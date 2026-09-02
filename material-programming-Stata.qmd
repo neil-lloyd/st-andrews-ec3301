@@ -1,0 +1,186 @@
+---
+title: Basic Programming in Stata
+format: 
+  html: default
+engine: npstata  
+---
+
+The goal for this short handout is to introduce you to some basic programming tools within Stata. [Lab 1](lab-1-Stata.qmd) focused on the tools needed to open, manipulate, and summarize data. Here you will learn about some important programming features:
+
+- how to create objects: scalars, matrices, macros
+- how to automate repetitive processes using loops
+
+## Scalars
+
+You can store a single value as a scalar. 
+
+```{stata}
+scalar mu = 0.5
+scalar sigma = 1
+```
+
+This can be useful if you want to assign values to specific parameters at the beginning of your `.do` file. For example, if you were creating a similuation:
+
+```{stata}
+* Create empty dataset
+set obs 200
+
+* Fix a random seed
+set seed 8471
+
+* Generate random variable
+gen x = rnormal(mu,sigma)
+```
+
+You can observe list the of stored scalars using
+
+```{stata}
+scalar list
+```
+
+Another useful trick is to store values from output that might be used elsewhere. For example, storing the mean of a variable to use in a plot. 
+
+```{stata}
+sum x
+scalar mean = r(mean)
+gen x2 = (x-scalar(mean))^2
+sum x2
+
+```
+
+You will notice that I referenced the scalar as `scalar(mean)`. This is done as a precaution in case there is a variable in the dataset called mean. Stata will assume that mean is a variable
+
+
+## Matrices
+
+If you are going to do any advanced computations - especially if they involve complex linear algebra - I would recommend using Matlab (another proprietory software) or languages like R, Python, and Julia. However, there are times when it is useful to know how to list or manipulate a matrix in Stata. 
+
+For example, when you estimate a linear regression model, many of the results are stored as a matrix. 
+
+```{stata}
+gen y = 1 + 0.5*x + rnormal()
+quietly reg y x
+ereturn list
+```
+
+The above code quietly (i.e. without output) regresses y on x. The command `ereturn list` then shows you the stored values. You will see that certain measures are stored as scalars (e.g. $R^2$). Then there are matrices $b$ and $V$: the vector of coefficients and the matrix of covariances. We can see the contents of these values using the command `matrix list`.
+
+```{stata}
+mat list e(b)
+mat list e(V)
+```
+
+Equally, we could create our own matrix:
+
+```{stata}
+mat def beta = e(b)
+mat def var = e(V)
+```
+
+You can then compute the t-statistic for this coefficient on `x`. Which should match what is displayed in the Stata regression output. 
+
+```{stata}
+dis beta[1,1]/sqrt(var[1,1])
+reg y x
+```
+
+## Macros
+
+Stata also allows you to define macros. There are two types: `local` and `global`. They operate as "placeholder" or simple stores of values and can include numbers and/or text. 
+
+For example, we can define:
+
+```{stata}
+local hi "Hello world!"
+dis `local'
+```
+
+Notice, you need to reference a local using a specific apostrophe pair: ``'`. 
+
+```{stata}
+reg y x
+local b0 = _b[_cons]
+local b1 = _b[x]
+
+twoway (scatter y x) (function y = `b0' + `b1'*x, range(-3 3))
+```
+
+A global uses a different notation. 
+
+```{stata}
+global vars "y x"
+dis $vars
+```
+
+The key distinction between the two types is that a `local` is only defined within a specific `.do` file, loop, or programme. In contrast, a global can be referenced across `.do` files. So, locals are used within loops which we will discuss next. You can see your saved macros in the following way:
+
+```{stata}
+macro list
+```
+
+:::{.callout-warning}
+This distinction between local and global can matter. Quite often when researchers work in Stata they execute sections of code from `.do` in stages. You might then think that if you execute a line that defines a local and then in the next step execute a line that uses that local it will work. No it won't. Why?! When you highlight a subset of lines in a `.do` file to execute Stata creates a temporary `.do` file (including just those lines) and executes it. Within this temporary `.do` file that local is visible. Outside of it, they are not. So, when the research runs the second set of lines (creating a new temporary `.do` file) it does not know the definition of that previously defined local. 
+
+What to do?! When using locals you need to execute the code that defines and uses the local simultaneously. 
+:::
+
+## Loops
+
+Loops are fantastic ways to automate repetitive exercise. In Stata there are three main loop functions: `forvalues`, `foreach`, and `while` (see `help forvalues` to learn more about them). Here we will cover the first two, as while loops are used less often. 
+
+`forvalues` allows you to loop over a numerical sequence:
+
+```{stata}
+forvalues i = 0(5)20{
+  dis `i'^2
+}
+```
+
+Notice that you reference the argument of the loop (`i`) using local notation. The name given to the argument is arbitrary and can be changed:
+
+```{stata}
+forvalues num = 1/10{
+  dis `num'*2
+}
+```
+
+`foreach` allows you to loop through values within a list or macro:
+
+```{stata}
+foreach var in y x {
+  sum `var'
+}
+```
+
+or
+
+```{stata}
+foreach var of global vars {
+  sum `var'
+}
+```
+
+Another command which is useful in collaboration with loops is `levelsof`. It tells you how many different values a variable has. Suppose the dataset contained a categorical variable and you wanted to compute the mean of another variable for category. 
+
+First we will create an arbitrary categorical variable, then use `levelsof` to create a list. 
+
+```{stata}
+* Create an arbitrary dummy variable =1 for the first 100 observations and =0 otherwise:
+gen d = _n<=100
+
+* Summarize y for each value of d
+
+levelsof d
+return list
+```
+
+The function creates a macro called `r(level)` that contains the list of values taken by `d`. 
+
+Now we can run a loop through all the values:
+
+```{stata}
+local levels = r(levels)
+foreach i of local levels {
+  sum y if d==`i'
+}
+```

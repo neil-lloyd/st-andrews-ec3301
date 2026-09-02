@@ -1,0 +1,122 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "EC3301 Econometrics"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Lectures
+        menu:
+          - href: lecture-0.qmd
+            text: Pre-sessional Lecture
+          - href: lecture-1.qmd
+            text: Lecture 1
+#          - href: lecture-2.qmd
+#            text: Lecture 2
+#          - href: lecture-3.qmd
+#            text: Lecture 3
+#          - href: lecture-4.qmd
+#            text: Lecture 4
+#          - href: lecture-5.qmd
+#            text: Lecture 5
+#          - href: lecture-6.qmd
+#            text: Lecture 6
+#          - href: lecture-7.qmd
+#            text: Lecture 7.
+#          - href: lecture-8.qmd
+#            text: Lecture 8
+#          - href: lecture-9.qmd
+#            text: Lecture 9
+#          - href: lecture-10.qmd
+#            text: Lecture 10
+      - text: Labs
+        menu:
+          - href: lab-1-Stata.qmd
+            text: Lab 1 (Stata)
+          - href: lab-1-R.qmd
+            text: Lab 1 (R)
+#          - href: lab-2-Stata.qmd
+#            text: Lab 2 (Stata)
+#          - href: lab-2-R.qmd
+#            text: Lab 2 (R) 
+#          - href: lab-3-Stata.qmd
+#            text: Lab 3 (Stata)
+#          - href: lab-3-R.qmd
+#            text: Lab 3 (R)  
+#          - href: lab-4-Stata.qmd
+#            text: Lab 4 (Stata)
+#          - href: lab-4-R.qmd
+#            text: Lab 4 (R)  
+#          - href: lab-5-Stata.qmd
+#            text: Lab 5 (Stata)
+#          - href: lab-5-R.qmd
+#            text: Lab 5 (R)  
+      - text: Tutorials
+        menu:
+          - href: tutorial-1.qmd
+            text: Tutorial 1
+#          - href: tutorial-1.qmd
+#            text: Tutorial 1 (Solutions)
+#          - href: tutorial-2.qmd
+#            text: Tutorial 2
+#          - href: tutorial-2.qmd
+#            text: Tutorial 2 (Solutions)  
+#          - href: tutorial-3.qmd
+#            text: Tutorial 3
+#          - href: tutorial-3.qmd
+#            text: Tutorial 3 (Solutions) 
+#          - href: tutorial-4.qmd
+#            text: Tutorial 4
+#          - href: tutorial-4.qmd
+#            text: Tutorial 4 (Solutions) 
+      - text: Extra Material
+        menu:
+          - href: material-interpretation.qmd
+            text: Interpreting Linear Models
+          - href: material-cef.qmd
+            text: Conditional Expectation Function
+          - href: material-programming-R.qmd
+            text: Basic Programming in R
+          - href: material-programming-Stata.qmd
+            text: Basic Programming in Stata
+            
+bibliography: references.bib            
+            
+margin-header: |
+  ::: {.light-content}
+  ![](img/01-standard-vertical-black-text.png)
+  :::
+  ::: {.dark-content}
+  ![](img/02-standard-vertical-white-text.png)
+  :::
+
+format:
+  html:
+    theme:
+      light: [flatly, style-website-light.scss]
+      dark: [darkly, style-website-dark.scss]
+    toc: true
+    toc-depth: 1   # shows h1 and h2
+    toc-expand: true  # collapses h2    
+  revealjs: 
+    theme: [white, style-slides.scss]
+    embed-resources: true
+    slide-number: c/t
+    width: 1280
+    height: 720
+    logo: "img/01-foundation-black-text.png"
+    html-math-method: katex
+  pdf:
+    include-before-body:
+      - style-notes.tex
+    
+execute:
+  freeze: auto 
+  cache: true
+
+
+
+

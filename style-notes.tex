@@ -1,0 +1,32 @@
+% --- St Andrews brand colours for callout boxes ---
+\definecolor{quarto-callout-note-color}{HTML}{007DC5}
+\definecolor{quarto-callout-note-color-frame}{HTML}{007DC5}
+
+\definecolor{quarto-callout-tip-color}{HTML}{00853F}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{00853F}
+
+\definecolor{quarto-callout-caution-color}{HTML}{F5842B}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{F5842B}
+
+\definecolor{quarto-callout-warning-color}{HTML}{EE312A}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{EE312A}
+
+\definecolor{quarto-callout-important-color}{HTML}{7B439A}
+\definecolor{quarto-callout-important-color-frame}{HTML}{7B439A}
+
+% This approach is similar to: https://github.com/orgs/quarto-dev/discussions/13739; which added the following to the YAML section 
+%  pdf:
+%    include-before-body:
+%      - text: |
+%          \definecolor{quarto-callout-note-color}{HTML}{007DC5}
+%          \definecolor{quarto-callout-tip-color}{HTML}{00853F}
+%          \definecolor{quarto-callout-important-color}{HTML}{7B439A}
+%          \definecolor{quarto-callout-caution-color}{HTML}{F5842B}
+%          \definecolor{quarto-callout-warning-color}{HTML}{EE312A}
+ 
+% But follows the advice of https://quarto.org/docs/output-formats/pdf-basics.html to add macros.tex section. 
+
+% Alternatively, you follow this approach: https://enrico.spinielli.net/posts/2023-05-01-quarto-callout-hack/
+% However, it edits the formatting of the PDF entirely instead of just adding a few changes. 
+% If following this advice, you append the above to the end of the title.tex file. 
+

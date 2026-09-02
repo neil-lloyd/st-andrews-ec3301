@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Econometrics Lab 1 – EC3301 Econometrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cf201e8c159c64e39451d1a718f2f573.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">EC3301 Econometrics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lectures" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lectures</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lectures">    
+        <li>
+    <a class="dropdown-item" href="./lecture-0.html">
+ <span class="dropdown-text">Pre-sessional Lecture</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-1.html">
+ <span class="dropdown-text">Lecture 1</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="./lab-1-Stata.html">
+ <span class="dropdown-text">Lab 1 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-1-R.html">
+ <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./tutorial-1.html">
+ <span class="dropdown-text">Tutorial 1</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-extra-material" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Extra Material</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-extra-material">    
+        <li>
+    <a class="dropdown-item" href="./material-interpretation.html">
+ <span class="dropdown-text">Interpreting Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-cef.html">
+ <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-R.html">
+ <span class="dropdown-text">Basic Programming in R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-Stata.html">
+ <span class="dropdown-text">Basic Programming in Stata</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="light-content">
+<p><img src="img/01-standard-vertical-black-text.png" class="img-fluid"></p>
+</div>
+<div class="dark-content">
+<p><img src="img/02-standard-vertical-white-text.png" class="img-fluid"></p>
+</div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#stata" id="toc-stata" class="nav-link active" data-scroll-target="#stata">Stata</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#scripts" id="toc-scripts" class="nav-link" data-scroll-target="#scripts">Scripts</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  <li><a href="#graphs" id="toc-graphs" class="nav-link" data-scroll-target="#graphs">Graphs</a></li>
+  <li><a href="#logs" id="toc-logs" class="nav-link" data-scroll-target="#logs">Logs</a></li>
+  <li><a href="#replication" id="toc-replication" class="nav-link" data-scroll-target="#replication">Replication</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Econometrics Lab 1</h1>
+<p class="subtitle lead">Working with data in Stata</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="stata" class="level1">
+<h1>Stata</h1>
+<section id="why-stata" class="level2">
+<h2 class="anchored" data-anchor-id="why-stata">Why Stata</h2>
+<p>Stata is a proprietory statistical software used by researchers. Estimates of Stata usage in Economics suggest that 71% of replication packages in economic journals contain Stata .do scripts (i.e.&nbsp;Stata code) (Source: <a href="https://skranz.github.io/r/2023/12/29/FindingEconomicArticles7.html"><em>Economics and R Blog</em></a>). R is rising, but still only found in 9.8% of replication packages.</p>
+<p><strong>Why Stata?</strong> Part of the story is network ‘lock-in’: academics train students to use the tools they know. But the software has its merits and developed the right set of tools for the data available at the time. These strengths are:</p>
+<ol type="1">
+<li><p>Stata’s command-line functionality allows for reproducible workflows, without requiring general programming language expertise. While not a complete language, Stata does have programming features; like loops, macros, and functions.</p></li>
+<li><p>Stata’s own packages and commands come with extensive documentation and are rigorously tested. User-written commands are community-vetted through the Statistical Software Components (SSC), with many Econometrician contributors.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p></li>
+</ol>
+<!-- -->
+<ol start="3" type="1">
+<li><p>For smaller datasets, Stata is fast! It processes data by first loading it into memory on the computer, which makes all computations rather efficient. However, this also means that Stata is limited by the available RAM (computer memory).</p></li>
+<li><p>Stata is designed to analyse and manage rectangular datasets: each row is an observation, with each column a new variable. For example, survey data where each row represents a respondent and each column a survey question response. Indeed, Stata has many functions designed specifically for the analysis of cross-sectional and longitudinal surveys, which are extensively used in applied economics research.</p></li>
+<li><p>Stata’s .dta format preserves variable metadata (labels, formats, notes), making it easier to share documented datasets compared to plain text formats like CSV. This aids in collaboration and the sharing of vital metadata between data providers (e.g.&nbsp;surveyors) and users.</p></li>
+</ol>
+<p>Many of these strengths are not unique to Stata but, put together, they demonstrate why Stata became so widely used in applied economics research beginning in the 1990s. This was a period of increasing access to high quality micro-level survey data, improved computing, new econometrics methods, and the ‘Credibility Revolution’ in Economics.</p>
+<p><strong>BUT</strong>, these strengths also point to Stata’s vulnerabilities. In the age of the internet, we are surrounded by data, but much of this data is not rectangular (‘tidy’). Moreover, Stata is not designed to work with <em>BIG</em> data. For this reason, data scientists and engineers increasingly work with R and Python. And many of the econometrics packages that made Stata the default option for economists are now available in these open source languages.</p>
+<p><strong>Should you learn Stata?</strong> Sure! Stata provides an easy introduction to data management, econometric analysis, and basic programming. These skills are transferable to many data analysis settings; including working with data in Excel. And once you have mastered Stata, it will be relatively easy to adapt those skills to a programming language setting.</p>
+<p>There is one major consideration: you will have remote access to Stata via <a href="https://appstore.st-andrews.ac.uk/">AppsAnywhere</a>. You can sign into AppsAnywhere from your own computer so long as you are connected to the campus network (or VPN), but will not be able to install the software directly on your computer. Of course, you are free to purchase your own <a href="https://www.stata.com/order/new/edu/profplus/student-pricing/">Stata license</a>. Unfortunately, AppsAnywhere will not allow you install user written packages.</p>
+</section>
+<section id="navigating-statas-gui" class="level2">
+<h2 class="anchored" data-anchor-id="navigating-statas-gui">Navigating Stata’s GUI</h2>
+<p>Upon launching Stata with <a href="https://appstore.st-andrews.ac.uk/">AppsAnywhere</a>, you will see a screen that looks as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lab-1/stata-home-annotated.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><span style="color:red;"><strong>A.</strong></span> Output window which is a plain text display of the commands executed and their output. Graphs will be displayed in a separate window.</p>
+<p><span style="color:green;"><strong>B.</strong></span> Command window where you can run a type and execute (using the <code>Enter</code> key) a command.</p>
+<p><span style="color:blue;"><strong>C.</strong></span> History window which contains a list of all commands executed. If you click on an item listed here it will reappear in your command line where you can re-execute it.</p>
+<p><span style="color:orange;"><strong>D.</strong></span> Variables window shows all the variables in the opened dataset.</p>
+<p><span style="color:purple;"><strong>E.</strong></span> Properties window shows details about a selected variable as well as the whole dataset.</p>
+<p>These windows can be moved and closed if you prefer more space or a different orientation. The ‘Windows’ tab at the top of the Stata window will allow you reopen any closed windows.</p>
+</section>
+</section>
+<section id="data" class="level1">
+<h1>Data</h1>
+<p>Download file “shs2023.dta” from Moodle (under Week 2). This is a Stata dataset saved in its custom .dta file format. Then, move the downloaded file from the Downloads folder to a location on either your OneDrive or ‘Home Drive (H:)’. A good idea would be to create an EC3301 folder in the Documents folder of either drives. Then create a sub-folder for this lab: “..". Move <code>shs2023.dta</code> to this folder.</p>
+<section id="opening-a-.dta-file" class="level2">
+<h2 class="anchored" data-anchor-id="opening-a-.dta-file">Opening a .dta file</h2>
+<p>Now, back in Stata:</p>
+<ul>
+<li>Navigate to ‘File&gt;Open’</li>
+<li>Locate the folder where you stored “shs2023.dta”</li>
+<li>Select ‘Open’</li>
+</ul>
+<p>The Variables and Properties window should now be populated with information about the “shs2023.dta”. In the output window you should see the output:</p>
+<pre><code>. use "..\EC3301\Lab 1\shs2023.dta"</code></pre>
+<p>The same operation of opening the data through menus can be replicated using the command <code>use</code>. Use the History window to copy the line into the Command window and (press <code>ENTER</code> on the keyboard). It should open the dataset again.</p>
+</section>
+<section id="viewing-and-describing-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="viewing-and-describing-the-data">Viewing and describing the data</h2>
+<p>You have now opened the dataset (i.e.&nbsp;loaded it into memory) and should see information about the dataset in the Variables and Properties windows.</p>
+<ol type="1">
+<li>How many variables are there?</li>
+<li>How many observations are there?</li>
+<li>What does the variable <code>hc4</code> measure?</li>
+</ol>
+<p>To view the actual data look for the small table icon <strong>with the magnifying glass</strong> in the top left corner (‘Data Editor (Browse)’). Clicking this button will open a separate window that shows you the data. Notice how the dataset looks like a big ‘rectangle’/matrix, with each variable as a new column.</p>
+<p>You can achieve the same result with command:</p>
+<div id="11b2fdbc" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>browse</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You can use the search bar at the top of the Variables window to look for variables containing particular information. Equally, you can use the <code>lookfor</code> command. Try to find any variables with information about electricity. For example,</p>
+<div id="415c33ec" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">lookfor</span> elec</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+-------------------------------------------------------------------------------
+htcostsum_1     byte    %8.0g      htcostsum_1
+                                              Cost of electricity - summary
+                                                variable
+htcostamt_1     int     %8.0g                 Cost of electricity - amount
+                                                variable</code></pre>
+</div>
+</div>
+<p>This command looks for the phrase <code>elec</code> in either the variable name of label.</p>
+<p>Notice, the above command provided a lot of information about two variables in the dataset: Variable name; Storage type; Display format; Value label; and Variable label. The same information can be accessed using the <code>describe</code> command.</p>
+<div id="245d2034" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">describe</span> htcostsum_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Abbreviations">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Abbreviations
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Stata does not need the full name of a command to recognise it: the command <code>describe</code> can be shortened to <code>des</code>, even just <code>d</code>. Similarly, so long as there is no ambiguity, you can shorten the name of a variable. The above command can be shortened to <code>d htcostsum_1</code>. Since there is a <code>htcostsum_2</code>, anything short of <code>htcostsum_1</code> will lead to ambiguity.</p>
+</div>
+</div>
+</section>
+<section id="managing-data" class="level2">
+<h2 class="anchored" data-anchor-id="managing-data">Managing data</h2>
+<p>There are a large number of variables in the dataset and we will not be using all of them. We can <code>drop</code> particular variables we do not need, or <code>keep</code> the variables we will use. Since the latter is a short list, it makes sense to use <code>keep</code>.</p>
+<ol type="1">
+<li>Remove all unnecessary variables using the command:</li>
+</ol>
+<div id="cbbc991f" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> area RTParea MD20QUIN hhsize hb1 hb509 rent_amt rent_sum mortgage_amt mortgage_sum shared_ownership_sum shared_ownership_amt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This command removes the variables from the dataset in memory, NOT the dataset saved on the harddrive of the computer (“..2023.dta”). Removing variables like this is fine, so long as you do not save over the original data. If you make these changes permanent by saving changes to the data (saved on the harddrive), the removed variables will be lost and you would need to recover the original source of data.</p>
+</div>
+</div>
+<p>The dataset contains the original variable names and labels. Some of variable names correspond to the question in the questionnaire they relate to (e.g.&nbsp;<code>hb1</code>). These names are not very intuitive, so we will begin by renaming certain variables.</p>
+<ol start="2" type="1">
+<li>Rename the variable <code>hb1</code> <code>dwell_type</code> using the <code>rename</code> command</li>
+</ol>
+<div id="5daff46c" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span> hb1 dwell_type</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="3" type="1">
+<li>Rename <code>hb509</code> <code>own_grp</code></li>
+</ol>
+<p>The labels attached these variables are equally uniformative. We can change the labels using the command <code>variable label</code></p>
+<ol start="4" type="1">
+<li>Label <code>dwell_type</code> “Type of dwelling”</li>
+</ol>
+<div id="e47ac266" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">label</span> <span class="kw">var</span> dwell_type <span class="st">"Type of dwelling"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="5" type="1">
+<li>Label <code>own_grp</code> “Ownership of the dwelling”</li>
+</ol>
+</section>
+</section>
+<section id="scripts" class="level1">
+<h1>Scripts</h1>
+<section id="reproducibility-with-.do-files" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-with-.do-files">Reproducibility with .do files</h2>
+<p>At this stage it is important to stop and think about reproducibility. We have just made changes to the data, changing names and labels, but to reproduce these changes we would have to manually re-execute these commands. This is not very efficient.</p>
+<p>This is where a .do file scripts comes in. These are plain text script that are used to store a sequence of commands. They can also include programming features like loops and macros (more on that later). To create a new .do file click on the small page icon <strong>with the pencil</strong> in the top left corner (‘New Do-file Editor’). This should open a new window that looks like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lab-1/stata-do-editor.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Before you progress, save the file as “lab-1.do” in the same folder where you stored the data.</p>
+<p>The text in .do files is interpretted as commands unless commented out. Here are a few ways you can leave comments:</p>
+<ul>
+<li><p>A single <code>*</code> at the start of a line comments it out</p></li>
+<li><p>A double <code>\\</code> will also comment out a line and can be used after a command too</p></li>
+<li><p>The pair <code>\*</code> followed by <code>*\</code> can be used to comment out multiple lines.</p></li>
+</ul>
+<p>We can now copy the commands we have executed into our new .do file and add some comments:</p>
+<div id="c2ecba1d" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>* Title: Econometrics Lab 1: Working with <span class="kw">data</span> <span class="kw">in</span> Stata</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>* Author: [INSERT NAME]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>* Date: [INSERT DATE]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>* Open <span class="kw">data</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="st">"[INSERT FILE PATH]\shs2023.dta"</span>, <span class="kw">clear</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>* Managing <span class="kw">data</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>** 1. Remove <span class="ot">all</span> unnecessary variables <span class="kw">using</span> the command:</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> area RTParea MD20QUIN hhsize hb1 hb509 rent_amt rent_sum mortgage_amt mortgage_sum shared_ownership_sum shared_ownership_amt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" type="Saving changes to data">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Notice the extra option</em> <code>, clear</code> after <code>use</code>. This gives Stata permission to reopen the original dataset without saving changes to the current file in memory. It is best practice to never save changes to original data. Instead, save all the changes you made in a .do file so that they are reproducible. When you do need to save changes to the dataset, use the <code>save</code> command to save the data under a new name.</p>
+</div>
+</div>
+<p>You can execute the .do file using the ‘play’ button in the top left of the editor window (‘Execute selection (do)’). Clicking this will execute the entire file. Alternatively, use your cursor to highlight a line (or multiple lines) and then execute these specific lines using the same ‘do’ button.</p>
+<div class="callout callout-style-default callout-note callout-titled" type="Hotkeys">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The hotkey ‘Ctrl + L’ on the keyboard will highlight the line of the .do file you cursor is on. Then you can use ‘Ctrl + D’ to execute that line.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="variables" class="level1">
+<h1>Variables</h1>
+<p>Datasets can contain both numerical and string (i.e.&nbsp;text) variables. In this section we will look at two types of numerical variables:</p>
+<ol type="1">
+<li>categorical (discrete) variables where values correspond to distinct categories; e.g.&nbsp;“Renter”, “Owner”</li>
+<li>continuous variables can take on any value along the real line; the amount paid for rent (likely stored as an integer)</li>
+</ol>
+<p><em>A priori</em> it is not always obvious which variables are which. You can use the <code>codebook</code> command to check how many unique values a variable takes on:</p>
+<div id="4b99a6ae" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">codebook</span> dwell_type</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-------------------------------------------------------------------------------
+dwell_type                                                     Type of dwelling
+-------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+                 Label: hb1
+
+                 Range: [1,3]                         Units: 1
+         Unique values: 3                         Missing .: 0/10,496
+
+            Tabulation: Freq.   Numeric  Label
+                        7,379         1  House or bungalow
+                        3,086         2  A flat, maisonette or apartment
+                                         (including )
+                           31         3  Other, including room(s),
+                                         caravan/mobile homes</code></pre>
+</div>
+</div>
+<section id="categorical-variables" class="level2">
+<h2 class="anchored" data-anchor-id="categorical-variables">Categorical variables</h2>
+<p>The simplest way to summarize the information in a categorical variable is to create a frequency table, which can be done using the <code>tabulate</code> (or <code>tab</code> for short) command:</p>
+<ol type="1">
+<li>How many types of dwelling are there in the data?</li>
+</ol>
+<div id="c4b46cc4" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> dwell_type</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                       Type of dwelling |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+                      House or bungalow |      7,379       70.30       70.30
+A flat, maisonette or apartment (includ |      3,086       29.40       99.70
+Other, including room(s), caravan/mobil |         31        0.30      100.00
+----------------------------------------+-----------------------------------
+                                  Total |     10,496      100.00</code></pre>
+</div>
+</div>
+<p>The output above shows the labels attached to each category, but not the numerical values that underpin these labels. We can ask Stata to show us this useful information:</p>
+<div id="7a87a9ec" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">numlabel</span>, add</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> dwell_type</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                       Type of dwelling |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+                   1. House or bungalow |      7,379       70.30       70.30
+2. A flat, maisonette or apartment (inc |      3,086       29.40       99.70
+3. Other, including room(s), caravan/mo |         31        0.30      100.00
+----------------------------------------+-----------------------------------
+                                  Total |     10,496      100.00</code></pre>
+</div>
+</div>
+<p>We now see that the variable actually takes on 3 values, each with a label.</p>
+<ol start="2" type="1">
+<li><p>How many households live in rented accommodation?</p></li>
+<li><p>Create a cross-tabulation of the variables <code>dwell_type</code> and <code>own_grp</code>. How many households rent a flat in the dataset?</p></li>
+<li><p>The variable <code>MD20QUIN</code> (Scottish Index of Multiple Deprivation (SIMD), 2020 quintiles) has information about the socio-economic status of the household. Are the observations balanced across quintiles?</p></li>
+</ol>
+<p>You will notice that the labels of the values attached to <code>MD20QUIN</code> are incomplete. The <code>describe</code> command will give us the name of this label.</p>
+<div id="6af03cdc" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">des</span> MD20QUIN</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">label</span> <span class="ot">list</span> MD20QUIN</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+-------------------------------------------------------------------------------
+MD20QUIN        byte    %25.0g     MD20QUIN   SIMD 2020 - 1 = 20% most deprived
+                                                to 5 = 20% least deprived
+MD20QUIN:
+           1 1. 1 - 20% most deprived
+           2 2. 2
+           3 3. 3
+           4 4. 4
+           5 5. 5 - 20% least deprived</code></pre>
+</div>
+</div>
+<p>We can create our own label and attach them to this variable:</p>
+<div id="f28eab2f" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">label</span> def QUINTILE 1 <span class="st">"Bottom: 0-20%"</span> 2 <span class="st">"Lower: 20-40%"</span> 3 <span class="st">"Middle: 40-60%"</span> 4 <span class="st">"Upper: 60-80%"</span> 5 <span class="st">"Top: 80-100%"</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">label</span> val MD20QUIN QUINTILE</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> MD20QUIN</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ SIMD 2020 - 1 |
+    = 20% most |
+ deprived to 5 |
+   = 20% least |
+      deprived |      Freq.     Percent        Cum.
+---------------+-----------------------------------
+ Bottom: 0-20% |      1,928       18.37       18.37
+ Lower: 20-40% |      2,061       19.64       38.00
+Middle: 40-60% |      2,267       21.60       59.60
+ Upper: 60-80% |      2,346       22.35       81.96
+  Top: 80-100% |      1,894       18.04      100.00
+---------------+-----------------------------------
+         Total |     10,496      100.00</code></pre>
+</div>
+</div>
+</section>
+<section id="continuous-variables" class="level2">
+<h2 class="anchored" data-anchor-id="continuous-variables">Continuous variables</h2>
+<p>You do not want to tabulate a continuous variable because it has too many unique values. The simplest way to evaluate the distribution of a continuous variable is with the <code>summarize</code> command (or just <code>sum</code>).</p>
+<ol type="1">
+<li>What is the average amount money paid as rent by households in the data?</li>
+</ol>
+<div id="14c35a07" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> rent_amt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+    rent_amt |      3,414    477.6421     168.932        290        940</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>Did you notice that the number of observations is listed as 3,414? Does this match the total number of observations in the dataset? [You can use the <code>count</code> command to check this.]</p></li>
+<li><p>Browse the dataset to investigate: <code>browse rent_amt</code>.</p></li>
+<li><p>Create a frequency table of the categorical variable <code>rent_sum</code> to explore why there only 3,414 observations.</p></li>
+<li><p>Use the option <code>, detail</code> in your summary of both <code>rent_amt</code> and <code>mortgage_amt</code>. Which has the highest median?</p></li>
+</ol>
+<div id="9eab9281" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> rent_amt, <span class="kw">detail</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> mortgage_amt, <span class="kw">detail</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+       Amount of monthly rent for households that are
+                          renting 
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%          290            290
+ 5%          300            290
+10%          320            290       Obs               3,414
+25%          360            290       Sum of wgt.       3,414
+
+50%          420                      Mean           477.6421
+                        Largest       Std. dev.       168.932
+75%          530            940
+90%          750            940       Variance       28538.04
+95%          900            940       Skewness       1.400969
+99%          940            940       Kurtosis       4.203235
+
+     Amount of monthly mortgage payments for households
+                       with a mortgage
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%          200            200
+ 5%          250            200
+10%          300            200       Obs               2,552
+25%          430            200       Sum of wgt.       2,552
+
+50%          600                      Mean           675.0862
+                        Largest       Std. dev.       314.008
+75%          890           1320
+90%         1200           1320       Variance       98601.01
+95%         1320           1320       Skewness       .5740237
+99%         1320           1320       Kurtosis       2.383898</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" type="Options">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Most Stata commands have additional options. These follow the basic command with <code>,</code>. Use the <code>help</code> command (e.g.&nbsp;<code>help summarize</code>) to see all the options for a command.</p>
+</div>
+</div>
+</section>
+<section id="adding-conditions" class="level2">
+<h2 class="anchored" data-anchor-id="adding-conditions">Adding conditions</h2>
+<p>In the previous section we saw that some observations do not have information on rent paid. This is a common feature of survey data, since surveys often include skip patterns: if a household owns the dwelling they live in they will skip the question on monthly rental payments.</p>
+<p>In Stata, you can apply <code>if</code> conditions to most commands allowing you to restrict the operation to a subset of data that meets another condition.</p>
+<p>In the data there are 2,229 observations that pay rent and provided an estimate of rental income. The following code will compute the average rental payment of these observations by selecting on the sample in this group.</p>
+<div id="5323486a" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> rent_amt <span class="kw">if</span> rent_sum==1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+    rent_amt |      2,229    490.4217    165.7097        290        940</code></pre>
+</div>
+</div>
+<p>Notice, you need to know the numerical value of the category of <code>rent_sum</code>, not the value label, to create such a condition.</p>
+<ol type="1">
+<li><p>What is the average mortgage payment of households who own their home and provide a mortgage payment? [You can ignore those with `mortgage_sum==3’ “Buying with mortgage - amount given by respondent, but not used in imputation routines”]</p></li>
+<li><p>Is the average imputed mortgage payment higher than the average reported payment?</p></li>
+<li><p>Using the variable <code>area</code>, which city has higher mean and/or median rental payments: Edinburgh or Glasgow?</p></li>
+</ol>
+</section>
+<section id="summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics">Summary statistics</h2>
+<p>A common task in data analysis is to summarize a continuous variable by values of a categorical variable. There is a simple way to do this using a few different commands.</p>
+<ul>
+<li>We can <code>tabulate</code> with the <code>summarize()</code> option.</li>
+</ul>
+<div id="51e2f0b5" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> MD20QUIN, <span class="kw">sum</span>(rent_amt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+SIMD 2020 - |
+    1 = 20% |
+       most |
+deprived to |
+    5 = 20% |  Summary of Amount of monthly rent
+      least |  for households that are renting 
+   deprived |        Mean   Std. dev.       Freq.
+------------+------------------------------------
+  Bottom: 0 |   427.22591    112.6494       1,204
+  Lower: 20 |   451.14679   147.98941         872
+  Middle: 4 |   490.12012   166.84147         666
+  Upper: 60 |   537.70925   192.60511         454
+  Top: 80-1 |   698.85321   231.81326         218
+------------+------------------------------------
+      Total |   477.64206   168.93205       3,414</code></pre>
+</div>
+</div>
+<ul>
+<li>Another command <code>table</code> allows for more options. The list of statistics can also correspond to different variables. Try <code>help table</code> to see all options.</li>
+</ul>
+<div id="1f98f5ef" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">table</span> MD20QUIN, stat(<span class="kw">mean</span> rent_amt) stat(<span class="fu">sd</span> rent_amt) stat(<span class="fu">count</span> rent_amt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+--------------------------------------------------------------------------------------------------------------------------
+                                                            |      Mean   Standard deviation   Number of nonmissing values
+------------------------------------------------------------+-------------------------------------------------------------
+SIMD 2020 - 1 = 20% most deprived to 5 = 20% least deprived |                                                             
+  Bottom: 0-20%                                             |  427.2259             112.6494                         1,204
+  Lower: 20-40%                                             |  451.1468             147.9894                           872
+  Middle: 40-60%                                            |  490.1201             166.8415                           666
+  Upper: 60-80%                                             |  537.7093             192.6051                           454
+  Top: 80-100%                                              |  698.8532             231.8133                           218
+  Total                                                     |  477.6421              168.932                         3,414
+--------------------------------------------------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<ul>
+<li>The command <code>tabstat</code> is similarly flexible, but uses a different notation: <code>help tabstat</code>.</li>
+</ul>
+<div id="72c9a9c0" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tabstat</span> rent_amt, <span class="kw">by</span>(MD20QUIN) stat(<span class="kw">mean</span> <span class="fu">sd</span> <span class="fu">count</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Summary for variables: rent_amt
+Group variable: MD20QUIN (SIMD 2020 - 1 = 20% most deprived to 5 = 20% least de
+&gt; prived)
+
+      MD20QUIN |      Mean        SD         N
+---------------+------------------------------
+ Bottom: 0-20% |  427.2259  112.6494      1204
+ Lower: 20-40% |  451.1468  147.9894       872
+Middle: 40-60% |  490.1201  166.8415       666
+ Upper: 60-80% |  537.7093  192.6051       454
+  Top: 80-100% |  698.8532  231.8133       218
+---------------+------------------------------
+         Total |  477.6421   168.932      3414
+----------------------------------------------</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>Using the variable <code>RTParea</code>, compute a table of average rental and mortgage payments by area.</li>
+</ol>
+</section>
+<section id="generate-new-variables" class="level2">
+<h2 class="anchored" data-anchor-id="generate-new-variables">Generate new variables</h2>
+<p>To create a new variable in Stata you need to use the <code>generate</code> command:</p>
+<div id="7db386fc" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> amt_sum = .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(10,496 missing values generated)</code></pre>
+</div>
+</div>
+<p>The variable <code>amt_sum</code> has been assigned ‘missing’ values.</p>
+<div id="a3454753" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> amt_sum</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     amt_sum |          0</code></pre>
+</div>
+</div>
+<p>We can now modify the values based on other variables. Let’s assign the vairable values based on the rule:</p>
+<ul>
+<li><code>=1</code> if rent payment observed;</li>
+<li><code>=2</code> if mortgage payment observed;</li>
+<li><code>=3</code> if shared-ownership payment observed.</li>
+</ul>
+<p>We can modify values using the command <code>replace</code>.</p>
+<div id="659b62ab" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> amt_sum = 1 <span class="kw">if</span> rent_amt &gt; 0 &amp; rent_amt != .</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> amt_sum = 2 <span class="kw">if</span> mortgage_amt &gt; 0 &amp; mortgage_amt != .</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> amt_sum = 3 <span class="kw">if</span> shared_ownership_amt &gt; 0 &amp; shared_ownership_amt != .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(3,414 real changes made)
+(2,552 real changes made)
+(83 real changes made)</code></pre>
+</div>
+</div>
+<p>Why the additional condition <code>&amp; rent_amt != .</code>? First off, the symbol <code>&amp;</code> means ‘and’, which means that both conditions must be true. The reason for this extra condition is that Stata treats a <code>.</code>-missing value as a very large number. So any condition of the form <code>&gt;</code> will include missing values if they exist. And we know they exist for this variable.</p>
+<p>We can check the values of our variable:</p>
+<div id="52d37eb5" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> amt_sum, <span class="fu">missing</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    amt_sum |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |      3,414       32.53       32.53
+          2 |      2,552       24.31       56.84
+          3 |         83        0.79       57.63
+          . |      4,447       42.37      100.00
+------------+-----------------------------------
+      Total |     10,496      100.00</code></pre>
+</div>
+</div>
+<ol type="1">
+<li><p>Check that those with rental, mortgage, and shared payments are mutually exclusive.</p></li>
+<li><p>Create a new variable called <code>payment</code> equal to the sum of <code>rent_amt</code>, <code>mortgage_amt</code>, and <code>shared_ownership_amt</code>. [Hint: you will not be able to do this by adding the variables together.]</p></li>
+<li><p>Compute the mean of <code>payment</code> and the number of observations for which <code>payment==.</code>. Who has a missing value of <code>payment</code>? How should these values be coded?</p></li>
+<li><p>Create a new variable - <code>pc_payment</code> - equal to the total monthly payment divided by household size. Label the variable “Per capita monthly payment for housing.”</p></li>
+<li><p>Which <code>area</code> has the highest average per capita payment?</p></li>
+</ol>
+</section>
+</section>
+<section id="graphs" class="level1">
+<h1>Graphs</h1>
+<p>Stata has a number of graphical commands; too many to remember. The best option is to use the interactive menus to set up a graph. Each time you execute a graph using the menus it print the corresponding code in the output window. You can then copy the code from the output window to your .do file to replicate.</p>
+<section id="basic-graphics" class="level2">
+<h2 class="anchored" data-anchor-id="basic-graphics">Basic graphics</h2>
+<p>Making a histogram:</p>
+<ul>
+<li>in the main Stata window go to ‘Graphics&gt;Histogram’</li>
+<li>use the ‘Variable’ drop-down menu to select <code>rent_amount</code></li>
+<li>select ‘Submit’ [If you select ‘OK’, Stata will close the Graphing window. If you want to continue to edit the graph, select ‘Submit’ instead.]</li>
+</ul>
+<p>This should create the graph below</p>
+<div id="85e8f5d1" class="cell" data-execution_count="25">
+<div class="cell-output cell-output-stdout">
+<pre><code>(bin=35, start=290, width=18.571429)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab-1-Stata_files/figure-html/cell-26-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>and populate the Output window with the code below.</p>
+<pre><code>. histogram rent_amt </code></pre>
+<p>Copy the line (<strong>excluding the</strong> <code>.</code>) to your .do file.</p>
+<p>Making a frequency bar graph:</p>
+<ul>
+<li>in the main Stata window go to ‘Graphics&gt;Bar chart’</li>
+<li>select the option ‘Graph of percent of frequencies within categories’</li>
+<li>under the ‘Categories’ tab, select ‘Group 1’ and find <code>RTParea</code> under ‘Grouping variable:’</li>
+<li>select ‘Submit’</li>
+</ul>
+<div id="e2255763" class="cell" data-execution_count="26">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab-1-Stata_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Again, copy the code to your .do file.</p>
+<p>Making a bar graph of means, but categories.</p>
+<ul>
+<li>navigate back to the ‘Bar chart’ window</li>
+<li>under the ‘Main’ tab, select ‘Graph of summary statistics’</li>
+<li>leave the default ‘Statistic’ as a Mean, but select <code>rent_amt</code> under ‘Variables’</li>
+<li>select ‘Submit’</li>
+</ul>
+<div id="c4a0f2eb" class="cell" data-execution_count="27">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab-1-Stata_files/figure-html/cell-28-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol type="1">
+<li><p>The labels of the above graph do not display very well. Navigate back to the ‘Bar chart’ window. Under the ‘Categories’ tab, you will see an option to edit the ‘Properties’ of the categories. See if you can change the angle of labels so that they are displayed at a <span class="math inline">\(45^\circ\)</span> angle.</p></li>
+<li><p>Create a graph that displays the average average rent and mortgage paid by households in each of the <code>RTParea</code>. Edit the graph so that it has an informative y-axis title, legend, and title.</p></li>
+<li><p>Create a single graph showing 5 separate histograms of rental payments for each <code>MD20QUIN</code> group. Use the ‘By’ tab in the ‘Graphics&gt;Histogram’ window to do this. You can also select the option ‘Add a graph of totals’ to make it an even 6 histograms.</p></li>
+</ol>
+</section>
+<section id="exporting-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="exporting-graphs">Exporting graphs</h2>
+<p>Stata has its own file format for graphs .gph. You can save a graph using this format using <code>graph save</code>.</p>
+<div id="afdbb83c" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">save</span> <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1\graph.gph"</span>, <span class="kw">replace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The problem is that .gph files have to be opened in Stata, which is not particularly useful. You would rather save an image as a .png or .jpg which can then be opened using a Photo application and easily copied into a Word document.</p>
+<p>You can do this using the <code>graph export</code> command.</p>
+<div id="4f5e1641" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1</span><span class="ch">\f</span><span class="st">ile_name.png"</span>, <span class="kw">replace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li>Save the last graph you created in the same folder as the data and .do file using the name <code>hist_rent_by_quintile.png</code></li>
+</ol>
+</section>
+</section>
+<section id="logs" class="level1">
+<h1>Logs</h1>
+<p>We are nearing the end of the lab. Make sure that all the changes you have made to your .do are saved. If you have stored all the relevant code in the .do file, you should be able to replicate your results next time you open Stata.</p>
+<p>But what about all of the tables and summary statistics we created in the ‘Output’ window. These are not stored in the .do file. We can store these using a log file.</p>
+<section id="logs-1" class="level2">
+<h2 class="anchored" data-anchor-id="logs-1">Logs</h2>
+<p>A log file keeps a plain text record of all the output shown in the ‘Output’ window. You can store this using a number of file types.</p>
+<p>Stata has its own file format for logs .smcl (and also .log). As with the .gph file format, this file-type can only be opened in Stata. There are two ways to initiate a log:</p>
+<ul>
+<li>go to ‘File&gt;Log&gt;Begin’ and save the log file in the directory of choice;</li>
+<li>OR add the following <strong>to the top</strong> of your .do file.</li>
+</ul>
+<div id="3bb9347f" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">using</span> <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1\lab-1.smcl"</span>, <span class="kw">replace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You must also then add the following to the end of your .do file:</p>
+<div id="83aa7a0c" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">close</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A better format to use is a plain text format that can then be opened in a text editor like Notepad. Here is how you would do this:</p>
+<ul>
+<li>Add the following to the top of your .do file.</li>
+</ul>
+<div id="f2964ee5" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>cap <span class="fu">log</span> <span class="kw">close</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">using</span> <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1\lab_1.txt"</span>, <span class="kw">replace</span> <span class="bn">text</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <code>cap log close</code> ensures that you avoid an error message created when you try to restart the log file before closing it.</p>
+<ul>
+<li>Add the following to the bottom of the .do file.</li>
+</ul>
+<div id="ef1652a1" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">close</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="replication" class="level1">
+<h1>Replication</h1>
+<p>You are now ready to try and execute all of today’s work, while saving a copy of your graph and a log file. If this works, it will mean that your work is replicable, <em>so long as you have saved your</em> .do file (<strong>CHECK</strong>).</p>
+<p>When you close Stata (don’t do it yet) you will see the following warning you that the data in memory has been changed (from the original file you opened) and if you fail to save these changes they will be lost.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lab-1/stata-save-changes.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>YOU SHOULD SAY NO!</strong> Why? Because then you will change the original file and the results will no longer be replicable using your .do file.</p>
+<section id="setting-a-directory" class="level2">
+<h2 class="anchored" data-anchor-id="setting-a-directory">Setting a directory</h2>
+<p>You will have noticed that on several occasions we have had to specify the location of files, like when we exported a copy of the graph and saved the log file. If all your files are stored in the same directory, we can set this once and then Stata will use this as the default location.</p>
+<div id="f841c7a1" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>cd <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Having told Stata the directory on your computer where everything is stored, we can edit the lines for <code>graph export</code> and <code>log using</code>. For example,</p>
+<div id="fcba554e" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"file_name.png"</span>, <span class="kw">replace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="final-set-up" class="level2">
+<h2 class="anchored" data-anchor-id="final-set-up">Final set-up</h2>
+<p>Here is how your .do file should look:</p>
+<div id="610ef40b" class="cell" data-execution_count="36">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>* Title: Econometrics Lab 1: Working with <span class="kw">data</span> <span class="kw">in</span> Stata</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>* Author: [INSERT NAME]</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>* Date: [INSERT DATE]</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>* Clear <span class="ot">all</span> objects <span class="kw">in</span> <span class="dv">memory</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>* Set directory</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>cd <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1"</span></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>* Start <span class="fu">log</span></span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>cap <span class="fu">log</span> <span class="kw">close</span></span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">using</span> lab_1.txt, <span class="kw">replace</span> <span class="bn">text</span></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>* Open <span class="kw">data</span></span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="st">"shs2023.dta"</span></span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>[ALL THE EXERCISES GO HERE!]</span>
+<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a>* Close <span class="fu">log</span></span>
+<span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">close</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The line <code>clear all</code> removes the existing data from memory, as well as any other stored objects (scalars, matrices, macros, estimates, etc.). This is not strictly needed, but if you remove it you should then add the <code>clear</code> as an option to the <code>use</code> command: <code>use "shs2023.dta", clear</code>. Otherwise, you will get an error message when you try to open the data. This is because Stata will not open a new dataset when there is another dataset in memory that has unsaved changes. Adding the <code>clear</code> option (or <code>clear all</code>) gives Stata permission to close the open dataset, despite there being unsaved changes.</p>
+</section>
+<section id="replicate" class="level2">
+<h2 class="anchored" data-anchor-id="replicate">Replicate</h2>
+<p>Having checked the .do file and made sure it is saved, execute the entire file. Check that there are no error messages. If all works, you can then close the .do file editing window and then close Stata, <strong>selecting ‘Don’t save’</strong> when it warns you that the data in memory has changed.</p>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Unlike open-source languages like R, StataCorp carries legal liability for its code, making it an attractive choice for economists in litigation support and legal consulting where accountability is important.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

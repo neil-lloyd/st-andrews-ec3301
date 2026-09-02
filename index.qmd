@@ -1,0 +1,28 @@
+---
+title: "EC3301"
+format:
+  html: default
+---
+
+## *Welcome* to Econometrics
+
+This is not the official module website. The [EC3301 Moodle](https://moody.st-andrews.ac.uk/moodle/course/view.php?id=25098) page is the primary source of communication and resources for this module. 
+
+This website is designed to host all lecture, tutorial, and lab material. Each lecture page includes a link to the html lecture slides, along with downloadable pdf notes that can be used for annotation. The material is optimized for presentation and therefore includes some formatting features which are sub-optimal as a webpage or A4 notes.
+
+The webpage and pdf notes should always match one another. Every now and then the slides include content that is not found in the notes/webpage, and *vice versa*. This is only ever done to make the lectures more engaging and avoid repetition in the notes. All examinable material should be available across all formats. Please let me know if you find major inconsistencies.
+
+All [green boxes]{style="color:#00853f;"} (see below) include additional comments that are not examinable. They are there to provoke and inspire an interest in the subject of Econometrics. They will not appear in the lecture slides. 
+
+:::{.callout-tip title="For the curious"}
+These boxes contain non-examinable material to inspire further interest in the subject of Econometrics.
+:::
+
+Please let me know if you find any mistakes in my notes or code. In addition, I welcome any suggestions on how to improve the resources developed for this module. 
+
+[Neil Lloyd](https://www.st-andrews.ac.uk/business-school/people/economics/ndl1/)
+
+**Contact:**
+
+- Office: G5 Castlecliffe, St Andrews
+- Email: neil.lloyd\@st-andrews.ac.uk

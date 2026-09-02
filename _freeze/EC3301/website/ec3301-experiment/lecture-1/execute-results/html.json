@@ -1,0 +1,15 @@
+{
+  "hash": "711daa20c1858f46849961946197db3d",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: The Linear Regression Model\nsubtitle: Lecture 1\nformat: \n  html: default\n  revealjs: \n    output-file: lecture-1-slides.html\n    footer: \"St Andrews Business School - Martinmas 2026/27\"\n  pdf: default\nengine: knitr  \n---\n\n## Context\n\nA little nonsense\n\n:::{.callout-note title=\"Title\"}\nnote...\n:::\n\n[link](https://neil-lloyd.github.io/website/)\n\nIf you want to change colour of [word]{style=\"color:red\"} to red.\n\n## Call out blocks\n\n\n:::{.callout-note title=\"Note\"}\ntext\n:::\n\n:::{.callout-tip title=\"Tip\"}\ntext\n:::\n\n:::{.callout-important title=\"Important\"}\ntext\n:::\n\n:::{.callout-caution title=\"Caution\"}\ntext\n:::\n\n:::{.callout-warning title=\"Warning\"}\ntext\n:::\n\n\n##\n\n::: {.callout-note collapse=\"true\"}\nCollapsed by default.\n:::\n\n::: {.callout-tip icon=\"false\"}\nNo icon shown.\n:::\n\n::: {.callout-warning appearance=\"simple\" title=\"Light\"}\nA lighter-weight style with less box chrome.\n:::",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

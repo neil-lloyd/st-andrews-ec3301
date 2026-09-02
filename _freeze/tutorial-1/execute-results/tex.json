@@ -1,0 +1,11 @@
+{
+  "hash": "2187edefebb29bf8a33f09725f3f3fcd",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: Tutorial 1\nsubtitle: EC3301 - Martinmas Semester\nformat: \n  html: default\n  pdf: \n    output-file: tutorial-1-handout.pdf\nengine: npstata\n---\n\n## Question 1\n\nIn each case, try to prove the following properties of the OLS estimators ($\\hat{\\beta_0},\\hat{\\beta_1}$) for a simple linear regression model\n\n$$\n  y_i = \\beta_0 + \\beta_1 x_i + u_i\n$$\n\na. $\\sum_{i=1}^n \\hat{u}_i=0$, where $\\hat{u}_i = y_i - \\hat{\\beta}_0-\\hat{\\beta}_1 x_i$\n\nb. $\\bar{y} = \\hat{\\beta_0} + \\hat{\\beta_1} \\bar{x}$, where $\\bar{y} = \\frac{1}{n}\\sum_{i=1}^n y_i$ and $\\bar{x} = \\frac{1}{n}\\sum_{i=1}^n x_i$.\n\nc. $\\sum_{i=1}^n x_i \\hat{u}_i = 0$\n\nd. $\\widehat{Cov}(x_i,\\hat{u}_i)=0$ where $\\widehat{Cov}()$ is the sample covariance\n\ne. $\\widehat{Cov(y_i,\\hat{y}_i)} = \\widehat{Var}(x_i)$ where $\\widehat{Var}()$ is the sample variance\n\nMaybe add page 26 - covariance formula. \n\n## Question 2\n\nNeed some hypothesis tests\n\n\n## Question 3\n\n\n\n",
+    "supporting": [
+      "tutorial-1_files\\figure-pdf"
+    ],
+    "filters": []
+  }
+}

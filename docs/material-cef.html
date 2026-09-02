@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Conditional Expectation Function – EC3301 Econometrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cf201e8c159c64e39451d1a718f2f573.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">EC3301 Econometrics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lectures" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lectures</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lectures">    
+        <li>
+    <a class="dropdown-item" href="./lecture-0.html">
+ <span class="dropdown-text">Pre-sessional Lecture</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-1.html">
+ <span class="dropdown-text">Lecture 1</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="./lab-1-Stata.html">
+ <span class="dropdown-text">Lab 1 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-1-R.html">
+ <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./tutorial-1.html">
+ <span class="dropdown-text">Tutorial 1</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-extra-material" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Extra Material</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-extra-material">    
+        <li>
+    <a class="dropdown-item" href="./material-interpretation.html">
+ <span class="dropdown-text">Interpreting Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-cef.html">
+ <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-R.html">
+ <span class="dropdown-text">Basic Programming in R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-Stata.html">
+ <span class="dropdown-text">Basic Programming in Stata</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="light-content">
+<p><img src="img/01-standard-vertical-black-text.png" class="img-fluid"></p>
+</div>
+<div class="dark-content">
+<p><img src="img/02-standard-vertical-white-text.png" class="img-fluid"></p>
+</div>
+</div></div>
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Conditional Expectation Function</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="expectation-operator" class="level2">
+<h2 class="anchored" data-anchor-id="expectation-operator">Expectation operator</h2>
+<p>For a continuous variable, we define the expectation the integral over all possible values of <span class="math inline">\(y\)</span> and the probability density function (<span class="math inline">\(f_y\)</span>).</p>
+<p><span class="math display">\[
+E[y_i] = \int t \cdot f_{y}(t)dt = \int t dF_{y}(t)
+\]</span></p>
+<p>The letter <span class="math inline">\(t\)</span> is used to denote the argument of the integral; i.e.&nbsp;all the values <span class="math inline">\(y\)</span> can take on. The final equality also shows that we can define the <span class="math inline">\(E[]\)</span> using the cumulative density function (<span class="math inline">\(F_y\)</span>). This definition is some used in Microeconomic theory.</p>
+<p>It is important to know that the <span class="math inline">\(E[y_i]\)</span> is a non-random scalar. It is just a number; e.g.&nbsp;5.623.</p>
+<p>The use of integrals can seem a little confusing/complicated/daunting. If <span class="math inline">\(y\)</span> takes on <span class="math inline">\(m\)</span> discrete values - e.g., <span class="math inline">\(y\in\{\text{y}_1,\text{y}_2,...,\text{y}_m\}\)</span> - then we can define the expectation in terms of the probability mass function (<span class="math inline">\(p_y\)</span>).</p>
+<p><span class="math display">\[
+E[y_i] = \sum_{j=1}^{m} \text{y}_j \cdot p_{y}(\text{y}_j)
+\]</span></p>
+<p>where <span class="math inline">\(p_{y}(\text{y}_j) = Pr(y_i = \text{y}_j)\)</span>.</p>
+</section>
+<section id="conditional-expectations" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-expectations">Conditional Expectations</h2>
+<p>The expected value of <span class="math inline">\(y\)</span> for a given value of variable <span class="math inline">\(x\)</span> is defined in terms of the conditional expectation: <span class="math inline">\(E[y_i|x_i=\text{x}]\)</span>. Here, the value of <span class="math inline">\(x\)</span> has been fixed at <span class="math inline">\(x_i=\text{x}\)</span>. The value of the expected value will therefore depend on the conditional distribution of <span class="math inline">\(y|x\)</span>.</p>
+<p><span class="math display">\[
+E[y_i|x_i = \text{x}] = \int t \cdot f_{y|x}(t|x_i = \text{x})dt = \int t dF_{y}(t|x_i = \text{x})
+\]</span></p>
+<p>Just like the unconditional expectation of <span class="math inline">\(y\)</span>, <span class="math inline">\(E[y_i]\)</span>, this value is a non-random scalar.</p>
+</section>
+<section id="conditional-expectation-function" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-expectation-function">Conditional Expectation Function</h2>
+<p>The Conditional Expecation Function (CEF) - denoted <span class="math inline">\(E[y_i|x_i]\)</span> - <strong>is a random function</strong>. It is a function that returns the conditional expectation of <span class="math inline">\(y\)</span> for each value of <span class="math inline">\(x\)</span>. And since <span class="math inline">\(x\)</span> is a random variable, the CEF is a <em>random function</em>.</p>
+<p>We define the conditional expectation function as</p>
+<p><span class="math display">\[
+E[y_i|x_i] = \int t \cdot f_{y|x}(t|x_i)dt = \int t dF_{y|x}(t|x_i)
+\]</span></p>
+<p>This should look very similarly; with the exception that <span class="math inline">\(x\)</span> is not fixed. If we fix <span class="math inline">\(x_i = \text{x}\)</span> (as above), then the value at which we are evaluating the function is no longer random. The result is the constant conditional expectation: <span class="math inline">\(E[y_i|x_i = \text{x}]\)</span>.</p>
+</section>
+<section id="case-of-binary-x" class="level2">
+<h2 class="anchored" data-anchor-id="case-of-binary-x">Case of Binary <span class="math inline">\(x\)</span></h2>
+<p>In the case where <span class="math inline">\(x\)</span> is a binary random <em>variable</em> (i.e., dummy variable), the CEF is linear. We can write the CEF of <span class="math inline">\(y\)</span> given <span class="math inline">\(x\)</span> as,</p>
+<p><span class="math display">\[
+E[y_i|x_i] = E[y_i|x_i=0] + x_i\cdot\big(E[y_i|x_i=1]-E[y_i|x_i=0]\big)
+\]</span></p>
+<p>The above function returns <span class="math inline">\(E[y_i|x_i=0]\)</span> when <span class="math inline">\(x_i=0\)</span> and <span class="math inline">\(E[y_i|x_i=1]\)</span> when <span class="math inline">\(x_i=1\)</span>. This expression for the CEF is used <a href="lecture-6.qmd">Lecture 6</a> and related to the discussion of potential outcomes on page 50 of Wooldridge.</p>
+</section>
+<section id="law-of-iterated-expectations" class="level2">
+<h2 class="anchored" data-anchor-id="law-of-iterated-expectations">Law of Iterated Expectations</h2>
+<p>The Law of Iterated Expectations says that given two random variables<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\([y_i,x_i]\)</span>, we can express the unconditional expected value of <span class="math inline">\(y_i\)</span> as the expected value of the conditional expectation of <span class="math inline">\(y_i\)</span> on <span class="math inline">\(x_i\)</span>.</p>
+<p><span class="math display">\[
+        E[y_i] = E\big[E[y_i|x_i]\big]
+\]</span></p>
+<p>Where the outside expectation is with respect to <span class="math inline">\(x_i\)</span>,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> since the CEF is a random function of <span class="math inline">\(x_i\)</span>. We can expand this as follows,</p>
+<p><span class="math display">\[
+E[y_i] = \int t \cdot f_{y}(t)dt = \int\int t \cdot f_{y|x}(t|v)dtf_x(v)dv = E\big[E[y_i|x_i]\big]
+\]</span></p>
+<div id="exm-cef" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1</strong></span> Suppose <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are both discrete random variables: <span class="math inline">\(y_i\in\{1,2\}\)</span> and <span class="math inline">\(x_i\in\{3,4\}\)</span>. With the joint distribution:</p>
+<table class="caption-top table">
+<caption><span class="math inline">\(f_{y,x}\)</span></caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(x_i=3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x_i=2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(y_i=1\)</span></td>
+<td style="text-align: center;"><strong>1/10</strong></td>
+<td style="text-align: center;"><strong>3/10</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(y_i=2\)</span></td>
+<td style="text-align: center;"><strong>2/10</strong></td>
+<td style="text-align: center;"><strong>4/10</strong></td>
+</tr>
+</tbody>
+</table>
+<p>We can then define the two marginal distributions,</p>
+<table class="caption-top table">
+<caption><span class="math inline">\(f_y\)</span></caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(y_i=1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_i=2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>4/10</strong></td>
+<td style="text-align: center;"><strong>6/10</strong></td>
+</tr>
+</tbody>
+</table>
+<p>and,</p>
+<table class="caption-top table">
+<caption><span class="math inline">\(f_x\)</span></caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(x_i=3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x_i=4\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>3/10</strong></td>
+<td style="text-align: center;"><strong>7/10</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Likewise, we know the conditional distribution <span class="math inline">\(f_{y|x}\)</span>; which we get by dividing the joint distribution by the marginal distribution of <span class="math inline">\(x\)</span>. Each column of the conditional distribution should add up to 1.</p>
+<table class="caption-top table">
+<caption><span class="math inline">\(f_{y|x}\)</span></caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(x_i=3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x_i=4\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(y_i=1\)</span></td>
+<td style="text-align: center;"><strong>1/3</strong></td>
+<td style="text-align: center;"><strong>3/7</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(y_i=2\)</span></td>
+<td style="text-align: center;"><strong>2/3</strong></td>
+<td style="text-align: center;"><strong>4/7</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Now we can calculate the following objects:</p>
+<ol type="1">
+<li><span class="math inline">\(E[y_i]\)</span></li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+        E[y_i] =&amp; 1\cdot Pr(y_i=1)+2\cdot Pr(y_i=2) \\
+        =&amp;1\cdot 4/10+2\cdot 6/10 \\
+        =&amp;16/10
+    \end{aligned}
+\]</span></p>
+<ol start="2" type="1">
+<li><span class="math inline">\(E[y_i|x_i=3]\)</span></li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+        E[y_i|x_i=3] =&amp; 1\cdot Pr(y_i=1|x_i=3)+2\cdot Pr(y_i=2|x_i=3) \\
+        =&amp;1\cdot 1/3+2\cdot 2/3 \\
+        =&amp;5/3
+\end{aligned}
+\]</span></p>
+<ol start="3" type="1">
+<li><span class="math inline">\(E[y_i|x_i=4]\)</span></li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+        E[y_i|x_i=4] =&amp; 1\cdot Pr(y_i=1|x_i=4)+2\cdot Pr(y_i=2|x_i=4) \\
+        =&amp;1\cdot 3/7+2\cdot 4/7 \\
+        =&amp;11/7
+    \end{aligned}
+\]</span></p>
+<ol start="4" type="1">
+<li><span class="math inline">\(E\big[E[y_i|x_i]\big]\)</span></li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+        E\big[E[y_i|x_i]\big] =&amp; E[y_i|x_i=3]\cdot Pr(x_i=3)+ E[y_i|x_i=4]\cdot Pr(x_i=4) \\
+        =&amp;5/3\cdot3/10+11/7\cdot 7/10 \\
+        =&amp;16/10
+    \end{aligned}
+\]</span></p>
+<p>We have therefore demonstrated the law of iterated expectations.</p>
+</div>
+<p>We can extend this principle to conditional expectations. Suppose you have three random variables/vectors <span class="math inline">\(\{y_i,x_i,z_i\}\)</span>, we can express the conditional expected value of <span class="math inline">\(y_i\)</span> on <span class="math inline">\(x_i\)</span> as the (conditional) expected value of the conditional expectation of <span class="math inline">\(y_i\)</span> on <span class="math inline">\(x_i\)</span> <em>and</em> <span class="math inline">\(z_i\)</span>.</p>
+<p><span class="math display">\[
+        E[y_i|x_i] = E\big[E[y_i|x_i,z_i]|x_i\big]
+\]</span></p>
+<p>Here the outside expectation is with respect <span class="math inline">\(z_i\)</span> <em>conditional on</em> <span class="math inline">\(x_i\)</span>. It utilizes the conditional distribution <span class="math inline">\(f_{z|x}\)</span> to form the outside expectation,</p>
+<p><span class="math display">\[
+E[y_i|x_i] = \int t \cdot f_{y|x}(t|x_i)dt = \int\int y \cdot f_{y|x,z}(t|x_i,u)dtf_{z|x}(u|x_i)du = E\big[E[y_i|x_i,z_i]|x_i\big]
+\]</span></p>
+</section>
+<section id="properties-of-the-cef" class="level2">
+<h2 class="anchored" data-anchor-id="properties-of-the-cef">Properties of the CEF</h2>
+<p>The following three theorems can be found in a range of Econometrics textbooks and Microeconometrics texts.</p>
+<div id="thm-cef1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1</strong></span> We can express the <em>observed</em> outcome <span class="math inline">\(y_i\)</span> as a sum of <span class="math inline">\(E[y_i|x_i]+\varepsilon_i\)</span> where <span class="math inline">\(E[\varepsilon_i|x_i]=0\)</span> (i.e., mean independent).</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span></p>
+<ol type="1">
+<li><p><span class="math inline">\(E[\varepsilon_i | x_i] = E[y_i - E[y_i | x_i] | x_i] = E[y_i | x_i] - E[y_i | x_i] = 0\)</span></p></li>
+<li><p><span class="math inline">\(E[h(x_i)\varepsilon_i] = E[h(x_i)E[\varepsilon_i | x_i]] = E[h(x_i) \times 0] = 0\)</span></p></li>
+</ol>
+</div>
+<div id="thm-cef2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2</strong></span> <span class="math inline">\(E[y_i|x_i]\)</span> is the best predictor of <span class="math inline">\(y_i\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><span class="math display">\[
+\begin{aligned}
+(y_i - m(x_i))^2 =&amp; \left((y_i - E[y_i | x_i]) + (E[y_i | x_i] - m(x_i))\right)^2 \\
+=&amp; (y_i - E[y_i \| x_i])^2 + (E[y_i | x_i] - m(x_i))^2 \\&amp;+ 2(y_i - E[y_i | x_i]) \times (E[y_i | x_i] - m(x_i))
+\end{aligned}
+\]</span></p>
+<p>The last term (cross product) is mean zero. Thus, the function is minimized by setting <span class="math inline">\(m(x_i) = E[y_i | x_i]\)</span>.</p>
+</div>
+<div id="thm-cef3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3</strong></span> [ANOVA Theorem] The variance of <span class="math inline">\(y_i\)</span> can be decomposed as <span class="math inline">\(V(E[y_i|x_i])+E(V(y_i|x_i))\)</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><span class="math display">\[
+\begin{aligned}
+        V(y_i)=&amp;V(E[y_i|x_i] + \varepsilon_i) \\
+        =&amp;V(E[y_i|x_i])+V(\varepsilon_i) \\
+        =&amp;V(E[y_i|x_i])+E[\varepsilon_i^2]
+    \end{aligned}
+\]</span> The second line follows from Theorem 1.1 (independence) and</p>
+<p><span class="math display">\[
+        E[\varepsilon_i^2]=E\left[E[\varepsilon_i^2|x_i]\right]=E\left[V(y_i|x_i)\right]
+\]</span></p>
+</div>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>This can be extended to random vectors.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Some texts use the notation <span class="math inline">\(E_X\big[E[y_i|x_i]\big]\)</span> to demonstrate that the outside expectation is with respect to <span class="math inline">\(x_i\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
