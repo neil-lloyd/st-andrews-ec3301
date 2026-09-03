@@ -16,7 +16,9 @@ engine: knitr
 #| include: false
 
 library(Statamarkdown)
+#stataexe <- "C:/Program Files/StataNow19/StataSE-64.exe"
 knitr::opts_chunk$set(collectcode = TRUE)
+#knitr::opts_chunk$set(engine.path = list(stata = stataexe))
 ```
 
 :::{.content-visible when-format="revealjs"}
@@ -661,7 +663,7 @@ var(reg_vals)
 ```
 :::
 
-## {.scrollable}
+## Fitted values {.scrollable}
 
 :::{.panel-tabset}
 
@@ -673,7 +675,7 @@ var(reg_vals)
 #| output: false
 
 * Plot
-twoway (scatter hhcon hhinc, mc(black) mfc(%50)) (scatter fitted hhinc, mc(red) mfc(%50) msize(small) ms(S)) (scatter residual hhinc, mc(blue) mfc(%50) msize(small) ms(D))  (function y = _b[_cons] + _b[hhinc]*x, lc(red) lp(solid) range(0 3000)), ytitle("Household consumption (£/week)") xtitle("Household income (£/week)") title("Household consumption vs income (LCF, 2023)") legend(order(1 "Observed" 2 "Fitted values" 3 "Residuals") r(3) pos(2) ring(0)) yline(0, lc(blue) lp(solid))
+twoway (scatter hhcon hhinc, mc(black) mfc(%50)) (scatter fitted hhinc, mc(red) mfc(%50) msize(small) ms(S)) (function y = _b[_cons] + _b[hhinc]*x, lc(red) lp(solid) range(0 3000)), ytitle("Household consumption (£/week)") xtitle("Household income (£/week)") title("Household consumption vs income (LCF, 2023)") legend(order(1 "Observed" 2 "Fitted values") r(2) pos(2) ring(0))
 ```
 
 
@@ -704,13 +706,66 @@ plot_vals <- data.frame(
 ggplot(plot_vals, aes(x = hhinc, y = hhcon)) +
   geom_point(aes(colour = "Observed"), alpha = 0.5) +
   geom_point(aes(y = fitted, colour = "Fitted values"), shape = 15, size = 2, alpha = 0.5) +
-  geom_point(aes(y = resid, colour = "Residuals"), shape = 18, size = 2, alpha = 0.5) +
-  geom_hline(yintercept = 0, colour = "blue", linewidth = 0.7) +
   geom_abline(intercept = coef(model1)[1], slope = coef(model1)[2],
               colour = "red", linewidth = 0.7) +
   scale_colour_manual(values = c("Observed" = "grey30",
-                                 "Fitted values" = "red",
-                                 "Residuals" = "blue")) +
+                                 "Fitted values" = "red")) +
+  labs(x = "Household income (£/week)",
+       y = "Household consumption (£/week)",
+       title = "Household consumption vs income (LCF, 2023)",
+       colour = NULL) +
+  theme_minimal() +
+  theme(legend.position = c(0.98, 0.98),
+        legend.justification = c(1, 1))
+```
+:::
+
+## Residual {.scrollable}
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| code-fold: true
+#| output: false
+
+* Plot
+twoway (scatter hhcon hhinc, mc(black) mfc(%50)) (scatter residual hhinc, mc(green) mfc(%50) msize(small) ms(D)), ytitle("Household consumption (£/week)") xtitle("Household income (£/week)") title("Household consumption vs income (LCF, 2023)") legend(order(1 "Observed" 2 "Residuals") r(2) pos(2) ring(0)) yline(0, lc(green) lp(solid))
+```
+
+
+```{stata}
+#| echo: false
+#| output: false
+graph export "material/lecture-2/lcf-decomp2.png", replace
+```
+![](material/lecture-2/lcf-decomp2.png){fig-align="center" width=67%}
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+#| fig-align: center
+
+# Data frame with the x-variable plus fitted values and residuals
+plot_vals <- data.frame(
+  hhinc  = model.frame(model1)$hhinc,  # exactly the rows lm() used
+  hhcon  = model.frame(model1)$hhcon,
+  fitted = fitted(model1),
+  resid  = residuals(model1)
+)
+
+# Plot
+ggplot(plot_vals, aes(x = hhinc, y = hhcon)) +
+  geom_point(aes(colour = "Observed"), alpha = 0.5) +
+  geom_point(aes(y = resid, colour = "Residuals"), shape = 18, size = 2, alpha = 0.5) +
+  geom_hline(yintercept = 0, colour = "green", linewidth = 0.7) +
+  scale_colour_manual(values = c("Observed" = "grey30",
+                                 "Residuals" = "green")) +
   labs(x = "Household income (£/week)",
        y = "Household consumption (£/week)",
        title = "Household consumption vs income (LCF, 2023)",
@@ -800,7 +855,7 @@ Many students make the mistake of thinking that higher $\mathbf{R}^2$ is always 
 An alternative measure fit is the *adjusted* $\mathbf{R}^2$:
 
 $$
-  \bar{\mathbf{R}}^2 = 1 - \frac{\text{SSR}/(n-k-1)}{\text{SST}/n}
+  \overline{\mathbf{R}}^2 = 1 - \frac{\text{SSR}/(n-k-1)}{\text{SST}/n}
 $$
 
 where, 
@@ -809,7 +864,7 @@ where,
 - $k$ is the number of regressors $\Rightarrow$ $k+1$ is the number of parameters estimated (including intercept).
 
 ::: {.fragment .fade-in}
-As you increase $k$, you decrease $\bar{\mathbf{R}}^2$
+As you increase $k$, you decrease $\overline{\mathbf{R}}^2$
 
 - Creates a disincentive to add irrelevant regressors that do not also reduce $SSR$.
 

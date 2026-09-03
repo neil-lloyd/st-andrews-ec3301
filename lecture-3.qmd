@@ -404,12 +404,12 @@ The OLS estimator is a **random variable**. Under MLR 1-5:
 Under MLR 6:
 
 $$
-  \hat{\beta}_j|\mathbf{x} \sim\quad \mathcal{N}\big(\beta_j,\,Var(\hat{\beta}_j|\mathbf{x})\big) 
+  \hat{\beta}_j|\mathbf{x} \sim\quad N\big(\beta_j,\,Var(\hat{\beta}_j|\mathbf{x})\big) 
 $$
 
 Why?
 
-- $u_i|\mathbf{x} \sim \mathcal{N}(0,\sigma^2)$
+- $u_i|\mathbf{x} \sim N(0,\sigma^2)$
 
 - conditional on x, $\hat{\beta}$ is a linear transformation of $u$.
 
@@ -418,19 +418,19 @@ Why?
 We can therefore standardize the distribution: 
 
 $$
-  \frac{\hat{\beta}_j-\beta_j}{se(\hat{\beta}_j)} | x \sim \mathcal{N}(0,1)
+  \frac{\hat{\beta}_j-\beta_j}{se(\hat{\beta}_j)} | x \sim N(0,1)
 $$
 where $se(\hat{\beta}_j) = \sqrt{Var(\hat{\beta}_j)}$
 
 
 ##
 
-This term - let's call it $z=(\hat{\beta}_j-\beta_j)/se(\hat{\beta}_j)$ is another random variable. Since we know the properties $\mathcal{N}(0,1)$, we know:
+This term - let's call it $z=(\hat{\beta}_j-\beta_j)/se(\hat{\beta}_j)$ is another random variable. Since we know the properties $N(0,1)$, we know:
 
 ::: incremental
-- $Pr(z<\text{z}_{0.025}) = 0.025$ where $\text{z}_{0.025} = -1.96$ is the $2.5^{th}$ percentile of $\mathcal{N}(0,1)$
+- $Pr(z<\text{z}_{0.025}) = 0.025$ where $\text{z}_{0.025} = -1.96$ is the $2.5^{th}$ percentile of $N(0,1)$
 
-- $Pr(z>\text{z}_{0.975}) = 0.025$ where $\text{z}_{0.975} = 1.96$ is the $97.5^{th}$ percentile of $\mathcal{N}(0,1)$
+- $Pr(z>\text{z}_{0.975}) = 0.025$ where $\text{z}_{0.975} = 1.96$ is the $97.5^{th}$ percentile of $N(0,1)$
 
 - $Pr(\text{z}_{0.025}<z<\text{z}_{0.975}) = 0.95$ (or 95%)
 :::
@@ -526,13 +526,13 @@ If we reject $H_0$ we conclude $H_1$. It is NOT accurate to say that we 'prove' 
 We know that under MLR 1-6,
 
 $$
-  \frac{\hat{\beta}_j-\beta_j}{se(\hat{\beta}_j)} | x \sim \mathcal{N}(0,1)
+  \frac{\hat{\beta}_j-\beta_j}{se(\hat{\beta}_j)} | x \sim N(0,1)
 $$
 
 Under $H_0: \beta_j=0$
 
 $$
-  \text{Test-stat} = \frac{\hat{\beta}_j-0}{se(\hat{\beta}_j)} | x \underset{H_0}{\sim} \mathcal{N}(0,1)
+  \text{Test-stat} = \frac{\hat{\beta}_j-0}{se(\hat{\beta}_j)} | x \underset{H_0}{\sim} N(0,1)
 $$
 
 ::: {.callout-important}
@@ -558,7 +558,7 @@ In Economics, we typically use $\alpha = \{0.01,0.05,0.10\}$.
 Under $H_0$, 
 
 $$
-  \text{Test-stat} \underset{H_0}{\sim} \mathcal{N}(0,1)
+  \text{Test-stat} \underset{H_0}{\sim} N(0,1)
 $$
 
 ##
@@ -711,7 +711,7 @@ We have to add and subtract $\kappa/se(\hat{\beta}_j)$.
 $$
   \begin{aligned}
     Pr(\text{Reject}\;H_0|\beta_j = \kappa) =& Pr\Bigg(\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}+\frac{\kappa-0}{se(\hat{\beta}_j)}<-1.96\Bigg|\beta_j = \kappa\Bigg) + Pr\Bigg(\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}+\frac{\kappa-0}{se(\hat{\beta}_j)}>1.96\Bigg|\beta_j = \kappa\Bigg) \\
-    =& Pr\Bigg(\underbrace{\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}}_{\sim \mathcal{N}(0,1)}<-1.96-\frac{\kappa}{se(\hat{\beta}_j)}\Bigg|\beta_j = \kappa\Bigg) + Pr\Bigg(\underbrace{\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}}_{\sim \mathcal{N}(0,1)}>1.96-\frac{\kappa}{se(\hat{\beta}_j)}\Bigg|\beta_j = \kappa\Bigg) \\
+    =& Pr\Bigg(\underbrace{\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}}_{\sim N(0,1)}<-1.96-\frac{\kappa}{se(\hat{\beta}_j)}\Bigg|\beta_j = \kappa\Bigg) + Pr\Bigg(\underbrace{\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}}_{\sim N(0,1)}>1.96-\frac{\kappa}{se(\hat{\beta}_j)}\Bigg|\beta_j = \kappa\Bigg) \\
     =& \Phi\big(-1.96-\kappa/se(\hat{\beta}_j)\big) + 1- \Phi\big(1.96-\kappa/se(\hat{\beta}_j)\big) \\
     \geq & 0.05
   \end{aligned}

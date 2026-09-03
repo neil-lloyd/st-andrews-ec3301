@@ -13,7 +13,7 @@ engine: npstata
 Consider a random sample (iid: independently and identitically distributed) drawn from the distribution 
 
 $$
-  y_i\sim \mathcal{N}(2,25)
+  y_i\sim N(2,25)
 $$ 
 
 1. What is the $E[y_i]$ and $Var(y_i)$?
@@ -51,15 +51,15 @@ $$
 3. What is the distribution of $\bar{y}$?
 
 $$
-  \bar{y} \sim \mathcal{N}(2,25/n)
+  \bar{y} \sim N(2,25/n)
 $$
 
 4. Compute the probability that $Pr(\bar{y}<3)$ in a sample of $n=100$.
 
-Since $\bar{y} \sim \mathcal{N}(2,1/4)$, 
+Since $\bar{y} \sim N(2,1/4)$, 
 
 $$
-  \frac{\bar{y}-2}{0.5} \sim \mathcal{N}(0,1)
+  \frac{\bar{y}-2}{0.5} \sim N(0,1)
 $$
 
 $$
@@ -76,7 +76,7 @@ $$
 dis normal(2)
 ```
 
-Suppose, you draw a random sample that has the following properties. For the next questions we will assume no knowledge of the true mean of $y$; only that it the sample was drawn from a normal distribution $y_i\sim \mathcal{N}(\mu,\sigma^2)$ 
+Suppose, you draw a random sample that has the following properties. For the next questions we will assume no knowledge of the true mean of $y$; only that it the sample was drawn from a normal distribution $y_i\sim N(\mu,\sigma^2)$ 
 
 ```{stata}
 *| echo: false
@@ -96,7 +96,7 @@ mean y
 
 The standard deviation ($s$) is the square-root of the sample variance. The sample variance is an estimate of the unobserved distribution variance ($Var(y_i)=4$). In our above example $s = 2.082121$ which is $\approx 2 = \sqrt{4}$. The standard error ($se$) is the square root of the $Var(\bar{y})$. As we proved above,  $Var(\bar{y}) = Var(y_i)/n$. That means that $se(\bar{y}) = sd/\sqrt{n}$. As $n=100$, we find that $se = .2082121$; exactly equal to the $s/10$.
 
-6. Earlier we showed that, $\frac{\bar{y}-2}{se(\bar{y})} \sim \mathcal{N}(0,1)$ where $se(\bar{y}) = \sigma/\sqrt{n}$. Since we do not know $\sigma$, what happens to the distribution if we replace $\sigma$ with $s$, the standard deviation of the sample. 
+6. Earlier we showed that, $\frac{\bar{y}-2}{se(\bar{y})} \sim N(0,1)$ where $se(\bar{y}) = \sigma/\sqrt{n}$. Since we do not know $\sigma$, what happens to the distribution if we replace $\sigma$ with $s$, the standard deviation of the sample. 
 
 $$
   \frac{\bar{y}-2}{s/\sqrt{n}} \sim T_{n-1}

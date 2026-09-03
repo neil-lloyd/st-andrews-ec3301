@@ -107,6 +107,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -450,46 +453,17 @@ window.Quarto = {
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<svg width="576" height="480" viewbox="0.00 0.00 415.07 44.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 40)">
-<title>G</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-40 411.07,-40 411.07,4 -4,4"></polygon>
-<!-- A -->
-<g id="node1" class="node">
-<title>A</title>
-<ellipse fill="none" stroke="black" cx="56.21" cy="-18" rx="56.43" ry="18"></ellipse>
-<text text-anchor="middle" x="56.21" y="-13.8" font-family="DejaVu Sans" font-size="14.00">Estimand</text>
-</g>
-<!-- B -->
-<g id="node2" class="node">
-<title>B</title>
-<ellipse fill="none" stroke="black" cx="206.06" cy="-18" rx="57.76" ry="18"></ellipse>
-<text text-anchor="middle" x="206.06" y="-13.8" font-family="DejaVu Sans" font-size="14.00">Estimator</text>
-</g>
-<!-- A&#45;&#45;B -->
-<g id="edge1" class="edge">
-<title>A--B</title>
-<path fill="none" stroke="black" d="M112.69,-18C124.32,-18 136.61,-18 148.29,-18"></path>
-</g>
-<!-- C -->
-<g id="node3" class="node">
-<title>C</title>
-<ellipse fill="none" stroke="black" cx="353.38" cy="-18" rx="53.88" ry="18"></ellipse>
-<text text-anchor="middle" x="353.38" y="-13.8" font-family="DejaVu Sans" font-size="14.00">Estimate</text>
-</g>
-<!-- B&#45;&#45;C -->
-<g id="edge2" class="edge">
-<title>B--C</title>
-<path fill="none" stroke="black" d="M264.07,-18C275.68,-18 287.85,-18 299.32,-18"></path>
-</g>
-</g>
-</svg>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Estimator] --&gt; B[Estimand]
+  A --&gt; C[Estimate]
+
+</pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
-<p>The estimand (<span class="math inline">\(\beta\)</span>) is an unknown population parameter (i.e., a non-random number); the estimator (<span class="math inline">\(\hat{\beta}\)</span>) a random function; and the estimate (e.g.&nbsp;<span class="math inline">\(0.187\)</span>) a realized value of said random function (i.e.&nbsp;a non-random number).</p>
+<p>The estimand (<span class="math inline">\(\beta\)</span>) is an unknown population parameter (i.e., a non-random number); the estimator (<span class="math inline">\(\hat{\beta}\)</span>) a random variable; and the estimate (e.g.&nbsp;<span class="math inline">\(0.187\)</span>) a realized value of said random function (i.e.&nbsp;a non-random number).</p>
 <section id="accuracy-vs-effiency" class="level1">
 <h1>Accuracy vs Effiency</h1>
 <section id="accuracy" class="level2">
@@ -818,11 +792,11 @@ E[\hat{\beta}_1] = E\big[E[\hat{\beta}_1|x]\big] = E[\beta_1] = \beta_1
 <h2 class="anchored" data-anchor-id="normality">Normality</h2>
 <p>Under MLR 6:</p>
 <p><span class="math display">\[
-  \hat{\beta}_j|\mathbf{x} \sim\quad \mathcal{N}\big(\beta_j,\,Var(\hat{\beta}_j|\mathbf{x})\big)
+  \hat{\beta}_j|\mathbf{x} \sim\quad N\big(\beta_j,\,Var(\hat{\beta}_j|\mathbf{x})\big)
 \]</span></p>
 <p>Why?</p>
 <ul>
-<li><p><span class="math inline">\(u_i|\mathbf{x} \sim \mathcal{N}(0,\sigma^2)\)</span></p></li>
+<li><p><span class="math inline">\(u_i|\mathbf{x} \sim N(0,\sigma^2)\)</span></p></li>
 <li><p>conditional on x, <span class="math inline">\(\hat{\beta}\)</span> is a linear transformation of <span class="math inline">\(u\)</span>.</p></li>
 </ul>
 </section>
@@ -830,16 +804,16 @@ E[\hat{\beta}_1] = E\big[E[\hat{\beta}_1|x]\big] = E[\beta_1] = \beta_1
 <h2 class="anchored" data-anchor-id="normalization">Normalization</h2>
 <p>We can therefore standardize the distribution:</p>
 <p><span class="math display">\[
-  \frac{\hat{\beta}_j-\beta_j}{se(\hat{\beta}_j)} | x \sim \mathcal{N}(0,1)
+  \frac{\hat{\beta}_j-\beta_j}{se(\hat{\beta}_j)} | x \sim N(0,1)
 \]</span> where <span class="math inline">\(se(\hat{\beta}_j) = \sqrt{Var(\hat{\beta}_j)}\)</span></p>
 </section>
 <section id="section-10" class="level2">
 <h2 class="anchored" data-anchor-id="section-10"></h2>
-<p>This term - let’s call it <span class="math inline">\(z=(\hat{\beta}_j-\beta_j)/se(\hat{\beta}_j)\)</span> is another random variable. Since we know the properties <span class="math inline">\(\mathcal{N}(0,1)\)</span>, we know:</p>
+<p>This term - let’s call it <span class="math inline">\(z=(\hat{\beta}_j-\beta_j)/se(\hat{\beta}_j)\)</span> is another random variable. Since we know the properties <span class="math inline">\(N(0,1)\)</span>, we know:</p>
 <div class="incremental">
 <ul class="incremental">
-<li><p><span class="math inline">\(Pr(z&lt;\text{z}_{0.025}) = 0.025\)</span> where <span class="math inline">\(\text{z}_{0.025} = -1.96\)</span> is the <span class="math inline">\(2.5^{th}\)</span> percentile of <span class="math inline">\(\mathcal{N}(0,1)\)</span></p></li>
-<li><p><span class="math inline">\(Pr(z&gt;\text{z}_{0.975}) = 0.025\)</span> where <span class="math inline">\(\text{z}_{0.975} = 1.96\)</span> is the <span class="math inline">\(97.5^{th}\)</span> percentile of <span class="math inline">\(\mathcal{N}(0,1)\)</span></p></li>
+<li><p><span class="math inline">\(Pr(z&lt;\text{z}_{0.025}) = 0.025\)</span> where <span class="math inline">\(\text{z}_{0.025} = -1.96\)</span> is the <span class="math inline">\(2.5^{th}\)</span> percentile of <span class="math inline">\(N(0,1)\)</span></p></li>
+<li><p><span class="math inline">\(Pr(z&gt;\text{z}_{0.975}) = 0.025\)</span> where <span class="math inline">\(\text{z}_{0.975} = 1.96\)</span> is the <span class="math inline">\(97.5^{th}\)</span> percentile of <span class="math inline">\(N(0,1)\)</span></p></li>
 <li><p><span class="math inline">\(Pr(\text{z}_{0.025}&lt;z&lt;\text{z}_{0.975}) = 0.95\)</span> (or 95%)</p></li>
 </ul>
 </div>
@@ -950,11 +924,11 @@ Note
 </ol>
 <p>We know that under MLR 1-6,</p>
 <p><span class="math display">\[
-  \frac{\hat{\beta}_j-\beta_j}{se(\hat{\beta}_j)} | x \sim \mathcal{N}(0,1)
+  \frac{\hat{\beta}_j-\beta_j}{se(\hat{\beta}_j)} | x \sim N(0,1)
 \]</span></p>
 <p>Under <span class="math inline">\(H_0: \beta_j=0\)</span></p>
 <p><span class="math display">\[
-  \text{Test-stat} = \frac{\hat{\beta}_j-0}{se(\hat{\beta}_j)} | x \underset{H_0}{\sim} \mathcal{N}(0,1)
+  \text{Test-stat} = \frac{\hat{\beta}_j-0}{se(\hat{\beta}_j)} | x \underset{H_0}{\sim} N(0,1)
 \]</span></p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -987,7 +961,7 @@ Important
 </ol>
 <p>Under <span class="math inline">\(H_0\)</span>,</p>
 <p><span class="math display">\[
-  \text{Test-stat} \underset{H_0}{\sim} \mathcal{N}(0,1)
+  \text{Test-stat} \underset{H_0}{\sim} N(0,1)
 \]</span></p>
 </section>
 <section id="section-12" class="level2">
@@ -1140,7 +1114,7 @@ Important
 <p><span class="math display">\[
   \begin{aligned}
     Pr(\text{Reject}\;H_0|\beta_j = \kappa) =&amp; Pr\Bigg(\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}+\frac{\kappa-0}{se(\hat{\beta}_j)}&lt;-1.96\Bigg|\beta_j = \kappa\Bigg) + Pr\Bigg(\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}+\frac{\kappa-0}{se(\hat{\beta}_j)}&gt;1.96\Bigg|\beta_j = \kappa\Bigg) \\
-    =&amp; Pr\Bigg(\underbrace{\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}}_{\sim \mathcal{N}(0,1)}&lt;-1.96-\frac{\kappa}{se(\hat{\beta}_j)}\Bigg|\beta_j = \kappa\Bigg) + Pr\Bigg(\underbrace{\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}}_{\sim \mathcal{N}(0,1)}&gt;1.96-\frac{\kappa}{se(\hat{\beta}_j)}\Bigg|\beta_j = \kappa\Bigg) \\
+    =&amp; Pr\Bigg(\underbrace{\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}}_{\sim N(0,1)}&lt;-1.96-\frac{\kappa}{se(\hat{\beta}_j)}\Bigg|\beta_j = \kappa\Bigg) + Pr\Bigg(\underbrace{\frac{\hat{\beta}_j-\kappa}{se(\hat{\beta}_j)}}_{\sim N(0,1)}&gt;1.96-\frac{\kappa}{se(\hat{\beta}_j)}\Bigg|\beta_j = \kappa\Bigg) \\
     =&amp; \Phi\big(-1.96-\kappa/se(\hat{\beta}_j)\big) + 1- \Phi\big(1.96-\kappa/se(\hat{\beta}_j)\big) \\
     \geq &amp; 0.05
   \end{aligned}
