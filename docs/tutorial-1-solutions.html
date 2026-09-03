@@ -20,10 +20,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -72,6 +107,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -400,8 +438,209 @@ window.Quarto = {
 </header>
 
 
-<section id="question-1" class="level2">
-<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
+<section id="statistical-inference" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-inference">Statistical inference</h2>
+<p>Consider a random sample (iid: independently and identitically distributed) drawn from the distribution</p>
+<p><span class="math display">\[
+  y_i\sim \mathcal{N}(2,25)
+\]</span></p>
+<ol type="1">
+<li>What is the <span class="math inline">\(E[y_i]\)</span> and <span class="math inline">\(Var(y_i)\)</span>?</li>
+</ol>
+<p><span class="math display">\[
+  \begin{aligned}
+  E[y_i] = 2 \\
+  Var(y_i) = 25
+  \end{aligned}
+\]</span></p>
+<ol start="2" type="1">
+<li>Solve for the expected value and variance of the sample mean: <span class="math inline">\(\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i\)</span>.</li>
+</ol>
+<p><span class="math display">\[
+  \begin{aligned}
+  E[\bar{y}] =&amp; E\Bigg[\frac{1}{n}\sum_{i=1}^n y_i\Bigg]  \\
+  =&amp; \frac{1}{n}\sum_{i=1}^n E[y_i] \\
+  =&amp; \frac{1}{n}\sum_{i=1}^n 2 \\
+  =&amp; \frac{2n}{n} \\
+  =&amp; 2
+  \end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+  \begin{aligned}
+  Var(\bar{y}) =&amp; E[(\bar{y}-\underbrace{E[\bar{y}]}_{=2})^2]  \\
+  =&amp; E\Bigg[\bigg(\frac{1}{n}\sum_{i=1}^n (y_i-2)\bigg)^2\Bigg] \\
+  =&amp; E\Bigg[\frac{1}{n^2}\sum_{i=1}^n (y_i-2)^2+2\times\frac{1}{n^2}\sum_{i=1}^{n-1} \sum_{j=i+1}^{n} (y_i-2)(y_j-2)\Bigg] \\
+  =&amp; \frac{1}{n^2}\sum_{i=1}^n \underbrace{E\big[(y_i-2)^2\big]}_{Var(y_i)} + 2\times \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} \underbrace{E\big[(y_i-2)(y_j-2)\big]}_{Cov(y_i,y_j)=0} \\
+  =&amp; \frac{nVar(y_i)}{n^2} \\
+  =&amp; \frac{25}{n}
+  \end{aligned}
+\]</span></p>
+<ol start="3" type="1">
+<li>What is the distribution of <span class="math inline">\(\bar{y}\)</span>?</li>
+</ol>
+<p><span class="math display">\[
+  \bar{y} \sim \mathcal{N}(2,25/n)
+\]</span></p>
+<ol start="4" type="1">
+<li>Compute the probability that <span class="math inline">\(Pr(\bar{y}&lt;3)\)</span> in a sample of <span class="math inline">\(n=100\)</span>.</li>
+</ol>
+<p>Since <span class="math inline">\(\bar{y} \sim \mathcal{N}(2,1/4)\)</span>,</p>
+<p><span class="math display">\[
+  \frac{\bar{y}-2}{0.5} \sim \mathcal{N}(0,1)
+\]</span></p>
+<p><span class="math display">\[
+  \begin{aligned}
+  Pr(\bar{y}&lt;3) =&amp; Pr(\bar{y}-2&lt;3-2) \\
+  =&amp; Pr\bigg(\frac{\bar{y}-2}{0.5} &lt; \frac{1}{0.5}\bigg) \\
+  =&amp; Pr(z&lt;2)
+  \end{aligned}
+\]</span></p>
+<div id="ceacb35e" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">normal</span>(2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Running C:\Users\ndl1\OneDrive - University of St Andrews\Documents\EC3301\webs
+&gt; ite\st-andrews-ec3301\profile.do ...
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.97724987</code></pre>
+</div>
+</div>
+<p>Suppose, you draw a random sample that has the following properties. For the next questions we will assume no knowledge of the true mean of <span class="math inline">\(y\)</span>; only that it the sample was drawn from a normal distribution <span class="math inline">\(y_i\sim \mathcal{N}(\mu,\sigma^2)\)</span></p>
+<div id="4af6ba3a" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> <span class="fu">y</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mean</span> <span class="fu">y</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+           y |        100    2.218156    2.082121   -2.61975   6.654652
+
+Mean estimation                            Number of obs = 100
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+           y |   2.218156   .2082121      1.805018    2.631294
+--------------------------------------------------------------</code></pre>
+</div>
+</div>
+<ol start="5" type="1">
+<li>What is the relationship between the standard deviation of the sample and the standard error of the mean reported above?</li>
+</ol>
+<p>The standard deviation (<span class="math inline">\(s\)</span>) is the square-root of the sample variance. The sample variance is an estimate of the unobserved distribution variance (<span class="math inline">\(Var(y_i)=4\)</span>). In our above example <span class="math inline">\(s = 2.082121\)</span> which is <span class="math inline">\(\approx 2 = \sqrt{4}\)</span>. The standard error (<span class="math inline">\(se\)</span>) is the square root of the <span class="math inline">\(Var(\bar{y})\)</span>. As we proved above, <span class="math inline">\(Var(\bar{y}) = Var(y_i)/n\)</span>. That means that <span class="math inline">\(se(\bar{y}) = sd/\sqrt{n}\)</span>. As <span class="math inline">\(n=100\)</span>, we find that <span class="math inline">\(se = .2082121\)</span>; exactly equal to the <span class="math inline">\(s/10\)</span>.</p>
+<ol start="6" type="1">
+<li>Earlier we showed that, <span class="math inline">\(\frac{\bar{y}-2}{se(\bar{y})} \sim \mathcal{N}(0,1)\)</span> where <span class="math inline">\(se(\bar{y}) = \sigma/\sqrt{n}\)</span>. Since we do not know <span class="math inline">\(\sigma\)</span>, what happens to the distribution if we replace <span class="math inline">\(\sigma\)</span> with <span class="math inline">\(s\)</span>, the standard deviation of the sample.</li>
+</ol>
+<p><span class="math display">\[
+  \frac{\bar{y}-2}{s/\sqrt{n}} \sim T_{n-1}
+\]</span></p>
+<ol start="7" type="1">
+<li>Using the properties of the sample, test the null hypothesis <span class="math inline">\(H_0: \mu =1.85\)</span> (where <span class="math inline">\(\mu\)</span> is the unobserved <span class="math inline">\(E[y_i]\)</span>). Use a significance level of <span class="math inline">\(\alpha = 0.05\)</span>.</li>
+</ol>
+<p><span class="math display">\[
+  \frac{\bar{y}-1.85}{s/\sqrt{n}} \underset{H_0}{\sim} T_{n-1}
+\]</span></p>
+<p>Compute the test statistic:</p>
+<div id="3de832f8" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dis (_b[<span class="fu">y</span>]-1.85)/_se[<span class="fu">y</span>] </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.7681755</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>mean</code> command stores estimates in a similar way to <code>regress</code>. They are both e-class commands.</p>
+<ul>
+<li>The <code>_b[]</code> function can be used to call the stored coefficient estimate for a particular variable. The full set of coefficients is stored as in the vector <code>e(b)</code>.</li>
+<li>The <code>_se[]</code> function can be used to call the SE of a particular coefficient. These computed using the covariance matrix stored as <code>e(V)</code>.</li>
+</ul>
+<p>To see the full list of stored estimates, type <code>ereturn list</code>. Note, this does not work for <code>summarize</code>, which is a r-class command. After summarize you can run <code>return list</code> to see the format of its stored estimates.</p>
+</div>
+</div>
+<p>Rejection rule:</p>
+<ul>
+<li>Since this is a two-sided test, we will reject if <span class="math inline">\(|\text{test-stat}|&lt;\text{t}_{99,0.975}\)</span>.</li>
+</ul>
+<p>The test static remains the same.</p>
+<p>Critical values of t-distribution (which is symmetric):</p>
+<div id="7b3bbc90" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dis invt(99,0.975)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.984217</code></pre>
+</div>
+</div>
+<p>Since <span class="math inline">\(|\text{test-stat}|&lt;\text{t}_{99,0.975}\)</span>, we fail to reject.</p>
+<ol start="8" type="1">
+<li>Using the properties of the sample, test the null hypothesis <span class="math inline">\(H_0: \mu \leq 1.85\)</span>.</li>
+</ol>
+<p>Rejection rule:</p>
+<ul>
+<li>Since this is a one-sided test, we will reject if <span class="math inline">\(\text{test-stat}&gt;\text{t}_{99,0.95}\)</span>.</li>
+</ul>
+<p>Critical values of t-distribution (which is symmetric):</p>
+<div id="5cb8dc23" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dis invt(99,0.95)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.6603912</code></pre>
+</div>
+</div>
+<p>We reject <span class="math inline">\(H_0\)</span> and conclude that <span class="math inline">\(\mu &gt; 1.85\)</span>.</p>
+<ol start="9" type="1">
+<li>Why is the conclusion different for the two hypotheses?</li>
+</ol>
+<p>The only difference is the critical value. The one-side test has a lower critical value than the two-sided test.</p>
+<ol start="10" type="1">
+<li>Which test has more statistical power? Compute the power of the test to reject <span class="math inline">\(H_0\)</span> when the true value of <span class="math inline">\(\mu = 2\)</span>.</li>
+</ol>
+<p>In the two-sided test:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  Pr(\text{Reject}\;H_0|\mu = 2) =&amp; Pr\Bigg(\bigg|\frac{\bar{y}-1.85}{s/\sqrt{n}}\bigg|&gt;\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
+  =&amp; Pr\Bigg(\frac{\bar{y}-1.85}{s/\sqrt{n}}&lt;\text{t}_{99,0.025}\Bigg|\mu = 2\Bigg) + Pr\Bigg(\frac{\bar{y}-1.85}{s/\sqrt{n}}&gt;\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
+  =&amp; Pr\Bigg(\frac{\bar{y}-2}{s/\sqrt{n}}&lt;\text{t}_{99,0.025}-\frac{0.15}{s/\sqrt{n}}\Bigg|\mu = 2\Bigg) + Pr\Bigg(\frac{\bar{y}-2}{s/\sqrt{n}}&gt;\text{t}_{99,0.975}-\frac{0.15}{s/\sqrt{n}}\Bigg|\mu = 2\Bigg) \\
+  =&amp; T_{n-1}(\text{t}_{99,0.025}-\frac{0.15}{s/\sqrt{n}}) + 1-T_{n-1}(\text{t}_{99,0.975}-\frac{0.15}{s/\sqrt{n}}) \\
+  \end{aligned}
+\]</span></p>
+<div id="b0d0b21e" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dis t(99,invt(99,0.025)-0.15/_se[<span class="fu">y</span>]) + 1 - t(99,invt(99,0.975)-0.15/_se[<span class="fu">y</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.10866073</code></pre>
+</div>
+</div>
+<p>In the one-sided test:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  Pr(\text{Reject}\;H_0|\mu = 2) =&amp; Pr\Bigg(\frac{\bar{y}-1.85}{s/\sqrt{n}}&gt;\text{t}_{99,0.95}\Bigg|\mu = 2\Bigg) \\
+  =&amp; Pr\Bigg(\frac{\bar{y}-2}{s/\sqrt{n}}&gt;\text{t}_{99,0.95}-\frac{0.15}{s/\sqrt{n}}\Bigg|\mu = 2\Bigg) \\
+  =&amp; 1-T_{n-1}(\text{t}_{99,0.95}-\frac{0.15}{s/\sqrt{n}}) \\
+  \end{aligned}
+\]</span></p>
+<div id="ea4c72e7" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dis 1 - t(99,invt(99,0.95)-0.15/_se[<span class="fu">y</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.17475989</code></pre>
+</div>
+</div>
+<p>This shows that the one-sided test is a more powerful test.</p>
+</section>
+<section id="ols-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="ols-estimator">OLS estimator</h2>
 <p>In each case, try to prove the following properties of the OLS estimators (<span class="math inline">\(\hat{\beta_0},\hat{\beta_1}\)</span>) for a simple linear regression model</p>
 <p><span class="math display">\[
   y_i = \beta_0 + \beta_1 x_i + u_i

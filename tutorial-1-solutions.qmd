@@ -8,7 +8,187 @@ format:
 engine: npstata
 ---
 
-## Question 1
+## Statistical inference
+
+Consider a random sample (iid: independently and identitically distributed) drawn from the distribution 
+
+$$
+  y_i\sim \mathcal{N}(2,25)
+$$ 
+
+1. What is the $E[y_i]$ and $Var(y_i)$?
+
+$$
+  \begin{aligned}
+  E[y_i] = 2 \\
+  Var(y_i) = 25
+  \end{aligned}
+$$
+
+2. Solve for the expected value and variance of the sample mean: $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$.
+
+$$
+  \begin{aligned}
+  E[\bar{y}] =& E\Bigg[\frac{1}{n}\sum_{i=1}^n y_i\Bigg]  \\
+  =& \frac{1}{n}\sum_{i=1}^n E[y_i] \\
+  =& \frac{1}{n}\sum_{i=1}^n 2 \\
+  =& \frac{2n}{n} \\
+  =& 2
+  \end{aligned}
+$$
+
+$$
+  \begin{aligned}
+  Var(\bar{y}) =& E[(\bar{y}-\underbrace{E[\bar{y}]}_{=2})^2]  \\
+  =& E\Bigg[\bigg(\frac{1}{n}\sum_{i=1}^n (y_i-2)\bigg)^2\Bigg] \\
+  =& E\Bigg[\frac{1}{n^2}\sum_{i=1}^n (y_i-2)^2+2\times\frac{1}{n^2}\sum_{i=1}^{n-1} \sum_{j=i+1}^{n} (y_i-2)(y_j-2)\Bigg] \\
+  =& \frac{1}{n^2}\sum_{i=1}^n \underbrace{E\big[(y_i-2)^2\big]}_{Var(y_i)} + 2\times \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} \underbrace{E\big[(y_i-2)(y_j-2)\big]}_{Cov(y_i,y_j)=0} \\
+  =& \frac{nVar(y_i)}{n^2} \\
+  =& \frac{25}{n}
+  \end{aligned}
+$$
+
+3. What is the distribution of $\bar{y}$?
+
+$$
+  \bar{y} \sim \mathcal{N}(2,25/n)
+$$
+
+4. Compute the probability that $Pr(\bar{y}<3)$ in a sample of $n=100$.
+
+Since $\bar{y} \sim \mathcal{N}(2,1/4)$, 
+
+$$
+  \frac{\bar{y}-2}{0.5} \sim \mathcal{N}(0,1)
+$$
+
+$$
+  \begin{aligned}
+  Pr(\bar{y}<3) =& Pr(\bar{y}-2<3-2) \\
+  =& Pr\bigg(\frac{\bar{y}-2}{0.5} < \frac{1}{0.5}\bigg) \\
+  =& Pr(z<2)
+  \end{aligned}
+$$
+
+```{stata}
+*| echo: true
+*| code-fold: true
+dis normal(2)
+```
+
+Suppose, you draw a random sample that has the following properties. For the next questions we will assume no knowledge of the true mean of $y$; only that it the sample was drawn from a normal distribution $y_i\sim \mathcal{N}(\mu,\sigma^2)$ 
+
+```{stata}
+*| echo: false
+*| output: false
+set seed 576
+set obs 200
+keep if _n <= 100
+gen y = rnormal(2,2) // note: arguments are (mean,sd)
+```
+
+```{stata}
+sum y
+mean y
+```
+
+5. What is the relationship between the standard deviation of the sample and the standard error of the mean reported above?
+
+The standard deviation ($s$) is the square-root of the sample variance. The sample variance is an estimate of the unobserved distribution variance ($Var(y_i)=4$). In our above example $s = 2.082121$ which is $\approx 2 = \sqrt{4}$. The standard error ($se$) is the square root of the $Var(\bar{y})$. As we proved above,  $Var(\bar{y}) = Var(y_i)/n$. That means that $se(\bar{y}) = sd/\sqrt{n}$. As $n=100$, we find that $se = .2082121$; exactly equal to the $s/10$.
+
+6. Earlier we showed that, $\frac{\bar{y}-2}{se(\bar{y})} \sim \mathcal{N}(0,1)$ where $se(\bar{y}) = \sigma/\sqrt{n}$. Since we do not know $\sigma$, what happens to the distribution if we replace $\sigma$ with $s$, the standard deviation of the sample. 
+
+$$
+  \frac{\bar{y}-2}{s/\sqrt{n}} \sim T_{n-1}
+$$
+
+7. Using the properties of the sample, test the null hypothesis $H_0: \mu =1.85$ (where $\mu$ is the unobserved $E[y_i]$). Use a significance level of $\alpha = 0.05$. 
+
+$$
+  \frac{\bar{y}-1.85}{s/\sqrt{n}} \underset{H_0}{\sim} T_{n-1}
+$$
+
+Compute the test statistic:
+
+```{stata}
+dis (_b[y]-1.85)/_se[y] 
+```
+
+:::{.callout-note}
+The `mean` command stores estimates in a similar way to `regress`. They are both e-class commands. 
+
+- The `_b[]` function can be used to call the stored coefficient estimate for a particular variable. The full set of coefficients is stored as in the vector `e(b)`. 
+- The `_se[]` function can be used to call the SE of a particular coefficient. These computed using the covariance matrix stored as `e(V)`.
+
+To see the full list of stored estimates, type `ereturn list`. Note, this does not work for `summarize`, which is a r-class command. After summarize you can run `return list` to see the format of its stored estimates. 
+:::
+
+Rejection rule:
+
+- Since this is a two-sided test, we will reject if $|\text{test-stat}|<\text{t}_{99,0.975}$.
+
+The test static remains the same. 
+
+Critical values of t-distribution (which is symmetric):
+
+```{stata}
+dis invt(99,0.975)
+```
+
+Since $|\text{test-stat}|<\text{t}_{99,0.975}$, we fail to reject. 
+
+8. Using the properties of the sample, test the null hypothesis $H_0: \mu \leq 1.85$.
+
+Rejection rule:
+
+- Since this is a one-sided test, we will reject if $\text{test-stat}>\text{t}_{99,0.95}$.
+
+Critical values of t-distribution (which is symmetric):
+
+```{stata}
+dis invt(99,0.95)
+```
+
+We reject $H_0$ and conclude that $\mu > 1.85$. 
+
+9. Why is the conclusion different for the two hypotheses?
+
+The only difference is the critical value. The one-side test has a lower critical value than the two-sided test. 
+
+10. Which test has more statistical power? Compute the power of the test to reject $H_0$ when the true value of $\mu = 2$.
+
+In the two-sided test:
+
+$$
+  \begin{aligned}
+  Pr(\text{Reject}\;H_0|\mu = 2) =& Pr\Bigg(\bigg|\frac{\bar{y}-1.85}{s/\sqrt{n}}\bigg|>\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
+  =& Pr\Bigg(\frac{\bar{y}-1.85}{s/\sqrt{n}}<\text{t}_{99,0.025}\Bigg|\mu = 2\Bigg) + Pr\Bigg(\frac{\bar{y}-1.85}{s/\sqrt{n}}>\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
+  =& Pr\Bigg(\frac{\bar{y}-2}{s/\sqrt{n}}<\text{t}_{99,0.025}-\frac{0.15}{s/\sqrt{n}}\Bigg|\mu = 2\Bigg) + Pr\Bigg(\frac{\bar{y}-2}{s/\sqrt{n}}>\text{t}_{99,0.975}-\frac{0.15}{s/\sqrt{n}}\Bigg|\mu = 2\Bigg) \\
+  =& T_{n-1}(\text{t}_{99,0.025}-\frac{0.15}{s/\sqrt{n}}) + 1-T_{n-1}(\text{t}_{99,0.975}-\frac{0.15}{s/\sqrt{n}}) \\
+  \end{aligned}
+$$
+
+```{stata}
+dis t(99,invt(99,0.025)-0.15/_se[y]) + 1 - t(99,invt(99,0.975)-0.15/_se[y])
+```
+
+In the one-sided test:
+
+$$
+  \begin{aligned}
+  Pr(\text{Reject}\;H_0|\mu = 2) =& Pr\Bigg(\frac{\bar{y}-1.85}{s/\sqrt{n}}>\text{t}_{99,0.95}\Bigg|\mu = 2\Bigg) \\
+  =& Pr\Bigg(\frac{\bar{y}-2}{s/\sqrt{n}}>\text{t}_{99,0.95}-\frac{0.15}{s/\sqrt{n}}\Bigg|\mu = 2\Bigg) \\
+  =& 1-T_{n-1}(\text{t}_{99,0.95}-\frac{0.15}{s/\sqrt{n}}) \\
+  \end{aligned}
+$$
+
+```{stata}
+dis 1 - t(99,invt(99,0.95)-0.15/_se[y])
+```
+
+This shows that the one-sided test is a more powerful test. 
+
+## OLS estimator
 
 In each case, try to prove the following properties of the OLS estimators ($\hat{\beta_0},\hat{\beta_1}$) for a simple linear regression model
 
