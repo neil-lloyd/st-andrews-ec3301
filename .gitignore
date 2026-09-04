@@ -5,3 +5,10 @@
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Quarto/knitr build artifacts — ignore everywhere except inside docs/
+*_files/
+*_cache/
+.jupyter_cache/
+!docs/**/*_files/
+!docs/**/*_cache/
