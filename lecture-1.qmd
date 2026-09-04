@@ -11,9 +11,9 @@ format:
 engine: knitr  
 ---
 
-
 ```{r}
 #| include: false
+#| cache: false
 
 library(Statamarkdown)
 knitr::opts_chunk$set(collectcode = TRUE)

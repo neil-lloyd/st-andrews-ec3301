@@ -109,10 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
-
-
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -498,15 +495,14 @@ window.Quarto = {
   =&amp; Pr(z&lt;2)
   \end{aligned}
 \]</span></p>
-<div id="ceacb35e" class="cell" data-execution_count="2">
+<div id="33838625" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">normal</span>(2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Running C:\Users\ndl1\OneDrive - University of St Andrews\Documents\EC3301\webs
-&gt; ite\st-andrews-ec3301\profile.do ...
+Running C:\Users\ndl1\websites\st-andrews-ec3301\profile.do ...
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -517,7 +513,7 @@ Running C:\Users\ndl1\OneDrive - University of St Andrews\Documents\EC3301\webs
 </div>
 </div>
 <p>Suppose, you draw a random sample that has the following properties. For the next questions we will assume no knowledge of the true mean of <span class="math inline">\(y\)</span>; only that it the sample was drawn from a normal distribution <span class="math inline">\(y_i\sim N(\mu,\sigma^2)\)</span></p>
-<div id="4af6ba3a" class="cell" data-execution_count="4">
+<div id="7e701588" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> <span class="fu">y</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mean</span> <span class="fu">y</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -552,7 +548,7 @@ Mean estimation                            Number of obs = 100
   \frac{\bar{y}-1.85}{s/\sqrt{n}} \underset{H_0}{\sim} T_{n-1}
 \]</span></p>
 <p>Compute the test statistic:</p>
-<div id="3de832f8" class="cell" data-execution_count="5">
+<div id="4af244fe" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dis (_b[<span class="fu">y</span>]-1.85)/_se[<span class="fu">y</span>] </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1.7681755</code></pre>
@@ -582,7 +578,7 @@ Note
 </ul>
 <p>The test static remains the same.</p>
 <p>Critical values of t-distribution (which is symmetric):</p>
-<div id="7b3bbc90" class="cell" data-execution_count="6">
+<div id="2a4d38bb" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dis invt(99,0.975)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1.984217</code></pre>
@@ -597,7 +593,7 @@ Note
 <li>Since this is a one-sided test, we will reject if <span class="math inline">\(\text{test-stat}&gt;\text{t}_{99,0.95}\)</span>.</li>
 </ul>
 <p>Critical values of t-distribution (which is symmetric):</p>
-<div id="5cb8dc23" class="cell" data-execution_count="7">
+<div id="7b7a7d97" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dis invt(99,0.95)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1.6603912</code></pre>
@@ -620,7 +616,7 @@ Note
   =&amp; T_{n-1}(\text{t}_{99,0.025}-\frac{0.15}{s/\sqrt{n}}) + 1-T_{n-1}(\text{t}_{99,0.975}-\frac{0.15}{s/\sqrt{n}}) \\
   \end{aligned}
 \]</span></p>
-<div id="b0d0b21e" class="cell" data-execution_count="8">
+<div id="1fe26df3" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dis t(99,invt(99,0.025)-0.15/_se[<span class="fu">y</span>]) + 1 - t(99,invt(99,0.975)-0.15/_se[<span class="fu">y</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.10866073</code></pre>
@@ -634,7 +630,7 @@ Note
   =&amp; 1-T_{n-1}(\text{t}_{99,0.95}-\frac{0.15}{s/\sqrt{n}}) \\
   \end{aligned}
 \]</span></p>
-<div id="ea4c72e7" class="cell" data-execution_count="9">
+<div id="50937a1a" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dis 1 - t(99,invt(99,0.95)-0.15/_se[<span class="fu">y</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.17475989</code></pre>

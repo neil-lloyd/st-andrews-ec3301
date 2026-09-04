@@ -11,14 +11,12 @@ format:
 engine: knitr  
 ---
 
-
 ```{r}
 #| include: false
+#| cache: false
 
 library(Statamarkdown)
-#stataexe <- "C:/Program Files/StataNow19/StataSE-64.exe"
 knitr::opts_chunk$set(collectcode = TRUE)
-#knitr::opts_chunk$set(engine.path = list(stata = stataexe))
 ```
 
 :::{.content-visible when-format="revealjs"}
@@ -619,6 +617,7 @@ summary(model1)
 predict fitted
 predict residual, resid
 ```
+
 ```{stata}
 #| echo: true
 #| code-fold: false
@@ -626,6 +625,7 @@ predict residual, resid
 * Compute averages
 sum hhcon fitted residual
 ```
+
 ```{stata}
 #| echo: true
 #| code-fold: false
@@ -682,9 +682,9 @@ twoway (scatter hhcon hhinc, mc(black) mfc(%50)) (scatter fitted hhinc, mc(red) 
 ```{stata}
 #| echo: false
 #| output: false
-graph export "material/lecture-2/lcf-decomp.png", replace
+graph export "material/lecture-2/lcf-decomp1.png", replace
 ```
-![](material/lecture-2/lcf-decomp.png){fig-align="center" width=67%}
+![](material/lecture-2/lcf-decomp1.png){fig-align="center" width=67%}
 
 ### R
 
@@ -734,7 +734,6 @@ ggplot(plot_vals, aes(x = hhinc, y = hhcon)) +
 * Plot
 twoway (scatter hhcon hhinc, mc(black) mfc(%50)) (scatter residual hhinc, mc(green) mfc(%50) msize(small) ms(D)), ytitle("Household consumption (£/week)") xtitle("Household income (£/week)") title("Household consumption vs income (LCF, 2023)") legend(order(1 "Observed" 2 "Residuals") r(2) pos(2) ring(0)) yline(0, lc(green) lp(solid))
 ```
-
 
 ```{stata}
 #| echo: false
