@@ -1,0 +1,206 @@
+---
+title: Interpreting Linear Models
+format: 
+  html: default
+---
+
+In this short handout we will consider the interpretation of linear regression model coefficients in models with different combinations of outcome and regressor variables:
+
+1.  continuous level-level
+
+2.  continuous-binary
+
+3.  binary-continuous
+
+4.  binary-binary
+
+5.  log-level
+
+6.  level-log
+
+7.  log-log
+
+In all instances, we will work on the CLRM model assumptions 1 & 2, which tell us that the conditional expectation function is linear in parameters:
+
+$$
+E[y_i|\mathbf{x}_i] = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+\dots + \beta_kx_{ik}= \mathbf{x}_i\beta
+$$
+
+## Continuous, level-level models
+
+If $y_i$ and $\mathbf{x}_i$ are both continuously distributed random variables then,
+
+$$
+\beta_j = \frac{\partial E[y_i|\mathbf{x}_i]}{\partial x_{ij}}
+$$ 
+
+$\beta_j$ is the expected change in $y$ from a 1 unit change in $x$, holding all other regressors fixed. Recall from [Lecture 0](lecture-0.qmd), this is often referred to as the *ceteris paribus* ("holding all else fixed") interpretation.
+
+## Continuous-binary models
+
+Consider a case where there is a single binary regressor: $x_i \in \{0,1\}$. For example,
+
+$$
+  y_i = \beta_0 + \beta_1 x_i + u_i
+$$ 
+
+We often refer to such variables as "dummy" variables. Since $x_i$ is not continuous, we cannot differentiate the CEF with respect to $x_i$. Instead, we will look at differences in CEF for $x=0,1$:
+
+$$
+\begin{aligned}
+    &E[y_i|x_i=1] = \beta_0 + \beta_1 \\
+    &E[y_i|x_i=0] = \beta_0 \\   
+    & \\
+    \Rightarrow &\beta_1 = E[y_i|x_i=1] - E[y_i|x_i=0]
+\end{aligned}
+$$
+
+$\beta_1$ is no longer a derivate (or slope parameter), but rather a difference between the expected values of two groups. 
+
+We can easily extend this the case where the model includes additional (discrete or continuous) covariates, as well as case where the variable takes on multiple discrete values. For example, let $d_i$ denote a binary (dummy) variable, while the vector $\mathbf{x}$ includes a set of continuous and/or dummy variables. 
+
+$$
+  y_i = \beta_0 + \beta_1 d_i + \mathbf{x}_i\gamma  + u_i
+$$ 
+
+If $E[u_i|d_i,\mathbf{x}_i]=0$, then 
+
+$$
+  \beta_1 = E[y_i|d_i=1,\mathbf{x}_i] - E[y_i|d_i=0,\mathbf{x}_i]
+$$
+
+
+
+## Binary-continuous models
+
+If the outcome is binary ($y_i\in\{0,1\}$) while the regressors are continuous, the resulting linear model is referred to as a linear probability model.
+
+$$
+E[y_i|\mathbf{x}_i] = Pr(y_i = 1|\mathbf{x}_i) = \mathbf{x}_i\beta
+$$ This is differentiable, since $\mathbf{x}$ is continuous and the same partial derivative interpretation follows.
+
+$$
+\beta_j = \frac{\partial Pr(y_i=1|\mathbf{x}_i)}{\partial x_{ij}}
+$$
+
+Note, the unit of $y$ is probability-points (i.e., $\in[0,1]$), not %-points (i.e., $\in[0,100]$). Of course, the conversion of units can be made by $\times 100$ to measure in **%-points**.
+
+## Binary-binary models
+
+If both the outcome and regressor(s) are discrete, then the parameter identifies a difference in conditional probabilities, 
+
+$$
+\beta_1 = Pr(y_i|x_i=1) - Pr(y_i=1|x_i=0)
+$$ 
+
+Note, the unit of $y$ is probability-points (i.e., $\in[0,1]$), not %-points (i.e., $\in[0,100]$).
+
+## Log-level models
+
+Consider the model,
+
+$$
+  \ln(y_i) = \mathbf{x}_i\beta + u_i
+$$ Then,
+
+$$
+  \mathbf{x}_i\beta = E[\ln(y_i)|\mathbf{x}_i]
+$$
+
+$$
+\beta_j = \frac{\partial E[\ln(y_i)|\mathbf{x}_i]}{\partial x_{ij}}
+$$
+
+The coefficient is therefore measured in log-units of $y$. The relation to a change in the (expected) level of $y$ is given by,
+
+$$
+\%\Delta\; E[y_i|\mathbf{x}_i] = (exp(\beta_j)-1)\times 100
+$$ 
+
+For reasonably small values of $\beta_j$ (i.e. within the range $[-0.1,0.1]$) this can be approximated by,
+
+$$
+\%\Delta\; E[y_i|\mathbf{x}_i] \approx \beta_j\times 100
+$$ 
+
+A 1-unit change in $x_{ij}$ is associated with a $\approx \beta_j\times 100$ **percentage** change in the expected value of $y$.
+
+This referred to as a **semi-elasticity**.
+
+What if the regressor is binary (i.e., dummy variable)? For example, $\ln(y)_i = \beta_0 + \beta_1 d_i + \mathbf{x}_i\gamma  + u_i$.  Then, 
+
+$$
+\beta_1 = E[\ln(y_i)|d_i=1,\mathbf{x}_i]-  E[\ln(y_i)|d_i=0,\mathbf{x}_i]
+$$
+
+$\beta_1$ gives you the mean difference between the two groups in log-points. To convert this to changes in $y$, you must use the same $\exp$ transformation above. 
+
+This remains a **semi-elasticity**.
+
+## Level-log models
+
+If the regressor is measure in log-units; for example,
+
+$$
+  y_i = \beta_0 + \beta_1 \ln(x_i) + u_i
+$$ 
+
+Then,
+
+$$
+\beta_1 = \frac{\partial E[y_i|x_i]}{\partial \ln(x_i)}
+$$
+
+A 1 **percent** increase in $x$ is exactly $x\times1.01$. This is equivalent to a change in $\ln(x)$ of,
+
+$$
+\ln(x_i\times1.01) - \ln(x_i) = \ln(1.01) \approx 0.01
+$$ 
+
+Thus, a 1 **percent** increase in (the level of) $x$ is associated with a $\beta_1\times 0.01 = \beta_1/100$ increase in the expected value of $y$. Or, more accurately
+
+$$
+  \Delta E[y_i|x_i] = \beta_1\times \ln(1.01)
+$$ 
+
+This is also a semi-elasticity.
+
+What if $y$ is binary outcome? Then, 
+
+$$
+\beta_1 = \frac{\partial Pr(y_i=1|x_i)}{\partial \ln(x_i)}
+$$
+
+A 1 **percent** increase in (the level of) $x$ is associated with a $\beta_1\times 0.01$ increase in the probability that $y=1$. However, since the mean of the outcome is a mesaure of probability (i.e., $\in[0,1]$), converting to percentage-point probability undoes the impact of the $\times 0.01$:
+
+$$
+\beta_1\times 0.01\times 100 = \beta_1 
+$$
+
+So, $\beta_1$ is the **percentage-point** change in the probability that $y=1$ from a 1 **percent** increase in $x$. 
+
+Again, this remains a **semi-elasticity**.
+
+::: {.callout-warning title="%-pt vs %"}
+There is an important difference between a percentage (%) change and percentage-point (%-pt) change in a variable.  
+
+We use the phrase "percentage change" when referring to a relative change. For example, if the average starting salary of Bachelors- and Master's-degree holders is £40,000 and £50,000 respectively, then continuing on to a Master's increases earnings by 25 percentage (%).
+
+We use the phrase "percentage point change" when referring to an absolute change in a variable measured in %-pts. For example, if the probability of graduating with a first in Economics and Management is 25% and 30% respectively, then Management students have a 5 %-pt higher chance of achieving a first.
+
+It can get confusing when both interpretations can be applied. For example, based on the above figures, you could also say that being a Management student increases your chances of graduating with a first by 20%. The absolute difference of 5 %-pts (30%-25%) is equivalent to a relative difference of 20% (over 25%). 
+:::
+
+## Log-log models
+
+In models where both the outcome and regressor are log-transformed we apply an **elasticity** interpretation.
+
+$$
+    \ln(y_i) = \beta_0 + \beta_1 \ln(x_i) + u_i
+$$ 
+
+$$
+\beta_1 = \frac{\partial E[\ln(y_i)|x_i]}{\partial \ln(x_i)}
+$$ 
+
+$\beta_1$ is a the % change in the expected value of $y$ from a 1 % change in $x$. This is the very definition of the an elasticity. 

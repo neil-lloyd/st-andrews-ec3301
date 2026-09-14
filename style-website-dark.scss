@@ -1,0 +1,50 @@
+/*-- scss:defaults --*/
+
+// =============================================================
+// University of St Andrews brand colours
+// Source: https://www.st-andrews.ac.uk/about/brand/colours/
+// =============================================================
+
+// --- Primary colours ---
+$st-blue:    #00539b; // St Andrews Blue   (PANTONE 287)
+$st-red:     #ee312a; // St Andrews Red    (PANTONE 485)
+$st-yellow:  #ffdf00; // St Andrews Yellow (PANTONE Yellow)
+$st-black:   #231f20; // St Andrews Black  (PANTONE Black)
+
+// --- Secondary colours ---
+$st-light-blue:  #00aeef; // PANTONE Cyan
+$st-mid-blue:    #007dc5; // PANTONE 3005
+$st-burgundy:    #c60c46; // PANTONE 1945
+$st-purple:      #7b439a; // PANTONE 2593
+$st-orange:      #f5842b; // PANTONE 151
+$st-green:       #54b948; // PANTONE 361
+$st-mid-green:   #00853f; // PANTONE 356
+$st-dark-green:  #005953; // PANTONE 330
+
+// =============================================================
+// Reset colours
+// =============================================================
+
+// --- Link colours ---
+$link-color: $st-light-blue;
+
+// --- Callout colours ---
+$callout-color-note:      $st-mid-blue;
+$callout-color-tip:       $st-mid-green;
+$callout-color-warning:   $st-red;
+$callout-color-caution:   $st-orange;
+$callout-color-important: $st-purple;
+
+// --- Navigration bar ---
+$navbar-bg: white;
+$navbar-fg: $st-blue;
+$navbar-hl: $st-red;
+$navbar-hover-color: $st-red;
+
+.file-path {
+  font-family: 'Courier New', monospace;
+  color: $st-mid-green;
+  background-color: rgba(0, 133, 63, 0.08);
+  padding: 2px 4px;
+  border-radius: 3px;
+}

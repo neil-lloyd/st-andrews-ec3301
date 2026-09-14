@@ -1,0 +1,30 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+
+/.quarto/
+**/*.quarto_ipynb
+
+# Quarto/knitr build artifacts — ignore everywhere except inside docs/
+*_files/
+*_cache/
+.jupyter_cache/
+!docs/**/*_files/
+!docs/**/*_cache/
+
+# Data — never commit
+*.sav
+*.dta
+*.tab
+*.por
+*.zip
+*.csv
+*.rds
+*.xlsx
+data/
+
+# Config files - never commit
+config.R
+config.do

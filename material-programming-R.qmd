@@ -1,0 +1,189 @@
+---
+title: Basic Programming in R
+format: 
+  html: default
+engine: knitr  
+---
+
+The goal for this short handout is to introduce you to some basic programming tools within R. [Lab 1](lab-1-R.qmd) focuses on the tools needed to open, manipulate, and summarize data. Here you will learn about some important programming features:
+
+- how to create objects: scalars, sequences, vectors, lists
+- how to automate repetitive processes using loops
+
+## Single values
+
+We begin by assign an object `x` a value using the operator `<-`. 
+
+```{r}
+x <- 3 + sin(pi/2)
+```
+
+If you're working in RStudio, `x` (=4) will appear as a stored value under the "Environment" tab. We can now use `x` in various computations; for example, solving for its square root.
+
+```{r}
+sqrt(x)
+```
+
+Note, doing so does not change the stored value of `x`. We could define a new value `y` as its square root or replace `x` with its square root. 
+```{}
+y <- sqrt(x)
+x <- sqrt(x)
+```
+
+The store value of `x` (and `y`) is now 2. 
+
+Values need not be numerical. They can also stored characters (often referred to as strings in other languages/software). For example, 
+
+```{r}
+z <- "United Kingdom"
+```
+
+## Sequences and Loops
+
+Sequences are used extensively in programming. The most common place is in a loop that iterates through a sequence. We can define a sequence of numbers on in two ways. Consider the sequence $1,\dots,10$. 
+
+```{r}
+u <- seq(1,10)
+v <- 1:10
+```
+
+Both give the same result, but the `seq()`-uence function is more flexible since it allows you adapt the interval. For example, we can we can make the intervals in the sequence $0.5$. 
+
+```{r}
+U <- seq(1,10,0.5)
+```
+
+An immediate application of a sequence is in a loop. Consider a loop over the sequence $1(1)10$ that simply prints the number of the loop. 
+
+```{r}
+for(i in 1:10){
+  print(i)
+}
+```
+
+## Vectors and Matrices
+
+When stored as values, sequences are essentially vectors. A more flexible function for creating a vector is the `c()`-ombine function. We can combine a set of objects, numeric or character. 
+
+```{r}
+w <- c(12,1,2,3)
+W <- c("12","1","2","3")
+```
+Vectors have two important features: length and type. 
+```{r}
+length(w)
+typeof(w)
+typeof(W)
+```
+You can even include a sequence within the combination. 
+
+```{r}
+w <- c(12,1:3)
+w
+```
+
+When you print `w` (as above), it does so as a single row. However, if you use the `t()`-ranspose function, you will see that it displays as a row vector. Taking the transpose of the transpose shows you that the default is in fact to think about `w` as a column vector. 
+
+```{r}
+t(w)
+t(t(w))
+```
+Here are a few fuctions that may be useful:
+```{r}
+# minimum
+min(w)
+# maximum
+max(w)
+# sort
+sort(w)
+```
+Note, `sort(w)` outputs a sorted version of `w`, but does not change the stored order of values in `w`. 
+Multiplication/division by a scalar, is element by element. 
+```{r}
+w*2
+w/2
+```
+We can combine two columns to form a matrix. 
+```{r}
+A <- cbind(w,seq(1,4))
+A
+B <- rbind(w,seq(1,4))
+B
+```
+Interestingly, this shows us that R does not fix the row-column dimension of a vector. Else, `rbind()` would give you a $8\times 1$ vector. We can achieve this result by first fixing `w` as a $4\times 1$ matrix. 
+```{r}
+C <- rbind(matrix(w),matrix(seq(1,4)))
+C
+```
+When working with vectors (and matrices) it is important to know how to index specific values. For example, if you want the third value of `w` you can say,
+```{r}
+w[3]
+```
+
+## Lists
+
+Lists can combine multiple types of data and/or values. They can become relatively complex collections, that employ a hierarchical structure to navigate. When you scrape data from a website it will usually be structured as a list. 
+
+```{r}
+site <- list("22 January 2025","United Kingdom",1:10,A)
+typeof(site)
+length(site)
+```
+The above list has length 4 as it includes for items. The third item is the sequence $1(1)10$, which has 10 elements. We can index a particular element of the list by indexing. 
+```{r}
+site[3]
+typeof(site[[3]])
+length(site[[3]])
+```
+Lists can be recursive
+```{r}
+page <- list(list("22 January 2025","United Kingdom"),list("URL","download-date"))
+```
+You can then extract a sublist,
+```{r}
+page1 <- page[[1]]
+element11 <- page1[[1]]
+```
+
+## Loops
+
+There are three main types of loops in R: `for`, `while`, and `repeat`. Here we will cover the first two.
+
+`for` loops are probably the most common. They allow you to iterate over an argument that follows a sequence:
+
+```{r}
+for (i in 1:5) {
+  print(i)
+}
+```
+
+This may seem simple, but consider the fact that this sequence could be used as an index. Earlier we defined the vector `W`. 
+
+```{r}
+n <- length(w)
+for(i in 1:n){
+  print(W[i])
+}
+```
+
+Here, I use the `length()` function to know the stopping point of the loop. 
+
+The sequence need not increase by increments of 1 each time; for example, 
+
+```{r}
+for (i in seq(0, 20, by = 5)) {
+  print(i)
+}
+```
+
+`while` loops require you to set a break point: the value of the argument at which the loop stops. You also need to set the starting point. 
+
+```{r}
+i <- 1
+while (i <= 5) {
+  print(i)
+  i <- i + 1
+}
+```
+
+This loop does the same thing as the first `for` loop. 
