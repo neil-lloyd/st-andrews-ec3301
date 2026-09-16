@@ -15,8 +15,8 @@ website:
         menu:
           - href: lecture-0.qmd
             text: Pre-sessional Lecture
-#          - href: lecture-1.qmd
-#            text: Lecture 1
+          - href: lecture-1-multi.qmd
+            text: Lecture 1
 #          - href: lecture-2.qmd
 #            text: Lecture 2
 #          - href: lecture-3.qmd

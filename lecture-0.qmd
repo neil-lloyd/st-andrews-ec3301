@@ -509,6 +509,6 @@ This is a bit of an experiment: and you are the 'guinea pigs'
 # Questions?
 :::
 
-::: {.content-visible unless-format="revealjs"}
-# References
-:::
+# References 
+
+## Bibliography {.scrollable}

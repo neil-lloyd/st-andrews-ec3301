@@ -354,6 +354,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./lecture-0.html">
  <span class="dropdown-text">Pre-sessional Lecture</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-1.html">
+ <span class="dropdown-text">Lecture 1</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -418,13 +422,14 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#linear-population-regression-function" id="toc-linear-population-regression-function" class="nav-link active" data-scroll-target="#linear-population-regression-function">Linear Population Regression Function</a></li>
-  <li><a href="#how-did-we-get-here" id="toc-how-did-we-get-here" class="nav-link" data-scroll-target="#how-did-we-get-here">How did we get here?</a></li>
+  <li><a href="#how-did-we-get-here" id="toc-how-did-we-get-here" class="nav-link active" data-scroll-target="#how-did-we-get-here">How did we get here?</a></li>
   <li><a href="#classical-linear-regression-model" id="toc-classical-linear-regression-model" class="nav-link" data-scroll-target="#classical-linear-regression-model">Classical Linear Regression Model</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
+  <li><a href="#simple-case" id="toc-simple-case" class="nav-link" data-scroll-target="#simple-case">Simple case</a></li>
+  <li><a href="#multivariate-case" id="toc-multivariate-case" class="nav-link" data-scroll-target="#multivariate-case">Multivariate case</a></li>
+  <li><a href="#qa" id="toc-qa" class="nav-link" data-scroll-target="#qa">Q&amp;A</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-1-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="lecture-1-notes-stata.pdf"><i class="bi bi-file-pdf"></i>PDF with Stata</a></li><li><a href="lecture-1-notes-r.pdf"><i class="bi bi-file-pdf"></i>PDF with R</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-1-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="lecture-1-notes-Stata.pdf"><i class="bi bi-file-pdf"></i>PDF with Stata</a></li><li><a href="lecture-1-notes-R.pdf"><i class="bi bi-file-pdf"></i>PDF with R</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -460,73 +465,27 @@ window.Quarto = {
 </ul>
 <p>*We will cover the Potential Outcomes Framework (Ch. 2.7a - “Counterfactual (or Potential) Outcomes, Causality, and Policy Analysis”) in Week 7. For now, it is only important to know the interpretation of a regression on a binary (“dummy”) variable.</p>
 </section>
-<section id="wooldridge" class="level2">
-<h2 class="anchored" data-anchor-id="wooldridge">Wooldridge</h2>
-<p>Over the next 3 lectures will cover most of Chapters 2-4 from Wooldridge.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Wooldridge approach:</p>
-<ol type="1">
-<li><p>Simple Linear Model</p></li>
-<li><p>Ordinary Least Squares</p></li>
-<li><p>Properties of OLS</p></li>
-<li><p>Multivariate Model</p></li>
-<li><p>Inference</p></li>
-</ol>
-</div><div class="column" style="width:50%;">
-<p>Neil approach:</p>
-<ol type="1">
-<li><p>Population Linear Regression Model</p></li>
-<li><p>Classical Linear Regression Model</p>
-<ul>
-<li>Special case: Simple Model</li>
-</ul></li>
-<li><p>Ordinary Least Squares</p>
-<ul>
-<li>Special case: Simple Model</li>
-</ul></li>
-<li><p>Properties of OLS</p></li>
-<li><p>Inference</p></li>
-</ol>
-</div>
-</div>
-</section>
-<section id="linear-population-regression-function" class="level1">
-<h1>Linear Population Regression Function</h1>
-<section id="linear-population-regression-function-1" class="level2">
-<h2 class="anchored" data-anchor-id="linear-population-regression-function-1">Linear Population Regression Function</h2>
+<section id="linear-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="linear-regression-model">Linear Regression Model</h2>
 <p>General form:</p>
 <p><span class="math display">\[
-  y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+\dots + \beta_kx_{ik} + u_i
+  y = \beta_0 + \beta_1x_{1} + \beta_2x_{2}+\dots + \beta_kx_{k} + u
 \]</span></p>
 </section>
 <section id="component-1-data" class="level2">
 <h2 class="anchored" data-anchor-id="component-1-data">Component #1: Data</h2>
 <p><span class="math display">\[
-  \textcolor{red}{y_i} = \beta_0 + \beta_1\textcolor{red}{x_{i1}} + \beta_2\textcolor{red}{x_{i2}}+\dots + \beta_k\textcolor{red}{x_{ik}} + u_i
-\]</span> The <strong>observable</strong> <em>random</em> variables in the model are,</p>
+  \textcolor{red}{y} = \beta_0 + \beta_1\textcolor{red}{x_{1}} + \beta_2\textcolor{red}{x_{2}}+\dots + \beta_k\textcolor{red}{x_{k}} + u
+\]</span> The <strong>observable</strong> variables in the model are,</p>
 <ul>
-<li><p><span class="math inline">\(y_i\)</span>: the outcome (dependent) variable,</p></li>
-<li><p><span class="math inline">\(x_{i1},x_{i2},\dots,x_{ik}\)</span>: the regressors (independent variables).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p></li>
+<li><p><span class="math inline">\(y\)</span>: the outcome (dependent) variable,</p></li>
+<li><p><span class="math inline">\(x_{1},x_{2},\dots,x_{k}\)</span>: the <span class="math inline">\(k\)</span> regressors (independent variables).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p></li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled" title="Unit of Analysis">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Unit of Analysis
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>An often overlooked feature of the model is the unit of analysis. In the model, the subscript <span class="math inline">\(i\)</span> represents the unit at which the data is measured. For example, on model may represent data at the individual level, while another captures firm-level data.</p>
-</div>
-</div>
 </section>
 <section id="component-2-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="component-2-parameters">Component #2: Parameters</h2>
 <p><span class="math display">\[
-  y_i = \textcolor{red}{\beta_0} + \textcolor{red}{\beta_1}x_{i1} + \textcolor{red}{\beta_2}x_{i2}+\dots + \textcolor{red}{\beta_k}x_{ik} + u_i
+  y = \textcolor{red}{\beta_0} + \textcolor{red}{\beta_1}x_{1} + \textcolor{red}{\beta_2}x_{2}+\dots + \textcolor{red}{\beta_k}x_{k} + u
 \]</span> The relationship between the outcome and regressors is explained by set of <em>non-random</em> population parameters:</p>
 <ul>
 <li><p><span class="math inline">\(\beta_1, \beta_2, ..., \beta_k\)</span> are often referred to as “slope coefficients”,</p></li>
@@ -542,31 +501,37 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The model is referred to as the <em>Linear</em> Population Regression Function not because it is linear in regressors, but because it is linear in parameters. Suppose <span class="math inline">\(x_{i2}= x_{i1}^2\)</span>, the model would be non-linear in <span class="math inline">\(x_{i1}\)</span>. However, it is still linear in parameters.</p>
+<p>The model is referred to as the <em>linear</em> regression model because it is linear in parameters, NOT because it is linear in regressors. The <span class="math inline">\(x_j\)</span> are generic placeholder names. Consider, <span class="math inline">\(x_{2}= x_{1}^2\)</span>, the model would be non-linear in <span class="math inline">\(x_{1}\)</span>. However, it would remain linear in parameters.</p>
 </div>
 </div>
 </section>
 <section id="component-3-error" class="level2">
 <h2 class="anchored" data-anchor-id="component-3-error">Component #3: Error</h2>
 <p><span class="math display">\[
-  y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+ \dots + \beta_kx_{ik} + \textcolor{red}{u_i}
+  y = \beta_0 + \beta_1x_{1} + \beta_2x_{2}+ \dots + \beta_kx_{k} + \textcolor{red}{u}
 \]</span></p>
-<p>The error term represents the part of <span class="math inline">\(y_i\)</span> that is NOT explained by the model:</p>
-<p>In Econometrics</p>
+<p>The error term represents the part of <span class="math inline">\(y\)</span> that is NOT explained by the <em>regression function</em>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="fragment fade-in">
+<p>In Econometrics, a lot of time is spent thinking about the error term:</p>
+<ul>
+<li><p>Theoretically, we will want to assume that it can be ‘ignored’</p></li>
+<li><p>Practically, this often too strong an assumption to make.</p></li>
+</ul>
+</div>
 </section>
 <section id="vector-notation" class="level2">
 <h2 class="anchored" data-anchor-id="vector-notation">Vector notation</h2>
 <p>When reading papers, you will frequently see the following notation:</p>
 <p><span class="math display">\[
-  y_i = \mathbf{x}_i\beta + u_i
+  y = \mathbf{x}\beta + u
 \]</span></p>
 <p><strong>What’s going on here?</strong> The variables have been collected as vectors:</p>
 <p><span class="math display">\[
-  y_i = \underbrace{\begin{bmatrix} 1 &amp; x_{i1} &amp; x_{i2} &amp; \dots &amp;x_{ik}\end{bmatrix}}_{\mathbf{x}_i}\underbrace{\begin{bmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_{ik} \end{bmatrix}}_\beta  + u_i
+  y = \underbrace{\begin{bmatrix} 1 &amp; x_{1} &amp; x_{2} &amp; \dots &amp;x_{k}\end{bmatrix}}_{\mathbf{x}}\underbrace{\begin{bmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_{ik} \end{bmatrix}}_\beta  + u
 \]</span></p>
-<p>When written in vector notation <span class="math inline">\(\mathbf{x}_i\)</span> always preceeds <span class="math inline">\(\beta\)</span>, as <span class="math inline">\(\beta\mathbf{x}_i\neq \mathbf{x}_i\beta\)</span>.</p>
+<p>When written in vector notation <span class="math inline">\(\mathbf{x}\)</span> always precedes <span class="math inline">\(\beta\)</span>, as <span class="math inline">\(\beta\mathbf{x}\neq \mathbf{x}\beta\)</span>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Vector notation differences">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -575,16 +540,40 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Wooldridge defines <span class="math inline">\(\mathbf{x}_i\)</span> as a row vector, but <span class="math inline">\(\beta\)</span> as a column vector. Many texts define both as column vectors and will therefore express the linear population regression function as,</p>
+<p>Wooldridge defines <span class="math inline">\(\mathbf{x}\)</span> as a row vector, but <span class="math inline">\(\beta\)</span> as a column vector. Many texts define both as column vectors and will therefore express the linear population regression function as,</p>
 <p><span class="math display">\[
-  y_i = \mathbf{x}_i'\beta + u_i
+  y = \mathbf{x}'\beta + u
 \]</span></p>
 </div>
 </div>
 </div>
 </section>
+<section id="sample" class="level2">
+<h2 class="anchored" data-anchor-id="sample">Sample</h2>
+<p>When we have a sample of observations, <span class="math inline">\(i=1,\dots,n\)</span>, we typically use the notation:</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+\dots + \beta_kx_{ik} + u_i
+\]</span></p>
+<p>We need to make further assumptions about sampling,</p>
+<ul>
+<li>do observations relate to one another?</li>
+<li>are they derived from the same population model?</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Unit of Analysis">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Unit of Analysis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An often overlooked feature of the model is the unit of analysis. In the model, the subscript <span class="math inline">\(i\)</span> represents the unit at which the data is observed. For example, one model may represent data at the individual level, while another captures firm-level data. When each observation represents the same unit observed across different time periods, we usually use the notation <span class="math inline">\(t\)</span>: <span class="math inline">\(\{y_t,\mathbf{x}_t\}:\;t=1,\dots,T\)</span>. In panel or repeated cross-section datasets, the data is observed at two levels: <span class="math inline">\(i\)</span> and <span class="math inline">\(t\)</span>.</p>
+</div>
+</div>
 </section>
 <section id="how-did-we-get-here" class="level1">
 <h1>How did we get here?</h1>
@@ -594,7 +583,7 @@ window.Quarto = {
 <p>The model represents the true <strong>data generating process</strong> at the population level <span class="math inline">\(\Rightarrow\)</span></p>
 <ul>
 <li><p>if we know the population parameters</p></li>
-<li><p>AND the distribution of the righthand-side variables (incl.&nbsp;error term)</p></li>
+<li><p>AND the joint distribution of the regressors and error term</p></li>
 </ul>
 <p>we can generate data in a manner akin to sampling from the population distribution.</p>
 <p>e.g.&nbsp;</p>
@@ -604,6 +593,35 @@ window.Quarto = {
 \text{with}\;&amp;\beta_0=0.5,\; \beta_1=0.6,\; x_{i}\sim U(0,1),\; u_i \sim N(0, 0.6^2)
 \end{aligned}
 \]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Population">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Population
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When econometricians uses the word ‘population’, they are not referring to an enumerable collection of units, as in a census. They mean a probability distribution — the joint distribution over the random variables of interest, from which the observed sample is drawn. As we shall shortly see, the population parameters are defined in terms of the joint distribution of the random variables.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Finite vs Super Population">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Finite vs Super Population
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In design-based causal inference methods, a distinction is made bewteen the ‘finite’ and ‘super’ populations. The above description of the population fits the super-population approach: each sample is a draw from a theoretically infinite super-population. This sampling uncertainty is key to understanding the properties of the estimator. In the finite-population approach, the sample is treated as the population and uncertainty arises <em>only</em> from random assignment in an experiment.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="section" class="level2 scrollable">
 <h2 class="scrollable anchored" data-anchor-id="section"></h2>
@@ -678,21 +696,23 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Econometricians use such approaches to study the properties of estimators. It is often referred to as Monte Carlo simulation. Because you know the true value of the population parameters, you can look to see how well the estimator performs across multiple simulations.</p>
+<p>Econometricians use such approaches to study the properties of estimators. It is often referred to as a Monte Carlo simulation. Given that you know the true value of the population parameters, you can examine how well the estimator performs across multiple simulations.</p>
 </section>
 <section id="approach-2-prediction" class="level2">
 <h2 class="anchored" data-anchor-id="approach-2-prediction">Approach #2: Prediction</h2>
-<p>Suppose you want predict a random variable <span class="math inline">\(y_i\)</span> using information from a set of variables <span class="math inline">\(\mathbf{x}_i\)</span>. The ‘best’ predictor of <span class="math inline">\(y_i\)</span> is the conditional expectation (function; CEF)</p>
+<p>Suppose you want to predict <span class="math inline">\(y\)</span> using information from a set of variables <span class="math inline">\(\mathbf{x}=[x_1,x_2,\dots,x_k]\)</span>. The ‘best’ predictor of <span class="math inline">\(y\)</span> is the conditional expectation (function; CEF)</p>
 <p><span class="math display">\[
-  E[y_i | \mathbf{x}_i] \equiv m(\mathbf{x}_i)
+  E[y | \mathbf{x}] = m(\mathbf{x})
 \]</span></p>
-<p>Where the CEF is a function of <span class="math inline">\(\mathbf{x}_i\)</span>.</p>
+<p>Where the CEF is a function of <span class="math inline">\(\mathbf{x}\)</span>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="fragment fade-in">
 <p>This is the starting point for Data Science.</p>
 <ul>
-<li>“Fancier” methods like Lasso, Random Forests, and Neural Networks are simply newer methods to estimate <span class="math inline">\(m(\mathbf{x}_i)\)</span>. They have core advantages over linear regression models that relate specifically to ‘big’ data.</li>
+<li>‘Fancier’ methods like Lasso, Random Forests, and Neural Networks are simply newer methods to estimate <span class="math inline">\(m(\mathbf{x})\)</span>. They have core advantages over linear regression models that relate specifically to ‘big’ data.</li>
 </ul>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Best? Big?">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -701,29 +721,44 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>What do we mean by <em>best</em> predictor? This is a very specific use of the word ‘best’. The CEF is the best mean-squared error predictor of <span class="math inline">\(y_i\)</span>. You can find more on this in my <a href="">notes on the CEF</a>.</p>
-<p>‘Big’ data also has a very specific meaning. It does not concern the absolute size (number of observations) of the dataset, but rather the number of regressors relative to observations. ‘Big’ data is used to describe settings where you have more regressors than observations.</p>
+<p>What do we mean by <em>best</em> predictor? This is a very specific use of the word ‘best’. The CEF is the best mean-squared error predictor of <span class="math inline">\(y\)</span>. You can find more on this in the <a href="./material-cef.html">additional material on the CEF</a>.</p>
+<p>‘Big’ data also has a very specific meaning. It does not concern the absolute size (i.e.&nbsp;number of observations <span class="math inline">\(n\)</span>) of the dataset, but rather the number of regressors/predictors (<span class="math inline">\(k\)</span>) relative to observations (<span class="math inline">\(n\)</span>). ‘Big’ data is used to describe settings where you have more regressors than observations.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="section-1" class="level2">
 <h2 class="anchored" data-anchor-id="section-1"></h2>
-<p>It turns out that you can write,</p>
+<p>It turns out that you can write (see <a href="./material-cef.html">CEF Material</a>),</p>
 <p><span class="math display">\[
-  y_i = m(\mathbf{x}_i) + u_i
+  y = m(\mathbf{x}) + u
 \]</span></p>
-<p>where <span class="math inline">\(u_i\)</span> has the nice property <span class="math inline">\(E[u_i| \mathbf{x}_i] = 0\)</span>. [<strong>We will see this shortly!</strong>]</p>
-<p>If you <strong>assume</strong> that <span class="math inline">\(m(\mathbf{x}_i)\)</span> is linear (in parameters), then</p>
+<p>where <span class="math inline">\(u\)</span> has the nice property <span class="math inline">\(E[u| \mathbf{x}] = 0\)</span>.</p>
+<div class="fragment fade-in">
+<p>If you <strong>assume</strong> that <span class="math inline">\(m(\mathbf{x})\)</span> is linear (in parameters), then the best predictor of <span class="math inline">\(y\)</span> is</p>
 <p><span class="math display">\[
-  y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+\dots + \beta_kx_{ik} + u_i
+  E[y | \mathbf{x}] = \beta_0 + \beta_1x_{1} + \beta_2x_{2}+\dots + \beta_kx_{k}
 \]</span></p>
-<p>and the best predictor of <span class="math inline">\(y_i\)</span> is</p>
+<p>and,</p>
 <p><span class="math display">\[
-  E[y_i | \mathbf{x}_i] = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+\dots + \beta_kx_{ik}
+  y = \beta_0 + \beta_1x_{1} + \beta_2x_{2}+\dots + \beta_kx_{k} + u
 \]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Population Regression Function">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Population Regression Function
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The function <span class="math inline">\(m(\mathbf{x})\)</span> is called the population regression function and <span class="math inline">\(\mathbf{x}\beta\)</span> is referred to as the linear population regression function (or linear projection). It may be that <span class="math inline">\(m(\mathbf{x})=\mathbf{x}\beta\)</span>.</p>
+</div>
+</div>
 </section>
 <section id="approach-3-economics" class="level2">
 <h2 class="anchored" data-anchor-id="approach-3-economics">Approach #3: Economics</h2>
@@ -733,11 +768,13 @@ window.Quarto = {
 <p><span class="math display">\[
   Y_t = A_tK_t^\alpha L_t^{1-\alpha}
 \]</span></p>
+<div class="fragment fade-in">
 <p><strong>Step 2:</strong> Express in terms of per-worker variables:</p>
 <p><span class="math display">\[
   y_t = A_tk_t^\alpha
 \]</span></p>
 <p>where <span class="math inline">\(y_t=Y_t/L_t\)</span> and <span class="math inline">\(k_t=K_t/L_t\)</span>.</p>
+</div>
 </section>
 <section id="section-2" class="level2">
 <h2 class="anchored" data-anchor-id="section-2"></h2>
@@ -745,24 +782,27 @@ window.Quarto = {
 <p><span class="math display">\[
   \ln y_t = \ln A_t + \alpha \ln k_t
 \]</span> Now we have a linear model with a slope parameter <span class="math inline">\(\alpha\)</span> - the parameter of interest.</p>
+<div class="fragment fade-in">
 <p><strong>BUT</strong> we have a problem:</p>
 <ol type="1">
 <li><p><span class="math inline">\(A_t\)</span> - which represents TFP - is not observed in the data</p></li>
 <li><p>There is no error term! The model is deterministic.</p></li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled" title="Missing error terms">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Missing error term">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Missing error terms
+<span class="screen-reader-only">Tip</span>Missing error term
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Regression models model uncertain processes, but many economic models have no inherent uncertainty. More modern models do include uncertainty, but this uncertainty may be of a different form to that observed in real economic variables. Indeed</p>
+<p>Regression models have inherent uncertainty: the error term. Because of the error term, the realized value of <span class="math inline">\(y\)</span> need not match the value predicted by the population regression function (e.g.&nbsp;<span class="math inline">\(\mathbf{x}\beta\)</span>). However, many economic models have no inherent uncertainty. And when they do, this uncertainty may be of a different form to that observed in real economic variables. Indeed, this issue of ‘missing error term’ is a very old problem in Economics.</p>
+<p>As <span class="citation" data-cites="morgan1992history">Morgan (<a href="#ref-morgan1992history" role="doc-biblioref">1992</a>)</span> describes, economists were initially resistant to the adoption statistical methods. The hesitancy to consider these methodologies was down to a belief that the ‘laws’ studied by economists acted like laws of nature. That is, they could be directly measured, just as you would measure gravitational force. The was therefore no inherent uncertainty in the model. Indeed, early attempts to rationalize uncertainty in economic data often turned to measurement error. The model didn’t fit the data perfectly because the variables were measured with error.</p>
 </div>
 </div>
 </div>
@@ -770,11 +810,12 @@ window.Quarto = {
 <section id="section-3" class="level2">
 <h2 class="anchored" data-anchor-id="section-3"></h2>
 <p><strong>Step 4:</strong> Make an assumption</p>
-<p>Assume that TFP follows a particular time-series process (i.e.&nbsp;DGP):</p>
+<p>Assume that TFP follows a particular time-series process (i.e.&nbsp;DGP):<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p><span class="math display">\[
   \ln A_t = \ln A_0 +gt+u_t
 \]</span></p>
 <p>where <span class="math inline">\(gt\)</span> is a deterministic trend and <span class="math inline">\(u_t\)</span> a stochastic shock.</p>
+<div class="fragment fade-in">
 <p><strong>NOW</strong> we have a model of the form</p>
 <p><span class="math display">\[
   \ln y_t = \ln A_0 + gt + \alpha \ln k_t+u_t
@@ -783,8 +824,9 @@ window.Quarto = {
 <p><span class="math display">\[
   \ln y_t = \beta_0 + \beta_1t + \beta_2 \ln k_t + u_t
 \]</span></p>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Mankiw, Romer &amp; Weil (1992)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -793,18 +835,18 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The above equation is a time-series regression model that requires rather strong assumptions. Mankiw, Romer and Weil (1992) derives a more complete approach, based on a model with inherent uncertainty. The paper uses a linear approximation of dynamics around the steady state and derives an equation which can be estimated using a cross-section of country-level data. This approach is discussed by Daron Acemoglu in his comprehensive <a href="https://economics.mit.edu/sites/default/files/inline-files/Economic%20Growth%20Lectures%202%20and%203%202025_0.pdf">lecture notes</a>.</p>
+<p>The above equation is a time-series regression model that requires rather strong assumptions. <span class="citation" data-cites="mankiw1992contribution">Mankiw, Romer, and Weil (<a href="#ref-mankiw1992contribution" role="doc-biblioref">1992</a>)</span> derives a more complete approach, based on a model with inherent uncertainty. The paper uses a linear approximation of dynamics around the steady state and derives an equation which can be estimated using a cross-section of country-level data. This approach is discussed by Prof.&nbsp;Daron Acemoglu in his comprehensive <a href="https://economics.mit.edu/sites/default/files/inline-files/Economic%20Growth%20Lectures%202%20and%203%202025_0.pdf">lecture notes</a>.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="approach-4-estimation" class="level2">
-<h2 class="anchored" data-anchor-id="approach-4-estimation">Approach #4: Estimation</h2>
-<p>A more modern approach, popularized by applied microeconomists, is not rooted in formal economic modelling. Instead, it focuses on a set of research designs (methodologies) that target the causal relationship between two variables. These are often taught as <em>Microeconometrics</em>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<section id="approach-4-causal-inference" class="level2">
+<h2 class="anchored" data-anchor-id="approach-4-causal-inference">Approach #4: Causal Inference</h2>
+<p>A more modern approach, popularized by applied microeconomists, is not rooted in formal economic modelling. Instead, it focuses on a set of research designs (methodologies) that target the causal relationship between two variables. These are often taught as <em>Microeconometrics</em>.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Microeconometrics">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -813,14 +855,14 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Microeconometrics focuses on the identification and estimation of causal relationships. It builds on the Neyman-Rubin Causal Model which includes the Potential Outcomes Framework. Related to this field are literatures on randomized experiments, causal inference, treatment effects, and policy evaluation. And these methods are prolific across applied microeconomics fields; including, Labour, Health, Education, Development, Public Policy, etc.</p>
 <p>If you are interested in these topics, you should consider reading:</p>
 <ol type="1">
-<li></li>
-<li></li>
-<li></li>
+<li><span class="citation" data-cites="angrist2014mastering">Angrist and Pischke (<a href="#ref-angrist2014mastering" role="doc-biblioref">2014</a>)</span> <em>Mastering ’Metrics</em> (good introduction)</li>
+<li><span class="citation" data-cites="angrist2009mostly">Angrist and Pischke (<a href="#ref-angrist2009mostly" role="doc-biblioref">2009</a>)</span> <em>Mostly Harmless Econometrics</em> (more advanced notation)</li>
+<li><span class="citation" data-cites="cunningham2021causal">Cunningham (<a href="#ref-cunningham2021causal" role="doc-biblioref">2021</a>)</span> <em>Causal Inference: The Mixtape</em> (up to date and available <a href="https://mixtape.scunning.com/">online</a>)</li>
 </ol>
 </div>
 </div>
@@ -829,30 +871,34 @@ window.Quarto = {
 <p><span class="math display">\[
   \text{Marginal Tax Rate} \rightarrow \text{Labour Supply}
 \]</span></p>
+<div class="fragment fade-in">
 <p>A researcher might choose to estimate this relationship within a linear regression model framework, by specifying the <em>estimating equation</em>:</p>
 <p><span class="math display">\[
   hrswrk_i = \beta_0 + \beta_1 \text{MTR}_i + u_i
 \]</span></p>
-<p>The estimate for <span class="math inline">\(\beta_1\)</span> tells us about how a change in <span class="math inline">\(MTR\)</span> affects <span class="math inline">\(hrswrk\)</span> in the data. [<strong>More on this soon!</strong>]</p>
+<p>The <em>estimate</em> of <span class="math inline">\(\beta_1\)</span> tells us about how a change in <span class="math inline">\(MTR\)</span> affects <span class="math inline">\(hrswrk\)</span> in the data.</p>
+</div>
 </section>
 <section id="section-4" class="level2">
 <h2 class="anchored" data-anchor-id="section-4"></h2>
 <p><strong>BUT</strong> if we were to estimate this relationship in the data, do we really think it will tell us something causal? Consider:</p>
 <ul>
-<li><p>those who face a higher marginal tax rate are higher are those with higher income;</p></li>
+<li><p>those who face a higher marginal tax rate do so because they earn more;</p></li>
 <li><p>and those with higher income might be people with higher education;</p></li>
-<li><p>etc.</p></li>
+<li><p>…, etc.</p></li>
 </ul>
+<div class="fragment fade-in">
 <p>Can we account for these differences in the model?</p>
 <p><span class="math display">\[
   hrswrk_i = \beta_0 + \beta_1 MTR_i + \beta_2 income_i + \beta_3 yrsedu_i + u_i
 \]</span></p>
 <p>This is where we get into the idea of adding additional regressors as “control” variables.</p>
+</div>
 </section>
 </section>
 <section id="classical-linear-regression-model" class="level1">
 <h1>Classical Linear Regression Model</h1>
-<p>What constitutes a model? In some sense, a model is just a collection of assumptions. Here are the assumptions that govern the CLRM. Some of them will be more relevant once we discuss the estimation of the CLRM.</p>
+<p>What constitutes a model? In some sense, a model is just a collection of assumptions. Here are the assumptions that govern the CLRM. Some of them will be more relevant once we discuss the estimation of the CLRM. We will follow Wooldridge’s notation of labelling these MLR. 1-6. In Chapter 2, Wooldridge defines SLR. 1-6. These are a special case of MLR. 1-6 for a model with a simple linear model (i.e.&nbsp;single regressor and intercept).</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Alternatives">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -863,7 +909,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please be aware that there alternative ways to specify the CLRM assumptions. One noteable variant, found in a number of texts (and websites), considers the case of non-random regressors. That is, the value of regressors do not change with sampling.</p>
+<p>Please be aware that there alternative ways to specify the CLRM assumptions. One noteable variant, found in a number of texts (and websites), considers the case of non-random regressors. That is, the value of regressors does not change with sampling.</p>
 </div>
 </div>
 <section id="mlr-1" class="level2">
@@ -873,7 +919,7 @@ window.Quarto = {
 <p><strong>MLR-1: Linear in parameters</strong></p>
 <p>The population model is given by,</p>
 <p><span class="math display">\[
-  y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+\dots + \beta_kx_{ik} + u_i
+  y = \beta_0 + \beta_1x_{1} + \beta_2x_{2}+\dots + \beta_kx_{k} + u
 \]</span></p>
 </blockquote>
 <p>It may seem obvious, but it is nonetheless an assumption that the model is <strong>correctly specified</strong> as linear in parameters.</p>
@@ -882,9 +928,22 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="mlr-2">MLR #2</h2>
 <blockquote class="blockquote">
 <p><strong>MLR-2: Random sampling</strong></p>
-<p>Random sample of <span class="math inline">\(n\)</span> from the population</p>
+<p>Random sample of <span class="math inline">\(n\)</span> observations, <span class="math inline">\(\{\mathbf{x}_i,y_i\}:\; i=1,\dots,n\)</span>, drawn from the population model</p>
 </blockquote>
-<p>This will</p>
+<p>Random sampling is sometimes referred to as <em>independently and identically distributed</em> (iid).</p>
+<ul>
+<li>The ‘identically distributed’ part can be relaxed (i.e.&nbsp;error variance)</li>
+</ul>
+<div class="fragment fade-in">
+<p>Together with MLR-1, it gives us</p>
+<p><span class="math display">\[
+   y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+\dots + \beta_kx_{ik} + u_i\qquad i=1,\dots,n
+\]</span></p>
+<ul>
+<li>Needed for Law of Large Numbers and Central Limit Theorem</li>
+<li>Sampling is the primary source of uncertainty the model.</li>
+</ul>
+</div>
 </section>
 <section id="mlr-3" class="level2">
 <h2 class="anchored" data-anchor-id="mlr-3">MLR #3</h2>
@@ -894,14 +953,17 @@ window.Quarto = {
 </blockquote>
 <p>This assumption is key for <em>identification</em>. It ensures that each parameter is uniquely identified.</p>
 </section>
-<section id="section-5" class="level2">
-<h2 class="anchored" data-anchor-id="section-5"></h2>
-<p>Consider a regression of hours-worked against temperature, measured in both Celsius and Fahrenheit,</p>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>Consider a regression of hours-worked against temperature, measured in both <span class="math inline">\(F^\circ\)</span> and <span class="math inline">\(C^\circ\)</span>,</p>
 <p><span class="math display">\[
   hrswrk_i = \beta_0 + \beta_1 tempC_i + \beta_2 tempF_i + u_i
 \]</span></p>
-<p>Note, the model has 3 parameters.</p>
-<p>There is a linear formula that links temperature in <span class="math inline">\(F^\circ\Rightarrow C^\circ\)</span>: <span class="math inline">\(F^\circ = 9/5\cdot C^\circ+32\)</span>.</p>
+<p>The model has 3 parameters.</p>
+</section>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5"></h2>
+<p>BUT there is a linear formula that links temperature in <span class="math inline">\(F^\circ\Rightarrow C^\circ\)</span>: <span class="math inline">\(F^\circ = 9/5\cdot C^\circ+32\)</span>.</p>
 <ul>
 <li>Plug this into the equation:</li>
 </ul>
@@ -912,55 +974,71 @@ window.Quarto = {
             =&amp; \gamma_0 + \gamma_1 tempC_i + u_i \\
   \end{aligned}
 \]</span></p>
-<p>The model has 2 parameters now. The third was not identified because the variable <span class="math inline">\(tempF_i\)</span> is perfectly collinear with <span class="math inline">\(tempC_i\)</span> and the constant in the model.</p>
+<p>The model has 2 parameters now.</p>
+<ul>
+<li>The third was not identified because the variable <span class="math inline">\(tempF_i\)</span> is perfectly collinear with <span class="math inline">\(tempC_i\)</span> and the constant in the model.</li>
+</ul>
 </section>
 <section id="mlr-4" class="level2">
 <h2 class="anchored" data-anchor-id="mlr-4">MLR #4</h2>
 <blockquote class="blockquote">
 <p><strong>MLR-4: Zero conditional mean</strong></p>
-<p>Also referred to as mean independence between the error term and regressors.</p>
+<p>The error term has expected value of 0 given the any vlaue of the explantory variable</p>
 <p><span class="math display">\[
-   E[u_i | \mathbf{x}_i] = 0
+   E[u | \mathbf{x}] = 0
 \]</span></p>
 </blockquote>
-<p>This is assumption is</p>
+<div class="fragment fade-in">
+<p>If sample is iid, then MLR-4 <span class="math inline">\(\Rightarrow E[u_i | \mathbf{x}_i]\)</span> for <span class="math inline">\(i=1,\dots,n\)</span>.</p>
 <ul>
-<li><p>weaker than full independence: <span class="math inline">\(u_i\perp \mathbf{x}_i\)</span>);</p></li>
-<li><p>but stronger than uncorrelatedness: <span class="math inline">\(Cov(\mathbf{x}_i, u_i) = 0\)</span></p></li>
+<li><p>weaker than full independence: <span class="math inline">\(u\perp \mathbf{x}\)</span>);</p></li>
+<li><p>but stronger than uncorrelatedness: <span class="math inline">\(Cov(\mathbf{x}, u) = 0\)</span></p></li>
 </ul>
+</div>
 </section>
 <section id="section-6" class="level2">
 <h2 class="anchored" data-anchor-id="section-6"></h2>
 <p>We can also show the following:</p>
 <ol type="1">
-<li>MLR-4 implies that the unconditional mean of the error term is 0.</li>
+<li>MLR-4 implies that the unconditional mean of the error term is 0 (Law of Iterated Expectations; see <a href="./material-cef.html">CEF notes</a>.</li>
 </ol>
 <p><span class="math display">\[
-  E[u_i | \mathbf{x}_i] = 0 \Rightarrow E[u_i] = 0
+  E[u | \mathbf{x}] = 0 \Rightarrow E[u] = 0
 \]</span></p>
 <ol start="2" type="1">
 <li>MLR-4 implies the error term is uncorrelated with all regressors</li>
 </ol>
 <p><span class="math display">\[
-  E[u_i | \mathbf{x}_i] = 0 \Rightarrow E[u_ix_{ij}]=Cov(u_i, x_{ij}) = 0\quad j=1,2,\dots,k
+  E[u | \mathbf{x}] = 0 \Rightarrow E[u_ix_{j}]=Cov(u, x_{j}) = 0\quad j=1,2,\dots,k
 \]</span></p>
+</section>
+<section id="section-7" class="level2">
+<h2 class="anchored" data-anchor-id="section-7"></h2>
+<ol start="3" type="1">
+<li><p>MLR-4 implies that we can treat <span class="math inline">\(\mathbf{x}\)</span> as ‘fixed’ across repeated samples.</p>
+<ul>
+<li>If <span class="math inline">\(x\)</span> is fixed, there is only source of uncertainty is <span class="math inline">\(u\)</span>.</li>
+<li>Allows us to treat <span class="math inline">\(x\)</span> as non-random in derivations; e.g.&nbsp;variance.</li>
+</ul></li>
+</ol>
 </section>
 <section id="mlr-5" class="level2">
 <h2 class="anchored" data-anchor-id="mlr-5">MLR #5</h2>
-<p>The next two assumptions yield nice properties for the OLS estimator.</p>
 <blockquote class="blockquote">
 <p><strong>MLR-5: Homoskedasticity</strong></p>
-<p>The variance of the error term is constant.</p>
+<p>The variance of the error term is the same given any value of <span class="math inline">\(x_i\)</span>.</p>
 <p><span class="math display">\[
-  Var(u_i|\mathbf{x}_i) = \sigma^2
+  Var(u|\mathbf{x}) = \sigma^2
 \]</span></p>
 </blockquote>
+<div class="fragment fade-in">
+<p>If sample is iid, then MLR-4 <span class="math inline">\(\Rightarrow Var(u_i|\mathbf{x}_i) = \sigma^2\)</span> for <span class="math inline">\(i=1,\dots,n\)</span>.</p>
 <ul>
 <li><p>Needed to define the variance of the estimator</p></li>
-<li><p>Homoskedasticity is a key assumption needed for the famous BLUE property of OLS.</p></li>
+<li><p>Needed for the famous BLUE property of OLS (Gauss Markov Theorem)</p></li>
 <li><p>It can be relaxed. Such errors are referred to as heteroskedastic.</p></li>
 </ul>
-<p>This will be covered in future material.</p>
+</div>
 </section>
 <section id="mlr-6" class="level2">
 <h2 class="anchored" data-anchor-id="mlr-6">MLR #6</h2>
@@ -968,22 +1046,26 @@ window.Quarto = {
 <p><strong>MLR-6: Normality</strong></p>
 <p>The conditional distribution of the error term is normal.</p>
 <p><span class="math display">\[
-  u_i|\mathbf{x}_i\sim N(0,\sigma^2)
+  u|\mathbf{x}\sim N(0,\sigma^2)
 \]</span></p>
 </blockquote>
+<div class="fragment fade-in">
 <ul>
-<li><p>Needed to know the finite distribution of the estimator</p></li>
+<li><p>Needed to know the <em>finite</em> distribution of the estimator</p></li>
 <li><p>Can be relaxed, but then only asymptotic distribution is known.</p></li>
 </ul>
-<p>Again, this will be covered in future material.</p>
+</div>
 </section>
-<section id="univariate-case" class="level2">
-<h2 class="anchored" data-anchor-id="univariate-case">Univariate case</h2>
-<p>Let’s consider the simplest case: univariate regression</p>
+</section>
+<section id="simple-case" class="level1">
+<h1>Simple case</h1>
+<section id="slr-model" class="level2">
+<h2 class="anchored" data-anchor-id="slr-model">SLR model</h2>
+<p>Let’s consider the simplest case: a bivariate regression model</p>
 <p><span class="math display">\[
   y_i = \beta_0 + \beta_1 x_i + u_i
 \]</span></p>
-<p>Under MLR-1 and MLR-4:</p>
+<p>Under MLR. 1-4 (or Wooldridge’s SLR. 1-4):</p>
 <p><span class="math display">\[
   \begin{aligned}
     E[y_i | x_i] =&amp; E[\beta_0 + \beta_1 x_i + u_i | x_i] \\
@@ -992,70 +1074,6 @@ window.Quarto = {
     =&amp; \beta_0 + \beta_1 x_i
   \end{aligned}
 \]</span></p>
-</section>
-<section id="section-7" class="level2">
-<h2 class="anchored" data-anchor-id="section-7"></h2>
-<p>Let’s plot <span class="math inline">\(E[y_i | x_i]=0.5 + 0.6 x_i\)</span></p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="section-8" class="level2">
-<h2 class="anchored" data-anchor-id="section-8"></h2>
-<p>Around the <span class="math inline">\(E[y_i|x_i]\)</span>, the error term is normaly distributed: <span class="math inline">\(u_i\sim N(0,0.6^2)\)</span></p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="section-9" class="level2">
-<h2 class="anchored" data-anchor-id="section-9"></h2>
-<p>This is what it would look like if you sampled <span class="math inline">\(n=50\)</span> errors for <span class="math inline">\(x\)</span> from that distribution.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>For a given <span class="math inline">\(x\)</span>, more of the observations will be concentrated around the <em>conditional</em> mean.</p>
-</section>
-<section id="interpretation" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation">Interpretation</h2>
-<p>This then gives us a clear interpretation of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span></p>
-<p><span class="math display">\[
-  \begin{aligned}
-    \beta_0 =&amp; E[y_i | x_i=0] \\
-    \beta_1 =&amp; \frac{dE[y_i | x_i]}{dx_i}
-  \end{aligned}
-\]</span></p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The interpretation of <span class="math inline">\(\beta_1\)</span> as a derivative assumes that <span class="math inline">\(x_i\)</span> is a continuous variable. We discuss the case of discrete variables at a later point.</p>
-</div>
-</div>
-<p>Note, <span class="math inline">\(\beta_0\)</span> may not have a “realistic” interpretation. For example, you are unlikely to find some one in the data who has an age of 0.</p>
 </section>
 <section id="identification" class="level2">
 <h2 class="anchored" data-anchor-id="identification">Identification</h2>
@@ -1066,8 +1084,8 @@ Warning
 </ol>
 <p>We can use these two moments to demonstrate the identification of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
 </section>
-<section id="section-10" class="level2">
-<h2 class="anchored" data-anchor-id="section-10"></h2>
+<section id="section-8" class="level2">
+<h2 class="anchored" data-anchor-id="section-8"></h2>
 <p><strong>Step 1</strong>: Substitute <span class="math inline">\(u_i = y_i - \beta_0 -\beta_1x_i\)</span> into (1)</p>
 <p><span class="math display">\[
   0 = E[u_i] = E[y_i - \beta_0 - \beta_1x_i]\Rightarrow \beta_0 = E[y_i]-\beta_1 E[x_i]
@@ -1081,8 +1099,8 @@ Warning
   0 = E[y_ix_i]-\beta_0E[x_i]-\beta_1E[x_i^2] = E[y_ix_i] - (E[y_i]-\beta_1 E[x_i])E[x_i] - \beta_1 E[x_i^2]
 \]</span></p>
 </section>
-<section id="section-11" class="level2">
-<h2 class="anchored" data-anchor-id="section-11"></h2>
+<section id="section-9" class="level2">
+<h2 class="anchored" data-anchor-id="section-9"></h2>
 <p>Manipulate and solve</p>
 <p><span class="math display">\[
   0 = \underbrace{E[y_ix_i]-E[y_i]E[x_i]}_{Cov(y_i,x_i)}-\beta_1(\underbrace{E[x_i^2]-E[x_i]^2}_{Var(x_i)})
@@ -1096,59 +1114,403 @@ Warning
 \]</span></p>
 <p>Both population parameters can be written as expressions of “observable” moments in the data. In this sence, they are identified.</p>
 </section>
-<section id="multivariate-case" class="level2">
-<h2 class="anchored" data-anchor-id="multivariate-case">Multivariate case</h2>
-<p>In the multivariate case we have models of the form,</p>
-<p><span class="math display">\[
-  y_i = \beta_0 + \beta_1 x_{i1} + \beta_2x_{i2}+\dots+\beta_k x_{ik} + u_i
-\]</span></p>
-<p>As with the univariate case, under MLR-1 and MLR-4:</p>
-<p><span class="math display">\[
-  E[y_i|\mathbf{x}_i] = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_k x_{ik}
-\]</span></p>
+<section id="section-10" class="level2">
+<h2 class="anchored" data-anchor-id="section-10"></h2>
+<p>Let’s plot <span class="math inline">\(E[y | x]=0.5 + 0.6 x\)</span>, the (linear) population regression function.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="interpretation-1" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-1">Interpretation</h2>
-<p>We can now think of each slope coefficient as</p>
+<section id="section-11" class="level2">
+<h2 class="anchored" data-anchor-id="section-11"></h2>
+<p>Around the <span class="math inline">\(E[y_i|x_i]\)</span>, the error term is normaly distributed: <span class="math inline">\(u_i\sim N(0,0.6^2)\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="section-12" class="level2">
+<h2 class="anchored" data-anchor-id="section-12"></h2>
+<p>This is what it would look like if you sampled <span class="math inline">\(n=50\)</span> errors for <span class="math inline">\(x\)</span> from that distribution.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For a given <span class="math inline">\(x\)</span>, more of the observations will be concentrated around the <em>conditional</em> mean.</p>
+</section>
+<section id="interpretation-continuous-regressor" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-continuous-regressor">Interpretation: Continuous regressor</h2>
+<p>This then gives us a clear interpretation of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span></p>
 <p><span class="math display">\[
-  \beta_j = \frac{\partial E[y_i | \mathbf{x}_i]}{\partial x_{ij}} \quad j=1,\dots,k
+  \begin{aligned}
+    \beta_0 =&amp; E[y_i | x_i=0] \\
+    \beta_1 =&amp; \frac{dE[y_i | x_i]}{dx_i}
+  \end{aligned}
 \]</span></p>
-<p>This is a <em>partial derivative</em>.</p>
+<div class="fragment fade-in">
+<p>Note, <span class="math inline">\(\beta_0\)</span> may not have a “realistic” interpretation.</p>
 <ul>
-<li><p>Change in the conditional mean of <span class="math inline">\(y\)</span> for a 1 unit change in regressor <span class="math inline">\(x_j\)</span>, <strong>holding all other variables fixed</strong></p></li>
-<li><p>This is also why additional regressors in a model are referred to as “control variables”, since their presence changes the interpretation of the slope coefficient.</p></li>
+<li>e.g., if <span class="math inline">\(y\)</span> is level of exports (to US) and <span class="math inline">\(x\)</span> is USD exchange rate of country <span class="math inline">\(i\)</span>.</li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled" title="*Ceteris Paribus*">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span><em>Ceteris Paribus</em>
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We often use the Latin phrase <em>ceteris paribus</em> to describe this interpretation as it means “all else equal”.</p>
+<p>The interpretation of <span class="math inline">\(\beta_1\)</span> as a derivative assumes that <span class="math inline">\(x_i\)</span> is a continuous variable.</p>
+</div>
 </div>
 </div>
 </section>
+<section id="section-13" class="level2">
+<h2 class="anchored" data-anchor-id="section-13"></h2>
+<p>Why not?</p>
+<p><span class="math display">\[
+  \beta_1 = \frac{dy_i}{dx_i}
+\]</span></p>
+<div class="fragment fade-in">
+<ul>
+<li>Without MLR. 1-4 (zero condition mean), we can’t rule out a relationship bewteen <span class="math inline">\(u\)</span> and <span class="math inline">\(x\)</span>
+<ul>
+<li>e.g., <span class="math inline">\(u\)</span> could include powers of <span class="math inline">\(x\)</span>: <span class="math inline">\(u_i= \beta_2 x_i^2 + v_i\)</span></li>
+</ul></li>
+<li>With MLR. 1-4, <span class="math inline">\(E[y_i|x_i] = \beta_0 + \beta_1 x_i\)</span> (i.e.&nbsp;the population regression function)</li>
+</ul>
+</div>
 </section>
-<section id="questions" class="level1">
-<h1>Questions</h1>
-<ol type="1">
-<li><p>How many parameters are there in the model <span class="math inline">\(y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+\dots + \beta_kx_{ik} + u_i\)</span>? And how many regressors?</p></li>
-<li></li>
+<section id="interpretation-binary-regressor" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-binary-regressor">Interpretation: Binary regressor</h2>
+<p>What if <span class="math inline">\(x\in\{0,1\}\)</span>?</p>
+<ul>
+<li>We cannot differentiate <span class="math inline">\(E[y_i|x_i]\)</span>.</li>
+</ul>
+<div class="fragment fade-in">
+<p><strong>Solution</strong>: difference</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  E[y_i|x_i=\textcolor{blue}{0}] =&amp; \beta_0 + \beta_1\times \textcolor{blue}{0} = \beta_0 \\
+  E[y_i|x_i=\textcolor{red}{1}] =&amp; \beta_0 + \beta_1\times \textcolor{red}{1} = \beta_0 + \beta_1 \\
+  &amp;\\
+  \Rightarrow \beta_1 =&amp; E[y_i|x_i=\textcolor{red}{1}]-E[y_i|x_i=\textcolor{blue}{0}]
+  \end{aligned}
+\]</span></p>
+</div>
+</section>
+</section>
+<section id="multivariate-case" class="level1">
+<h1>Multivariate case</h1>
+<section id="mlr-model" class="level2">
+<h2 class="anchored" data-anchor-id="mlr-model">MLR model</h2>
+<p>In the multivariate case we have models of the form (<span class="math inline">\(k=3\)</span>),</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_{i1} + \beta_2x_{i2}+\beta_3 x_{i3} + u_i
+\]</span></p>
+<p>As with the SLR case, under MLR 1-4:</p>
+<p><span class="math display">\[
+  E[y_i|\mathbf{x}_i] = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i3}
+\]</span></p>
+</section>
+<section id="interpretation-continuous-regressor-linear" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-continuous-regressor-linear">Interpretation: Continuous regressor (linear)</h2>
+<p><strong>Suppose</strong>, the linear population regression function is <em>also</em> linear in <span class="math inline">\(x\)</span>.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>We can now think of each slope coefficient as</p>
+<p><span class="math display">\[
+  \beta_j = \frac{\partial E[y_i | \mathbf{x}_i]}{\partial x_{ij}} \quad j=1,2,3
+\]</span></p>
+<div class="fragment fade-in">
+<p>This is a <em>partial derivative</em>.</p>
+<ul>
+<li><p>Change in the conditional mean of <span class="math inline">\(y\)</span> for a 1 unit change in regressor <span class="math inline">\(x_j\)</span>, <strong>holding <span class="math inline">\(x_2\)</span> and <span class="math inline">\(x_3\)</span> fixed</strong></p></li>
+<li><p>Why additional regressors in a model are referred to as “control variables”; their presence changes the interpretation of the slope coefficient.</p></li>
+</ul>
+</div>
+</section>
+<section id="differential" class="level2">
+<h2 class="anchored" data-anchor-id="differential">Differential</h2>
+<p>The mean of the outcome will change in the following manner with the regressors:</p>
+<p><span class="math display">\[
+  \Delta E[y_i|\mathbf{x}_i] = \frac{\partial E[y_i | \mathbf{x}_i]}{\partial x_{i1}} \Delta x_{i1} + \frac{\partial E[y_i | \mathbf{x}_i]}{\partial x_{i2}} \Delta x_{i2} + \frac{\partial E[y_i | \mathbf{x}_i]}{\partial x_{i3}} \Delta x_{i3}
+\]</span></p>
+<p>So, if you ask what is the change in (expected value of y) from a <span class="math inline">\(10\)</span>-unit change in <span class="math inline">\(x_{1}\)</span>:</p>
+<p><span class="math display">\[
+  \Delta E[y_i|\mathbf{x}_i] = \beta_1 \times 10
+\]</span></p>
+</section>
+<section id="interpretation-continuous-regressor-polynomial" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-continuous-regressor-polynomial">Interpretation: Continuous regressor (polynomial)</h2>
+<p><strong>Suppose</strong>, the <em>linear</em> population regression function includes higher-order polynomials of some <span class="math inline">\(x\)</span>’s.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p><span class="math display">\[
+  E[y_i|\mathbf{x}_i] = \beta_0 + \beta_1 \textcolor{red}{x_{i1}} + \beta_2 \textcolor{red}{x_{i1}^2} + \beta_3 x_{i3}
+\]</span></p>
+<div class="fragment fade-in">
+<p>The derivative (w.r.t. <span class="math inline">\(x_1\)</span>) now depends on the value of <span class="math inline">\(x_1\)</span>:</p>
+<p><span class="math display">\[
+  \frac{\partial E[y_i | \mathbf{x}_i]}{\partial \textcolor{red}{x_{i1}}}= \beta_1 + 2\beta_2 x_{i1}
+\]</span></p>
+</div>
+</section>
+<section id="nber-example" class="level2">
+<h2 class="anchored" data-anchor-id="nber-example">NBER example</h2>
+<p>From <span class="citation" data-cites="NBERw35529">Berg, Curtis, and Mark (<a href="#ref-NBERw35529" role="doc-biblioref">2026, 6</a>)</span> <a href="https://www.nber.org/papers/w35529">“Temperature Fluctuations and Economic Conditions: Evidence from Weekly U.S. Data”</a></p>
+<p><img src="material/lecture-1/nber-polynomial.png" class="img-fluid"></p>
+<ul>
+<li><span class="math inline">\(\sum_{j=0}^{h}y_{i,t+j}\)</span> <span class="math inline">\(y_{i,t}\)</span> - is the Economic Conditions Index for state <span class="math inline">\(i\)</span> in week <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\tau_{i,t}\)</span> - seasonally adjusted temperature</li>
+</ul>
+</section>
+<section id="interpretation-continuous-regressor-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-continuous-regressor-interactions">Interpretation: Continuous regressor (interactions)</h2>
+<p><strong>Suppose</strong>, the <em>linear</em> population regression function includes higher-order polynomials of some <span class="math inline">\(x\)</span>, but had some interactions.</p>
+<p><span class="math display">\[
+  E[y_i|\mathbf{x}_i] = \beta_0 + \beta_1 \textcolor{red}{x_{i1}} + \beta_2 \textcolor{red}{x_{i1}}\cdot x_{i3} + \beta_3 x_{i3}
+\]</span></p>
+<div class="fragment fade-in">
+<p>The derivative (w.r.t. <span class="math inline">\(x_1\)</span>) now depends on the value of <span class="math inline">\(x_3\)</span>:</p>
+<p><span class="math display">\[
+  \frac{\partial E[y_i | \mathbf{x}_i]}{\partial \textcolor{red}{x_{i1}}}= \beta_1 + \beta_2 x_{i3}
+\]</span></p>
+</div>
+</section>
+<section id="nber-example-1" class="level2">
+<h2 class="anchored" data-anchor-id="nber-example-1">NBER example</h2>
+<p>From <span class="citation" data-cites="NBERw34128">Kristian Blickle and Ma (<a href="#ref-NBERw34128" role="doc-biblioref">2025, 10</a>)</span> <a href="https://www.nber.org/papers/w34128">“The Dynamics of Deposit Flightiness and its Impact on Financial Stability”</a></p>
+<p><img src="material/lecture-1/nber-interaction.png" class="img-fluid"></p>
+<ul>
+<li><span class="math inline">\(Flow_{jt}\)</span> - deposit flow of bank <span class="math inline">\(j\)</span> in quarter <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(DepRate_{jt}\)</span> - deposit rates for bank <span class="math inline">\(j\)</span> in quarter <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(AggFlow_{t}\)</span> - one-year cumulative deposit flow in quarter <span class="math inline">\(t\)</span></li>
+</ul>
+</section>
+<section id="interpretation-binary-variable" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-binary-variable">Interpretation: binary variable</h2>
+<p><strong>Suppose</strong>, that <span class="math inline">\(x_{1}\in\{0,1\}\)</span>.</p>
+<p><span class="math display">\[
+  E[y_i|\textcolor{blue}{x_{i1}=0},x_{i2},x_{i3}] = \beta_0 + \textcolor{blue}{0} + \beta_2 x_{i2} + \beta_3 x_{i3}
+\]</span></p>
+<p>and,</p>
+<p><span class="math display">\[
+  E[y_i|\textcolor{red}{x_{i1}=1},x_{i2},x_{i3}] = \beta_0 + \textcolor{red}{\beta_1} + \beta_2 x_{i2} + \beta_3 x_{i3}
+\]</span></p>
+<div class="fragment fade-in">
+<p>Thus,</p>
+<p><span class="math display">\[
+  \beta_1 = E[y_i|\textcolor{red}{x_{i1}=1},x_{i2},x_{i3}]-E[y_i|\textcolor{red}{x_{i1}=0},x_{i2},x_{i3}]
+\]</span></p>
+</div>
+</section>
+<section id="nber-example-2" class="level2">
+<h2 class="anchored" data-anchor-id="nber-example-2">NBER example</h2>
+<p>From <span class="citation" data-cites="NBERw35729">Karlan, Rigol, and Roth (<a href="#ref-NBERw35729" role="doc-biblioref">2026, 24</a>)</span> <a href="https://www.nber.org/papers/w35729">“When Microenterprises Grow, Are Consumers Better Off? Evidence from Large Loans to Microenterprises in Chile”</a></p>
+<p><img src="material/lecture-1/nber-dummy.png" class="img-fluid"></p>
+<ul>
+<li><span class="math inline">\(T_i\)</span> - indicator for treatment (loan receipt): treated <span class="math inline">\(=1\)</span>, control <span class="math inline">\(=0\)</span></li>
+<li><span class="math inline">\(X_i\)</span> - firm characteristics</li>
+</ul>
+</section>
+<section id="log-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="log-transformation">Log transformation</h2>
+<p>It is common in economics to apply a log-transformation to economic variables.</p>
+<p><span class="math display">\[
+  \ln(y)
+\]</span></p>
+<p><strong>WHy?</strong></p>
+<ul>
+<li>helps to deal with outliers</li>
+<li>some variables are (close to) log-normal</li>
+<li>log-linearization is used to transform economic models</li>
+<li>changes the interpretation; e.g.&nbsp;growth rates of macroeconomic variables</li>
+</ul>
+</section>
+<section id="interpretation-log-level" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-log-level">Interpretation: log-level</h2>
+<p>Suppose,</p>
+<p><span class="math display">\[
+  E[\textcolor{red}{\ln(y_i)}|\mathbf{x}_i] = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i3}
+\]</span></p>
+<p><span class="math display">\[
+  \beta_j = \frac{\partial E[\textcolor{red}{\ln(y_i)} | \mathbf{x}_i]}{\partial x_{ij}}
+\]</span> The coefficient is therefore measured in log-units of <span class="math inline">\(y\)</span>.</p>
+</section>
+<section id="section-14" class="level2">
+<h2 class="anchored" data-anchor-id="section-14"></h2>
+<p>The relation to a change in the (expected) level of <span class="math inline">\(y\)</span> is given by,</p>
+<p><span class="math display">\[
+\%\Delta\; E[y_i|\mathbf{x}_i] = (exp(\beta_j)-1)\times 100
+\]</span></p>
+<div class="fragment fade-in">
+<p>For reasonably small values of <span class="math inline">\(\beta_1\)</span> (i.e.&nbsp;within the range <span class="math inline">\([-0.1,0.1]\)</span>) this can be approximated by,</p>
+<p><span class="math display">\[
+\%\Delta\; E[y_i|\mathbf{x}_i] \approx \beta_j\times 100
+\]</span></p>
+<p>A 1-unit change in <span class="math inline">\(x_{ij}\)</span> is associated with a <span class="math inline">\(\approx \beta_j\times 100\)</span> <strong>percentage</strong> change in the expected value of <span class="math inline">\(y\)</span>.</p>
+<p>This referred to as a <strong>semi-elasticity</strong>.</p>
+</div>
+</section>
+<section id="nber-example-3" class="level2">
+<h2 class="anchored" data-anchor-id="nber-example-3">NBER example</h2>
+<p>From <span class="citation" data-cites="NBERw35743">Eriksson, Lin, and Niemesh (<a href="#ref-NBERw35743" role="doc-biblioref">2026, 16</a>)</span> <a href="https://www.nber.org/papers/w35743">“Immigration and Child Mortality during the Age of Mass Migration”</a></p>
+<p><img src="material/lecture-1/nber-log-level.png" class="img-fluid"></p>
+<ul>
+<li><span class="math inline">\(\ln(M_{it})\)</span> - log of the mortality rate in the town-year</li>
+<li><span class="math inline">\(SF_{it}\)</span> - share of the town’s population that was foreign-born</li>
+</ul>
+</section>
+<section id="interpretation-level-log" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-level-log">Interpretation: level-log</h2>
+<p>Suppose,</p>
+<p><span class="math display">\[
+  E[y_i|\mathbf{x}_i] = \beta_0 + \beta_1 \textcolor{blue}{\ln(x_{i1})} + \beta_2 x_{i2} + \beta_3 x_{i3}
+\]</span></p>
+<p>Then,</p>
+<p><span class="math display">\[
+  \beta_1 = \frac{\partial E[y_i | \mathbf{x}_i]}{\partial \textcolor{blue}{\ln(x_{i1})}}
+\]</span> The coefficient is measured in <span class="math inline">\(y\)</span>.</p>
+</section>
+<section id="section-15" class="level2">
+<h2 class="anchored" data-anchor-id="section-15"></h2>
+<p>A 1 <strong>percent</strong> increase in <span class="math inline">\(x\)</span> is exactly <span class="math inline">\(x\times1.01\)</span>. This is equivalent to a change in <span class="math inline">\(\ln(x)\)</span> of,</p>
+<p><span class="math display">\[
+\ln(x_i\times1.01) - \ln(x_i) = \ln(1.01) \approx 0.01
+\]</span></p>
+<p>Thus, a 1 <strong>percent</strong> increase in (the level of) <span class="math inline">\(x\)</span> is associated with a <span class="math inline">\(\beta_1\times 0.01 = \beta_1/100\)</span> increase in the expected value of <span class="math inline">\(y\)</span>. Or, more accurately</p>
+<p><span class="math display">\[
+  \Delta E[y_i|x_i] = \beta_1\times \ln(1.01)
+\]</span></p>
+<p>This is also a <strong>semi-elasticity</strong>.</p>
+</section>
+<section id="nber-example-4" class="level2">
+<h2 class="anchored" data-anchor-id="nber-example-4">NBER example</h2>
+<p>From <span class="citation" data-cites="NBERw35639">Cordova and Schaller (<a href="#ref-NBERw35639" role="doc-biblioref">2026, 23</a>)</span> <a href="https://www.nber.org/papers/w35639">“Local Labor Demand and Achievement Gaps: Evidence from the Great Recession”</a></p>
+<p><img src="material/lecture-1/nber-level-log.png" class="img-fluid"></p>
+<ul>
+<li><span class="math inline">\(Y_{cgt}\)</span> - cohort-standardized achievement in county <span class="math inline">\(c\)</span>, grade <span class="math inline">\(g\)</span>, year <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(lnEct\)</span> - log of employment in country <span class="math inline">\(c\)</span>, year <span class="math inline">\(t\)</span> (ignore the first-difference <span class="math inline">\(\Delta\)</span>)</li>
+</ul>
+</section>
+<section id="interpretation-log-log" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-log-log">Interpretation: log-log</h2>
+<p>Suppose,</p>
+<p><span class="math display">\[
+  E[\textcolor{red}{\ln(y_i)}|\mathbf{x}_i] = \beta_0 + \beta_1 \textcolor{blue}{\ln(x_{i1})} + \beta_2 x_{i2} + \beta_3 x_{i3}
+\]</span></p>
+<p>Then,</p>
+<p><span class="math display">\[
+  \beta_1 = \frac{\partial E[\textcolor{red}{\ln(y_i)}|\mathbf{x}_i]}{\partial \textcolor{blue}{\ln(x_{i1})}}
+\]</span></p>
+<p>This is an <strong>elasticity</strong> measure: <span class="math inline">\(\beta_1\)</span> is the % change in the expected value of <span class="math inline">\(y\)</span> from a 1 % change in <span class="math inline">\(x\)</span></p>
+</section>
+<section id="nber-example-5" class="level2">
+<h2 class="anchored" data-anchor-id="nber-example-5">NBER example</h2>
+<p>From <span class="citation" data-cites="NBERw35721">Bai, Bian, and Jia (<a href="#ref-NBERw35721" role="doc-biblioref">2026, 9</a>)</span> <a href="https://www.nber.org/papers/w35721">“Politics-driven Market Access and Its Cost: Evidence from China’s Grand Canal”</a></p>
+<p><img src="material/lecture-1/nber-log-log.png" class="img-fluid"></p>
+<ul>
+<li><span class="math inline">\(\ln MA_{it}\)</span> - (log of) market access in grid <span class="math inline">\(i\)</span>, year <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\ln MA_{it}^{opt,pop_0}\)</span> - (log of) optimal market access based on historic constraints (e.g.&nbsp;Tang-dynasty population)</li>
+</ul>
+</section>
+</section>
+<section id="qa" class="level1">
+<h1>Q&amp;A</h1>
+<section id="questions" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="questions">Questions</h2>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><p>How many parameters are there in the model <span class="math inline">\(y = \beta_0 + \beta_1x_{1} + \beta_2x_{2}+\dots + \beta_kx_{k} + u\)</span>? And how many regressors?</p></li>
+<li><p>TRUE/FALSE: are the following models linear in parameters?</p>
+<p>2.1. <span class="math inline">\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u\)</span></p>
+<p>2.2. <span class="math inline">\(y = \theta_0 + \theta_1 x + \theta_1^2 z + u\)</span></p>
+<p>2.3. <span class="math inline">\(y = \alpha + \beta x + \gamma x^2 + u\)</span></p>
+<p>2.4. <span class="math inline">\(y = \alpha + \beta x + \mathbf{z}\gamma + u\)</span></p>
+<p>2.5. <span class="math inline">\(y = exp(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + u)\)</span></p></li>
+<li><p>Suppose, <span class="math inline">\(exp_i = age_i-(edu_i + 6)\)</span>. Is the following model identified? What if you excluded <span class="math inline">\(age_i\)</span> from the model?</p></li>
 </ol>
+<p><span class="math display">\[
+  \ln(wage_i) = \beta_0 + \beta_1 exp_i + \beta_2 age_i + \beta_3 edu_i + u_i
+\]</span></p>
+</div>
+</section>
+<section id="answers" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="answers">Answers</h2>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><p><span class="math inline">\(k+1\)</span> parameters, <span class="math inline">\(k\)</span> regressors</p></li>
+<li><p>TRUE/FALSE: are the following models linear in parameters?</p>
+<p>2.1. TRUE</p>
+<p>2.2. FALSE</p>
+<p>2.3. TRUE</p>
+<p>2.4. TRUE</p>
+<p>2.5. FALSE</p></li>
+<li><p>No, since <span class="math inline">\(exp_i\)</span> can be perfectly explained by the other variables (including the intercept). If <span class="math inline">\(age_i\)</span> is removed, then the model is identified.</p></li>
+</ol>
+</div>
+</section>
 </section>
 <section id="references" class="level1">
+<h1>References</h1>
+<section id="bibliography" class="level2 scrollable">
 
 
 
 
 </section>
+</section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliography</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-angrist2009mostly" class="csl-entry" role="listitem">
+Angrist, Joshua D, and Jörn-Steffen Pischke. 2009. <em>Mostly Harmless Econometrics: An Empiricist’s Companion</em>. Princeton university press.
+</div>
+<div id="ref-angrist2014mastering" class="csl-entry" role="listitem">
+———. 2014. <em>Mastering’metrics: The Path from Cause to Effect</em>. Princeton university press.
+</div>
+<div id="ref-NBERw35721" class="csl-entry" role="listitem">
+Bai, Ying, Xiaoyu Bian, and Ruixue Jia. 2026. <span>“Politics-Driven Market Access and Its Cost: Evidence from China’s Grand Canal.”</span> Working Paper 35721. Working Paper Series. National Bureau of Economic Research. <a href="https://doi.org/10.3386/w35721">https://doi.org/10.3386/w35721</a>.
+</div>
+<div id="ref-NBERw35529" class="csl-entry" role="listitem">
+Berg, Kimberly A., Chadwick C. Curtis, and Nelson C. Mark. 2026. <span>“Temperature Fluctuations and Economic Conditions: Evidence from Weekly u.s. Data.”</span> Working Paper 35529. Working Paper Series. National Bureau of Economic Research. <a href="https://doi.org/10.3386/w35529">https://doi.org/10.3386/w35529</a>.
+</div>
+<div id="ref-NBERw35639" class="csl-entry" role="listitem">
+Cordova, Karla, and Jessamyn Schaller. 2026. <span>“Local Labor Demand and Achievement Gaps: Evidence from the Great Recession.”</span> Working Paper 35639. Working Paper Series. National Bureau of Economic Research. <a href="https://doi.org/10.3386/w35639">https://doi.org/10.3386/w35639</a>.
+</div>
+<div id="ref-cunningham2021causal" class="csl-entry" role="listitem">
+Cunningham, Scott. 2021. <em>Causal Inference: The Mixtape</em>. Yale university press.
+</div>
+<div id="ref-NBERw35743" class="csl-entry" role="listitem">
+Eriksson, Katherine, Peter Zhixian Lin, and Gregory Niemesh. 2026. <span>“Immigration and Child Mortality During the Age of Mass Migration.”</span> Working Paper 35743. Working Paper Series. National Bureau of Economic Research. <a href="https://doi.org/10.3386/w35743">https://doi.org/10.3386/w35743</a>.
+</div>
+<div id="ref-NBERw35729" class="csl-entry" role="listitem">
+Karlan, Dean, Natalia Rigol, and Benjamin N. Roth. 2026. <span>“When Microenterprises Grow, Are Consumers Better Off? Evidence from Large Loans to Microenterprises in Chile.”</span> Working Paper 35729. Working Paper Series. National Bureau of Economic Research. <a href="https://doi.org/10.3386/w35729">https://doi.org/10.3386/w35729</a>.
+</div>
+<div id="ref-NBERw34128" class="csl-entry" role="listitem">
+Kristian Blickle, Xu Lu, Jian Li, and Yiming Ma. 2025. <span>“The Dynamics of Deposit Flightiness and Its Impact on Financial Stability.”</span> Working Paper 34128. Working Paper Series. National Bureau of Economic Research. <a href="https://doi.org/10.3386/w34128">https://doi.org/10.3386/w34128</a>.
+</div>
+<div id="ref-mankiw1992contribution" class="csl-entry" role="listitem">
+Mankiw, N Gregory, David Romer, and David N Weil. 1992. <span>“A Contribution to the Empirics of Economic Growth.”</span> <em>The Quarterly Journal of Economics</em> 107 (2): 407–37.
+</div>
+<div id="ref-morgan1992history" class="csl-entry" role="listitem">
+Morgan, Mary S. 1992. <em>The History of Econometric Ideas</em>. Cambridge university press.
+</div>
 <div id="ref-wooldridge2025" class="csl-entry" role="listitem">
 Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approach.”</span>
 </div>
@@ -1156,7 +1518,12 @@ Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approa
 
 <ol>
 <li id="fn1"><p>There are other words given to the righthand-side variables; including “control variables” and “covariates”. These terms have a particular meaning which will become clearer at a later stage.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>If you are keen to learn more about these approaches you should consider taking EC4425 <em>Econometrics of Impact Evaluation</em>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>It is inaccurate to say “NOT explained by the regressors”, as the the error term may contain non-linear functions of the regressors.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Referred to as the population regression function.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>If you are keen to learn more about these approaches you should consider taking <a href="https://www.st-andrews.ac.uk/subjects/modules/catalogue/?meta_semester_sand=2&amp;meta_modulecode=EC4437&amp;meta_ayrs_sand=2026%2F7">EC4437</a> <em>Applied Macroeconomics</em>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>If you are keen to learn more about these approaches you should consider taking <a href="https://www.st-andrews.ac.uk/subjects/modules/catalogue/?meta_semester_sand=2&amp;meta_modulecode=EC4425&amp;meta_ayrs_sand=2026%2F7">EC4425</a> <em>Econometrics of Impact Evaluation</em>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>And additively separable, which rules out interactions between variables.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>And additively separable, which rules out interactions between variables.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
