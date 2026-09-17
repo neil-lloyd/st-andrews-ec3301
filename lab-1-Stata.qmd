@@ -12,19 +12,19 @@ do "config.do"
 ```
 
 :::{.callout-important title="Data Access"}
-For this lab you will be using a dataset supplied by the UK Data Service. Before using the dataset, you need to do the following:
+For this lab you will be using a dataset supplied by the UK Data Service under an End User License. Before accessing the dataset, you need to do ONE of the following:
 
-1. Go to [UK Data Service](https://beta.ukdataservice.ac.uk/myaccount/login) registration page
-2. Type in and select "University of St Andrews"
-3. Complete the registration form. 
+- go to [UK Data Service](https://beta.ukdataservice.ac.uk/myaccount/login) and register an academic account using "University of St Andrews" as your institution.
 
-This then entitles you to access the data via Moodle. 
+- OR sign the physical license agreement available to you in class. 
 
-4. Agree to the [Data Access Quiz](https://moody.st-andrews.ac.uk/moodle/mod/quiz/view.php?id=1563763) on Moodle.
+Once you have have completed either of these, you can access the data via Moodle so long as you: 
+
+- agree to the [Data Access Quiz](https://moody.st-andrews.ac.uk/moodle/mod/quiz/view.php?id=1563763).
 
 Upon submitting the quiz, you will be shown a link to the data.
 
-5. Download the "shs2023.dta" file. For this lab you do not need the "shs2023.csv" file.
+Download the "shs2023.dta" file. For this lab you do not need the "shs2023.csv" file.
 :::
 
 # Stata
@@ -55,7 +55,7 @@ Many of these strengths are not unique to Stata but, put together, they demonstr
 
 **Should you learn Stata?** Sure! Stata provides an easy introduction to data management, econometric analysis, and basic programming. These skills are transferable to many data analysis settings; including working with data in Excel. And once you have mastered Stata, it will be relatively easy to adapt those skills to a programming language setting.
 
-There is one major consideration: you will have remote access to Stata via [AppsAnywhere](https://appstore.st-andrews.ac.uk/). You can sign into AppsAnywhere from your own computer so long as you are connected to the campus network (or VPN), but will not be able to install the software directly on your computer. Of course, you are free to purchase your own [Stata license](https://www.stata.com/order/new/edu/profplus/student-pricing/). Unfortunately, AppsAnywhere will not allow you install user written packages.
+There is one major consideration: you will have remote access to Stata via [AppsAnywhere](https://appstore.st-andrews.ac.uk/). You can sign into AppsAnywhere from your own computer so long as you are connected to the campus network (or VPN), but will not be able to install the software directly on your computer. Of course, you are free to purchase your own [Stata license](https://www.stata.com/order/new/edu/profplus/student-pricing/). Unfortunately, AppsAnywhere will not allow you install user-written packages.
 
 ## Navigating Stata's GUI
 

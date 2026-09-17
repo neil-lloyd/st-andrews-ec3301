@@ -5,7 +5,7 @@
 # ============================================================================ #
 # Load libraries
 library("haven")
-library("labelled")
+#library("labelled")                  # Not available in AppsAnywhere
 library("dplyr")
 library("ggplot2")
 
@@ -36,11 +36,12 @@ clean <- rename(clean, own_grp = hb509)
 
 # 4. Label `dwell_type` "Type of dwelling"
 
-var_label(clean$dwell_type) <- "Type of dwelling"
+attr(clean$dwell_type, "label") <- "Type of dwelling"
+clean$dwell_type <- labelled(clean$dwell_type, label="Type of dwelling")
 
 # 5. Label `own_grp` "Ownership of the dwelling"
 
-var_label(clean$own_grp) <- "Ownership of the dwelling"
+attr(clean$own_grp, "label") <- "Ownership of the dwelling"
 
 # ============================================================================ #
 # Using pipes
@@ -49,9 +50,14 @@ clean <- shs_dta %>%
   select(area, RTParea, MD20QUIN, hhsize, hb1, hb509, rent_amt, rent_sum, mortgage_amt, mortgage_sum, shared_ownership_sum, shared_ownership_amt) %>%
   rename(dwell_type = hb1, own_grp = hb509)
 
-  var_label(clean$dwell_type) <- "Type of dwelling"
-  var_label(clean$own_grp) <- "Ownership of the dwelling"
+  attr(clean$dwell_type, "label") <- "Type of dwelling"
+  attr(clean$own_grp, "label") <- "Ownership of the dwelling"
 
+clean <- shs_dta %>%
+  select(area, RTParea, MD20QUIN, hhsize, hb1, hb509, rent_amt, rent_sum, mortgage_amt, mortgage_sum, shared_ownership_sum, shared_ownership_amt) %>%
+  rename(dwell_type = hb1, own_grp = hb509) %>%
+  mutate(dwell_type = structure(dwell_type, label = "Type of dwelling"),
+         own_grp = structure(own_grp, label = "Ownership of the dwelling"))  
 
 # ============================================================================ #
 # Variables
@@ -90,9 +96,10 @@ clean %>%
 
 table(clean$MD20QUIN)
 
-val_labels(clean$MD20QUIN)
+clean$MD20QUIN <- labelled(
+  clean$MD20QUIN,
+  labels = c("Bottom: 0-20%" = 1, "Lower: 20-40%" = 2, "Middle: 40-60%" = 3, "Upper: 60-80%" = 4, "Top: 80-100%" = 5))
 
-val_labels(clean$MD20QUIN) <- c("Bottom: 0-20%" = 1, "Lower: 20-40%" = 2, "Middle: 40-60%" = 3, "Upper: 60-80%" = 4, "Top: 80-100%" = 5)
 clean %>% 
   count(MD20QUIN) %>%
   mutate(prop = n / sum(n))

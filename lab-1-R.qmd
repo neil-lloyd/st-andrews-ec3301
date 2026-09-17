@@ -13,28 +13,28 @@ source(here::here("config.R"))
 ```
 
 :::{.callout-important title="Data Access"}
-For this lab you will be using a dataset supplied by the UK Data Service. Before using the dataset, you need to do the following:
+For this lab you will be using a dataset supplied by the UK Data Service under an End User License. Before accessing the dataset, you need to do ONE of the following:
 
-1. Go to [UK Data Service](https://beta.ukdataservice.ac.uk/myaccount/login) registration page
-2. Type in and select "University of St Andrews"
-3. Complete the registration form. 
+- go to [UK Data Service](https://beta.ukdataservice.ac.uk/myaccount/login) and register an academic account using "University of St Andrews" as your institution.
 
-This then entitles you to access the data via Moodle. 
+- OR sign the physical license agreement available to you in class. 
 
-4. Agree to the [Data Access Quiz](https://moody.st-andrews.ac.uk/moodle/mod/quiz/view.php?id=1563763) on Moodle.
+Once you have have completed either of these, you can access the data via Moodle so long as you: 
+
+- agree to the [Data Access Quiz](https://moody.st-andrews.ac.uk/moodle/mod/quiz/view.php?id=1563763).
 
 Upon submitting the quiz, you will be shown a link to the data.
 
-5. Download both the "shs2023.dta" and "shs2023.csv" files. 
+Download both the "shs2023.dta" and "shs2023.csv" files. 
 :::
 
 # R
 
 ## Why R?
 
-R is an open source programming language developed for statistical analysis. Estimates of R usage in Economics suggest that only 9.8% of replication packages in economic journals contain .R scripts (i.e. R code) (Source: [*Economics and R Blog*](https://skranz.github.io/r/2023/12/29/FindingEconomicArticles7.html)). Stata remains dominant (with 72%), with Matlab second (24%).
+R is an open source programming language developed for statistical analysis. Estimates of R usage in Economics suggest that only 9.8% of replication packages in economic journals contain .R scripts (i.e. R code) (Source: [*Economics and R Blog*](https://skranz.github.io/r/2023/12/29/FindingEconomicArticles7.html)). Stata remains dominant (72%), with Matlab second (24%).
 
-**Why not R? It's free!?** Part of the story is network 'lock-in': academics train students to use the tools they know, which is Stata and Matlab. But R usage is rising; in particular, among younger researchers. And this is happening for a few key reasons:
+**Why not R? It's free!?** Part of the story is network 'lock-in': academics train students to use the tools they know, which is Stata and Matlab. But R (and Python) usage is rising; in particular, among younger researchers. And this is happening for a few key reasons:
 
 1. Data is changing. Stata was designed to work with rectangular datasets that suited the analysis of cross-sectional and longitudinal survey data. In the age of the internet, there is A LOT of data and it is not stored in this type of structure. R and Python have packages designed to manage BIG 'messy' data. 
 
@@ -44,11 +44,13 @@ R is an open source programming language developed for statistical analysis. Est
 
 **Should you learn R?** Sure! R is a widely used programming language and learning econometric analysis in R will enable you to integrate these skills with other R programming features. And once you've learnt one programming language, it is relatively easy to learn another with modern development tools. You should be aware that R has a steeper learning curve than Stata, but the payoff in flexibility and integration with other tools is significant.
 
-An advantage of using R is that it is a free open source language. You will have remote access to R and the RStudio IDE via [AppsAnywhere](https://appstore.st-andrews.ac.uk/). Unfortunately, AppsAnywhere will not allow you install user written packages, but does have a range of popular packages pre-installed. However, you can also install these on your own computer. You will first need to [install R](https://cran.r-project.org/) and then an IDE. R comes with its own, fairly basic, IDE, but I recommend using [RStudio](https://posit.co/products/open-source/rstudio). If you are a more experienced programmer, you can also consider [Positron](https://posit.co/products/ide/positron).[^1]
+An advantage of using R is that it is a free open-source language. You will have remote access to R and the RStudio IDE via [AppsAnywhere](https://appstore.st-andrews.ac.uk/) on the desktop computers in this lab. Unfortunately, AppsAnywhere will not allow you install additional user-written packages, but does have a range of popular packages pre-installed. This lab is designed to run on this system. 
+
+Of course, there is nothing stopping you installing R on your own computer. You will first need to [install R](https://cran.r-project.org/) and then an IDE. R comes with its own, fairly basic, IDE but I recommend using [RStudio](https://posit.co/products/open-source/rstudio). If you are a more experienced programmer, you can also consider [Positron](https://posit.co/products/ide/positron).[^1]
 
 [^1]: Developed by the same team as RStudio, Positron is a 'fork' of VS Code. It combines the multi-language features of VS Code with the data science features of RStudio. Positron is still in development and does not have all of RStudio's features; e.g., it doesn't work with R-projects.
 
-**Why not Python?** It is used by the Statistics and Maths modules that count as optional prerequisites for this module. But more importantly, R has particularly strong econometrics packages through CRAN, which is important for your module. Python is more widely used in Machine Learning and has excellent data visualization packages. If needs be, you can always run Python commands within R (via `reticulate` package). 
+**Why not Python?** R is used by the Statistics and Maths modules that count as optional prerequisites for this module. But more importantly, R has a well developed stock of econometrics packages through CRAN. Python is more widely used in Machine Learning and has excellent data visualization packages. If needs be, you can always run Python commands within R via the `reticulate` package. 
 
 ## Navigating the RStudio's GUI
 
@@ -209,22 +211,40 @@ clean <- rename(clean, dwell_type = hb1)
 
 3. Rename `hb509` to `own_grp` in the clean file. 
 
-The labels attached these variables are equally uninformative. We can change the labels using the packaged `labelled` that is a companion to `haven`
-
-```{r}
-#| warning: false
-library("labelled")
-```
+The labels attached these variables are equally uninformative. 
 
 4. Label `dwell_type` "Type of dwelling"
+
+The base R option is:
 
 ```{r}
 #| eval: false
 var_label(clean$dwell_type) <- "Type of dwelling"
 ```
 
+Alternatively, you can use the `labelled()` function within the `haven` package.
+
+```{r}
+#| eval: false
+clean$dwell_type <- labelled(clean$dwell_type, label="Type of dwelling")
+```
+
 5. Label `own_grp` "Ownership of the dwelling"
 
+:::{.callout-note}
+The package `labelled` - developed by the same team as `haven` - can do this more efficiently. However, you will not be able to do this in AppsAnywhere as it would require installation. 
+
+```{r}
+#| eval: false
+install.pacakges("labelled")
+library("labelled")
+
+var_label(clean) <- list(
+  dwell_type = "Type of dwelling",
+  own_grp = "Ownership of the dwelling"
+)
+```
+:::
 
 ## Using pipes
 
@@ -238,7 +258,17 @@ clean <- shs_dta %>%
   rename(dwell_type = hb1, own_grp = hb509)
 ```
 
-You can see how this would reduce the number of lines need to perform a sequence of dataset manipulations. Unfortunately, there is no straightforward option to add the `var_label()` function to this sequence as it is not a `dplyr` function. 
+You can see how this would reduce the number of lines need to perform a sequence of dataset manipulations. We can even incorporate the label changes using the `mutate()` function:
+
+```{r}
+#| eval: true
+#| output: false
+clean <- shs_dta %>%
+  select(area, RTParea, MD20QUIN, hhsize, hb1, hb509, rent_amt, rent_sum, mortgage_amt, mortgage_sum, shared_ownership_sum, shared_ownership_amt) %>%
+  rename(dwell_type = hb1, own_grp = hb509) %>%
+  mutate(dwell_type = structure(dwell_type, label = "Type of dwelling"),
+         own_grp = structure(own_grp, label = "Ownership of the dwelling"))
+```
 
 :::{.callout-note}
 The `%>%` is a `tidyverse` pipe. R has a native pipe operator too: `|>`. There are some important differences in how they operate. 
@@ -318,15 +348,27 @@ You will notice that the labels of the values attached to `MD20QUIN` are incompl
 val_labels(clean$MD20QUIN)
 ```
 
-We can create our own label and attach them to this variable:
+We can create our own label and attach them to this variable using the `labelled()` function from `haven`:
 
 ```{r}
 #| echo: true
-val_labels(clean$MD20QUIN) <- c("Bottom: 0-20%" = 1, "Lower: 20-40%" = 2, "Middle: 40-60%" = 3, "Upper: 60-80%" = 4, "Top: 80-100%" = 5)
+clean$MD20QUIN <- labelled(
+  clean$MD20QUIN,
+  labels = c("Bottom: 0-20%" = 1, "Lower: 20-40%" = 2, "Middle: 40-60%" = 3, "Upper: 60-80%" = 4, "Top: 80-100%" = 5))
+
 clean %>% 
   count(MD20QUIN) %>%
   mutate(prop = n / sum(n))
 ```
+
+:::{.callout-note}
+Again, the `labelled` package has a simpler notation for this: 
+
+```{r}
+#| eval: false
+val_labels(clean$MD20QUIN) <- c("Bottom: 0-20%" = 1, "Lower: 20-40%" = 2, "Middle: 40-60%" = 3, "Upper: 60-80%" = 4, "Top: 80-100%" = 5)
+```
+:::
 
 ## Continuous variables
 
@@ -648,7 +690,6 @@ Here is how your .R file should look:
 
 # Load libraries
 library("haven")
-library("labelled")
 library("dplyr")
 library("ggplot2")
 
