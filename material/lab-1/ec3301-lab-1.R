@@ -12,8 +12,8 @@ library("ggplot2")
 # Clear all objects from the R environment
 rm(list = ls())
 
-# Set working directory
-setwd("C:/Users/ndl1/OneDrive - University of St Andrews/Documents/EC3301/website/st-andrews-ec3301/material/lab-1")
+# Set working directory  [EDIT: add your project directory]
+setwd("../lab-1")
 
 # Open data
 shs_csv <- read.csv("shs2023.csv")

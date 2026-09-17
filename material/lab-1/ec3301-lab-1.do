@@ -6,8 +6,8 @@
 * Clear all objects in memory
 clear all
 
-* Set directory
-cd "C:\Users\ndl1\OneDrive - University of St Andrews\Documents\EC3301\website\st-andrews-ec3301\material\lab-1"
+* Set directory [EDIT: add your project directory]
+cd "..\lab-1"
 
 * Start log
 *cap log close

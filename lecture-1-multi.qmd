@@ -179,13 +179,13 @@ $$
 
 ## Sample
 
-When we have a sample of observations, $i=1,\dots,n$, we typically use the notation:
+When we have a sample of observations, $i=1,\dots,n$, we use the notation:
 
 $$
   y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+\dots + \beta_kx_{ik} + u_i
 $$
 
-We need to make further assumptions about sampling,
+We will need to make further assumptions about sampling,
 
 - do observations relate to one another?
 - are they derived from the same population model?
@@ -584,16 +584,16 @@ The model has 2 parameters now.
 
 > **MLR-4: Zero conditional mean** 
 >
-> The error term has expected value of 0 given the any vlaue of the explantory variable
+> The error term has expected value of 0 given the any value of the explanatory variables
 >  
 > $$
 >    E[u | \mathbf{x}] = 0
 > $$
 
 ::: {.fragment .fade-in}  
-If sample is iid, then MLR-4 $\Rightarrow E[u_i | \mathbf{x}_i]$ for $i=1,\dots,n$. 
+With random sampling, then MLR-4 $\Rightarrow E[u_i | \mathbf{x}_i]$ for $i=1,\dots,n$. 
 
-- weaker than full independence: $u\perp \mathbf{x}$); 
+- weaker than full independence: $u\perp \mathbf{x}$; 
 
 - but stronger than uncorrelatedness: $Cov(\mathbf{x}, u) = 0$
 :::
@@ -602,7 +602,7 @@ If sample is iid, then MLR-4 $\Rightarrow E[u_i | \mathbf{x}_i]$ for $i=1,\dots,
 
 We can also show the following:
 
-1. MLR-4 implies that the unconditional mean of the error term is 0 (Law of Iterated Expectations; see [CEF notes](material-cef.qmd). 
+1. MLR-4 implies that the unconditional mean of the error term is 0 (Law of Iterated Expectations; see [CEF notes](material-cef.qmd)). 
 
 $$
   E[u | \mathbf{x}] = 0 \Rightarrow E[u] = 0
@@ -611,34 +611,34 @@ $$
 2. MLR-4 implies the error term is uncorrelated with all regressors
 
 $$
-  E[u | \mathbf{x}] = 0 \Rightarrow E[u_ix_{j}]=Cov(u, x_{j}) = 0\quad j=1,2,\dots,k
+  E[u | \mathbf{x}] = 0 \Rightarrow E[ux_{j}]=Cov(u, x_{j}) = 0\quad j=1,2,\dots,k
 $$
 
 ##
 
-3. MLR-4 implies that we can treat $\mathbf{x}$ as 'fixed' across repeated samples. 
+3. MLR-4 implies that we can *treat* $\mathbf{x}$ as fixed across repeated samples (even if they are not; i.e. also random variables). 
 
-   - If $x$ is fixed, there is only source of uncertainty is $u$. 
-   - Allows us to treat $x$ as non-random in derivations; e.g. variance.
+   - If $x$ is fixed, there is only source of uncertainty: $u$. 
+   - Allows us to treat $x$ as non-random in derivations; e.g. variance of estimator.
    
 ## MLR \#5
 
 > **MLR-5: Homoskedasticity** 
 >
-> The variance of the error term is the same given any value of $x_i$. 
+> The variance of the error term is the same given any value of $\mathbf{x}$. 
 >  
 > $$
 >   Var(u|\mathbf{x}) = \sigma^2
 > $$
 
 ::: {.fragment .fade-in}
-If sample is iid, then MLR-4 $\Rightarrow Var(u_i|\mathbf{x}_i) = \sigma^2$ for $i=1,\dots,n$. 
+With random sampling, then MLR-5 $\Rightarrow Var(u_i|\mathbf{x}_i) = \sigma^2$ for $i=1,\dots,n$. 
 
 - Needed to define the variance of the estimator
 
 - Needed for the famous BLUE property of OLS (Gauss Markov Theorem)
 
-- It can be relaxed. Such errors are referred to as heteroskedastic.
+- It can be relaxed; such errors are referred to as heteroskedastic
 :::
 
 ## MLR \#6
@@ -654,7 +654,7 @@ If sample is iid, then MLR-4 $\Rightarrow Var(u_i|\mathbf{x}_i) = \sigma^2$ for 
 ::: {.fragment .fade-in}
 - Needed to know the *finite* distribution of the estimator
 
-- Can be relaxed, but then only asymptotic distribution is known. 
+- Can be relaxed, but then only asymptotic distribution is known 
 :::
 
 # Simple case
@@ -728,7 +728,7 @@ $$
   \beta_0 = E[y_i] - \beta_1 E[x_i]
 $$
 
-Both population parameters can be written as expressions of "observable" moments in the data. In this sence, they are identified. 
+Both population parameters can be written as expressions of "observable" moments in the data. In this sense, they are *identified*. 
 
 ## 
 

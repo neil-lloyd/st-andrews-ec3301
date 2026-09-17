@@ -837,7 +837,7 @@
     "href": "lecture-1.html#sample",
     "title": "The Linear Regression Model",
     "section": "Sample",
-    "text": "Sample\nWhen we have a sample of observations, \\(i=1,\\dots,n\\), we typically use the notation:\n\\[\n  y_i = \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2}+\\dots + \\beta_kx_{ik} + u_i\n\\]\nWe need to make further assumptions about sampling,\n\ndo observations relate to one another?\nare they derived from the same population model?\n\n\n\n\n\n\n\nNoteUnit of Analysis\n\n\n\nAn often overlooked feature of the model is the unit of analysis. In the model, the subscript \\(i\\) represents the unit at which the data is observed. For example, one model may represent data at the individual level, while another captures firm-level data. When each observation represents the same unit observed across different time periods, we usually use the notation \\(t\\): \\(\\{y_t,\\mathbf{x}_t\\}:\\;t=1,\\dots,T\\). In panel or repeated cross-section datasets, the data is observed at two levels: \\(i\\) and \\(t\\)."
+    "text": "Sample\nWhen we have a sample of observations, \\(i=1,\\dots,n\\), we use the notation:\n\\[\n  y_i = \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2}+\\dots + \\beta_kx_{ik} + u_i\n\\]\nWe will need to make further assumptions about sampling,\n\ndo observations relate to one another?\nare they derived from the same population model?\n\n\n\n\n\n\n\nNoteUnit of Analysis\n\n\n\nAn often overlooked feature of the model is the unit of analysis. In the model, the subscript \\(i\\) represents the unit at which the data is observed. For example, one model may represent data at the individual level, while another captures firm-level data. When each observation represents the same unit observed across different time periods, we usually use the notation \\(t\\): \\(\\{y_t,\\mathbf{x}_t\\}:\\;t=1,\\dots,T\\). In panel or repeated cross-section datasets, the data is observed at two levels: \\(i\\) and \\(t\\)."
   },
   {
     "objectID": "lecture-1.html#approach-1-dgp",
@@ -942,35 +942,35 @@
     "href": "lecture-1.html#mlr-4",
     "title": "The Linear Regression Model",
     "section": "MLR #4",
-    "text": "MLR #4\n\nMLR-4: Zero conditional mean\nThe error term has expected value of 0 given the any vlaue of the explantory variable\n\\[\n   E[u | \\mathbf{x}] = 0\n\\]\n\n\nIf sample is iid, then MLR-4 \\(\\Rightarrow E[u_i | \\mathbf{x}_i]\\) for \\(i=1,\\dots,n\\).\n\nweaker than full independence: \\(u\\perp \\mathbf{x}\\));\nbut stronger than uncorrelatedness: \\(Cov(\\mathbf{x}, u) = 0\\)"
+    "text": "MLR #4\n\nMLR-4: Zero conditional mean\nThe error term has expected value of 0 given the any value of the explanatory variables\n\\[\n   E[u | \\mathbf{x}] = 0\n\\]\n\n\nWith random sampling, then MLR-4 \\(\\Rightarrow E[u_i | \\mathbf{x}_i]\\) for \\(i=1,\\dots,n\\).\n\nweaker than full independence: \\(u\\perp \\mathbf{x}\\);\nbut stronger than uncorrelatedness: \\(Cov(\\mathbf{x}, u) = 0\\)"
   },
   {
     "objectID": "lecture-1.html#section-6",
     "href": "lecture-1.html#section-6",
     "title": "The Linear Regression Model",
     "section": "",
-    "text": "We can also show the following:\n\nMLR-4 implies that the unconditional mean of the error term is 0 (Law of Iterated Expectations; see CEF notes.\n\n\\[\n  E[u | \\mathbf{x}] = 0 \\Rightarrow E[u] = 0\n\\]\n\nMLR-4 implies the error term is uncorrelated with all regressors\n\n\\[\n  E[u | \\mathbf{x}] = 0 \\Rightarrow E[u_ix_{j}]=Cov(u, x_{j}) = 0\\quad j=1,2,\\dots,k\n\\]"
+    "text": "We can also show the following:\n\nMLR-4 implies that the unconditional mean of the error term is 0 (Law of Iterated Expectations; see CEF notes).\n\n\\[\n  E[u | \\mathbf{x}] = 0 \\Rightarrow E[u] = 0\n\\]\n\nMLR-4 implies the error term is uncorrelated with all regressors\n\n\\[\n  E[u | \\mathbf{x}] = 0 \\Rightarrow E[ux_{j}]=Cov(u, x_{j}) = 0\\quad j=1,2,\\dots,k\n\\]"
   },
   {
     "objectID": "lecture-1.html#section-7",
     "href": "lecture-1.html#section-7",
     "title": "The Linear Regression Model",
     "section": "",
-    "text": "MLR-4 implies that we can treat \\(\\mathbf{x}\\) as ‘fixed’ across repeated samples.\n\nIf \\(x\\) is fixed, there is only source of uncertainty is \\(u\\).\nAllows us to treat \\(x\\) as non-random in derivations; e.g. variance."
+    "text": "MLR-4 implies that we can treat \\(\\mathbf{x}\\) as fixed across repeated samples (even if they are not; i.e. also random variables).\n\nIf \\(x\\) is fixed, there is only source of uncertainty: \\(u\\).\nAllows us to treat \\(x\\) as non-random in derivations; e.g. variance of estimator."
   },
   {
     "objectID": "lecture-1.html#mlr-5",
     "href": "lecture-1.html#mlr-5",
     "title": "The Linear Regression Model",
     "section": "MLR #5",
-    "text": "MLR #5\n\nMLR-5: Homoskedasticity\nThe variance of the error term is the same given any value of \\(x_i\\).\n\\[\n  Var(u|\\mathbf{x}) = \\sigma^2\n\\]\n\n\nIf sample is iid, then MLR-4 \\(\\Rightarrow Var(u_i|\\mathbf{x}_i) = \\sigma^2\\) for \\(i=1,\\dots,n\\).\n\nNeeded to define the variance of the estimator\nNeeded for the famous BLUE property of OLS (Gauss Markov Theorem)\nIt can be relaxed. Such errors are referred to as heteroskedastic."
+    "text": "MLR #5\n\nMLR-5: Homoskedasticity\nThe variance of the error term is the same given any value of \\(\\mathbf{x}\\).\n\\[\n  Var(u|\\mathbf{x}) = \\sigma^2\n\\]\n\n\nWith random sampling, then MLR-5 \\(\\Rightarrow Var(u_i|\\mathbf{x}_i) = \\sigma^2\\) for \\(i=1,\\dots,n\\).\n\nNeeded to define the variance of the estimator\nNeeded for the famous BLUE property of OLS (Gauss Markov Theorem)\nIt can be relaxed; such errors are referred to as heteroskedastic"
   },
   {
     "objectID": "lecture-1.html#mlr-6",
     "href": "lecture-1.html#mlr-6",
     "title": "The Linear Regression Model",
     "section": "MLR #6",
-    "text": "MLR #6\n\nMLR-6: Normality\nThe conditional distribution of the error term is normal.\n\\[\n  u|\\mathbf{x}\\sim N(0,\\sigma^2)\n\\]\n\n\n\nNeeded to know the finite distribution of the estimator\nCan be relaxed, but then only asymptotic distribution is known."
+    "text": "MLR #6\n\nMLR-6: Normality\nThe conditional distribution of the error term is normal.\n\\[\n  u|\\mathbf{x}\\sim N(0,\\sigma^2)\n\\]\n\n\n\nNeeded to know the finite distribution of the estimator\nCan be relaxed, but then only asymptotic distribution is known"
   },
   {
     "objectID": "lecture-1.html#slr-model",
@@ -998,7 +998,7 @@
     "href": "lecture-1.html#section-9",
     "title": "The Linear Regression Model",
     "section": "",
-    "text": "Manipulate and solve\n\\[\n  0 = \\underbrace{E[y_ix_i]-E[y_i]E[x_i]}_{Cov(y_i,x_i)}-\\beta_1(\\underbrace{E[x_i^2]-E[x_i]^2}_{Var(x_i)})\n\\]\nArrive at the neat solution:\n\\[\n  \\beta_1 = \\frac{Cov(y_i,x_i)}{Var(x_i)}\n\\] and,\n\\[\n  \\beta_0 = E[y_i] - \\beta_1 E[x_i]\n\\]\nBoth population parameters can be written as expressions of “observable” moments in the data. In this sence, they are identified."
+    "text": "Manipulate and solve\n\\[\n  0 = \\underbrace{E[y_ix_i]-E[y_i]E[x_i]}_{Cov(y_i,x_i)}-\\beta_1(\\underbrace{E[x_i^2]-E[x_i]^2}_{Var(x_i)})\n\\]\nArrive at the neat solution:\n\\[\n  \\beta_1 = \\frac{Cov(y_i,x_i)}{Var(x_i)}\n\\] and,\n\\[\n  \\beta_0 = E[y_i] - \\beta_1 E[x_i]\n\\]\nBoth population parameters can be written as expressions of “observable” moments in the data. In this sense, they are identified."
   },
   {
     "objectID": "lecture-1.html#section-10",
@@ -1243,7 +1243,7 @@
     "href": "lecture-1-slides.html#sample",
     "title": "The Linear Regression Model",
     "section": "Sample",
-    "text": "Sample\nWhen we have a sample of observations, i=1,\\dots,n, we typically use the notation:\n\n  y_i = \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2}+\\dots + \\beta_kx_{ik} + u_i\n\nWe need to make further assumptions about sampling,\n\ndo observations relate to one another?\nare they derived from the same population model?\n\n\n\n\n\n\n\n\nUnit of Analysis\n\n\nAn often overlooked feature of the model is the unit of analysis. In the model, the subscript i represents the unit at which the data is observed. For example, one model may represent data at the individual level, while another captures firm-level data. When each observation represents the same unit observed across different time periods, we usually use the notation t: \\{y_t,\\mathbf{x}_t\\}:\\;t=1,\\dots,T. In panel or repeated cross-section datasets, the data is observed at two levels: i and t."
+    "text": "Sample\nWhen we have a sample of observations, i=1,\\dots,n, we use the notation:\n\n  y_i = \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2}+\\dots + \\beta_kx_{ik} + u_i\n\nWe will need to make further assumptions about sampling,\n\ndo observations relate to one another?\nare they derived from the same population model?\n\n\n\n\n\n\n\n\nUnit of Analysis\n\n\nAn often overlooked feature of the model is the unit of analysis. In the model, the subscript i represents the unit at which the data is observed. For example, one model may represent data at the individual level, while another captures firm-level data. When each observation represents the same unit observed across different time periods, we usually use the notation t: \\{y_t,\\mathbf{x}_t\\}:\\;t=1,\\dots,T. In panel or repeated cross-section datasets, the data is observed at two levels: i and t."
   },
   {
     "objectID": "lecture-1-slides.html#approach-1-dgp",
@@ -1348,35 +1348,35 @@
     "href": "lecture-1-slides.html#mlr-4",
     "title": "The Linear Regression Model",
     "section": "MLR #4",
-    "text": "MLR #4\n\nMLR-4: Zero conditional mean\nThe error term has expected value of 0 given the any vlaue of the explantory variable\n\n   E[u | \\mathbf{x}] = 0\n\n\n\nIf sample is iid, then MLR-4 \\Rightarrow E[u_i | \\mathbf{x}_i] for i=1,\\dots,n.\n\nweaker than full independence: u\\perp \\mathbf{x});\nbut stronger than uncorrelatedness: Cov(\\mathbf{x}, u) = 0"
+    "text": "MLR #4\n\nMLR-4: Zero conditional mean\nThe error term has expected value of 0 given the any value of the explanatory variables\n\n   E[u | \\mathbf{x}] = 0\n\n\n\nWith random sampling, then MLR-4 \\Rightarrow E[u_i | \\mathbf{x}_i] for i=1,\\dots,n.\n\nweaker than full independence: u\\perp \\mathbf{x};\nbut stronger than uncorrelatedness: Cov(\\mathbf{x}, u) = 0"
   },
   {
     "objectID": "lecture-1-slides.html#section-6",
     "href": "lecture-1-slides.html#section-6",
     "title": "The Linear Regression Model",
     "section": "",
-    "text": "We can also show the following:\n\nMLR-4 implies that the unconditional mean of the error term is 0 (Law of Iterated Expectations; see CEF notes.\n\n\n  E[u | \\mathbf{x}] = 0 \\Rightarrow E[u] = 0\n\n\nMLR-4 implies the error term is uncorrelated with all regressors\n\n\n  E[u | \\mathbf{x}] = 0 \\Rightarrow E[u_ix_{j}]=Cov(u, x_{j}) = 0\\quad j=1,2,\\dots,k"
+    "text": "We can also show the following:\n\nMLR-4 implies that the unconditional mean of the error term is 0 (Law of Iterated Expectations; see CEF notes).\n\n\n  E[u | \\mathbf{x}] = 0 \\Rightarrow E[u] = 0\n\n\nMLR-4 implies the error term is uncorrelated with all regressors\n\n\n  E[u | \\mathbf{x}] = 0 \\Rightarrow E[ux_{j}]=Cov(u, x_{j}) = 0\\quad j=1,2,\\dots,k"
   },
   {
     "objectID": "lecture-1-slides.html#section-7",
     "href": "lecture-1-slides.html#section-7",
     "title": "The Linear Regression Model",
     "section": "",
-    "text": "MLR-4 implies that we can treat \\mathbf{x} as ‘fixed’ across repeated samples.\n\nIf x is fixed, there is only source of uncertainty is u.\nAllows us to treat x as non-random in derivations; e.g. variance."
+    "text": "MLR-4 implies that we can treat \\mathbf{x} as fixed across repeated samples (even if they are not; i.e. also random variables).\n\nIf x is fixed, there is only source of uncertainty: u.\nAllows us to treat x as non-random in derivations; e.g. variance of estimator."
   },
   {
     "objectID": "lecture-1-slides.html#mlr-5",
     "href": "lecture-1-slides.html#mlr-5",
     "title": "The Linear Regression Model",
     "section": "MLR #5",
-    "text": "MLR #5\n\nMLR-5: Homoskedasticity\nThe variance of the error term is the same given any value of x_i.\n\n  Var(u|\\mathbf{x}) = \\sigma^2\n\n\n\nIf sample is iid, then MLR-4 \\Rightarrow Var(u_i|\\mathbf{x}_i) = \\sigma^2 for i=1,\\dots,n.\n\nNeeded to define the variance of the estimator\nNeeded for the famous BLUE property of OLS (Gauss Markov Theorem)\nIt can be relaxed. Such errors are referred to as heteroskedastic."
+    "text": "MLR #5\n\nMLR-5: Homoskedasticity\nThe variance of the error term is the same given any value of \\mathbf{x}.\n\n  Var(u|\\mathbf{x}) = \\sigma^2\n\n\n\nWith random sampling, then MLR-5 \\Rightarrow Var(u_i|\\mathbf{x}_i) = \\sigma^2 for i=1,\\dots,n.\n\nNeeded to define the variance of the estimator\nNeeded for the famous BLUE property of OLS (Gauss Markov Theorem)\nIt can be relaxed; such errors are referred to as heteroskedastic"
   },
   {
     "objectID": "lecture-1-slides.html#mlr-6",
     "href": "lecture-1-slides.html#mlr-6",
     "title": "The Linear Regression Model",
     "section": "MLR #6",
-    "text": "MLR #6\n\nMLR-6: Normality\nThe conditional distribution of the error term is normal.\n\n  u|\\mathbf{x}\\sim N(0,\\sigma^2)\n\n\n\n\nNeeded to know the finite distribution of the estimator\nCan be relaxed, but then only asymptotic distribution is known."
+    "text": "MLR #6\n\nMLR-6: Normality\nThe conditional distribution of the error term is normal.\n\n  u|\\mathbf{x}\\sim N(0,\\sigma^2)\n\n\n\n\nNeeded to know the finite distribution of the estimator\nCan be relaxed, but then only asymptotic distribution is known"
   },
   {
     "objectID": "lecture-1-slides.html#slr-model",
@@ -1404,7 +1404,7 @@
     "href": "lecture-1-slides.html#section-9",
     "title": "The Linear Regression Model",
     "section": "",
-    "text": "Manipulate and solve\n\n  0 = \\underbrace{E[y_ix_i]-E[y_i]E[x_i]}_{Cov(y_i,x_i)}-\\beta_1(\\underbrace{E[x_i^2]-E[x_i]^2}_{Var(x_i)})\n\nArrive at the neat solution:\n\n  \\beta_1 = \\frac{Cov(y_i,x_i)}{Var(x_i)}\n and,\n\n  \\beta_0 = E[y_i] - \\beta_1 E[x_i]\n\nBoth population parameters can be written as expressions of “observable” moments in the data. In this sence, they are identified."
+    "text": "Manipulate and solve\n\n  0 = \\underbrace{E[y_ix_i]-E[y_i]E[x_i]}_{Cov(y_i,x_i)}-\\beta_1(\\underbrace{E[x_i^2]-E[x_i]^2}_{Var(x_i)})\n\nArrive at the neat solution:\n\n  \\beta_1 = \\frac{Cov(y_i,x_i)}{Var(x_i)}\n and,\n\n  \\beta_0 = E[y_i] - \\beta_1 E[x_i]\n\nBoth population parameters can be written as expressions of “observable” moments in the data. In this sense, they are identified."
   },
   {
     "objectID": "lecture-1-slides.html#section-10",

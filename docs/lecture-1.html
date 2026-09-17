@@ -552,11 +552,11 @@ window.Quarto = {
 </section>
 <section id="sample" class="level2">
 <h2 class="anchored" data-anchor-id="sample">Sample</h2>
-<p>When we have a sample of observations, <span class="math inline">\(i=1,\dots,n\)</span>, we typically use the notation:</p>
+<p>When we have a sample of observations, <span class="math inline">\(i=1,\dots,n\)</span>, we use the notation:</p>
 <p><span class="math display">\[
   y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+\dots + \beta_kx_{ik} + u_i
 \]</span></p>
-<p>We need to make further assumptions about sampling,</p>
+<p>We will need to make further assumptions about sampling,</p>
 <ul>
 <li>do observations relate to one another?</li>
 <li>are they derived from the same population model?</li>
@@ -983,15 +983,15 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="mlr-4">MLR #4</h2>
 <blockquote class="blockquote">
 <p><strong>MLR-4: Zero conditional mean</strong></p>
-<p>The error term has expected value of 0 given the any vlaue of the explantory variable</p>
+<p>The error term has expected value of 0 given the any value of the explanatory variables</p>
 <p><span class="math display">\[
    E[u | \mathbf{x}] = 0
 \]</span></p>
 </blockquote>
 <div class="fragment fade-in">
-<p>If sample is iid, then MLR-4 <span class="math inline">\(\Rightarrow E[u_i | \mathbf{x}_i]\)</span> for <span class="math inline">\(i=1,\dots,n\)</span>.</p>
+<p>With random sampling, then MLR-4 <span class="math inline">\(\Rightarrow E[u_i | \mathbf{x}_i]\)</span> for <span class="math inline">\(i=1,\dots,n\)</span>.</p>
 <ul>
-<li><p>weaker than full independence: <span class="math inline">\(u\perp \mathbf{x}\)</span>);</p></li>
+<li><p>weaker than full independence: <span class="math inline">\(u\perp \mathbf{x}\)</span>;</p></li>
 <li><p>but stronger than uncorrelatedness: <span class="math inline">\(Cov(\mathbf{x}, u) = 0\)</span></p></li>
 </ul>
 </div>
@@ -1000,7 +1000,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="section-6"></h2>
 <p>We can also show the following:</p>
 <ol type="1">
-<li>MLR-4 implies that the unconditional mean of the error term is 0 (Law of Iterated Expectations; see <a href="./material-cef.html">CEF notes</a>.</li>
+<li>MLR-4 implies that the unconditional mean of the error term is 0 (Law of Iterated Expectations; see <a href="./material-cef.html">CEF notes</a>).</li>
 </ol>
 <p><span class="math display">\[
   E[u | \mathbf{x}] = 0 \Rightarrow E[u] = 0
@@ -1009,16 +1009,16 @@ window.Quarto = {
 <li>MLR-4 implies the error term is uncorrelated with all regressors</li>
 </ol>
 <p><span class="math display">\[
-  E[u | \mathbf{x}] = 0 \Rightarrow E[u_ix_{j}]=Cov(u, x_{j}) = 0\quad j=1,2,\dots,k
+  E[u | \mathbf{x}] = 0 \Rightarrow E[ux_{j}]=Cov(u, x_{j}) = 0\quad j=1,2,\dots,k
 \]</span></p>
 </section>
 <section id="section-7" class="level2">
 <h2 class="anchored" data-anchor-id="section-7"></h2>
 <ol start="3" type="1">
-<li><p>MLR-4 implies that we can treat <span class="math inline">\(\mathbf{x}\)</span> as ‘fixed’ across repeated samples.</p>
+<li><p>MLR-4 implies that we can <em>treat</em> <span class="math inline">\(\mathbf{x}\)</span> as fixed across repeated samples (even if they are not; i.e.&nbsp;also random variables).</p>
 <ul>
-<li>If <span class="math inline">\(x\)</span> is fixed, there is only source of uncertainty is <span class="math inline">\(u\)</span>.</li>
-<li>Allows us to treat <span class="math inline">\(x\)</span> as non-random in derivations; e.g.&nbsp;variance.</li>
+<li>If <span class="math inline">\(x\)</span> is fixed, there is only source of uncertainty: <span class="math inline">\(u\)</span>.</li>
+<li>Allows us to treat <span class="math inline">\(x\)</span> as non-random in derivations; e.g.&nbsp;variance of estimator.</li>
 </ul></li>
 </ol>
 </section>
@@ -1026,17 +1026,17 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="mlr-5">MLR #5</h2>
 <blockquote class="blockquote">
 <p><strong>MLR-5: Homoskedasticity</strong></p>
-<p>The variance of the error term is the same given any value of <span class="math inline">\(x_i\)</span>.</p>
+<p>The variance of the error term is the same given any value of <span class="math inline">\(\mathbf{x}\)</span>.</p>
 <p><span class="math display">\[
   Var(u|\mathbf{x}) = \sigma^2
 \]</span></p>
 </blockquote>
 <div class="fragment fade-in">
-<p>If sample is iid, then MLR-4 <span class="math inline">\(\Rightarrow Var(u_i|\mathbf{x}_i) = \sigma^2\)</span> for <span class="math inline">\(i=1,\dots,n\)</span>.</p>
+<p>With random sampling, then MLR-5 <span class="math inline">\(\Rightarrow Var(u_i|\mathbf{x}_i) = \sigma^2\)</span> for <span class="math inline">\(i=1,\dots,n\)</span>.</p>
 <ul>
 <li><p>Needed to define the variance of the estimator</p></li>
 <li><p>Needed for the famous BLUE property of OLS (Gauss Markov Theorem)</p></li>
-<li><p>It can be relaxed. Such errors are referred to as heteroskedastic.</p></li>
+<li><p>It can be relaxed; such errors are referred to as heteroskedastic</p></li>
 </ul>
 </div>
 </section>
@@ -1052,7 +1052,7 @@ window.Quarto = {
 <div class="fragment fade-in">
 <ul>
 <li><p>Needed to know the <em>finite</em> distribution of the estimator</p></li>
-<li><p>Can be relaxed, but then only asymptotic distribution is known.</p></li>
+<li><p>Can be relaxed, but then only asymptotic distribution is known</p></li>
 </ul>
 </div>
 </section>
@@ -1112,7 +1112,7 @@ window.Quarto = {
 <p><span class="math display">\[
   \beta_0 = E[y_i] - \beta_1 E[x_i]
 \]</span></p>
-<p>Both population parameters can be written as expressions of “observable” moments in the data. In this sence, they are identified.</p>
+<p>Both population parameters can be written as expressions of “observable” moments in the data. In this sense, they are <em>identified</em>.</p>
 </section>
 <section id="section-10" class="level2">
 <h2 class="anchored" data-anchor-id="section-10"></h2>
