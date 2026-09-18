@@ -23,6 +23,13 @@ engine: knitr
 
 library(Statamarkdown)
 knitr::opts_chunk$set(collectcode = TRUE)
+
+# Load packages
+library(ggplot2)
+
+# Set seed
+set.seed(9871)
+
 ```
 
 ::: {.content-visible unless-format="revealjs"}
@@ -273,12 +280,6 @@ graph export "material/lecture-1/dgp.png", replace
 #| code-fold: true
 #| warning: false
 #| fig-align: center
-
-# Load packages
-library(ggplot2)
-
-# Set seed
-set.seed(9871)
 
 # Parameters
 n   <- 100

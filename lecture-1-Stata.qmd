@@ -16,6 +16,13 @@ lang-stata: true
 
 library(Statamarkdown)
 knitr::opts_chunk$set(collectcode = TRUE)
+
+# Load packages
+library(ggplot2)
+
+# Set seed
+set.seed(9871)
+
 ```
 
 ::: {.content-visible unless-format="revealjs"}
