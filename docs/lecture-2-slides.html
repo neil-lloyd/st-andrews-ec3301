@@ -1113,12 +1113,29 @@ margin-right: 0; }
 </section>
 <section id="recap" class="slide level2">
 <h2>Recap</h2>
-<p>This week we cover:</p>
-<ol type="1">
-<li><p>Straight in the deep end</p></li>
-<li><p>A step back</p></li>
-<li><p>The model; i.e. assumptions …</p></li>
-</ol>
+<p>Last week we discussed:</p>
+<ul>
+<li><p>Linear Regression Model: structure, notation, etc.</p></li>
+<li><p>How we can rationalize the model</p></li>
+<li><p>Classical MLR 1-6 assumptions</p></li>
+<li><p>Identification (simple case)</p></li>
+<li><p>Interpretation (simple and multivariate case)</p></li>
+</ul>
+</section>
+<section id="quiz" class="slide level2">
+<h2>Quiz</h2>
+<p>What’s wrong with this model?</p>
+<p><span class="math display">
+  energy\_costs_i = \beta_0 + \beta_1 England_i + \beta_2 Wales_i + \beta_3 Scotland_i + \beta_4 NIreland_i + u_i
+</span></p>
+<p>for a sample of UK households. Where,</p>
+<ul>
+<li><span class="math inline">[England_i, Wales_i, Scotland_i, NIreland_i]</span> are all ‘dummy’ variables denoting the location of household <span class="math inline">i</span>.</li>
+</ul>
+</section>
+<section id="quiz-1" class="slide level2">
+<h2>Quiz</h2>
+<p>Imagine what this dataset might look like:</p>
 </section>
 <section id="this-week" class="slide level2">
 <h2>This week</h2>
@@ -1172,17 +1189,17 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 </section>
 <section id="section-2" class="slide level2">
 <h2></h2>
-<p>Suppose you started with the data? For example, the Living Costs and Food Survey: a household level dataset with information on consumption and income.</p>
+<p>Suppose you started with the data? For example, the <a href="https://datacatalogue.ukdataservice.ac.uk/series/series/2000028#abstract">Living Costs and Food Survey</a>:</p>
+<ul>
+<li>a <em>household level</em> dataset with information on consumption and income.</li>
+</ul>
 <p><span class="math display">
   [cons_i, inc_i] \quad i = 1, \dots, n
-</span></p>
-<p>And suppose we had an economic model that suggested a linear relationship between consumption and income (i.e. constant propensity to consume). We might then posit a simple linear regression model:</p>
-<p><span class="math display">
-  cons_i = \beta_0 + \beta_1 inc_i + u_i
 </span></p>
 </section>
 <section id="section-3" class="slide level2 scrollable">
 <h2></h2>
+<p>Does the relationship between consumption and income look linear?</p>
 <div class="panel-tabset">
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-1-1">Stata</a></li><li><a href="#tabset-1-2">R</a></li></ul>
 <div class="tab-content">

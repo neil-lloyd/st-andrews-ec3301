@@ -2,13 +2,19 @@
 title: Ordinary Least Squares
 subtitle: Lecture 2
 format: 
-  html: default
+  html:
+    output-file: lecture-2.html
+#    other-links:
+#      - text: "PDF with Stata"
+#        href: "lecture-2-notes-Stata.pdf"
+#        icon: file-pdf
+#      - text: "PDF with R"
+#        href: "lecture-2-notes-R.pdf"
+#        icon: file-pdf
   revealjs: 
     output-file: lecture-2-slides.html
     footer: "St Andrews Business School - Martinmas 2026/27"
-  pdf: 
-    output-file: lecture-2-notes.pdf
-engine: knitr  
+engine: knitr
 ---
 
 ```{r}
@@ -34,13 +40,34 @@ do "config.do"
 :::{.content-visible when-format="revealjs"}
 ## Recap
 
-This week we cover:
+Last week we discussed:
 
-1. Straight in the deep end
+- Linear Regression Model: structure, notation, etc.
 
-2. A step back
+- How we can rationalize the model
 
-3. The model; i.e. assumptions ...
+- Classical MLR 1-6 assumptions 
+
+- Identification (simple case)
+
+- Interpretation (simple and multivariate case)
+
+## Quiz
+
+What's wrong with this model?
+
+$$
+  energy\_costs_i = \beta_0 + \beta_1 England_i + \beta_2 Wales_i + \beta_3 Scotland_i + \beta_4 NIreland_i + u_i
+$$
+
+for a sample of UK households. Where, 
+
+- $[England_i, Wales_i, Scotland_i, NIreland_i]$ are all 'dummy' variables denoting the location of household $i$. 
+
+## Quiz
+
+Imagine what this dataset might look like:
+
 
 
 ## This week
@@ -97,19 +124,17 @@ $$
 
 ## 
 
-Suppose you started with the data? For example, the Living Costs and Food Survey: a household level dataset with information on consumption and income. 
+Suppose you started with the data? For example, the [Living Costs and Food Survey](https://datacatalogue.ukdataservice.ac.uk/series/series/2000028#abstract): 
+
+- a *household level* dataset with information on consumption and income. 
 
 $$
   [cons_i, inc_i] \quad i = 1, \dots, n
 $$
 
-And suppose we had an economic model that suggested a linear relationship between consumption and income (i.e. constant propensity to consume). We might then posit a simple linear regression model: 
-
-$$
-  cons_i = \beta_0 + \beta_1 inc_i + u_i
-$$
-
 ## {.scrollable}
+
+Does the relationship between consumption and income look linear?
 
 :::{.panel-tabset}
 ### Stata 

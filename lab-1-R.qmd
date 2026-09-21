@@ -219,7 +219,7 @@ The base R option is:
 
 ```{r}
 #| eval: false
-var_label(clean$dwell_type) <- "Type of dwelling"
+attr(clean$dwell_type, "label") <- "Type of dwelling"
 ```
 
 Alternatively, you can use the `labelled()` function within the `haven` package.
@@ -342,13 +342,13 @@ We now see that the variable actually takes on 3 values, each with a label.
 
 4. The variable `MD20QUIN` (Scottish Index of Multiple Deprivation (SIMD), 2020 quintiles) has information about the socio-economic status of the household. Are the observations balanced across quintiles? 
 
-You will notice that the labels of the values attached to `MD20QUIN` are incomplete. The value labels can be listed as follows:
+You will notice that the labels of the values attached to `MD20QUIN` are incomplete. 
 
 ```{r}
-val_labels(clean$MD20QUIN)
+clean %>% count(MD20QUIN)
 ```
 
-We can create our own label and attach them to this variable using the `labelled()` function from `haven`:
+If you are able to load the `labelled` package, you can also list the value labels using `val_labels(clean$MD20QUIN)`. We can create our own label and attach them to this variable using the `labelled()` function from `haven`:
 
 ```{r}
 #| echo: true
@@ -436,7 +436,7 @@ clean %>%
 
 Notice, you need to know the numerical value of the category of `rent_sum`, not the value label, to create such a condition. 
 
-1. What is the average mortgage payment of households who own their home and provide a mortgage payment? [You can ignore those with `mortgage_sum==3' "Buying with mortgage - amount given by respondent, but not used in imputation routines"]
+1. What is the average mortgage payment of households who own their home and provide a mortgage payment? [You can ignore those with `mortgage_sum==3` "Buying with mortgage - amount given by respondent, but not used in imputation routines"]
 
 2. Is the average imputed mortgage payment higher than the average reported payment?
 

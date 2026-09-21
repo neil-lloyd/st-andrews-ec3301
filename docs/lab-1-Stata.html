@@ -109,7 +109,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -524,11 +527,11 @@ window.Quarto = {
 </ol>
 <p>To view the actual data look for the small table icon <strong>with the magnifying glass</strong> in the top left corner (‘Data Editor (Browse)’). Clicking this button will open a separate window that shows you the data. Notice how the dataset looks like a big ‘rectangle’/matrix, with each variable as a new column.</p>
 <p>You can achieve the same result with command:</p>
-<div id="61789d6a" class="cell" data-execution_count="4">
+<div id="ca1f7f0a" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>browse</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You can use the search bar at the top of the Variables window to look for variables containing particular information. Equally, you can use the <code>lookfor</code> command. Try to find any variables with information about electricity. For example,</p>
-<div id="3fa53e44" class="cell" data-execution_count="5">
+<div id="5935c21a" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">lookfor</span> elec</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -544,7 +547,7 @@ htcostamt_1     int     %8.0g                 Cost of electricity - amount
 </div>
 <p>This command looks for the phrase <code>elec</code> in either the variable name of label.</p>
 <p>Notice, the above command provided a lot of information about two variables in the dataset: Variable name; Storage type; Display format; Value label; and Variable label. The same information can be accessed using the <code>describe</code> command.</p>
-<div id="29577606" class="cell" data-execution_count="6">
+<div id="2d7be194" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">describe</span> htcostsum_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Abbreviations">
@@ -567,7 +570,7 @@ htcostamt_1     int     %8.0g                 Cost of electricity - amount
 <ol type="1">
 <li>Remove all unnecessary variables using the command:</li>
 </ol>
-<div id="2540ad3f" class="cell" data-execution_count="7">
+<div id="f04745c2" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> area RTParea MD20QUIN hhsize hb1 hb509 rent_amt rent_sum mortgage_amt mortgage_sum shared_ownership_sum shared_ownership_amt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -587,7 +590,7 @@ Important
 <ol start="2" type="1">
 <li>Rename the variable <code>hb1</code> <code>dwell_type</code> using the <code>rename</code> command</li>
 </ol>
-<div id="e0896807" class="cell" data-execution_count="8">
+<div id="3f2dff03" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span> hb1 dwell_type</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="3" type="1">
@@ -597,7 +600,7 @@ Important
 <ol start="4" type="1">
 <li>Label <code>dwell_type</code> “Type of dwelling”</li>
 </ol>
-<div id="7e9a2293" class="cell" data-execution_count="9">
+<div id="a6fa7acb" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">label</span> <span class="kw">var</span> dwell_type <span class="st">"Type of dwelling"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="5" type="1">
@@ -624,7 +627,7 @@ Important
 <li><p>The pair <code>\*</code> followed by <code>*\</code> can be used to comment out multiple lines.</p></li>
 </ul>
 <p>We can now copy the commands we have executed into our new .do file and add some comments:</p>
-<div id="c1d0ba88" class="cell" data-execution_count="10">
+<div id="2723480c" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>* Title: Econometrics Lab 1: Working with <span class="kw">data</span> <span class="kw">in</span> Stata</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>* Author: [INSERT NAME]</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>* Date: [INSERT DATE]</span>
@@ -638,6 +641,7 @@ Important
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> area RTParea MD20QUIN hhsize hb1 hb509 rent_amt rent_sum mortgage_amt mortgage_sum shared_ownership_sum shared_ownership_amt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p><strong>Copy and paste the code from exercises 2-5 above</strong> (i.e., the <code>rename</code> and <code>label</code> commands).</p>
 <div class="callout callout-style-default callout-important callout-titled" type="Saving changes to data">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -675,7 +679,7 @@ Note
 <li>continuous variables can take on any value along the real line; the amount paid for rent (likely stored as an integer)</li>
 </ol>
 <p><em>A priori</em> it is not always obvious which variables are which. You can use the <code>codebook</code> command to check how many unique values a variable takes on:</p>
-<div id="66fe0166" class="cell" data-execution_count="12">
+<div id="ca5ed294" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">codebook</span> dwell_type</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -703,7 +707,7 @@ dwell_type                                                     Type of dwelling
 <ol type="1">
 <li>How many types of dwelling are there in the data?</li>
 </ol>
-<div id="a1bae68d" class="cell" data-execution_count="13">
+<div id="b21ffcb7" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> dwell_type</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -717,7 +721,7 @@ Other, including room(s), caravan/mobil |         31        0.30      100.00
 </div>
 </div>
 <p>The output above shows the labels attached to each category, but not the numerical values that underpin these labels. We can ask Stata to show us this useful information:</p>
-<div id="76a45bf8" class="cell" data-execution_count="14">
+<div id="d558aa20" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">numlabel</span>, add</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> dwell_type</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -738,7 +742,7 @@ Other, including room(s), caravan/mobil |         31        0.30      100.00
 <li><p>The variable <code>MD20QUIN</code> (Scottish Index of Multiple Deprivation (SIMD), 2020 quintiles) has information about the socio-economic status of the household. Are the observations balanced across quintiles?</p></li>
 </ol>
 <p>You will notice that the labels of the values attached to <code>MD20QUIN</code> are incomplete. The <code>describe</code> command will give us the name of this label.</p>
-<div id="57d9b83c" class="cell" data-execution_count="15">
+<div id="0972aa76" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">des</span> MD20QUIN</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">label</span> <span class="ot">list</span> MD20QUIN</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -757,7 +761,7 @@ MD20QUIN:
 </div>
 </div>
 <p>We can create our own label and attach them to this variable:</p>
-<div id="3d3d517e" class="cell" data-execution_count="16">
+<div id="816e491b" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">label</span> def QUINTILE 1 <span class="st">"Bottom: 0-20%"</span> 2 <span class="st">"Lower: 20-40%"</span> 3 <span class="st">"Middle: 40-60%"</span> 4 <span class="st">"Upper: 60-80%"</span> 5 <span class="st">"Top: 80-100%"</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">label</span> val MD20QUIN QUINTILE</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> MD20QUIN</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -785,7 +789,7 @@ Middle: 40-60% |      2,267       21.60       59.60
 <ol type="1">
 <li>What is the average amount money paid as rent by households in the data?</li>
 </ol>
-<div id="e5131c3c" class="cell" data-execution_count="17">
+<div id="be92b9b4" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> rent_amt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -800,7 +804,7 @@ Middle: 40-60% |      2,267       21.60       59.60
 <li><p>Create a frequency table of the categorical variable <code>rent_sum</code> to explore why there only 3,414 observations.</p></li>
 <li><p>Use the option <code>, detail</code> in your summary of both <code>rent_amt</code> and <code>mortgage_amt</code>. Which has the highest median?</p></li>
 </ol>
-<div id="0e84a161" class="cell" data-execution_count="18">
+<div id="ff61068a" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> rent_amt, <span class="kw">detail</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> mortgage_amt, <span class="kw">detail</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -857,7 +861,7 @@ Note
 <p>In the previous section we saw that some observations do not have information on rent paid. This is a common feature of survey data, since surveys often include skip patterns: if a household owns the dwelling they live in they will skip the question on monthly rental payments.</p>
 <p>In Stata, you can apply <code>if</code> conditions to most commands allowing you to restrict the operation to a subset of data that meets another condition.</p>
 <p>In the data there are 2,229 observations that pay rent and provided an estimate of rental income. The following code will compute the average rental payment of these observations by selecting on the sample in this group.</p>
-<div id="c2b1e14b" class="cell" data-execution_count="19">
+<div id="8adb4fa7" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> rent_amt <span class="kw">if</span> rent_sum==1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -868,7 +872,7 @@ Note
 </div>
 <p>Notice, you need to know the numerical value of the category of <code>rent_sum</code>, not the value label, to create such a condition.</p>
 <ol type="1">
-<li><p>What is the average mortgage payment of households who own their home and provide a mortgage payment? [You can ignore those with `mortgage_sum==3’ “Buying with mortgage - amount given by respondent, but not used in imputation routines”]</p></li>
+<li><p>What is the average mortgage payment of households who own their home and provide a mortgage payment? [According to <code>mortgage_sum</code> there are three groups of households for whom we observe a mortgage payment. For the purposes of this question, you can ignore the third category: 3. “Buying with mortgage - amount given by respondent, but not used in imputation routines”]</p></li>
 <li><p>Is the average imputed mortgage payment higher than the average reported payment?</p></li>
 <li><p>Using the variable <code>area</code>, which city has higher mean and/or median rental payments: Edinburgh or Glasgow?</p></li>
 </ol>
@@ -879,7 +883,7 @@ Note
 <ul>
 <li>We can <code>tabulate</code> with the <code>summarize()</code> option.</li>
 </ul>
-<div id="ef8de77f" class="cell" data-execution_count="20">
+<div id="1e71f270" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> MD20QUIN, <span class="kw">sum</span>(rent_amt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -903,7 +907,7 @@ deprived to |
 <ul>
 <li>Another command <code>table</code> allows for more options. The list of statistics can also correspond to different variables. Try <code>help table</code> to see all options.</li>
 </ul>
-<div id="05878ec9" class="cell" data-execution_count="21">
+<div id="8ab83025" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">table</span> MD20QUIN, stat(<span class="kw">mean</span> rent_amt) stat(<span class="fu">sd</span> rent_amt) stat(<span class="fu">count</span> rent_amt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -923,7 +927,7 @@ SIMD 2020 - 1 = 20% most deprived to 5 = 20% least deprived |
 <ul>
 <li>The command <code>tabstat</code> is similarly flexible, but uses a different notation: <code>help tabstat</code>.</li>
 </ul>
-<div id="461581cf" class="cell" data-execution_count="22">
+<div id="5b6b0cc0" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tabstat</span> rent_amt, <span class="kw">by</span>(MD20QUIN) stat(<span class="kw">mean</span> <span class="fu">sd</span> <span class="fu">count</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -950,14 +954,14 @@ Middle: 40-60% |  490.1201  166.8415       666
 <section id="generate-new-variables" class="level2">
 <h2 class="anchored" data-anchor-id="generate-new-variables">Generate new variables</h2>
 <p>To create a new variable in Stata you need to use the <code>generate</code> command:</p>
-<div id="2c819850" class="cell" data-execution_count="23">
+<div id="722805d6" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> amt_sum = .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(10,496 missing values generated)</code></pre>
 </div>
 </div>
 <p>The variable <code>amt_sum</code> has been assigned ‘missing’ values.</p>
-<div id="ee4d46aa" class="cell" data-execution_count="24">
+<div id="7e9a9be0" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> amt_sum</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -973,7 +977,7 @@ Middle: 40-60% |  490.1201  166.8415       666
 <li><code>=3</code> if shared-ownership payment observed.</li>
 </ul>
 <p>We can modify values using the command <code>replace</code>.</p>
-<div id="b9a58ab3" class="cell" data-execution_count="25">
+<div id="05ec262c" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> amt_sum = 1 <span class="kw">if</span> rent_amt &gt; 0 &amp; rent_amt != .</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> amt_sum = 2 <span class="kw">if</span> mortgage_amt &gt; 0 &amp; mortgage_amt != .</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> amt_sum = 3 <span class="kw">if</span> shared_ownership_amt &gt; 0 &amp; shared_ownership_amt != .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -985,7 +989,7 @@ Middle: 40-60% |  490.1201  166.8415       666
 </div>
 <p>Why the additional condition <code>&amp; rent_amt != .</code>? First off, the symbol <code>&amp;</code> means ‘and’, which means that both conditions must be true. The reason for this extra condition is that Stata treats a <code>.</code>-missing value as a very large number. So any condition of the form <code>&gt;</code> will include missing values if they exist. And we know they exist for this variable.</p>
 <p>We can check the values of our variable:</p>
-<div id="59701747" class="cell" data-execution_count="26">
+<div id="98a51924" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> amt_sum, <span class="fu">missing</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1020,7 +1024,7 @@ Middle: 40-60% |  490.1201  166.8415       666
 <li>select ‘Submit’ [If you select ‘OK’, Stata will close the Graphing window. If you want to continue to edit the graph, select ‘Submit’ instead.]</li>
 </ul>
 <p>This should create the graph below</p>
-<div id="4d29d74e" class="cell" data-execution_count="27">
+<div id="0f12a73c" class="cell" data-execution_count="27">
 <div class="cell-output cell-output-stdout">
 <pre><code>(bin=35, start=290, width=18.571429)</code></pre>
 </div>
@@ -1042,7 +1046,7 @@ Middle: 40-60% |  490.1201  166.8415       666
 <li>under the ‘Categories’ tab, select ‘Group 1’ and find <code>RTParea</code> under ‘Grouping variable:’</li>
 <li>select ‘Submit’</li>
 </ul>
-<div id="a6965308" class="cell" data-execution_count="28">
+<div id="1f0d1c6d" class="cell" data-execution_count="28">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1059,7 +1063,7 @@ Middle: 40-60% |  490.1201  166.8415       666
 <li>leave the default ‘Statistic’ as a Mean, but select <code>rent_amt</code> under ‘Variables’</li>
 <li>select ‘Submit’</li>
 </ul>
-<div id="ae6a426f" class="cell" data-execution_count="29">
+<div id="27171d40" class="cell" data-execution_count="29">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1070,19 +1074,19 @@ Middle: 40-60% |  490.1201  166.8415       666
 </div>
 <ol type="1">
 <li><p>The labels of the above graph do not display very well. Navigate back to the ‘Bar chart’ window. Under the ‘Categories’ tab, you will see an option to edit the ‘Properties’ of the categories. See if you can change the angle of labels so that they are displayed at a <span class="math inline">\(45^\circ\)</span> angle.</p></li>
-<li><p>Create a graph that displays the average average rent and mortgage paid by households in each of the <code>RTParea</code>. Edit the graph so that it has an informative y-axis title, legend, and title.</p></li>
+<li><p>Create a graph that displays the average rent and mortgage paid by households in each of the <code>RTParea</code>. Edit the graph so that it has an informative y-axis title, legend, and title.</p></li>
 <li><p>Create a single graph showing 5 separate histograms of rental payments for each <code>MD20QUIN</code> group. Use the ‘By’ tab in the ‘Graphics&gt;Histogram’ window to do this. You can also select the option ‘Add a graph of totals’ to make it an even 6 histograms.</p></li>
 </ol>
 </section>
 <section id="exporting-graphs" class="level2">
 <h2 class="anchored" data-anchor-id="exporting-graphs">Exporting graphs</h2>
 <p>Stata has its own file format for graphs .gph. You can save a graph using this format using <code>graph save</code>.</p>
-<div id="96ca41cd" class="cell" data-execution_count="30">
+<div id="667ca0ec" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">save</span> <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1\graph.gph"</span>, <span class="kw">replace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The problem is that .gph files have to be opened in Stata, which is not particularly useful. You would rather save an image as a .png or .jpg which can then be opened using a Photo application and easily copied into a Word document.</p>
 <p>You can do this using the <code>graph export</code> command.</p>
-<div id="a28140cb" class="cell" data-execution_count="31">
+<div id="932c3253" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1</span><span class="ch">\f</span><span class="st">ile_name.png"</span>, <span class="kw">replace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
@@ -1102,26 +1106,26 @@ Middle: 40-60% |  490.1201  166.8415       666
 <li>go to ‘File&gt;Log&gt;Begin’ and save the log file in the directory of choice;</li>
 <li>OR add the following <strong>to the top</strong> of your .do file.</li>
 </ul>
-<div id="4a68d83d" class="cell" data-execution_count="32">
+<div id="fe195d66" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">using</span> <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1\lab-1.smcl"</span>, <span class="kw">replace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You must also then add the following to the end of your .do file:</p>
-<div id="49cce9a9" class="cell" data-execution_count="33">
+<div id="72ec13f1" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">close</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>A better format to use is a plain text format that can then be opened in a text editor like Notepad. Here is how you would do this:</p>
 <ul>
 <li>Add the following to the top of your .do file.</li>
 </ul>
-<div id="bbec9cd0" class="cell" data-execution_count="34">
+<div id="81578ed1" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>cap <span class="fu">log</span> <span class="kw">close</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">using</span> <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1\lab_1.txt"</span>, <span class="kw">replace</span> <span class="bn">text</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">using</span> <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1\lab-1.txt"</span>, <span class="kw">replace</span> <span class="bn">text</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The <code>cap log close</code> ensures that you avoid an error message created when you try to restart the log file before closing it.</p>
 <ul>
 <li>Add the following to the bottom of the .do file.</li>
 </ul>
-<div id="4e4f93e7" class="cell" data-execution_count="35">
+<div id="efbd3d99" class="cell" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">close</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -1139,18 +1143,18 @@ Middle: 40-60% |  490.1201  166.8415       666
 <section id="setting-a-directory" class="level2">
 <h2 class="anchored" data-anchor-id="setting-a-directory">Setting a directory</h2>
 <p>You will have noticed that on several occasions we have had to specify the location of files, like when we exported a copy of the graph and saved the log file. If all your files are stored in the same directory, we can set this once and then Stata will use this as the default location.</p>
-<div id="1cfdbbfa" class="cell" data-execution_count="36">
+<div id="6bef500b" class="cell" data-execution_count="36">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>cd <span class="st">"[INSERT FILE PATH]\EC3301\Lab 1"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Having told Stata the directory on your computer where everything is stored, we can edit the lines for <code>graph export</code> and <code>log using</code>. For example,</p>
-<div id="a2449090" class="cell" data-execution_count="37">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"file_name.png"</span>, <span class="kw">replace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="eb2e09bb" class="cell" data-execution_count="37">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> <span class="st">"file-name.png"</span>, <span class="kw">replace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="final-set-up" class="level2">
 <h2 class="anchored" data-anchor-id="final-set-up">Final set-up</h2>
 <p>Here is how your .do file should look:</p>
-<div id="da0124ef" class="cell" data-execution_count="38">
+<div id="1adea1d9" class="cell" data-execution_count="38">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>* Title: Econometrics Lab 1: Working with <span class="kw">data</span> <span class="kw">in</span> Stata</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>* Author: [INSERT NAME]</span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>* Date: [INSERT DATE]</span>
@@ -1163,7 +1167,7 @@ Middle: 40-60% |  490.1201  166.8415       666
 <span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>* Start <span class="fu">log</span></span>
 <span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>cap <span class="fu">log</span> <span class="kw">close</span></span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">using</span> lab_1.txt, <span class="kw">replace</span> <span class="bn">text</span></span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">using</span> lab-1-<span class="fu">log</span>.txt, <span class="kw">replace</span> <span class="bn">text</span></span>
 <span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>* Open <span class="kw">data</span></span>
 <span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="st">"shs2023.dta"</span></span>

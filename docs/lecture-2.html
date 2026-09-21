@@ -408,7 +408,7 @@ window.Quarto = {
   <li><a href="#example-lcf-2023" id="toc-example-lcf-2023" class="nav-link" data-scroll-target="#example-lcf-2023">Example: LCF (2023)</a></li>
   <li><a href="#goodness-of-fit" id="toc-goodness-of-fit" class="nav-link" data-scroll-target="#goodness-of-fit">Goodness-of-Fit</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-2-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="lecture-2-notes.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-2-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -472,17 +472,17 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 <h1>Estimation: An intuitive approach</h1>
 <section id="section-2" class="level2">
 <h2 class="anchored" data-anchor-id="section-2"></h2>
-<p>Suppose you started with the data? For example, the Living Costs and Food Survey: a household level dataset with information on consumption and income.</p>
+<p>Suppose you started with the data? For example, the <a href="https://datacatalogue.ukdataservice.ac.uk/series/series/2000028#abstract">Living Costs and Food Survey</a>:</p>
+<ul>
+<li>a <em>household level</em> dataset with information on consumption and income.</li>
+</ul>
 <p><span class="math display">\[
   [cons_i, inc_i] \quad i = 1, \dots, n
-\]</span></p>
-<p>And suppose we had an economic model that suggested a linear relationship between consumption and income (i.e.&nbsp;constant propensity to consume). We might then posit a simple linear regression model:</p>
-<p><span class="math display">\[
-  cons_i = \beta_0 + \beta_1 inc_i + u_i
 \]</span></p>
 </section>
 <section id="section-3" class="level2 scrollable">
 <h2 class="scrollable anchored" data-anchor-id="section-3"></h2>
+<p>Does the relationship between consumption and income look linear?</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li></ul>
 <div class="tab-content">

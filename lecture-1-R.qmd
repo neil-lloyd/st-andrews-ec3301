@@ -16,13 +16,16 @@ lang-r: true
 
 library(Statamarkdown)
 knitr::opts_chunk$set(collectcode = TRUE)
+```
+
+```{r}
+#| include: false
 
 # Load packages
 library(ggplot2)
 
 # Set seed
 set.seed(9871)
-
 ```
 
 ::: {.content-visible unless-format="revealjs"}
@@ -160,7 +163,7 @@ $$
 **What's going on here?** The variables have been collected as vectors:
 
 $$
-  y = \underbrace{\begin{bmatrix} 1 & x_{1} & x_{2} & \dots &x_{k}\end{bmatrix}}_{\mathbf{x}}\underbrace{\begin{bmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_{ik} \end{bmatrix}}_\beta  + u
+  y = \underbrace{\begin{bmatrix} 1 & x_{1} & x_{2} & \dots &x_{k}\end{bmatrix}}_{\mathbf{x}}\underbrace{\begin{bmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_{k} \end{bmatrix}}_\beta  + u
 $$
 
 When written in vector notation $\mathbf{x}$ always precedes $\beta$, as $\beta\mathbf{x}\neq \mathbf{x}\beta$.
@@ -1046,7 +1049,7 @@ $$
 Thus, 
 
 $$
-  \beta_1 = E[y_i|\textcolor{red}{x_{i1}=1},x_{i2},x_{i3}]-E[y_i|\textcolor{red}{x_{i1}=0},x_{i2},x_{i3}]
+  \beta_1 = E[y_i|\textcolor{red}{x_{i1}=1},x_{i2},x_{i3}]-E[y_i|\textcolor{blue}{x_{i1}=0},x_{i2},x_{i3}]
 $$
 
 :::

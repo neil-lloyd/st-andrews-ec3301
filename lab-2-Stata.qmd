@@ -1,0 +1,294 @@
+---
+title: Econometrics Lab 2
+subtitle: Linear Regression in Stata
+format: 
+  html: default
+jupyter: nbstata
+---
+
+```{stata}
+*| include: false
+do "config.do"
+```
+
+This lab was motivated by the ongoing "cost of living crisis" that has many politicians, economists, and policy specialists working hard to help households. It focuses on two aspects of this crisis: the cost of energy (part 1) and access to (un)healthy food (part 2). The first part makes use of the Scottish Household Survey (2023) sample from Lab 1, while the second part uses a county level dataset from the US Department of Agriculture. 
+
+## Setup
+
+Before we get started, 
+
+- Create a new folder for this week's lab ("EC3301/Lab 2") in the same location as your "EC3301/Lab 1" folder. 
+
+- Go to Moodle and download the datasets provided under Week 4. (You will also need access to the "shs2023.dta" file from Lab 1.)
+
+- Move the new files, as well as a copy of "shs2023.dta", to "EC3301/Lab 2".
+
+- Open Stata and create a new .do file. Save it as "Lab 2/lab-2.do"
+
+- Add the following to your .do file; editing the file path as necessary
+
+```{stata}
+*| eval: false
+
+* Title: Econometrics Lab 2: Linear Regression in Stata
+* Author: [INSERT NAME]
+* Date: [INSERT DATE]
+
+* ============================================================================ *
+* Clear all objects in memory
+clear all
+
+* Set directory
+cd "[INSERT FILE PATH]\EC3301\Lab 2"
+
+* Start log
+cap log close
+log using lab-2-log.txt, replace text
+
+* ============================================================================ *
+* Part 1
+
+
+* ============================================================================ *
+* Part 2
+
+
+* ============================================================================ *
+* Close log
+log close
+```
+
+
+# Part 1: Energy costs in Scotland
+
+The Scottish Household Survey (2023) includes information about the amount of money households spend on energy to heat and light their homes (i.e., electircity, gas, etc.). During this lab we will investigate whether lower income households spend a disproportionate amount of money on energy. Why does this matter? Well, if true, it means that energy shocks affect lower income households more. 
+
+1. Having run the first few lines of the above .do file code, add the following line under `* Part 1` and run. 
+
+```{stata}
+*| eval: false
+use shs2023.dta, clear
+
+rename hb1 dwell_type
+rename hb509 own_grp
+
+label var dwell_type "Type of dwelling"
+label var own_grp "Ownership of the dwelling"
+```
+
+
+```{stata}
+*| include: false
+use "$data_dir\shs2023.dta", clear
+
+rename hb1 dwell_type
+rename hb509 own_grp
+
+label var dwell_type "Type of dwelling"
+label var own_grp "Ownership of the dwelling"
+```
+
+2. The dataset includes a set of variables `htcostsum_1-htcostsum_9` and `htcostamt_1-htcostamt_9`. Try to understand the relationship between each variable by first using `tab` to check the values of `htcostsum_*` and then `tab htcostsum_*, sum(htcostamt_*)` to check how they relate to one another. For example, 
+
+```{stata}
+tab htcostsum_1
+tab htcostsum_1, sum(htcostamt_1)
+```
+
+3. Create a variable equal to the sum of all energy costs; aptly name `energy_cost`. The most accurate way to do this is using the `egen` command along with the `rowtotal()` function (type `help egen` in the command line to learn about the command). You will want to add the option `missing`. 
+
+```{stata}
+*| include: false
+egen energy_cost = rowtotal(htcostamt_*), missing 
+```
+
+4. How many observations have missing, zero, and positive (non-missing values). Check that your output corresponds to mine. 
+
+```{stata}
+count if energy_cost ==.
+count if energy_cost==0
+count if energy_cost>0 & !missing(energy_cost)
+```
+
+```{stata}
+sum energy_cost, det
+```
+
+5. This new variable measures energy costs at an annual level. Transform the variable - using the `replace` command - to a monthly value. Then label it "Household energy costs (monthly £s)".
+
+```{stata}
+*| include: false
+replace energy_cost = energy_cost/12
+label var energy_cost "Household energy costs (monthly £s)"
+```
+
+6. Use a similar approach to construct a measure of housing costs (i.e. mortgage or rent). Are there a similar number of non-missing and zero values? Who would have a housing cost of £0? Wealthier or poorer households?
+
+```{stata}
+egen housing_cost = rowtotal(mortgage_amt rent_amt shared_ownership_amt), missing
+label var housing_cost "Household housing costs (monthly £s)"
+```
+
+7. Compare the new `housing_cost` variable to the variable in the data called `hcost_amt`. You can also use `browse mortgage_amt rent_amt shared_ownership_amt hcost_amt housing_cost` to investigate why these two variables are not the same. Should we be concerned?
+
+```{stata}
+*| eval: false
+compare housing_cost hcost_amt
+```
+
+8. Check `housing_cost` against `own_grp` (a variable we used in Lab 1). It is clear that our variable ignores those who own outright or live rent free. Does this seem like a reasonable outcome?
+
+```{stata}
+tab own_grp
+tab own_grp, sum(housing_cost)
+```
+
+9. Create a new `income` variable equal to `annetinc`/12. Label the variable "Household income (monthly £s)".
+
+```{stata}
+*| include: false
+gen income = annetinc/12
+label var income "Household income (monthly £s)"
+```
+
+10. Keep the sample of observations that have non-missing values for all three variables: `energy_cost`, `housing_cost`, and `income`. How many observations do we lose? There are multiple ways you can achieve this result:
+
+- Select all observations where all variables are *not* equal to `.`. In Stata, not-equal-to is either `~=` or `!=`. 
+   
+```{stata}
+*| eval: false
+keep if energy_cost!=. & housing_cost!=. & income!=.
+```
+
+- Using the `missing()` function combined with `!` symbol to denote not-missing. 
+   
+```{stata}
+*| output: false
+keep if !missing(energy_cost) & !missing(housing_cost) & !missing(income)
+```
+
+11. Create a scatter plot of `energy_cost` and `income` using the command `scatter`. 
+
+12. Use the `twoway` graph command to overlay the scatter plot with a (linear) line of best fit. Here is what the output should look like:
+
+```{stata}
+*| echo: false
+
+twoway (scatter energy_cost income) (lfit energy_cost income), legend(off)
+```
+
+Note, I have turned off the legend option. 
+
+13. The line of best fit corresponds to the OLS estimator. Is the slope significantly different from 0? On average, what fraction of an additional £ of income is spent on energy costs. 
+
+
+```{stata}
+reg energy_cost income
+```
+
+14. Use the `predict` command to create predicted energy for each household `energy_hat`. Plot the predicted value alongside the actual value of energy. 
+
+```{stata}
+*| echo: false
+predict energy_hat
+```
+
+```{stata}
+twoway (scatter energy_cost income) (scatter energy_hat income), legend(off)
+```
+
+15. Create a similar graph for `housing_cost`. You can combine the graphs into a single figure. Is one slope steeper than the other?
+
+```{stata}
+twoway (scatter energy_cost income) (lfit energy_cost income), ylabel(0(500)1500) legend(off) name(energy, replace) nodraw ytitle(Energy costs)
+twoway (scatter housing_cost income) (lfit housing_cost income), ylabel(0(500)1500)  legend(off) name(housing, replace) nodraw ytitle(Housing costs)
+graph combine energy housing
+```
+
+16. Create a new variable `energy_share` equal to the energy costs as a share of energy PLUS housing costs. 
+
+```{stata}
+*| include: false
+gen energy_share = energy_cost/(energy_cost + housing_cost)	
+```
+
+17. Interpret the slope coefficient and $\mathbf{R}^2$ from the model below. Use the p-value to test whether the relationship statistically significant at a $\alpha = 0.01$ significance level?
+
+```{stata}
+gen ln_income = ln(income)
+reg energy_share ln_income
+```
+
+18. One important factor which may determine a household's energy usage in Scotland is where they live. Afterall, it's a lot darker and colder in the Outer Hebrides compared with the sunny Kingdom of Fife. Try to replicate the following bar graph showing the average share of expenditure on energy by area. 
+
+```{stata}
+*| echo: false
+graph bar (mean) energy_share, over(area, label(angle(forty_five))) ytitle("Energy share")
+```
+
+
+19. Estimate the multivariate model below. Why is Edinburgh missing from the model? Has the adjusted-$\mathbf{R}^2$ increased?
+
+```{stata}
+*| eval: false
+rename hc4 bedrooms
+reg energy_share ln_income hhsize bedrooms i.own_grp i.dwell_type i.area
+```
+
+20. Using the evidence we have collected along with any other evidence you choose to create, do you think that the recent energy crisis will have had a disproportionate effect on lower or higher income households? What aspects have we ignored (or assumed away) in this discussion. [Hint: think about our sample selection decisions and variables we have ignored.]
+
+# Part 2: Fast-food access in the US
+
+There is a large literature on the impact that fast-food access has on health outcomes; especially obesity [@currie2010effect]. There is also a big policy debate in the US about 'food deserts' and access to healthy food alternatives, which includes a growing suspicion that fast-food outlets target underprivileged neighbourhoods. The following exercise investigates the relationship between fast-food access (at the county level) and the largest anti-hunger food programme in the US: the Supplemental Nutrition Assistance Program (SNAP). SNAP distributes vouchers/credits to participants to spend at [SNAP-authorized stores](https://www.fna.usda.gov/snap/eligible-food-items). Rather cynically, it investigates whether fast-food chains locate themselves in areas with areas with a higher share of SNAP participants. 
+
+The data comes from the US Department of Agriculture's [Food Environment Atlas (2025)](https://www.ers.usda.gov/data-products/food-environment-atlas/data-access-and-documentation-downloads). The dataset includes information on the number of food outlets (by category and adjusted for population), participation in food assistance programmes, and important county characteristics. The file "VariableList.csv" on Moodle includes useful descriptions of each variable. 
+
+1. Open the "usda25.csv". As it is not a .dta file, you will need to import it. In the main Stata window, go to 'File>Import>Text data (delimited, *.csv,...)'. This will open a new window. Select the file icon next to 'File to import:' and locate the data in your "EC3301/Lab 2" folder. This should populate the 'Preview:' window. Select 'OK'. In the output window you will see code starting with `import delimited`. Copy this code and paste it in your .do file so that the action can be replicated. 
+
+```{stata}
+*| include: false
+import delimited "$data_dir\usda2025.csv", clear
+```
+
+2. Generate a new variable `ln_pc_snapben17` equal to the log of `pc_snapben17`. The "VariableList.csv" file will show you that this is SNAP benefits per capita in 2017. 
+
+```{stata}
+*| include: false
+gen ln_pc_snapben17 = ln(pc_snapben17)
+```
+
+3. Compute the correlation between 3 measures of SNAP exposure (at the county level): `ln_pc_snapben17`, `pct_snap17` (% of population participate in SNAP, 2017), and `snapspth17` (SNAP-authorized stored per 1000 people, 2017). Are the results surprising?
+
+```{stata}
+*| eval: false
+corr ln_pc_snapben17 snapspth17 pct_snap17
+```
+
+4. Estimate 3 separate simple regression models of `ffrpth20` (fast-food stores per 1000 people, 2020) against the above three measures of SNAP exposure. Interpret each slope coefficient. Which model has the highest $\mathbf{R}^2$.
+
+5. Most SNAP-authorized stores are big grocery stores (e.g. Walmart, Target, Kroger, etc.). The data includes information on the total number of grocery stores (in 2016): `grocpth16`. Are they highly correlated?
+
+```{stata}
+corr snapspth17 grocpth16
+```
+
+6. Estimate the multivariate model below, that controls for the poverty rate, number full-service restaruants, number of grocery stores, and a metropolitan dummy variable. Is there a statistically significant relationship between the number of SNAP-authorized stores and fast-food stores, conditional on these other variables? And how does the coefficient compare to the simple model?
+
+```{stata}
+reg ffrpth20 snapspth17 povrate21 fsrpth16 grocpth16  metro23 pct_nhblack20 pct_hisp20 pct_65older20 pct_18younger20 
+```
+
+7. Estimate the same multivariate model, but for the other measures of SNAP exposure. Are these relationships statistically significant?
+
+8. The data has information about other federal nutrition programmes: (1) [WIC](https://www.fna.usda.gov/wic) (Women, Infants, Children); (2) National School Lunch Programme; (3) Summer Food Service Programme. Compare the participation rates of these programmes. Note, the latter two programmes measure participation as % of eligible children. 
+
+```{stata}
+sum pct_snap17 pct_wic17 pct_nslp17 pct_sfsp17
+```
+
+9. Using these variables as the measure of exposure, do we find any evidence of a relationship with fast-food access in 2017. 
+
+10. Explore the data further to see if you can learn more about this relationship. One option might be to look at `pch_ffrpth_16_20` in place of `ffrpth20` as the outcome variable, since it captures the percentage *change in* fast-food establishments per 1000 people. Another option is to consider different controls. Ideally, these should be **good controls**. A **bad control** is a variable that could (theoretically) be an outcome of the variable of interest: in this instance, SNAP exposure. You could also use variables like `pct_laccess_lowi19` to investigate low access to stores among low income residents (i.e. 'food deserts').
+
+# References
+

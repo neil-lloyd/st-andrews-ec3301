@@ -96,8 +96,7 @@ The Variables and Properties window should now be populated with information abo
 The same operation of opening the data through menus can be replicated using the command `use`. Use the History window to copy the line into the Command window and (press `ENTER` on the keyboard). It should open the dataset again.
 
 ```{stata}
-*| echo: false
-*| output: false
+*| include: false
 use "$data_dir\shs2023.dta", clear
 ```
 
@@ -212,6 +211,8 @@ use "[INSERT FILE PATH]\shs2023.dta", clear
 
 keep area RTParea MD20QUIN hhsize hb1 hb509 rent_amt rent_sum mortgage_amt mortgage_sum shared_ownership_sum shared_ownership_amt
 ```
+
+**Copy and paste the code from exercises 2-5 above** (i.e., the `rename` and `label` commands).
 
 ```{stata}
 *| echo: false
@@ -346,7 +347,7 @@ sum rent_amt if rent_sum==1
 
 Notice, you need to know the numerical value of the category of `rent_sum`, not the value label, to create such a condition. 
 
-1. What is the average mortgage payment of households who own their home and provide a mortgage payment? [You can ignore those with `mortgage_sum==3' "Buying with mortgage - amount given by respondent, but not used in imputation routines"] 
+1. What is the average mortgage payment of households who own their home and provide a mortgage payment? [According to `mortgage_sum` there are three groups of households for whom we observe a mortgage payment. For the purposes of this question, you can ignore the third category: 3. "Buying with mortgage - amount given by respondent, but not used in imputation routines"] 
 
 2. Is the average imputed mortgage payment higher than the average reported payment?
 
@@ -486,7 +487,7 @@ graph bar (mean) rent_amt, over(RTParea)
 
 1. The labels of the above graph do not display very well. Navigate back to the 'Bar chart' window. Under the 'Categories' tab, you will see an option to edit the 'Properties' of the categories. See if you can change the angle of labels so that they are displayed at a $45^\circ$ angle. 
 
-2. Create a graph that displays the average average rent and mortgage paid by households in each of the `RTParea`. Edit the graph so that it has an informative y-axis title, legend, and title. 
+2. Create a graph that displays the average rent and mortgage paid by households in each of the `RTParea`. Edit the graph so that it has an informative y-axis title, legend, and title. 
 
 3. Create a single graph showing 5 separate histograms of rental payments for each `MD20QUIN` group. Use the 'By' tab in the 'Graphics>Histogram' window to do this. You can also select the option 'Add a graph of totals' to make it an even 6 histograms. 
 
@@ -549,7 +550,7 @@ A better format to use is a plain text format that can then be opened in a text 
 *| eval: false
 *| echo: true
 cap log close
-log using "[INSERT FILE PATH]\EC3301\Lab 1\lab_1.txt", replace text
+log using "[INSERT FILE PATH]\EC3301\Lab 1\lab-1.txt", replace text
 ```
 
 The `cap log close` ensures that you avoid an error message created when you try to restart the log file before closing it. 
@@ -587,7 +588,7 @@ Having told Stata the directory on your computer where everything is stored, we 
 ```{stata}
 *| eval: false
 *| echo: true
-graph export "file_name.png", replace
+graph export "file-name.png", replace
 ```
 
 ## Final set-up
@@ -609,7 +610,7 @@ cd "[INSERT FILE PATH]\EC3301\Lab 1"
 
 * Start log
 cap log close
-log using lab_1.txt, replace text
+log using lab-1-log.txt, replace text
 
 * Open data
 use "shs2023.dta"

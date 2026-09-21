@@ -527,7 +527,7 @@ window.Quarto = {
 \]</span></p>
 <p><strong>What’s going on here?</strong> The variables have been collected as vectors:</p>
 <p><span class="math display">\[
-  y = \underbrace{\begin{bmatrix} 1 &amp; x_{1} &amp; x_{2} &amp; \dots &amp;x_{k}\end{bmatrix}}_{\mathbf{x}}\underbrace{\begin{bmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_{ik} \end{bmatrix}}_\beta  + u
+  y = \underbrace{\begin{bmatrix} 1 &amp; x_{1} &amp; x_{2} &amp; \dots &amp;x_{k}\end{bmatrix}}_{\mathbf{x}}\underbrace{\begin{bmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_{k} \end{bmatrix}}_\beta  + u
 \]</span></p>
 <p>When written in vector notation <span class="math inline">\(\mathbf{x}\)</span> always precedes <span class="math inline">\(\beta\)</span>, as <span class="math inline">\(\beta\mathbf{x}\neq \mathbf{x}\beta\)</span>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Vector notation differences">
@@ -682,7 +682,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1115,7 +1115,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1128,7 +1128,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1141,7 +1141,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="lecture-1-multi_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1309,7 +1309,7 @@ Warning
 <div class="fragment fade-in">
 <p>Thus,</p>
 <p><span class="math display">\[
-  \beta_1 = E[y_i|\textcolor{red}{x_{i1}=1},x_{i2},x_{i3}]-E[y_i|\textcolor{red}{x_{i1}=0},x_{i2},x_{i3}]
+  \beta_1 = E[y_i|\textcolor{red}{x_{i1}=1},x_{i2},x_{i3}]-E[y_i|\textcolor{blue}{x_{i1}=0},x_{i2},x_{i3}]
 \]</span></p>
 </div>
 </section>
