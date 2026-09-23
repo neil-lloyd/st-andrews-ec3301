@@ -1,0 +1,1565 @@
+---
+title: Ordinary Least Squares
+subtitle: Lecture 2
+format: 
+  html:
+    output-file: lecture-2.html
+    other-links:
+      - text: "PDF with Stata"
+        href: "lecture-2-notes-Stata.pdf"
+        icon: file-pdf
+      - text: "PDF with R"
+        href: "lecture-2-notes-R.pdf"
+        icon: file-pdf
+  revealjs: 
+    output-file: lecture-2-slides.html
+    footer: "St Andrews Business School - Martinmas 2026/27"
+engine: knitr
+---
+
+```{r}
+#| include: false
+#| cache: false
+
+library(Statamarkdown)
+knitr::opts_chunk$set(collectcode = TRUE)
+```
+
+```{r}
+#| include: false
+
+source(here::here("config.R"))
+
+# Packages
+library(haven)                  
+library(ggplot2)
+library(DT)
+
+# Set seed
+set.seed(9871)
+```
+
+```{stata}
+#| include: false
+
+do "config.do"
+
+* Set seed
+set seed 1857
+```
+
+::: {.content-visible unless-format="revealjs"}
+## Reading
+
+This lecture covers material from @wooldridge2025:
+
+- Chapter 2.2 - "Deriving the Ordinary Least Squares Estimates"
+- Chapter 2.3 - "Properties of OLS on Any Sample of Data"
+- Chapter 2.4 - "Units of Measurement and Functional Form" (covered in Lecture 1)
+- Chapter 3.2 - "Mechanics and Interpretation of Ordinary Least Squares"
+- Chapter 6.3 - "More on Goodness-of-Fit and Selection of Regressors"
+
+The lecture does not cover Chapter 2.6 "Regression through the Origin and Regression on a Constant". I would suggest reading the section, but we will not have time to cover it.
+:::
+
+
+:::{.content-visible when-format="revealjs"}
+## Recap
+
+Last week we discussed:
+
+- Linear Regression Model: structure, notation, etc.
+
+- How we can rationalize the model
+
+- Classical MLR 1-6 assumptions 
+
+- Identification (simple case)
+
+- Interpretation (simple and multivariate cases)
+
+Please check my Moodle forum post on [What To Know](https://moody.st-andrews.ac.uk/moodle/mod/forum/discuss.php?d=97199): *WTK: Lecture 1*
+
+## Quiz
+
+What's wrong with this model of household energy costs in the UK?
+
+$$
+  energy\_costs_i = \beta_0 + \beta_1 england_i + \beta_2 wales_i + \beta_3 scotland_i + \beta_4 n\_ireland_i + u_i
+$$
+
+where, 
+
+- $england_i$ 
+- $wales_i$
+- $scotland_i$
+- $n\_ireland_i$
+
+are dummy variables denoting household location. 
+
+## 
+
+Imagine what this dataset might look like:
+
+```{r}
+#| echo: false
+
+df <- data.frame(
+  id        = 1:10,
+  england   = c(1, 1, 1, 1, 1, 0, 0, 0, 0, 0),
+  wales     = c(0, 0, 0, 0, 0, 1, 1, 0, 0, 0),
+  scotland  = c(0, 0, 0, 0, 0, 0, 0, 1, 1, 0),
+  n_ireland = c(0, 0, 0, 0, 0, 0, 0, 0, 0, 1)
+)
+
+DT::datatable(
+  df,
+  rownames = FALSE,
+  colnames = c("ID", "England", "Wales", "Scotland", "N. Ireland"),
+  options  = list(pageLength = 10, dom = "t")   # 10 rows, no search/paging clutter
+)
+```
+
+##
+
+```{r}
+#| echo: false
+
+df <- data.frame(
+  id        = 1:10,
+  england   = c(1, 1, 1, 1, 1, 0, 0, 0, 0, 0),
+  wales     = c(0, 0, 0, 0, 0, 1, 1, 0, 0, 0),
+  scotland  = c(0, 0, 0, 0, 0, 0, 0, 1, 1, 0),
+  n_ireland = c(0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+  cons = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+)
+
+DT::datatable(
+  df,
+  rownames = FALSE,
+  colnames = c("ID", "England", "Wales", "Scotland", "N. Ireland", "Intercept"),
+  options  = list(pageLength = 10, dom = "t")   # 10 rows, no search/paging clutter
+)
+```
+
+## Base category
+
+This means that we must drop 1 category
+
+- For example, leave out $england_i$
+
+$$
+  energy\_costs_i = \textcolor{blue}{\beta_0} + \textcolor{blue}{\beta_1} wales_i + \textcolor{blue}{\beta_2} scotland_i + \textcolor{blue}{\beta_3} n\_ireland_i + u_i
+$$
+
+- or $wales_i$ 
+
+$$
+  energy\_costs_i = \textcolor{red}{\gamma_0} + \textcolor{red}{\gamma_1} england_i + \textcolor{red}{\gamma_2} scotland_i + \textcolor{red}{\gamma_3} n\_ireland_i + u_i
+$$
+
+In each case, the interpretation of the parameters changes: $\textcolor{blue}{\beta} \neq \textcolor{red}{\gamma}$.
+
+# Lecture 2 - Ordinary Least Squares
+
+## Today
+
+Today we cover:
+
+1. Data
+
+2. Estimation: An intuitive approach
+
+3. Ordinary Least Squares
+
+   - Simple case
+   - Binary case
+   - Multivariate case
+   
+4. Does it work?
+
+:::
+
+# Data
+
+##
+
+For each observation we observe:
+
+$$
+  [y_i, x_{i1}, x_{i2}, \dots, x_{ik}] \quad i = 1, \dots, n
+$$
+
+Stacked together, we have a matrix of data:
+
+$$
+\begin{bmatrix}
+y_1 & x_{11} & x_{12} & \dots & x_{1k} \\
+y_2 & x_{21} & x_{22} & \dots & x_{2k} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+y_n & x_{n1} & x_{n2} & \dots & x_{nk} \\
+\end{bmatrix}
+$$
+
+Just like in Stata/R
+
+## LCF (2023)
+
+Suppose you wanted to estimate the the marginal propensity to consume in the UK using data from the [Living Costs and Food Survey](https://datacatalogue.ukdataservice.ac.uk/series/series/2000028#abstract): 
+
+- a *household level* dataset with information on consumption, income, and other characteristics. 
+
+$$
+  [cons_i, inc_i, children_i,size_i,tv\_license_i,month_i] \quad i = 1, \dots, n
+$$
+
+# Estimation: An intuitive approach
+
+## {.scrollable}
+
+Does the relationship between consumption and income look linear?
+
+:::{.panel-tabset}
+### Stata 
+
+```{stata}
+#| echo: true
+#| code-fold: true
+#| output: false
+
+* Open data
+use "$data_dir\lcf_2023.dta", clear
+
+* Plot
+scatter hhcon hhinc, mc(black) mfc(%50) ytitle("Household consumption (£/week)") xtitle("Household income (£/week)") title("Household consumption vs income (LCF, 2023)")
+```
+
+```{stata}
+#| echo: false
+#| output: false
+graph export "material/lecture-2/lcf-scatter.png", replace
+```
+![](material/lecture-2/lcf-scatter.png){fig-align="center" width=67%}
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+#| fig-align: center
+
+# Load the Stata file
+lcf_data <- read_dta(file.path(data_dir, "lcf_2023.dta"))
+
+# Plot
+ggplot(lcf_data, aes(x = hhinc, y = hhcon)) +
+  geom_point(alpha = 0.5) +
+  labs(x = "Household income (£/week)",
+       y = "Household consumption (£/week)",
+       title = "Household consumption vs income (LCF, 2023)") +
+  theme_minimal()
+```
+:::
+
+## 
+
+Consider the following two observations:
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-align: center
+
+# Load the Stata file
+lcf_data <- read_dta(file.path(data_dir, "lcf_2023.dta"))
+
+# Plot
+ggplot(lcf_data, aes(x = hhinc, y = hhcon)) +
+  geom_point(alpha = 0.5) +
+  # Highlight obs == 134 (red)
+  geom_point(data = subset(lcf_data, obs == 134),
+             colour = "red", size = 3) +
+  geom_text(data = subset(lcf_data, obs == 134),
+            aes(label = paste0("(", round(hhinc, 1), ", ", round(hhcon, 1), ")")),
+            colour = "red", vjust = -1, fontface = "bold") +
+  # Highlight obs == 175 (blue)
+  geom_point(data = subset(lcf_data, obs == 175),
+             colour = "blue", size = 3) +
+  geom_text(data = subset(lcf_data, obs == 175),
+            aes(label = paste0("(", round(hhinc, 1), ", ", round(hhcon, 1), ")")),
+            colour = "blue", vjust = -1, fontface = "bold") +
+  labs(x = "Household income (£/week)",
+       y = "Household consumption (£/week)",
+       title = "Household consumption vs income (LCF, 2023)") +
+  theme_minimal()
+```
+
+## Guess 1
+
+Suppose we plot a line through the points: 
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-align: center
+
+# Predicted values on the green line for the two highlighted x-values
+line_pts <- subset(lcf_data, obs %in% c(134, 175))
+line_pts$yhat <- 275 + 0.275 * line_pts$hhinc
+
+# Position for the equation label: near the right end of the line
+x_eq <- 0.85 * max(lcf_data$hhinc, na.rm = TRUE)
+y_eq <- 275 + 0.275 * x_eq
+
+# Plot
+ggplot(lcf_data, aes(x = hhinc, y = hhcon)) +
+  geom_point(alpha = 0.5) +
+  # Green line: y = 275 + 0.275x
+  geom_abline(intercept = 275, slope = 0.275,
+              colour = "green4", linewidth = 1) +
+  # Equation label for the line
+  annotate("text", x = x_eq, y = y_eq,
+           label = "y == 275 + 0.275 * x", parse = TRUE,
+           colour = "green4", fontface = "bold",
+           vjust = -1, hjust = 0.5) +
+  # Green dots on the line at the same x-values as the red/blue points
+  geom_point(data = line_pts,
+             aes(x = hhinc, y = yhat),
+             colour = "green4", size = 4) +
+  # Highlight obs == 134 (red)
+  geom_point(data = subset(lcf_data, obs == 134),
+             colour = "red", size = 4) +
+  geom_text(data = subset(lcf_data, obs == 134),
+            aes(label = paste0("(", round(hhinc, 1), ", ", round(hhcon, 1), ")")),
+            colour = "red", vjust = -1, fontface = "bold") +
+  # Highlight obs == 175 (blue)
+  geom_point(data = subset(lcf_data, obs == 175),
+             colour = "blue", size = 4) +
+  geom_text(data = subset(lcf_data, obs == 175),
+            aes(label = paste0("(", round(hhinc, 1), ", ", round(hhcon, 1), ")")),
+            colour = "blue", vjust = -1, fontface = "bold") +
+  labs(x = "Household income (£/week)",
+       y = "Household consumption (£/week)",
+       title = "Household consumption vs income (LCF, 2023)") +
+  theme_minimal()
+```
+
+##
+
+The vertical distance between points in the data and the line tells us how the difference between the "prediction" of the line (for a given $inc_i$) and the actual data. 
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-align: center
+# Predicted values and residual distances for the two highlighted obs
+line_pts <- subset(lcf_data, obs %in% c(134, 175))
+line_pts$yhat <- 275 + 0.275 * line_pts$hhinc
+line_pts$dist <- line_pts$hhcon - line_pts$yhat        # signed gap
+line_pts$ymid <- (line_pts$hhcon + line_pts$yhat) / 2  # midpoint for the label
+
+# Small horizontal offset for the bracket, relative to the x-range
+off <- 0.01 * diff(range(lcf_data$hhinc, na.rm = TRUE))
+
+# Plot
+ggplot(lcf_data, aes(x = hhinc, y = hhcon)) +
+  geom_point(alpha = 0.5) +
+  # Green line: y = 275 + 0.275x
+  geom_abline(intercept = 275, slope = 0.275,
+              colour = "green4", linewidth = 1) +
+  # Green dots on the line
+  geom_point(data = line_pts,
+             aes(x = hhinc, y = yhat),
+             colour = "green4", size = 4) +
+  # Red / blue observed points
+  geom_point(data = subset(lcf_data, obs == 134),
+             colour = "red", size = 4) +
+  geom_point(data = subset(lcf_data, obs == 175),
+             colour = "blue", size = 4) +
+  # Bracket: vertical segment just to the right of each pair of points
+  geom_segment(data = line_pts,
+               aes(x = hhinc + off, xend = hhinc + off,
+                   y = hhcon, yend = yhat),
+               linewidth = 0.7) +
+  # Top and bottom caps of the bracket
+  geom_segment(data = line_pts,
+               aes(x = hhinc + 0.4 * off, xend = hhinc + off,
+                   y = hhcon, yend = hhcon),
+               linewidth = 0.7) +
+  geom_segment(data = line_pts,
+               aes(x = hhinc + 0.4 * off, xend = hhinc + off,
+                   y = yhat, yend = yhat),
+               linewidth = 0.7) +
+  # Distance label at the midpoint of the bracket
+  geom_text(data = line_pts,
+            aes(x = hhinc + off, y = ymid,
+                label = round(dist, 1)),
+            hjust = -0.3, fontface = "bold") +
+  labs(x = "Household income (£/week)",
+       y = "Household consumption (£/week)",
+       title = "Household consumption vs income (LCF, 2023)") +
+  theme_minimal()
+
+```
+
+## Guess 2
+
+What if we chose a different plot?
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-align: center
+
+# Predicted values and residual distances for the two highlighted obs
+line_pts <- subset(lcf_data, obs %in% c(134, 175))
+line_pts$yhat <- 500 + 0.15 * line_pts$hhinc
+line_pts$dist <- line_pts$hhcon - line_pts$yhat        # signed gap
+line_pts$ymid <- (line_pts$hhcon + line_pts$yhat) / 2  # midpoint for the label
+
+# Small horizontal offset for the bracket, relative to the x-range
+off <- 0.01 * diff(range(lcf_data$hhinc, na.rm = TRUE))
+
+# Position for the equation label: near the right end of the line
+x_eq <- 0.85 * max(lcf_data$hhinc, na.rm = TRUE)
+y_eq <- 500 + 0.15 * x_eq
+
+# Plot
+ggplot(lcf_data, aes(x = hhinc, y = hhcon)) +
+  geom_point(alpha = 0.5) +
+  # Purple line: y = 500 + 0.15x
+  geom_abline(intercept = 500, slope = 0.15,
+              colour = "purple", linewidth = 1) +
+  # Equation label for the line
+  annotate("text", x = x_eq, y = y_eq,
+           label = "y == 500 + 0.15 * x", parse = TRUE,
+           colour = "purple", fontface = "bold",
+           vjust = -1, hjust = 0.5) +
+  # Purple dots on the line
+  geom_point(data = line_pts,
+             aes(x = hhinc, y = yhat),
+             colour = "purple", size = 4) +
+  # Red / blue observed points
+  geom_point(data = subset(lcf_data, obs == 134),
+             colour = "red", size = 4) +
+  geom_point(data = subset(lcf_data, obs == 175),
+             colour = "blue", size = 4) +
+  # Bracket: vertical segment just to the right of each pair of points
+  geom_segment(data = line_pts,
+               aes(x = hhinc + off, xend = hhinc + off,
+                   y = hhcon, yend = yhat),
+               linewidth = 0.7) +
+  # Top and bottom caps of the bracket
+  geom_segment(data = line_pts,
+               aes(x = hhinc + 0.4 * off, xend = hhinc + off,
+                   y = hhcon, yend = hhcon),
+               linewidth = 0.7) +
+  geom_segment(data = line_pts,
+               aes(x = hhinc + 0.4 * off, xend = hhinc + off,
+                   y = yhat, yend = yhat),
+               linewidth = 0.7) +
+  # Distance label at the midpoint of the bracket
+  geom_text(data = line_pts,
+            aes(x = hhinc + off, y = ymid,
+                label = round(dist, 1)),
+            hjust = -0.3, fontface = "bold") +
+  labs(x = "Household income (£/week)",
+       y = "Household consumption (£/week)",
+       title = "Household consumption vs income (LCF, 2023)") +
+  theme_minimal()
+```
+
+## 
+
+**Which guess was better? Why?** 
+
+## Structure
+
+Let's formalize the above process:
+
+- **Goal:** we want to pick the line that best fits the data.
+
+::: {.fragment .fade-in}
+
+- **Problem:** what do we mean by "fit"?
+
+  - For a given value of $inc_i$ in the data, the "fitted" value of $cons_i$ is
+
+  $$
+    \widehat{cons}_i = b_0 + b_1 inc_i
+  $$
+
+  where $[b_0,b_1]$ are the chosen parameters. 
+
+  - For example, 
+  
+    - $\textcolor{green}{\widehat{cons}_i = 275 + 0.275 inc_i}$
+    
+    - $\textcolor{purple}{\widehat{cons}_i = 500 + 0.15 inc_i}$
+
+:::
+
+## Fit
+
+We need a measure of distance:
+
+**Candidate 1**: difference
+
+$$
+  cons_i - \widehat{cons}_i
+$$
+
+- **PROBLEM**: could be negative (i.e. not a measure of distance)
+
+::: {.fragment .fade-in}
+**Candidate 2**: absolute value
+
+$$
+  |cons_i - \widehat{cons}_i|
+$$
+
+- **PRO**: intuitive
+- **CON**: difficult to work with (i.e. not globally differentiable)
+:::
+
+##
+
+**Candidate 3**: squared deviation
+
+$$
+  (cons_i - \widehat{cons}_i)^2
+$$
+
+- always positive
+- amplifies bigger deviations, which is more *efficient* (more on that soon!)
+
+## Aggregation
+
+What we care about is the difference between the prediction and data across all observations:
+
+$$
+  \sum_{i=1}^{n}(cons_i - \widehat{cons}_i)^2
+$$
+
+And since $\widehat{cons}_i = b_0 + b_1 inc_i$
+
+$$
+  \sum_{i=1}^{n}(cons_i - b_0 - b_1 inc_i)^2
+$$
+
+## Minization
+
+The value of these squared deviations (from the prediction) depend on $[b_0,b_1]$. It seems intuitive then to pick the values that minimize this value:
+
+$$
+  \underset{b_0,b_1}{\min} \quad\sum_{i=1}^{n}(cons_i - b_0 - b_1 inc_i)^2
+$$
+
+# Ordinary Least Squares
+
+## Problem
+
+Minimization problem:
+
+$$
+  \hat{\beta}=\underset{b}{\arg\min} \quad\sum_{i=1}^{n}(y_i - b_0 - b_1x_{i1}-\dots-b_kx_{ik})^2
+$$
+
+where $\hat{\beta} = [\hat{\beta}_0,\hat{\beta}_1,\dots,\hat{\beta}_k]$ and $b=[b_0,b_1,\dots,b_k]$.
+
+- hence the name "Least Squares"
+
+
+
+## First order conditions
+
+Differentiate w.r.t. $b_j$'s and then set to 0. For $\hat{\beta}_0$ (the constant):
+
+  $$
+    \begin{aligned}
+      & 0=2\sum_{i=1}^{n}(y_i - \hat{\beta}_0 - \hat{\beta}_1x_{i1}-\dots-\hat{\beta}_kx_{ik}) \\
+      \Rightarrow \quad & 0=\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{\beta}_0 - \hat{\beta}_1x_{i1}-\dots-\hat{\beta}_kx_{ik}) \\
+      \Rightarrow \quad & \hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x}_{1}-\dots-\hat{\beta}_k\bar{x}_{k}
+    \end{aligned}
+  $$
+  
+:::{.callout-note}
+The inclusion of a constant in the model ensures that the residual is always mean zero:
+
+$$
+  0=\sum_{i=1}^{n}(y_i - \hat{\beta}_0 - \hat{\beta}_1x_{i1}-\dots-\hat{\beta}_kx_{ik})=\sum_{i=1}^{n}\hat{u}_i
+$$
+
+:::
+  
+##
+
+For $\hat{\beta}_j\quad j=1,\dots,k$
+
+  $$
+    \begin{aligned}
+      & 0=2\sum_{i=1}^{n}(y_i - \hat{\beta}_0 - \hat{\beta}_1x_{i1}-\dots-\hat{\beta}_kx_{ik})x_{ij} \\
+      \Rightarrow \quad &0= \sum_{i=1}^{n}(y_i - \hat{\beta}_0 - \hat{\beta}_1x_{i1}-\dots-\hat{\beta}_kx_{ik})x_{ij}
+    \end{aligned}
+  $$
+
+There are $k$ of these first-order conditions (plus the 1 for the constant)
+
+$\Rightarrow$ $k+1$ equations and $k+1$ unknowns. 
+  
+## Simple case
+
+In the case of a single regressor, the solution is more easily solved. 
+
+- For $\hat{\beta}_0$ (the constant):
+
+$$
+   \hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x}
+$$
+  
+##
+
+- For $\hat{\beta}_1$:
+
+$$
+  \begin{aligned}
+    & 0=2\sum_{i=1}^{n}(y_i - \hat{\beta}_0 - \hat{\beta}_1x_{i})x_{i} \\
+    \Rightarrow \quad & 0=\sum_{i=1}^{n}\big(y_i - (\textcolor{blue}{\bar{y} - \hat{\beta}_1\bar{x}}) - \hat{\beta}_1x_{i}\big)x_{i} \qquad \text{substitute in}\quad \textcolor{blue}{\hat{\beta}_0}\\
+    \Rightarrow \quad & 0=\sum_{i=1}^{n}\big((y_i -\bar{y})  - \hat{\beta}_1(x_{i}-\bar{x})\big)x_{i}
+  \end{aligned}
+$$
+
+##
+
+The next step explooits the fact that:
+
+$$
+  \sum_{i=1}^{n}\hat{u}_i=0 \Rightarrow \bar{x}\sum_{i=1}^{n}\hat{u}_i=0 \Rightarrow \textcolor{red}{\sum_{i=1}^{n}\hat{u}_i\bar{x}}=0
+$$
+
+Therefore we can minus 0 from the right-hand side without changing anything.
+
+$$
+  \begin{aligned}
+    & 0=\sum_{i=1}^{n}\big(\underbrace{(y_i -\bar{y})  - \hat{\beta}_1(x_{i}-\bar{x})}_{\hat{u}_i}\big)x_{i} -\textcolor{red}{\sum_{i=1}^{n}\hat{u}_i\bar{x}}\\
+    \Rightarrow \quad & 0=\sum_{i=1}^{n}\big((y_i -\bar{y})  - \hat{\beta}_1(x_{i}-\bar{x})\big)(x_{i}-\bar{x})   \\
+    \Rightarrow \quad & \hat{\beta}_1 = \frac{\sum_{i=1}^{n}(y_i -\bar{y})(x_{i}-\bar{x})}{\sum_{i=1}^{n}(x_{i}-\bar{x})^2} = \frac{\widehat{Cov}(y_i,x_i)}{\widehat{Var}(x_i)}
+  \end{aligned}
+$$
+
+:::: {.content-visible unless-format="revealjs"}
+::: {.callout-tip title="Linear algebra"  collapse=true}
+The above expression - along with its multivariate counterpart - has a very nice linear algebra counterpart. The vector of OLS estimators (including the intercept) is given by,
+
+$$
+  \hat{\beta} = (X'X)^{-1}X'Y
+$$
+
+Where $X$ is a $n\times (k+1)$ matrix of regressors (including vector of $1$'s for the intercept) and $Y$ a $n\times 1$ vector. It's a very simple expression and demonstrates the value of knowing a little linear algebra. This how you define the OLS estimator in graduate-level modules like [EC5207](https://www.st-andrews.ac.uk/subjects/modules/catalogue/?meta_modulecode=EC5207) *Econometric Methods and Applications*.
+:::
+::::
+
+
+## Sample Analogue
+
+Recall from Lecture 1, under the MLR assumptions (notably, $E[x_iu_i]=0$)
+
+$$
+  \begin{aligned}
+    \beta_1 =& \frac{Cov(y_i,x_i)}{Var(x_i)} \\
+    \beta_0 =& E[y_i]-\beta_1E[x_i]
+  \end{aligned}
+$$
+
+The OLS estimators for a simple model are the **sample analogue**
+
+$$
+  \begin{aligned}
+    \hat{\beta}_1 =& \frac{\widehat{Cov}(y_i,x_i)}{\widehat{Var}(x_i)} \\
+    \hat{\beta}_0 =& \bar{y} - \hat{\beta}_1\bar{x}
+  \end{aligned}
+$$
+
+OLS replaces expectations with sample averages. 
+
+## Decomposition
+
+Given the OLS estimates, we can decompose the outcome into two parts: fitted values ($\hat{y}_i$) and residual ($\hat{u}_i$)
+
+$$
+  y_i = \underbrace{\hat{\beta_0} + \hat{\beta_1} x_i}_{\hat{y}_i} + \hat{u}_i
+$$
+
+## Fitted values
+
+You can show, 
+
+- $\sum_{i=1}^{n} \hat{u}_i=0$: residuals are mean zero
+
+- $\sum_{i=1}^{n} x_i\hat{u}_i=0$: residuals and regressors are uncorrelated
+
+- $\sum_{i=1}^{n} \hat{y}_i\hat{u}_i=0$: residuals and fitted values are uncorrelated
+
+- $\sum_{i=1}^{n} \hat{y}_i = \sum_{i=1}^{n} y_i$: fitted values have the same mean as outcome
+
+- $\sum_{i=1}^{n} y_i\hat{u}_i=\sum_{i=1}^{n} (\hat{y}_i+\hat{u}_i)\hat{u}_i=\sum_{i=1}^{n} \hat{u}_i^2$
+
+Some of these are exercises in [Tutorial 1](tutorial-1.qmd)
+
+## Interpretation
+
+The $\hat{y}_i = \hat{\beta_0} + \hat{\beta_1} x_i$ also gives us the interpration of the estimator:
+
+$$
+  \hat{\beta}_1 = \frac{d \hat{y}_i}{d x_i}\quad \text{OR}\quad \Delta \hat{y}_i = \hat{\beta}_1 \Delta x_i
+$$
+
+and 
+
+$$
+  \hat{\beta}_0 = \hat{y}_i\quad \text{for}\; x_i = 0
+$$
+
+# Example: LCF (2023)
+
+## Estimation
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| code-fold: false
+#| output: true
+
+* Estimate bivariate linear regression
+regress hhcon hhinc
+```
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: false
+#| warning: false
+
+# Estimate bivariate linear regression
+model1 <- lm(hhcon ~ hhinc, data = lcf_data)
+
+# View results
+summary(model1)
+```
+:::
+
+## Decomposition {.scrollable}
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| code-fold: true
+#| output: false
+
+* Generate fitted values and residuals
+predict fitted
+predict residual, resid
+```
+
+```{stata}
+#| echo: true
+#| code-fold: false
+#| output: true
+* Compute averages
+sum hhcon fitted residual
+```
+
+```{stata}
+#| echo: true
+#| code-fold: false
+#| output: true
+* Compute variance-covariance matrix
+corr hhcon fitted residual, cov
+```
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+# Get fitted values and residuals
+reg_vals <- data.frame(
+  hhcon    = lcf_data$hhcon,
+  fitted   = fitted(model1),
+  resid    = residuals(model1)
+)
+```
+```{r}
+#| echo: true
+#| code-fold: false
+#| warning: false
+# Compute averages
+colMeans(reg_vals)
+```
+```{r}
+#| echo: true
+#| code-fold: false
+#| warning: false
+# Compute variance-covariance matrix
+var(reg_vals)
+```
+:::
+
+## Fitted values {.scrollable}
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| code-fold: true
+#| output: false
+
+* Plot
+twoway (scatter hhcon hhinc, mc(black) mfc(%50)) (scatter fitted hhinc, mc(red) mfc(%50) msize(small) ms(S)) (function y = _b[_cons] + _b[hhinc]*x, lc(red) lp(solid) range(0 3000)), ytitle("Household consumption (£/week)") xtitle("Household income (£/week)") title("Household consumption vs income (LCF, 2023)") legend(order(1 "Observed" 2 "Fitted values") r(2) pos(2) ring(0))
+```
+
+
+```{stata}
+#| echo: false
+#| output: false
+graph export "material/lecture-2/lcf-decomp1.png", replace
+```
+![](material/lecture-2/lcf-decomp1.png){fig-align="center" width=67%}
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+#| fig-align: center
+
+# Data frame with the x-variable plus fitted values and residuals
+plot_vals <- data.frame(
+  hhinc  = model.frame(model1)$hhinc,  # exactly the rows lm() used
+  hhcon  = model.frame(model1)$hhcon,
+  fitted = fitted(model1),
+  resid  = residuals(model1)
+)
+
+# Plot
+ggplot(plot_vals, aes(x = hhinc, y = hhcon)) +
+  geom_point(aes(colour = "Observed"), alpha = 0.5) +
+  geom_point(aes(y = fitted, colour = "Fitted values"), shape = 15, size = 2, alpha = 0.5) +
+  geom_abline(intercept = coef(model1)[1], slope = coef(model1)[2],
+              colour = "red", linewidth = 0.7) +
+  scale_colour_manual(values = c("Observed" = "grey30",
+                                 "Fitted values" = "red")) +
+  labs(x = "Household income (£/week)",
+       y = "Household consumption (£/week)",
+       title = "Household consumption vs income (LCF, 2023)",
+       colour = NULL) +
+  theme_minimal() +
+  theme(legend.position = c(0.98, 0.98),
+        legend.justification = c(1, 1))
+```
+:::
+
+## Residual {.scrollable}
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| code-fold: true
+#| output: false
+
+* Plot
+twoway (scatter hhcon hhinc, mc(black) mfc(%50)) (scatter residual hhinc, mc(green) mfc(%50) msize(small) ms(D)), ytitle("Household consumption (£/week)") xtitle("Household income (£/week)") title("Household consumption vs income (LCF, 2023)") legend(order(1 "Observed" 2 "Residuals") r(2) pos(2) ring(0)) yline(0, lc(green) lp(solid))
+```
+
+```{stata}
+#| echo: false
+#| output: false
+graph export "material/lecture-2/lcf-decomp2.png", replace
+```
+![](material/lecture-2/lcf-decomp2.png){fig-align="center" width=67%}
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+#| fig-align: center
+
+# Data frame with the x-variable plus fitted values and residuals
+plot_vals <- data.frame(
+  hhinc  = model.frame(model1)$hhinc,  # exactly the rows lm() used
+  hhcon  = model.frame(model1)$hhcon,
+  fitted = fitted(model1),
+  resid  = residuals(model1)
+)
+
+# Plot
+ggplot(plot_vals, aes(x = hhinc, y = hhcon)) +
+  geom_point(aes(colour = "Observed"), alpha = 0.5) +
+  geom_point(aes(y = resid, colour = "Residuals"), shape = 18, size = 2, alpha = 0.5) +
+  geom_hline(yintercept = 0, colour = "green", linewidth = 0.7) +
+  scale_colour_manual(values = c("Observed" = "grey30",
+                                 "Residuals" = "green")) +
+  labs(x = "Household income (£/week)",
+       y = "Household consumption (£/week)",
+       title = "Household consumption vs income (LCF, 2023)",
+       colour = NULL) +
+  theme_minimal() +
+  theme(legend.position = c(0.98, 0.98),
+        legend.justification = c(1, 1))
+```
+:::
+
+## Binary regressor:
+
+What happens if the regressor is a 'dummy' variable?
+
+$$
+[hhcons_i, children_i]
+$$
+
+where $children_i$
+
+- $=1$: household has children, 
+- $=0$: household does not have children
+
+
+## Summary stats
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| code-fold: true
+#| output: true
+
+* Summary table
+tab children, sum(hhcon)
+```
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+
+# Summary table
+tapply(lcf_data$hhcon, lcf_data$children, mean, na.rm = TRUE)
+```
+:::
+
+## OLS - dummy variable
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| code-fold: true
+#| output: true
+
+* Estimate bivariate linear regression
+reg hhcon children
+```
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+
+# Estimate bivariate linear regression
+model_dummy <- lm(hhcon ~ children, data=lcf_data)
+
+summary(model_dummy)
+```
+:::
+
+## 
+
+You can show, 
+
+$$
+  \begin{aligned}
+    \hat{\beta}_1 =& \bar{y}_1-\bar{y}_0 \\
+    \hat{\beta}_0 =& \bar{y}_0
+  \end{aligned}
+$$
+
+where, 
+
+- $\bar{y}_0$ is the mean of the outcome for observations with $x=0$ 
+- $\bar{y}_1$ is the mean of the outcome for observations with $x=1$t
+
+**Yields a very intuitive interpretation of the OLS estimator**
+
+## Sample analogue
+
+This is the sample analogue of 
+
+$$
+  \begin{aligned}
+    \beta_1 =& E[y_i|x_i=1]-E[y_i|x_i=0] \\
+    \beta_0 =& E[y_i|x_i=0]
+  \end{aligned}
+$$
+
+Which was the interpretation of the population parameter in a model with a binary ('dummy') variable.
+
+## Multivariate models
+
+What happens if you have two regressors
+
+$$
+[hhcons_i, hhinc_i, children, hhsize_i]
+$$
+
+## OLS - multivariate
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| code-fold: true
+#| output: true
+
+* Estimate bivariate linear regression
+reg hhcon hhinc children hhsize
+```
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+
+# Estimate bivariate linear regression
+model_multi <- lm(hhcon ~ hhinc + children + hhsize, data=lcf_data)
+
+summary(model_multi)
+```
+:::
+
+## Interpretation
+
+Interpretation follows from the fact that, 
+
+$$
+  \hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \hat{\beta}_2 x_{i2} + \dots + \hat{\beta}_k x_{ik}
+$$  
+
+
+$$
+  \hat{\beta}_j = \frac{\partial \hat{y}_i}{\partial x_{ij}}
+$$
+
+or 
+
+$$
+\Delta \hat{y}_i = \hat{\beta}_j \Delta x_{ij} \quad \text{holding other }x\text{'s fixed}
+$$
+
+## Partialling out
+
+The following result is called the **Frisch-Waugh Theorem** [@wooldridge2025, p. 76]
+
+::: {.fragment .fade-in}
+The OLS estimate for $\hat{\beta}_1$ from the multivariate 'projection'
+
+$$
+  \hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \hat{\beta}_2 x_{i2} + \dots + \hat{\beta}_k x_{ik}
+$$
+
+is the same as the OLS estimate for $\hat{\gamma}_1$ simple 'projection'
+
+$$
+  \hat{\tilde{y}}_i = \hat{\gamma}_0 + \hat{\gamma}_1 \tilde{x}_{i1}
+$$
+
+:::
+
+:::: {.content-visible unless-format="revealjs"}
+::: {.callout-tip title="Projection"  collapse=true}
+Why the phrase 'projection'? One interpretation of OLS is geometric. The estimator 'projects' the outcome ($Y$) in the (vector) space spanned by the regressors (columns of $X$). 
+
+$$
+  \hat{Y}=X\hat{\beta} = \underbrace{X(X'X)^{-1}X'}_{P_X}Y
+$$
+
+The predicted value of $Y$ is just a 'projection' of $Y$: $P_X Y$. $P_X$ is an idempotent projection matrix. The residual then is, 
+
+$$
+\hat{U} = Y-\hat{Y} = Y-P_X Y = (\underbrace{I-P_X}_{M_X})Y
+$$
+
+$M_X$ is another idempotent projection matrix. And crucially, $M_XP_X = 0$: the two projections are orthogonal. So, OLS projects Y into two vector spaces: one spanned ('explained by') $X$ and another orthogonal to that space. The predicted values and residuals are mechanically orthogonal, which means that they are perfectly uncorrelated *in the data*. 
+:::
+::::
+
+
+##
+
+where, 
+
+- $\tilde{x}_{i1}$ is the residual from the regression of $x_{1}$ against all other regressors
+
+$$
+  \tilde{x}_{i1} = x_{i1}  -( \hat{\rho}_0 + \hat{\rho}_1x_{i2} + \dots + \hat{\rho}_{k-1}x_{ik}) 
+$$
+
+and,
+
+::: {.fragment .fade-in}
+
+- $\tilde{y}_{i}$ is the residual from the regression of $y$ against all regressors *excluding* $x_{1}$
+
+$$
+ \tilde{y}_{i} = y_{i}  -( \hat{\psi}_0 + \hat{\psi}_1x_{i2} + \dots + \hat{\psi}_{k-1}x_{ik}) 
+$$
+
+:::
+
+## Demonstration
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| code-fold: true
+#| output: true
+
+* Estimate bivariate linear regression
+qui reg hhinc children hhsize
+predict hhinc_tilde, resid
+qui reg hhcon children hhsize
+predict hhcon_tilde, resid
+
+reg hhcon_tilde hhinc_tilde
+```
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+
+# Estimate bivariate linear regression
+model_f1 <- lm(hhinc ~ children + hhsize, data=lcf_data)
+model_f2 <- lm(hhcon ~ children + hhsize, data=lcf_data)
+
+frisch <- data.frame(
+  hhinc_tilde  = residuals(model_f1),  
+  hhcon_tilde  = residuals(model_f2) 
+)
+
+model_frisch <- lm(hhcon_tilde ~ hhinc_tilde, data = frisch)
+summary(model_frisch)
+```
+:::
+
+
+# Goodness-of-Fit
+
+## 
+
+**How well did we fit the data?**
+
+::: {.fragment .fade-in}
+We have decomposed each observation into two parts:
+
+$$
+  y_i = \underbrace{\hat{y}_i}_\text{fitted values} + \underbrace{\hat{u}_i}_\text{residual}
+$$
+
+:::
+
+## 
+
+We can apply this decomposition to the *total sum of squares* (SST)
+
+$$
+  \text{SST} \equiv \sum_{i=1}^n (y_i-\bar{y})^2
+$$
+
+- The SST is a measure of the total variation in $y$. 
+
+##
+
+We can show that [see @wooldridge2025, pp. 33-34], 
+
+$$
+ \text{SST} = \text{SSE} + \text{SSR}
+$$
+
+where, 
+
+- *explained sum of squares* (SSE):
+
+$$
+  \text{SSE} \equiv \sum_{i=1}^n (\hat{y}_i-\bar{y})^2
+$$
+
+- *residual sum of squares* (SSR):
+
+$$
+  \text{SSR} \equiv \sum_{i=1}^n \hat{u}_i^2
+$$
+
+## Measure of fit
+
+One key measure of fit then is:
+
+$$
+  \mathbf{R}^2 = \frac{\text{SSE}}{\text{SST}} = 1-\frac{\text{SSR}}{\text{SST}}
+$$
+
+This measure captures the share of the variance in the outcome variable explained by the regressors. 
+
+- If $\mathbf{R}^2=1$ then regressors perfectly predict the outcome. 
+
+## Chasing $\mathbf{R}^2$
+
+Many students make the mistake of thinking that higher $\mathbf{R}^2$ is always better. Here are reasons this need not be the case:
+
+1. In social sciences, the DGP is often very complex and we don't observe many explanatory variables. 
+
+   - given the same set of $\mathbf{x}$'s, different outcomes may have very different $\mathbf{R}^2$
+
+::: {.fragment .fade-in}
+2. If we care about the relationship between $y$ and a specific $x_j$, we do not necessarily care about explaining all of $y$. 
+
+3. We can always add variables and (mechanically) increase $\mathbf{R}^2$; however, this comes at a potential cost:
+
+   a. we *MAY* inadvertantly increase the variance of our estimates (e.g., *irrelevant* variables)
+   
+   b. we *MAY* end up adding "bad controls"
+:::
+
+## Adjusted $\mathbf{R}^2$
+
+An alternative measure fit is the *adjusted* $\mathbf{R}^2$:
+
+$$
+  \overline{\mathbf{R}}^2 = 1 - \frac{\text{SSR}/(n-k-1)}{\text{SST}/(n-1)} = 1 - (1-\mathbf{R}^2)\times\frac{(n-1)}{(n-k-1)}
+$$
+
+where, 
+
+- $n$ is sample size
+- $k$ is the number of regressors $\Rightarrow$ $k+1$ is the number of parameters estimated (including intercept).
+
+::: {.fragment .fade-in}
+As you increase $k$, you decrease $\overline{\mathbf{R}}^2$
+
+- Creates a disincentive to add irrelevant regressors that do not also reduce $SSR$.
+
+:::
+
+## Example: LCF (2023)
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: false
+
+* Report R2 and adj. R2 from stored results
+qui reg hhcon hhinc children hhsize
+dis e(r2)
+dis e(r2_a)
+```
+
+### R
+
+```{r}
+#| echo: false
+#| warning: false
+
+# Pull R2 from summary
+summary(model_multi)$r.squared
+summary(model_multi)$adj.r.squared
+```
+:::
+
+## Adding "irrelevant" variables
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+reg hhcon hhinc hhsize children month tvlicense
+```
+
+### R
+
+```{r}
+#| echo: true
+#| warning: false
+model_irrel <- lm(hhcon ~ hhinc + hhsize + children + month + tvlicense, data = lcf_data)
+summary(model_irrel)
+```
+:::
+
+# Does OLS work?
+
+## 
+
+Are these the "right" numbers?
+
+:::{.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: false
+
+* Estimate bivariate linear regression
+regress hhcon hhinc
+```
+
+### R
+
+```{r}
+#| echo: false
+#| warning: false
+
+# View results
+summary(model1)
+```
+:::
+
+## 
+
+Let's evaluate the question:
+
+::: incremental
+1. it pre-supposes that there is a *right* answer (i.e. a correct estimate)
+
+   - i.e., a *true* population parameter ($\beta$)
+   
+2. it implies a notion of "correctness"
+
+   - do we mean $\beta = 0.27$?
+   - do we mean $\beta \approx 0.27$?
+   - do we mean $\beta$ is 'close to' $0.27$?
+   
+3. it assumes that the OLS estimator can be *right*. 
+:::
+
+## 
+
+First off, let's clarify something:
+
+:::: columns
+::: {.column width="50%"}
+$$
+\hat{\beta}
+$$
+
+- the estimator
+
+**...is a random variable**
+
+:::
+
+::: {.column width="50%"}
+$$
+ 0.27
+$$
+
+- the estimate
+
+**...is just a number**
+:::
+::::
+
+## Accuracy
+
+Is $\hat{\beta} = \beta$?
+
+:::: {.fragment .fade-in}
+
+::: incremental
+- No!
+
+- In fact, the statement does not make sense since $\hat{\beta}$ is a random variable while $\beta$ is a non-random constant. 
+
+- If we are accurate, we can ask: $Pr(\hat{\beta}=\beta)=?$
+
+- The answer is: $Pr(\hat{\beta}=\beta|\mathbf{x})=0$ for any $u$ with a continuous distribution (conditional on $\mathbf{x}$).
+
+:::
+
+::::
+
+## Random variable
+
+In what sense is $\hat{\beta}$ a random variable?
+
+- The realized value of $\hat{\beta}$ depends on the realized sample[^1]
+
+[^1]: Recall, if $u$ is independent of $\mathbf{x}$, then we can treat $\mathbf{x}$ as fixed. Therefore, the randomness (across samples) is really from different realizations of $u$. However, any discussion of $u$ and $\mathbf{x}$ pre-supposes a model which we have not yet defined. 
+
+- In another 'state of the world', the sample may have realized differently
+
+## Example: LCF (2023) - Version 2
+
+I randomly sampled 200 observations from the LCF (2023) data, but could have equally have sampled a different 200 observations
+
+:::{.panel-tabset}
+### Stata 
+
+```{stata}
+#| echo: false
+
+* Open data
+use "$data_dir\lcf_2023_s2.dta", clear
+
+* Estimate bivariate linear regression
+reg hhcon hhinc
+```
+
+### R
+
+```{r}
+#| echo: false
+#| warning: false
+
+# Open data
+lcf_data2 <- read_dta(file.path(data_dir, "lcf_2023_s2.dta"))
+
+# Estimate bivariate linear regression
+model2 <- lm(hhcon ~ hhinc, data = lcf_data2)
+
+# View results
+summary(model2)
+```
+:::
+
+
+## Example: LCF (2023) - Version 3
+
+... and again, 
+
+:::{.panel-tabset}
+### Stata 
+
+```{stata}
+#| echo: false
+
+* Open data
+use "$data_dir\lcf_2023_s3.dta", clear
+
+* Estimate bivariate linear regression
+reg hhcon hhinc
+```
+
+### R
+
+```{r}
+#| echo: false
+#| warning: false
+
+# Open data
+lcf_data3 <- read_dta(file.path(data_dir, "lcf_2023_s3.dta"))
+
+# Estimate bivariate linear regression
+model3 <- lm(hhcon ~ hhinc, data = lcf_data3)
+
+# View results
+summary(model3)
+```
+:::
+
+## Example: LCF (2023) - Version 4
+
+... and again. 
+
+:::{.panel-tabset}
+### Stata 
+
+```{stata}
+#| echo: false
+
+* Open data
+use "$data_dir\lcf_2023_s4.dta", clear
+
+* Estimate bivariate linear regression
+reg hhcon hhinc
+```
+
+### R
+
+```{r}
+#| echo: false
+#| warning: false
+
+# Open data
+lcf_data4 <- read_dta(file.path(data_dir, "lcf_2023_s4.dta"))
+
+# Estimate bivariate linear regression
+model4 <- lm(hhcon ~ hhinc, data = lcf_data4)
+
+# View results
+summary(model4)
+```
+:::
+
+## 
+Can we **expect** -- *a priori* -- for $\hat{\beta}$ to be "on target"?
+
+:::: {.fragment .fade-in}
+
+::: incremental
+
+- This is a question of *biasedness*: is $E[\hat{\beta}] = \beta$?
+
+- The answer: it depends!
+
+- Specifically, it depends on the underlying **model**! 
+
+:::
+
+::::
+
+:::: {.content-visible unless-format="revealjs"}
+::: {.callout-note}
+It is an all to common mistake to conflate the estimator - in particular, the OLS estimator - with the linear regression model. People will say, "We estimate an OLS regression model". This doesn't really make sense, since you OLS is the estimator, not the name of the model. You can say, "We estimate a linear regression model using OLS". 
+
+This may seem pedantic, but it is an important distinction since there are a range of estimators that can be used to estimate a linear regression model; all with different properties. In addition, the OLS estimator can be applied to any data, regardless of the true model. So it is a good idea to make sure your language is accurate. 
+:::
+::::
+
+# References
+
+## Bibliography

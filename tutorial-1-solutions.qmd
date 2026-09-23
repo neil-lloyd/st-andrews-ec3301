@@ -335,7 +335,7 @@ This simple model can be rationalized by a model in which workers choose the len
 
 :::{.border}
 $$
-  \frac{\partial E[\ln(wage_i)|edu_i,exp_i]}{\partial exp_i} = \beta_2 + \beta_3 exp_i
+  \frac{\partial E[\ln(wage_i)|edu_i,exp_i]}{\partial exp_i} = \beta_2 + 2\times\beta_3 exp_i
 $$
 
 The function will be convex (concave) if the second derivate is positive (negative). This then depends on the sign of $\beta_3$, which is not known. 

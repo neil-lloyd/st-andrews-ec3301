@@ -17,8 +17,8 @@ website:
             text: Pre-sessional Lecture
           - href: lecture-1-multi.qmd
             text: Lecture 1
-#          - href: lecture-2.qmd
-#            text: Lecture 2
+          - href: lecture-2-multi.qmd
+            text: Lecture 2
 #          - href: lecture-3.qmd
 #            text: Lecture 3
 #          - href: lecture-4.qmd
@@ -57,10 +57,10 @@ website:
 #            text: Lab 5 (Stata)
 #          - href: lab-5-R.qmd
 #            text: Lab 5 (R)  
-#      - text: Tutorials
-#        menu:
-#          - href: tutorial-1.qmd
-#            text: Tutorial 1
+      - text: Tutorials
+        menu:
+          - href: tutorial-1.qmd
+            text: Tutorial 1
 #          - href: tutorial-1.qmd
 #            text: Tutorial 1 (Solutions)
 #          - href: tutorial-2.qmd

@@ -40,60 +40,6 @@ This lecture covers material from @wooldridge2025:
 *We will cover the Potential Outcomes Framework (Ch. 2.7a - "Counterfactual (or Potential) Outcomes, Causality, and Policy Analysis") in Week 7. For now, it is only important to know the interpretation of a regression on a binary ("dummy") variable.
 :::
 
-:::::{.content-visible when-format="revealjs"}
-## 2 💊's, 1 medicine
-
-:::: columns
-::: {.column width="50%"}
-🟦 [Wooldridge]{style="color:#00539b;"} 💊
-
-1. Simple Linear Model
-
-2. Ordinary Least Squares
-
-3. Properties of OLS
-
-4. Multivariate Model
-
-5. Inference
-:::
-
-::: {.column width="50%"}
-🔴 [Neil]{style="color:#c60c46;"} 💊
-
-1. Linear Regression Model
-
-2. Classical Linear Regression Model
-   - Simple vs multivariate case
-   
-3. Ordinary Least Squares
-   - Simple vs multivariate case
-
-4. Properties of OLS
-
-5. Inference
-:::
-::::
-Over the next 3 lectures will cover most of Chapters 2-4 from Wooldridge. 
-:::::
-
-
-:::{.content-visible when-format="revealjs"}
-## Today
-
-Today we take the "May Dip" (shock therapy) approach
-
-1. Straight in the deep end (cold plunge)
-
-2. Come up for air
-
-3. Swim to the shallows
-
-4. Reflect on our (joint) trauma
-:::
-
-
-
 ## Linear Regression Model
 
 General form:
@@ -101,8 +47,6 @@ General form:
 $$
   y = \beta_0 + \beta_1x_{1} + \beta_2x_{2}+\dots + \beta_kx_{k} + u
 $$
-
- 
 
 ## Component \#1: Data
 
@@ -116,8 +60,6 @@ The **observable** variables in the model are,
 - $x_{1},x_{2},\dots,x_{k}$: the $k$ regressors (independent variables).[^1]
 
 [^1]: There are other words given to the righthand-side variables; including "control variables" and "covariates". These terms have a particular meaning which will become clearer at a later stage.
-
-
 
 ## Component \#2: Parameters
 
@@ -259,9 +201,7 @@ ggplot(df, aes(x, y)) +
   geom_abline(intercept = b0, slope = b1, color = "red")
 ```
 
-
 Econometricians use such approaches to study the properties of estimators. It is often referred to as a Monte Carlo simulation. Given that you know the true value of the population parameters, you can examine how well the estimator performs across multiple simulations. 
-
 
 ## Approach \#2: Prediction
 
@@ -521,7 +461,6 @@ The model has 3 parameters.
 
 ##
 
-
 BUT there is a linear formula that links temperature in $F^\circ\Rightarrow C^\circ$:  $F^\circ = 9/5\cdot C^\circ+32$. 
 
 - Plug this into the equation:
@@ -537,7 +476,6 @@ $$
 The model has 2 parameters now. 
 
 - The third was not identified because the variable $tempF_i$ is perfectly collinear with $tempC_i$ and the constant in the model.
-
 
 ## MLR \#4
 
@@ -654,7 +592,6 @@ $$
   0 = E[u_i] = E[y_i - \beta_0 - \beta_1x_i]\Rightarrow \beta_0 = E[y_i]-\beta_1 E[x_i]
 $$
 
-
 **Step 2**: Substitute $u_i = y_i - \beta_0 -\beta_1x_i$ into (2)
 
 $$
@@ -662,7 +599,6 @@ $$
 $$
 
 **Step 3**: Substitute the solution for $\beta_0$
-
 
 $$
   0 = E[y_ix_i]-\beta_0E[x_i]-\beta_1E[x_i^2] = E[y_ix_i] - (E[y_i]-\beta_1 E[x_i])E[x_i] - \beta_1 E[x_i^2]
@@ -902,8 +838,6 @@ $$
 - With MLR. 1-4, $E[y_i|x_i] = \beta_0 + \beta_1 x_i$ (i.e. the population regression function)
 
 :::
-
-
 
 ## Interpretation: Binary regressor
 
@@ -1210,8 +1144,6 @@ $$
   \ln(wage_i) = \beta_0 + \beta_1 exp_i + \beta_2 age_i + \beta_3 edu_i + u_i
 $$
    
-
-
 :::
 
 ## Answers {.scrollable}

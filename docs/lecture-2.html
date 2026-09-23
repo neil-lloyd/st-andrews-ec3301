@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -107,6 +127,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+
+<script src="site_libs/datatables-binding-0.34.0/datatables.js"></script>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+
+<script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link href="site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -338,6 +378,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./lecture-1.html">
  <span class="dropdown-text">Lecture 1</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-2.html">
+ <span class="dropdown-text">Lecture 2</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -352,6 +396,17 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="./lab-1-R.html">
  <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./tutorial-1.html">
+ <span class="dropdown-text">Tutorial 1</span></a>
   </li>  
     </ul>
   </li>
@@ -407,8 +462,10 @@ window.Quarto = {
   <li><a href="#ordinary-least-squares" id="toc-ordinary-least-squares" class="nav-link" data-scroll-target="#ordinary-least-squares">Ordinary Least Squares</a></li>
   <li><a href="#example-lcf-2023" id="toc-example-lcf-2023" class="nav-link" data-scroll-target="#example-lcf-2023">Example: LCF (2023)</a></li>
   <li><a href="#goodness-of-fit" id="toc-goodness-of-fit" class="nav-link" data-scroll-target="#goodness-of-fit">Goodness-of-Fit</a></li>
+  <li><a href="#does-ols-work" id="toc-does-ols-work" class="nav-link" data-scroll-target="#does-ols-work">Does OLS work?</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-2-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-2-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="lecture-2-notes-Stata.pdf"><i class="bi bi-file-pdf"></i>PDF with Stata</a></li><li><a href="lecture-2-notes-R.pdf"><i class="bi bi-file-pdf"></i>PDF with R</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -434,26 +491,23 @@ window.Quarto = {
 </header>
 
 
+<section id="reading" class="level2">
+<h2 class="anchored" data-anchor-id="reading">Reading</h2>
+<p>This lecture covers material from <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>:</p>
+<ul>
+<li>Chapter 2.2 - “Deriving the Ordinary Least Squares Estimates”</li>
+<li>Chapter 2.3 - “Properties of OLS on Any Sample of Data”</li>
+<li>Chapter 2.4 - “Units of Measurement and Functional Form” (covered in Lecture 1)</li>
+<li>Chapter 3.2 - “Mechanics and Interpretation of Ordinary Least Squares”</li>
+<li>Chapter 6.3 - “More on Goodness-of-Fit and Selection of Regressors”</li>
+</ul>
+<p>The lecture does not cover Chapter 2.6 “Regression through the Origin and Regression on a Constant”. I would suggest reading the section, but we will not have time to cover it.</p>
+</section>
 <section id="data" class="level1">
 <h1>Data</h1>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
-<p>We start with the multivariate linear regression model,</p>
-<p><span class="math display">\[
-  y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}+\dots + \beta_kx_{ik} + u_i
-\]</span></p>
-<p>which could represent:</p>
-<ul>
-<li>the true data generating process,</li>
-<li>the conditional expectation function,</li>
-<li>an economic model,</li>
-<li>an estimating equation</li>
-</ul>
-<p>under different assumptions.</p>
-</section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1"></h2>
-<p>Curcially, the model includes data: for each observation we observation</p>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2"></h2>
+<p>For each observation we observe:</p>
 <p><span class="math display">\[
   [y_i, x_{i1}, x_{i2}, \dots, x_{ik}] \quad i = 1, \dots, n
 \]</span></p>
@@ -466,20 +520,21 @@ y_2 &amp; x_{21} &amp; x_{22} &amp; \dots &amp; x_{2k} \\
 y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 \end{bmatrix}
 \]</span></p>
+<p>Just like in Stata/R</p>
+</section>
+<section id="lcf-2023" class="level2">
+<h2 class="anchored" data-anchor-id="lcf-2023">LCF (2023)</h2>
+<p>Suppose you wanted to estimate the the marginal propensity to consume in the UK using data from the <a href="https://datacatalogue.ukdataservice.ac.uk/series/series/2000028#abstract">Living Costs and Food Survey</a>:</p>
+<ul>
+<li>a <em>household level</em> dataset with information on consumption, income, and other characteristics.</li>
+</ul>
+<p><span class="math display">\[
+  [cons_i, inc_i, children_i,size_i,tv\_license_i,month_i] \quad i = 1, \dots, n
+\]</span></p>
 </section>
 </section>
 <section id="estimation-an-intuitive-approach" class="level1">
 <h1>Estimation: An intuitive approach</h1>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2"></h2>
-<p>Suppose you started with the data? For example, the <a href="https://datacatalogue.ukdataservice.ac.uk/series/series/2000028#abstract">Living Costs and Food Survey</a>:</p>
-<ul>
-<li>a <em>household level</em> dataset with information on consumption and income.</li>
-</ul>
-<p><span class="math display">\[
-  [cons_i, inc_i] \quad i = 1, \dots, n
-\]</span></p>
-</section>
 <section id="section-3" class="level2 scrollable">
 <h2 class="scrollable anchored" data-anchor-id="section-3"></h2>
 <p>Does the relationship between consumption and income look linear?</p>
@@ -507,25 +562,21 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)                  <span class="co"># To load Stata .dta file</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the Stata file</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>lcf_data <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"lcf_2023.dta"</span>))</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lcf_data, <span class="fu">aes</span>(<span class="at">x =</span> hhinc, <span class="at">y =</span> hhcon)) <span class="sc">+</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Household income (£/week)"</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Household consumption (£/week)"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Household consumption vs income (LCF, 2023)"</span>) <span class="sc">+</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the Stata file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lcf_data <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"lcf_2023.dta"</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lcf_data, <span class="fu">aes</span>(<span class="at">x =</span> hhinc, <span class="at">y =</span> hhcon)) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Household income (£/week)"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Household consumption (£/week)"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Household consumption vs income (LCF, 2023)"</span>) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-2_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="lecture-2-multi_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -541,7 +592,7 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-2_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="lecture-2-multi_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -554,7 +605,7 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="lecture-2-multi_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -567,7 +618,7 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-2_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="lecture-2-multi_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -580,7 +631,7 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-2_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="lecture-2-multi_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -594,8 +645,11 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 <h2 class="anchored" data-anchor-id="structure">Structure</h2>
 <p>Let’s formalize the above process:</p>
 <ul>
-<li><p>Goal: we want to pick the line that best fits the data.</p></li>
-<li><p>Problem: what do we mean by “fit”?</p>
+<li><strong>Goal:</strong> we want to pick the line that best fits the data.</li>
+</ul>
+<div class="fragment fade-in">
+<ul>
+<li><p><strong>Problem:</strong> what do we mean by “fit”?</p>
 <ul>
 <li>For a given value of <span class="math inline">\(inc_i\)</span> in the data, the “fitted” value of <span class="math inline">\(cons_i\)</span> is</li>
 </ul>
@@ -606,11 +660,12 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 <ul>
 <li><p>For example,</p>
 <ul>
-<li><p><span class="math inline">\(\widehat{cons}_i = 275 + 0.275 inc_i\)</span></p></li>
-<li><p><span class="math inline">\(\widehat{cons}_i = 500 + 0.15 inc_i\)</span></p></li>
+<li><p><span class="math inline">\(\textcolor{green}{\widehat{cons}_i = 275 + 0.275 inc_i}\)</span></p></li>
+<li><p><span class="math inline">\(\textcolor{purple}{\widehat{cons}_i = 500 + 0.15 inc_i}\)</span></p></li>
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="fit" class="level2">
 <h2 class="anchored" data-anchor-id="fit">Fit</h2>
@@ -622,6 +677,7 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 <ul>
 <li><strong>PROBLEM</strong>: could be negative (i.e.&nbsp;not a measure of distance)</li>
 </ul>
+<div class="fragment fade-in">
 <p><strong>Candidate 2</strong>: absolute value</p>
 <p><span class="math display">\[
   |cons_i - \widehat{cons}_i|
@@ -630,6 +686,7 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 <li><strong>PRO</strong>: intuitive</li>
 <li><strong>CON</strong>: difficult to work with (i.e.&nbsp;not globally differentiable)</li>
 </ul>
+</div>
 </section>
 <section id="section-7" class="level2">
 <h2 class="anchored" data-anchor-id="section-7"></h2>
@@ -663,13 +720,6 @@ y_n &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{nk} \\
 </section>
 <section id="ordinary-least-squares" class="level1">
 <h1>Ordinary Least Squares</h1>
-<section id="notation" class="level2">
-<h2 class="anchored" data-anchor-id="notation">Notation</h2>
-<ul>
-<li>Data: <span class="math inline">\([y_i,x_{i1},x_{i2},\dots,x_{ik}]\quad i=1,\dots,n\)</span></li>
-<li></li>
-</ul>
-</section>
 <section id="problem" class="level2">
 <h2 class="anchored" data-anchor-id="problem">Problem</h2>
 <p>Minimization problem:</p>
@@ -720,8 +770,8 @@ Note
 <p>There are <span class="math inline">\(k\)</span> of these first-order conditions (plus the 1 for the constant)</p>
 <p><span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(k+1\)</span> equations and <span class="math inline">\(k+1\)</span> unknowns.</p>
 </section>
-<section id="univariate-case" class="level2">
-<h2 class="anchored" data-anchor-id="univariate-case">Univariate case</h2>
+<section id="simple-case" class="level2">
+<h2 class="anchored" data-anchor-id="simple-case">Simple case</h2>
 <p>In the case of a single regressor, the solution is more easily solved.</p>
 <ul>
 <li>For <span class="math inline">\(\hat{\beta}_0\)</span> (the constant):</li>
@@ -757,6 +807,26 @@ Note
     \Rightarrow \quad &amp; \hat{\beta}_1 = \frac{\sum_{i=1}^{n}(y_i -\bar{y})(x_{i}-\bar{x})}{\sum_{i=1}^{n}(x_{i}-\bar{x})^2} = \frac{\widehat{Cov}(y_i,x_i)}{\widehat{Var}(x_i)}
   \end{aligned}
 \]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Linear algebra">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Linear algebra
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The above expression - along with its multivariate counterpart - has a very nice linear algebra counterpart. The vector of OLS estimators (including the intercept) is given by,</p>
+<p><span class="math display">\[
+  \hat{\beta} = (X'X)^{-1}X'Y
+\]</span></p>
+<p>Where <span class="math inline">\(X\)</span> is a <span class="math inline">\(n\times (k+1)\)</span> matrix of regressors (including vector of <span class="math inline">\(1\)</span>’s for the intercept) and <span class="math inline">\(Y\)</span> a <span class="math inline">\(n\times 1\)</span> vector. It’s a very simple expression and demonstrates the value of knowing a little linear algebra. This how you define the OLS estimator in graduate-level modules like <a href="https://www.st-andrews.ac.uk/subjects/modules/catalogue/?meta_modulecode=EC5207">EC5207</a> <em>Econometric Methods and Applications</em>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="sample-analogue" class="level2">
 <h2 class="anchored" data-anchor-id="sample-analogue">Sample Analogue</h2>
@@ -767,7 +837,7 @@ Note
     \beta_0 =&amp; E[y_i]-\beta_1E[x_i]
   \end{aligned}
 \]</span></p>
-<p>The OLS estimators for a univariate model are the <strong>sample analogue</strong></p>
+<p>The OLS estimators for a simple model are the <strong>sample analogue</strong></p>
 <p><span class="math display">\[
   \begin{aligned}
     \hat{\beta}_1 =&amp; \frac{\widehat{Cov}(y_i,x_i)}{\widehat{Var}(x_i)} \\
@@ -782,7 +852,10 @@ Note
 <p><span class="math display">\[
   y_i = \underbrace{\hat{\beta_0} + \hat{\beta_1} x_i}_{\hat{y}_i} + \hat{u}_i
 \]</span></p>
-<p>where:</p>
+</section>
+<section id="fitted-values" class="level2">
+<h2 class="anchored" data-anchor-id="fitted-values">Fitted values</h2>
+<p>You can show,</p>
 <ul>
 <li><p><span class="math inline">\(\sum_{i=1}^{n} \hat{u}_i=0\)</span>: residuals are mean zero</p></li>
 <li><p><span class="math inline">\(\sum_{i=1}^{n} x_i\hat{u}_i=0\)</span>: residuals and regressors are uncorrelated</p></li>
@@ -790,6 +863,18 @@ Note
 <li><p><span class="math inline">\(\sum_{i=1}^{n} \hat{y}_i = \sum_{i=1}^{n} y_i\)</span>: fitted values have the same mean as outcome</p></li>
 <li><p><span class="math inline">\(\sum_{i=1}^{n} y_i\hat{u}_i=\sum_{i=1}^{n} (\hat{y}_i+\hat{u}_i)\hat{u}_i=\sum_{i=1}^{n} \hat{u}_i^2\)</span></p></li>
 </ul>
+<p>Some of these are exercises in <a href="./tutorial-1.html">Tutorial 1</a></p>
+</section>
+<section id="interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation">Interpretation</h2>
+<p>The <span class="math inline">\(\hat{y}_i = \hat{\beta_0} + \hat{\beta_1} x_i\)</span> also gives us the interpration of the estimator:</p>
+<p><span class="math display">\[
+  \hat{\beta}_1 = \frac{d \hat{y}_i}{d x_i}\quad \text{OR}\quad \Delta \hat{y}_i = \hat{\beta}_1 \Delta x_i
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+  \hat{\beta}_0 = \hat{y}_i\quad \text{for}\; x_i = 0
+\]</span></p>
 </section>
 </section>
 <section id="example-lcf-2023" class="level1">
@@ -801,7 +886,7 @@ Note
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>* Estimate univariate linear regression</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>* Estimate bivariate linear regression</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> hhcon hhinc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Source |       SS           df       MS      Number of obs   =       200
@@ -822,7 +907,7 @@ Note
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate univariate linear regression</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate bivariate linear regression</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hhcon <span class="sc">~</span> hhinc, <span class="at">data =</span> lcf_data)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View results</span></span>
@@ -925,8 +1010,8 @@ resid   84413.96 2.331285e-12 8.441396e+04</code></pre>
 </div>
 </div>
 </section>
-<section id="fitted-values" class="level2 scrollable">
-<h2 class="scrollable anchored" data-anchor-id="fitted-values">Fitted values</h2>
+<section id="fitted-values-1" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="fitted-values-1">Fitted values</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">R</a></li></ul>
 <div class="tab-content">
@@ -975,7 +1060,7 @@ resid   84413.96 2.331285e-12 8.441396e+04</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-2_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="lecture-2-multi_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1033,9 +1118,372 @@ resid   84413.96 2.331285e-12 8.441396e+04</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-2_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="lecture-2-multi_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="binary-regressor" class="level2">
+<h2 class="anchored" data-anchor-id="binary-regressor">Binary regressor:</h2>
+<p>What happens if the regressor is a ‘dummy’ variable?</p>
+<p><span class="math display">\[
+[hhcons_i, children_i]
+\]</span></p>
+<p>where <span class="math inline">\(children_i\)</span></p>
+<ul>
+<li><span class="math inline">\(=1\)</span>: household has children,</li>
+<li><span class="math inline">\(=0\)</span>: household does not have children</li>
+</ul>
+</section>
+<section id="summary-stats" class="level2">
+<h2 class="anchored" data-anchor-id="summary-stats">Summary stats</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>* Summary <span class="kw">table</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> children, <span class="kw">sum</span>(hhcon)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>            |      Summary of COICOP: Total
+            | consumption expenditure - children
+            |             and adults
+   children |        Mean   Std. dev.       Freq.
+------------+------------------------------------
+          0 |   481.09786   342.33194         151
+          1 |    575.2546   278.91476          49
+------------+------------------------------------
+      Total |   504.16626   329.76875         200</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary table</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(lcf_data<span class="sc">$</span>hhcon, lcf_data<span class="sc">$</span>children, mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       0        1 
+481.0979 575.2546 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ols---dummy-variable" class="level2">
+<h2 class="anchored" data-anchor-id="ols---dummy-variable">OLS - dummy variable</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>* Estimate bivariate linear regression</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> hhcon children</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =      3.05
+       Model |  327978.835         1  327978.835   Prob &gt; F        =    0.0824
+    Residual |    21312759       198  107640.197   R-squared       =    0.0152
+-------------+----------------------------------   Adj R-squared   =    0.0102
+       Total |  21640737.9       199  108747.427   Root MSE        =    328.09
+
+------------------------------------------------------------------------------
+       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    children |   94.15674   53.94059     1.75   0.082    -12.21506    200.5285
+       _cons |   481.0979   26.69923    18.02   0.000     428.4465    533.7492
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate bivariate linear regression</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>model_dummy <span class="ot">&lt;-</span> <span class="fu">lm</span>(hhcon <span class="sc">~</span> children, <span class="at">data=</span>lcf_data)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_dummy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hhcon ~ children, data = lcf_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-405.94 -248.78  -60.47  110.39 1501.92 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   481.10      26.70  18.019   &lt;2e-16 ***
+children       94.16      53.94   1.746   0.0824 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 328.1 on 198 degrees of freedom
+Multiple R-squared:  0.01516,   Adjusted R-squared:  0.01018 
+F-statistic: 3.047 on 1 and 198 DF,  p-value: 0.08244</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="section-11" class="level2">
+<h2 class="anchored" data-anchor-id="section-11"></h2>
+<p>You can show,</p>
+<p><span class="math display">\[
+  \begin{aligned}
+    \hat{\beta}_1 =&amp; \bar{y}_1-\bar{y}_0 \\
+    \hat{\beta}_0 =&amp; \bar{y}_0
+  \end{aligned}
+\]</span></p>
+<p>where,</p>
+<ul>
+<li><span class="math inline">\(\bar{y}_0\)</span> is the mean of the outcome for observations with <span class="math inline">\(x=0\)</span></li>
+<li><span class="math inline">\(\bar{y}_1\)</span> is the mean of the outcome for observations with <span class="math inline">\(x=1\)</span>t</li>
+</ul>
+<p><strong>Yields a very intuitive interpretation of the OLS estimator</strong></p>
+</section>
+<section id="sample-analogue-1" class="level2">
+<h2 class="anchored" data-anchor-id="sample-analogue-1">Sample analogue</h2>
+<p>This is the sample analogue of</p>
+<p><span class="math display">\[
+  \begin{aligned}
+    \beta_1 =&amp; E[y_i|x_i=1]-E[y_i|x_i=0] \\
+    \beta_0 =&amp; E[y_i|x_i=0]
+  \end{aligned}
+\]</span></p>
+<p>Which was the interpretation of the population parameter in a model with a binary (‘dummy’) variable.</p>
+</section>
+<section id="multivariate-models" class="level2">
+<h2 class="anchored" data-anchor-id="multivariate-models">Multivariate models</h2>
+<p>What happens if you have two regressors</p>
+<p><span class="math display">\[
+[hhcons_i, hhinc_i, children, hhsize_i]
+\]</span></p>
+</section>
+<section id="ols---multivariate" class="level2">
+<h2 class="anchored" data-anchor-id="ols---multivariate">OLS - multivariate</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>* Estimate bivariate linear regression</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> hhcon hhinc children hhsize</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(3, 196)       =     27.93
+       Model |  6480977.84         3  2160325.95   Prob &gt; F        =    0.0000
+    Residual |    15159760       196  77345.7144   R-squared       =    0.2995
+-------------+----------------------------------   Adj R-squared   =    0.2888
+       Total |  21640737.9       199  108747.427   Root MSE        =    278.11
+
+------------------------------------------------------------------------------
+       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hhinc |   .1937248   .0382801     5.06   0.000     .1182311    .2692185
+    children |  -238.3538   74.84546    -3.18   0.002    -385.9596   -90.74795
+      hhsize |   125.7418   27.57406     4.56   0.000     71.36187    180.1217
+       _cons |   121.2957   47.91901     2.53   0.012     26.79261    215.7987
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate bivariate linear regression</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>model_multi <span class="ot">&lt;-</span> <span class="fu">lm</span>(hhcon <span class="sc">~</span> hhinc <span class="sc">+</span> children <span class="sc">+</span> hhsize, <span class="at">data=</span>lcf_data)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_multi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hhcon ~ hhinc + children + hhsize, data = lcf_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-456.92 -168.81  -58.49   96.59 1437.52 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  121.29566   47.91901   2.531  0.01215 *  
+hhinc          0.19372    0.03828   5.061 9.58e-07 ***
+children    -238.35377   74.84546  -3.185  0.00169 ** 
+hhsize       125.74181   27.57406   4.560 8.99e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 278.1 on 196 degrees of freedom
+Multiple R-squared:  0.2995,    Adjusted R-squared:  0.2888 
+F-statistic: 27.93 on 3 and 196 DF,  p-value: 4.407e-15</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-1" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-1">Interpretation</h2>
+<p>Interpretation follows from the fact that,</p>
+<p><span class="math display">\[
+  \hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \hat{\beta}_2 x_{i2} + \dots + \hat{\beta}_k x_{ik}
+\]</span></p>
+<p><span class="math display">\[
+  \hat{\beta}_j = \frac{\partial \hat{y}_i}{\partial x_{ij}}
+\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+\Delta \hat{y}_i = \hat{\beta}_j \Delta x_{ij} \quad \text{holding other }x\text{'s fixed}
+\]</span></p>
+</section>
+<section id="partialling-out" class="level2">
+<h2 class="anchored" data-anchor-id="partialling-out">Partialling out</h2>
+<p>The following result is called the <strong>Frisch-Waugh Theorem</strong> <span class="citation" data-cites="wooldridge2025">(<a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 76</a>)</span></p>
+<div class="fragment fade-in">
+<p>The OLS estimate for <span class="math inline">\(\hat{\beta}_1\)</span> from the multivariate ‘projection’</p>
+<p><span class="math display">\[
+  \hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \hat{\beta}_2 x_{i2} + \dots + \hat{\beta}_k x_{ik}
+\]</span></p>
+<p>is the same as the OLS estimate for <span class="math inline">\(\hat{\gamma}_1\)</span> simple ‘projection’</p>
+<p><span class="math display">\[
+  \hat{\tilde{y}}_i = \hat{\gamma}_0 + \hat{\gamma}_1 \tilde{x}_{i1}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Projection">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Projection
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Why the phrase ‘projection’? One interpretation of OLS is geometric. The estimator ‘projects’ the outcome (<span class="math inline">\(Y\)</span>) in the (vector) space spanned by the regressors (columns of <span class="math inline">\(X\)</span>).</p>
+<p><span class="math display">\[
+  \hat{Y}=X\hat{\beta} = \underbrace{X(X'X)^{-1}X'}_{P_X}Y
+\]</span></p>
+<p>The predicted value of <span class="math inline">\(Y\)</span> is just a ‘projection’ of <span class="math inline">\(Y\)</span>: <span class="math inline">\(P_X Y\)</span>. <span class="math inline">\(P_X\)</span> is an idempotent projection matrix. The residual then is,</p>
+<p><span class="math display">\[
+\hat{U} = Y-\hat{Y} = Y-P_X Y = (\underbrace{I-P_X}_{M_X})Y
+\]</span></p>
+<p><span class="math inline">\(M_X\)</span> is another idempotent projection matrix. And crucially, <span class="math inline">\(M_XP_X = 0\)</span>: the two projections are orthogonal. So, OLS projects Y into two vector spaces: one spanned (‘explained by’) <span class="math inline">\(X\)</span> and another orthogonal to that space. The predicted values and residuals are mechanically orthogonal, which means that they are perfectly uncorrelated <em>in the data</em>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="section-12" class="level2">
+<h2 class="anchored" data-anchor-id="section-12"></h2>
+<p>where,</p>
+<ul>
+<li><span class="math inline">\(\tilde{x}_{i1}\)</span> is the residual from the regression of <span class="math inline">\(x_{1}\)</span> against all other regressors</li>
+</ul>
+<p><span class="math display">\[
+  \tilde{x}_{i1} = x_{i1}  -( \hat{\rho}_0 + \hat{\rho}_1x_{i2} + \dots + \hat{\rho}_{k-1}x_{ik})
+\]</span></p>
+<p>and,</p>
+<div class="fragment fade-in">
+<ul>
+<li><span class="math inline">\(\tilde{y}_{i}\)</span> is the residual from the regression of <span class="math inline">\(y\)</span> against all regressors <em>excluding</em> <span class="math inline">\(x_{1}\)</span></li>
+</ul>
+<p><span class="math display">\[
+\tilde{y}_{i} = y_{i}  -( \hat{\psi}_0 + \hat{\psi}_1x_{i2} + \dots + \hat{\psi}_{k-1}x_{ik})
+\]</span></p>
+</div>
+</section>
+<section id="demonstration" class="level2">
+<h2 class="anchored" data-anchor-id="demonstration">Demonstration</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>* Estimate bivariate linear regression</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> hhinc children hhsize</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> hhinc_tilde, <span class="kw">resid</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> hhcon children hhsize</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> hhcon_tilde, <span class="kw">resid</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> hhcon_tilde hhinc_tilde</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =     25.87
+       Model |  1980895.01         1  1980895.01   Prob &gt; F        =    0.0000
+    Residual |  15159759.9       198  76564.4441   R-squared       =    0.1156
+-------------+----------------------------------   Adj R-squared   =    0.1111
+       Total |  17140654.9       199  86133.9444   Root MSE        =     276.7
+
+------------------------------------------------------------------------------
+ hhcon_tilde | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ hhinc_tilde |   .1937248   .0380862     5.09   0.000     .1186181    .2688315
+       _cons |  -2.04e-08   19.56584    -0.00   1.000    -38.58418    38.58418
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate bivariate linear regression</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>model_f1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hhinc <span class="sc">~</span> children <span class="sc">+</span> hhsize, <span class="at">data=</span>lcf_data)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>model_f2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(hhcon <span class="sc">~</span> children <span class="sc">+</span> hhsize, <span class="at">data=</span>lcf_data)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>frisch <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">hhinc_tilde  =</span> <span class="fu">residuals</span>(model_f1),  </span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">hhcon_tilde  =</span> <span class="fu">residuals</span>(model_f2) </span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>model_frisch <span class="ot">&lt;-</span> <span class="fu">lm</span>(hhcon_tilde <span class="sc">~</span> hhinc_tilde, <span class="at">data =</span> frisch)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_frisch)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hhcon_tilde ~ hhinc_tilde, data = frisch)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-456.92 -168.81  -58.49   96.59 1437.52 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -2.673e-14  1.957e+01   0.000        1    
+hhinc_tilde  1.937e-01  3.809e-02   5.086 8.44e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 276.7 on 198 degrees of freedom
+Multiple R-squared:  0.1156,    Adjusted R-squared:  0.1111 
+F-statistic: 25.87 on 1 and 198 DF,  p-value: 8.437e-07</code></pre>
 </div>
 </div>
 </div>
@@ -1045,18 +1493,18 @@ resid   84413.96 2.331285e-12 8.441396e+04</code></pre>
 </section>
 <section id="goodness-of-fit" class="level1">
 <h1>Goodness-of-Fit</h1>
-<section id="section-11" class="level2">
-<h2 class="anchored" data-anchor-id="section-11"></h2>
+<section id="section-13" class="level2">
+<h2 class="anchored" data-anchor-id="section-13"></h2>
 <p><strong>How well did we fit the data?</strong></p>
 <div class="fragment fade-in">
 <p>We have decomposed each observation into two parts:</p>
 <p><span class="math display">\[
-  y_i = \underbrace{\hat{y}_i}_\text{fitted valeus} + \underbrace{\hat{u}_i}_\text{residual}
+  y_i = \underbrace{\hat{y}_i}_\text{fitted values} + \underbrace{\hat{u}_i}_\text{residual}
 \]</span></p>
 </div>
 </section>
-<section id="section-12" class="level2">
-<h2 class="anchored" data-anchor-id="section-12"></h2>
+<section id="section-14" class="level2">
+<h2 class="anchored" data-anchor-id="section-14"></h2>
 <p>We can apply this decomposition to the <em>total sum of squares</em> (SST)</p>
 <p><span class="math display">\[
   \text{SST} \equiv \sum_{i=1}^n (y_i-\bar{y})^2
@@ -1065,9 +1513,9 @@ resid   84413.96 2.331285e-12 8.441396e+04</code></pre>
 <li>The SST is a measure of the total variation in <span class="math inline">\(y\)</span>.</li>
 </ul>
 </section>
-<section id="section-13" class="level2">
-<h2 class="anchored" data-anchor-id="section-13"></h2>
-<p>We can show that (Tutorial 1),</p>
+<section id="section-15" class="level2">
+<h2 class="anchored" data-anchor-id="section-15"></h2>
+<p>We can show that <span class="citation" data-cites="wooldridge2025">(see <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 33–34</a>)</span>,</p>
 <p><span class="math display">\[
 \text{SST} = \text{SSE} + \text{SSR}
 \]</span></p>
@@ -1104,6 +1552,9 @@ resid   84413.96 2.331285e-12 8.441396e+04</code></pre>
 <ul>
 <li>given the same set of <span class="math inline">\(\mathbf{x}\)</span>’s, different outcomes may have very different <span class="math inline">\(\mathbf{R}^2\)</span></li>
 </ul></li>
+</ol>
+<div class="fragment fade-in">
+<ol start="2" type="1">
 <li><p>If we care about the relationship between <span class="math inline">\(y\)</span> and a specific <span class="math inline">\(x_j\)</span>, we do not necessarily care about explaining all of <span class="math inline">\(y\)</span>.</p></li>
 <li><p>We can always add variables and (mechanically) increase <span class="math inline">\(\mathbf{R}^2\)</span>; however, this comes at a potential cost:</p>
 <ol type="a">
@@ -1111,12 +1562,13 @@ resid   84413.96 2.331285e-12 8.441396e+04</code></pre>
 <li><p>we <em>MAY</em> end up adding “bad controls”</p></li>
 </ol></li>
 </ol>
+</div>
 </section>
 <section id="adjusted-mathbfr2" class="level2">
 <h2 class="anchored" data-anchor-id="adjusted-mathbfr2">Adjusted <span class="math inline">\(\mathbf{R}^2\)</span></h2>
 <p>An alternative measure fit is the <em>adjusted</em> <span class="math inline">\(\mathbf{R}^2\)</span>:</p>
 <p><span class="math display">\[
-  \overline{\mathbf{R}}^2 = 1 - \frac{\text{SSR}/(n-k-1)}{\text{SST}/n}
+  \overline{\mathbf{R}}^2 = 1 - \frac{\text{SSR}/(n-k-1)}{\text{SST}/(n-1)} = 1 - (1-\mathbf{R}^2)\times\frac{(n-1)}{(n-k-1)}
 \]</span></p>
 <p>where,</p>
 <ul>
@@ -1129,12 +1581,423 @@ resid   84413.96 2.331285e-12 8.441396e+04</code></pre>
 <li>Creates a disincentive to add irrelevant regressors that do not also reduce <span class="math inline">\(SSR\)</span>.</li>
 </ul>
 </div>
+</section>
+<section id="example-lcf-2023-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-lcf-2023-1">Example: LCF (2023)</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>.29948045
+
+.28875821</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2994804</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2887582</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-irrelevant-variables" class="level2">
+<h2 class="anchored" data-anchor-id="adding-irrelevant-variables">Adding “irrelevant” variables</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> hhcon hhinc hhsize children <span class="fu">month</span> tvlicense</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(5, 194)       =     16.91
+       Model |  6568404.46         5  1313680.89   Prob &gt; F        =    0.0000
+    Residual |  15072333.4       194  77692.4403   R-squared       =    0.3035
+-------------+----------------------------------   Adj R-squared   =    0.2856
+       Total |  21640737.9       199  108747.427   Root MSE        =    278.73
+
+------------------------------------------------------------------------------
+       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hhinc |   .1911845   .0385338     4.96   0.000     .1151854    .2671835
+      hhsize |    124.161   27.71213     4.48   0.000     69.50531    178.8168
+    children |  -233.0088   75.21666    -3.10   0.002    -381.3562   -84.66142
+       month |  -1.276233   6.234806    -0.20   0.838    -13.57294    11.02047
+   tvlicense |   59.82271   56.57194     1.06   0.292     -51.7523    171.3977
+       _cons |   82.86154   77.50891     1.07   0.286    -70.00675    235.7298
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>model_irrel <span class="ot">&lt;-</span> <span class="fu">lm</span>(hhcon <span class="sc">~</span> hhinc <span class="sc">+</span> hhsize <span class="sc">+</span> children <span class="sc">+</span> month <span class="sc">+</span> tvlicense, <span class="at">data =</span> lcf_data)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_irrel)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hhcon ~ hhinc + hhsize + children + month + tvlicense, 
+    data = lcf_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-468.33 -163.40  -53.35   84.28 1434.32 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   82.86154   77.50891   1.069  0.28637    
+hhinc          0.19118    0.03853   4.961 1.53e-06 ***
+hhsize       124.16104   27.71213   4.480 1.27e-05 ***
+children    -233.00879   75.21666  -3.098  0.00224 ** 
+month         -1.27623    6.23481  -0.205  0.83803    
+tvlicense     59.82271   56.57194   1.057  0.29162    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 278.7 on 194 degrees of freedom
+Multiple R-squared:  0.3035,    Adjusted R-squared:  0.2856 
+F-statistic: 16.91 on 5 and 194 DF,  p-value: 7.335e-14</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="does-ols-work" class="level1">
+<h1>Does OLS work?</h1>
+<section id="section-16" class="level2">
+<h2 class="anchored" data-anchor-id="section-16"></h2>
+<p>Are these the “right” numbers?</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =     57.08
+       Model |  4842359.39         1  4842359.39   Prob &gt; F        =    0.0000
+    Residual |  16798378.5       198  84840.2954   R-squared       =    0.2238
+-------------+----------------------------------   Adj R-squared   =    0.2198
+       Total |  21640737.9       199  108747.427   Root MSE        =    291.27
+
+------------------------------------------------------------------------------
+       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hhinc |   .2705895   .0358165     7.55   0.000     .1999587    .3412203
+       _cons |   268.0611   37.42847     7.16   0.000     194.2515    341.8707
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-12-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-12-2-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hhcon ~ hhinc, data = lcf_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-519.70 -177.46  -60.08   95.78 1473.71 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 268.06105   37.42847   7.162 1.53e-11 ***
+hhinc         0.27059    0.03582   7.555 1.52e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 291.3 on 198 degrees of freedom
+Multiple R-squared:  0.2238,    Adjusted R-squared:  0.2198 
+F-statistic: 57.08 on 1 and 198 DF,  p-value: 1.515e-12</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="section-17" class="level2">
+<h2 class="anchored" data-anchor-id="section-17"></h2>
+<p>Let’s evaluate the question:</p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><p>it pre-supposes that there is a <em>right</em> answer (i.e.&nbsp;a correct estimate)</p>
+<ul class="incremental">
+<li>i.e., a <em>true</em> population parameter (<span class="math inline">\(\beta\)</span>)</li>
+</ul></li>
+<li><p>it implies a notion of “correctness”</p>
+<ul class="incremental">
+<li>do we mean <span class="math inline">\(\beta = 0.27\)</span>?</li>
+<li>do we mean <span class="math inline">\(\beta \approx 0.27\)</span>?</li>
+<li>do we mean <span class="math inline">\(\beta\)</span> is ‘close to’ <span class="math inline">\(0.27\)</span>?</li>
+</ul></li>
+<li><p>it assumes that the OLS estimator can be <em>right</em>.</p></li>
+</ol>
+</div>
+</section>
+<section id="section-18" class="level2">
+<h2 class="anchored" data-anchor-id="section-18"></h2>
+<p>First off, let’s clarify something:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[
+\hat{\beta}
+\]</span></p>
+<ul>
+<li>the estimator</li>
+</ul>
+<p><strong>…is a random variable</strong></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[
+0.27
+\]</span></p>
+<ul>
+<li>the estimate</li>
+</ul>
+<p><strong>…is just a number</strong></p>
+</div>
+</div>
+</section>
+<section id="accuracy" class="level2">
+<h2 class="anchored" data-anchor-id="accuracy">Accuracy</h2>
+<p>Is <span class="math inline">\(\hat{\beta} = \beta\)</span>?</p>
+<div class="fragment fade-in">
+<div class="incremental">
+<ul class="incremental">
+<li><p>No!</p></li>
+<li><p>In fact, the statement does not make sense since <span class="math inline">\(\hat{\beta}\)</span> is a random variable while <span class="math inline">\(\beta\)</span> is a non-random constant.</p></li>
+<li><p>If we are accurate, we can ask: <span class="math inline">\(Pr(\hat{\beta}=\beta)=?\)</span></p></li>
+<li><p>The answer is: <span class="math inline">\(Pr(\hat{\beta}=\beta|\mathbf{x})=0\)</span> for any <span class="math inline">\(u\)</span> with a continuous distribution (conditional on <span class="math inline">\(\mathbf{x}\)</span>).</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="random-variable" class="level2">
+<h2 class="anchored" data-anchor-id="random-variable">Random variable</h2>
+<p>In what sense is <span class="math inline">\(\hat{\beta}\)</span> a random variable?</p>
+<ul>
+<li>The realized value of <span class="math inline">\(\hat{\beta}\)</span> depends on the realized sample<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+</ul>
+<ul>
+<li>In another ‘state of the world’, the sample may have realized differently</li>
+</ul>
+</section>
+<section id="example-lcf-2023---version-2" class="level2">
+<h2 class="anchored" data-anchor-id="example-lcf-2023---version-2">Example: LCF (2023) - Version 2</h2>
+<p>I randomly sampled 200 observations from the LCF (2023) data, but could have equally have sampled a different 200 observations</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =     90.01
+       Model |  5283929.28         1  5283929.28   Prob &gt; F        =    0.0000
+    Residual |  11623093.9       198  58702.4945   R-squared       =    0.3125
+-------------+----------------------------------   Adj R-squared   =    0.3091
+       Total |  16907023.2       199  84959.9155   Root MSE        =    242.29
+
+------------------------------------------------------------------------------
+       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hhinc |   .2712055   .0285857     9.49   0.000     .2148341     .327577
+       _cons |   232.6529   30.55968     7.61   0.000     172.3886    292.9171
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-13-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-13-2-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hhcon ~ hhinc, data = lcf_data2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-420.74 -150.66  -39.10   87.07 1763.32 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 232.65286   30.55968   7.613 1.07e-12 ***
+hhinc         0.27121    0.02859   9.487  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 242.3 on 198 degrees of freedom
+Multiple R-squared:  0.3125,    Adjusted R-squared:  0.3091 
+F-statistic: 90.01 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-lcf-2023---version-3" class="level2">
+<h2 class="anchored" data-anchor-id="example-lcf-2023---version-3">Example: LCF (2023) - Version 3</h2>
+<p>… and again,</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =    102.09
+       Model |  7462064.65         1  7462064.65   Prob &gt; F        =    0.0000
+    Residual |  14472533.5       198  73093.6037   R-squared       =    0.3402
+-------------+----------------------------------   Adj R-squared   =    0.3369
+       Total |  21934598.2       199  110224.111   Root MSE        =    270.36
+
+------------------------------------------------------------------------------
+       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hhinc |   .3461268   .0342567    10.10   0.000      .278572    .4136816
+       _cons |   189.5292   36.88368     5.14   0.000      116.794    262.2645
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-14-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-14-2-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hhcon ~ hhinc, data = lcf_data3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-515.61 -149.84  -46.11  115.40 1483.04 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 189.52921   36.88368   5.139 6.61e-07 ***
+hhinc         0.34613    0.03426  10.104  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 270.4 on 198 degrees of freedom
+Multiple R-squared:  0.3402,    Adjusted R-squared:  0.3369 
+F-statistic: 102.1 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-lcf-2023---version-4" class="level2">
+<h2 class="anchored" data-anchor-id="example-lcf-2023---version-4">Example: LCF (2023) - Version 4</h2>
+<p>… and again.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-15-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-15-1-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      Source |       SS           df       MS      Number of obs   =       200
+-------------+----------------------------------   F(1, 198)       =     27.79
+       Model |  3538499.21         1  3538499.21   Prob &gt; F        =    0.0000
+    Residual |  25213603.4       198  127341.431   R-squared       =    0.1231
+-------------+----------------------------------   Adj R-squared   =    0.1186
+       Total |  28752102.6       199  144482.928   Root MSE        =    356.85
+
+------------------------------------------------------------------------------
+       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hhinc |    .241712   .0458536     5.27   0.000     .1512879    .3321361
+       _cons |   267.7737   48.63081     5.51   0.000     171.8729    363.6745
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-15-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-15-2-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hhcon ~ hhinc, data = lcf_data4)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-450.45 -163.57  -75.46   70.08 3112.93 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 267.77370   48.63081   5.506 1.13e-07 ***
+hhinc         0.24171    0.04585   5.271 3.53e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 356.8 on 198 degrees of freedom
+Multiple R-squared:  0.1231,    Adjusted R-squared:  0.1186 
+F-statistic: 27.79 on 1 and 198 DF,  p-value: 3.526e-07</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="section-19" class="level2">
+<h2 class="anchored" data-anchor-id="section-19"></h2>
+<p>Can we <strong>expect</strong> – <em>a priori</em> – for <span class="math inline">\(\hat{\beta}\)</span> to be “on target”?</p>
+<div class="fragment fade-in">
+<div class="incremental">
+<ul class="incremental">
+<li><p>This is a question of <em>biasedness</em>: is <span class="math inline">\(E[\hat{\beta}] = \beta\)</span>?</p></li>
+<li><p>The answer: it depends!</p></li>
+<li><p>Specifically, it depends on the underlying <strong>model</strong>!</p></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is an all to common mistake to conflate the estimator - in particular, the OLS estimator - with the linear regression model. People will say, “We estimate an OLS regression model”. This doesn’t really make sense, since you OLS is the estimator, not the name of the model. You can say, “We estimate a linear regression model using OLS”.</p>
+<p>This may seem pedantic, but it is an important distinction since there are a range of estimators that can be used to estimate a linear regression model; all with different properties. In addition, the OLS estimator can be applied to any data, regardless of the true model. So it is a good idea to make sure your language is accurate.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<section id="bibliography" class="level2">
+
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliography</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-wooldridge2025" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approach.”</span>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Recall, if <span class="math inline">\(u\)</span> is independent of <span class="math inline">\(\mathbf{x}\)</span>, then we can treat <span class="math inline">\(\mathbf{x}\)</span> as fixed. Therefore, the randomness (across samples) is really from different realizations of <span class="math inline">\(u\)</span>. However, any discussion of <span class="math inline">\(u\)</span> and <span class="math inline">\(\mathbf{x}\)</span> pre-supposes a model which we have not yet defined.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

@@ -133,20 +133,6 @@
     "text": "In this lecture we investigate the properties of the OLS estimator and how it relates to the assumptions we make about the unobserved population regression model. As we do so it will help to keep in mind the distinction between the estimand, the estimator, and the estimate.\nflowchart LR\n  A[Estimator] --&gt; B[Estimand]\n  A --&gt; C[Estimate]\nThe estimand (\\(\\beta\\)) is an unknown population parameter (i.e., a non-random number); the estimator (\\(\\hat{\\beta}\\)) a random variable; and the estimate (e.g. \\(0.187\\)) a realized value of said random function (i.e. a non-random number)."
   },
   {
-    "objectID": "lecture-3.html#accuracy",
-    "href": "lecture-3.html#accuracy",
-    "title": "Properties of OLS and Statistical Inference",
-    "section": "Accuracy",
-    "text": "Accuracy\nIs \\(\\hat{\\beta} = \\beta\\)?\n\n\n\nNo!\nIn fact, the statement does not make sense since \\(\\hat{\\beta}\\) is a random variable while \\(\\beta\\) is a non-random constant.\nIf we are accurate, we can ask: \\(Pr(\\hat{\\beta}=\\beta)=?\\)\nThe answer is: \\(Pr(\\hat{\\beta}=\\beta|\\mathbf{x})=0\\) for any \\(u_i\\) with a continuous distribution (conditional on \\(\\mathbf{x}\\))."
-  },
-  {
-    "objectID": "lecture-3.html#section-1",
-    "href": "lecture-3.html#section-1",
-    "title": "Properties of OLS and Statistical Inference",
-    "section": "",
-    "text": "Can we expect – a priori – for \\(\\hat{\\beta}\\) to be “on target”?\n\nThis is a question of biasedness: is \\(E[\\hat{\\beta}] = \\beta\\)?\nThe answer: it depends!\nSpecifically, it depends on the properties of the model!\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nIt is an all to common mistake to conflate the estimator - in particular, the OLS estimator - with the linear regression model. People will say, “We estimate an OLS regression model”. This doesn’t really make sense, since you OLS is the estimator, not the name of the model. You can say, “We estimate a linear regression model using OLS”.\nThis may seem pedantic, but it is an important distinction since there are a range of estimators that can be used to estimate a linear regression model; all with different properties. In addition, the OLS estimator can be applied to any data, regardless of the true model. So it is a good idea to make sure your language is accurate."
-  },
-  {
     "objectID": "lecture-3.html#biasedness",
     "href": "lecture-3.html#biasedness",
     "title": "Properties of OLS and Statistical Inference",
@@ -154,8 +140,8 @@
     "text": "Biasedness\nWhen is the OLS estimator unbias?\n\\[\nE[\\hat{\\beta}] = \\beta\n\\]"
   },
   {
-    "objectID": "lecture-3.html#section-2",
-    "href": "lecture-3.html#section-2",
+    "objectID": "lecture-3.html#section-1",
+    "href": "lecture-3.html#section-1",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "Under the assumptions MLR 1-4,\n\\[\n  E[\\hat{\\beta}_j] = \\beta_j \\qquad j=0,\\dots,k\n\\]"
@@ -168,36 +154,36 @@
     "text": "Proof\nWe do not have the math to do this for the multivariate case. However, we can show this for the univariate case:\nUnder MLR 1-4 (equiv. to Wooldridge’s SLR 1-4)\n\\[\n  y_i = \\beta_0 + \\beta_1 x_i + u_i\n\\]\nwhere \\(E[u_i|x_i]=0\\)."
   },
   {
+    "objectID": "lecture-3.html#section-2",
+    "href": "lecture-3.html#section-2",
+    "title": "Properties of OLS and Statistical Inference",
+    "section": "",
+    "text": "The OLS estimator for \\(\\beta_1\\) is given by (see Lecture 2):\n\\[\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\sum_{i=1}^{n}(y_i -\\bar{y})(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} \\\\\n    =& \\frac{\\sum_{i=1}^{n}y_i(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} \\\\\n    =& \\frac{\\sum_{i=1}^{n}y_i(x_{i}-\\bar{x})}{\\text{SST}_x}\n  \\end{aligned}\n\\]\nwhere \\(\\text{SST}_x=\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2\\)"
+  },
+  {
     "objectID": "lecture-3.html#section-3",
     "href": "lecture-3.html#section-3",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "The OLS estimator for \\(\\beta_1\\) is given by (see Lecture 2):\n\\[\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\sum_{i=1}^{n}(y_i -\\bar{y})(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} \\\\\n    =& \\frac{\\sum_{i=1}^{n}y_i(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} \\\\\n    =& \\frac{\\sum_{i=1}^{n}y_i(x_{i}-\\bar{x})}{\\text{SST}_x}\n  \\end{aligned}\n\\]\nwhere \\(\\text{SST}_x=\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2\\)"
+    "text": "Substitute the model (\\(y_i = \\beta_0 + \\beta_1 x_i + u_i\\)) in:\n\\[\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\sum_{i=1}^{n}(\\beta_0 + \\beta_1 x_i + u_i)(x_{i}-\\bar{x})}{\\text{SST}_x} \\\\\n    =& \\frac{\\beta_0}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x}) + \\frac{\\beta_1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})x_i + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n  \\end{aligned}\n\\]"
   },
   {
     "objectID": "lecture-3.html#section-4",
     "href": "lecture-3.html#section-4",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "Substitute the model (\\(y_i = \\beta_0 + \\beta_1 x_i + u_i\\)) in:\n\\[\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\sum_{i=1}^{n}(\\beta_0 + \\beta_1 x_i + u_i)(x_{i}-\\bar{x})}{\\text{SST}_x} \\\\\n    =& \\frac{\\beta_0}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x}) + \\frac{\\beta_1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})x_i + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n  \\end{aligned}\n\\]"
+    "text": "Now we use the fact that:\n\\[\n    \\hat{\\beta}_1 = \\frac{\\beta_0}{\\text{SST}_x}\\underbrace{\\sum_{i=1}^{n}(x_{i}-\\bar{x})}_{=0} + \\frac{\\beta_1}{\\text{SST}_x}\\underbrace{\\sum_{i=1}^{n}(x_{i}-\\bar{x})x_i}_{\\text{SST}_x} + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n\\]\nTo get,\n\\[\n    \\hat{\\beta}_1 = \\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n\\]"
   },
   {
     "objectID": "lecture-3.html#section-5",
     "href": "lecture-3.html#section-5",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "Now we use the fact that:\n\\[\n    \\hat{\\beta}_1 = \\frac{\\beta_0}{\\text{SST}_x}\\underbrace{\\sum_{i=1}^{n}(x_{i}-\\bar{x})}_{=0} + \\frac{\\beta_1}{\\text{SST}_x}\\underbrace{\\sum_{i=1}^{n}(x_{i}-\\bar{x})x_i}_{\\text{SST}_x} + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n\\]\nTo get,\n\\[\n    \\hat{\\beta}_1 = \\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n\\]"
+    "text": "Now we can take the conditional expectation of \\(\\hat{\\beta}_1\\)\n\\[\n  \\begin{aligned}\n  E[\\hat{\\beta}_1|x] =& E\\Bigg[\\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\\Bigg\\vert x\\Bigg] \\\\\n  =& \\beta_1 + E\\Bigg[\\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\\Bigg\\vert x\\Bigg] \\\\\n  =& \\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})\\underbrace{E[u_i|x]}_{=0} \\\\\n  =& \\beta_1\n  \\end{aligned}\n\\]"
   },
   {
     "objectID": "lecture-3.html#section-6",
     "href": "lecture-3.html#section-6",
-    "title": "Properties of OLS and Statistical Inference",
-    "section": "",
-    "text": "Now we can take the conditional expectation of \\(\\hat{\\beta}_1\\)\n\\[\n  \\begin{aligned}\n  E[\\hat{\\beta}_1|x] =& E\\Bigg[\\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\\Bigg\\vert x\\Bigg] \\\\\n  =& \\beta_1 + E\\Bigg[\\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\\Bigg\\vert x\\Bigg] \\\\\n  =& \\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})\\underbrace{E[u_i|x]}_{=0} \\\\\n  =& \\beta_1\n  \\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "lecture-3.html#section-7",
-    "href": "lecture-3.html#section-7",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "Since, \\(E[\\hat{\\beta}_1|x] = \\beta_1\\), then by the Law of Iterated Expectations (see CEF Material)\n\\[\nE[\\hat{\\beta}_1] = E\\big[E[\\hat{\\beta}_1|x]\\big] = E[\\beta_1] = \\beta_1\n\\]"
@@ -231,15 +217,15 @@
     "text": "Variance\nThe variance of the estimator will depend on the variance of the \\(x\\)’s and the error term. As before, we can show this more easily for the SLR:\n\\[\n  \\begin{aligned}\n  Var(\\hat{\\beta}_1|x) =& E\\Big[\\big(\\hat{\\beta}_1-\\underbrace{E[\\hat{\\beta}_1|x]}_{\\beta_1}\\big)^2\\Big|x\\Big] \\\\\n  =& E\\big[(\\hat{\\beta}_1-\\beta_1)^2\\big|x\\big]\n  \\end{aligned}\n\\]"
   },
   {
-    "objectID": "lecture-3.html#section-8",
-    "href": "lecture-3.html#section-8",
+    "objectID": "lecture-3.html#section-7",
+    "href": "lecture-3.html#section-7",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "Earlier, we showed that\n\\[\n  \\hat{\\beta}_1 = \\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n\\]\nSubstituting this is, we get:\n\\[\n  Var(\\hat{\\beta}_1|x) = E\\Bigg[\\bigg(\\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\\bigg)^2\\Bigg|x\\Bigg]\n\\]"
   },
   {
-    "objectID": "lecture-3.html#section-9",
-    "href": "lecture-3.html#section-9",
+    "objectID": "lecture-3.html#section-8",
+    "href": "lecture-3.html#section-8",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "After some math…(exploiting MLR-2)\n\\[\n  Var(\\hat{\\beta}_1|x) = \\frac{Var(u_i|x_i)}{SST_x} = \\frac{\\sigma^2}{SST_x}\n\\]\nUsing MLR-5 (Homoskedasticity).\n\nThe larger the variance of error term, the bigger the variance of the estimator\n\n\\(\\Rightarrow\\) if you add variables that explain more of \\(y\\) you can reduce the variance.\n\nIf you increase the variance in \\(x\\), you reduce the variance of the estimator.\n\n\n\n\n\n\n\nTipOptimal experiment\n\n\n\n\n\nIn Randomized Control Trials the regressor is a single dummy variable \\(w_i=1\\) (\\(=0\\)) if treated (if control). In this case, \\(SST_x=n\\bar{w}(1-\\bar{w})\\): a function that is quadratic in \\(\\bar{w}=1/n\\sum_i w_i\\) - the share of treated individuals. This function is concave, with a maximum at \\(\\bar{w} = 0.5\\). This tells us that the most efficient assignment is 50-50. With equal treatment, the variance of the estimator is minimized"
@@ -280,8 +266,8 @@
     "text": "Normalization\nWe can therefore standardize the distribution:\n\\[\n  \\frac{\\hat{\\beta}_j-\\beta_j}{se(\\hat{\\beta}_j)} | x \\sim N(0,1)\n\\] where \\(se(\\hat{\\beta}_j) = \\sqrt{Var(\\hat{\\beta}_j)}\\)"
   },
   {
-    "objectID": "lecture-3.html#section-10",
-    "href": "lecture-3.html#section-10",
+    "objectID": "lecture-3.html#section-9",
+    "href": "lecture-3.html#section-9",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "This term - let’s call it \\(z=(\\hat{\\beta}_j-\\beta_j)/se(\\hat{\\beta}_j)\\) is another random variable. Since we know the properties \\(N(0,1)\\), we know:\n\n\n\\(Pr(z&lt;\\text{z}_{0.025}) = 0.025\\) where \\(\\text{z}_{0.025} = -1.96\\) is the \\(2.5^{th}\\) percentile of \\(N(0,1)\\)\n\\(Pr(z&gt;\\text{z}_{0.975}) = 0.025\\) where \\(\\text{z}_{0.975} = 1.96\\) is the \\(97.5^{th}\\) percentile of \\(N(0,1)\\)\n\\(Pr(\\text{z}_{0.025}&lt;z&lt;\\text{z}_{0.975}) = 0.95\\) (or 95%)"
@@ -294,8 +280,8 @@
     "text": "Confidence Intervals\nWe can use this knowledge to form confidence intervals for the unknown \\(\\beta_j\\)\n\\[\n  \\begin{aligned}\n  0.95 =& Pr(\\text{z}_{0.025} &lt; z &lt; \\text{z}_{0.975}) \\\\\n  =& Pr\\Bigg(\\text{z}_{0.025} &lt; \\frac{\\hat{\\beta}_j-\\beta_j}{se(\\hat{\\beta}_j)} &lt; \\text{z}_{0.975}\\Bigg) \\\\\n  =& Pr\\big(\\text{z}_{0.025}\\times se(\\hat{\\beta}_j) &lt; \\hat{\\beta}_j-\\beta_j &lt; \\text{z}_{0.975}\\times se(\\hat{\\beta}_j)\\big) \\\\\n  =& Pr\\big(-\\hat{\\beta}_j+\\text{z}_{0.025}\\times se(\\hat{\\beta}_j) &lt; -\\beta_j &lt; -\\hat{\\beta}_j+\\text{z}_{0.975}\\times se(\\hat{\\beta}_j)\\big) \\\\\n  =& Pr\\big(\\hat{\\beta}_j - \\text{z}_{0.975}\\times se(\\hat{\\beta}_j) &lt; \\beta_j &lt; \\hat{\\beta}_j - \\text{z}_{0.025}\\times se(\\hat{\\beta}_j)\\big) \\\\\n  \\end{aligned}\n\\]\nNotice, the percentiles end up on opposite sides."
   },
   {
-    "objectID": "lecture-3.html#section-11",
-    "href": "lecture-3.html#section-11",
+    "objectID": "lecture-3.html#section-10",
+    "href": "lecture-3.html#section-10",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "For symmetric distributions, like Normal, \\(\\text{z}_{0.975}=- \\text{z}_{0.025}\\). This gives us the simplified Confidence Interval:\n\\[\n  \\text{CI}_{0.95} = \\big[\\hat{\\beta}_j - \\text{z}_{0.975}\\times se(\\hat{\\beta}_j),\\hat{\\beta}_j + \\text{z}_{0.975}\\times se(\\hat{\\beta}_j)\\big]\n\\]\n\n\n\n\n\n\nNote\n\n\n\nThe CI is depends on the estimator \\(\\hat{\\beta}_j\\). Since the estimator is random variable, the CI is also random. For this reason, we can ask: what is the probability that \\(\\beta_j\\) lies within the CI.\n\\[\n  Pr(\\beta_j\\in \\text{CI}_{0.95}) = 0.95\n\\] If replaced \\(\\beta_j\\) with another value it the probability would change. This is because the distribution of \\(\\hat{\\beta}_j\\) is centered around \\(\\beta_j\\).\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nSuppose I estimate \\(\\hat{\\beta}_j = 0.35\\;(\\text{SE}=0.12)\\) and construct the 95% confidence interval:\n\\[\n  [0.35 - \\text{z}_{0.975}\\times 0.12,0.35 + \\text{z}_{0.975}\\times 0.12]\n\\]\nWhat is the \\(Pr\\big(\\beta_j \\in [0.35 - \\text{z}_{0.975}\\times 0.12,0.35 + \\text{z}_{0.975}\\times 0.12]\\big)\\)? You might be tempted to say 95%, but (from a frequentist perspective) you would be wrong. The answer is either \\(0\\) or \\(1\\).\nWhy? The interval you have constructed is not random; it is just two numbers, a lower and upper bound. The question is equivalent to asking what is \\(Pr\\big(5 \\in [1,4]\\big)\\)? In this case the answer is evidently 0, but if the interval were \\([2,6]\\) the answer would be 1."
@@ -336,15 +322,15 @@
     "text": "Rejection rule\n\nDetermine a rejection rule consistent with a chosen \\(\\alpha\\).\n\nUnder \\(H_0\\),\n\\[\n  \\text{Test-stat} \\underset{H_0}{\\sim} N(0,1)\n\\]"
   },
   {
-    "objectID": "lecture-3.html#section-12",
-    "href": "lecture-3.html#section-12",
+    "objectID": "lecture-3.html#section-11",
+    "href": "lecture-3.html#section-11",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "\\[\n  \\Rightarrow Pr(-1.96 &lt; \\text{Test-stat} &lt; 1.96 | H_0) = 0.95\n\\]\n\n\nCode\nx &lt;- seq(-3, 3, length.out = 1000)\ny &lt;- dnorm(x)\n\npar(mar = c(4, 4, 2, 1))\n\nplot(x, y, type = \"l\", lwd = 2, col = \"black\",\n     xlim = c(-3, 3),\n     xlab = \"z\", ylab = \"Density\",\n     main = \"Standard Normal Distribution\",\n     xaxs = \"i\", yaxs = \"i\", ylim = c(0, max(y) * 1.1))\n\n# Shade the area between -1.96 and 1.96\nx_shade &lt;- seq(-1.96, 1.96, length.out = 500)\ny_shade &lt;- dnorm(x_shade)\n\npolygon(c(x_shade[1], x_shade, tail(x_shade, 1)),\n        c(0, y_shade, 0),\n        col = rgb(0.20, 0.40, 0.70, 0.5), border = NA)\n\n# Re-draw the curve on top so the outline stays crisp over the shading\nlines(x, y, lwd = 2, col = \"black\")\n\n# Reference lines at the cutoffs\nabline(v = c(-1.96, 1.96), lty = 2, col = \"gray40\")\n\n# Label the shaded area\ntext(0, dnorm(0) * 0.4, \"Area = 0.95\", cex = 1.1, font = 2)\n\n# Label the cutoff values on the x-axis\naxis(1, at = c(-1.96, 1.96), labels = c(\"-1.96\", \"1.96\"),\n     line = 1.1, tick = FALSE, cex.axis = 0.85, col.axis = \"gray30\")"
   },
   {
-    "objectID": "lecture-3.html#section-13",
-    "href": "lecture-3.html#section-13",
+    "objectID": "lecture-3.html#section-12",
+    "href": "lecture-3.html#section-12",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "Reject \\(H_0\\) if: \\(\\text{Test-stat}&gt;1.96\\) or \\(\\text{Test-stat}&lt;-1.96\\)\n\\[\n  \\Rightarrow \\text{Reject if}\\quad  |\\text{Test-stat}|&gt;1.96\n\\]\n\n\nCode\nplot(x, y, type = \"l\", lwd = 2, col = \"black\",\n     xlim = c(-3, 3),\n     xlab = \"z\", ylab = \"Density\",\n     main = \"Standard Normal Distribution\",\n     xaxs = \"i\", yaxs = \"i\", ylim = c(0, max(y) * 1.25))\n\n# --- Left tail: x &lt;= -1.96 ---\nx_left &lt;- seq(-3, -1.96, length.out = 200)\ny_left &lt;- dnorm(x_left)\npolygon(c(x_left[1], x_left, tail(x_left, 1)),\n        c(0, y_left, 0),\n        col = rgb(0.80, 0.15, 0.15, 0.7), border = NA)\n\n# --- Right tail: x &gt;= 1.96 ---\nx_right &lt;- seq(1.96, 3, length.out = 200)\ny_right &lt;- dnorm(x_right)\npolygon(c(x_right[1], x_right, tail(x_right, 1)),\n        c(0, y_right, 0),\n        col = rgb(0.80, 0.15, 0.15, 0.7), border = NA)\n\n# Re-draw the curve on top so the outline stays crisp over the shading\nlines(x, y, lwd = 2, col = \"black\")\n\n# Reference lines at the cutoffs\nabline(v = c(-1.96, 1.96), lty = 2, col = \"gray40\")\n\n# Labels for each tail, placed above the curve with an arrow pointing\n# down into the shaded region (the tails are too thin to hold text)\narrows(x0 = -2.45, y0 = 0.09, x1 = -2.20, y1 = 0.012,\n       length = 0.08, col = \"black\", lwd = 1.2)\ntext(-2.95, 0.10, \"Area = 0.025\", cex = 0.95, font = 2, pos = 4)\n\narrows(x0 = 2.45, y0 = 0.09, x1 = 2.20, y1 = 0.012,\n       length = 0.08, col = \"black\", lwd = 1.2)\ntext(2.95, 0.10, \"Area = 0.025\", cex = 0.95, font = 2, pos = 2)\n\n# Label the cutoff values on the x-axis\naxis(1, at = c(-1.96, 1.96), labels = c(\"-1.96\", \"1.96\"),\n     line = 1.1, tick = FALSE, cex.axis = 0.85, col.axis = \"gray30\")"
@@ -364,22 +350,22 @@
     "text": "Power function\nSuppose \\(\\beta_j = \\kappa\\).\n\\[\n  Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa)\n\\]\nWe call this the power function. And,\n\\[\n  1-Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa) = Pr(\\text{Type 2 error})\n\\]\n\nHigher power \\(\\rightarrow\\) lower probability of type 2 error."
   },
   {
-    "objectID": "lecture-3.html#section-14",
-    "href": "lecture-3.html#section-14",
+    "objectID": "lecture-3.html#section-13",
+    "href": "lecture-3.html#section-13",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "We know what this function looks like:\n\\[\n  \\begin{aligned}\n    Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa) =& Pr(|\\text{Test-stat}|&gt;1.96|\\beta_j = \\kappa) \\\\\n    =& Pr\\Bigg(\\Bigg| \\frac{\\hat{\\beta}_j-0}{se(\\hat{\\beta}_j)}\\Bigg|&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg) \\\\\n    =& Pr\\Bigg(\\frac{\\hat{\\beta}_j-0}{se(\\hat{\\beta}_j)}&lt;-1.96\\Bigg|\\beta_j = \\kappa\\Bigg) + Pr\\Bigg(\\frac{\\hat{\\beta}_j-0}{se(\\hat{\\beta}_j)}&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg)\n  \\end{aligned}\n\\]\nThis probablity is not \\(0.05\\) because \\(\\beta_j \\neq 0\\)."
   },
   {
-    "objectID": "lecture-3.html#section-15",
-    "href": "lecture-3.html#section-15",
+    "objectID": "lecture-3.html#section-14",
+    "href": "lecture-3.html#section-14",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "We have to add and subtract \\(\\kappa/se(\\hat{\\beta}_j)\\).\n\\[\n  \\begin{aligned}\n    Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa) =& Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa}{se(\\hat{\\beta}_j)}+\\frac{\\kappa-0}{se(\\hat{\\beta}_j)}&lt;-1.96\\Bigg|\\beta_j = \\kappa\\Bigg) + Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa}{se(\\hat{\\beta}_j)}+\\frac{\\kappa-0}{se(\\hat{\\beta}_j)}&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg) \\\\\n    =& Pr\\Bigg(\\underbrace{\\frac{\\hat{\\beta}_j-\\kappa}{se(\\hat{\\beta}_j)}}_{\\sim N(0,1)}&lt;-1.96-\\frac{\\kappa}{se(\\hat{\\beta}_j)}\\Bigg|\\beta_j = \\kappa\\Bigg) + Pr\\Bigg(\\underbrace{\\frac{\\hat{\\beta}_j-\\kappa}{se(\\hat{\\beta}_j)}}_{\\sim N(0,1)}&gt;1.96-\\frac{\\kappa}{se(\\hat{\\beta}_j)}\\Bigg|\\beta_j = \\kappa\\Bigg) \\\\\n    =& \\Phi\\big(-1.96-\\kappa/se(\\hat{\\beta}_j)\\big) + 1- \\Phi\\big(1.96-\\kappa/se(\\hat{\\beta}_j)\\big) \\\\\n    \\geq & 0.05\n  \\end{aligned}\n\\]\nUnder the null hypothesis we assumed the distribution of \\(\\hat{\\beta}_j\\) was centered on 0, when it is actually \\(\\kappa\\). This yields a probability of rejection greater than \\(0.05=\\alpha\\)."
   },
   {
-    "objectID": "lecture-3.html#section-16",
-    "href": "lecture-3.html#section-16",
+    "objectID": "lecture-3.html#section-15",
+    "href": "lecture-3.html#section-15",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "Suppose \\(\\kappa/se(\\hat{\\beta}_j)=1\\). Conditional on \\(\\beta_j=\\kappa\\), the standardized test statistic is actually centered around 1.\n\n\nCode\nx &lt;- seq(-4, 5, length.out = 1000)\ny0 &lt;- dnorm(x, mean = 0, sd = 1)   # null distribution\ny1 &lt;- dnorm(x, mean = 1, sd = 1)   # alternative distribution\n\npar(mar = c(4, 4, 2, 1))\n\nplot(x, y0, type = \"l\", lwd = 2, col = \"black\",\n     xlim = c(-4, 5),\n     xlab = \"z\", ylab = \"Density\",\n     main = \"Standard Normal vs. N(1, 1)\",\n     xaxs = \"i\", yaxs = \"i\", ylim = c(0, max(y0, y1) * 1.15))\n\n# --- Shade N(1,1) area left of -1.96 ---\nx_left &lt;- seq(-4, -1.96, length.out = 200)\ny_left &lt;- dnorm(x_left, mean = 1, sd = 1)\npolygon(c(x_left[1], x_left, tail(x_left, 1)),\n        c(0, y_left, 0),\n        col = rgb(0.20, 0.60, 0.20, 0.6), border = NA)\n\n# --- Shade N(1,1) area right of 1.96 ---\nx_right &lt;- seq(1.96, 5, length.out = 200)\ny_right &lt;- dnorm(x_right, mean = 1, sd = 1)\npolygon(c(x_right[1], x_right, tail(x_right, 1)),\n        c(0, y_right, 0),\n        col = rgb(0.20, 0.60, 0.20, 0.6), border = NA)\n\n# Draw both curves on top of the shading\nlines(x, y0, lwd = 2, col = \"black\")\nlines(x, y1, lwd = 2, col = \"steelblue4\")\n\n# Vertical reference lines at the rejection-rule cutoffs\nabline(v = c(-1.96, 1.96), lty = 2, col = \"gray40\")\n\n# Label the cutoff values on the x-axis\naxis(1, at = c(-1.96, 1.96), labels = c(\"-1.96\", \"1.96\"),\n     line = 1.1, tick = FALSE, cex.axis = 0.85, col.axis = \"gray30\")\n\nlegend(\"topright\", inset = 0.02,\n       legend = c(\"N(0, 1)\", \"N(1, 1)\"),\n       col = c(\"black\", \"steelblue4\"), lwd = 2, bty = \"n\")\n\n\n\n\n\n\n\n\n\nThe probability of rejecting increases as \\(\\kappa\\) moves further from \\(0\\) (the value under \\(H_0\\))."
@@ -445,7 +431,7 @@
     "href": "lecture-3.html#useful-code",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Useful code",
-    "text": "Useful code\n\nStataR\n\n\n\n* Standard normal distribution\n\n** Evaluate point on CDF: i.e., probability below 0.675\ndis normal(0.675)\n\n** Percentile of CDF\ndis invnormal(0.975)\n\n* t-distribution\n\n** Evaluate point on CDF (df = 100): i.e., probability below 0.675\ndis t(100, 0.675)\n\n** Percentile of CDF (df = 100)\ndis invt(100, 0.975)\n\n.75016212\n\n1.959964\n\n.74938326\n\n1.9839715\n\n\n\n\n\n# Standard normal distribution\n\n## Evaluate point on CDF: i.e., probability below 0.675\npnorm(0.675)\n\n[1] 0.7501621\n\n## Percentile of CDF\nqnorm(0.975)\n\n[1] 1.959964\n\n## t-distribution\n\n## Evaluate point on CDF (df = 100): i.e., probability below 0.675\npt(0.675, 100)\n\n[1] 0.7493833\n\n## Percentile of CDF (df = 100)\nqt(0.975, 100)\n\n[1] 1.983972"
+    "text": "Useful code\n\nStataR\n\n\n\n* Standard normal distribution\n\n** Evaluate point on CDF: i.e., probability below 0.675\ndis normal(0.675)\n\n** Percentile of CDF\ndis invnormal(0.975)\n\n.75016212\n\n1.959964\n\n\n\n* t-distribution\n\n** Evaluate point on CDF (df = 100): i.e., probability below 0.675\ndis t(100, 0.675)\n\n** Percentile of CDF (df = 100)\ndis invt(100, 0.975)\n\n.74938326\n\n1.9839715\n\n\n\n\n\n# Standard normal distribution\n\n## Evaluate point on CDF: i.e., probability below 0.675\npnorm(0.675)\n\n[1] 0.7501621\n\n## Percentile of CDF\nqnorm(0.975)\n\n[1] 1.959964\n\n\n\n## t-distribution\n\n## Evaluate point on CDF (df = 100): i.e., probability below 0.675\npt(0.675, 100)\n\n[1] 0.7493833\n\n## Percentile of CDF (df = 100)\nqt(0.975, 100)\n\n[1] 1.983972"
   },
   {
     "objectID": "lecture-3.html#footnotes",
@@ -469,20 +455,6 @@
     "text": "G\n\n\n\nA\n\nEstimand\n\n\n\nB\n\nEstimator\n\n\n\nA--B\n\n\n\n\nC\n\nEstimate\n\n\n\nB--C"
   },
   {
-    "objectID": "lecture-3-slides.html#accuracy",
-    "href": "lecture-3-slides.html#accuracy",
-    "title": "Properties of OLS and Statistical Inference",
-    "section": "Accuracy",
-    "text": "Accuracy\nIs \\hat{\\beta} = \\beta?\n\n\nNo!\nIn fact, the statement does not make sense since \\hat{\\beta} is a random variable while \\beta is a non-random constant.\nIf we are accurate, we can ask: Pr(\\hat{\\beta}=\\beta)=?\nThe answer is: Pr(\\hat{\\beta}=\\beta|\\mathbf{x})=0 for any u_i with a continuous distribution (conditional on \\mathbf{x})."
-  },
-  {
-    "objectID": "lecture-3-slides.html#section-1",
-    "href": "lecture-3-slides.html#section-1",
-    "title": "Properties of OLS and Statistical Inference",
-    "section": "",
-    "text": "Can we expect – a priori – for \\hat{\\beta} to be “on target”?\n\nThis is a question of biasedness: is E[\\hat{\\beta}] = \\beta?\nThe answer: it depends!\nSpecifically, it depends on the properties of the model!"
-  },
-  {
     "objectID": "lecture-3-slides.html#biasedness",
     "href": "lecture-3-slides.html#biasedness",
     "title": "Properties of OLS and Statistical Inference",
@@ -490,8 +462,8 @@
     "text": "Biasedness\nWhen is the OLS estimator unbias?\n\nE[\\hat{\\beta}] = \\beta"
   },
   {
-    "objectID": "lecture-3-slides.html#section-2",
-    "href": "lecture-3-slides.html#section-2",
+    "objectID": "lecture-3-slides.html#section-1",
+    "href": "lecture-3-slides.html#section-1",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "Under the assumptions MLR 1-4,\n\n  E[\\hat{\\beta}_j] = \\beta_j \\qquad j=0,\\dots,k"
@@ -504,36 +476,36 @@
     "text": "Proof\nWe do not have the math to do this for the multivariate case. However, we can show this for the univariate case:\nUnder MLR 1-4 (equiv. to Wooldridge’s SLR 1-4)\n\n  y_i = \\beta_0 + \\beta_1 x_i + u_i\n\nwhere E[u_i|x_i]=0."
   },
   {
+    "objectID": "lecture-3-slides.html#section-2",
+    "href": "lecture-3-slides.html#section-2",
+    "title": "Properties of OLS and Statistical Inference",
+    "section": "",
+    "text": "The OLS estimator for \\beta_1 is given by (see Lecture 2):\n\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\sum_{i=1}^{n}(y_i -\\bar{y})(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} \\\\\n    =& \\frac{\\sum_{i=1}^{n}y_i(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} \\\\\n    =& \\frac{\\sum_{i=1}^{n}y_i(x_{i}-\\bar{x})}{\\text{SST}_x}\n  \\end{aligned}\n\nwhere \\text{SST}_x=\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2"
+  },
+  {
     "objectID": "lecture-3-slides.html#section-3",
     "href": "lecture-3-slides.html#section-3",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "The OLS estimator for \\beta_1 is given by (see Lecture 2):\n\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\sum_{i=1}^{n}(y_i -\\bar{y})(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} \\\\\n    =& \\frac{\\sum_{i=1}^{n}y_i(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} \\\\\n    =& \\frac{\\sum_{i=1}^{n}y_i(x_{i}-\\bar{x})}{\\text{SST}_x}\n  \\end{aligned}\n\nwhere \\text{SST}_x=\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2"
+    "text": "Substitute the model (y_i = \\beta_0 + \\beta_1 x_i + u_i) in:\n\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\sum_{i=1}^{n}(\\beta_0 + \\beta_1 x_i + u_i)(x_{i}-\\bar{x})}{\\text{SST}_x} \\\\\n    =& \\frac{\\beta_0}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x}) + \\frac{\\beta_1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})x_i + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n  \\end{aligned}"
   },
   {
     "objectID": "lecture-3-slides.html#section-4",
     "href": "lecture-3-slides.html#section-4",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "Substitute the model (y_i = \\beta_0 + \\beta_1 x_i + u_i) in:\n\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\sum_{i=1}^{n}(\\beta_0 + \\beta_1 x_i + u_i)(x_{i}-\\bar{x})}{\\text{SST}_x} \\\\\n    =& \\frac{\\beta_0}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x}) + \\frac{\\beta_1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})x_i + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n  \\end{aligned}"
+    "text": "Now we use the fact that:\n\n    \\hat{\\beta}_1 = \\frac{\\beta_0}{\\text{SST}_x}\\underbrace{\\sum_{i=1}^{n}(x_{i}-\\bar{x})}_{=0} + \\frac{\\beta_1}{\\text{SST}_x}\\underbrace{\\sum_{i=1}^{n}(x_{i}-\\bar{x})x_i}_{\\text{SST}_x} + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n\nTo get,\n\n    \\hat{\\beta}_1 = \\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i"
   },
   {
     "objectID": "lecture-3-slides.html#section-5",
     "href": "lecture-3-slides.html#section-5",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "Now we use the fact that:\n\n    \\hat{\\beta}_1 = \\frac{\\beta_0}{\\text{SST}_x}\\underbrace{\\sum_{i=1}^{n}(x_{i}-\\bar{x})}_{=0} + \\frac{\\beta_1}{\\text{SST}_x}\\underbrace{\\sum_{i=1}^{n}(x_{i}-\\bar{x})x_i}_{\\text{SST}_x} + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n\nTo get,\n\n    \\hat{\\beta}_1 = \\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i"
+    "text": "Now we can take the conditional expectation of \\hat{\\beta}_1\n\n  \\begin{aligned}\n  E[\\hat{\\beta}_1|x] =& E\\Bigg[\\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\\Bigg\\vert x\\Bigg] \\\\\n  =& \\beta_1 + E\\Bigg[\\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\\Bigg\\vert x\\Bigg] \\\\\n  =& \\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})\\underbrace{E[u_i|x]}_{=0} \\\\\n  =& \\beta_1\n  \\end{aligned}"
   },
   {
     "objectID": "lecture-3-slides.html#section-6",
     "href": "lecture-3-slides.html#section-6",
-    "title": "Properties of OLS and Statistical Inference",
-    "section": "",
-    "text": "Now we can take the conditional expectation of \\hat{\\beta}_1\n\n  \\begin{aligned}\n  E[\\hat{\\beta}_1|x] =& E\\Bigg[\\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\\Bigg\\vert x\\Bigg] \\\\\n  =& \\beta_1 + E\\Bigg[\\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\\Bigg\\vert x\\Bigg] \\\\\n  =& \\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})\\underbrace{E[u_i|x]}_{=0} \\\\\n  =& \\beta_1\n  \\end{aligned}"
-  },
-  {
-    "objectID": "lecture-3-slides.html#section-7",
-    "href": "lecture-3-slides.html#section-7",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "Since, E[\\hat{\\beta}_1|x] = \\beta_1, then by the Law of Iterated Expectations (see CEF Material)\n\nE[\\hat{\\beta}_1] = E\\big[E[\\hat{\\beta}_1|x]\\big] = E[\\beta_1] = \\beta_1"
@@ -567,15 +539,15 @@
     "text": "Variance\nThe variance of the estimator will depend on the variance of the x’s and the error term. As before, we can show this more easily for the SLR:\n\n  \\begin{aligned}\n  Var(\\hat{\\beta}_1|x) =& E\\Big[\\big(\\hat{\\beta}_1-\\underbrace{E[\\hat{\\beta}_1|x]}_{\\beta_1}\\big)^2\\Big|x\\Big] \\\\\n  =& E\\big[(\\hat{\\beta}_1-\\beta_1)^2\\big|x\\big]\n  \\end{aligned}"
   },
   {
-    "objectID": "lecture-3-slides.html#section-8",
-    "href": "lecture-3-slides.html#section-8",
+    "objectID": "lecture-3-slides.html#section-7",
+    "href": "lecture-3-slides.html#section-7",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "Earlier, we showed that\n\n  \\hat{\\beta}_1 = \\beta_1 + \\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\n\nSubstituting this is, we get:\n\n  Var(\\hat{\\beta}_1|x) = E\\Bigg[\\bigg(\\frac{1}{\\text{SST}_x}\\sum_{i=1}^{n}(x_{i}-\\bar{x})u_i\\bigg)^2\\Bigg|x\\Bigg]"
   },
   {
-    "objectID": "lecture-3-slides.html#section-9",
-    "href": "lecture-3-slides.html#section-9",
+    "objectID": "lecture-3-slides.html#section-8",
+    "href": "lecture-3-slides.html#section-8",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "After some math…(exploiting MLR-2)\n\n  Var(\\hat{\\beta}_1|x) = \\frac{Var(u_i|x_i)}{SST_x} = \\frac{\\sigma^2}{SST_x}\n\nUsing MLR-5 (Homoskedasticity).\n\nThe larger the variance of error term, the bigger the variance of the estimator\n\n\\Rightarrow if you add variables that explain more of y you can reduce the variance.\n\nIf you increase the variance in x, you reduce the variance of the estimator."
@@ -616,8 +588,8 @@
     "text": "Normalization\nWe can therefore standardize the distribution:\n\n  \\frac{\\hat{\\beta}_j-\\beta_j}{se(\\hat{\\beta}_j)} | x \\sim N(0,1)\n where se(\\hat{\\beta}_j) = \\sqrt{Var(\\hat{\\beta}_j)}"
   },
   {
-    "objectID": "lecture-3-slides.html#section-10",
-    "href": "lecture-3-slides.html#section-10",
+    "objectID": "lecture-3-slides.html#section-9",
+    "href": "lecture-3-slides.html#section-9",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "This term - let’s call it z=(\\hat{\\beta}_j-\\beta_j)/se(\\hat{\\beta}_j) is another random variable. Since we know the properties N(0,1), we know:\n\nPr(z&lt;\\text{z}_{0.025}) = 0.025 where \\text{z}_{0.025} = -1.96 is the 2.5^{th} percentile of N(0,1)\nPr(z&gt;\\text{z}_{0.975}) = 0.025 where \\text{z}_{0.975} = 1.96 is the 97.5^{th} percentile of N(0,1)\nPr(\\text{z}_{0.025}&lt;z&lt;\\text{z}_{0.975}) = 0.95 (or 95%)"
@@ -630,8 +602,8 @@
     "text": "Confidence Intervals\nWe can use this knowledge to form confidence intervals for the unknown \\beta_j\n\n  \\begin{aligned}\n  0.95 =& Pr(\\text{z}_{0.025} &lt; z &lt; \\text{z}_{0.975}) \\\\\n  =& Pr\\Bigg(\\text{z}_{0.025} &lt; \\frac{\\hat{\\beta}_j-\\beta_j}{se(\\hat{\\beta}_j)} &lt; \\text{z}_{0.975}\\Bigg) \\\\\n  =& Pr\\big(\\text{z}_{0.025}\\times se(\\hat{\\beta}_j) &lt; \\hat{\\beta}_j-\\beta_j &lt; \\text{z}_{0.975}\\times se(\\hat{\\beta}_j)\\big) \\\\\n  =& Pr\\big(-\\hat{\\beta}_j+\\text{z}_{0.025}\\times se(\\hat{\\beta}_j) &lt; -\\beta_j &lt; -\\hat{\\beta}_j+\\text{z}_{0.975}\\times se(\\hat{\\beta}_j)\\big) \\\\\n  =& Pr\\big(\\hat{\\beta}_j - \\text{z}_{0.975}\\times se(\\hat{\\beta}_j) &lt; \\beta_j &lt; \\hat{\\beta}_j - \\text{z}_{0.025}\\times se(\\hat{\\beta}_j)\\big) \\\\\n  \\end{aligned}\n\nNotice, the percentiles end up on opposite sides."
   },
   {
-    "objectID": "lecture-3-slides.html#section-11",
-    "href": "lecture-3-slides.html#section-11",
+    "objectID": "lecture-3-slides.html#section-10",
+    "href": "lecture-3-slides.html#section-10",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "For symmetric distributions, like Normal, \\text{z}_{0.975}=- \\text{z}_{0.025}. This gives us the simplified Confidence Interval:\n\n  \\text{CI}_{0.95} = \\big[\\hat{\\beta}_j - \\text{z}_{0.975}\\times se(\\hat{\\beta}_j),\\hat{\\beta}_j + \\text{z}_{0.975}\\times se(\\hat{\\beta}_j)\\big]\n\n\n\n\n\n\n\nNote\n\n\nThe CI is depends on the estimator \\hat{\\beta}_j. Since the estimator is random variable, the CI is also random. For this reason, we can ask: what is the probability that \\beta_j lies within the CI.\n\n  Pr(\\beta_j\\in \\text{CI}_{0.95}) = 0.95\n If replaced \\beta_j with another value it the probability would change. This is because the distribution of \\hat{\\beta}_j is centered around \\beta_j."
@@ -672,15 +644,15 @@
     "text": "Rejection rule\n\nDetermine a rejection rule consistent with a chosen \\alpha.\n\nUnder H_0,\n\n  \\text{Test-stat} \\underset{H_0}{\\sim} N(0,1)"
   },
   {
-    "objectID": "lecture-3-slides.html#section-12",
-    "href": "lecture-3-slides.html#section-12",
+    "objectID": "lecture-3-slides.html#section-11",
+    "href": "lecture-3-slides.html#section-11",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "\\Rightarrow Pr(-1.96 &lt; \\text{Test-stat} &lt; 1.96 | H_0) = 0.95\n\n\n\nCode\nx &lt;- seq(-3, 3, length.out = 1000)\ny &lt;- dnorm(x)\n\npar(mar = c(4, 4, 2, 1))\n\nplot(x, y, type = \"l\", lwd = 2, col = \"black\",\n     xlim = c(-3, 3),\n     xlab = \"z\", ylab = \"Density\",\n     main = \"Standard Normal Distribution\",\n     xaxs = \"i\", yaxs = \"i\", ylim = c(0, max(y) * 1.1))\n\n# Shade the area between -1.96 and 1.96\nx_shade &lt;- seq(-1.96, 1.96, length.out = 500)\ny_shade &lt;- dnorm(x_shade)\n\npolygon(c(x_shade[1], x_shade, tail(x_shade, 1)),\n        c(0, y_shade, 0),\n        col = rgb(0.20, 0.40, 0.70, 0.5), border = NA)\n\n# Re-draw the curve on top so the outline stays crisp over the shading\nlines(x, y, lwd = 2, col = \"black\")\n\n# Reference lines at the cutoffs\nabline(v = c(-1.96, 1.96), lty = 2, col = \"gray40\")\n\n# Label the shaded area\ntext(0, dnorm(0) * 0.4, \"Area = 0.95\", cex = 1.1, font = 2)\n\n# Label the cutoff values on the x-axis\naxis(1, at = c(-1.96, 1.96), labels = c(\"-1.96\", \"1.96\"),\n     line = 1.1, tick = FALSE, cex.axis = 0.85, col.axis = \"gray30\")"
   },
   {
-    "objectID": "lecture-3-slides.html#section-13",
-    "href": "lecture-3-slides.html#section-13",
+    "objectID": "lecture-3-slides.html#section-12",
+    "href": "lecture-3-slides.html#section-12",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "Reject H_0 if: \\text{Test-stat}&gt;1.96 or \\text{Test-stat}&lt;-1.96\n\n  \\Rightarrow \\text{Reject if}\\quad  |\\text{Test-stat}|&gt;1.96\n\n\n\nCode\nplot(x, y, type = \"l\", lwd = 2, col = \"black\",\n     xlim = c(-3, 3),\n     xlab = \"z\", ylab = \"Density\",\n     main = \"Standard Normal Distribution\",\n     xaxs = \"i\", yaxs = \"i\", ylim = c(0, max(y) * 1.25))\n\n# --- Left tail: x &lt;= -1.96 ---\nx_left &lt;- seq(-3, -1.96, length.out = 200)\ny_left &lt;- dnorm(x_left)\npolygon(c(x_left[1], x_left, tail(x_left, 1)),\n        c(0, y_left, 0),\n        col = rgb(0.80, 0.15, 0.15, 0.7), border = NA)\n\n# --- Right tail: x &gt;= 1.96 ---\nx_right &lt;- seq(1.96, 3, length.out = 200)\ny_right &lt;- dnorm(x_right)\npolygon(c(x_right[1], x_right, tail(x_right, 1)),\n        c(0, y_right, 0),\n        col = rgb(0.80, 0.15, 0.15, 0.7), border = NA)\n\n# Re-draw the curve on top so the outline stays crisp over the shading\nlines(x, y, lwd = 2, col = \"black\")\n\n# Reference lines at the cutoffs\nabline(v = c(-1.96, 1.96), lty = 2, col = \"gray40\")\n\n# Labels for each tail, placed above the curve with an arrow pointing\n# down into the shaded region (the tails are too thin to hold text)\narrows(x0 = -2.45, y0 = 0.09, x1 = -2.20, y1 = 0.012,\n       length = 0.08, col = \"black\", lwd = 1.2)\ntext(-2.95, 0.10, \"Area = 0.025\", cex = 0.95, font = 2, pos = 4)\n\narrows(x0 = 2.45, y0 = 0.09, x1 = 2.20, y1 = 0.012,\n       length = 0.08, col = \"black\", lwd = 1.2)\ntext(2.95, 0.10, \"Area = 0.025\", cex = 0.95, font = 2, pos = 2)\n\n# Label the cutoff values on the x-axis\naxis(1, at = c(-1.96, 1.96), labels = c(\"-1.96\", \"1.96\"),\n     line = 1.1, tick = FALSE, cex.axis = 0.85, col.axis = \"gray30\")"
@@ -700,22 +672,22 @@
     "text": "Power function\nSuppose \\beta_j = \\kappa.\n\n  Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa)\n\nWe call this the power function. And,\n\n  1-Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa) = Pr(\\text{Type 2 error})\n\n\nHigher power \\rightarrow lower probability of type 2 error."
   },
   {
-    "objectID": "lecture-3-slides.html#section-14",
-    "href": "lecture-3-slides.html#section-14",
+    "objectID": "lecture-3-slides.html#section-13",
+    "href": "lecture-3-slides.html#section-13",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "We know what this function looks like:\n\n  \\begin{aligned}\n    Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa) =& Pr(|\\text{Test-stat}|&gt;1.96|\\beta_j = \\kappa) \\\\\n    =& Pr\\Bigg(\\Bigg| \\frac{\\hat{\\beta}_j-0}{se(\\hat{\\beta}_j)}\\Bigg|&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg) \\\\\n    =& Pr\\Bigg(\\frac{\\hat{\\beta}_j-0}{se(\\hat{\\beta}_j)}&lt;-1.96\\Bigg|\\beta_j = \\kappa\\Bigg) + Pr\\Bigg(\\frac{\\hat{\\beta}_j-0}{se(\\hat{\\beta}_j)}&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg)\n  \\end{aligned}\n\nThis probablity is not 0.05 because \\beta_j \\neq 0."
   },
   {
-    "objectID": "lecture-3-slides.html#section-15",
-    "href": "lecture-3-slides.html#section-15",
+    "objectID": "lecture-3-slides.html#section-14",
+    "href": "lecture-3-slides.html#section-14",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "We have to add and subtract \\kappa/se(\\hat{\\beta}_j).\n\n  \\begin{aligned}\n    Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa) =& Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa}{se(\\hat{\\beta}_j)}+\\frac{\\kappa-0}{se(\\hat{\\beta}_j)}&lt;-1.96\\Bigg|\\beta_j = \\kappa\\Bigg) + Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa}{se(\\hat{\\beta}_j)}+\\frac{\\kappa-0}{se(\\hat{\\beta}_j)}&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg) \\\\\n    =& Pr\\Bigg(\\underbrace{\\frac{\\hat{\\beta}_j-\\kappa}{se(\\hat{\\beta}_j)}}_{\\sim N(0,1)}&lt;-1.96-\\frac{\\kappa}{se(\\hat{\\beta}_j)}\\Bigg|\\beta_j = \\kappa\\Bigg) + Pr\\Bigg(\\underbrace{\\frac{\\hat{\\beta}_j-\\kappa}{se(\\hat{\\beta}_j)}}_{\\sim N(0,1)}&gt;1.96-\\frac{\\kappa}{se(\\hat{\\beta}_j)}\\Bigg|\\beta_j = \\kappa\\Bigg) \\\\\n    =& \\Phi\\big(-1.96-\\kappa/se(\\hat{\\beta}_j)\\big) + 1- \\Phi\\big(1.96-\\kappa/se(\\hat{\\beta}_j)\\big) \\\\\n    \\geq & 0.05\n  \\end{aligned}\n\nUnder the null hypothesis we assumed the distribution of \\hat{\\beta}_j was centered on 0, when it is actually \\kappa. This yields a probability of rejection greater than 0.05=\\alpha."
   },
   {
-    "objectID": "lecture-3-slides.html#section-16",
-    "href": "lecture-3-slides.html#section-16",
+    "objectID": "lecture-3-slides.html#section-15",
+    "href": "lecture-3-slides.html#section-15",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
     "text": "Suppose \\kappa/se(\\hat{\\beta}_j)=1. Conditional on \\beta_j=\\kappa, the standardized test statistic is actually centered around 1.\n\n\nCode\nx &lt;- seq(-4, 5, length.out = 1000)\ny0 &lt;- dnorm(x, mean = 0, sd = 1)   # null distribution\ny1 &lt;- dnorm(x, mean = 1, sd = 1)   # alternative distribution\n\npar(mar = c(4, 4, 2, 1))\n\nplot(x, y0, type = \"l\", lwd = 2, col = \"black\",\n     xlim = c(-4, 5),\n     xlab = \"z\", ylab = \"Density\",\n     main = \"Standard Normal vs. N(1, 1)\",\n     xaxs = \"i\", yaxs = \"i\", ylim = c(0, max(y0, y1) * 1.15))\n\n# --- Shade N(1,1) area left of -1.96 ---\nx_left &lt;- seq(-4, -1.96, length.out = 200)\ny_left &lt;- dnorm(x_left, mean = 1, sd = 1)\npolygon(c(x_left[1], x_left, tail(x_left, 1)),\n        c(0, y_left, 0),\n        col = rgb(0.20, 0.60, 0.20, 0.6), border = NA)\n\n# --- Shade N(1,1) area right of 1.96 ---\nx_right &lt;- seq(1.96, 5, length.out = 200)\ny_right &lt;- dnorm(x_right, mean = 1, sd = 1)\npolygon(c(x_right[1], x_right, tail(x_right, 1)),\n        c(0, y_right, 0),\n        col = rgb(0.20, 0.60, 0.20, 0.6), border = NA)\n\n# Draw both curves on top of the shading\nlines(x, y0, lwd = 2, col = \"black\")\nlines(x, y1, lwd = 2, col = \"steelblue4\")\n\n# Vertical reference lines at the rejection-rule cutoffs\nabline(v = c(-1.96, 1.96), lty = 2, col = \"gray40\")\n\n# Label the cutoff values on the x-axis\naxis(1, at = c(-1.96, 1.96), labels = c(\"-1.96\", \"1.96\"),\n     line = 1.1, tick = FALSE, cex.axis = 0.85, col.axis = \"gray30\")\n\nlegend(\"topright\", inset = 0.02,\n       legend = c(\"N(0, 1)\", \"N(1, 1)\"),\n       col = c(\"black\", \"steelblue4\"), lwd = 2, bty = \"n\")\n\n\n\nThe probability of rejecting increases as \\kappa moves further from 0 (the value under H_0)."
@@ -781,7 +753,7 @@
     "href": "lecture-3-slides.html#useful-code",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Useful code",
-    "text": "Useful code\n\nStataR\n\n\n\n* Standard normal distribution\n\n** Evaluate point on CDF: i.e., probability below 0.675\ndis normal(0.675)\n\n** Percentile of CDF\ndis invnormal(0.975)\n\n* t-distribution\n\n** Evaluate point on CDF (df = 100): i.e., probability below 0.675\ndis t(100, 0.675)\n\n** Percentile of CDF (df = 100)\ndis invt(100, 0.975)\n\n.75016212\n\n1.959964\n\n.74938326\n\n1.9839715\n\n\n\n\n\n# Standard normal distribution\n\n## Evaluate point on CDF: i.e., probability below 0.675\npnorm(0.675)\n\n[1] 0.7501621\n\n## Percentile of CDF\nqnorm(0.975)\n\n[1] 1.959964\n\n## t-distribution\n\n## Evaluate point on CDF (df = 100): i.e., probability below 0.675\npt(0.675, 100)\n\n[1] 0.7493833\n\n## Percentile of CDF (df = 100)\nqt(0.975, 100)\n\n[1] 1.983972"
+    "text": "Useful code\n\nStataR\n\n\n\n* Standard normal distribution\n\n** Evaluate point on CDF: i.e., probability below 0.675\ndis normal(0.675)\n\n** Percentile of CDF\ndis invnormal(0.975)\n\n.75016212\n\n1.959964\n\n\n\n* t-distribution\n\n** Evaluate point on CDF (df = 100): i.e., probability below 0.675\ndis t(100, 0.675)\n\n** Percentile of CDF (df = 100)\ndis invt(100, 0.975)\n\n.74938326\n\n1.9839715\n\n\n\n\n\n# Standard normal distribution\n\n## Evaluate point on CDF: i.e., probability below 0.675\npnorm(0.675)\n\n[1] 0.7501621\n\n## Percentile of CDF\nqnorm(0.975)\n\n[1] 1.959964\n\n\n\n## t-distribution\n\n## Evaluate point on CDF (df = 100): i.e., probability below 0.675\npt(0.675, 100)\n\n[1] 0.7493833\n\n## Percentile of CDF (df = 100)\nqt(0.975, 100)\n\n[1] 1.983972"
   },
   {
     "objectID": "lecture-1.html",
@@ -2293,56 +2265,56 @@
     "href": "lecture-2-slides.html#recap",
     "title": "Ordinary Least Squares",
     "section": "Recap",
-    "text": "Recap\nLast week we discussed:\n\nLinear Regression Model: structure, notation, etc.\nHow we can rationalize the model\nClassical MLR 1-6 assumptions\nIdentification (simple case)\nInterpretation (simple and multivariate case)"
+    "text": "Recap\nLast week we discussed:\n\nLinear Regression Model: structure, notation, etc.\nHow we can rationalize the model\nClassical MLR 1-6 assumptions\nIdentification (simple case)\nInterpretation (simple and multivariate cases)\n\nPlease check my Moodle forum post on What To Know: WTK: Lecture 1"
   },
   {
     "objectID": "lecture-2-slides.html#quiz",
     "href": "lecture-2-slides.html#quiz",
     "title": "Ordinary Least Squares",
     "section": "Quiz",
-    "text": "Quiz\nWhat’s wrong with this model?\n\n  energy\\_costs_i = \\beta_0 + \\beta_1 England_i + \\beta_2 Wales_i + \\beta_3 Scotland_i + \\beta_4 NIreland_i + u_i\n\nfor a sample of UK households. Where,\n\n[England_i, Wales_i, Scotland_i, NIreland_i] are all ‘dummy’ variables denoting the location of household i."
-  },
-  {
-    "objectID": "lecture-2-slides.html#quiz-1",
-    "href": "lecture-2-slides.html#quiz-1",
-    "title": "Ordinary Least Squares",
-    "section": "Quiz",
-    "text": "Quiz\nImagine what this dataset might look like:"
-  },
-  {
-    "objectID": "lecture-2-slides.html#this-week",
-    "href": "lecture-2-slides.html#this-week",
-    "title": "Ordinary Least Squares",
-    "section": "This week",
-    "text": "This week\nThis week we cover:\n\nData\nEstimation: An intuitive approach\nOrdinary Least Squares"
+    "text": "Quiz\nWhat’s wrong with this model of household energy costs in the UK?\n\n  energy\\_costs_i = \\beta_0 + \\beta_1 england_i + \\beta_2 wales_i + \\beta_3 scotland_i + \\beta_4 n\\_ireland_i + u_i\n\nwhere,\n\nengland_i\nwales_i\nscotland_i\nn\\_ireland_i\n\nare dummy variables denoting household location."
   },
   {
     "objectID": "lecture-2-slides.html#section",
     "href": "lecture-2-slides.html#section",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "We start with the multivariate linear regression model,\n\n  y_i = \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2}+\\dots + \\beta_kx_{ik} + u_i\n\nwhich could represent:\n\nthe true data generating process,\nthe conditional expectation function,\nan economic model,\nan estimating equation\n\nunder different assumptions."
+    "text": "Imagine what this dataset might look like:"
   },
   {
-    "objectID": "lecture-2-slides.html#section-1",
-    "href": "lecture-2-slides.html#section-1",
+    "objectID": "lecture-2-slides.html#base-category",
+    "href": "lecture-2-slides.html#base-category",
     "title": "Ordinary Least Squares",
-    "section": "",
-    "text": "Curcially, the model includes data: for each observation we observation\n\n  [y_i, x_{i1}, x_{i2}, \\dots, x_{ik}] \\quad i = 1, \\dots, n\n\nStacked together, we have a matrix of data:\n\n\\begin{bmatrix}\ny_1 & x_{11} & x_{12} & \\dots & x_{1k} \\\\\ny_2 & x_{21} & x_{22} & \\dots & x_{2k} \\\\\n\\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\\ny_n & x_{n1} & x_{n2} & \\dots & x_{nk} \\\\\n\\end{bmatrix}"
+    "section": "Base category",
+    "text": "Base category\nThis means that we must drop 1 category\n\nFor example, leave out england_i\n\n\n  energy\\_costs_i = \\textcolor{blue}{\\beta_0} + \\textcolor{blue}{\\beta_1} wales_i + \\textcolor{blue}{\\beta_2} scotland_i + \\textcolor{blue}{\\beta_3} n\\_ireland_i + u_i\n\n\nor wales_i\n\n\n  energy\\_costs_i = \\textcolor{red}{\\gamma_0} + \\textcolor{red}{\\gamma_1} england_i + \\textcolor{red}{\\gamma_2} scotland_i + \\textcolor{red}{\\gamma_3} n\\_ireland_i + u_i\n\nIn each case, the interpretation of the parameters changes: \\textcolor{blue}{\\beta} \\neq \\textcolor{red}{\\gamma}."
+  },
+  {
+    "objectID": "lecture-2-slides.html#today",
+    "href": "lecture-2-slides.html#today",
+    "title": "Ordinary Least Squares",
+    "section": "Today",
+    "text": "Today\nToday we cover:\n\nData\nEstimation: An intuitive approach\nOrdinary Least Squares\n\nSimple case\nBinary case\nMultivariate case\n\nDoes it work?"
   },
   {
     "objectID": "lecture-2-slides.html#section-2",
     "href": "lecture-2-slides.html#section-2",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "Suppose you started with the data? For example, the Living Costs and Food Survey:\n\na household level dataset with information on consumption and income.\n\n\n  [cons_i, inc_i] \\quad i = 1, \\dots, n"
+    "text": "For each observation we observe:\n\n  [y_i, x_{i1}, x_{i2}, \\dots, x_{ik}] \\quad i = 1, \\dots, n\n\nStacked together, we have a matrix of data:\n\n\\begin{bmatrix}\ny_1 & x_{11} & x_{12} & \\dots & x_{1k} \\\\\ny_2 & x_{21} & x_{22} & \\dots & x_{2k} \\\\\n\\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\\ny_n & x_{n1} & x_{n2} & \\dots & x_{nk} \\\\\n\\end{bmatrix}\n\nJust like in Stata/R"
+  },
+  {
+    "objectID": "lecture-2-slides.html#lcf-2023",
+    "href": "lecture-2-slides.html#lcf-2023",
+    "title": "Ordinary Least Squares",
+    "section": "LCF (2023)",
+    "text": "LCF (2023)\nSuppose you wanted to estimate the the marginal propensity to consume in the UK using data from the Living Costs and Food Survey:\n\na household level dataset with information on consumption, income, and other characteristics.\n\n\n  [cons_i, inc_i, children_i,size_i,tv\\_license_i,month_i] \\quad i = 1, \\dots, n"
   },
   {
     "objectID": "lecture-2-slides.html#section-3",
     "href": "lecture-2-slides.html#section-3",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "Does the relationship between consumption and income look linear?\n\nStataR\n\n\n\n\nCode\n* Open data\nuse \"$data_dir\\lcf_2023.dta\", clear\n\n* Plot\nscatter hhcon hhinc, mc(black) mfc(%50) ytitle(\"Household consumption (£/week)\") xtitle(\"Household income (£/week)\") title(\"Household consumption vs income (LCF, 2023)\")\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Packages\nlibrary(haven)                  # To load Stata .dta file\nlibrary(ggplot2)\n\n# Load the Stata file\nlcf_data &lt;- read_dta(file.path(data_dir, \"lcf_2023.dta\"))\n\n# Plot\nggplot(lcf_data, aes(x = hhinc, y = hhcon)) +\n  geom_point(alpha = 0.5) +\n  labs(x = \"Household income (£/week)\",\n       y = \"Household consumption (£/week)\",\n       title = \"Household consumption vs income (LCF, 2023)\") +\n  theme_minimal()"
+    "text": "Does the relationship between consumption and income look linear?\n\nStataR\n\n\n\n\nCode\n* Open data\nuse \"$data_dir\\lcf_2023.dta\", clear\n\n* Plot\nscatter hhcon hhinc, mc(black) mfc(%50) ytitle(\"Household consumption (£/week)\") xtitle(\"Household income (£/week)\") title(\"Household consumption vs income (LCF, 2023)\")\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Load the Stata file\nlcf_data &lt;- read_dta(file.path(data_dir, \"lcf_2023.dta\"))\n\n# Plot\nggplot(lcf_data, aes(x = hhinc, y = hhcon)) +\n  geom_point(alpha = 0.5) +\n  labs(x = \"Household income (£/week)\",\n       y = \"Household consumption (£/week)\",\n       title = \"Household consumption vs income (LCF, 2023)\") +\n  theme_minimal()"
   },
   {
     "objectID": "lecture-2-slides.html#section-4",
@@ -2384,14 +2356,14 @@
     "href": "lecture-2-slides.html#structure",
     "title": "Ordinary Least Squares",
     "section": "Structure",
-    "text": "Structure\nLet’s formalize the above process:\n\nGoal: we want to pick the line that best fits the data.\nProblem: what do we mean by “fit”?\n\nFor a given value of inc_i in the data, the “fitted” value of cons_i is\n\n\n  \\widehat{cons}_i = b_0 + b_1 inc_i\n\nwhere [b_0,b_1] are the chosen parameters.\n\nFor example,\n\n\\widehat{cons}_i = 275 + 0.275 inc_i\n\\widehat{cons}_i = 500 + 0.15 inc_i"
+    "text": "Structure\nLet’s formalize the above process:\n\nGoal: we want to pick the line that best fits the data.\n\n\n\nProblem: what do we mean by “fit”?\n\nFor a given value of inc_i in the data, the “fitted” value of cons_i is\n\n\n  \\widehat{cons}_i = b_0 + b_1 inc_i\n\nwhere [b_0,b_1] are the chosen parameters.\n\nFor example,\n\n\\textcolor{green}{\\widehat{cons}_i = 275 + 0.275 inc_i}\n\\textcolor{purple}{\\widehat{cons}_i = 500 + 0.15 inc_i}"
   },
   {
     "objectID": "lecture-2-slides.html#fit",
     "href": "lecture-2-slides.html#fit",
     "title": "Ordinary Least Squares",
     "section": "Fit",
-    "text": "Fit\nWe need a measure of distance:\nCandidate 1: difference\n\n  cons_i - \\widehat{cons}_i\n\n\nPROBLEM: could be negative (i.e. not a measure of distance)\n\nCandidate 2: absolute value\n\n  |cons_i - \\widehat{cons}_i|\n\n\nPRO: intuitive\nCON: difficult to work with (i.e. not globally differentiable)"
+    "text": "Fit\nWe need a measure of distance:\nCandidate 1: difference\n\n  cons_i - \\widehat{cons}_i\n\n\nPROBLEM: could be negative (i.e. not a measure of distance)\n\n\nCandidate 2: absolute value\n\n  |cons_i - \\widehat{cons}_i|\n\n\nPRO: intuitive\nCON: difficult to work with (i.e. not globally differentiable)"
   },
   {
     "objectID": "lecture-2-slides.html#section-7",
@@ -2415,13 +2387,6 @@
     "text": "Minization\nThe value of these squared deviations (from the prediction) depend on [b_0,b_1]. It seems intuitive then to pick the values that minimize this value:\n\n  \\underset{b_0,b_1}{\\min} \\quad\\sum_{i=1}^{n}(cons_i - b_0 - b_1 inc_i)^2"
   },
   {
-    "objectID": "lecture-2-slides.html#notation",
-    "href": "lecture-2-slides.html#notation",
-    "title": "Ordinary Least Squares",
-    "section": "Notation",
-    "text": "Notation\n\nData: [y_i,x_{i1},x_{i2},\\dots,x_{ik}]\\quad i=1,\\dots,n"
-  },
-  {
     "objectID": "lecture-2-slides.html#problem",
     "href": "lecture-2-slides.html#problem",
     "title": "Ordinary Least Squares",
@@ -2443,11 +2408,11 @@
     "text": "For \\hat{\\beta}_j\\quad j=1,\\dots,k\n\n    \\begin{aligned}\n      & 0=2\\sum_{i=1}^{n}(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1x_{i1}-\\dots-\\hat{\\beta}_kx_{ik})x_{ij} \\\\\n      \\Rightarrow \\quad &0= \\sum_{i=1}^{n}(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1x_{i1}-\\dots-\\hat{\\beta}_kx_{ik})x_{ij}\n    \\end{aligned}\n  \nThere are k of these first-order conditions (plus the 1 for the constant)\n\\Rightarrow k+1 equations and k+1 unknowns."
   },
   {
-    "objectID": "lecture-2-slides.html#univariate-case",
-    "href": "lecture-2-slides.html#univariate-case",
+    "objectID": "lecture-2-slides.html#simple-case",
+    "href": "lecture-2-slides.html#simple-case",
     "title": "Ordinary Least Squares",
-    "section": "Univariate case",
-    "text": "Univariate case\nIn the case of a single regressor, the solution is more easily solved.\n\nFor \\hat{\\beta}_0 (the constant):\n\n\n   \\hat{\\beta}_0 = \\bar{y} - \\hat{\\beta}_1\\bar{x}"
+    "section": "Simple case",
+    "text": "Simple case\nIn the case of a single regressor, the solution is more easily solved.\n\nFor \\hat{\\beta}_0 (the constant):\n\n\n   \\hat{\\beta}_0 = \\bar{y} - \\hat{\\beta}_1\\bar{x}"
   },
   {
     "objectID": "lecture-2-slides.html#section-9",
@@ -2468,21 +2433,35 @@
     "href": "lecture-2-slides.html#sample-analogue",
     "title": "Ordinary Least Squares",
     "section": "Sample Analogue",
-    "text": "Sample Analogue\nRecall from Lecture 1, under the MLR assumptions (notably, E[x_iu_i]=0)\n\n  \\begin{aligned}\n    \\beta_1 =& \\frac{Cov(y_i,x_i)}{Var(x_i)} \\\\\n    \\beta_0 =& E[y_i]-\\beta_1E[x_i]\n  \\end{aligned}\n\nThe OLS estimators for a univariate model are the sample analogue\n\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\widehat{Cov}(y_i,x_i)}{\\widehat{Var}(x_i)} \\\\\n    \\hat{\\beta}_0 =& \\bar{y} - \\hat{\\beta}_1\\bar{x}\n  \\end{aligned}\n\nOLS replaces expectations with sample averages."
+    "text": "Sample Analogue\nRecall from Lecture 1, under the MLR assumptions (notably, E[x_iu_i]=0)\n\n  \\begin{aligned}\n    \\beta_1 =& \\frac{Cov(y_i,x_i)}{Var(x_i)} \\\\\n    \\beta_0 =& E[y_i]-\\beta_1E[x_i]\n  \\end{aligned}\n\nThe OLS estimators for a simple model are the sample analogue\n\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\widehat{Cov}(y_i,x_i)}{\\widehat{Var}(x_i)} \\\\\n    \\hat{\\beta}_0 =& \\bar{y} - \\hat{\\beta}_1\\bar{x}\n  \\end{aligned}\n\nOLS replaces expectations with sample averages."
   },
   {
     "objectID": "lecture-2-slides.html#decomposition",
     "href": "lecture-2-slides.html#decomposition",
     "title": "Ordinary Least Squares",
     "section": "Decomposition",
-    "text": "Decomposition\nGiven the OLS estimates, we can decompose the outcome into two parts: fitted values (\\hat{y}_i) and residual (\\hat{u}_i)\n\n  y_i = \\underbrace{\\hat{\\beta_0} + \\hat{\\beta_1} x_i}_{\\hat{y}_i} + \\hat{u}_i\n\nwhere:\n\n\\sum_{i=1}^{n} \\hat{u}_i=0: residuals are mean zero\n\\sum_{i=1}^{n} x_i\\hat{u}_i=0: residuals and regressors are uncorrelated\n\\sum_{i=1}^{n} \\hat{y}_i\\hat{u}_i=0: residuals and fitted values are uncorrelated\n\\sum_{i=1}^{n} \\hat{y}_i = \\sum_{i=1}^{n} y_i: fitted values have the same mean as outcome\n\\sum_{i=1}^{n} y_i\\hat{u}_i=\\sum_{i=1}^{n} (\\hat{y}_i+\\hat{u}_i)\\hat{u}_i=\\sum_{i=1}^{n} \\hat{u}_i^2"
+    "text": "Decomposition\nGiven the OLS estimates, we can decompose the outcome into two parts: fitted values (\\hat{y}_i) and residual (\\hat{u}_i)\n\n  y_i = \\underbrace{\\hat{\\beta_0} + \\hat{\\beta_1} x_i}_{\\hat{y}_i} + \\hat{u}_i"
+  },
+  {
+    "objectID": "lecture-2-slides.html#fitted-values",
+    "href": "lecture-2-slides.html#fitted-values",
+    "title": "Ordinary Least Squares",
+    "section": "Fitted values",
+    "text": "Fitted values\nYou can show,\n\n\\sum_{i=1}^{n} \\hat{u}_i=0: residuals are mean zero\n\\sum_{i=1}^{n} x_i\\hat{u}_i=0: residuals and regressors are uncorrelated\n\\sum_{i=1}^{n} \\hat{y}_i\\hat{u}_i=0: residuals and fitted values are uncorrelated\n\\sum_{i=1}^{n} \\hat{y}_i = \\sum_{i=1}^{n} y_i: fitted values have the same mean as outcome\n\\sum_{i=1}^{n} y_i\\hat{u}_i=\\sum_{i=1}^{n} (\\hat{y}_i+\\hat{u}_i)\\hat{u}_i=\\sum_{i=1}^{n} \\hat{u}_i^2\n\nSome of these are exercises in Tutorial 1"
+  },
+  {
+    "objectID": "lecture-2-slides.html#interpretation",
+    "href": "lecture-2-slides.html#interpretation",
+    "title": "Ordinary Least Squares",
+    "section": "Interpretation",
+    "text": "Interpretation\nThe \\hat{y}_i = \\hat{\\beta_0} + \\hat{\\beta_1} x_i also gives us the interpration of the estimator:\n\n  \\hat{\\beta}_1 = \\frac{d \\hat{y}_i}{d x_i}\\quad \\text{OR}\\quad \\Delta \\hat{y}_i = \\hat{\\beta}_1 \\Delta x_i\n\nand\n\n  \\hat{\\beta}_0 = \\hat{y}_i\\quad \\text{for}\\; x_i = 0"
   },
   {
     "objectID": "lecture-2-slides.html#estimation",
     "href": "lecture-2-slides.html#estimation",
     "title": "Ordinary Least Squares",
     "section": "Estimation",
-    "text": "Estimation\n\nStataR\n\n\n\n* Estimate univariate linear regression\nregress hhcon hhinc\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     57.08\n       Model |  4842359.39         1  4842359.39   Prob &gt; F        =    0.0000\n    Residual |  16798378.5       198  84840.2954   R-squared       =    0.2238\n-------------+----------------------------------   Adj R-squared   =    0.2198\n       Total |  21640737.9       199  108747.427   Root MSE        =    291.27\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .2705895   .0358165     7.55   0.000     .1999587    .3412203\n       _cons |   268.0611   37.42847     7.16   0.000     194.2515    341.8707\n------------------------------------------------------------------------------\n\n\n\n\n\n# Estimate univariate linear regression\nmodel1 &lt;- lm(hhcon ~ hhinc, data = lcf_data)\n\n# View results\nsummary(model1)\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-519.70 -177.46  -60.08   95.78 1473.71 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 268.06105   37.42847   7.162 1.53e-11 ***\nhhinc         0.27059    0.03582   7.555 1.52e-12 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 291.3 on 198 degrees of freedom\nMultiple R-squared:  0.2238,    Adjusted R-squared:  0.2198 \nF-statistic: 57.08 on 1 and 198 DF,  p-value: 1.515e-12"
+    "text": "Estimation\n\nStataR\n\n\n\n* Estimate bivariate linear regression\nregress hhcon hhinc\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     57.08\n       Model |  4842359.39         1  4842359.39   Prob &gt; F        =    0.0000\n    Residual |  16798378.5       198  84840.2954   R-squared       =    0.2238\n-------------+----------------------------------   Adj R-squared   =    0.2198\n       Total |  21640737.9       199  108747.427   Root MSE        =    291.27\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .2705895   .0358165     7.55   0.000     .1999587    .3412203\n       _cons |   268.0611   37.42847     7.16   0.000     194.2515    341.8707\n------------------------------------------------------------------------------\n\n\n\n\n\n# Estimate bivariate linear regression\nmodel1 &lt;- lm(hhcon ~ hhinc, data = lcf_data)\n\n# View results\nsummary(model1)\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-519.70 -177.46  -60.08   95.78 1473.71 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 268.06105   37.42847   7.162 1.53e-11 ***\nhhinc         0.27059    0.03582   7.555 1.52e-12 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 291.3 on 198 degrees of freedom\nMultiple R-squared:  0.2238,    Adjusted R-squared:  0.2198 \nF-statistic: 57.08 on 1 and 198 DF,  p-value: 1.515e-12"
   },
   {
     "objectID": "lecture-2-slides.html#decomposition-1",
@@ -2492,8 +2471,8 @@
     "text": "Decomposition\n\nStataR\n\n\n\n\nCode\n* Generate fitted values and residuals\npredict fitted\npredict residual, resid\n\n\n\n* Compute averages\nsum hhcon fitted residual\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n       hhcon |        200    504.1663    329.7687      75.16    1983.02\n      fitted |        200    504.1663    155.9919   268.1639   1022.213\n    residual |        200   -1.28e-07    290.5408  -519.6953   1473.709\n\n\n\n* Compute variance-covariance matrix\ncorr hhcon fitted residual, cov\n\n(obs=200)\n\n             |    hhcon   fitted residual\n-------------+---------------------------\n       hhcon |   108747\n      fitted |  24333.5  24333.5\n    residual |    84414 -.000076    84414\n\n\n\n\n\n\nCode\n# Get fitted values and residuals\nreg_vals &lt;- data.frame(\n  hhcon    = lcf_data$hhcon,\n  fitted   = fitted(model1),\n  resid    = residuals(model1)\n)\n\n\n\n# Compute averages\ncolMeans(reg_vals)\n\n       hhcon       fitted        resid \n5.041663e+02 5.041663e+02 2.611245e-14 \n\n\n\n# Compute variance-covariance matrix\nvar(reg_vals)\n\n           hhcon       fitted        resid\nhhcon  108747.43 2.433346e+04 8.441396e+04\nfitted  24333.46 2.433346e+04 2.331285e-12\nresid   84413.96 2.331285e-12 8.441396e+04"
   },
   {
-    "objectID": "lecture-2-slides.html#fitted-values",
-    "href": "lecture-2-slides.html#fitted-values",
+    "objectID": "lecture-2-slides.html#fitted-values-1",
+    "href": "lecture-2-slides.html#fitted-values-1",
     "title": "Ordinary Least Squares",
     "section": "Fitted values",
     "text": "Fitted values\n\nStataR\n\n\n\n\nCode\n* Plot\ntwoway (scatter hhcon hhinc, mc(black) mfc(%50)) (scatter fitted hhinc, mc(red) mfc(%50) msize(small) ms(S)) (function y = _b[_cons] + _b[hhinc]*x, lc(red) lp(solid) range(0 3000)), ytitle(\"Household consumption (£/week)\") xtitle(\"Household income (£/week)\") title(\"Household consumption vs income (LCF, 2023)\") legend(order(1 \"Observed\" 2 \"Fitted values\") r(2) pos(2) ring(0))\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Data frame with the x-variable plus fitted values and residuals\nplot_vals &lt;- data.frame(\n  hhinc  = model.frame(model1)$hhinc,  # exactly the rows lm() used\n  hhcon  = model.frame(model1)$hhcon,\n  fitted = fitted(model1),\n  resid  = residuals(model1)\n)\n\n# Plot\nggplot(plot_vals, aes(x = hhinc, y = hhcon)) +\n  geom_point(aes(colour = \"Observed\"), alpha = 0.5) +\n  geom_point(aes(y = fitted, colour = \"Fitted values\"), shape = 15, size = 2, alpha = 0.5) +\n  geom_abline(intercept = coef(model1)[1], slope = coef(model1)[2],\n              colour = \"red\", linewidth = 0.7) +\n  scale_colour_manual(values = c(\"Observed\" = \"grey30\",\n                                 \"Fitted values\" = \"red\")) +\n  labs(x = \"Household income (£/week)\",\n       y = \"Household consumption (£/week)\",\n       title = \"Household consumption vs income (LCF, 2023)\",\n       colour = NULL) +\n  theme_minimal() +\n  theme(legend.position = c(0.98, 0.98),\n        legend.justification = c(1, 1))"
@@ -2506,25 +2485,102 @@
     "text": "Residual\n\nStataR\n\n\n\n\nCode\n* Plot\ntwoway (scatter hhcon hhinc, mc(black) mfc(%50)) (scatter residual hhinc, mc(green) mfc(%50) msize(small) ms(D)), ytitle(\"Household consumption (£/week)\") xtitle(\"Household income (£/week)\") title(\"Household consumption vs income (LCF, 2023)\") legend(order(1 \"Observed\" 2 \"Residuals\") r(2) pos(2) ring(0)) yline(0, lc(green) lp(solid))\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Data frame with the x-variable plus fitted values and residuals\nplot_vals &lt;- data.frame(\n  hhinc  = model.frame(model1)$hhinc,  # exactly the rows lm() used\n  hhcon  = model.frame(model1)$hhcon,\n  fitted = fitted(model1),\n  resid  = residuals(model1)\n)\n\n# Plot\nggplot(plot_vals, aes(x = hhinc, y = hhcon)) +\n  geom_point(aes(colour = \"Observed\"), alpha = 0.5) +\n  geom_point(aes(y = resid, colour = \"Residuals\"), shape = 18, size = 2, alpha = 0.5) +\n  geom_hline(yintercept = 0, colour = \"green\", linewidth = 0.7) +\n  scale_colour_manual(values = c(\"Observed\" = \"grey30\",\n                                 \"Residuals\" = \"green\")) +\n  labs(x = \"Household income (£/week)\",\n       y = \"Household consumption (£/week)\",\n       title = \"Household consumption vs income (LCF, 2023)\",\n       colour = NULL) +\n  theme_minimal() +\n  theme(legend.position = c(0.98, 0.98),\n        legend.justification = c(1, 1))"
   },
   {
+    "objectID": "lecture-2-slides.html#binary-regressor",
+    "href": "lecture-2-slides.html#binary-regressor",
+    "title": "Ordinary Least Squares",
+    "section": "Binary regressor:",
+    "text": "Binary regressor:\nWhat happens if the regressor is a ‘dummy’ variable?\n\n[hhcons_i, children_i]\n\nwhere children_i\n\n=1: household has children,\n=0: household does not have children"
+  },
+  {
+    "objectID": "lecture-2-slides.html#summary-stats",
+    "href": "lecture-2-slides.html#summary-stats",
+    "title": "Ordinary Least Squares",
+    "section": "Summary stats",
+    "text": "Summary stats\n\nStataR\n\n\n\n\nCode\n* Summary table\ntab children, sum(hhcon)\n\n\n            |      Summary of COICOP: Total\n            | consumption expenditure - children\n            |             and adults\n   children |        Mean   Std. dev.       Freq.\n------------+------------------------------------\n          0 |   481.09786   342.33194         151\n          1 |    575.2546   278.91476          49\n------------+------------------------------------\n      Total |   504.16626   329.76875         200\n\n\n\n\n\n\nCode\n# Summary table\ntapply(lcf_data$hhcon, lcf_data$children, mean, na.rm = TRUE)\n\n\n       0        1 \n481.0979 575.2546"
+  },
+  {
+    "objectID": "lecture-2-slides.html#ols---dummy-variable",
+    "href": "lecture-2-slides.html#ols---dummy-variable",
+    "title": "Ordinary Least Squares",
+    "section": "OLS - dummy variable",
+    "text": "OLS - dummy variable\n\nStataR\n\n\n\n\nCode\n* Estimate bivariate linear regression\nreg hhcon children\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =      3.05\n       Model |  327978.835         1  327978.835   Prob &gt; F        =    0.0824\n    Residual |    21312759       198  107640.197   R-squared       =    0.0152\n-------------+----------------------------------   Adj R-squared   =    0.0102\n       Total |  21640737.9       199  108747.427   Root MSE        =    328.09\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n    children |   94.15674   53.94059     1.75   0.082    -12.21506    200.5285\n       _cons |   481.0979   26.69923    18.02   0.000     428.4465    533.7492\n------------------------------------------------------------------------------\n\n\n\n\n\n\nCode\n# Estimate bivariate linear regression\nmodel_dummy &lt;- lm(hhcon ~ children, data=lcf_data)\n\nsummary(model_dummy)\n\n\n\nCall:\nlm(formula = hhcon ~ children, data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-405.94 -248.78  -60.47  110.39 1501.92 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   481.10      26.70  18.019   &lt;2e-16 ***\nchildren       94.16      53.94   1.746   0.0824 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 328.1 on 198 degrees of freedom\nMultiple R-squared:  0.01516,   Adjusted R-squared:  0.01018 \nF-statistic: 3.047 on 1 and 198 DF,  p-value: 0.08244"
+  },
+  {
     "objectID": "lecture-2-slides.html#section-11",
     "href": "lecture-2-slides.html#section-11",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "How well did we fit the data?\n\nWe have decomposed each observation into two parts:\n\n  y_i = \\underbrace{\\hat{y}_i}_\\text{fitted valeus} + \\underbrace{\\hat{u}_i}_\\text{residual}"
+    "text": "You can show,\n\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\bar{y}_1-\\bar{y}_0 \\\\\n    \\hat{\\beta}_0 =& \\bar{y}_0\n  \\end{aligned}\n\nwhere,\n\n\\bar{y}_0 is the mean of the outcome for observations with x=0\n\\bar{y}_1 is the mean of the outcome for observations with x=1t\n\nYields a very intuitive interpretation of the OLS estimator"
+  },
+  {
+    "objectID": "lecture-2-slides.html#sample-analogue-1",
+    "href": "lecture-2-slides.html#sample-analogue-1",
+    "title": "Ordinary Least Squares",
+    "section": "Sample analogue",
+    "text": "Sample analogue\nThis is the sample analogue of\n\n  \\begin{aligned}\n    \\beta_1 =& E[y_i|x_i=1]-E[y_i|x_i=0] \\\\\n    \\beta_0 =& E[y_i|x_i=0]\n  \\end{aligned}\n\nWhich was the interpretation of the population parameter in a model with a binary (‘dummy’) variable."
+  },
+  {
+    "objectID": "lecture-2-slides.html#multivariate-models",
+    "href": "lecture-2-slides.html#multivariate-models",
+    "title": "Ordinary Least Squares",
+    "section": "Multivariate models",
+    "text": "Multivariate models\nWhat happens if you have two regressors\n\n[hhcons_i, hhinc_i, children, hhsize_i]"
+  },
+  {
+    "objectID": "lecture-2-slides.html#ols---multivariate",
+    "href": "lecture-2-slides.html#ols---multivariate",
+    "title": "Ordinary Least Squares",
+    "section": "OLS - multivariate",
+    "text": "OLS - multivariate\n\nStataR\n\n\n\n\nCode\n* Estimate bivariate linear regression\nreg hhcon hhinc children hhsize\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(3, 196)       =     27.93\n       Model |  6480977.84         3  2160325.95   Prob &gt; F        =    0.0000\n    Residual |    15159760       196  77345.7144   R-squared       =    0.2995\n-------------+----------------------------------   Adj R-squared   =    0.2888\n       Total |  21640737.9       199  108747.427   Root MSE        =    278.11\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .1937248   .0382801     5.06   0.000     .1182311    .2692185\n    children |  -238.3538   74.84546    -3.18   0.002    -385.9596   -90.74795\n      hhsize |   125.7418   27.57406     4.56   0.000     71.36187    180.1217\n       _cons |   121.2957   47.91901     2.53   0.012     26.79261    215.7987\n------------------------------------------------------------------------------\n\n\n\n\n\n\nCode\n# Estimate bivariate linear regression\nmodel_multi &lt;- lm(hhcon ~ hhinc + children + hhsize, data=lcf_data)\n\nsummary(model_multi)\n\n\n\nCall:\nlm(formula = hhcon ~ hhinc + children + hhsize, data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-456.92 -168.81  -58.49   96.59 1437.52 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  121.29566   47.91901   2.531  0.01215 *  \nhhinc          0.19372    0.03828   5.061 9.58e-07 ***\nchildren    -238.35377   74.84546  -3.185  0.00169 ** \nhhsize       125.74181   27.57406   4.560 8.99e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 278.1 on 196 degrees of freedom\nMultiple R-squared:  0.2995,    Adjusted R-squared:  0.2888 \nF-statistic: 27.93 on 3 and 196 DF,  p-value: 4.407e-15"
+  },
+  {
+    "objectID": "lecture-2-slides.html#interpretation-1",
+    "href": "lecture-2-slides.html#interpretation-1",
+    "title": "Ordinary Least Squares",
+    "section": "Interpretation",
+    "text": "Interpretation\nInterpretation follows from the fact that,\n\n  \\hat{y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 x_{i1} + \\hat{\\beta}_2 x_{i2} + \\dots + \\hat{\\beta}_k x_{ik}\n\n\n  \\hat{\\beta}_j = \\frac{\\partial \\hat{y}_i}{\\partial x_{ij}}\n\nor\n\n\\Delta \\hat{y}_i = \\hat{\\beta}_j \\Delta x_{ij} \\quad \\text{holding other }x\\text{'s fixed}"
+  },
+  {
+    "objectID": "lecture-2-slides.html#partialling-out",
+    "href": "lecture-2-slides.html#partialling-out",
+    "title": "Ordinary Least Squares",
+    "section": "Partialling out",
+    "text": "Partialling out\nThe following result is called the Frisch-Waugh Theorem (Wooldridge 2025, 76)\n\nThe OLS estimate for \\hat{\\beta}_1 from the multivariate ‘projection’\n\n  \\hat{y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 x_{i1} + \\hat{\\beta}_2 x_{i2} + \\dots + \\hat{\\beta}_k x_{ik}\n\nis the same as the OLS estimate for \\hat{\\gamma}_1 simple ‘projection’\n\n  \\hat{\\tilde{y}}_i = \\hat{\\gamma}_0 + \\hat{\\gamma}_1 \\tilde{x}_{i1}"
   },
   {
     "objectID": "lecture-2-slides.html#section-12",
     "href": "lecture-2-slides.html#section-12",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "We can apply this decomposition to the total sum of squares (SST)\n\n  \\text{SST} \\equiv \\sum_{i=1}^n (y_i-\\bar{y})^2\n\n\nThe SST is a measure of the total variation in y."
+    "text": "where,\n\n\\tilde{x}_{i1} is the residual from the regression of x_{1} against all other regressors\n\n\n  \\tilde{x}_{i1} = x_{i1}  -( \\hat{\\rho}_0 + \\hat{\\rho}_1x_{i2} + \\dots + \\hat{\\rho}_{k-1}x_{ik})\n\nand,\n\n\n\\tilde{y}_{i} is the residual from the regression of y against all regressors excluding x_{1}\n\n\n\\tilde{y}_{i} = y_{i}  -( \\hat{\\psi}_0 + \\hat{\\psi}_1x_{i2} + \\dots + \\hat{\\psi}_{k-1}x_{ik})"
+  },
+  {
+    "objectID": "lecture-2-slides.html#demonstration",
+    "href": "lecture-2-slides.html#demonstration",
+    "title": "Ordinary Least Squares",
+    "section": "Demonstration",
+    "text": "Demonstration\n\nStataR\n\n\n\n\nCode\n* Estimate bivariate linear regression\nqui reg hhinc children hhsize\npredict hhinc_tilde, resid\nqui reg hhcon children hhsize\npredict hhcon_tilde, resid\n\nreg hhcon_tilde hhinc_tilde\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     25.87\n       Model |  1980895.01         1  1980895.01   Prob &gt; F        =    0.0000\n    Residual |  15159759.9       198  76564.4441   R-squared       =    0.1156\n-------------+----------------------------------   Adj R-squared   =    0.1111\n       Total |  17140654.9       199  86133.9444   Root MSE        =     276.7\n\n------------------------------------------------------------------------------\n hhcon_tilde | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n hhinc_tilde |   .1937248   .0380862     5.09   0.000     .1186181    .2688315\n       _cons |  -2.04e-08   19.56584    -0.00   1.000    -38.58418    38.58418\n------------------------------------------------------------------------------\n\n\n\n\n\n\nCode\n# Estimate bivariate linear regression\nmodel_f1 &lt;- lm(hhinc ~ children + hhsize, data=lcf_data)\nmodel_f2 &lt;- lm(hhcon ~ children + hhsize, data=lcf_data)\n\nfrisch &lt;- data.frame(\n  hhinc_tilde  = residuals(model_f1),  \n  hhcon_tilde  = residuals(model_f2) \n)\n\nmodel_frisch &lt;- lm(hhcon_tilde ~ hhinc_tilde, data = frisch)\nsummary(model_frisch)\n\n\n\nCall:\nlm(formula = hhcon_tilde ~ hhinc_tilde, data = frisch)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-456.92 -168.81  -58.49   96.59 1437.52 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -2.673e-14  1.957e+01   0.000        1    \nhhinc_tilde  1.937e-01  3.809e-02   5.086 8.44e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 276.7 on 198 degrees of freedom\nMultiple R-squared:  0.1156,    Adjusted R-squared:  0.1111 \nF-statistic: 25.87 on 1 and 198 DF,  p-value: 8.437e-07"
   },
   {
     "objectID": "lecture-2-slides.html#section-13",
     "href": "lecture-2-slides.html#section-13",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "We can show that (Tutorial 1),\n\n\\text{SST} = \\text{SSE} + \\text{SSR}\n\nwhere,\n\nexplained sum of squares (SSE):\n\n\n  \\text{SSE} \\equiv \\sum_{i=1}^n (\\hat{y}_i-\\bar{y})^2\n\n\nresidual sum of squares (SSR):\n\n\n  \\text{SSR} \\equiv \\sum_{i=1}^n \\hat{u}_i^2"
+    "text": "How well did we fit the data?\n\nWe have decomposed each observation into two parts:\n\n  y_i = \\underbrace{\\hat{y}_i}_\\text{fitted values} + \\underbrace{\\hat{u}_i}_\\text{residual}"
+  },
+  {
+    "objectID": "lecture-2-slides.html#section-14",
+    "href": "lecture-2-slides.html#section-14",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "We can apply this decomposition to the total sum of squares (SST)\n\n  \\text{SST} \\equiv \\sum_{i=1}^n (y_i-\\bar{y})^2\n\n\nThe SST is a measure of the total variation in y."
+  },
+  {
+    "objectID": "lecture-2-slides.html#section-15",
+    "href": "lecture-2-slides.html#section-15",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "We can show that (see Wooldridge 2025, 33–34),\n\n\\text{SST} = \\text{SSE} + \\text{SSR}\n\nwhere,\n\nexplained sum of squares (SSE):\n\n\n  \\text{SSE} \\equiv \\sum_{i=1}^n (\\hat{y}_i-\\bar{y})^2\n\n\nresidual sum of squares (SSR):\n\n\n  \\text{SSR} \\equiv \\sum_{i=1}^n \\hat{u}_i^2"
   },
   {
     "objectID": "lecture-2-slides.html#measure-of-fit",
@@ -2538,49 +2594,133 @@
     "href": "lecture-2-slides.html#chasing-mathbfr2",
     "title": "Ordinary Least Squares",
     "section": "Chasing \\mathbf{R}^2",
-    "text": "Chasing \\mathbf{R}^2\nMany students make the mistake of thinking that higher \\mathbf{R}^2 is always better. Here are reasons this need not be the case:\n\nIn social sciences, the DGP is often very complex and we don’t observe many explanatory variables.\n\ngiven the same set of \\mathbf{x}’s, different outcomes may have very different \\mathbf{R}^2\n\nIf we care about the relationship between y and a specific x_j, we do not necessarily care about explaining all of y.\nWe can always add variables and (mechanically) increase \\mathbf{R}^2; however, this comes at a potential cost:\n\nwe MAY inadvertantly increase the variance of our estimates (e.g., irrelevant variables)\nwe MAY end up adding “bad controls”"
+    "text": "Chasing \\mathbf{R}^2\nMany students make the mistake of thinking that higher \\mathbf{R}^2 is always better. Here are reasons this need not be the case:\n\nIn social sciences, the DGP is often very complex and we don’t observe many explanatory variables.\n\ngiven the same set of \\mathbf{x}’s, different outcomes may have very different \\mathbf{R}^2\n\n\n\n\nIf we care about the relationship between y and a specific x_j, we do not necessarily care about explaining all of y.\nWe can always add variables and (mechanically) increase \\mathbf{R}^2; however, this comes at a potential cost:\n\nwe MAY inadvertantly increase the variance of our estimates (e.g., irrelevant variables)\nwe MAY end up adding “bad controls”"
   },
   {
     "objectID": "lecture-2-slides.html#adjusted-mathbfr2",
     "href": "lecture-2-slides.html#adjusted-mathbfr2",
     "title": "Ordinary Least Squares",
     "section": "Adjusted \\mathbf{R}^2",
-    "text": "Adjusted \\mathbf{R}^2\nAn alternative measure fit is the adjusted \\mathbf{R}^2:\n\n  \\overline{\\mathbf{R}}^2 = 1 - \\frac{\\text{SSR}/(n-k-1)}{\\text{SST}/n}\n\nwhere,\n\nn is sample size\nk is the number of regressors \\Rightarrow k+1 is the number of parameters estimated (including intercept).\n\n\nAs you increase k, you decrease \\overline{\\mathbf{R}}^2\n\nCreates a disincentive to add irrelevant regressors that do not also reduce SSR."
+    "text": "Adjusted \\mathbf{R}^2\nAn alternative measure fit is the adjusted \\mathbf{R}^2:\n\n  \\overline{\\mathbf{R}}^2 = 1 - \\frac{\\text{SSR}/(n-k-1)}{\\text{SST}/(n-1)} = 1 - (1-\\mathbf{R}^2)\\times\\frac{(n-1)}{(n-k-1)}\n\nwhere,\n\nn is sample size\nk is the number of regressors \\Rightarrow k+1 is the number of parameters estimated (including intercept).\n\n\nAs you increase k, you decrease \\overline{\\mathbf{R}}^2\n\nCreates a disincentive to add irrelevant regressors that do not also reduce SSR."
+  },
+  {
+    "objectID": "lecture-2-slides.html#example-lcf-2023-1",
+    "href": "lecture-2-slides.html#example-lcf-2023-1",
+    "title": "Ordinary Least Squares",
+    "section": "Example: LCF (2023)",
+    "text": "Example: LCF (2023)\n\nStataR\n\n\n\n\n.29948045\n\n.28875821\n\n\n\n\n\n\n[1] 0.2994804\n\n\n[1] 0.2887582"
+  },
+  {
+    "objectID": "lecture-2-slides.html#adding-irrelevant-variables",
+    "href": "lecture-2-slides.html#adding-irrelevant-variables",
+    "title": "Ordinary Least Squares",
+    "section": "Adding “irrelevant” variables",
+    "text": "Adding “irrelevant” variables\n\nStataR\n\n\n\nreg hhcon hhinc hhsize children month tvlicense\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(5, 194)       =     16.91\n       Model |  6568404.46         5  1313680.89   Prob &gt; F        =    0.0000\n    Residual |  15072333.4       194  77692.4403   R-squared       =    0.3035\n-------------+----------------------------------   Adj R-squared   =    0.2856\n       Total |  21640737.9       199  108747.427   Root MSE        =    278.73\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .1911845   .0385338     4.96   0.000     .1151854    .2671835\n      hhsize |    124.161   27.71213     4.48   0.000     69.50531    178.8168\n    children |  -233.0088   75.21666    -3.10   0.002    -381.3562   -84.66142\n       month |  -1.276233   6.234806    -0.20   0.838    -13.57294    11.02047\n   tvlicense |   59.82271   56.57194     1.06   0.292     -51.7523    171.3977\n       _cons |   82.86154   77.50891     1.07   0.286    -70.00675    235.7298\n------------------------------------------------------------------------------\n\n\n\n\n\nmodel_irrel &lt;- lm(hhcon ~ hhinc + hhsize + children + month + tvlicense, data = lcf_data)\nsummary(model_irrel)\n\n\nCall:\nlm(formula = hhcon ~ hhinc + hhsize + children + month + tvlicense, \n    data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-468.33 -163.40  -53.35   84.28 1434.32 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   82.86154   77.50891   1.069  0.28637    \nhhinc          0.19118    0.03853   4.961 1.53e-06 ***\nhhsize       124.16104   27.71213   4.480 1.27e-05 ***\nchildren    -233.00879   75.21666  -3.098  0.00224 ** \nmonth         -1.27623    6.23481  -0.205  0.83803    \ntvlicense     59.82271   56.57194   1.057  0.29162    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 278.7 on 194 degrees of freedom\nMultiple R-squared:  0.3035,    Adjusted R-squared:  0.2856 \nF-statistic: 16.91 on 5 and 194 DF,  p-value: 7.335e-14"
+  },
+  {
+    "objectID": "lecture-2-slides.html#section-16",
+    "href": "lecture-2-slides.html#section-16",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "Are these the “right” numbers?\n\nStataR\n\n\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     57.08\n       Model |  4842359.39         1  4842359.39   Prob &gt; F        =    0.0000\n    Residual |  16798378.5       198  84840.2954   R-squared       =    0.2238\n-------------+----------------------------------   Adj R-squared   =    0.2198\n       Total |  21640737.9       199  108747.427   Root MSE        =    291.27\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .2705895   .0358165     7.55   0.000     .1999587    .3412203\n       _cons |   268.0611   37.42847     7.16   0.000     194.2515    341.8707\n------------------------------------------------------------------------------\n\n\n\n\n\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-519.70 -177.46  -60.08   95.78 1473.71 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 268.06105   37.42847   7.162 1.53e-11 ***\nhhinc         0.27059    0.03582   7.555 1.52e-12 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 291.3 on 198 degrees of freedom\nMultiple R-squared:  0.2238,    Adjusted R-squared:  0.2198 \nF-statistic: 57.08 on 1 and 198 DF,  p-value: 1.515e-12"
+  },
+  {
+    "objectID": "lecture-2-slides.html#section-17",
+    "href": "lecture-2-slides.html#section-17",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "Let’s evaluate the question:\n\nit pre-supposes that there is a right answer (i.e. a correct estimate)\n\ni.e., a true population parameter (\\beta)\n\nit implies a notion of “correctness”\n\ndo we mean \\beta = 0.27?\ndo we mean \\beta \\approx 0.27?\ndo we mean \\beta is ‘close to’ 0.27?\n\nit assumes that the OLS estimator can be right."
+  },
+  {
+    "objectID": "lecture-2-slides.html#section-18",
+    "href": "lecture-2-slides.html#section-18",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "First off, let’s clarify something:\n\n\n\n\\hat{\\beta}\n\n\nthe estimator\n\n…is a random variable\n\n\n0.27\n\n\nthe estimate\n\n…is just a number"
+  },
+  {
+    "objectID": "lecture-2-slides.html#accuracy",
+    "href": "lecture-2-slides.html#accuracy",
+    "title": "Ordinary Least Squares",
+    "section": "Accuracy",
+    "text": "Accuracy\nIs \\hat{\\beta} = \\beta?\n\n\nNo!\nIn fact, the statement does not make sense since \\hat{\\beta} is a random variable while \\beta is a non-random constant.\nIf we are accurate, we can ask: Pr(\\hat{\\beta}=\\beta)=?\nThe answer is: Pr(\\hat{\\beta}=\\beta|\\mathbf{x})=0 for any u with a continuous distribution (conditional on \\mathbf{x})."
+  },
+  {
+    "objectID": "lecture-2-slides.html#random-variable",
+    "href": "lecture-2-slides.html#random-variable",
+    "title": "Ordinary Least Squares",
+    "section": "Random variable",
+    "text": "Random variable\nIn what sense is \\hat{\\beta} a random variable?\n\nThe realized value of \\hat{\\beta} depends on the realized sample1\n\n\nIn another ‘state of the world’, the sample may have realized differently\n\nRecall, if u is independent of \\mathbf{x}, then we can treat \\mathbf{x} as fixed. Therefore, the randomness (across samples) is really from different realizations of u. However, any discussion of u and \\mathbf{x} pre-supposes a model which we have not yet defined."
+  },
+  {
+    "objectID": "lecture-2-slides.html#example-lcf-2023---version-2",
+    "href": "lecture-2-slides.html#example-lcf-2023---version-2",
+    "title": "Ordinary Least Squares",
+    "section": "Example: LCF (2023) - Version 2",
+    "text": "Example: LCF (2023) - Version 2\nI randomly sampled 200 observations from the LCF (2023) data, but could have equally have sampled a different 200 observations\n\nStataR\n\n\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     90.01\n       Model |  5283929.28         1  5283929.28   Prob &gt; F        =    0.0000\n    Residual |  11623093.9       198  58702.4945   R-squared       =    0.3125\n-------------+----------------------------------   Adj R-squared   =    0.3091\n       Total |  16907023.2       199  84959.9155   Root MSE        =    242.29\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .2712055   .0285857     9.49   0.000     .2148341     .327577\n       _cons |   232.6529   30.55968     7.61   0.000     172.3886    292.9171\n------------------------------------------------------------------------------\n\n\n\n\n\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data2)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-420.74 -150.66  -39.10   87.07 1763.32 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 232.65286   30.55968   7.613 1.07e-12 ***\nhhinc         0.27121    0.02859   9.487  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 242.3 on 198 degrees of freedom\nMultiple R-squared:  0.3125,    Adjusted R-squared:  0.3091 \nF-statistic: 90.01 on 1 and 198 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lecture-2-slides.html#example-lcf-2023---version-3",
+    "href": "lecture-2-slides.html#example-lcf-2023---version-3",
+    "title": "Ordinary Least Squares",
+    "section": "Example: LCF (2023) - Version 3",
+    "text": "Example: LCF (2023) - Version 3\n… and again,\n\nStataR\n\n\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =    102.09\n       Model |  7462064.65         1  7462064.65   Prob &gt; F        =    0.0000\n    Residual |  14472533.5       198  73093.6037   R-squared       =    0.3402\n-------------+----------------------------------   Adj R-squared   =    0.3369\n       Total |  21934598.2       199  110224.111   Root MSE        =    270.36\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .3461268   .0342567    10.10   0.000      .278572    .4136816\n       _cons |   189.5292   36.88368     5.14   0.000      116.794    262.2645\n------------------------------------------------------------------------------\n\n\n\n\n\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data3)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-515.61 -149.84  -46.11  115.40 1483.04 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 189.52921   36.88368   5.139 6.61e-07 ***\nhhinc         0.34613    0.03426  10.104  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 270.4 on 198 degrees of freedom\nMultiple R-squared:  0.3402,    Adjusted R-squared:  0.3369 \nF-statistic: 102.1 on 1 and 198 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lecture-2-slides.html#example-lcf-2023---version-4",
+    "href": "lecture-2-slides.html#example-lcf-2023---version-4",
+    "title": "Ordinary Least Squares",
+    "section": "Example: LCF (2023) - Version 4",
+    "text": "Example: LCF (2023) - Version 4\n… and again.\n\nStataR\n\n\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     27.79\n       Model |  3538499.21         1  3538499.21   Prob &gt; F        =    0.0000\n    Residual |  25213603.4       198  127341.431   R-squared       =    0.1231\n-------------+----------------------------------   Adj R-squared   =    0.1186\n       Total |  28752102.6       199  144482.928   Root MSE        =    356.85\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |    .241712   .0458536     5.27   0.000     .1512879    .3321361\n       _cons |   267.7737   48.63081     5.51   0.000     171.8729    363.6745\n------------------------------------------------------------------------------\n\n\n\n\n\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data4)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-450.45 -163.57  -75.46   70.08 3112.93 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 267.77370   48.63081   5.506 1.13e-07 ***\nhhinc         0.24171    0.04585   5.271 3.53e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 356.8 on 198 degrees of freedom\nMultiple R-squared:  0.1231,    Adjusted R-squared:  0.1186 \nF-statistic: 27.79 on 1 and 198 DF,  p-value: 3.526e-07"
+  },
+  {
+    "objectID": "lecture-2-slides.html#section-19",
+    "href": "lecture-2-slides.html#section-19",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "Can we expect – a priori – for \\hat{\\beta} to be “on target”?\n\n\nThis is a question of biasedness: is E[\\hat{\\beta}] = \\beta?\nThe answer: it depends!\nSpecifically, it depends on the underlying model!"
+  },
+  {
+    "objectID": "lecture-2-slides.html#bibliography",
+    "href": "lecture-2-slides.html#bibliography",
+    "title": "Ordinary Least Squares",
+    "section": "Bibliography",
+    "text": "Bibliography\n\n\n\n\nWooldridge, Jeffrey M. 2025. “Introductory Econometrics: A Modern Approach.”"
   },
   {
     "objectID": "lecture-2.html",
     "href": "lecture-2.html",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "We start with the multivariate linear regression model,\n\\[\n  y_i = \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2}+\\dots + \\beta_kx_{ik} + u_i\n\\]\nwhich could represent:\n\nthe true data generating process,\nthe conditional expectation function,\nan economic model,\nan estimating equation\n\nunder different assumptions.\n\n\n\nCurcially, the model includes data: for each observation we observation\n\\[\n  [y_i, x_{i1}, x_{i2}, \\dots, x_{ik}] \\quad i = 1, \\dots, n\n\\]\nStacked together, we have a matrix of data:\n\\[\n\\begin{bmatrix}\ny_1 & x_{11} & x_{12} & \\dots & x_{1k} \\\\\ny_2 & x_{21} & x_{22} & \\dots & x_{2k} \\\\\n\\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\\ny_n & x_{n1} & x_{n2} & \\dots & x_{nk} \\\\\n\\end{bmatrix}\n\\]"
+    "text": "This lecture covers material from Wooldridge (2025):\n\nChapter 2.2 - “Deriving the Ordinary Least Squares Estimates”\nChapter 2.3 - “Properties of OLS on Any Sample of Data”\nChapter 2.4 - “Units of Measurement and Functional Form” (covered in Lecture 1)\nChapter 3.2 - “Mechanics and Interpretation of Ordinary Least Squares”\nChapter 6.3 - “More on Goodness-of-Fit and Selection of Regressors”\n\nThe lecture does not cover Chapter 2.6 “Regression through the Origin and Regression on a Constant”. I would suggest reading the section, but we will not have time to cover it."
   },
   {
-    "objectID": "lecture-2.html#section",
-    "href": "lecture-2.html#section",
+    "objectID": "lecture-2.html#reading",
+    "href": "lecture-2.html#reading",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "We start with the multivariate linear regression model,\n\\[\n  y_i = \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2}+\\dots + \\beta_kx_{ik} + u_i\n\\]\nwhich could represent:\n\nthe true data generating process,\nthe conditional expectation function,\nan economic model,\nan estimating equation\n\nunder different assumptions."
-  },
-  {
-    "objectID": "lecture-2.html#section-1",
-    "href": "lecture-2.html#section-1",
-    "title": "Ordinary Least Squares",
-    "section": "",
-    "text": "Curcially, the model includes data: for each observation we observation\n\\[\n  [y_i, x_{i1}, x_{i2}, \\dots, x_{ik}] \\quad i = 1, \\dots, n\n\\]\nStacked together, we have a matrix of data:\n\\[\n\\begin{bmatrix}\ny_1 & x_{11} & x_{12} & \\dots & x_{1k} \\\\\ny_2 & x_{21} & x_{22} & \\dots & x_{2k} \\\\\n\\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\\ny_n & x_{n1} & x_{n2} & \\dots & x_{nk} \\\\\n\\end{bmatrix}\n\\]"
+    "text": "This lecture covers material from Wooldridge (2025):\n\nChapter 2.2 - “Deriving the Ordinary Least Squares Estimates”\nChapter 2.3 - “Properties of OLS on Any Sample of Data”\nChapter 2.4 - “Units of Measurement and Functional Form” (covered in Lecture 1)\nChapter 3.2 - “Mechanics and Interpretation of Ordinary Least Squares”\nChapter 6.3 - “More on Goodness-of-Fit and Selection of Regressors”\n\nThe lecture does not cover Chapter 2.6 “Regression through the Origin and Regression on a Constant”. I would suggest reading the section, but we will not have time to cover it."
   },
   {
     "objectID": "lecture-2.html#section-2",
     "href": "lecture-2.html#section-2",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "Suppose you started with the data? For example, the Living Costs and Food Survey:\n\na household level dataset with information on consumption and income.\n\n\\[\n  [cons_i, inc_i] \\quad i = 1, \\dots, n\n\\]"
+    "text": "For each observation we observe:\n\\[\n  [y_i, x_{i1}, x_{i2}, \\dots, x_{ik}] \\quad i = 1, \\dots, n\n\\]\nStacked together, we have a matrix of data:\n\\[\n\\begin{bmatrix}\ny_1 & x_{11} & x_{12} & \\dots & x_{1k} \\\\\ny_2 & x_{21} & x_{22} & \\dots & x_{2k} \\\\\n\\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\\ny_n & x_{n1} & x_{n2} & \\dots & x_{nk} \\\\\n\\end{bmatrix}\n\\]\nJust like in Stata/R"
+  },
+  {
+    "objectID": "lecture-2.html#lcf-2023",
+    "href": "lecture-2.html#lcf-2023",
+    "title": "Ordinary Least Squares",
+    "section": "LCF (2023)",
+    "text": "LCF (2023)\nSuppose you wanted to estimate the the marginal propensity to consume in the UK using data from the Living Costs and Food Survey:\n\na household level dataset with information on consumption, income, and other characteristics.\n\n\\[\n  [cons_i, inc_i, children_i,size_i,tv\\_license_i,month_i] \\quad i = 1, \\dots, n\n\\]"
   },
   {
     "objectID": "lecture-2.html#section-3",
     "href": "lecture-2.html#section-3",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "Does the relationship between consumption and income look linear?\n\nStataR\n\n\n\n\nCode\n* Open data\nuse \"$data_dir\\lcf_2023.dta\", clear\n\n* Plot\nscatter hhcon hhinc, mc(black) mfc(%50) ytitle(\"Household consumption (£/week)\") xtitle(\"Household income (£/week)\") title(\"Household consumption vs income (LCF, 2023)\")\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Packages\nlibrary(haven)                  # To load Stata .dta file\nlibrary(ggplot2)\n\n# Load the Stata file\nlcf_data &lt;- read_dta(file.path(data_dir, \"lcf_2023.dta\"))\n\n# Plot\nggplot(lcf_data, aes(x = hhinc, y = hhcon)) +\n  geom_point(alpha = 0.5) +\n  labs(x = \"Household income (£/week)\",\n       y = \"Household consumption (£/week)\",\n       title = \"Household consumption vs income (LCF, 2023)\") +\n  theme_minimal()"
+    "text": "Does the relationship between consumption and income look linear?\n\nStataR\n\n\n\n\nCode\n* Open data\nuse \"$data_dir\\lcf_2023.dta\", clear\n\n* Plot\nscatter hhcon hhinc, mc(black) mfc(%50) ytitle(\"Household consumption (£/week)\") xtitle(\"Household income (£/week)\") title(\"Household consumption vs income (LCF, 2023)\")\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Load the Stata file\nlcf_data &lt;- read_dta(file.path(data_dir, \"lcf_2023.dta\"))\n\n# Plot\nggplot(lcf_data, aes(x = hhinc, y = hhcon)) +\n  geom_point(alpha = 0.5) +\n  labs(x = \"Household income (£/week)\",\n       y = \"Household consumption (£/week)\",\n       title = \"Household consumption vs income (LCF, 2023)\") +\n  theme_minimal()"
   },
   {
     "objectID": "lecture-2.html#section-4",
@@ -2622,14 +2762,14 @@
     "href": "lecture-2.html#structure",
     "title": "Ordinary Least Squares",
     "section": "Structure",
-    "text": "Structure\nLet’s formalize the above process:\n\nGoal: we want to pick the line that best fits the data.\nProblem: what do we mean by “fit”?\n\nFor a given value of \\(inc_i\\) in the data, the “fitted” value of \\(cons_i\\) is\n\n\\[\n  \\widehat{cons}_i = b_0 + b_1 inc_i\n\\]\nwhere \\([b_0,b_1]\\) are the chosen parameters.\n\nFor example,\n\n\\(\\widehat{cons}_i = 275 + 0.275 inc_i\\)\n\\(\\widehat{cons}_i = 500 + 0.15 inc_i\\)"
+    "text": "Structure\nLet’s formalize the above process:\n\nGoal: we want to pick the line that best fits the data.\n\n\n\nProblem: what do we mean by “fit”?\n\nFor a given value of \\(inc_i\\) in the data, the “fitted” value of \\(cons_i\\) is\n\n\\[\n  \\widehat{cons}_i = b_0 + b_1 inc_i\n\\]\nwhere \\([b_0,b_1]\\) are the chosen parameters.\n\nFor example,\n\n\\(\\textcolor{green}{\\widehat{cons}_i = 275 + 0.275 inc_i}\\)\n\\(\\textcolor{purple}{\\widehat{cons}_i = 500 + 0.15 inc_i}\\)"
   },
   {
     "objectID": "lecture-2.html#fit",
     "href": "lecture-2.html#fit",
     "title": "Ordinary Least Squares",
     "section": "Fit",
-    "text": "Fit\nWe need a measure of distance:\nCandidate 1: difference\n\\[\n  cons_i - \\widehat{cons}_i\n\\]\n\nPROBLEM: could be negative (i.e. not a measure of distance)\n\nCandidate 2: absolute value\n\\[\n  |cons_i - \\widehat{cons}_i|\n\\]\n\nPRO: intuitive\nCON: difficult to work with (i.e. not globally differentiable)"
+    "text": "Fit\nWe need a measure of distance:\nCandidate 1: difference\n\\[\n  cons_i - \\widehat{cons}_i\n\\]\n\nPROBLEM: could be negative (i.e. not a measure of distance)\n\n\nCandidate 2: absolute value\n\\[\n  |cons_i - \\widehat{cons}_i|\n\\]\n\nPRO: intuitive\nCON: difficult to work with (i.e. not globally differentiable)"
   },
   {
     "objectID": "lecture-2.html#section-7",
@@ -2653,13 +2793,6 @@
     "text": "Minization\nThe value of these squared deviations (from the prediction) depend on \\([b_0,b_1]\\). It seems intuitive then to pick the values that minimize this value:\n\\[\n  \\underset{b_0,b_1}{\\min} \\quad\\sum_{i=1}^{n}(cons_i - b_0 - b_1 inc_i)^2\n\\]"
   },
   {
-    "objectID": "lecture-2.html#notation",
-    "href": "lecture-2.html#notation",
-    "title": "Ordinary Least Squares",
-    "section": "Notation",
-    "text": "Notation\n\nData: \\([y_i,x_{i1},x_{i2},\\dots,x_{ik}]\\quad i=1,\\dots,n\\)"
-  },
-  {
     "objectID": "lecture-2.html#problem",
     "href": "lecture-2.html#problem",
     "title": "Ordinary Least Squares",
@@ -2681,11 +2814,11 @@
     "text": "For \\(\\hat{\\beta}_j\\quad j=1,\\dots,k\\)\n\\[\n    \\begin{aligned}\n      & 0=2\\sum_{i=1}^{n}(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1x_{i1}-\\dots-\\hat{\\beta}_kx_{ik})x_{ij} \\\\\n      \\Rightarrow \\quad &0= \\sum_{i=1}^{n}(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1x_{i1}-\\dots-\\hat{\\beta}_kx_{ik})x_{ij}\n    \\end{aligned}\n  \\]\nThere are \\(k\\) of these first-order conditions (plus the 1 for the constant)\n\\(\\Rightarrow\\) \\(k+1\\) equations and \\(k+1\\) unknowns."
   },
   {
-    "objectID": "lecture-2.html#univariate-case",
-    "href": "lecture-2.html#univariate-case",
+    "objectID": "lecture-2.html#simple-case",
+    "href": "lecture-2.html#simple-case",
     "title": "Ordinary Least Squares",
-    "section": "Univariate case",
-    "text": "Univariate case\nIn the case of a single regressor, the solution is more easily solved.\n\nFor \\(\\hat{\\beta}_0\\) (the constant):\n\n\\[\n   \\hat{\\beta}_0 = \\bar{y} - \\hat{\\beta}_1\\bar{x}\n\\]"
+    "section": "Simple case",
+    "text": "Simple case\nIn the case of a single regressor, the solution is more easily solved.\n\nFor \\(\\hat{\\beta}_0\\) (the constant):\n\n\\[\n   \\hat{\\beta}_0 = \\bar{y} - \\hat{\\beta}_1\\bar{x}\n\\]"
   },
   {
     "objectID": "lecture-2.html#section-9",
@@ -2699,28 +2832,42 @@
     "href": "lecture-2.html#section-10",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "The next step explooits the fact that:\n\\[\n  \\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\bar{x}\\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}=0\n\\]\nTherefore we can minus 0 from the right-hand side without changing anything.\n\\[\n  \\begin{aligned}\n    & 0=\\sum_{i=1}^{n}\\big(\\underbrace{(y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})}_{\\hat{u}_i}\\big)x_{i} -\\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}\\\\\n    \\Rightarrow \\quad & 0=\\sum_{i=1}^{n}\\big((y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})\\big)(x_{i}-\\bar{x})   \\\\\n    \\Rightarrow \\quad & \\hat{\\beta}_1 = \\frac{\\sum_{i=1}^{n}(y_i -\\bar{y})(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} = \\frac{\\widehat{Cov}(y_i,x_i)}{\\widehat{Var}(x_i)}\n  \\end{aligned}\n\\]"
+    "text": "The next step explooits the fact that:\n\\[\n  \\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\bar{x}\\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}=0\n\\]\nTherefore we can minus 0 from the right-hand side without changing anything.\n\\[\n  \\begin{aligned}\n    & 0=\\sum_{i=1}^{n}\\big(\\underbrace{(y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})}_{\\hat{u}_i}\\big)x_{i} -\\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}\\\\\n    \\Rightarrow \\quad & 0=\\sum_{i=1}^{n}\\big((y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})\\big)(x_{i}-\\bar{x})   \\\\\n    \\Rightarrow \\quad & \\hat{\\beta}_1 = \\frac{\\sum_{i=1}^{n}(y_i -\\bar{y})(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} = \\frac{\\widehat{Cov}(y_i,x_i)}{\\widehat{Var}(x_i)}\n  \\end{aligned}\n\\]\n\n\n\n\n\n\nTipLinear algebra\n\n\n\n\n\nThe above expression - along with its multivariate counterpart - has a very nice linear algebra counterpart. The vector of OLS estimators (including the intercept) is given by,\n\\[\n  \\hat{\\beta} = (X'X)^{-1}X'Y\n\\]\nWhere \\(X\\) is a \\(n\\times (k+1)\\) matrix of regressors (including vector of \\(1\\)’s for the intercept) and \\(Y\\) a \\(n\\times 1\\) vector. It’s a very simple expression and demonstrates the value of knowing a little linear algebra. This how you define the OLS estimator in graduate-level modules like EC5207 Econometric Methods and Applications."
   },
   {
     "objectID": "lecture-2.html#sample-analogue",
     "href": "lecture-2.html#sample-analogue",
     "title": "Ordinary Least Squares",
     "section": "Sample Analogue",
-    "text": "Sample Analogue\nRecall from Lecture 1, under the MLR assumptions (notably, \\(E[x_iu_i]=0\\))\n\\[\n  \\begin{aligned}\n    \\beta_1 =& \\frac{Cov(y_i,x_i)}{Var(x_i)} \\\\\n    \\beta_0 =& E[y_i]-\\beta_1E[x_i]\n  \\end{aligned}\n\\]\nThe OLS estimators for a univariate model are the sample analogue\n\\[\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\widehat{Cov}(y_i,x_i)}{\\widehat{Var}(x_i)} \\\\\n    \\hat{\\beta}_0 =& \\bar{y} - \\hat{\\beta}_1\\bar{x}\n  \\end{aligned}\n\\]\nOLS replaces expectations with sample averages."
+    "text": "Sample Analogue\nRecall from Lecture 1, under the MLR assumptions (notably, \\(E[x_iu_i]=0\\))\n\\[\n  \\begin{aligned}\n    \\beta_1 =& \\frac{Cov(y_i,x_i)}{Var(x_i)} \\\\\n    \\beta_0 =& E[y_i]-\\beta_1E[x_i]\n  \\end{aligned}\n\\]\nThe OLS estimators for a simple model are the sample analogue\n\\[\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\frac{\\widehat{Cov}(y_i,x_i)}{\\widehat{Var}(x_i)} \\\\\n    \\hat{\\beta}_0 =& \\bar{y} - \\hat{\\beta}_1\\bar{x}\n  \\end{aligned}\n\\]\nOLS replaces expectations with sample averages."
   },
   {
     "objectID": "lecture-2.html#decomposition",
     "href": "lecture-2.html#decomposition",
     "title": "Ordinary Least Squares",
     "section": "Decomposition",
-    "text": "Decomposition\nGiven the OLS estimates, we can decompose the outcome into two parts: fitted values (\\(\\hat{y}_i\\)) and residual (\\(\\hat{u}_i\\))\n\\[\n  y_i = \\underbrace{\\hat{\\beta_0} + \\hat{\\beta_1} x_i}_{\\hat{y}_i} + \\hat{u}_i\n\\]\nwhere:\n\n\\(\\sum_{i=1}^{n} \\hat{u}_i=0\\): residuals are mean zero\n\\(\\sum_{i=1}^{n} x_i\\hat{u}_i=0\\): residuals and regressors are uncorrelated\n\\(\\sum_{i=1}^{n} \\hat{y}_i\\hat{u}_i=0\\): residuals and fitted values are uncorrelated\n\\(\\sum_{i=1}^{n} \\hat{y}_i = \\sum_{i=1}^{n} y_i\\): fitted values have the same mean as outcome\n\\(\\sum_{i=1}^{n} y_i\\hat{u}_i=\\sum_{i=1}^{n} (\\hat{y}_i+\\hat{u}_i)\\hat{u}_i=\\sum_{i=1}^{n} \\hat{u}_i^2\\)"
+    "text": "Decomposition\nGiven the OLS estimates, we can decompose the outcome into two parts: fitted values (\\(\\hat{y}_i\\)) and residual (\\(\\hat{u}_i\\))\n\\[\n  y_i = \\underbrace{\\hat{\\beta_0} + \\hat{\\beta_1} x_i}_{\\hat{y}_i} + \\hat{u}_i\n\\]"
+  },
+  {
+    "objectID": "lecture-2.html#fitted-values",
+    "href": "lecture-2.html#fitted-values",
+    "title": "Ordinary Least Squares",
+    "section": "Fitted values",
+    "text": "Fitted values\nYou can show,\n\n\\(\\sum_{i=1}^{n} \\hat{u}_i=0\\): residuals are mean zero\n\\(\\sum_{i=1}^{n} x_i\\hat{u}_i=0\\): residuals and regressors are uncorrelated\n\\(\\sum_{i=1}^{n} \\hat{y}_i\\hat{u}_i=0\\): residuals and fitted values are uncorrelated\n\\(\\sum_{i=1}^{n} \\hat{y}_i = \\sum_{i=1}^{n} y_i\\): fitted values have the same mean as outcome\n\\(\\sum_{i=1}^{n} y_i\\hat{u}_i=\\sum_{i=1}^{n} (\\hat{y}_i+\\hat{u}_i)\\hat{u}_i=\\sum_{i=1}^{n} \\hat{u}_i^2\\)\n\nSome of these are exercises in Tutorial 1"
+  },
+  {
+    "objectID": "lecture-2.html#interpretation",
+    "href": "lecture-2.html#interpretation",
+    "title": "Ordinary Least Squares",
+    "section": "Interpretation",
+    "text": "Interpretation\nThe \\(\\hat{y}_i = \\hat{\\beta_0} + \\hat{\\beta_1} x_i\\) also gives us the interpration of the estimator:\n\\[\n  \\hat{\\beta}_1 = \\frac{d \\hat{y}_i}{d x_i}\\quad \\text{OR}\\quad \\Delta \\hat{y}_i = \\hat{\\beta}_1 \\Delta x_i\n\\]\nand\n\\[\n  \\hat{\\beta}_0 = \\hat{y}_i\\quad \\text{for}\\; x_i = 0\n\\]"
   },
   {
     "objectID": "lecture-2.html#estimation",
     "href": "lecture-2.html#estimation",
     "title": "Ordinary Least Squares",
     "section": "Estimation",
-    "text": "Estimation\n\nStataR\n\n\n\n* Estimate univariate linear regression\nregress hhcon hhinc\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     57.08\n       Model |  4842359.39         1  4842359.39   Prob &gt; F        =    0.0000\n    Residual |  16798378.5       198  84840.2954   R-squared       =    0.2238\n-------------+----------------------------------   Adj R-squared   =    0.2198\n       Total |  21640737.9       199  108747.427   Root MSE        =    291.27\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .2705895   .0358165     7.55   0.000     .1999587    .3412203\n       _cons |   268.0611   37.42847     7.16   0.000     194.2515    341.8707\n------------------------------------------------------------------------------\n\n\n\n\n\n# Estimate univariate linear regression\nmodel1 &lt;- lm(hhcon ~ hhinc, data = lcf_data)\n\n# View results\nsummary(model1)\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-519.70 -177.46  -60.08   95.78 1473.71 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 268.06105   37.42847   7.162 1.53e-11 ***\nhhinc         0.27059    0.03582   7.555 1.52e-12 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 291.3 on 198 degrees of freedom\nMultiple R-squared:  0.2238,    Adjusted R-squared:  0.2198 \nF-statistic: 57.08 on 1 and 198 DF,  p-value: 1.515e-12"
+    "text": "Estimation\n\nStataR\n\n\n\n* Estimate bivariate linear regression\nregress hhcon hhinc\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     57.08\n       Model |  4842359.39         1  4842359.39   Prob &gt; F        =    0.0000\n    Residual |  16798378.5       198  84840.2954   R-squared       =    0.2238\n-------------+----------------------------------   Adj R-squared   =    0.2198\n       Total |  21640737.9       199  108747.427   Root MSE        =    291.27\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .2705895   .0358165     7.55   0.000     .1999587    .3412203\n       _cons |   268.0611   37.42847     7.16   0.000     194.2515    341.8707\n------------------------------------------------------------------------------\n\n\n\n\n\n# Estimate bivariate linear regression\nmodel1 &lt;- lm(hhcon ~ hhinc, data = lcf_data)\n\n# View results\nsummary(model1)\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-519.70 -177.46  -60.08   95.78 1473.71 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 268.06105   37.42847   7.162 1.53e-11 ***\nhhinc         0.27059    0.03582   7.555 1.52e-12 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 291.3 on 198 degrees of freedom\nMultiple R-squared:  0.2238,    Adjusted R-squared:  0.2198 \nF-statistic: 57.08 on 1 and 198 DF,  p-value: 1.515e-12"
   },
   {
     "objectID": "lecture-2.html#decomposition-1",
@@ -2730,8 +2877,8 @@
     "text": "Decomposition\n\nStataR\n\n\n\n\nCode\n* Generate fitted values and residuals\npredict fitted\npredict residual, resid\n\n\n\n* Compute averages\nsum hhcon fitted residual\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n       hhcon |        200    504.1663    329.7687      75.16    1983.02\n      fitted |        200    504.1663    155.9919   268.1639   1022.213\n    residual |        200   -1.28e-07    290.5408  -519.6953   1473.709\n\n\n\n* Compute variance-covariance matrix\ncorr hhcon fitted residual, cov\n\n(obs=200)\n\n             |    hhcon   fitted residual\n-------------+---------------------------\n       hhcon |   108747\n      fitted |  24333.5  24333.5\n    residual |    84414 -.000076    84414\n\n\n\n\n\n\nCode\n# Get fitted values and residuals\nreg_vals &lt;- data.frame(\n  hhcon    = lcf_data$hhcon,\n  fitted   = fitted(model1),\n  resid    = residuals(model1)\n)\n\n\n\n# Compute averages\ncolMeans(reg_vals)\n\n       hhcon       fitted        resid \n5.041663e+02 5.041663e+02 2.611245e-14 \n\n\n\n# Compute variance-covariance matrix\nvar(reg_vals)\n\n           hhcon       fitted        resid\nhhcon  108747.43 2.433346e+04 8.441396e+04\nfitted  24333.46 2.433346e+04 2.331285e-12\nresid   84413.96 2.331285e-12 8.441396e+04"
   },
   {
-    "objectID": "lecture-2.html#fitted-values",
-    "href": "lecture-2.html#fitted-values",
+    "objectID": "lecture-2.html#fitted-values-1",
+    "href": "lecture-2.html#fitted-values-1",
     "title": "Ordinary Least Squares",
     "section": "Fitted values",
     "text": "Fitted values\n\nStataR\n\n\n\n\nCode\n* Plot\ntwoway (scatter hhcon hhinc, mc(black) mfc(%50)) (scatter fitted hhinc, mc(red) mfc(%50) msize(small) ms(S)) (function y = _b[_cons] + _b[hhinc]*x, lc(red) lp(solid) range(0 3000)), ytitle(\"Household consumption (£/week)\") xtitle(\"Household income (£/week)\") title(\"Household consumption vs income (LCF, 2023)\") legend(order(1 \"Observed\" 2 \"Fitted values\") r(2) pos(2) ring(0))\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Data frame with the x-variable plus fitted values and residuals\nplot_vals &lt;- data.frame(\n  hhinc  = model.frame(model1)$hhinc,  # exactly the rows lm() used\n  hhcon  = model.frame(model1)$hhcon,\n  fitted = fitted(model1),\n  resid  = residuals(model1)\n)\n\n# Plot\nggplot(plot_vals, aes(x = hhinc, y = hhcon)) +\n  geom_point(aes(colour = \"Observed\"), alpha = 0.5) +\n  geom_point(aes(y = fitted, colour = \"Fitted values\"), shape = 15, size = 2, alpha = 0.5) +\n  geom_abline(intercept = coef(model1)[1], slope = coef(model1)[2],\n              colour = \"red\", linewidth = 0.7) +\n  scale_colour_manual(values = c(\"Observed\" = \"grey30\",\n                                 \"Fitted values\" = \"red\")) +\n  labs(x = \"Household income (£/week)\",\n       y = \"Household consumption (£/week)\",\n       title = \"Household consumption vs income (LCF, 2023)\",\n       colour = NULL) +\n  theme_minimal() +\n  theme(legend.position = c(0.98, 0.98),\n        legend.justification = c(1, 1))"
@@ -2744,25 +2891,102 @@
     "text": "Residual\n\nStataR\n\n\n\n\nCode\n* Plot\ntwoway (scatter hhcon hhinc, mc(black) mfc(%50)) (scatter residual hhinc, mc(green) mfc(%50) msize(small) ms(D)), ytitle(\"Household consumption (£/week)\") xtitle(\"Household income (£/week)\") title(\"Household consumption vs income (LCF, 2023)\") legend(order(1 \"Observed\" 2 \"Residuals\") r(2) pos(2) ring(0)) yline(0, lc(green) lp(solid))\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Data frame with the x-variable plus fitted values and residuals\nplot_vals &lt;- data.frame(\n  hhinc  = model.frame(model1)$hhinc,  # exactly the rows lm() used\n  hhcon  = model.frame(model1)$hhcon,\n  fitted = fitted(model1),\n  resid  = residuals(model1)\n)\n\n# Plot\nggplot(plot_vals, aes(x = hhinc, y = hhcon)) +\n  geom_point(aes(colour = \"Observed\"), alpha = 0.5) +\n  geom_point(aes(y = resid, colour = \"Residuals\"), shape = 18, size = 2, alpha = 0.5) +\n  geom_hline(yintercept = 0, colour = \"green\", linewidth = 0.7) +\n  scale_colour_manual(values = c(\"Observed\" = \"grey30\",\n                                 \"Residuals\" = \"green\")) +\n  labs(x = \"Household income (£/week)\",\n       y = \"Household consumption (£/week)\",\n       title = \"Household consumption vs income (LCF, 2023)\",\n       colour = NULL) +\n  theme_minimal() +\n  theme(legend.position = c(0.98, 0.98),\n        legend.justification = c(1, 1))"
   },
   {
+    "objectID": "lecture-2.html#binary-regressor",
+    "href": "lecture-2.html#binary-regressor",
+    "title": "Ordinary Least Squares",
+    "section": "Binary regressor:",
+    "text": "Binary regressor:\nWhat happens if the regressor is a ‘dummy’ variable?\n\\[\n[hhcons_i, children_i]\n\\]\nwhere \\(children_i\\)\n\n\\(=1\\): household has children,\n\\(=0\\): household does not have children"
+  },
+  {
+    "objectID": "lecture-2.html#summary-stats",
+    "href": "lecture-2.html#summary-stats",
+    "title": "Ordinary Least Squares",
+    "section": "Summary stats",
+    "text": "Summary stats\n\nStataR\n\n\n\n\nCode\n* Summary table\ntab children, sum(hhcon)\n\n\n            |      Summary of COICOP: Total\n            | consumption expenditure - children\n            |             and adults\n   children |        Mean   Std. dev.       Freq.\n------------+------------------------------------\n          0 |   481.09786   342.33194         151\n          1 |    575.2546   278.91476          49\n------------+------------------------------------\n      Total |   504.16626   329.76875         200\n\n\n\n\n\n\nCode\n# Summary table\ntapply(lcf_data$hhcon, lcf_data$children, mean, na.rm = TRUE)\n\n\n       0        1 \n481.0979 575.2546"
+  },
+  {
+    "objectID": "lecture-2.html#ols---dummy-variable",
+    "href": "lecture-2.html#ols---dummy-variable",
+    "title": "Ordinary Least Squares",
+    "section": "OLS - dummy variable",
+    "text": "OLS - dummy variable\n\nStataR\n\n\n\n\nCode\n* Estimate bivariate linear regression\nreg hhcon children\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =      3.05\n       Model |  327978.835         1  327978.835   Prob &gt; F        =    0.0824\n    Residual |    21312759       198  107640.197   R-squared       =    0.0152\n-------------+----------------------------------   Adj R-squared   =    0.0102\n       Total |  21640737.9       199  108747.427   Root MSE        =    328.09\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n    children |   94.15674   53.94059     1.75   0.082    -12.21506    200.5285\n       _cons |   481.0979   26.69923    18.02   0.000     428.4465    533.7492\n------------------------------------------------------------------------------\n\n\n\n\n\n\nCode\n# Estimate bivariate linear regression\nmodel_dummy &lt;- lm(hhcon ~ children, data=lcf_data)\n\nsummary(model_dummy)\n\n\n\nCall:\nlm(formula = hhcon ~ children, data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-405.94 -248.78  -60.47  110.39 1501.92 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   481.10      26.70  18.019   &lt;2e-16 ***\nchildren       94.16      53.94   1.746   0.0824 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 328.1 on 198 degrees of freedom\nMultiple R-squared:  0.01516,   Adjusted R-squared:  0.01018 \nF-statistic: 3.047 on 1 and 198 DF,  p-value: 0.08244"
+  },
+  {
     "objectID": "lecture-2.html#section-11",
     "href": "lecture-2.html#section-11",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "How well did we fit the data?\n\nWe have decomposed each observation into two parts:\n\\[\n  y_i = \\underbrace{\\hat{y}_i}_\\text{fitted valeus} + \\underbrace{\\hat{u}_i}_\\text{residual}\n\\]"
+    "text": "You can show,\n\\[\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\bar{y}_1-\\bar{y}_0 \\\\\n    \\hat{\\beta}_0 =& \\bar{y}_0\n  \\end{aligned}\n\\]\nwhere,\n\n\\(\\bar{y}_0\\) is the mean of the outcome for observations with \\(x=0\\)\n\\(\\bar{y}_1\\) is the mean of the outcome for observations with \\(x=1\\)t\n\nYields a very intuitive interpretation of the OLS estimator"
+  },
+  {
+    "objectID": "lecture-2.html#sample-analogue-1",
+    "href": "lecture-2.html#sample-analogue-1",
+    "title": "Ordinary Least Squares",
+    "section": "Sample analogue",
+    "text": "Sample analogue\nThis is the sample analogue of\n\\[\n  \\begin{aligned}\n    \\beta_1 =& E[y_i|x_i=1]-E[y_i|x_i=0] \\\\\n    \\beta_0 =& E[y_i|x_i=0]\n  \\end{aligned}\n\\]\nWhich was the interpretation of the population parameter in a model with a binary (‘dummy’) variable."
+  },
+  {
+    "objectID": "lecture-2.html#multivariate-models",
+    "href": "lecture-2.html#multivariate-models",
+    "title": "Ordinary Least Squares",
+    "section": "Multivariate models",
+    "text": "Multivariate models\nWhat happens if you have two regressors\n\\[\n[hhcons_i, hhinc_i, children, hhsize_i]\n\\]"
+  },
+  {
+    "objectID": "lecture-2.html#ols---multivariate",
+    "href": "lecture-2.html#ols---multivariate",
+    "title": "Ordinary Least Squares",
+    "section": "OLS - multivariate",
+    "text": "OLS - multivariate\n\nStataR\n\n\n\n\nCode\n* Estimate bivariate linear regression\nreg hhcon hhinc children hhsize\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(3, 196)       =     27.93\n       Model |  6480977.84         3  2160325.95   Prob &gt; F        =    0.0000\n    Residual |    15159760       196  77345.7144   R-squared       =    0.2995\n-------------+----------------------------------   Adj R-squared   =    0.2888\n       Total |  21640737.9       199  108747.427   Root MSE        =    278.11\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .1937248   .0382801     5.06   0.000     .1182311    .2692185\n    children |  -238.3538   74.84546    -3.18   0.002    -385.9596   -90.74795\n      hhsize |   125.7418   27.57406     4.56   0.000     71.36187    180.1217\n       _cons |   121.2957   47.91901     2.53   0.012     26.79261    215.7987\n------------------------------------------------------------------------------\n\n\n\n\n\n\nCode\n# Estimate bivariate linear regression\nmodel_multi &lt;- lm(hhcon ~ hhinc + children + hhsize, data=lcf_data)\n\nsummary(model_multi)\n\n\n\nCall:\nlm(formula = hhcon ~ hhinc + children + hhsize, data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-456.92 -168.81  -58.49   96.59 1437.52 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  121.29566   47.91901   2.531  0.01215 *  \nhhinc          0.19372    0.03828   5.061 9.58e-07 ***\nchildren    -238.35377   74.84546  -3.185  0.00169 ** \nhhsize       125.74181   27.57406   4.560 8.99e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 278.1 on 196 degrees of freedom\nMultiple R-squared:  0.2995,    Adjusted R-squared:  0.2888 \nF-statistic: 27.93 on 3 and 196 DF,  p-value: 4.407e-15"
+  },
+  {
+    "objectID": "lecture-2.html#interpretation-1",
+    "href": "lecture-2.html#interpretation-1",
+    "title": "Ordinary Least Squares",
+    "section": "Interpretation",
+    "text": "Interpretation\nInterpretation follows from the fact that,\n\\[\n  \\hat{y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 x_{i1} + \\hat{\\beta}_2 x_{i2} + \\dots + \\hat{\\beta}_k x_{ik}\n\\]\n\\[\n  \\hat{\\beta}_j = \\frac{\\partial \\hat{y}_i}{\\partial x_{ij}}\n\\]\nor\n\\[\n\\Delta \\hat{y}_i = \\hat{\\beta}_j \\Delta x_{ij} \\quad \\text{holding other }x\\text{'s fixed}\n\\]"
+  },
+  {
+    "objectID": "lecture-2.html#partialling-out",
+    "href": "lecture-2.html#partialling-out",
+    "title": "Ordinary Least Squares",
+    "section": "Partialling out",
+    "text": "Partialling out\nThe following result is called the Frisch-Waugh Theorem (Wooldridge 2025, 76)\n\nThe OLS estimate for \\(\\hat{\\beta}_1\\) from the multivariate ‘projection’\n\\[\n  \\hat{y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 x_{i1} + \\hat{\\beta}_2 x_{i2} + \\dots + \\hat{\\beta}_k x_{ik}\n\\]\nis the same as the OLS estimate for \\(\\hat{\\gamma}_1\\) simple ‘projection’\n\\[\n  \\hat{\\tilde{y}}_i = \\hat{\\gamma}_0 + \\hat{\\gamma}_1 \\tilde{x}_{i1}\n\\]\n\n\n\n\n\n\n\nTipProjection\n\n\n\n\n\nWhy the phrase ‘projection’? One interpretation of OLS is geometric. The estimator ‘projects’ the outcome (\\(Y\\)) in the (vector) space spanned by the regressors (columns of \\(X\\)).\n\\[\n  \\hat{Y}=X\\hat{\\beta} = \\underbrace{X(X'X)^{-1}X'}_{P_X}Y\n\\]\nThe predicted value of \\(Y\\) is just a ‘projection’ of \\(Y\\): \\(P_X Y\\). \\(P_X\\) is an idempotent projection matrix. The residual then is,\n\\[\n\\hat{U} = Y-\\hat{Y} = Y-P_X Y = (\\underbrace{I-P_X}_{M_X})Y\n\\]\n\\(M_X\\) is another idempotent projection matrix. And crucially, \\(M_XP_X = 0\\): the two projections are orthogonal. So, OLS projects Y into two vector spaces: one spanned (‘explained by’) \\(X\\) and another orthogonal to that space. The predicted values and residuals are mechanically orthogonal, which means that they are perfectly uncorrelated in the data."
   },
   {
     "objectID": "lecture-2.html#section-12",
     "href": "lecture-2.html#section-12",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "We can apply this decomposition to the total sum of squares (SST)\n\\[\n  \\text{SST} \\equiv \\sum_{i=1}^n (y_i-\\bar{y})^2\n\\]\n\nThe SST is a measure of the total variation in \\(y\\)."
+    "text": "where,\n\n\\(\\tilde{x}_{i1}\\) is the residual from the regression of \\(x_{1}\\) against all other regressors\n\n\\[\n  \\tilde{x}_{i1} = x_{i1}  -( \\hat{\\rho}_0 + \\hat{\\rho}_1x_{i2} + \\dots + \\hat{\\rho}_{k-1}x_{ik})\n\\]\nand,\n\n\n\\(\\tilde{y}_{i}\\) is the residual from the regression of \\(y\\) against all regressors excluding \\(x_{1}\\)\n\n\\[\n\\tilde{y}_{i} = y_{i}  -( \\hat{\\psi}_0 + \\hat{\\psi}_1x_{i2} + \\dots + \\hat{\\psi}_{k-1}x_{ik})\n\\]"
+  },
+  {
+    "objectID": "lecture-2.html#demonstration",
+    "href": "lecture-2.html#demonstration",
+    "title": "Ordinary Least Squares",
+    "section": "Demonstration",
+    "text": "Demonstration\n\nStataR\n\n\n\n\nCode\n* Estimate bivariate linear regression\nqui reg hhinc children hhsize\npredict hhinc_tilde, resid\nqui reg hhcon children hhsize\npredict hhcon_tilde, resid\n\nreg hhcon_tilde hhinc_tilde\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     25.87\n       Model |  1980895.01         1  1980895.01   Prob &gt; F        =    0.0000\n    Residual |  15159759.9       198  76564.4441   R-squared       =    0.1156\n-------------+----------------------------------   Adj R-squared   =    0.1111\n       Total |  17140654.9       199  86133.9444   Root MSE        =     276.7\n\n------------------------------------------------------------------------------\n hhcon_tilde | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n hhinc_tilde |   .1937248   .0380862     5.09   0.000     .1186181    .2688315\n       _cons |  -2.04e-08   19.56584    -0.00   1.000    -38.58418    38.58418\n------------------------------------------------------------------------------\n\n\n\n\n\n\nCode\n# Estimate bivariate linear regression\nmodel_f1 &lt;- lm(hhinc ~ children + hhsize, data=lcf_data)\nmodel_f2 &lt;- lm(hhcon ~ children + hhsize, data=lcf_data)\n\nfrisch &lt;- data.frame(\n  hhinc_tilde  = residuals(model_f1),  \n  hhcon_tilde  = residuals(model_f2) \n)\n\nmodel_frisch &lt;- lm(hhcon_tilde ~ hhinc_tilde, data = frisch)\nsummary(model_frisch)\n\n\n\nCall:\nlm(formula = hhcon_tilde ~ hhinc_tilde, data = frisch)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-456.92 -168.81  -58.49   96.59 1437.52 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -2.673e-14  1.957e+01   0.000        1    \nhhinc_tilde  1.937e-01  3.809e-02   5.086 8.44e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 276.7 on 198 degrees of freedom\nMultiple R-squared:  0.1156,    Adjusted R-squared:  0.1111 \nF-statistic: 25.87 on 1 and 198 DF,  p-value: 8.437e-07"
   },
   {
     "objectID": "lecture-2.html#section-13",
     "href": "lecture-2.html#section-13",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "We can show that (Tutorial 1),\n\\[\n\\text{SST} = \\text{SSE} + \\text{SSR}\n\\]\nwhere,\n\nexplained sum of squares (SSE):\n\n\\[\n  \\text{SSE} \\equiv \\sum_{i=1}^n (\\hat{y}_i-\\bar{y})^2\n\\]\n\nresidual sum of squares (SSR):\n\n\\[\n  \\text{SSR} \\equiv \\sum_{i=1}^n \\hat{u}_i^2\n\\]"
+    "text": "How well did we fit the data?\n\nWe have decomposed each observation into two parts:\n\\[\n  y_i = \\underbrace{\\hat{y}_i}_\\text{fitted values} + \\underbrace{\\hat{u}_i}_\\text{residual}\n\\]"
+  },
+  {
+    "objectID": "lecture-2.html#section-14",
+    "href": "lecture-2.html#section-14",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "We can apply this decomposition to the total sum of squares (SST)\n\\[\n  \\text{SST} \\equiv \\sum_{i=1}^n (y_i-\\bar{y})^2\n\\]\n\nThe SST is a measure of the total variation in \\(y\\)."
+  },
+  {
+    "objectID": "lecture-2.html#section-15",
+    "href": "lecture-2.html#section-15",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "We can show that (see Wooldridge 2025, 33–34),\n\\[\n\\text{SST} = \\text{SSE} + \\text{SSR}\n\\]\nwhere,\n\nexplained sum of squares (SSE):\n\n\\[\n  \\text{SSE} \\equiv \\sum_{i=1}^n (\\hat{y}_i-\\bar{y})^2\n\\]\n\nresidual sum of squares (SSR):\n\n\\[\n  \\text{SSR} \\equiv \\sum_{i=1}^n \\hat{u}_i^2\n\\]"
   },
   {
     "objectID": "lecture-2.html#measure-of-fit",
@@ -2776,14 +3000,98 @@
     "href": "lecture-2.html#chasing-mathbfr2",
     "title": "Ordinary Least Squares",
     "section": "Chasing \\(\\mathbf{R}^2\\)",
-    "text": "Chasing \\(\\mathbf{R}^2\\)\nMany students make the mistake of thinking that higher \\(\\mathbf{R}^2\\) is always better. Here are reasons this need not be the case:\n\nIn social sciences, the DGP is often very complex and we don’t observe many explanatory variables.\n\ngiven the same set of \\(\\mathbf{x}\\)’s, different outcomes may have very different \\(\\mathbf{R}^2\\)\n\nIf we care about the relationship between \\(y\\) and a specific \\(x_j\\), we do not necessarily care about explaining all of \\(y\\).\nWe can always add variables and (mechanically) increase \\(\\mathbf{R}^2\\); however, this comes at a potential cost:\n\nwe MAY inadvertantly increase the variance of our estimates (e.g., irrelevant variables)\nwe MAY end up adding “bad controls”"
+    "text": "Chasing \\(\\mathbf{R}^2\\)\nMany students make the mistake of thinking that higher \\(\\mathbf{R}^2\\) is always better. Here are reasons this need not be the case:\n\nIn social sciences, the DGP is often very complex and we don’t observe many explanatory variables.\n\ngiven the same set of \\(\\mathbf{x}\\)’s, different outcomes may have very different \\(\\mathbf{R}^2\\)\n\n\n\n\nIf we care about the relationship between \\(y\\) and a specific \\(x_j\\), we do not necessarily care about explaining all of \\(y\\).\nWe can always add variables and (mechanically) increase \\(\\mathbf{R}^2\\); however, this comes at a potential cost:\n\nwe MAY inadvertantly increase the variance of our estimates (e.g., irrelevant variables)\nwe MAY end up adding “bad controls”"
   },
   {
     "objectID": "lecture-2.html#adjusted-mathbfr2",
     "href": "lecture-2.html#adjusted-mathbfr2",
     "title": "Ordinary Least Squares",
     "section": "Adjusted \\(\\mathbf{R}^2\\)",
-    "text": "Adjusted \\(\\mathbf{R}^2\\)\nAn alternative measure fit is the adjusted \\(\\mathbf{R}^2\\):\n\\[\n  \\overline{\\mathbf{R}}^2 = 1 - \\frac{\\text{SSR}/(n-k-1)}{\\text{SST}/n}\n\\]\nwhere,\n\n\\(n\\) is sample size\n\\(k\\) is the number of regressors \\(\\Rightarrow\\) \\(k+1\\) is the number of parameters estimated (including intercept).\n\n\nAs you increase \\(k\\), you decrease \\(\\overline{\\mathbf{R}}^2\\)\n\nCreates a disincentive to add irrelevant regressors that do not also reduce \\(SSR\\)."
+    "text": "Adjusted \\(\\mathbf{R}^2\\)\nAn alternative measure fit is the adjusted \\(\\mathbf{R}^2\\):\n\\[\n  \\overline{\\mathbf{R}}^2 = 1 - \\frac{\\text{SSR}/(n-k-1)}{\\text{SST}/(n-1)} = 1 - (1-\\mathbf{R}^2)\\times\\frac{(n-1)}{(n-k-1)}\n\\]\nwhere,\n\n\\(n\\) is sample size\n\\(k\\) is the number of regressors \\(\\Rightarrow\\) \\(k+1\\) is the number of parameters estimated (including intercept).\n\n\nAs you increase \\(k\\), you decrease \\(\\overline{\\mathbf{R}}^2\\)\n\nCreates a disincentive to add irrelevant regressors that do not also reduce \\(SSR\\)."
+  },
+  {
+    "objectID": "lecture-2.html#example-lcf-2023-1",
+    "href": "lecture-2.html#example-lcf-2023-1",
+    "title": "Ordinary Least Squares",
+    "section": "Example: LCF (2023)",
+    "text": "Example: LCF (2023)\n\nStataR\n\n\n\n\n.29948045\n\n.28875821\n\n\n\n\n\n\n[1] 0.2994804\n\n\n[1] 0.2887582"
+  },
+  {
+    "objectID": "lecture-2.html#adding-irrelevant-variables",
+    "href": "lecture-2.html#adding-irrelevant-variables",
+    "title": "Ordinary Least Squares",
+    "section": "Adding “irrelevant” variables",
+    "text": "Adding “irrelevant” variables\n\nStataR\n\n\n\nreg hhcon hhinc hhsize children month tvlicense\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(5, 194)       =     16.91\n       Model |  6568404.46         5  1313680.89   Prob &gt; F        =    0.0000\n    Residual |  15072333.4       194  77692.4403   R-squared       =    0.3035\n-------------+----------------------------------   Adj R-squared   =    0.2856\n       Total |  21640737.9       199  108747.427   Root MSE        =    278.73\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .1911845   .0385338     4.96   0.000     .1151854    .2671835\n      hhsize |    124.161   27.71213     4.48   0.000     69.50531    178.8168\n    children |  -233.0088   75.21666    -3.10   0.002    -381.3562   -84.66142\n       month |  -1.276233   6.234806    -0.20   0.838    -13.57294    11.02047\n   tvlicense |   59.82271   56.57194     1.06   0.292     -51.7523    171.3977\n       _cons |   82.86154   77.50891     1.07   0.286    -70.00675    235.7298\n------------------------------------------------------------------------------\n\n\n\n\n\nmodel_irrel &lt;- lm(hhcon ~ hhinc + hhsize + children + month + tvlicense, data = lcf_data)\nsummary(model_irrel)\n\n\nCall:\nlm(formula = hhcon ~ hhinc + hhsize + children + month + tvlicense, \n    data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-468.33 -163.40  -53.35   84.28 1434.32 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   82.86154   77.50891   1.069  0.28637    \nhhinc          0.19118    0.03853   4.961 1.53e-06 ***\nhhsize       124.16104   27.71213   4.480 1.27e-05 ***\nchildren    -233.00879   75.21666  -3.098  0.00224 ** \nmonth         -1.27623    6.23481  -0.205  0.83803    \ntvlicense     59.82271   56.57194   1.057  0.29162    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 278.7 on 194 degrees of freedom\nMultiple R-squared:  0.3035,    Adjusted R-squared:  0.2856 \nF-statistic: 16.91 on 5 and 194 DF,  p-value: 7.335e-14"
+  },
+  {
+    "objectID": "lecture-2.html#section-16",
+    "href": "lecture-2.html#section-16",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "Are these the “right” numbers?\n\nStataR\n\n\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     57.08\n       Model |  4842359.39         1  4842359.39   Prob &gt; F        =    0.0000\n    Residual |  16798378.5       198  84840.2954   R-squared       =    0.2238\n-------------+----------------------------------   Adj R-squared   =    0.2198\n       Total |  21640737.9       199  108747.427   Root MSE        =    291.27\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .2705895   .0358165     7.55   0.000     .1999587    .3412203\n       _cons |   268.0611   37.42847     7.16   0.000     194.2515    341.8707\n------------------------------------------------------------------------------\n\n\n\n\n\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-519.70 -177.46  -60.08   95.78 1473.71 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 268.06105   37.42847   7.162 1.53e-11 ***\nhhinc         0.27059    0.03582   7.555 1.52e-12 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 291.3 on 198 degrees of freedom\nMultiple R-squared:  0.2238,    Adjusted R-squared:  0.2198 \nF-statistic: 57.08 on 1 and 198 DF,  p-value: 1.515e-12"
+  },
+  {
+    "objectID": "lecture-2.html#section-17",
+    "href": "lecture-2.html#section-17",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "Let’s evaluate the question:\n\n\nit pre-supposes that there is a right answer (i.e. a correct estimate)\n\ni.e., a true population parameter (\\(\\beta\\))\n\nit implies a notion of “correctness”\n\ndo we mean \\(\\beta = 0.27\\)?\ndo we mean \\(\\beta \\approx 0.27\\)?\ndo we mean \\(\\beta\\) is ‘close to’ \\(0.27\\)?\n\nit assumes that the OLS estimator can be right."
+  },
+  {
+    "objectID": "lecture-2.html#section-18",
+    "href": "lecture-2.html#section-18",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "First off, let’s clarify something:\n\n\n\\[\n\\hat{\\beta}\n\\]\n\nthe estimator\n\n…is a random variable\n\n\\[\n0.27\n\\]\n\nthe estimate\n\n…is just a number"
+  },
+  {
+    "objectID": "lecture-2.html#accuracy",
+    "href": "lecture-2.html#accuracy",
+    "title": "Ordinary Least Squares",
+    "section": "Accuracy",
+    "text": "Accuracy\nIs \\(\\hat{\\beta} = \\beta\\)?\n\n\n\nNo!\nIn fact, the statement does not make sense since \\(\\hat{\\beta}\\) is a random variable while \\(\\beta\\) is a non-random constant.\nIf we are accurate, we can ask: \\(Pr(\\hat{\\beta}=\\beta)=?\\)\nThe answer is: \\(Pr(\\hat{\\beta}=\\beta|\\mathbf{x})=0\\) for any \\(u\\) with a continuous distribution (conditional on \\(\\mathbf{x}\\))."
+  },
+  {
+    "objectID": "lecture-2.html#random-variable",
+    "href": "lecture-2.html#random-variable",
+    "title": "Ordinary Least Squares",
+    "section": "Random variable",
+    "text": "Random variable\nIn what sense is \\(\\hat{\\beta}\\) a random variable?\n\nThe realized value of \\(\\hat{\\beta}\\) depends on the realized sample1\n\n\nIn another ‘state of the world’, the sample may have realized differently"
+  },
+  {
+    "objectID": "lecture-2.html#example-lcf-2023---version-2",
+    "href": "lecture-2.html#example-lcf-2023---version-2",
+    "title": "Ordinary Least Squares",
+    "section": "Example: LCF (2023) - Version 2",
+    "text": "Example: LCF (2023) - Version 2\nI randomly sampled 200 observations from the LCF (2023) data, but could have equally have sampled a different 200 observations\n\nStataR\n\n\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     90.01\n       Model |  5283929.28         1  5283929.28   Prob &gt; F        =    0.0000\n    Residual |  11623093.9       198  58702.4945   R-squared       =    0.3125\n-------------+----------------------------------   Adj R-squared   =    0.3091\n       Total |  16907023.2       199  84959.9155   Root MSE        =    242.29\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .2712055   .0285857     9.49   0.000     .2148341     .327577\n       _cons |   232.6529   30.55968     7.61   0.000     172.3886    292.9171\n------------------------------------------------------------------------------\n\n\n\n\n\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data2)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-420.74 -150.66  -39.10   87.07 1763.32 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 232.65286   30.55968   7.613 1.07e-12 ***\nhhinc         0.27121    0.02859   9.487  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 242.3 on 198 degrees of freedom\nMultiple R-squared:  0.3125,    Adjusted R-squared:  0.3091 \nF-statistic: 90.01 on 1 and 198 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lecture-2.html#example-lcf-2023---version-3",
+    "href": "lecture-2.html#example-lcf-2023---version-3",
+    "title": "Ordinary Least Squares",
+    "section": "Example: LCF (2023) - Version 3",
+    "text": "Example: LCF (2023) - Version 3\n… and again,\n\nStataR\n\n\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =    102.09\n       Model |  7462064.65         1  7462064.65   Prob &gt; F        =    0.0000\n    Residual |  14472533.5       198  73093.6037   R-squared       =    0.3402\n-------------+----------------------------------   Adj R-squared   =    0.3369\n       Total |  21934598.2       199  110224.111   Root MSE        =    270.36\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |   .3461268   .0342567    10.10   0.000      .278572    .4136816\n       _cons |   189.5292   36.88368     5.14   0.000      116.794    262.2645\n------------------------------------------------------------------------------\n\n\n\n\n\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data3)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-515.61 -149.84  -46.11  115.40 1483.04 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 189.52921   36.88368   5.139 6.61e-07 ***\nhhinc         0.34613    0.03426  10.104  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 270.4 on 198 degrees of freedom\nMultiple R-squared:  0.3402,    Adjusted R-squared:  0.3369 \nF-statistic: 102.1 on 1 and 198 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lecture-2.html#example-lcf-2023---version-4",
+    "href": "lecture-2.html#example-lcf-2023---version-4",
+    "title": "Ordinary Least Squares",
+    "section": "Example: LCF (2023) - Version 4",
+    "text": "Example: LCF (2023) - Version 4\n… and again.\n\nStataR\n\n\n\n\n      Source |       SS           df       MS      Number of obs   =       200\n-------------+----------------------------------   F(1, 198)       =     27.79\n       Model |  3538499.21         1  3538499.21   Prob &gt; F        =    0.0000\n    Residual |  25213603.4       198  127341.431   R-squared       =    0.1231\n-------------+----------------------------------   Adj R-squared   =    0.1186\n       Total |  28752102.6       199  144482.928   Root MSE        =    356.85\n\n------------------------------------------------------------------------------\n       hhcon | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hhinc |    .241712   .0458536     5.27   0.000     .1512879    .3321361\n       _cons |   267.7737   48.63081     5.51   0.000     171.8729    363.6745\n------------------------------------------------------------------------------\n\n\n\n\n\n\n\nCall:\nlm(formula = hhcon ~ hhinc, data = lcf_data4)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-450.45 -163.57  -75.46   70.08 3112.93 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 267.77370   48.63081   5.506 1.13e-07 ***\nhhinc         0.24171    0.04585   5.271 3.53e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 356.8 on 198 degrees of freedom\nMultiple R-squared:  0.1231,    Adjusted R-squared:  0.1186 \nF-statistic: 27.79 on 1 and 198 DF,  p-value: 3.526e-07"
+  },
+  {
+    "objectID": "lecture-2.html#section-19",
+    "href": "lecture-2.html#section-19",
+    "title": "Ordinary Least Squares",
+    "section": "",
+    "text": "Can we expect – a priori – for \\(\\hat{\\beta}\\) to be “on target”?\n\n\n\nThis is a question of biasedness: is \\(E[\\hat{\\beta}] = \\beta\\)?\nThe answer: it depends!\nSpecifically, it depends on the underlying model!\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nIt is an all to common mistake to conflate the estimator - in particular, the OLS estimator - with the linear regression model. People will say, “We estimate an OLS regression model”. This doesn’t really make sense, since you OLS is the estimator, not the name of the model. You can say, “We estimate a linear regression model using OLS”.\nThis may seem pedantic, but it is an important distinction since there are a range of estimators that can be used to estimate a linear regression model; all with different properties. In addition, the OLS estimator can be applied to any data, regardless of the true model. So it is a good idea to make sure your language is accurate."
+  },
+  {
+    "objectID": "lecture-2.html#footnotes",
+    "href": "lecture-2.html#footnotes",
+    "title": "Ordinary Least Squares",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nRecall, if \\(u\\) is independent of \\(\\mathbf{x}\\), then we can treat \\(\\mathbf{x}\\) as fixed. Therefore, the randomness (across samples) is really from different realizations of \\(u\\). However, any discussion of \\(u\\) and \\(\\mathbf{x}\\) pre-supposes a model which we have not yet defined.↩︎"
   },
   {
     "objectID": "material-cef.html",
@@ -2909,7 +3217,7 @@
     "href": "tutorial-1-solutions.html#application-1-us-worker-wages",
     "title": "Tutorial 1 (Solutions)",
     "section": "Application 1: US worker wages",
-    "text": "Application 1: US worker wages\nOne of the most widely estimated regression model in economics is the Mincer equation (Mincer 1974; Lemieux 2006). It is a simple linear regression model that regresses log of wages (or earnings) on years of education and a quadratic term in years of potential experience. Where potential experience is measured using years since school completion.\n\\[\n  \\ln(wage_i) = \\beta_0 + \\beta_1 edu_i + \\beta_2 exp_i + \\beta_3 exp_i^2 + u_i\n\\]\nThis simple model can be rationalized by a model in which workers choose the length of time the choose to remain in school and delay earning in income in the labour market (Card 2001).\n\nAssuming \\(E[u_i|edu_i,exp_i] = 0\\), solve for \\(\\partial E[\\ln(wage_i)|edu_i,exp_i]/\\partial exp_i\\). Is the \\(E[\\ln(wage_i)|edu_i,exp_i]\\) concave or convex in years of experience?\n\n\n\\[\n  \\frac{\\partial E[\\ln(wage_i)|edu_i,exp_i]}{\\partial exp_i} = \\beta_2 + \\beta_3 exp_i\n\\]\nThe function will be convex (concave) if the second derivate is positive (negative). This then depends on the sign of \\(\\beta_3\\), which is not known.\n\n\nDoes it make sense to treat education as a continuous variable; i.e. years of education? What alternative approaches could you take?\n\n\nWhile one can count the number of years someone spends in education, the learning – or human capital – accumulated through education may not not increase in a linear way with years of education. To account for these non-linearities, you could:\n\nadd polynomials in the years of education\ntreat education as a categorical variable\nallow for discrete breaks in the relationship; e.g. at high school or UG graduation.\n\n\nFor the remaing questions we are going to use a random sample of the 2024 CPS (Source: NBER MORG). The sample includes only male, full-time, workers and excludes self-employed workers. These estimates are based on a random sub-sample of 300 individuals from this dataset.\n\nThe plot below shows the average wage for each year of education. Does the relationship appear to be linear in years of education?\n\n\npreserve\ncollapse (mean) wage, by(edu)\nscatter wage edu, ytitle(Average wage) xtitle(Years of education)\nrestore\n\n(Note: Below code run with echo to enable preserve/restore functionality.)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNoteAggregating data\n\n\n\nWhen working with micro-level data (i.e., unit is a firm, individual, household, etc.) you often need to aggregate the data to a lower level (e.g., region, group category). In Stata, this can be done using the collapse command. In R, you can use group_by() function within dplyr. This leads to an irreversible change in the structure of the dataset: you can aggregate data, but not disaggregate it. For this reason, it is a good idea to retain a version of the disaggregated data. In R, this is relatively straight forward because you can assign the aggregated file to a new dataframe. In Stata, you cannot have two datasets open at once. The solution therefore is to preserve a version of the disaggregated data and restore it once you are done with the aggregated file.\nNote, preserve and restore must be run together. The command uses temporary files, so if you just run preserve and then later try to restore, the temporary file will no longer exist and you will need to re-open the disaggregated file and reproduce all other changes you made to the dataset.\n\n\n\nFor parts of the domain (i.e. years of education) the relationship does appear to be linear. This is for years of education from 10-19. Average wages decline beyond 19 and are flat (although noisy) below 10. This may be a sign that level of education matters above a minimum threshold; e.g. completing high school.\n\n\nThe plot below shows the average log of wage for each year of education. Does the relationship appear to be linear in years of education?\n\n\npreserve\ncollapse (mean) lnwage, by(edu)\nscatter lnwage edu, ytitle(Average (log of) wage) xtitle(Years of education)\nrestore\n\n(Note: Below code run with echo to enable preserve/restore functionality.)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA similar pattern exists: linear within the domain 10-19 years of education. The log transformation is monotonic, but has a disproportionate impact on larger numbers (e.g. outliers). This may suggest that there are few outliers in the data.\n\nBelow is an estimate of the Mincer equation using the same sub-sample:\n\nreg lnwage edu exp expsq\n\n\n      Source |       SS           df       MS      Number of obs   =       300\n-------------+----------------------------------   F(3, 296)       =     33.82\n       Model |  26.8176018         3  8.93920059   Prob &gt; F        =    0.0000\n    Residual |  78.2323313       296  .264298417   R-squared       =    0.2553\n-------------+----------------------------------   Adj R-squared   =    0.2477\n       Total |  105.049933       299  .351337569   Root MSE        =     .5141\n\n------------------------------------------------------------------------------\n      lnwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         edu |   .0998468   .0107859     9.26   0.000       .07862    .1210736\n         exp |   .0208725   .0081481     2.56   0.011      .004837    .0369081\n       expsq |  -.0002387    .000162    -1.47   0.142    -.0005575    .0000801\n       _cons |   1.732044   .1753344     9.88   0.000     1.386984    2.077104\n------------------------------------------------------------------------------\n\n\n\nInterpret the coefficient on edu.\n\n\nA 1 year increase in years of education is associated with a \\(\\sim 10\\%\\) increase in average wages, holding other factors constant. This coefficient is right on the edge of values for which it is appropriate to use the \\(\\hat{\\beta}\\times 100\\) approximation. The exact value is given by,\n\ndis (exp(_b[edu])-1)*100\n\n10.50016\n\n\nwhich is slightly higher at 10.5%.\n\n\nAsk a LLM to provide an estimate of the returns to an additional year of education from the literature. You must specify that the outcome is measured in log-of wages. What is the typical estimate? And do our estimates seem off?\n\n\nA query, using Claude, cited a few key studies and meta-analyses. The conclusion was a range of 0.08-0.10; although it did specifiy a lower range of 0.06-0.07 for rich countries. This estimate is therefore slightly higher.\n\n\nCan we reject the \\(H_0: \\beta_1 &lt;0.08\\) at a \\(\\alpha=0.01\\) significance level? What if we chose \\(\\alpha=0.05\\) instead?\n\n\nThis test is designed to check whether or model estimates a return to education that is significantly higher than the using 0.08 value. It is a one-sided test, so we will reject if\n\\[\n  \\text{test-stat} = \\frac{\\hat{\\beta_1}-0.08}{\\widehat{se}(\\hat{\\beta_1})}&gt;T^{-1}_{300-4}(0.99)\n\\]\n\ndis (_b[edu]-0.08)/_se[edu]\ndis invt(e(df_r),0.99)\ndis invt(e(df_r),0.95)\n\n1.8400626\n2.3390116\n1.6500177\n\n\nWe fail to reject this null hypothesis at 1% significance level. We would reject at a 5% level.\n\n\nTest the hypothesis that \\(H_0:\\beta_2=0\\) at a \\(\\alpha=0.05\\) significance level.\n\n\nThis is a two-sided test. We will reject if,\n\\[\n  |\\text{test-stat}| = \\Bigg|\\frac{\\hat{\\beta_2}}{\\widehat{se}(\\hat{\\beta_2})}\\Bigg|&gt;T^{-1}_{300-4}(0.975)\n\\]\n\ndis _b[exp]/_se[exp]\ndis invt(e(df_r),0.975)\n\n2.56165\n1.9680107\n\n\nWe reject this null hypothesis.\n\n\nTest the hypothesis that \\(H_0:\\beta_3\\geq0\\) at a \\(\\alpha=0.05\\) significance level.\n\n\nThis is a one-sided test. We will reject if,\n\\[\n  \\text{test-stat} = \\frac{\\hat{\\beta_3}}{\\widehat{se}(\\hat{\\beta_3})}&lt;T^{-1}_{300-4}(0.05)\n\\]\n\ndis _b[expsq]/_se[expsq]\ndis invt(e(df_r),0.05)\n\n-1.4736091\n-1.6500177\n\n\nWe fail to reject this null hypothesis.\n\n\nIgnoring statistical significance, do the estimates suggest a concave or convex relationship with respect to years of experience?\n\n\nSince our estimate of \\(\\hat{\\beta}_3&lt;0\\), the data suggests that the relationship is concave. Wages are increasing in experience, but at a decreasing rate.\n\n\nIf we take these estimates seriously, after how many years of experience do we expected wages to decline? Do wages decrease while workers are still working?\n\n\nFor a quadratic function – \\(y = ax^2 + bx + c\\) – the turning point is given by \\(-b/2a\\)\n\ndis -_b[exp]/(2*_b[expsq])\n\n43.719251\n\n\nWages reach their peak around 44 years of experience. This is close to retirement for most workers, so it suggests that wages continue to rise throughout a worker’s career."
+    "text": "Application 1: US worker wages\nOne of the most widely estimated regression model in economics is the Mincer equation (Mincer 1974; Lemieux 2006). It is a simple linear regression model that regresses log of wages (or earnings) on years of education and a quadratic term in years of potential experience. Where potential experience is measured using years since school completion.\n\\[\n  \\ln(wage_i) = \\beta_0 + \\beta_1 edu_i + \\beta_2 exp_i + \\beta_3 exp_i^2 + u_i\n\\]\nThis simple model can be rationalized by a model in which workers choose the length of time the choose to remain in school and delay earning in income in the labour market (Card 2001).\n\nAssuming \\(E[u_i|edu_i,exp_i] = 0\\), solve for \\(\\partial E[\\ln(wage_i)|edu_i,exp_i]/\\partial exp_i\\). Is the \\(E[\\ln(wage_i)|edu_i,exp_i]\\) concave or convex in years of experience?\n\n\n\\[\n  \\frac{\\partial E[\\ln(wage_i)|edu_i,exp_i]}{\\partial exp_i} = \\beta_2 + 2\\times\\beta_3 exp_i\n\\]\nThe function will be convex (concave) if the second derivate is positive (negative). This then depends on the sign of \\(\\beta_3\\), which is not known.\n\n\nDoes it make sense to treat education as a continuous variable; i.e. years of education? What alternative approaches could you take?\n\n\nWhile one can count the number of years someone spends in education, the learning – or human capital – accumulated through education may not not increase in a linear way with years of education. To account for these non-linearities, you could:\n\nadd polynomials in the years of education\ntreat education as a categorical variable\nallow for discrete breaks in the relationship; e.g. at high school or UG graduation.\n\n\nFor the remaing questions we are going to use a random sample of the 2024 CPS (Source: NBER MORG). The sample includes only male, full-time, workers and excludes self-employed workers. These estimates are based on a random sub-sample of 300 individuals from this dataset.\n\nThe plot below shows the average wage for each year of education. Does the relationship appear to be linear in years of education?\n\n\npreserve\ncollapse (mean) wage, by(edu)\nscatter wage edu, ytitle(Average wage) xtitle(Years of education)\nrestore\n\n(Note: Below code run with echo to enable preserve/restore functionality.)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNoteAggregating data\n\n\n\nWhen working with micro-level data (i.e., unit is a firm, individual, household, etc.) you often need to aggregate the data to a lower level (e.g., region, group category). In Stata, this can be done using the collapse command. In R, you can use group_by() function within dplyr. This leads to an irreversible change in the structure of the dataset: you can aggregate data, but not disaggregate it. For this reason, it is a good idea to retain a version of the disaggregated data. In R, this is relatively straight forward because you can assign the aggregated file to a new dataframe. In Stata, you cannot have two datasets open at once. The solution therefore is to preserve a version of the disaggregated data and restore it once you are done with the aggregated file.\nNote, preserve and restore must be run together. The command uses temporary files, so if you just run preserve and then later try to restore, the temporary file will no longer exist and you will need to re-open the disaggregated file and reproduce all other changes you made to the dataset.\n\n\n\nFor parts of the domain (i.e. years of education) the relationship does appear to be linear. This is for years of education from 10-19. Average wages decline beyond 19 and are flat (although noisy) below 10. This may be a sign that level of education matters above a minimum threshold; e.g. completing high school.\n\n\nThe plot below shows the average log of wage for each year of education. Does the relationship appear to be linear in years of education?\n\n\npreserve\ncollapse (mean) lnwage, by(edu)\nscatter lnwage edu, ytitle(Average (log of) wage) xtitle(Years of education)\nrestore\n\n(Note: Below code run with echo to enable preserve/restore functionality.)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA similar pattern exists: linear within the domain 10-19 years of education. The log transformation is monotonic, but has a disproportionate impact on larger numbers (e.g. outliers). This may suggest that there are few outliers in the data.\n\nBelow is an estimate of the Mincer equation using the same sub-sample:\n\nreg lnwage edu exp expsq\n\n\n      Source |       SS           df       MS      Number of obs   =       300\n-------------+----------------------------------   F(3, 296)       =     33.82\n       Model |  26.8176018         3  8.93920059   Prob &gt; F        =    0.0000\n    Residual |  78.2323313       296  .264298417   R-squared       =    0.2553\n-------------+----------------------------------   Adj R-squared   =    0.2477\n       Total |  105.049933       299  .351337569   Root MSE        =     .5141\n\n------------------------------------------------------------------------------\n      lnwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         edu |   .0998468   .0107859     9.26   0.000       .07862    .1210736\n         exp |   .0208725   .0081481     2.56   0.011      .004837    .0369081\n       expsq |  -.0002387    .000162    -1.47   0.142    -.0005575    .0000801\n       _cons |   1.732044   .1753344     9.88   0.000     1.386984    2.077104\n------------------------------------------------------------------------------\n\n\n\nInterpret the coefficient on edu.\n\n\nA 1 year increase in years of education is associated with a \\(\\sim 10\\%\\) increase in average wages, holding other factors constant. This coefficient is right on the edge of values for which it is appropriate to use the \\(\\hat{\\beta}\\times 100\\) approximation. The exact value is given by,\n\ndis (exp(_b[edu])-1)*100\n\n10.50016\n\n\nwhich is slightly higher at 10.5%.\n\n\nAsk a LLM to provide an estimate of the returns to an additional year of education from the literature. You must specify that the outcome is measured in log-of wages. What is the typical estimate? And do our estimates seem off?\n\n\nA query, using Claude, cited a few key studies and meta-analyses. The conclusion was a range of 0.08-0.10; although it did specifiy a lower range of 0.06-0.07 for rich countries. This estimate is therefore slightly higher.\n\n\nCan we reject the \\(H_0: \\beta_1 &lt;0.08\\) at a \\(\\alpha=0.01\\) significance level? What if we chose \\(\\alpha=0.05\\) instead?\n\n\nThis test is designed to check whether or model estimates a return to education that is significantly higher than the using 0.08 value. It is a one-sided test, so we will reject if\n\\[\n  \\text{test-stat} = \\frac{\\hat{\\beta_1}-0.08}{\\widehat{se}(\\hat{\\beta_1})}&gt;T^{-1}_{300-4}(0.99)\n\\]\n\ndis (_b[edu]-0.08)/_se[edu]\ndis invt(e(df_r),0.99)\ndis invt(e(df_r),0.95)\n\n1.8400626\n2.3390116\n1.6500177\n\n\nWe fail to reject this null hypothesis at 1% significance level. We would reject at a 5% level.\n\n\nTest the hypothesis that \\(H_0:\\beta_2=0\\) at a \\(\\alpha=0.05\\) significance level.\n\n\nThis is a two-sided test. We will reject if,\n\\[\n  |\\text{test-stat}| = \\Bigg|\\frac{\\hat{\\beta_2}}{\\widehat{se}(\\hat{\\beta_2})}\\Bigg|&gt;T^{-1}_{300-4}(0.975)\n\\]\n\ndis _b[exp]/_se[exp]\ndis invt(e(df_r),0.975)\n\n2.56165\n1.9680107\n\n\nWe reject this null hypothesis.\n\n\nTest the hypothesis that \\(H_0:\\beta_3\\geq0\\) at a \\(\\alpha=0.05\\) significance level.\n\n\nThis is a one-sided test. We will reject if,\n\\[\n  \\text{test-stat} = \\frac{\\hat{\\beta_3}}{\\widehat{se}(\\hat{\\beta_3})}&lt;T^{-1}_{300-4}(0.05)\n\\]\n\ndis _b[expsq]/_se[expsq]\ndis invt(e(df_r),0.05)\n\n-1.4736091\n-1.6500177\n\n\nWe fail to reject this null hypothesis.\n\n\nIgnoring statistical significance, do the estimates suggest a concave or convex relationship with respect to years of experience?\n\n\nSince our estimate of \\(\\hat{\\beta}_3&lt;0\\), the data suggests that the relationship is concave. Wages are increasing in experience, but at a decreasing rate.\n\n\nIf we take these estimates seriously, after how many years of experience do we expected wages to decline? Do wages decrease while workers are still working?\n\n\nFor a quadratic function – \\(y = ax^2 + bx + c\\) – the turning point is given by \\(-b/2a\\)\n\ndis -_b[exp]/(2*_b[expsq])\n\n43.719251\n\n\nWages reach their peak around 44 years of experience. This is close to retirement for most workers, so it suggests that wages continue to rise throughout a worker’s career."
   },
   {
     "objectID": "tutorial-1-solutions.html#application-2-explaining-capital-structures",

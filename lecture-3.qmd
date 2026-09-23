@@ -85,49 +85,9 @@ The estimand ($\beta$) is an unknown population parameter (i.e., a non-random nu
 
 # Accuracy vs Effiency
 
-## Accuracy
 
-Is $\hat{\beta} = \beta$?
 
-:::: {.fragment .fade-in}
 
-::: incremental
-- No!
-
-- In fact, the statement does not make sense since $\hat{\beta}$ is a random variable while $\beta$ is a non-random constant. 
-
-- If we are accurate, we can ask: $Pr(\hat{\beta}=\beta)=?$
-
-- The answer is: $Pr(\hat{\beta}=\beta|\mathbf{x})=0$ for any $u_i$ with a continuous distribution (conditional on $\mathbf{x}$).
-
-:::
-
-::::
-
-## 
-
-:::: {.fragment .fade-in}
-
-::: incremental
-Can we **expect** -- *a priori* -- for $\hat{\beta}$ to be "on target"?
-
-- This is a question of *biasedness*: is $E[\hat{\beta}] = \beta$?
-
-- The answer: it depends!
-
-- Specifically, it depends on the properties of the model! 
-
-:::
-
-::::
-
-:::: {.content-visible unless-format="revealjs"}
-::: {.callout-note}
-It is an all to common mistake to conflate the estimator - in particular, the OLS estimator - with the linear regression model. People will say, "We estimate an OLS regression model". This doesn't really make sense, since you OLS is the estimator, not the name of the model. You can say, "We estimate a linear regression model using OLS". 
-
-This may seem pedantic, but it is an important distinction since there are a range of estimators that can be used to estimate a linear regression model; all with different properties. In addition, the OLS estimator can be applied to any data, regardless of the true model. So it is a good idea to make sure your language is accurate. 
-:::
-::::
 
 ## Biasedness
 
@@ -983,10 +943,6 @@ Hypothesis tests using t-distribution are more 'conservative' relative to normal
 ### Stata 
 
 ```{stata}
-#| echo: true
-#| code-fold: false
-#| output: true
-
 * Standard normal distribution
 
 ** Evaluate point on CDF: i.e., probability below 0.675
@@ -995,6 +951,9 @@ dis normal(0.675)
 ** Percentile of CDF
 dis invnormal(0.975)
 
+```
+
+```{stata}
 * t-distribution
 
 ** Evaluate point on CDF (df = 100): i.e., probability below 0.675
@@ -1007,8 +966,6 @@ dis invt(100, 0.975)
 ### R
 
 ```{r}
-#| echo: true
-#| code-fold: false
 #| warning: false
 
 # Standard normal distribution
@@ -1018,7 +975,10 @@ pnorm(0.675)
 
 ## Percentile of CDF
 qnorm(0.975)
+```
 
+```{r}
+#| warning: false
 ## t-distribution
 
 ## Evaluate point on CDF (df = 100): i.e., probability below 0.675
