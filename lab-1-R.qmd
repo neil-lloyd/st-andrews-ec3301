@@ -2,7 +2,11 @@
 title: Econometrics Lab 1
 subtitle: Working with data in R
 format: 
-  html: default
+  html: 
+    other-links:
+      - text: "Solution .R file"
+        href: "material/lab-1/ec3301-lab-1.R"
+        icon: code-square  
 engine: knitr  
 ---
 

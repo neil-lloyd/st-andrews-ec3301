@@ -2426,7 +2426,7 @@
     "href": "lecture-2-slides.html#section-10",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "The next step explooits the fact that:\n\n  \\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\bar{x}\\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}=0\n\nTherefore we can minus 0 from the right-hand side without changing anything.\n\n  \\begin{aligned}\n    & 0=\\sum_{i=1}^{n}\\big(\\underbrace{(y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})}_{\\hat{u}_i}\\big)x_{i} -\\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}\\\\\n    \\Rightarrow \\quad & 0=\\sum_{i=1}^{n}\\big((y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})\\big)(x_{i}-\\bar{x})   \\\\\n    \\Rightarrow \\quad & \\hat{\\beta}_1 = \\frac{\\sum_{i=1}^{n}(y_i -\\bar{y})(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} = \\frac{\\widehat{Cov}(y_i,x_i)}{\\widehat{Var}(x_i)}\n  \\end{aligned}"
+    "text": "The next step exploits the fact that:\n\n  \\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\bar{x}\\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}=0\n\nTherefore we can minus 0 from the right-hand side without changing anything.\n\n  \\begin{aligned}\n    & 0=\\sum_{i=1}^{n}\\big(\\underbrace{(y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})}_{\\hat{u}_i}\\big)x_{i} -\\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}\\\\\n    \\Rightarrow \\quad & 0=\\sum_{i=1}^{n}\\big((y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})\\big)(x_{i}-\\bar{x})   \\\\\n    \\Rightarrow \\quad & \\hat{\\beta}_1 = \\frac{\\sum_{i=1}^{n}(y_i -\\bar{y})(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} = \\frac{\\widehat{Cov}(y_i,x_i)}{\\widehat{Var}(x_i)}\n  \\end{aligned}"
   },
   {
     "objectID": "lecture-2-slides.html#sample-analogue",
@@ -2510,7 +2510,7 @@
     "href": "lecture-2-slides.html#section-11",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "You can show,\n\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\bar{y}_1-\\bar{y}_0 \\\\\n    \\hat{\\beta}_0 =& \\bar{y}_0\n  \\end{aligned}\n\nwhere,\n\n\\bar{y}_0 is the mean of the outcome for observations with x=0\n\\bar{y}_1 is the mean of the outcome for observations with x=1t\n\nYields a very intuitive interpretation of the OLS estimator"
+    "text": "You can show,\n\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\bar{y}_1-\\bar{y}_0 \\\\\n    \\hat{\\beta}_0 =& \\bar{y}_0\n  \\end{aligned}\n\nwhere,\n\n\\bar{y}_0 is the mean of the outcome for observations with x=0\n\\bar{y}_1 is the mean of the outcome for observations with x=1\n\nYields a very intuitive interpretation of the OLS estimator"
   },
   {
     "objectID": "lecture-2-slides.html#sample-analogue-1",
@@ -2832,7 +2832,7 @@
     "href": "lecture-2.html#section-10",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "The next step explooits the fact that:\n\\[\n  \\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\bar{x}\\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}=0\n\\]\nTherefore we can minus 0 from the right-hand side without changing anything.\n\\[\n  \\begin{aligned}\n    & 0=\\sum_{i=1}^{n}\\big(\\underbrace{(y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})}_{\\hat{u}_i}\\big)x_{i} -\\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}\\\\\n    \\Rightarrow \\quad & 0=\\sum_{i=1}^{n}\\big((y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})\\big)(x_{i}-\\bar{x})   \\\\\n    \\Rightarrow \\quad & \\hat{\\beta}_1 = \\frac{\\sum_{i=1}^{n}(y_i -\\bar{y})(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} = \\frac{\\widehat{Cov}(y_i,x_i)}{\\widehat{Var}(x_i)}\n  \\end{aligned}\n\\]\n\n\n\n\n\n\nTipLinear algebra\n\n\n\n\n\nThe above expression - along with its multivariate counterpart - has a very nice linear algebra counterpart. The vector of OLS estimators (including the intercept) is given by,\n\\[\n  \\hat{\\beta} = (X'X)^{-1}X'Y\n\\]\nWhere \\(X\\) is a \\(n\\times (k+1)\\) matrix of regressors (including vector of \\(1\\)’s for the intercept) and \\(Y\\) a \\(n\\times 1\\) vector. It’s a very simple expression and demonstrates the value of knowing a little linear algebra. This how you define the OLS estimator in graduate-level modules like EC5207 Econometric Methods and Applications."
+    "text": "The next step exploits the fact that:\n\\[\n  \\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\bar{x}\\sum_{i=1}^{n}\\hat{u}_i=0 \\Rightarrow \\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}=0\n\\]\nTherefore we can minus 0 from the right-hand side without changing anything.\n\\[\n  \\begin{aligned}\n    & 0=\\sum_{i=1}^{n}\\big(\\underbrace{(y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})}_{\\hat{u}_i}\\big)x_{i} -\\textcolor{red}{\\sum_{i=1}^{n}\\hat{u}_i\\bar{x}}\\\\\n    \\Rightarrow \\quad & 0=\\sum_{i=1}^{n}\\big((y_i -\\bar{y})  - \\hat{\\beta}_1(x_{i}-\\bar{x})\\big)(x_{i}-\\bar{x})   \\\\\n    \\Rightarrow \\quad & \\hat{\\beta}_1 = \\frac{\\sum_{i=1}^{n}(y_i -\\bar{y})(x_{i}-\\bar{x})}{\\sum_{i=1}^{n}(x_{i}-\\bar{x})^2} = \\frac{\\widehat{Cov}(y_i,x_i)}{\\widehat{Var}(x_i)}\n  \\end{aligned}\n\\]\n\n\n\n\n\n\nTipLinear algebra\n\n\n\n\n\nThe above expression - along with its multivariate counterpart - has a very nice linear algebra counterpart. The vector of OLS estimators (including the intercept) is given by,\n\\[\n  \\hat{\\beta} = (X'X)^{-1}X'Y\n\\]\nWhere \\(X\\) is a \\(n\\times (k+1)\\) matrix of regressors (including vector of \\(1\\)’s for the intercept) and \\(Y\\) a \\(n\\times 1\\) vector. It’s a very simple expression and demonstrates the value of knowing a little linear algebra. This how you define the OLS estimator in graduate-level modules like EC5207 Econometric Methods and Applications."
   },
   {
     "objectID": "lecture-2.html#sample-analogue",
@@ -2916,7 +2916,7 @@
     "href": "lecture-2.html#section-11",
     "title": "Ordinary Least Squares",
     "section": "",
-    "text": "You can show,\n\\[\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\bar{y}_1-\\bar{y}_0 \\\\\n    \\hat{\\beta}_0 =& \\bar{y}_0\n  \\end{aligned}\n\\]\nwhere,\n\n\\(\\bar{y}_0\\) is the mean of the outcome for observations with \\(x=0\\)\n\\(\\bar{y}_1\\) is the mean of the outcome for observations with \\(x=1\\)t\n\nYields a very intuitive interpretation of the OLS estimator"
+    "text": "You can show,\n\\[\n  \\begin{aligned}\n    \\hat{\\beta}_1 =& \\bar{y}_1-\\bar{y}_0 \\\\\n    \\hat{\\beta}_0 =& \\bar{y}_0\n  \\end{aligned}\n\\]\nwhere,\n\n\\(\\bar{y}_0\\) is the mean of the outcome for observations with \\(x=0\\)\n\\(\\bar{y}_1\\) is the mean of the outcome for observations with \\(x=1\\)\n\nYields a very intuitive interpretation of the OLS estimator"
   },
   {
     "objectID": "lecture-2.html#sample-analogue-1",

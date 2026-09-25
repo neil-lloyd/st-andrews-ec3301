@@ -2,7 +2,11 @@
 title: Econometrics Lab 1
 subtitle: Working with data in Stata
 format: 
-  html: default
+  html:
+    other-links:
+      - text: "Solution .do file"
+        href: "material/lab-1/ec3301-lab-1.do"
+        icon: code-square
 jupyter: nbstata
 ---
 

@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - "material/**/*.do"
+    - "material/**/*.R"
   pre-render: 
     - _pre-render-multi.py
     - _pre-render-solutions.py
@@ -19,21 +22,21 @@ website:
             text: Lecture 1
           - href: lecture-2-multi.qmd
             text: Lecture 2
-#          - href: lecture-3.qmd
+#          - href: lecture-3-multi.qmd
 #            text: Lecture 3
-#          - href: lecture-4.qmd
+#          - href: lecture-4-multi.qmd
 #            text: Lecture 4
-#          - href: lecture-5.qmd
+#          - href: lecture-5-multi.qmd
 #            text: Lecture 5
-#          - href: lecture-6.qmd
+#          - href: lecture-6-multi.qmd
 #            text: Lecture 6
-#          - href: lecture-7.qmd
+#          - href: lecture-7-multi.qmd
 #            text: Lecture 7.
-#          - href: lecture-8.qmd
+#          - href: lecture-8-multi.qmd
 #            text: Lecture 8
-#          - href: lecture-9.qmd
+#          - href: lecture-9-multi.qmd
 #            text: Lecture 9
-#          - href: lecture-10.qmd
+#          - href: lecture-10-multi.qmd
 #            text: Lecture 10
       - text: Labs
         menu:

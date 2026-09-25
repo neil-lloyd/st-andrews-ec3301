@@ -632,7 +632,7 @@ $$
 
 ##
 
-The next step explooits the fact that:
+The next step exploits the fact that:
 
 $$
   \sum_{i=1}^{n}\hat{u}_i=0 \Rightarrow \bar{x}\sum_{i=1}^{n}\hat{u}_i=0 \Rightarrow \textcolor{red}{\sum_{i=1}^{n}\hat{u}_i\bar{x}}=0
@@ -1010,7 +1010,7 @@ $$
 where, 
 
 - $\bar{y}_0$ is the mean of the outcome for observations with $x=0$ 
-- $\bar{y}_1$ is the mean of the outcome for observations with $x=1$t
+- $\bar{y}_1$ is the mean of the outcome for observations with $x=1$
 
 **Yields a very intuitive interpretation of the OLS estimator**
 
