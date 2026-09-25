@@ -1,0 +1,479 @@
+---
+title: Econometrics Lab 2
+subtitle: Linear Regression in R
+format:
+  html: default
+execute:
+  message: false
+  warning: false
+---
+
+```{r}
+#| include: false
+library("haven")
+library("dplyr")
+library("ggplot2")
+source("config.R")
+```
+
+This lab was motivated by the ongoing "cost of living crisis" that has many politicians, economists, and policy specialists working hard to help households. It focuses on two aspects of this crisis: the cost of energy (part 1) and access to (un)healthy food (part 2). The first part makes use of the Scottish Household Survey (2023) sample from Lab 1, while the second part uses a county level dataset from the US Department of Agriculture.
+
+## Setup
+
+Before we get started,
+
+- Create a new folder for this week's lab ("EC3301/Lab 2") in the same location as your "EC3301/Lab 1" folder.
+
+- Go to Moodle and download the datasets provided under Week 4. (You will also need access to the "shs2023.dta" file from Lab 1.)
+
+- Move the new files, as well as a copy of "shs2023.dta", to "EC3301/Lab 2".
+
+- Open RStudio and create a new R script. Save it as "Lab 2/lab-2.R"
+
+- Add the following to your R script; editing the file path to match your folder structure. Note, R uses forward slashes (`/`) in file paths, even on Windows.
+
+```{r}
+#| eval: false
+
+# Title: Econometrics Lab 2: Linear Regression in R
+# Author: [INSERT NAME]
+# Date: [INSERT DATE]
+
+# ============================================================================ #
+# Load libraries
+library("haven")
+library("dplyr")
+library("ggplot2")
+
+# Clear all objects from the R environment
+rm(list = ls())
+
+# Set working directory
+setwd("[INSERT FILE PATH]/EC3301/Lab 2")
+
+# ============================================================================ #
+# Part 1
+
+
+# ============================================================================ #
+# Part 2
+
+
+# ============================================================================ #
+```
+
+
+# Part 1: Energy costs in Scotland
+
+The Scottish Household Survey (2023) includes information about the amount of money households spend on energy to heat and light their homes (i.e., electricity, gas, etc.). During this lab we will investigate whether lower income households spend a disproportionate amount of money on energy. Why does this matter? Well, if true, it means that energy shocks affect lower income households more.
+
+1. Having run the first few lines of the above R script, add the following lines under `# Part 1` and run. This is code from Lab 1.
+
+```{r}
+#| eval: false
+shs <- read_dta("shs2023.dta")
+  # R should be able to find the file if the working directory (setwd) is set correctly.
+
+shs <- shs %>%
+  rename(dwell_type = hb1, own_grp = hb509) %>%
+  mutate(dwell_type = structure(dwell_type, label = "Type of dwelling"),
+         own_grp = structure(own_grp, label = "Ownership of the dwelling"))
+
+shs$MD20QUIN <- labelled(
+  shs$MD20QUIN,
+  labels = c("Bottom: 0-20%" = 1, "Lower: 20-40%" = 2, "Middle: 40-60%" = 3, "Upper: 60-80%" = 4, "Top: 80-100%" = 5))
+
+shs <- shs %>%
+  mutate(
+    amt_sum = case_when(
+      shared_ownership_amt > 0 ~ 3,
+      mortgage_amt > 0 ~ 2,
+      rent_amt > 0 ~ 1,
+      TRUE ~ NA_real_
+    ),
+    payment = case_when(
+      amt_sum == 1 ~ as.numeric(rent_amt),
+      amt_sum == 2 ~ as.numeric(mortgage_amt),
+      amt_sum == 3 ~ as.numeric(shared_ownership_amt),
+      TRUE ~ NA_real_
+    )
+  )
+```
+
+
+```{r}
+#| include: false
+shs <- read_dta(file.path(data_dir, "shs2023.dta"))
+
+shs <- shs %>%
+  rename(dwell_type = hb1, own_grp = hb509) %>%
+  mutate(dwell_type = structure(dwell_type, label = "Type of dwelling"),
+         own_grp = structure(own_grp, label = "Ownership of the dwelling"))
+
+shs$MD20QUIN <- labelled(
+  shs$MD20QUIN,
+  labels = c("Bottom: 0-20%" = 1, "Lower: 20-40%" = 2, "Middle: 40-60%" = 3, "Upper: 60-80%" = 4, "Top: 80-100%" = 5))
+
+shs <- shs %>%
+  mutate(
+    amt_sum = case_when(
+      shared_ownership_amt > 0 ~ 3,
+      mortgage_amt > 0 ~ 2,
+      rent_amt > 0 ~ 1,
+      TRUE ~ NA_real_
+    ),
+    payment = case_when(
+      amt_sum == 1 ~ as.numeric(rent_amt),
+      amt_sum == 2 ~ as.numeric(mortgage_amt),
+      amt_sum == 3 ~ as.numeric(shared_ownership_amt),
+      TRUE ~ NA_real_
+    )
+  )
+```
+
+2. The dataset includes a set of variables `htcostsum_1`-`htcostsum_9` and `htcostamt_1`-`htcostamt_9`. Try to understand the relationship between each variable by first using `count()` to check the values of `htcostsum_*` and then `group_by()` with `summarise()` to check how they relate to the values of `htcostamt_*`. For example,
+
+```{r}
+shs %>% count(htcostsum_1 = as_factor(htcostsum_1))
+
+shs %>%
+  group_by(htcostsum_1 = as_factor(htcostsum_1)) %>%
+  summarise(
+    n = sum(!is.na(htcostamt_1)),
+    mean = mean(htcostamt_1, na.rm = TRUE),
+    sd = sd(htcostamt_1, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+3. Create a variable equal to the sum of all energy costs called `energy_cost`. The most accurate way to do this is using the `rowSums()` function (type `?rowSums` in the console to learn about the function) along with `across(starts_with("htcostamt_"))` to select all the energy cost variables. You will want to add the option `na.rm = TRUE` so that missing values are ignored. However, `rowSums()` will then return a 0 (not `NA`) for households where *all* the variables are missing. You will need to recode these to `NA`. This approach could also have been used to create the `payment` variable in Lab 1.
+
+```{r}
+#| include: false
+shs <- shs %>%
+  mutate(
+    energy_cost = rowSums(across(starts_with("htcostamt_")), na.rm = TRUE),
+    energy_cost = if_else(rowSums(!is.na(across(starts_with("htcostamt_")))) == 0, NA_real_, energy_cost)
+  )
+```
+
+4. How many observations have missing, zero, and positive (non-missing values). Check that your output corresponds to mine.
+
+```{r}
+sum(is.na(shs$energy_cost))
+sum(shs$energy_cost == 0, na.rm = TRUE)
+sum(shs$energy_cost > 0, na.rm = TRUE)
+```
+
+```{r}
+shs %>%
+  summarise(
+    n = sum(!is.na(energy_cost)),
+    mean = mean(energy_cost, na.rm = TRUE),
+    sd = sd(energy_cost, na.rm = TRUE),
+    min = min(energy_cost, na.rm = TRUE),
+    p1 = quantile(energy_cost, 0.01, na.rm = TRUE, type = 2),
+    p5 = quantile(energy_cost, 0.05, na.rm = TRUE, type = 2),
+    p10 = quantile(energy_cost, 0.10, na.rm = TRUE, type = 2),
+    p25 = quantile(energy_cost, 0.25, na.rm = TRUE, type = 2),
+    p50 = quantile(energy_cost, 0.50, na.rm = TRUE, type = 2),
+    p75 = quantile(energy_cost, 0.75, na.rm = TRUE, type = 2),
+    p90 = quantile(energy_cost, 0.90, na.rm = TRUE, type = 2),
+    p95 = quantile(energy_cost, 0.95, na.rm = TRUE, type = 2),
+    p99 = quantile(energy_cost, 0.99, na.rm = TRUE, type = 2),
+    max = max(energy_cost, na.rm = TRUE)
+  )
+```
+
+5. This new variable measures energy costs at an annual level. Transform the variable - using the `mutate()` function - to a monthly value. Then label it "Household energy costs (monthly £s)".
+
+```{r}
+#| include: false
+shs <- shs %>%
+  mutate(energy_cost = energy_cost / 12,
+         energy_cost = structure(energy_cost, label = "Household energy costs (monthly £s)"))
+```
+
+6. Rename `payment` to `housing_cost` and give it the label "Household housing costs (monthly £s)". Does the variable have a similar number of non-missing and zero values to `energy_cost`? Who would have a housing cost of £0? Wealthier or poorer households?
+
+```{r}
+#| include: false
+shs <- shs %>%
+  rename(housing_cost = payment) %>%
+  mutate(housing_cost = structure(housing_cost, label = "Household housing costs (monthly £s)"))
+```
+
+7. Compare the new `housing_cost` variable to the variable in the data called `hcost_amt`. You can also use `View(select(shs, mortgage_amt, rent_amt, shared_ownership_amt, hcost_amt, housing_cost))` to investigate why these two variables are not the same. Should we be concerned?
+
+```{r}
+#| eval: false
+shs %>%
+  filter(!is.na(housing_cost) & !is.na(hcost_amt)) %>%
+  mutate(diff = housing_cost - hcost_amt,
+         comparison = case_when(
+           diff < 0 ~ "housing_cost < hcost_amt",
+           diff == 0 ~ "housing_cost = hcost_amt",
+           diff > 0 ~ "housing_cost > hcost_amt"
+         )) %>%
+  group_by(comparison) %>%
+  summarise(
+    n = n(),
+    min_diff = min(diff),
+    mean_diff = mean(diff),
+    max_diff = max(diff),
+    .groups = "drop"
+  )
+
+shs %>%
+  summarise(
+    n_housing_missing = sum(is.na(housing_cost)),
+    n_hcost_missing = sum(is.na(hcost_amt)),
+    n_both_missing = sum(is.na(housing_cost) & is.na(hcost_amt))
+  )
+```
+
+8. Check `housing_cost` against `own_grp` (a variable from Lab 1). It is clear that our variable ignores those who own outright or live rent free. Does this seem like a reasonable outcome?
+
+```{r}
+#| include: false
+shs %>% count(own_grp = as_factor(own_grp))
+
+shs %>%
+  group_by(own_grp = as_factor(own_grp)) %>%
+  summarise(
+    n = sum(!is.na(housing_cost)),
+    mean = mean(housing_cost, na.rm = TRUE),
+    sd = sd(housing_cost, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+9. Create a new `income` variable equal to `annetinc`$/12$. Label the variable "Household income (monthly £s)".
+
+```{r}
+#| include: false
+shs <- shs %>%
+  mutate(income = annetinc / 12,
+         income = structure(income, label = "Household income (monthly £s)"))
+```
+
+10. Keep the sample of observations that have non-missing values for all three variables: `energy_cost`, `housing_cost`, and `income`. How many observations do we lose? There are multiple ways you can achieve this result:
+
+- Using base R, select the rows where each variable is *not* missing. In R, missing values are `NA` and you check for them with the `is.na()` function; `!` denotes *not*. (Note, `energy_cost != NA` will not work: any comparison with `NA` returns `NA`.)
+
+```{r}
+#| eval: false
+shs <- shs[!is.na(shs$energy_cost) & !is.na(shs$housing_cost) & !is.na(shs$income), ]
+```
+
+- Using the `filter()` function from `dplyr`.
+
+```{r}
+#| output: false
+shs <- shs %>%
+  filter(!is.na(energy_cost) & !is.na(housing_cost) & !is.na(income))
+```
+
+11. Create a scatter plot of `energy_cost` and `income` using `ggplot()` and `geom_point()`.
+
+12. Add a second layer to the graph that overlays the scatter plot with a (linear) line of best fit using `geom_smooth()`. Here is what the output should look like:
+
+```{r}
+#| echo: false
+ggplot(shs, aes(x = income, y = energy_cost)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+Note, I have used the options `method = "lm"` to get a linear fit and `se = FALSE` to turn off the confidence interval.
+
+13. The line of best fit corresponds to the OLS estimator. Is the slope significantly different from 0? Based on the estimates, what fraction of an additional £ of income is spent on energy costs.
+
+
+```{r}
+reg1 <- lm(energy_cost ~ income, data = shs)
+summary(reg1)
+```
+
+14. Use the `predict()` function to create the predicted energy for each household `energy_hat` (see [Lecture 2](lecture-2-multi.qmd) for assistance). Plot the predicted value alongside the actual value of energy.
+
+```{r}
+#| echo: false
+shs$energy_hat <- predict(reg1, newdata = shs)
+```
+
+```{r}
+ggplot(shs, aes(x = income)) +
+  geom_point(aes(y = energy_cost)) +
+  geom_point(aes(y = energy_hat), colour = "red")
+```
+
+15. Create a similar graph for `housing_cost`. You can combine the graphs into a single figure by stacking the two outcomes into one dataframe and using `facet_wrap()`. Is one slope steeper than the other?
+
+```{r}
+combined <- bind_rows(
+  shs %>% transmute(income, cost = as.numeric(energy_cost), type = "Energy costs"),
+  shs %>% transmute(income, cost = as.numeric(housing_cost), type = "Housing costs")
+)
+
+ggplot(combined, aes(x = income, y = cost)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_y_continuous(breaks = seq(0, 1500, 500)) +
+  facet_wrap(~ type, scales = "free_y") +
+  labs(x = "Household income (monthly £s)", y = NULL)
+```
+
+16. Create a new variable `energy_share` equal to energy costs as a share of energy PLUS housing costs. Check that your variable has a similar mean and sd to the output below.
+
+```{r}
+#| include: false
+shs <- shs %>%
+  mutate(energy_share = energy_cost / (energy_cost + housing_cost))
+```
+
+```{r}
+shs %>%
+  summarise(
+    n = sum(!is.na(energy_share)),
+    mean = mean(energy_share, na.rm = TRUE),
+    sd = sd(energy_share, na.rm = TRUE),
+    min = min(energy_share, na.rm = TRUE),
+    max = max(energy_share, na.rm = TRUE)
+  )
+```
+
+17. Interpret the slope coefficient and $\mathbf{R}^2$ from the model below. Use the p-value to test whether the relationship is statistically significant at a $\alpha = 0.01$ significance level?
+
+```{r}
+# For ln(0) and ln(negative), R returns -Inf/NaN, so set these to NA
+shs <- shs %>%
+  mutate(ln_income = if_else(income > 0, log(income), NA_real_))
+
+reg2 <- lm(energy_share ~ ln_income, data = shs)
+summary(reg2)
+```
+
+18. One important factor which may determine a household's energy usage in Scotland is location. Afterall, it gets a lot darker and colder in the Outer Hebrides compared with the sunny Kingdom of Fife. Try to replicate the following bar graph showing the average share of expenditure on energy by area. See [Lab 1](lab-1-R.qmd) for a reminder of how to make a bar graph.
+
+```{r}
+#| echo: false
+means <- shs %>%
+  mutate(area = as_factor(area)) %>%
+  group_by(area) %>%
+  summarise(mean_share = mean(energy_share, na.rm = TRUE), .groups = "drop")
+
+ggplot(means, aes(x = area, y = mean_share)) +
+  geom_col(fill = "lightblue", color = "white") +
+  labs(x = NULL, y = "Energy share") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+19. Estimate the multivariate model below. Why is Edinburgh missing from the model? Has the adjusted-$\mathbf{R}^2$ increased?
+
+```{r}
+#| eval: false
+shs <- rename(shs, bedrooms = hc4)
+
+reg3 <- lm(energy_share ~ ln_income + hhsize + bedrooms + factor(own_grp) + factor(dwell_type) + factor(area),
+           data = shs)
+summary(reg3)
+```
+
+:::{.callout-note title="Factor variables"}
+Categorical variables -- like `own_grp`, `dwell_type`, and `area` -- are referred to as factor variables in R. The values that the variables take on have no cardinal meaning. For example, in the dataset `area==1` for households in Edinburgh and `area==2` for households in Glasgow. Does this mean that Glasgow is $2\times$ Edinburgh? No. Categorical variables like this need to enter the model as dummy variables, with each dummy variable denoting a different category.
+
+The *long* way to do this is to create all the dummy variables. You can do this as follows (and so on for each area),
+
+```{r}
+#| eval: false
+shs <- shs %>%
+  mutate(area1 = as.numeric(area == 1),
+         area2 = as.numeric(area == 2))
+```
+
+Fortunately, there is a way to tell R in the `lm()` function that it should treat the variable as a factor variable and include a dummy for each value. You do this by wrapping the regressor in `factor()`; for example,
+
+```{r}
+summary(lm(energy_share ~ factor(area), data = shs))
+```
+
+The default is to exclude the first level (the smallest number) as the base category (see start of [Lecture 2](lecture-2-multi.qmd) for a discussion of base categories). You can change this by declaring the base category with the `relevel()` function.
+
+```{r}
+summary(lm(energy_share ~ relevel(factor(area), ref = 2), data = shs))
+```
+
+Glasgow (`area==2`) is now the excluded base category.
+:::
+
+20. Estimate the above model again setting the base categories to: `own_grp==2`, `area==3`, `dwell_type==1`. Does this change the estimated slope coefficients for the *non-factor* variables?
+
+21. Using the evidence we have collected along with any other evidence you choose to create, do you think that the recent energy crisis will have had a disproportionate effect on lower or higher income households? What aspects have we ignored (or assumed away) in this discussion. [Hint: think about our sample selection decisions and variables we have ignored.]
+
+# Part 2: Fast-food access in the US
+
+There is a large literature on the impact that fast-food access has on health outcomes; especially obesity [@currie2010effect]. There is also a big policy debate in the US about 'food deserts' and access to healthy food alternatives, which includes a growing suspicion that fast-food outlets target underprivileged neighbourhoods with limited access to healthier alternatives. The following exercise investigates the relationship between fast-food access (at the county level) and the largest anti-hunger food programme in the US: the Supplemental Nutrition Assistance Program (SNAP). SNAP distributes vouchers/credits to participants to spend at [SNAP-authorized stores](https://www.fna.usda.gov/snap/eligible-food-items). Rather cynically, this lab investigates whether fast-food chains locate themselves in areas with areas with a higher share of SNAP participants.
+
+The data comes from the US Department of Agriculture's [Food Environment Atlas (2025)](https://www.ers.usda.gov/data-products/food-environment-atlas/data-access-and-documentation-downloads). The dataset includes information on the number of food outlets (by category and adjusted for population), participation in food assistance programmes, and important county characteristics. The file "VariableList.csv" on Moodle includes useful descriptions of each variable.
+
+1. Open the "usda2025.csv". As it is not a .dta file, you will need to import it with a different function: `read.csv()`. In RStudio, you can also go to 'File>Import Dataset>From Text (base)...' and locate the data in your "EC3301/Lab 2" folder. This will open a preview window. Select 'Import'. In the console you will see code starting with `read.csv`. Copy this code and paste it in your R script so that the action can be replicated. Name the dataframe `usda`.
+
+    The variable names in the file are in upper case. To make them easier to type, convert them to lower case using `names(usda) <- tolower(names(usda))`.
+
+```{r}
+#| include: false
+usda <- read.csv(file.path(data_dir, "usda2025.csv"))
+names(usda) <- tolower(names(usda))
+```
+
+2. Generate a new variable `ln_pc_snapben17` equal to the log of `pc_snapben17`. The "VariableList.csv" file will show you that this is SNAP benefits per capita in 2017.
+
+```{r}
+#| include: false
+usda <- usda %>%
+  mutate(ln_pc_snapben17 = if_else(pc_snapben17 > 0, log(pc_snapben17), NA_real_))
+```
+
+3. Compute the correlation between 3 measures of SNAP exposure (at the county level): `ln_pc_snapben17`, `pct_snap17` (% of population participate in SNAP, 2017), and `snapspth17` (SNAP-authorized stored per 1000 people, 2017). Are the results surprising?
+
+```{r}
+#| eval: false
+cor(usda[, c("ln_pc_snapben17", "snapspth17", "pct_snap17")], use = "complete.obs")
+```
+
+4. Estimate 3 separate simple regression models of `ffrpth20` (fast-food stores per 1000 people, 2020) against the above three measures of SNAP exposure. Interpret each slope coefficient. Which model has the highest $\mathbf{R}^2$.
+
+5. Most SNAP-authorized stores are big grocery stores (e.g. Walmart, Target, Kroger, etc.). The data includes information on the total number of grocery stores (in 2016): `grocpth16`. Are they highly correlated?
+
+```{r}
+cor(usda[, c("snapspth17", "grocpth16")], use = "complete.obs")
+```
+
+6. Estimate the multivariate model below, that controls for the poverty rate, number of full-service restaurants, number of grocery stores, and a metropolitan dummy variable. Is there a statistically significant relationship between the number of SNAP-authorized stores and fast-food stores, conditional on these other variables? And how does the coefficient compare to the simple model?
+
+```{r}
+summary(lm(ffrpth20 ~ snapspth17 + povrate21 + fsrpth16 + grocpth16 + metro23 + pct_nhblack20 + pct_hisp20 + pct_65older20 + pct_18younger20,
+           data = usda))
+```
+
+7. Estimate the same multivariate model, but for the other measures of SNAP exposure. Are these relationships statistically significant?
+
+8. The data has information about other federal nutrition programmes: (1) [WIC](https://www.fna.usda.gov/wic) (Women, Infants, Children); (2) National School Lunch Programme; (3) Summer Food Service Programme. Compare the participation rates of these programmes. Note, the latter two programmes measure participation as % of eligible children.
+
+```{r}
+usda %>%
+  summarise(across(c(pct_snap17, pct_wic17, pct_nslp17, pct_sfsp17),
+                   list(n = ~ sum(!is.na(.x)),
+                        mean = ~ mean(.x, na.rm = TRUE),
+                        sd = ~ sd(.x, na.rm = TRUE),
+                        min = ~ min(.x, na.rm = TRUE),
+                        max = ~ max(.x, na.rm = TRUE))))
+```
+
+9. Using these variables as the measure of exposure, do we find any evidence of a relationship with fast-food access in 2017.
+
+10. Explore the data further to see if you can learn more about this relationship. One option might be to look at `pch_ffrpth_16_20` in place of `ffrpth20` as the outcome variable, since it captures the percentage *change in* fast-food establishments per 1000 people. Another option is to consider different controls. Ideally, these should be **good controls**. We will discuss this more after the break, but a **bad control** is a variable that could (theoretically) be an outcome of the variable of interest: in this instance, SNAP exposure. You could also use variables like `pct_laccess_lowi19` to investigate low access to stores among low income residents (i.e. 'food deserts').
+
+# References
+
