@@ -51,7 +51,7 @@ mean y
 
 5. What is the relationship between the standard deviation of the variable and the standard error of the sample mean reported above?
 
-6. Earlier we showed that, $\frac{\bar{y}-2}{se(\bar{y})} \sim N(0,1)$ where $sd(\bar{y}) = \sigma/\sqrt{n}$. Since we do not know $\sigma$, what happens to the distribution if we replace $\sigma$ with $\hat{\sigma}$, the standard deviation of the sample. 
+6. Earlier we showed that, $\frac{\bar{y}-2}{sd(\bar{y})} \sim N(0,1)$ where $sd(\bar{y}) = \sigma/\sqrt{n}$. Since we do not know $\sigma$, what happens to the distribution if we replace $\sigma$ with $\hat{\sigma}$, the standard deviation of the sample. 
 
 7. Using the properties of the sample, test the null hypothesis $H_0: \mu =1.85$. Use a significance level of $\alpha = 0.05$. 
 

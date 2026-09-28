@@ -128,7 +128,7 @@ However, we do not know the true value of $\sigma$. In our estimation of the $sd
 As $n=100$, we find that $se = 0.2082121$; exactly equal to the $\hat{\sigma}/10$.
 :::
 
-6. Earlier we showed that, $\frac{\bar{y}-2}{se(\bar{y})} \sim N(0,1)$ where $sd(\bar{y}) = \sigma/\sqrt{n}$. Since we do not know $\sigma$, what happens to the distribution if we replace $\sigma$ with $\hat{\sigma}$, the standard deviation of the sample. 
+6. Earlier we showed that, $\frac{\bar{y}-2}{sd(\bar{y})} \sim N(0,1)$ where $sd(\bar{y}) = \sigma/\sqrt{n}$. Since we do not know $\sigma$, what happens to the distribution if we replace $\sigma$ with $\hat{\sigma}$, the standard deviation of the sample. 
 
 :::{.border}
 $$
