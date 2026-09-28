@@ -113,20 +113,26 @@ mean y
 5. What is the relationship between the standard deviation of the variable and the standard error of the sample mean reported above?
 
 :::{.border}
-The standard deviation ($s$) is the square-root of the sample variance. The sample variance ($s^2$) is an estimate of the unobserved distribution variance ($\sigma^2$). In this sample, $s = 2.082121$. 
+The reported standard deviation is the square-root of the sample variance. The sample variance ($\hat{\sigma}^2$) is an estimate of the unobserved distribution variance ($\sigma^2$). In this sample, $\hat{\sigma} = 2.082121$. Note, the estimator is
 
-The standard error ($se$) is the square root of the $Var(\bar{y})$. As we proved above,  $Var(\bar{y}) = \sigma^2/n$. That means that $se(\bar{y}) = \sigma/\sqrt{n}$$. 
+$$
+  \hat{\sigma}^2 = \frac{1}{n-1}\sum_{i=1}^n (y_i-\bar{y})^2
+$$
 
-However, we do not know the true value of $\sigma$. In our estimation of the $se(\bar{y})$, we replace $\sigma$ with $s$: $\widehat{se}(\bar{y}) = s/\sqrt{n}$. 
+where division by $n-1$ results from the fact that the demeaned $y$ has $n-1$ degrees of freedom (since the variable has mean zero). It is for this same reason that the $t$-distribution in Q.6 has $n-1$ degrees of freedom.
 
-As $n=100$, we find that $\widehat{se} = 0.2082121$; exactly equal to the $s/10$.
+The reported standard error is the square root of the $Var(\bar{y})$. As we proved above,  $Var(\bar{y}) = \sigma^2/n$. That means that $sd(\bar{y}) = \sigma/\sqrt{n}$. 
+
+However, we do not know the true value of $\sigma$. In our estimation of the $sd(\bar{y})$, we replace $\sigma$ with $\hat{\sigma}$: $se(\bar{y}) = \hat{\sigma}/\sqrt{n}$. 
+
+As $n=100$, we find that $se = 0.2082121$; exactly equal to the $\hat{\sigma}/10$.
 :::
 
-6. Earlier we showed that, $\frac{\bar{y}-2}{se(\bar{y})} \sim N(0,1)$ where $se(\bar{y}) = \sigma/\sqrt{n}$. Since we do not know $\sigma$, what happens to the distribution if we replace $\sigma$ with $s$, the standard deviation of the sample. 
+6. Earlier we showed that, $\frac{\bar{y}-2}{se(\bar{y})} \sim N(0,1)$ where $sd(\bar{y}) = \sigma/\sqrt{n}$. Since we do not know $\sigma$, what happens to the distribution if we replace $\sigma$ with $\hat{\sigma}$, the standard deviation of the sample. 
 
 :::{.border}
 $$
-  \frac{\bar{y}-2}{s/\sqrt{n}} \sim T_{n-1}
+    \frac{\bar{y}-2}{\hat{\sigma}/\sqrt{n}} \sim T_{n-1}
 $$
 :::
 
@@ -134,7 +140,7 @@ $$
 
 :::{.border}
 $$
-  \frac{\bar{y}-1.85}{s/\sqrt{n}} \underset{H_0}{\sim} T_{n-1}
+  \frac{\bar{y}-1.85}{\hat{\sigma}/\sqrt{n}} \underset{H_0}{\sim} T_{n-1}
 $$
 
 Compute the test statistic:
@@ -198,11 +204,11 @@ In the two-sided test:
 
 $$
   \begin{aligned}
-  Pr(\text{Reject}\;H_0|\mu = 2) =& Pr\Bigg(\bigg|\frac{\bar{y}-1.85}{\widehat{se}}\bigg|>\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
-  =& Pr\Bigg(\frac{\bar{y}-1.85}{\widehat{se}}<\text{t}_{99,0.025}\Bigg|\mu = 2\Bigg) + Pr\Bigg(\frac{\bar{y}-1.85}{\widehat{se}}>\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
-  =& Pr\Bigg(\frac{\bar{y}-2}{\widehat{se}}<\text{t}_{99,0.025}-\frac{0.15}{\widehat{se}}\Bigg|\mu = 2\Bigg) \\ 
-  &+ Pr\Bigg(\frac{\bar{y}-2}{\widehat{se}}>\text{t}_{99,0.975}-\frac{0.15}{\widehat{se}}\Bigg|\mu = 2\Bigg) \\
-  =& T_{n-1}(\text{t}_{99,0.025}-\frac{0.15}{\widehat{se}}) + 1-T_{n-1}(\text{t}_{99,0.975}-\frac{0.15}{\widehat{se}}) \\
+  Pr(\text{Reject}\;H_0|\mu = 2) =& Pr\Bigg(\bigg|\frac{\bar{y}-1.85}{se}\bigg|>\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
+  =& Pr\Bigg(\frac{\bar{y}-1.85}{se}<\text{t}_{99,0.025}\Bigg|\mu = 2\Bigg) + Pr\Bigg(\frac{\bar{y}-1.85}{se}>\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
+  =& Pr\Bigg(\frac{\bar{y}-2}{se}<\text{t}_{99,0.025}-\frac{0.15}{se}\Bigg|\mu = 2\Bigg) \\ 
+  &+ Pr\Bigg(\frac{\bar{y}-2}{se}>\text{t}_{99,0.975}-\frac{0.15}{se}\Bigg|\mu = 2\Bigg) \\
+  =& T_{n-1}(\text{t}_{99,0.025}-\frac{0.15}{se}) + 1-T_{n-1}(\text{t}_{99,0.975}-\frac{0.15}{se}) \\
   \end{aligned}
 $$
 
@@ -214,9 +220,9 @@ In the one-sided test:
 
 $$
   \begin{aligned}
-  Pr(\text{Reject}\;H_0|\mu = 2) =& Pr\Bigg(\frac{\bar{y}-1.85}{\widehat{se}}>\text{t}_{99,0.95}\Bigg|\mu = 2\Bigg) \\
-  =& Pr\Bigg(\frac{\bar{y}-2}{\widehat{se}}>\text{t}_{99,0.95}-\frac{0.15}{\widehat{se}}\Bigg|\mu = 2\Bigg) \\
-  =& 1-T_{n-1}(\text{t}_{99,0.95}-\frac{0.15}{\widehat{se}}) \\
+  Pr(\text{Reject}\;H_0|\mu = 2) =& Pr\Bigg(\frac{\bar{y}-1.85}{se}>\text{t}_{99,0.95}\Bigg|\mu = 2\Bigg) \\
+  =& Pr\Bigg(\frac{\bar{y}-2}{se}>\text{t}_{99,0.95}-\frac{0.15}{se}\Bigg|\mu = 2\Bigg) \\
+  =& 1-T_{n-1}(\text{t}_{99,0.95}-\frac{0.15}{se}) \\
   \end{aligned}
 $$
 
@@ -421,7 +427,7 @@ A query, using Claude, cited a few key studies and meta-analyses. The conclusion
 This test is designed to check whether or model estimates a return to education that is significantly higher than the using 0.08 value. It is a one-sided test, so we will reject if 
 
 $$
-  \text{test-stat} = \frac{\hat{\beta_1}-0.08}{\widehat{se}(\hat{\beta_1})}>T^{-1}_{300-4}(0.99)
+  \text{test-stat} = \frac{\hat{\beta_1}-0.08}{se(\hat{\beta_1})}>T^{-1}_{300-4}(0.99)
 $$
 
 ```{stata}
@@ -439,7 +445,7 @@ We fail to reject this null hypothesis at 1% significance level. We would reject
 This is a two-sided test. We will reject if, 
 
 $$
-  |\text{test-stat}| = \Bigg|\frac{\hat{\beta_2}}{\widehat{se}(\hat{\beta_2})}\Bigg|>T^{-1}_{300-4}(0.975)
+  |\text{test-stat}| = \Bigg|\frac{\hat{\beta_2}}{se(\hat{\beta_2})}\Bigg|>T^{-1}_{300-4}(0.975)
 $$
 
 ```{stata}
@@ -455,7 +461,7 @@ We reject this null hypothesis.
 This is a one-sided test. We will reject if, 
 
 $$
-  \text{test-stat} = \frac{\hat{\beta_3}}{\widehat{se}(\hat{\beta_3})}<T^{-1}_{300-4}(0.05)
+  \text{test-stat} = \frac{\hat{\beta_3}}{se(\hat{\beta_3})}<T^{-1}_{300-4}(0.05)
 $$
 ```{stata}
 dis _b[expsq]/_se[expsq]

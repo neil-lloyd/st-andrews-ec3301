@@ -129,10 +129,7 @@ div.csl-indent {
 }</script>
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
-
-
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -569,17 +566,21 @@ Mean estimation                            Number of obs = 100
 <li>What is the relationship between the standard deviation of the variable and the standard error of the sample mean reported above?</li>
 </ol>
 <div class="border">
-<p>The standard deviation (<span class="math inline">\(s\)</span>) is the square-root of the sample variance. The sample variance (<span class="math inline">\(s^2\)</span>) is an estimate of the unobserved distribution variance (<span class="math inline">\(\sigma^2\)</span>). In this sample, <span class="math inline">\(s = 2.082121\)</span>.</p>
-<p>The standard error (<span class="math inline">\(se\)</span>) is the square root of the <span class="math inline">\(Var(\bar{y})\)</span>. As we proved above, <span class="math inline">\(Var(\bar{y}) = \sigma^2/n\)</span>. That means that <span class="math inline">\(se(\bar{y}) = \sigma/\sqrt{n}\)</span>$.</p>
-<p>However, we do not know the true value of <span class="math inline">\(\sigma\)</span>. In our estimation of the <span class="math inline">\(se(\bar{y})\)</span>, we replace <span class="math inline">\(\sigma\)</span> with <span class="math inline">\(s\)</span>: <span class="math inline">\(\widehat{se}(\bar{y}) = s/\sqrt{n}\)</span>.</p>
-<p>As <span class="math inline">\(n=100\)</span>, we find that <span class="math inline">\(\widehat{se} = 0.2082121\)</span>; exactly equal to the <span class="math inline">\(s/10\)</span>.</p>
+<p>The reported standard deviation is the square-root of the sample variance. The sample variance (<span class="math inline">\(\hat{\sigma}^2\)</span>) is an estimate of the unobserved distribution variance (<span class="math inline">\(\sigma^2\)</span>). In this sample, <span class="math inline">\(\hat{\sigma} = 2.082121\)</span>. Note, the estimator is</p>
+<p><span class="math display">\[
+  \hat{\sigma}^2 = \frac{1}{n-1}\sum_{i=1}^n (y_i-\bar{y})^2
+\]</span></p>
+<p>where division by <span class="math inline">\(n-1\)</span> results from the fact that the demeaned <span class="math inline">\(y\)</span> has <span class="math inline">\(n-1\)</span> degrees of freedom (since the variable has mean zero). It is for this same reason that the <span class="math inline">\(t\)</span>-distribution in Q.6 has <span class="math inline">\(n-1\)</span> degrees of freedom.</p>
+<p>The reported standard error is the square root of the <span class="math inline">\(Var(\bar{y})\)</span>. As we proved above, <span class="math inline">\(Var(\bar{y}) = \sigma^2/n\)</span>. That means that <span class="math inline">\(sd(\bar{y}) = \sigma/\sqrt{n}\)</span>.</p>
+<p>However, we do not know the true value of <span class="math inline">\(\sigma\)</span>. In our estimation of the <span class="math inline">\(sd(\bar{y})\)</span>, we replace <span class="math inline">\(\sigma\)</span> with <span class="math inline">\(\hat{\sigma}\)</span>: <span class="math inline">\(se(\bar{y}) = \hat{\sigma}/\sqrt{n}\)</span>.</p>
+<p>As <span class="math inline">\(n=100\)</span>, we find that <span class="math inline">\(se = 0.2082121\)</span>; exactly equal to the <span class="math inline">\(\hat{\sigma}/10\)</span>.</p>
 </div>
 <ol start="6" type="1">
-<li>Earlier we showed that, <span class="math inline">\(\frac{\bar{y}-2}{se(\bar{y})} \sim N(0,1)\)</span> where <span class="math inline">\(se(\bar{y}) = \sigma/\sqrt{n}\)</span>. Since we do not know <span class="math inline">\(\sigma\)</span>, what happens to the distribution if we replace <span class="math inline">\(\sigma\)</span> with <span class="math inline">\(s\)</span>, the standard deviation of the sample.</li>
+<li>Earlier we showed that, <span class="math inline">\(\frac{\bar{y}-2}{se(\bar{y})} \sim N(0,1)\)</span> where <span class="math inline">\(sd(\bar{y}) = \sigma/\sqrt{n}\)</span>. Since we do not know <span class="math inline">\(\sigma\)</span>, what happens to the distribution if we replace <span class="math inline">\(\sigma\)</span> with <span class="math inline">\(\hat{\sigma}\)</span>, the standard deviation of the sample.</li>
 </ol>
 <div class="border">
 <p><span class="math display">\[
-  \frac{\bar{y}-2}{s/\sqrt{n}} \sim T_{n-1}
+    \frac{\bar{y}-2}{\hat{\sigma}/\sqrt{n}} \sim T_{n-1}
 \]</span></p>
 </div>
 <ol start="7" type="1">
@@ -587,7 +588,7 @@ Mean estimation                            Number of obs = 100
 </ol>
 <div class="border">
 <p><span class="math display">\[
-  \frac{\bar{y}-1.85}{s/\sqrt{n}} \underset{H_0}{\sim} T_{n-1}
+  \frac{\bar{y}-1.85}{\hat{\sigma}/\sqrt{n}} \underset{H_0}{\sim} T_{n-1}
 \]</span></p>
 <p>Compute the test statistic:</p>
 <div id="eb00909c" class="cell" data-execution_count="7">
@@ -662,11 +663,11 @@ Mean estimation                            Number of obs = 100
 <p>In the two-sided test:</p>
 <p><span class="math display">\[
   \begin{aligned}
-  Pr(\text{Reject}\;H_0|\mu = 2) =&amp; Pr\Bigg(\bigg|\frac{\bar{y}-1.85}{\widehat{se}}\bigg|&gt;\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
-  =&amp; Pr\Bigg(\frac{\bar{y}-1.85}{\widehat{se}}&lt;\text{t}_{99,0.025}\Bigg|\mu = 2\Bigg) + Pr\Bigg(\frac{\bar{y}-1.85}{\widehat{se}}&gt;\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
-  =&amp; Pr\Bigg(\frac{\bar{y}-2}{\widehat{se}}&lt;\text{t}_{99,0.025}-\frac{0.15}{\widehat{se}}\Bigg|\mu = 2\Bigg) \\
-  &amp;+ Pr\Bigg(\frac{\bar{y}-2}{\widehat{se}}&gt;\text{t}_{99,0.975}-\frac{0.15}{\widehat{se}}\Bigg|\mu = 2\Bigg) \\
-  =&amp; T_{n-1}(\text{t}_{99,0.025}-\frac{0.15}{\widehat{se}}) + 1-T_{n-1}(\text{t}_{99,0.975}-\frac{0.15}{\widehat{se}}) \\
+  Pr(\text{Reject}\;H_0|\mu = 2) =&amp; Pr\Bigg(\bigg|\frac{\bar{y}-1.85}{se}\bigg|&gt;\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
+  =&amp; Pr\Bigg(\frac{\bar{y}-1.85}{se}&lt;\text{t}_{99,0.025}\Bigg|\mu = 2\Bigg) + Pr\Bigg(\frac{\bar{y}-1.85}{se}&gt;\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
+  =&amp; Pr\Bigg(\frac{\bar{y}-2}{se}&lt;\text{t}_{99,0.025}-\frac{0.15}{se}\Bigg|\mu = 2\Bigg) \\
+  &amp;+ Pr\Bigg(\frac{\bar{y}-2}{se}&gt;\text{t}_{99,0.975}-\frac{0.15}{se}\Bigg|\mu = 2\Bigg) \\
+  =&amp; T_{n-1}(\text{t}_{99,0.025}-\frac{0.15}{se}) + 1-T_{n-1}(\text{t}_{99,0.975}-\frac{0.15}{se}) \\
   \end{aligned}
 \]</span></p>
 <div id="73b669d7" class="cell" data-execution_count="10">
@@ -678,9 +679,9 @@ Mean estimation                            Number of obs = 100
 <p>In the one-sided test:</p>
 <p><span class="math display">\[
   \begin{aligned}
-  Pr(\text{Reject}\;H_0|\mu = 2) =&amp; Pr\Bigg(\frac{\bar{y}-1.85}{\widehat{se}}&gt;\text{t}_{99,0.95}\Bigg|\mu = 2\Bigg) \\
-  =&amp; Pr\Bigg(\frac{\bar{y}-2}{\widehat{se}}&gt;\text{t}_{99,0.95}-\frac{0.15}{\widehat{se}}\Bigg|\mu = 2\Bigg) \\
-  =&amp; 1-T_{n-1}(\text{t}_{99,0.95}-\frac{0.15}{\widehat{se}}) \\
+  Pr(\text{Reject}\;H_0|\mu = 2) =&amp; Pr\Bigg(\frac{\bar{y}-1.85}{se}&gt;\text{t}_{99,0.95}\Bigg|\mu = 2\Bigg) \\
+  =&amp; Pr\Bigg(\frac{\bar{y}-2}{se}&gt;\text{t}_{99,0.95}-\frac{0.15}{se}\Bigg|\mu = 2\Bigg) \\
+  =&amp; 1-T_{n-1}(\text{t}_{99,0.95}-\frac{0.15}{se}) \\
   \end{aligned}
 \]</span></p>
 <div id="bb05ced7" class="cell" data-execution_count="11">
@@ -915,7 +916,7 @@ Mean estimation                            Number of obs = 100
 <div class="border">
 <p>This test is designed to check whether or model estimates a return to education that is significantly higher than the using 0.08 value. It is a one-sided test, so we will reject if</p>
 <p><span class="math display">\[
-  \text{test-stat} = \frac{\hat{\beta_1}-0.08}{\widehat{se}(\hat{\beta_1})}&gt;T^{-1}_{300-4}(0.99)
+  \text{test-stat} = \frac{\hat{\beta_1}-0.08}{se(\hat{\beta_1})}&gt;T^{-1}_{300-4}(0.99)
 \]</span></p>
 <div id="12f16fd3" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dis (_b[edu]-0.08)/_se[edu]</span>
@@ -935,7 +936,7 @@ Mean estimation                            Number of obs = 100
 <div class="border">
 <p>This is a two-sided test. We will reject if,</p>
 <p><span class="math display">\[
-  |\text{test-stat}| = \Bigg|\frac{\hat{\beta_2}}{\widehat{se}(\hat{\beta_2})}\Bigg|&gt;T^{-1}_{300-4}(0.975)
+  |\text{test-stat}| = \Bigg|\frac{\hat{\beta_2}}{se(\hat{\beta_2})}\Bigg|&gt;T^{-1}_{300-4}(0.975)
 \]</span></p>
 <div id="2ee447df" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dis _b[<span class="fu">exp</span>]/_se[<span class="fu">exp</span>]</span>
@@ -953,7 +954,7 @@ Mean estimation                            Number of obs = 100
 <div class="border">
 <p>This is a one-sided test. We will reject if,</p>
 <p><span class="math display">\[
-  \text{test-stat} = \frac{\hat{\beta_3}}{\widehat{se}(\hat{\beta_3})}&lt;T^{-1}_{300-4}(0.05)
+  \text{test-stat} = \frac{\hat{\beta_3}}{se(\hat{\beta_3})}&lt;T^{-1}_{300-4}(0.05)
 \]</span></p>
 <div id="7adc4038" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dis _b[expsq]/_se[expsq]</span>
