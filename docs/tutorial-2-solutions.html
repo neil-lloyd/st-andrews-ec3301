@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Tutorial 2 (Solutions) – EC3301 Econometrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cf201e8c159c64e39451d1a718f2f573.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">EC3301 Econometrics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lectures" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lectures</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lectures">    
+        <li>
+    <a class="dropdown-item" href="./lecture-0.html">
+ <span class="dropdown-text">Pre-sessional Lecture</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-1.html">
+ <span class="dropdown-text">Lecture 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-2.html">
+ <span class="dropdown-text">Lecture 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="./lab-1-Stata.html">
+ <span class="dropdown-text">Lab 1 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-1-R.html">
+ <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./tutorial-1.html">
+ <span class="dropdown-text">Tutorial 1</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-extra-material" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Extra Material</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-extra-material">    
+        <li>
+    <a class="dropdown-item" href="./material-interpretation.html">
+ <span class="dropdown-text">Interpreting Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-cef.html">
+ <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-R.html">
+ <span class="dropdown-text">Basic Programming in R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-Stata.html">
+ <span class="dropdown-text">Basic Programming in Stata</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="light-content">
+<p><img src="img/01-standard-vertical-black-text.png" class="img-fluid"></p>
+</div>
+<div class="dark-content">
+<p><img src="img/02-standard-vertical-white-text.png" class="img-fluid"></p>
+</div>
+</div></div>
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="tutorial-2-solutions.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tutorial 2 (Solutions)</h1>
+<p class="subtitle lead">EC3301 - Martinmas Semester</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="hedonic-regression-models" class="level2">
+<h2 class="anchored" data-anchor-id="hedonic-regression-models">Hedonic regression models</h2>
+<p>In this section we examine the an example of multivariate regression model: the hedonic regression model. These models are widely used in real estate to estimate the value of various characteristics of a house: its size, number of rooms, school access, neighbourhood quality, etc. Having decomposed the price, one can then predict the value of another house using its characteristics. In this case, we will make use a small dataset made available with the <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 131</a>)</span> textbook which includes the price and housing characteristic information for 506 nieghbourhoods (unit of observation) in the Boston area.</p>
+<ol type="1">
+<li><p>Consider the model below:</p>
+<p><span class="math display">\[
+price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta_4 crime_i + \beta_5 statio_i + u_i
+\]</span></p>
+<p>where,</p>
+<ul>
+<li><span class="math inline">\(price\)</span>: median housing price (USD)</li>
+<li><span class="math inline">\(rooms\)</span>: average number of rooms</li>
+<li><span class="math inline">\(proptax\)</span>: property tax <em>per $1000</em></li>
+<li><span class="math inline">\(dist\)</span>: weighted distance (in miles) to 5 employment centers</li>
+<li><span class="math inline">\(crime\)</span>: crimes committed in last year (per capita)</li>
+<li><span class="math inline">\(statio\)</span>: average student-teacher ratio of schools in the area</li>
+</ul>
+<p>Provide an interpretation for each coefficient and predict its sign. For <span class="math inline">\(proptax\)</span>, think about a $100 increase in tax.</p></li>
+</ol>
+<div class="border">
+<ul>
+<li>1 extra room increases expected (median) price by <span class="math inline">\(\beta_1\)</span>; all else constant. Expect <span class="math inline">\(\beta_1&gt;0\)</span>.</li>
+<li>A $100 increase in property tax increases expected (median) price by <span class="math inline">\(\beta_2\times 0.1\)</span>; all else constant. Expect <span class="math inline">\(\beta_2&lt;0\)</span>.</li>
+<li>being 1 mile closer to employment centers increases expected (median) price by <span class="math inline">\(\beta_3\)</span>; all else constant. Expect <span class="math inline">\(\beta_3&gt;0\)</span>.</li>
+<li>1 additional crime per capita increases expected (median) price by <span class="math inline">\(\beta_4\)</span>; all else constant. Expect <span class="math inline">\(\beta_4&lt;0\)</span>.</li>
+<li>1 additional student per teacher increase expected (median) price by <span class="math inline">\(\beta_5\)</span>; all else constant. Expect <span class="math inline">\(\beta_5&lt;0\)</span>.</li>
+</ul>
+</div>
+<ol start="2" type="1">
+<li><p>How does the interpretation of <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>, and <span class="math inline">\(\beta_3\)</span> change in the model below:</p>
+<p><span class="math display">\[
+\ln(price_i) = \beta_0 + \beta_1 rooms_i + \beta_2 \ln(proptax_i) + \beta_3 \ln(dist_i) + \beta_4 crime_i + \beta_5 statio_i + u_i
+\]</span></p></li>
+</ol>
+<div class="border">
+<ul>
+<li>1 extra room increases expected (median) price by <span class="math inline">\((\exp(\beta_1)-1)\times 100\)</span> %; all else constant. This is a semi-elasticity.</li>
+<li>1% increase in property tax increases increases expected (median) price by <span class="math inline">\(\beta_2\)</span> %; all else constant. This is an elasticity.</li>
+<li>being 1% closer to employment centers increases expected (median) price by <span class="math inline">\(\beta_3\)</span> %; all else constant. This is an elasticity.</li>
+</ul>
+</div>
+<ol start="3" type="1">
+<li>How would this interpretation of <span class="math inline">\(\beta_3\)</span> from the above equation change if <span class="math inline">\(proptax\)</span> was measured in $ and not $ per $1000? And <span class="math inline">\(\beta_4\)</span> if <span class="math inline">\(crime\)</span> was measured in crimes committed per 100 people. Would these changes affect the other coefficients in the model?</li>
+</ol>
+<div class="border">
+<p>Since, <span class="math inline">\(\ln(proptax_i\times 1000) = \ln(proptax_i)+\ln(1000)\)</span>, the scaling the variable does not change the interpretation. As you change the scaling of the variable, you change only the interpretation of the intercept.</p>
+<p>If crimes were measure per 100 people it would be equivalent to dividing the denominator (total crimes divided by population) by 1000. This is eqivalent to multiplying the variable by 100: <span class="math inline">\(crimes\times 100\)</span>. The effect of this change would be to divide the slope coefficient by 100: <span class="math inline">\(\beta_4/100\)</span>.</p>
+<p>Together these changes would yield the model:</p>
+<p><span class="math display">\[
+  \ln(price_i) = \gamma_0 + \gamma_1 rooms_i + \gamma_2 \ln(proptax_i) + \gamma_3 \ln(dist_i) + \gamma_4 crime_i + \gamma_5 statio_i + u_i
+\]</span></p>
+<p>With <span class="math inline">\(\gamma_0 = \beta_0 + \beta_2\times\ln(1000)\)</span> and <span class="math inline">\(\gamma_4 = \beta_4/100\)</span>. For <span class="math inline">\(j = 1,2,3,5\)</span>, <span class="math inline">\(\gamma_j= \beta_j\)</span>.</p>
+</div>
+<p>The following questions relate to the regression output below:</p>
+<div id="8bafc68f" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> lprice rooms lproptax ldist crime stratio</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       506
+-------------+----------------------------------   F(5, 500)       =    167.09
+       Model |  52.9136182         5  10.5827236   Prob &gt; F        =    0.0000
+    Residual |  31.6686068       500  .063337214   R-squared       =    0.6256
+-------------+----------------------------------   Adj R-squared   =    0.6218
+       Total |   84.582225       505  .167489554   Root MSE        =    .25167
+
+------------------------------------------------------------------------------
+      lprice | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       rooms |   .2633338   .0174317    15.11   0.000     .2290854    .2975821
+    lproptax |  -.2005414   .0403609    -4.97   0.000    -.2798393   -.1212435
+       ldist |   .0043865   .0266419     0.16   0.869    -.0479574    .0567304
+       crime |  -.0127542    .001601    -7.97   0.000    -.0158996   -.0096087
+     stratio |  -.0334352   .0059361    -5.63   0.000    -.0450979   -.0217725
+       _cons |   10.13379   .2869904    35.31   0.000     9.569931    10.69764
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Provide an accurate interpretation of the <code>rooms</code> coefficient (i.e.&nbsp;semi-elasticity).</li>
+</ol>
+<div class="border">
+<p>An additional room increases the predicted median sale price of a house by 30.1 percent.</p>
+<div id="92e9d960" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">exp</span>(_b[rooms])-1)*100</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>30.126096</code></pre>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Provide an interpretation of the estimated <code>ldist</code> and <code>crime</code> coefficients.</li>
+</ol>
+<div class="border">
+<p>A 1% increase in proximity to 5 employment centers increases predicted median house price of a community by 0.004 %. However, this slope coefficient is NOT statistically distinguishable from 0.</p>
+<p>A 1 unit increase in crime (per capita) <em>decreases</em> predicted median house price by approximately 1.28% or more precisely,</p>
+<div id="f4c1d189" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">exp</span>(_b[crime])-1)*100</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-1.2673186</code></pre>
+</div>
+</div>
+</div>
+<ol start="6" type="1">
+<li>What is the predicted (median) house price of a 4 bedroom home, subject to a <span class="math inline">\(30,000\)</span> property tax, 1 (weighted) mile from 5 economic centers, in a neighbourhood that reports 20 crimes per capita and a student-teacher ratio 16. [You can apply coefficients to the nearest 3 decimal points]</li>
+</ol>
+<div class="callout callout-style-default callout-caution callout-titled" title="Out of date">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Out of date
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The data comes a rather old study by <span class="citation" data-cites="harrison1978hedonic">Harrison Jr and Rubinfeld (<a href="#ref-harrison1978hedonic" role="doc-biblioref">1978</a>)</span> titled <em>Hedonic housing prices and the demand for clean air</em>. The answer you get for this question will not seem realistic given the housing market today. The mean of the <code>price</code> variable (which captures median house price in a neighbourhood) is $22,512. That would not be enough to buy a new car in the US today.</p>
+</div>
+</div>
+<div class="border">
+<p>Since, <span class="math inline">\(\ln(1)=0\)</span>, the predicted value is given by:</p>
+<div id="e56f3bf4" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">exp</span>(_b[<span class="dt">_cons</span>] + _b[rooms]*4 + _b[lproptax]*<span class="fu">ln</span>(30) + _b[crime]*20 + _b[stratio]*16)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ol start="7" type="1">
+<li>Test the null hypothesis <span class="math inline">\(\beta_{stratio}&lt;-0.025\)</span> at a signficance level of 0.05. You will need the following information on $T_{n-k-1}^{-1}(0.05)</li>
+</ol>
+<div id="e90d183d" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dis invt(<span class="fu">e</span>(df_r),0.05)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-1.6479069</code></pre>
+</div>
+</div>
+<div class="border">
+<p>The relevant <span class="math inline">\(t\)</span>-dsitributed test static is given by,</p>
+<p><span class="math display">\[
+  \frac{\hat{\beta}-(-0.025)}{se(\hat{\beta})}
+\]</span></p>
+<p>The realized value is:</p>
+<div id="b412f568" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dis (_b[stratio]+0.025)/_se[stratio]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-1.4210139</code></pre>
+</div>
+</div>
+<p>Since the realized value of the test-statistic is to the right (i.e.&nbsp;<span class="math inline">\(&gt;\)</span>) of the critical value, we do NOT reject <span class="math inline">\(H_0\)</span>.</p>
+</div>
+<ol start="8" type="1">
+<li>Replicate the 95% CI interval for <code>ldist</code> shown above. You need the following information on <span class="math inline">\(T_{n-k-1}^{-1}(0.975)\)</span>,</li>
+</ol>
+<div id="8d265be9" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dis invt(<span class="fu">e</span>(df_r),0.975)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.9647198</code></pre>
+</div>
+</div>
+<div class="border">
+<p>The confidence interval is given by:</p>
+<p><span class="math display">\[
+  \big[\hat{\beta}-\text{t}_{n-k-1,0.975}\times se(\hat{\beta}),\hat{\beta}+\text{t}_{n-k-1,0.975}\times se(\hat{\beta})\big]
+\]</span></p>
+<p>This estimated CI is:</p>
+<div id="0820b06b" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dis _b[ldist]-invt(<span class="fu">e</span>(df_r),0.975)*_se[ldist]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dis _b[ldist]+invt(<span class="fu">e</span>(df_r),0.975)*_se[ldist]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-.04795743
+.05673044</code></pre>
+</div>
+</div>
+</div>
+<ol start="9" type="1">
+<li>Replicate the reported <span class="math inline">\(\mathbf{R}^2\)</span> using the information reported above under ‘Source’. [Hint: ‘SS’ stands for Sum of Squares.]</li>
+</ol>
+<div class="border">
+<p><span class="math display">\[
+  \mathbf{R}^2 = \frac{SSE}{SST} = \frac{SSE}{SSE+SSR}
+\]</span></p>
+<p>Using the stored results, we can replicate this as:</p>
+<div id="d77cbe3e" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(mss)/(<span class="fu">e</span>(mss)+<span class="fu">e</span>(rss))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.62558792</code></pre>
+</div>
+</div>
+</div>
+<ol start="10" type="1">
+<li>Replicate the reported <span class="math inline">\(F\)</span>-statistic (‘F(5, 500)’) using the reported <span class="math inline">\(\mathbf{R}^2\)</span>. Is the model statistically significant?</li>
+</ol>
+<div class="border">
+<p>This <span class="math inline">\(F\)</span>-statistic can be written as:</p>
+<p><span class="math display">\[
+  F-\text{stat} = \frac{R^2/k}{(1-R^2)/(n-k-1)}
+\]</span></p>
+<p>Using the stored results, we can replicate this as:</p>
+<div id="ef9018c0" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">e</span>(r2)/<span class="fu">e</span>(df_m))/((1-<span class="fu">e</span>(r2))/<span class="fu">e</span>(df_r))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>167.0854</code></pre>
+</div>
+</div>
+<p>The critical value is given by <span class="math inline">\(F^{-1}{k,n-k-1}(0.95)\)</span> (i.e.&nbsp;one-sided test):</p>
+<div id="c9f3261d" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">invF</span>(<span class="fu">e</span>(df_m),<span class="fu">e</span>(df_r),0.95)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2.2320424</code></pre>
+</div>
+</div>
+<p>You can also observe that the p-value is a very small number (reported as 0). So, we reject.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before the next two questions, I will store some relevant Stata output from the first model:</p>
+<div id="80980214" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> r2_ur = <span class="fu">e</span>(r2)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> ssr_ur = <span class="fu">e</span>(rss)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> df_ur = <span class="fu">e</span>(df_r)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This will be wiped from memory after estimating a different model.</p>
+</div>
+</div>
+<ol start="11" type="1">
+<li>Test the <span class="math inline">\(H_0: \beta_{\ln(dist)}=\beta_{\ln(proptax)}=0\)</span> using the reported information below. [The code the <span class="math inline">\(\mathbf{R}^2\)</span> from a model that excludes <code>ldist</code> and <code>lproptax</code>.]</li>
+</ol>
+<div id="e7736aee" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lprice rooms crime stratio</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(r2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.60187703</code></pre>
+</div>
+</div>
+<div class="border">
+<p>The relevant <span class="math inline">\(F\)</span>-statistic for this test can be written in terms of the restricted and unrestricted <span class="math inline">\(\mathbf{R}^2\)</span>s.</p>
+<p><span class="math display">\[
+  F-\text{stat} = \frac{(R^2_{ur}-R^2_r)/q}{(1-R^2_{ur})/(n-k-1)}
+\]</span></p>
+<p>where <span class="math inline">\(q\)</span> is the difference bewteen the residual degrees of freedom of the restricted and unrestricted model.</p>
+<p>This is computed as:</p>
+<div id="08b4f2b0" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> <span class="fu">q</span> = <span class="fu">e</span>(df_r)-df_ur</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dis ((r2_ur-<span class="fu">e</span>(r2))/<span class="fu">q</span>)/((1-r2_ur)/df_ur)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>15.832081</code></pre>
+</div>
+</div>
+<p>The relevant critical value is <span class="math inline">\(F^{-1}{q,n-k-1}(0.95)\)</span></p>
+<div id="32dcff2b" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">invF</span>(<span class="fu">q</span>,df_ur,0.95)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We evidently reject <span class="math inline">\(H_0\)</span>.</p>
+<p>To check our solution, the output should replicate</p>
+<div id="f04a5217" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> lprice rooms lproptax ldist crime stratio</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> lproptax ldist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3.013753
+
+      Source |       SS           df       MS      Number of obs   =       506
+-------------+----------------------------------   F(5, 500)       =    167.09
+       Model |  52.9136182         5  10.5827236   Prob &gt; F        =    0.0000
+    Residual |  31.6686068       500  .063337214   R-squared       =    0.6256
+-------------+----------------------------------   Adj R-squared   =    0.6218
+       Total |   84.582225       505  .167489554   Root MSE        =    .25167
+
+------------------------------------------------------------------------------
+      lprice | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       rooms |   .2633338   .0174317    15.11   0.000     .2290854    .2975821
+    lproptax |  -.2005414   .0403609    -4.97   0.000    -.2798393   -.1212435
+       ldist |   .0043865   .0266419     0.16   0.869    -.0479574    .0567304
+       crime |  -.0127542    .001601    -7.97   0.000    -.0158996   -.0096087
+     stratio |  -.0334352   .0059361    -5.63   0.000    -.0450979   -.0217725
+       _cons |   10.13379   .2869904    35.31   0.000     9.569931    10.69764
+------------------------------------------------------------------------------
+
+ ( 1)  lproptax = 0
+ ( 2)  ldist = 0
+
+       F(  2,   500) =   15.83
+            Prob &gt; F =    0.0000</code></pre>
+</div>
+</div>
+</div>
+<ol start="12" type="1">
+<li>Test the <span class="math inline">\(H_0: \beta_{\ln(dist)}=0\)</span> using the reported information below. [The code the <span class="math inline">\(SSR\)</span> from a model that excludes <code>ldist</code>.] Compute the relevant p-value for this test. What is the relationship between the <span class="math inline">\(F\)</span>-statistic computed here and the <span class="math inline">\(t\)</span>-statistic shown in the original output.</li>
+</ol>
+<div id="f6a70150" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lprice rooms lproptax crime stratio</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>31.670324</code></pre>
+</div>
+</div>
+<div class="border">
+<p>The relevant <span class="math inline">\(F\)</span>-statistic for this test can be written in terms of the restricted and unrestricted <span class="math inline">\(SSR\)</span>s.</p>
+<p><span class="math display">\[
+  F-\text{stat} = \frac{(SSR_{r}-SSR_{ur})/q}{SSR_{ur}/(n-k-1)}
+\]</span></p>
+<p>where <span class="math inline">\(q\)</span> is the difference bewteen the residual degrees of freedom of the restricted and unrestricted model.</p>
+<p>This is computed as:</p>
+<div id="2d143988" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> <span class="fu">q</span> = <span class="fu">e</span>(df_r)-df_ur</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>dis ((<span class="fu">e</span>(rss)-ssr_ur)/<span class="fu">q</span>)/(ssr_ur/df_ur)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.02710852</code></pre>
+</div>
+</div>
+<p>To solve for the p-value we must solve for: <span class="math inline">\(1-F{q,n-k-1}(F-\text{stat})\)</span></p>
+<div id="4b4029b7" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> fstat = ((<span class="fu">e</span>(rss)-ssr_ur)/<span class="fu">q</span>)/(ssr_ur/df_ur)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>dis 1-<span class="fu">F</span>(<span class="fu">q</span>,df_ur,fstat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.86928865</code></pre>
+</div>
+</div>
+<p>This matches the reported p-value from the original regression. Moreover, <span class="math inline">\(F\)</span>-stat is equal to the square of the <span class="math inline">\(t\)</span>-stat from the original (unrestricted) model:</p>
+<div id="aeefc954" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">sqrt</span>(fstat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.16464666</code></pre>
+</div>
+</div>
+<p>To check our solution, the output should replicate</p>
+<div id="3cb650f9" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> lprice rooms lproptax ldist crime stratio</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> ldist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       506
+-------------+----------------------------------   F(5, 500)       =    167.09
+       Model |  52.9136182         5  10.5827236   Prob &gt; F        =    0.0000
+    Residual |  31.6686068       500  .063337214   R-squared       =    0.6256
+-------------+----------------------------------   Adj R-squared   =    0.6218
+       Total |   84.582225       505  .167489554   Root MSE        =    .25167
+
+------------------------------------------------------------------------------
+      lprice | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       rooms |   .2633338   .0174317    15.11   0.000     .2290854    .2975821
+    lproptax |  -.2005414   .0403609    -4.97   0.000    -.2798393   -.1212435
+       ldist |   .0043865   .0266419     0.16   0.869    -.0479574    .0567304
+       crime |  -.0127542    .001601    -7.97   0.000    -.0158996   -.0096087
+     stratio |  -.0334352   .0059361    -5.63   0.000    -.0450979   -.0217725
+       _cons |   10.13379   .2869904    35.31   0.000     9.569931    10.69764
+------------------------------------------------------------------------------
+
+ ( 1)  ldist = 0
+
+       F(  1,   500) =    0.03
+            Prob &gt; F =    0.8693</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="properties-of-ols" class="level2">
+<h2 class="anchored" data-anchor-id="properties-of-ols">Properties of OLS</h2>
+<p>Consider the following decomposition of <span class="math inline">\(y_i\)</span> based upon the OLS estimator,</p>
+<p><span class="math display">\[
+  y_i = \hat{\beta}_0 + \hat{\beta}_1 x_{1i}+ \hat{\beta}_2 x_{2i} + \hat{u}_i
+\]</span></p>
+<p>corresponding to the multivariate model</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1x_{1i} + \beta_2 x_{2i} + u_i
+\]</span></p>
+<ol type="1">
+<li>Under MLR. 1-4, you can show that <span class="math inline">\(E[\hat{\beta}_1] = \beta_1\)</span>. What is this property called and what does it mean?</li>
+</ol>
+<div class="border">
+<p>This is the formal definition of unbiasedness. It means that <em>in expectation</em> the OLS estimator will be equal to the true population parameter. Another way to describe this is if we were to draw an infinite number of equally sized samples from the population, the average realized value of the estimator will be <span class="math inline">\(\beta_1\)</span>. It does NOT mean that OLS estimator will be equal to <span class="math inline">\(\beta\)</span>: <span class="math inline">\(\hat{\beta}_1 \neq \beta_1\)</span>. Indeed, the probability that such an event occurs is theoretically 0.</p>
+</div>
+<ol start="2" type="1">
+<li><p>In <a href="lecture-3-multi.qmd">Lecture 3</a>, we defined</p>
+<p><span class="math display">\[
+   se(\hat{\beta}_1) = \frac{\hat{\sigma}}{\sqrt{n} sd(x_1) \sqrt{1-R^2_1}}
+\]</span></p>
+<p>Explain each component of this equation and how you would compute it.</p></li>
+</ol>
+<div class="border">
+<p><span class="math inline">\(\hat{\sigma}\)</span> is the given by the square-root of,</p>
+<p><span class="math display">\[
+  \hat{\sigma}^2 = \frac{1}{n-k-1}\sum_{i=1}^n \hat{u}_i^2
+\]</span></p>
+<p>where <span class="math inline">\(k=2\)</span> and <span class="math inline">\(\hat{u}_i\)</span> is the residual from the main regression.</p>
+<p><span class="math inline">\(\sqrt{n}sd(x_1)\)</span> is another solution for the square-root of,</p>
+<p><span class="math display">\[
+  SST_1 = \sum_{i=1}^n (x_{i1}-\bar{x}_1)^2
+\]</span></p>
+<p>since <span class="math inline">\(sd(x_1)\)</span> is just the square-root of,</p>
+<p><span class="math display">\[
+  Var(x_{i1}) = \frac{1}{n}\sum_{i=1}^n (x_{i1}-\bar{x}_1)^2
+\]</span></p>
+<p>Finally, <span class="math inline">\(R^2_1\)</span> is the <span class="math inline">\(R^2\)</span> from a regression of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span>.</p>
+</div>
+<ol start="3" type="1">
+<li>What happens to the variance of the estimator if <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are highly correlated?</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Multicollinearity">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Multicollinearity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the limit, you can consider what happens as <span class="math inline">\(R_{j}^2\rightarrow 1\)</span>. This is the problem of multicollinearity discussed on p.&nbsp;91 of <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>.</p>
+</div>
+</div>
+<div class="border">
+<p>A higher correlation between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> means a higher variance of the estimator for both variables. This is one reason to think critically before adding additional regressors to a model.</p>
+</div>
+<ol start="4" type="1">
+<li>How does the equation above relate to the material from <a href="./lecture-2.html">Lecture 2</a> on partialling out (i.e.&nbsp;Frisch-Waugh Theorem)?</li>
+</ol>
+<div class="border">
+<p>The Frisch-Waugh Theorem tells us that we can estimate <span class="math inline">\(\hat{\beta}_1\)</span> by first residualizing <span class="math inline">\(y\)</span> and <span class="math inline">\(x_1\)</span> in a regression on <span class="math inline">\(x_2\)</span>. Thus, you learn about the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> by first partialling out the effect of <span class="math inline">\(x_2\)</span>. If <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are highly correlated, there the residualize <span class="math inline">\(\tilde{x}_1\)</span> has a very low variance. This inflates the standard error of the estimator.</p>
+</div>
+<ol start="5" type="1">
+<li><p>Would the problem of correlated regressors be a problem in the evaluation of a Randomized Control Trial? As we saw in the regression from <span class="citation" data-cites="NBERw35729">Karlan, Rigol, and Roth (<a href="#ref-NBERw35729" role="doc-biblioref">2026, 24</a>)</span> (in <a href="./lecture-1.html">Lecture 1</a>), authors often estimate the impact of treatment in a randomized control trial by estimating a linear regression model with additional controls.</p>
+<p><span class="math display">\[
+  y_i = \alpha + \beta T_i + \mathbf{x}_i\delta + \varepsilon_i
+\]</span></p></li>
+</ol>
+<div class="border">
+<p>Random allocation should mean that the characteristics of firms are balanced (in expectation) across treatment and control. There may be a slight correlation in the realized allocation, but it should not be statistically significant. This is usually checked in a balance table.</p>
+<p>For that reason, the inclusion of <span class="math inline">\(\mathbf{x}\)</span> firm characteristics should not reduce the variance of the estimator through its correlation with <span class="math inline">\(T_i\)</span>. Instead, it should lower the variance by explaining more the variation in <span class="math inline">\(y\)</span> and lowering the <span class="math inline">\(SSR\)</span>.</p>
+</div>
+<ol start="6" type="1">
+<li>What would the impact of an increase in sample size be?</li>
+</ol>
+<div class="border">
+<p>The effect of an increase in sample size will be to reduce the SE of the estimator. Increasing the sample size should not (in expectation) change <span class="math inline">\(R_1^2\)</span>.</p>
+</div>
+<ol start="7" type="1">
+<li>Randomized control trials are famously low powered. Given the discussion above, what are some of the ways that researchers might increase the power of their test to reject the null hypothesis of no effect (<span class="math inline">\(H_0: \beta=0\)</span>).</li>
+</ol>
+<div class="border">
+<p>To increase power, you need an estimator with a lower variance. Here are three approaches researchers use:</p>
+<ol type="1">
+<li>Sample size. A larger sample size reduces the variance of the estimator. This option has the problem that it is costly when running a RCT.</li>
+<li>Treatment allocation. For discrete <span class="math inline">\(x_1\)</span>, <span class="math inline">\(SST_1=n\bar{x}_1(1-\bar{x}_1)\)</span> where <span class="math inline">\(\bar{x}_1\)</span> is the share of the sample treated (<span class="math inline">\(x_1=1\)</span>). For the lowest variance, you should treat 50% of the sample.</li>
+<li>Good controls. Adding in controls that explain <span class="math inline">\(y\)</span> helps to lower the variance of the estimator.</li>
+</ol>
+</div>
+<ol start="8" type="1">
+<li>If the error term in the underlying model is heteroskedastic, will the estimated variance be smaller or larger?</li>
+</ol>
+<div class="border">
+<p>The estimator for heteroskedastic SEs need not yield a larger estimate. In fact, heteroskedastic robust SE estimates are often small than their homoskedastic counterparts.</p>
+</div>
+<ol start="9" type="1">
+<li>When the error variance is not homoskedastic, why can you no longer use the <span class="math inline">\(t\)</span> or <span class="math inline">\(F\)</span> distribution? [This is an advanced question, not covered by material in the lectures. See what you can find out.]</li>
+</ol>
+<div class="border">
+<p>In the context we use them, the <span class="math inline">\(t\)</span>-distribution and <span class="math inline">\(F\)</span>-distribution take on the following forms:</p>
+<ul>
+<li><p><span class="math inline">\(t\)</span>-distribution</p>
+<p><span class="math display">\[
+  T_{n-k-1} = \frac{N(0,1)}{\chi^2_{n-k-1}/(n-k-1)}
+\]</span></p></li>
+<li><p><span class="math inline">\(F\)</span>-distribution</p>
+<p><span class="math display">\[
+  F_{q,n-k-1} = \frac{\chi^2_{q}/q}{\chi^2_{n-k-1}/(n-k-1)}
+\]</span></p></li>
+</ul>
+<p>They share the same denominator: <span class="math inline">\(\chi^2_{n-k-1}\)</span>. This distribution has a direct link to the error variance. It arises from:</p>
+<p><span class="math display">\[
+  \sum_{i=1}^{n-k-1}\bigg(\frac{\hat{u}_i}{\sigma}\bigg)^2 = \sum_{i=1}^{n-k-1}z_{i}^2 = \chi^2_{n-k-1}
+\]</span></p>
+<p>where <span class="math inline">\(\hat{u}_i/\sigma|\mathbf{x}_i=z_i\sim N(0,1)\)</span> only if <span class="math inline">\(Var(u_i|\mathbf{x}_i)=\sigma^2\)</span> and <span class="math inline">\(u_i|\mathbf{x}_i\sim N(0,\sigma^2)\)</span>. If the error variance is heteroskedastic then the denominator term no longer has a chi-squared distribution.</p>
+</div>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-harrison1978hedonic" class="csl-entry" role="listitem">
+Harrison Jr, David, and Daniel L Rubinfeld. 1978. <span>“Hedonic Housing Prices and the Demand for Clean Air.”</span> <em>Journal of Environmental Economics and Management</em> 5 (1): 81–102.
+</div>
+<div id="ref-NBERw35729" class="csl-entry" role="listitem">
+Karlan, Dean, Natalia Rigol, and Benjamin N. Roth. 2026. <span>“When Microenterprises Grow, Are Consumers Better Off? Evidence from Large Loans to Microenterprises in Chile.”</span> Working Paper 35729. Working Paper Series. National Bureau of Economic Research. <a href="https://doi.org/10.3386/w35729">https://doi.org/10.3386/w35729</a>.
+</div>
+<div id="ref-wooldridge2025" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approach.”</span>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,448 @@
+---
+title: Tutorial 2 (Solutions)
+subtitle: EC3301 - Martinmas Semester
+format: 
+  html: default
+  pdf: 
+    output-file: tutorial-2-solutions.pdf
+engine: npstata
+---
+
+```{stata}
+*| include: false
+
+do "config.do"
+
+use "$data_dir\wooldridge_HPRICE2.dta", clear
+```
+
+## Hedonic regression models
+
+In this section we examine the an example of multivariate regression model: the hedonic regression model. These models are widely used in real estate to estimate the value of various characteristics of a house: its size, number of rooms, school access, neighbourhood quality, etc. Having decomposed the price, one can then predict the value of another house using its characteristics. In this case, we will make use a small dataset made available with the @wooldridge2025 [p. 131] textbook which includes the price and housing characteristic information for 506 nieghbourhoods (unit of observation) in the Boston area. 
+
+1. Consider the model below:
+
+   $$
+    price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta_4 crime_i + \beta_5 statio_i + u_i
+   $$
+
+   where, 
+   
+   - $price$: median housing price (USD)
+   - $rooms$: average number of rooms
+   - $proptax$: property tax *per \$1000*
+   - $dist$: weighted distance (in miles) to 5 employment centers
+   - $crime$: crimes committed in last year (per capita)
+   - $statio$: average student-teacher ratio of schools in the area
+   
+   Provide an interpretation for each coefficient and predict its sign. For $proptax$, think about a \$100 increase in tax. 
+   
+:::{.border}
+
+- 1 extra room increases expected (median) price by $\beta_1$; all else constant. Expect $\beta_1>0$. 
+- A \$100 increase in property tax increases expected (median) price by $\beta_2\times 0.1$; all else constant. Expect $\beta_2<0$. 
+- being 1 mile closer to employment centers increases expected (median) price by $\beta_3$; all else constant. Expect $\beta_3>0$. 
+- 1 additional crime per capita increases expected (median) price by $\beta_4$; all else constant. Expect $\beta_4<0$. 
+- 1 additional student per teacher increase expected (median) price by $\beta_5$; all else constant. Expect $\beta_5<0$. 
+
+:::
+
+2. How does the interpretation of $\beta_1$, $\beta_2$, and $\beta_3$ change in the model below:
+
+   $$
+    \ln(price_i) = \beta_0 + \beta_1 rooms_i + \beta_2 \ln(proptax_i) + \beta_3 \ln(dist_i) + \beta_4 crime_i + \beta_5 statio_i + u_i
+   $$
+   
+:::{.border}
+
+- 1 extra room increases expected (median) price by $(\exp(\beta_1)-1)\times 100$ %; all else constant. This is a semi-elasticity.
+- 1% increase in property tax increases increases expected (median) price by $\beta_2$ %; all else constant. This is an elasticity. 
+- being 1% closer to employment centers increases expected (median) price by $\beta_3$ %; all else constant. This is an elasticity.
+
+:::   
+
+3. How would this interpretation of $\beta_3$ from the above equation change if $proptax$ was measured in \$ and not \$ per \$1000? And $\beta_4$ if $crime$ was measured in crimes committed per 100 people. Would these changes affect the other coefficients in the model?
+   
+:::{.border}
+Since, $\ln(proptax_i\times 1000) = \ln(proptax_i)+\ln(1000)$, the scaling the variable does not change the interpretation. As you change the scaling of the variable, you change only the interpretation of the intercept.  
+
+If crimes were measure per 100 people it would be equivalent to dividing the denominator (total crimes divided by population) by 1000. This is eqivalent to multiplying the variable by 100: $crimes\times 100$. The effect of this change would be to divide the slope coefficient by 100: $\beta_4/100$. 
+
+Together these changes would yield the model:
+
+$$
+  \ln(price_i) = \gamma_0 + \gamma_1 rooms_i + \gamma_2 \ln(proptax_i) + \gamma_3 \ln(dist_i) + \gamma_4 crime_i + \gamma_5 statio_i + u_i
+$$
+
+With $\gamma_0 = \beta_0 + \beta_2\times\ln(1000)$ and $\gamma_4 = \beta_4/100$. For $j = 1,2,3,5$, $\gamma_j= \beta_j$.
+
+:::   
+
+The following questions relate to the regression output below:
+
+```{stata}
+reg lprice rooms lproptax ldist crime stratio
+```
+
+4. Provide an accurate interpretation of the `rooms` coefficient (i.e. semi-elasticity).
+
+:::{.border}
+An additional room increases the predicted median sale price of a house by 30.1 percent.
+
+```{stata}
+dis (exp(_b[rooms])-1)*100
+```
+
+:::
+
+5. Provide an interpretation of the estimated `ldist` and `crime` coefficients. 
+
+:::{.border}
+A 1% increase in proximity to 5 employment centers increases predicted median house price of a community by 0.004 %. However, this slope coefficient is NOT statistically distinguishable from 0. 
+
+A 1 unit increase in crime (per capita) *decreases* predicted median house price by approximately 1.28% or more precisely,
+
+```{stata}
+dis (exp(_b[crime])-1)*100
+```
+
+:::
+
+6. What is the predicted (median) house price of a 4 bedroom home, subject to a $30,000$ property tax, 1 (weighted) mile from 5 economic centers, in a neighbourhood that reports 20 crimes per capita and a student-teacher ratio 16. [You can apply coefficients to the nearest 3 decimal points] 
+
+:::{.callout-caution title="Out of date"}
+The data comes a rather old study by @harrison1978hedonic titled *Hedonic housing prices and the demand for clean air*. The answer you get for this question will not seem realistic given the housing market today. The mean of the `price` variable (which captures median house price in a neighbourhood) is \$22,512. That would not be enough to buy a new car in the US today. 
+:::
+
+:::{.border}
+Since, $\ln(1)=0$, the predicted value is given by:
+
+```{stata}
+dis exp(_b[_cons] + _b[rooms]*4 + _b[lproptax]*ln(30) + _b[crime]*20 + _b[stratio]*16)
+```
+
+:::
+
+7. Test the null hypothesis $\beta_{stratio}<-0.025$ at a signficance level of 0.05. You will need the following information on $T_{n-k-1}^{-1}(0.05)
+
+```{stata}
+dis invt(e(df_r),0.05)
+```
+
+:::{.border}
+The relevant $t$-dsitributed test static is given by, 
+
+$$
+  \frac{\hat{\beta}-(-0.025)}{se(\hat{\beta})}
+$$
+
+The realized value is:
+
+```{stata}
+dis (_b[stratio]+0.025)/_se[stratio]
+```
+
+Since the realized value of the test-statistic is to the right (i.e. $>$) of the critical value, we do NOT reject $H_0$. 
+:::
+
+
+8. Replicate the 95% CI interval for `ldist` shown above. You need the following information on $T_{n-k-1}^{-1}(0.975)$,
+
+```{stata}
+dis invt(e(df_r),0.975)
+```
+
+:::{.border}
+The confidence interval is given by:
+
+$$
+  \big[\hat{\beta}-\text{t}_{n-k-1,0.975}\times se(\hat{\beta}),\hat{\beta}+\text{t}_{n-k-1,0.975}\times se(\hat{\beta})\big]
+$$
+
+This estimated CI is:
+
+```{stata}
+dis _b[ldist]-invt(e(df_r),0.975)*_se[ldist]
+dis _b[ldist]+invt(e(df_r),0.975)*_se[ldist]
+```
+
+:::
+
+9. Replicate the reported $\mathbf{R}^2$ using the information reported above under 'Source'. [Hint: 'SS' stands for Sum of Squares.] 
+
+:::{.border}
+
+$$
+  \mathbf{R}^2 = \frac{SSE}{SST} = \frac{SSE}{SSE+SSR}
+$$
+
+Using the stored results, we can replicate this as:
+
+```{stata}
+dis e(mss)/(e(mss)+e(rss))
+```
+
+:::
+
+
+10. Replicate the reported $F$-statistic ('F(5, 500)') using the reported $\mathbf{R}^2$. Is the model statistically significant?
+
+:::{.border}
+This $F$-statistic can be written as:
+
+$$
+  F-\text{stat} = \frac{R^2/k}{(1-R^2)/(n-k-1)}
+$$
+
+Using the stored results, we can replicate this as:
+
+```{stata}
+dis (e(r2)/e(df_m))/((1-e(r2))/e(df_r))
+```
+
+The critical value is given by $F^{-1}{k,n-k-1}(0.95)$ (i.e. one-sided test):
+
+```{stata}
+dis invF(e(df_m),e(df_r),0.95)
+```
+
+You can also observe that the p-value is a very small number (reported as 0). So, we reject. 
+
+:::
+
+
+:::{.callout-note}
+Before the next two questions, I will store some relevant Stata output from the first model:
+
+```{stata}
+scalar r2_ur = e(r2)
+scalar ssr_ur = e(rss)
+scalar df_ur = e(df_r)
+```
+
+This will be wiped from memory after estimating a different model. 
+:::
+
+11. Test the $H_0: \beta_{\ln(dist)}=\beta_{\ln(proptax)}=0$ using the reported information below. [The code the $\mathbf{R}^2$ from a model that excludes `ldist` and `lproptax`.]  
+
+
+
+```{stata}
+qui reg lprice rooms crime stratio
+dis e(r2)
+```
+
+:::{.border}
+The relevant $F$-statistic for this test can be written in terms of the restricted and unrestricted $\mathbf{R}^2$s.
+
+$$
+  F-\text{stat} = \frac{(R^2_{ur}-R^2_r)/q}{(1-R^2_{ur})/(n-k-1)}
+$$
+
+where $q$ is the difference bewteen the residual degrees of freedom of the restricted and unrestricted model. 
+
+This is computed as:
+
+```{stata}
+scalar q = e(df_r)-df_ur
+dis ((r2_ur-e(r2))/q)/((1-r2_ur)/df_ur)
+
+```
+
+The relevant critical value is $F^{-1}{q,n-k-1}(0.95)$
+
+
+```{stata}
+dis invF(q,df_ur,0.95)
+```
+
+We evidently reject $H_0$. 
+
+To check our solution, the output should replicate 
+
+```{stata}
+reg lprice rooms lproptax ldist crime stratio
+test lproptax ldist
+```
+
+:::
+
+
+
+12. Test the $H_0: \beta_{\ln(dist)}=0$ using the reported information below. [The code the $SSR$ from a model that excludes `ldist`.] Compute the relevant p-value for this test. What is the relationship between the $F$-statistic computed here and the $t$-statistic shown in the original output. 
+
+```{stata}
+qui reg lprice rooms lproptax crime stratio
+dis e(rss)
+```
+
+:::{.border}
+The relevant $F$-statistic for this test can be written in terms of the restricted and unrestricted $SSR$s.
+
+$$
+  F-\text{stat} = \frac{(SSR_{r}-SSR_{ur})/q}{SSR_{ur}/(n-k-1)}
+$$
+
+where $q$ is the difference bewteen the residual degrees of freedom of the restricted and unrestricted model. 
+
+This is computed as:
+
+```{stata}
+scalar q = e(df_r)-df_ur
+dis ((e(rss)-ssr_ur)/q)/(ssr_ur/df_ur)
+
+```
+
+To solve for the p-value we must solve for: $1-F{q,n-k-1}(F-\text{stat})$
+
+```{stata}
+scalar fstat = ((e(rss)-ssr_ur)/q)/(ssr_ur/df_ur)
+dis 1-F(q,df_ur,fstat)
+```
+
+This matches the reported p-value from the original regression. Moreover, $F$-stat is equal to the square of the $t$-stat from the original (unrestricted) model:
+
+```{stata}
+dis sqrt(fstat)
+```
+
+To check our solution, the output should replicate 
+
+```{stata}
+reg lprice rooms lproptax ldist crime stratio
+test ldist
+```
+
+:::
+
+## Properties of OLS
+
+Consider the following decomposition of $y_i$ based upon the OLS estimator,
+
+$$
+  y_i = \hat{\beta}_0 + \hat{\beta}_1 x_{1i}+ \hat{\beta}_2 x_{2i} + \hat{u}_i
+$$
+
+corresponding to the multivariate model
+
+$$
+  y_i = \beta_0 + \beta_1x_{1i} + \beta_2 x_{2i} + u_i
+$$
+
+1. Under MLR. 1-4, you can show that $E[\hat{\beta}_1] = \beta_1$. What is this property called and what does it mean? 
+
+:::{.border}
+This is the formal definition of unbiasedness. It means that *in expectation* the OLS estimator will be equal to the true population parameter. Another way to describe this is if we were to draw an infinite number of equally sized samples from the population, the average realized value of the estimator will be $\beta_1$. It does NOT mean that OLS estimator will be equal to $\beta$: $\hat{\beta}_1 \neq \beta_1$. Indeed, the probability that such an event occurs is theoretically 0.  
+:::
+
+
+2. In [Lecture 3](lecture-3-multi.qmd), we defined 
+
+   $$
+      se(\hat{\beta}_1) = \frac{\hat{\sigma}}{\sqrt{n} sd(x_1) \sqrt{1-R^2_1}}
+   $$
+   
+   Explain each component of this equation and how you would compute it. 
+   
+:::{.border}
+$\hat{\sigma}$ is the given by the square-root of, 
+
+$$
+  \hat{\sigma}^2 = \frac{1}{n-k-1}\sum_{i=1}^n \hat{u}_i^2
+$$
+
+where $k=2$ and $\hat{u}_i$ is the residual from the main regression. 
+
+$\sqrt{n}sd(x_1)$ is another solution for the square-root of, 
+
+$$
+  SST_1 = \sum_{i=1}^n (x_{i1}-\bar{x}_1)^2
+$$
+
+since $sd(x_1)$ is just the square-root of,
+
+$$
+  Var(x_{i1}) = \frac{1}{n}\sum_{i=1}^n (x_{i1}-\bar{x}_1)^2
+$$
+
+Finally, $R^2_1$ is the $R^2$ from a regression of $x_1$ on $x_2$. 
+:::
+
+3. What happens to the variance of the estimator if $x_1$ and $x_2$ are highly correlated? 
+
+:::{.callout-important title="Multicollinearity"}
+In the limit, you can consider what happens as $R_{j}^2\rightarrow 1$. This is the problem of multicollinearity discussed on p. 91 of @wooldridge2025. 
+:::
+
+:::{.border}
+A higher correlation between $x_1$ and $x_2$ means a higher variance of the estimator for both variables. This is one reason to think critically before adding additional regressors to a model. 
+:::
+
+4. How does the equation above relate to the material from [Lecture 2](lecture-2-multi.qmd) on partialling out (i.e. Frisch-Waugh Theorem)?
+
+:::{.border}
+The Frisch-Waugh Theorem tells us that we can estimate $\hat{\beta}_1$ by first residualizing $y$ and $x_1$ in a regression on $x_2$. Thus, you learn about the relationship between $y$ and $x$ by first partialling out the effect of $x_2$. If $x_1$ and $x_2$ are highly correlated, there the residualize $\tilde{x}_1$ has a very low variance. This inflates the standard error of the estimator. 
+:::
+
+5. Would the problem of correlated regressors be a problem in the evaluation of a Randomized Control Trial? As we saw in the regression from @NBERw35729 [p. 24] (in [Lecture 1](lecture-1-multi.qmd)), authors often estimate the impact of treatment in a randomized control trial by estimating a linear regression model with additional controls.
+
+   $$
+     y_i = \alpha + \beta T_i + \mathbf{x}_i\delta + \varepsilon_i
+   $$
+
+:::{.border}
+Random allocation should mean that the characteristics of firms are balanced (in expectation) across treatment and control. There may be a slight correlation in the realized allocation, but it should not be statistically significant. This is usually checked in a balance table. 
+
+For that reason, the inclusion of $\mathbf{x}$ firm characteristics should not reduce the variance of the estimator through its correlation with $T_i$. Instead, it should lower the variance by explaining more the variation in $y$ and lowering the $SSR$.
+:::
+
+6. What would the impact of an increase in sample size be? 
+
+:::{.border}
+The effect of an increase in sample size will be to reduce the SE of the estimator. Increasing the sample size should not (in expectation) change $R_1^2$. 
+:::
+
+7. Randomized control trials are famously low powered. Given the discussion above, what are some of the ways that researchers might increase the power of their test to reject the null hypothesis of no effect ($H_0: \beta=0$). 
+
+:::{.border}
+To increase power, you need an estimator with a lower variance. Here are three approaches researchers use:
+
+1. Sample size. A larger sample size reduces the variance of the estimator. This option has the problem that it is costly when running a RCT.
+2. Treatment allocation. For discrete $x_1$, $SST_1=n\bar{x}_1(1-\bar{x}_1)$ where $\bar{x}_1$ is the share of the sample treated ($x_1=1$). For the lowest variance, you should treat 50% of the sample.
+3. Good controls. Adding in controls that explain $y$ helps to lower the variance of the estimator. 
+
+
+:::
+
+8. If the error term in the underlying model is heteroskedastic, will the estimated variance be smaller or larger?
+
+:::{.border}
+The estimator for heteroskedastic SEs need not yield a larger estimate. In fact, heteroskedastic robust SE estimates are often small than their homoskedastic counterparts. 
+:::
+
+9. When the error variance is not homoskedastic, why can you no longer use the $t$ or $F$ distribution? [This is an advanced question, not covered by material in the lectures. See what you can find out.]
+
+:::{.border}
+In the context we use them, the $t$-distribution and $F$-distribution take on the following forms:
+
+- $t$-distribution
+
+  $$
+    T_{n-k-1} = \frac{N(0,1)}{\chi^2_{n-k-1}/(n-k-1)}
+  $$
+
+- $F$-distribution
+
+  $$
+    F_{q,n-k-1} = \frac{\chi^2_{q}/q}{\chi^2_{n-k-1}/(n-k-1)}
+  $$
+
+They share the same denominator: $\chi^2_{n-k-1}$. This distribution has a direct link to the error variance. It arises from:
+
+$$
+  \sum_{i=1}^{n-k-1}\bigg(\frac{\hat{u}_i}{\sigma}\bigg)^2 = \sum_{i=1}^{n-k-1}z_{i}^2 = \chi^2_{n-k-1}
+$$
+
+where $\hat{u}_i/\sigma|\mathbf{x}_i=z_i\sim N(0,1)$ only if $Var(u_i|\mathbf{x}_i)=\sigma^2$ and $u_i|\mathbf{x}_i\sim N(0,\sigma^2)$. If the error variance is heteroskedastic then the denominator term no longer has a chi-squared distribution. 
+
+:::
