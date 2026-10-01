@@ -11,13 +11,15 @@ engine: npstata
 do "config.do"
 ```
 
-This discusses the role of the intercept in a linear regression model. It first explores certain key results from OLS with (and without) an intercept, before thinking through the role of an intercept in the model. 
+This note discusses the role of the intercept in a linear regression model. It explores some key results from OLS with (and without) an intercept, before thinking through the role of an intercept in the model. 
 
-Quick note: the intercept in the model ($\beta_0$) can be thought of a regression as the slope parameter to a constant regressor (or regressor that is constant $\mathbf{1}$).
+The intercept in the model ($\beta_0$) can be thought of as the slope parameter to a **constant** regressor. To keep things simple, we define this constant as the number $\mathbf{1}$. This regressor does NOT vary across observations in the data; hence the name 'constant'.
 
 $$
   y_i = \beta_0 \mathbf{1}+\beta_1x_{i1}-\dots-\beta_kx_{ik} + u_i
 $$
+
+In Stata you have the option to estimate OLS with (default) and without (option `nocons`) a constant. We almost always estimate OLS with a constant; that is, we estimate an intercept parameter. However, it is helpful to explore the case without an intercept so as to understand the role of the intercept in OLS and, in particular, its relationship to the estimated residual. 
 
 ## OLS with an intercept
 
@@ -186,9 +188,9 @@ Here's a demonstration in Stata:
 
 ```{stata}
 drop *_tilde
-reg wage
+qui reg wage
 predict wage_tilde, resid
-reg edu
+qui reg edu
 predict edu_tilde, resid
 
 reg wage_tilde edu_tilde, nocons

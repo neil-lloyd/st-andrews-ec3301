@@ -129,10 +129,7 @@ div.csl-indent {
 }</script>
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
-
-
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -480,11 +477,12 @@ window.Quarto = {
 </header>
 
 
-<p>This discusses the role of the intercept in a linear regression model. It first explores certain key results from OLS with (and without) an intercept, before thinking through the role of an intercept in the model.</p>
-<p>Quick note: the intercept in the model (<span class="math inline">\(\beta_0\)</span>) can be thought of a regression as the slope parameter to a constant regressor (or regressor that is constant <span class="math inline">\(\mathbf{1}\)</span>).</p>
+<p>This note discusses the role of the intercept in a linear regression model. It explores some key results from OLS with (and without) an intercept, before thinking through the role of an intercept in the model.</p>
+<p>The intercept in the model (<span class="math inline">\(\beta_0\)</span>) can be thought of as the slope parameter to a <strong>constant</strong> regressor. To keep things simple, we define this constant as the number <span class="math inline">\(\mathbf{1}\)</span>. This regressor does NOT vary across observations in the data; hence the name ‘constant’.</p>
 <p><span class="math display">\[
   y_i = \beta_0 \mathbf{1}+\beta_1x_{i1}-\dots-\beta_kx_{ik} + u_i
 \]</span></p>
+<p>In Stata you have the option to estimate OLS with (default) and without (option <code>nocons</code>) a constant. We almost always estimate OLS with a constant; that is, we estimate an intercept parameter. However, it is helpful to explore the case without an intercept so as to understand the role of the intercept in OLS and, in particular, its relationship to the estimated residual.</p>
 <section id="ols-with-an-intercept" class="level2">
 <h2 class="anchored" data-anchor-id="ols-with-an-intercept">OLS with an intercept</h2>
 <p>In <a href="./lecture-2.html">Lecture 2</a> we stated the general least squares (LS) problem and solved the simple case.</p>
@@ -505,7 +503,7 @@ window.Quarto = {
 \]</span></p>
 <p>That is, <strong>the residual is mean zero</strong>. This a mechanical result and will also be the case if OLS is estimated with an intercept.</p>
 <p>For example, using a dataset from <a href="./tutorial-1.html">Tutorial 1</a></p>
-<div id="c417b39a" class="cell" data-execution_count="4">
+<div id="55546b06" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> wage edu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -524,7 +522,7 @@ window.Quarto = {
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="415e9ea0" class="cell" data-execution_count="5">
+<div id="6347e0ac" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> residual, <span class="kw">resid</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> residual</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -544,7 +542,7 @@ window.Quarto = {
 \]</span></p>
 <p>However, there is then no FOC which sets the mean of the residuals to zero. Indeed, the residual will not be mean zero.</p>
 <p>Again, we can show this mechanically in the data:</p>
-<div id="86c351ff" class="cell" data-execution_count="6">
+<div id="37f5f19e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> residual</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> wage edu, <span class="kw">nocons</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> residual, <span class="kw">resid</span></span>
@@ -558,7 +556,7 @@ window.Quarto = {
 </div>
 <p>Evidently, the average of the residual is non-zero.</p>
 <p>Visually, the problem is that you are forcing the fitted line to “go through the origin”:</p>
-<div id="af8cca14" class="cell" data-execution_count="7">
+<div id="e0747bbf" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> <span class="kw">fitted</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">scatter</span> wage edu, mc(<span class="bn">blue</span>%50)) (<span class="kw">scatter</span> <span class="kw">fitted</span> edu, mc(<span class="kw">red</span>)), <span class="bn">legend</span>(<span class="kw">off</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -591,7 +589,7 @@ window.Quarto = {
 \]</span></p>
 <p>where <span class="math inline">\(\tilde{y}_i=y_i- \bar{y}\)</span> (likewise for <span class="math inline">\(x\)</span>).</p>
 <p>Here’s a demonstration in Stata:</p>
-<div id="6865f301" class="cell" data-execution_count="8">
+<div id="42e894e5" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">sum</span> wage</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> wage_tilde = wage-<span class="fu">r</span>(<span class="kw">mean</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">sum</span> edu</span>
@@ -615,7 +613,7 @@ window.Quarto = {
 </div>
 </div>
 <p>We estimate the same slope coefficient. And, if we included a constant in the regression estimation the estimate would be “machine zero”.</p>
-<div id="0f5d6121" class="cell" data-execution_count="9">
+<div id="2ae96596" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> wage_tilde edu_tilde</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -670,42 +668,16 @@ window.Quarto = {
   \tilde{y}_i = \beta_1 \tilde{x}_i + \xi_i
 \]</span></p>
 <p>Here’s a demonstration in Stata:</p>
-<div id="3116d1f3" class="cell" data-execution_count="10">
+<div id="dca4085e" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> *_tilde</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> wage</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> wage</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> wage_tilde, <span class="kw">resid</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> edu</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> edu</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> edu_tilde, <span class="kw">resid</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> wage_tilde edu_tilde, <span class="kw">nocons</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-      Source |       SS           df       MS      Number of obs   =       300
--------------+----------------------------------   F(0, 299)       =      0.00
-       Model |           0         0           .   Prob &gt; F        =         .
-    Residual |  391000.285       299  1307.69326   R-squared       =    0.0000
--------------+----------------------------------   Adj R-squared   =    0.0000
-       Total |  391000.285       299  1307.69326   Root MSE        =    36.162
-
-------------------------------------------------------------------------------
-        wage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
--------------+----------------------------------------------------------------
-       _cons |   38.72977   2.087816    18.55   0.000      34.6211    42.83845
-------------------------------------------------------------------------------
-
-      Source |       SS           df       MS      Number of obs   =       300
--------------+----------------------------------   F(0, 299)       =      0.00
-       Model |           0         0           .   Prob &gt; F        =         .
-    Residual |  2294.79667       299  7.67490524   R-squared       =    0.0000
--------------+----------------------------------   Adj R-squared   =    0.0000
-       Total |  2294.79667       299  7.67490524   Root MSE        =    2.7704
-
-------------------------------------------------------------------------------
-         edu | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
--------------+----------------------------------------------------------------
-       _cons |   14.06333   .1599469    87.93   0.000     13.74857     14.3781
-------------------------------------------------------------------------------
-
       Source |       SS           df       MS      Number of obs   =       300
 -------------+----------------------------------   F(1, 299)       =     33.09
        Model |  38958.6637         1  38958.6637   Prob &gt; F        =    0.0000
