@@ -98,7 +98,7 @@ For the remaing questions we are going to use a random sample of the 2024 CPS (S
 ```{stata}
 *| echo: false
 *| output: false
-use "C:\Users\ndl1\OneDrive - University of St Andrews\Documents\EC3301\website\data\clean\morg24_sample.dta", clear
+use "$data_dir\morg24_sample.dta", clear
 ```
 
 ```{stata}
@@ -163,7 +163,7 @@ The sample has been restricted to firms with assets of at least \$1 million and 
 ```{stata}
 *| echo: false
 *| output: false
-use "C:\Users\ndl1\OneDrive - University of St Andrews\Documents\EC3301\website\data\clean\sec_2026q2.dta", clear
+use "$data_dir\sec_2026q2.dta", clear
 keep if Assets >1000000
 keep if tangibility <=1
 ```

@@ -1,11 +1,14 @@
 ---
 title: Econometrics Lab 2
 subtitle: Linear Regression in R
-format:
+format: 
   html: default
-execute:
-  message: false
-  warning: false
+#  html:
+#    other-links:
+#      - text: "Solution .R file"
+#        href: "material/lab-1/ec3301-lab-2.R"
+#        icon: code-square  
+engine: knitr 
 ---
 
 ```{r}

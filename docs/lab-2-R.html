@@ -362,6 +362,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./lecture-2.html">
  <span class="dropdown-text">Lecture 2</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-3.html">
+ <span class="dropdown-text">Lecture 3</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -376,6 +380,14 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="./lab-1-R.html">
  <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-Stata.html">
+ <span class="dropdown-text">Lab 2 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-R.html">
+ <span class="dropdown-text">Lab 2 (R)</span></a>
   </li>  
     </ul>
   </li>
@@ -402,6 +414,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="./material-cef.html">
  <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-intercept.html">
+ <span class="dropdown-text">The Intercept</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./material-programming-R.html">
@@ -672,6 +688,9 @@ window.Quarto = {
 <li><p>Add a second layer to the graph that overlays the scatter plot with a (linear) line of best fit using <code>geom_smooth()</code>. Here is what the output should look like:</p></li>
 </ol>
 <div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -685,8 +704,8 @@ window.Quarto = {
 <li>The line of best fit corresponds to the OLS estimator. Is the slope significantly different from 0? Based on the estimates, what fraction of an additional £ of income is spent on energy costs.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(energy_cost <span class="sc">~</span> income, <span class="at">data =</span> shs)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(energy_cost <span class="sc">~</span> income, <span class="at">data =</span> shs)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -712,9 +731,9 @@ F-statistic: 181.7 on 1 and 1529 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>Use the <code>predict()</code> function to create the predicted energy for each household <code>energy_hat</code> (see <a href="./lecture-2.html">Lecture 2</a> for assistance). Plot the predicted value alongside the actual value of energy.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(shs, <span class="fu">aes</span>(<span class="at">x =</span> income)) <span class="sc">+</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> energy_cost)) <span class="sc">+</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> energy_hat), <span class="at">colour =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(shs, <span class="fu">aes</span>(<span class="at">x =</span> income)) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> energy_cost)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> energy_hat), <span class="at">colour =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -727,17 +746,20 @@ F-statistic: 181.7 on 1 and 1529 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>Create a similar graph for <code>housing_cost</code>. You can combine the graphs into a single figure by stacking the two outcomes into one dataframe and using <code>facet_wrap()</code>. Is one slope steeper than the other?</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  shs <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(income, <span class="at">cost =</span> <span class="fu">as.numeric</span>(energy_cost), <span class="at">type =</span> <span class="st">"Energy costs"</span>),</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  shs <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(income, <span class="at">cost =</span> <span class="fu">as.numeric</span>(housing_cost), <span class="at">type =</span> <span class="st">"Housing costs"</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined, <span class="fu">aes</span>(<span class="at">x =</span> income, <span class="at">y =</span> cost)) <span class="sc">+</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1500</span>, <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Household income (monthly £s)"</span>, <span class="at">y =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  shs <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(income, <span class="at">cost =</span> <span class="fu">as.numeric</span>(energy_cost), <span class="at">type =</span> <span class="st">"Energy costs"</span>),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  shs <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(income, <span class="at">cost =</span> <span class="fu">as.numeric</span>(housing_cost), <span class="at">type =</span> <span class="st">"Housing costs"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined, <span class="fu">aes</span>(<span class="at">x =</span> income, <span class="at">y =</span> cost)) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1500</span>, <span class="dv">500</span>)) <span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Household income (monthly £s)"</span>, <span class="at">y =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -750,14 +772,14 @@ F-statistic: 181.7 on 1 and 1529 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>Create a new variable <code>energy_share</code> equal to energy costs as a share of energy PLUS housing costs. Check that your variable has a similar mean and sd to the output below.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>shs <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(energy_share)),</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(energy_share, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(energy_share, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(energy_share, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(energy_share, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>shs <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(energy_share)),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(energy_share, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(energy_share, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(energy_share, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(energy_share, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
       n  mean    sd   min   max
@@ -769,12 +791,12 @@ F-statistic: 181.7 on 1 and 1529 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>Interpret the slope coefficient and <span class="math inline">\(\mathbf{R}^2\)</span> from the model below. Use the p-value to test whether the relationship is statistically significant at a <span class="math inline">\(\alpha = 0.01\)</span> significance level?</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For ln(0) and ln(negative), R returns -Inf/NaN, so set these to NA</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>shs <span class="ot">&lt;-</span> shs <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ln_income =</span> <span class="fu">if_else</span>(income <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="fu">log</span>(income), <span class="cn">NA_real_</span>))</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(energy_share <span class="sc">~</span> ln_income, <span class="at">data =</span> shs)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For ln(0) and ln(negative), R returns -Inf/NaN, so set these to NA</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>shs <span class="ot">&lt;-</span> shs <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ln_income =</span> <span class="fu">if_else</span>(income <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="fu">log</span>(income), <span class="cn">NA_real_</span>))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(energy_share <span class="sc">~</span> ln_income, <span class="at">data =</span> shs)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -812,11 +834,11 @@ F-statistic: 4.348 on 1 and 1529 DF,  p-value: 0.03721</code></pre>
 <li>Estimate the multivariate model below. Why is Edinburgh missing from the model? Has the adjusted-<span class="math inline">\(\mathbf{R}^2\)</span> increased?</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>shs <span class="ot">&lt;-</span> <span class="fu">rename</span>(shs, <span class="at">bedrooms =</span> hc4)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(energy_share <span class="sc">~</span> ln_income <span class="sc">+</span> hhsize <span class="sc">+</span> bedrooms <span class="sc">+</span> <span class="fu">factor</span>(own_grp) <span class="sc">+</span> <span class="fu">factor</span>(dwell_type) <span class="sc">+</span> <span class="fu">factor</span>(area),</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> shs)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>shs <span class="ot">&lt;-</span> <span class="fu">rename</span>(shs, <span class="at">bedrooms =</span> hc4)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(energy_share <span class="sc">~</span> ln_income <span class="sc">+</span> hhsize <span class="sc">+</span> bedrooms <span class="sc">+</span> <span class="fu">factor</span>(own_grp) <span class="sc">+</span> <span class="fu">factor</span>(dwell_type) <span class="sc">+</span> <span class="fu">factor</span>(area),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> shs)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Factor variables">
 <div class="callout-header d-flex align-content-center">
@@ -831,13 +853,13 @@ F-statistic: 4.348 on 1 and 1529 DF,  p-value: 0.03721</code></pre>
 <p>Categorical variables – like <code>own_grp</code>, <code>dwell_type</code>, and <code>area</code> – are referred to as factor variables in R. The values that the variables take on have no cardinal meaning. For example, in the dataset <code>area==1</code> for households in Edinburgh and <code>area==2</code> for households in Glasgow. Does this mean that Glasgow is <span class="math inline">\(2\times\)</span> Edinburgh? No.&nbsp;Categorical variables like this need to enter the model as dummy variables, with each dummy variable denoting a different category.</p>
 <p>The <em>long</em> way to do this is to create all the dummy variables. You can do this as follows (and so on for each area),</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>shs <span class="ot">&lt;-</span> shs <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">area1 =</span> <span class="fu">as.numeric</span>(area <span class="sc">==</span> <span class="dv">1</span>),</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">area2 =</span> <span class="fu">as.numeric</span>(area <span class="sc">==</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>shs <span class="ot">&lt;-</span> shs <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">area1 =</span> <span class="fu">as.numeric</span>(area <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">area2 =</span> <span class="fu">as.numeric</span>(area <span class="sc">==</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Fortunately, there is a way to tell R in the <code>lm()</code> function that it should treat the variable as a factor variable and include a dummy for each value. You do this by wrapping the regressor in <code>factor()</code>; for example,</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(energy_share <span class="sc">~</span> <span class="fu">factor</span>(area), <span class="at">data =</span> shs))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(energy_share <span class="sc">~</span> <span class="fu">factor</span>(area), <span class="at">data =</span> shs))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -873,7 +895,7 @@ F-statistic: 5.972 on 13 and 1517 DF,  p-value: 6.232e-11</code></pre>
 </div>
 <p>The default is to exclude the first level (the smallest number) as the base category (see start of <a href="./lecture-2.html">Lecture 2</a> for a discussion of base categories). You can change this by declaring the base category with the <code>relevel()</code> function.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(energy_share <span class="sc">~</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(area), <span class="at">ref =</span> <span class="dv">2</span>), <span class="at">data =</span> shs))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(energy_share <span class="sc">~</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(area), <span class="at">ref =</span> <span class="dv">2</span>), <span class="at">data =</span> shs))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -926,14 +948,14 @@ F-statistic: 5.972 on 13 and 1517 DF,  p-value: 6.232e-11</code></pre>
 <li><p>Compute the correlation between 3 measures of SNAP exposure (at the county level): <code>ln_pc_snapben17</code>, <code>pct_snap17</code> (% of population participate in SNAP, 2017), and <code>snapspth17</code> (SNAP-authorized stored per 1000 people, 2017). Are the results surprising?</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(usda[, <span class="fu">c</span>(<span class="st">"ln_pc_snapben17"</span>, <span class="st">"snapspth17"</span>, <span class="st">"pct_snap17"</span>)], <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(usda[, <span class="fu">c</span>(<span class="st">"ln_pc_snapben17"</span>, <span class="st">"snapspth17"</span>, <span class="st">"pct_snap17"</span>)], <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="4" type="1">
 <li><p>Estimate 3 separate simple regression models of <code>ffrpth20</code> (fast-food stores per 1000 people, 2020) against the above three measures of SNAP exposure. Interpret each slope coefficient. Which model has the highest <span class="math inline">\(\mathbf{R}^2\)</span>.</p></li>
 <li><p>Most SNAP-authorized stores are big grocery stores (e.g.&nbsp;Walmart, Target, Kroger, etc.). The data includes information on the total number of grocery stores (in 2016): <code>grocpth16</code>. Are they highly correlated?</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(usda[, <span class="fu">c</span>(<span class="st">"snapspth17"</span>, <span class="st">"grocpth16"</span>)], <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(usda[, <span class="fu">c</span>(<span class="st">"snapspth17"</span>, <span class="st">"grocpth16"</span>)], <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           snapspth17 grocpth16
 snapspth17  1.0000000 0.4160153
@@ -944,8 +966,8 @@ grocpth16   0.4160153 1.0000000</code></pre>
 <li>Estimate the multivariate model below, that controls for the poverty rate, number of full-service restaurants, number of grocery stores, and a metropolitan dummy variable. Is there a statistically significant relationship between the number of SNAP-authorized stores and fast-food stores, conditional on these other variables? And how does the coefficient compare to the simple model?</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(ffrpth20 <span class="sc">~</span> snapspth17 <span class="sc">+</span> povrate21 <span class="sc">+</span> fsrpth16 <span class="sc">+</span> grocpth16 <span class="sc">+</span> metro23 <span class="sc">+</span> pct_nhblack20 <span class="sc">+</span> pct_hisp20 <span class="sc">+</span> pct_65older20 <span class="sc">+</span> pct_18younger20,</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> usda))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(ffrpth20 <span class="sc">~</span> snapspth17 <span class="sc">+</span> povrate21 <span class="sc">+</span> fsrpth16 <span class="sc">+</span> grocpth16 <span class="sc">+</span> metro23 <span class="sc">+</span> pct_nhblack20 <span class="sc">+</span> pct_hisp20 <span class="sc">+</span> pct_65older20 <span class="sc">+</span> pct_18younger20,</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> usda))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -983,13 +1005,13 @@ F-statistic: 218.4 on 9 and 2630 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><p>The data has information about other federal nutrition programmes: (1) <a href="https://www.fna.usda.gov/wic">WIC</a> (Women, Infants, Children); (2) National School Lunch Programme; (3) Summer Food Service Programme. Compare the participation rates of these programmes. Note, the latter two programmes measure participation as % of eligible children.</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>usda <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(pct_snap17, pct_wic17, pct_nslp17, pct_sfsp17),</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">n =</span> <span class="sc">~</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x)),</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">mean =</span> <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span> <span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">min =</span> <span class="sc">~</span> <span class="fu">min</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">max =</span> <span class="sc">~</span> <span class="fu">max</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>usda <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(pct_snap17, pct_wic17, pct_nslp17, pct_sfsp17),</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">n =</span> <span class="sc">~</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x)),</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">mean =</span> <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span> <span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">min =</span> <span class="sc">~</span> <span class="fu">min</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">max =</span> <span class="sc">~</span> <span class="fu">max</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  pct_snap17_n pct_snap17_mean pct_snap17_sd pct_snap17_min pct_snap17_max
 1         3142        12.89266      3.170124       5.668505       22.05548

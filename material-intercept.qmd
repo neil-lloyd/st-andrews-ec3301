@@ -1,0 +1,256 @@
+---
+title: The Intercept
+format: 
+  html: default
+engine: npstata  
+---
+
+```{stata}
+*| include: false
+
+do "config.do"
+```
+
+This discusses the role of the intercept in a linear regression model. It first explores certain key results from OLS with (and without) an intercept, before thinking through the role of an intercept in the model. 
+
+Quick note: the intercept in the model ($\beta_0$) can be thought of a regression as the slope parameter to a constant regressor (or regressor that is constant $\mathbf{1}$).
+
+$$
+  y_i = \beta_0 \mathbf{1}+\beta_1x_{i1}-\dots-\beta_kx_{ik} + u_i
+$$
+
+## OLS with an intercept
+
+In [Lecture 2](lecture-2-multi.qmd) we stated the general least squares (LS) problem and solved the simple case.
+
+$$
+  \hat{\beta}=\underset{b}{\arg\min} \quad\sum_{i=1}^{n}(y_i - b_0 - b_1x_{i1}-\dots-b_kx_{ik})^2
+$$
+
+In both cases, multivariate and simple, the first order condition (FOC) for $b_0$, yields:
+
+$$
+  2\sum_{i=1}^{n}(y_i - b_0 - b_1x_{i1}-\dots-b_kx_{ik})
+$$
+
+Setting the FOC $=0$, we get
+
+$$
+  0=\sum_{i=1}^{n}(y_i - \hat{\beta}_0 - \hat{\beta}_1x_{i1}-\dots-\hat{\beta}_kx_{ik})
+$$
+
+Since $y_i - \hat{\beta}_0 - \hat{\beta}_1x_{i1}-\dots-\hat{\beta}_kx_{ik} = \hat{u}_i$, this statement tells us:
+
+$$
+  0=\sum_{i=1}^{n}\hat{u}_i \Leftrightarrow \frac{1}{n}\sum_{i=1}^{n}\hat{u}_i=0
+$$
+
+That is, **the residual is mean zero**. This a mechanical result and will also be the case if OLS is estimated with an intercept. 
+
+For example, using a dataset from [Tutorial 1](tutorial-1.qmd)
+
+```{stata}
+*| echo: false
+*| output: false
+use "$data_dir\morg24_sample.dta", clear
+```
+
+```{stata}
+reg wage edu
+```
+```{stata}
+predict residual, resid
+sum residual
+```
+
+This is essential "machine zero", given the precision with which the variables and estimates are stored.
+
+## OLS without an intercept
+
+You can solve the LS problem without an intercept,
+
+$$
+  \hat{\beta}=\underset{b}{\arg\min} \quad\sum_{i=1}^{n}(y_i - b_1x_{i1}-\dots-b_kx_{ik})^2
+$$
+
+However, there is then no FOC which sets the mean of the residuals to zero. Indeed, the residual will not be mean zero. 
+
+Again, we can show this mechanically in the data:
+
+```{stata}
+drop residual
+qui reg wage edu, nocons
+predict residual, resid
+sum residual
+```
+
+Evidently, the average of the residual is non-zero. 
+
+Visually, the problem is that you are forcing the fitted line to "go through the origin":
+
+```{stata}
+predict fitted
+
+twoway (scatter wage edu, mc(blue%50)) (scatter fitted edu, mc(red)), legend(off)
+```
+
+This results in a poor overall fit of the data and a residual with a non-zero mean. 
+
+## De-meaning
+
+Returning to the specification with an intercept, we solve for $\hat{\beta}_0$ as a function of the other OLS estimators and variable means using the FOC from the LS problem:
+
+$$
+  \hat{\beta}_0 = \bar{y}-\hat{\beta}_1\bar{x}_1 - \dots - \hat{\beta}_k \bar{x}_k
+$$
+
+Substituting this back into the FOC for $b_1,\dots,b_k$ we get:
+
+$$
+  0=\sum_{i=1}^{n}\big((y_i- \bar{y}) - \hat{\beta}_1(x_{i1}-\bar{x}_1)-\dots-\hat{\beta}_k(x_{ik}-\bar{x}_k)\big)
+$$
+
+Each variable has been de-meaned: $(y_i- \bar{y}), (x_{i1}-\bar{x}_1),\dots,(x_{ik}-\bar{x}_k)$. This tells US something about what the intercept is doing to the data: it de-means all variables. In fact, it tells us that we can solve $\hat{\beta}_1,\dots,\hat{\beta}_k$ by first de-meaning all the variables and solving LS problem for a model without an intercept. 
+
+$$
+  \hat{\beta}=\underset{b}{\arg\min} \quad\sum_{i=1}^{n}(\tilde{y}_i - b_1\tilde{x}_{i1}-\dots-b_k\tilde{x}_{ik})^2
+$$
+
+where $\tilde{y}_i=y_i- \bar{y}$ (likewise for $x$).
+
+Here's a demonstration in Stata:
+
+```{stata}
+qui sum wage
+gen wage_tilde = wage-r(mean)
+qui sum edu
+gen edu_tilde = edu-r(mean)
+
+reg wage_tilde edu_tilde, nocons
+```
+
+We estimate the same slope coefficient. And, if we included a constant in the regression estimation the estimate would be "machine zero". 
+
+```{stata}
+reg wage_tilde edu_tilde
+```
+
+
+## Frisch-Waugh theorem and regression on a constant
+
+One way to rationalize what is happening is to use the Frisch-Waugh theorem. The theorem states that we can estimate a multivariate regression in two steps: 
+
+1. residualize $y$ and $x_1$ (or any chosen variable) against the other regressors
+2. regress the residuals from these models on one another: $\tilde{y}$ and $\tilde{x}_1$
+
+In the simple case, we have a regression of 
+
+$$
+  y_i = \beta_0 + \beta_1 x_{1i} + u_i
+$$
+
+There are actually two variables in this regression: $x_1$ and the constant ($\mathbf{1}$). Although, we do not normally talk about the constant as a regressor in this way. Regardless, we can indeed regress $x_{1}$ and $y$ on a constant alone. 
+
+$$
+  \begin{aligned}
+  y_i =& \alpha + v_i \\
+  x_{1i} =& \theta + e_i
+  \end{aligned}
+$$
+
+The corresponding OLS estimator for $\alpha$ is
+
+$$
+  \hat{\alpha} = \underset{a}{\arg\min} \sum_{i=1}^n (y_i-a)^2
+$$
+
+Solving, the FOCs, you get:
+
+$$
+  \hat{\alpha} = \frac{1}{n}\sum_{i=1}^n y_i = \bar{y}
+$$
+
+Thus, the residual from this regression-on-a-constant model is:
+
+$$
+  y_i-\hat{\alpha} = y_i-\bar{y} = \tilde{y}_i
+$$
+
+Given that the same is done for $x$, the Frisch-Waugh theorem tells us that we solve for $\hat{\beta_1}$ by estimating the regression of
+
+$$
+  \tilde{y}_i = \beta_1 \tilde{x}_i + \xi_i
+$$
+
+Here's a demonstration in Stata:
+
+```{stata}
+drop *_tilde
+reg wage
+predict wage_tilde, resid
+reg edu
+predict edu_tilde, resid
+
+reg wage_tilde edu_tilde, nocons
+```
+
+We estimate the same slope coefficient as the simple bivariate case with an intercept. 
+
+## The model and error term mean
+
+The above is largely "mechanics" and a function of the OLS problem. However, there is a parallel for the model. Consider the simple linear case, 
+
+$$
+  Y_i = \beta_0 + \beta_1 x_i + u_i
+$$
+
+We typically make the assumption MLR 4 $E[u_i|X_i]=0\Rightarrow E[u_i=0]$. Suppose, this wasn't the case. Suppose, $E[u_i|X_i] = \delta\Rightarrow E[u_i=0]=\delta$, where $\delta$ is a non-zero constant. 
+
+Then, 
+
+$$
+  E[Y_i] = \beta_0 + \beta_1E[x_i] + \underbrace{E[u_i]}_\delta
+$$
+
+Re-organizing, we get, 
+
+$$
+  \beta_0 = E[Y_i] - \beta_1E[x_i] - \delta
+$$
+
+What does this mean? It means that we can't identify $\beta_0$ unless we know $\delta$. And, crucially, we don't know $\delta$ since $u_i$ is not 'observed' in the data. 
+
+What do we do? Some *economagic*. We rewrite the error term as a deviation from its mean:
+
+$$
+  u_i = \delta + v_i \quad \Rightarrow\quad v_i = u_i-E[u_i]
+$$
+
+Since $v_i$ is a de-meaned version of the error, $E[v_i]=0$. We substitute in this definition of $u_i$ back into the model and re-arrange, 
+
+$$
+  \begin{aligned}
+  Y_i =& \beta_0 + \beta_1 x_i + \delta + v_i \\
+  =& \beta_0 + \delta + \beta_1 x_i + v_i \\
+  = & \psi_0 + \beta_1 x_i + v_i
+  \end{aligned}
+$$
+
+where $\psi_0 = \beta_0 + \delta$. We have the same model (in terms of slope parameter $\beta_1$), but the intercept now includes the non-zero mean of the original error ($u$), and the new error term ($v$) has mean zero. 
+
+This is another way to say that we cannot separate the intercept from the non-zero mean of the error term. And, by this logic, if the model has an intercept, it is reasonable to assume that $E[u_i]=0$. 
+
+How does this link to estimation? Well, $n^{-1}\sum_{i=1}^n\hat{u}_i = 0$ is the sample analogue of $E[u_i]=0$. In fact, one approach to estimation, called Methods of Moments [mentioned in @wooldridge2025, p. 25], does just this: it replaces identifying moments with their sample analogue. 
+For the linear model, our identifying moments (in the simple case) are:
+
+1. $E[u_i]=0$
+2. $E[u_ix_i]=0$
+
+Their sample analogue are:
+
+a. $n^{-1}\sum_{i=1}^n\hat{u}_i = 0$
+b. $n^{-1}\sum_{i=1}^n\hat{u}_ix_i = 0$
+
+where $\hat{u}_i = y_i-\hat{\beta}_0 -\hat{\beta}_1x_i$. Substituting in this definition, you will see that (a) and (b) are just the FOCs from the LS problem. 
+
+## References

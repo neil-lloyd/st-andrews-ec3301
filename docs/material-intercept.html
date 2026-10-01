@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Intercept – EC3301 Econometrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cf201e8c159c64e39451d1a718f2f573.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">EC3301 Econometrics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lectures" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lectures</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lectures">    
+        <li>
+    <a class="dropdown-item" href="./lecture-0.html">
+ <span class="dropdown-text">Pre-sessional Lecture</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-1.html">
+ <span class="dropdown-text">Lecture 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-2.html">
+ <span class="dropdown-text">Lecture 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-3.html">
+ <span class="dropdown-text">Lecture 3</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="./lab-1-Stata.html">
+ <span class="dropdown-text">Lab 1 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-1-R.html">
+ <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-Stata.html">
+ <span class="dropdown-text">Lab 2 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-R.html">
+ <span class="dropdown-text">Lab 2 (R)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./tutorial-1.html">
+ <span class="dropdown-text">Tutorial 1</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-extra-material" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Extra Material</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-extra-material">    
+        <li>
+    <a class="dropdown-item" href="./material-interpretation.html">
+ <span class="dropdown-text">Interpreting Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-cef.html">
+ <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-intercept.html">
+ <span class="dropdown-text">The Intercept</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-R.html">
+ <span class="dropdown-text">Basic Programming in R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-Stata.html">
+ <span class="dropdown-text">Basic Programming in Stata</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="light-content">
+<p><img src="img/01-standard-vertical-black-text.png" class="img-fluid"></p>
+</div>
+<div class="dark-content">
+<p><img src="img/02-standard-vertical-white-text.png" class="img-fluid"></p>
+</div>
+</div></div>
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Intercept</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This discusses the role of the intercept in a linear regression model. It first explores certain key results from OLS with (and without) an intercept, before thinking through the role of an intercept in the model.</p>
+<p>Quick note: the intercept in the model (<span class="math inline">\(\beta_0\)</span>) can be thought of a regression as the slope parameter to a constant regressor (or regressor that is constant <span class="math inline">\(\mathbf{1}\)</span>).</p>
+<p><span class="math display">\[
+  y_i = \beta_0 \mathbf{1}+\beta_1x_{i1}-\dots-\beta_kx_{ik} + u_i
+\]</span></p>
+<section id="ols-with-an-intercept" class="level2">
+<h2 class="anchored" data-anchor-id="ols-with-an-intercept">OLS with an intercept</h2>
+<p>In <a href="./lecture-2.html">Lecture 2</a> we stated the general least squares (LS) problem and solved the simple case.</p>
+<p><span class="math display">\[
+  \hat{\beta}=\underset{b}{\arg\min} \quad\sum_{i=1}^{n}(y_i - b_0 - b_1x_{i1}-\dots-b_kx_{ik})^2
+\]</span></p>
+<p>In both cases, multivariate and simple, the first order condition (FOC) for <span class="math inline">\(b_0\)</span>, yields:</p>
+<p><span class="math display">\[
+  2\sum_{i=1}^{n}(y_i - b_0 - b_1x_{i1}-\dots-b_kx_{ik})
+\]</span></p>
+<p>Setting the FOC <span class="math inline">\(=0\)</span>, we get</p>
+<p><span class="math display">\[
+  0=\sum_{i=1}^{n}(y_i - \hat{\beta}_0 - \hat{\beta}_1x_{i1}-\dots-\hat{\beta}_kx_{ik})
+\]</span></p>
+<p>Since <span class="math inline">\(y_i - \hat{\beta}_0 - \hat{\beta}_1x_{i1}-\dots-\hat{\beta}_kx_{ik} = \hat{u}_i\)</span>, this statement tells us:</p>
+<p><span class="math display">\[
+  0=\sum_{i=1}^{n}\hat{u}_i \Leftrightarrow \frac{1}{n}\sum_{i=1}^{n}\hat{u}_i=0
+\]</span></p>
+<p>That is, <strong>the residual is mean zero</strong>. This a mechanical result and will also be the case if OLS is estimated with an intercept.</p>
+<p>For example, using a dataset from <a href="./tutorial-1.html">Tutorial 1</a></p>
+<div id="c417b39a" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> wage edu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       300
+-------------+----------------------------------   F(1, 298)       =     32.98
+       Model |  38958.6634         1  38958.6634   Prob &gt; F        =    0.0000
+    Residual |  352041.622       298  1181.34772   R-squared       =    0.0996
+-------------+----------------------------------   Adj R-squared   =    0.0966
+       Total |  391000.285       299  1307.69326   Root MSE        =    34.371
+
+------------------------------------------------------------------------------
+        wage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         edu |    4.12031   .7174915     5.74   0.000     2.708318    5.532302
+       _cons |  -19.21552    10.2836    -1.87   0.063     -39.4532    1.022156
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="415e9ea0" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> residual, <span class="kw">resid</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> residual</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+    residual |        300    1.04e-08    34.31321  -38.01673   252.1038</code></pre>
+</div>
+</div>
+<p>This is essential “machine zero”, given the precision with which the variables and estimates are stored.</p>
+</section>
+<section id="ols-without-an-intercept" class="level2">
+<h2 class="anchored" data-anchor-id="ols-without-an-intercept">OLS without an intercept</h2>
+<p>You can solve the LS problem without an intercept,</p>
+<p><span class="math display">\[
+  \hat{\beta}=\underset{b}{\arg\min} \quad\sum_{i=1}^{n}(y_i - b_1x_{i1}-\dots-b_kx_{ik})^2
+\]</span></p>
+<p>However, there is then no FOC which sets the mean of the residuals to zero. Indeed, the residual will not be mean zero.</p>
+<p>Again, we can show this mechanically in the data:</p>
+<div id="86c351ff" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> residual</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> wage edu, <span class="kw">nocons</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> residual, <span class="kw">resid</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> residual</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+    residual |        300   -.7155145     34.5062  -33.55365   253.9359</code></pre>
+</div>
+</div>
+<p>Evidently, the average of the residual is non-zero.</p>
+<p>Visually, the problem is that you are forcing the fitted line to “go through the origin”:</p>
+<div id="af8cca14" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> <span class="kw">fitted</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">scatter</span> wage edu, mc(<span class="bn">blue</span>%50)) (<span class="kw">scatter</span> <span class="kw">fitted</span> edu, mc(<span class="kw">red</span>)), <span class="bn">legend</span>(<span class="kw">off</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(option xb assumed; fitted values)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="material-intercept_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This results in a poor overall fit of the data and a residual with a non-zero mean.</p>
+</section>
+<section id="de-meaning" class="level2">
+<h2 class="anchored" data-anchor-id="de-meaning">De-meaning</h2>
+<p>Returning to the specification with an intercept, we solve for <span class="math inline">\(\hat{\beta}_0\)</span> as a function of the other OLS estimators and variable means using the FOC from the LS problem:</p>
+<p><span class="math display">\[
+  \hat{\beta}_0 = \bar{y}-\hat{\beta}_1\bar{x}_1 - \dots - \hat{\beta}_k \bar{x}_k
+\]</span></p>
+<p>Substituting this back into the FOC for <span class="math inline">\(b_1,\dots,b_k\)</span> we get:</p>
+<p><span class="math display">\[
+  0=\sum_{i=1}^{n}\big((y_i- \bar{y}) - \hat{\beta}_1(x_{i1}-\bar{x}_1)-\dots-\hat{\beta}_k(x_{ik}-\bar{x}_k)\big)
+\]</span></p>
+<p>Each variable has been de-meaned: <span class="math inline">\((y_i- \bar{y}), (x_{i1}-\bar{x}_1),\dots,(x_{ik}-\bar{x}_k)\)</span>. This tells US something about what the intercept is doing to the data: it de-means all variables. In fact, it tells us that we can solve <span class="math inline">\(\hat{\beta}_1,\dots,\hat{\beta}_k\)</span> by first de-meaning all the variables and solving LS problem for a model without an intercept.</p>
+<p><span class="math display">\[
+  \hat{\beta}=\underset{b}{\arg\min} \quad\sum_{i=1}^{n}(\tilde{y}_i - b_1\tilde{x}_{i1}-\dots-b_k\tilde{x}_{ik})^2
+\]</span></p>
+<p>where <span class="math inline">\(\tilde{y}_i=y_i- \bar{y}\)</span> (likewise for <span class="math inline">\(x\)</span>).</p>
+<p>Here’s a demonstration in Stata:</p>
+<div id="6865f301" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">sum</span> wage</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> wage_tilde = wage-<span class="fu">r</span>(<span class="kw">mean</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">sum</span> edu</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> edu_tilde = edu-<span class="fu">r</span>(<span class="kw">mean</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> wage_tilde edu_tilde, <span class="kw">nocons</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       300
+-------------+----------------------------------   F(1, 299)       =     33.09
+       Model |  38958.6637         1  38958.6637   Prob &gt; F        =    0.0000
+    Residual |   352041.64       299  1177.39679   R-squared       =    0.0996
+-------------+----------------------------------   Adj R-squared   =    0.0966
+       Total |  391000.304       300  1303.33435   Root MSE        =    34.313
+
+------------------------------------------------------------------------------
+  wage_tilde | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   edu_tilde |    4.12031   .7162907     5.75   0.000     2.710701     5.52992
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>We estimate the same slope coefficient. And, if we included a constant in the regression estimation the estimate would be “machine zero”.</p>
+<div id="0f5d6121" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> wage_tilde edu_tilde</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       300
+-------------+----------------------------------   F(1, 298)       =     32.98
+       Model |  38958.6637         1  38958.6637   Prob &gt; F        =    0.0000
+    Residual |   352041.64       298  1181.34779   R-squared       =    0.0996
+-------------+----------------------------------   Adj R-squared   =    0.0966
+       Total |  391000.304       299  1307.69332   Root MSE        =    34.371
+
+------------------------------------------------------------------------------
+  wage_tilde | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   edu_tilde |    4.12031   .7174915     5.74   0.000     2.708318    5.532302
+       _cons |   1.07e-07   1.984396     0.00   1.000    -3.905204    3.905204
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="frisch-waugh-theorem-and-regression-on-a-constant" class="level2">
+<h2 class="anchored" data-anchor-id="frisch-waugh-theorem-and-regression-on-a-constant">Frisch-Waugh theorem and regression on a constant</h2>
+<p>One way to rationalize what is happening is to use the Frisch-Waugh theorem. The theorem states that we can estimate a multivariate regression in two steps:</p>
+<ol type="1">
+<li>residualize <span class="math inline">\(y\)</span> and <span class="math inline">\(x_1\)</span> (or any chosen variable) against the other regressors</li>
+<li>regress the residuals from these models on one another: <span class="math inline">\(\tilde{y}\)</span> and <span class="math inline">\(\tilde{x}_1\)</span></li>
+</ol>
+<p>In the simple case, we have a regression of</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_{1i} + u_i
+\]</span></p>
+<p>There are actually two variables in this regression: <span class="math inline">\(x_1\)</span> and the constant (<span class="math inline">\(\mathbf{1}\)</span>). Although, we do not normally talk about the constant as a regressor in this way. Regardless, we can indeed regress <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(y\)</span> on a constant alone.</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  y_i =&amp; \alpha + v_i \\
+  x_{1i} =&amp; \theta + e_i
+  \end{aligned}
+\]</span></p>
+<p>The corresponding OLS estimator for <span class="math inline">\(\alpha\)</span> is</p>
+<p><span class="math display">\[
+  \hat{\alpha} = \underset{a}{\arg\min} \sum_{i=1}^n (y_i-a)^2
+\]</span></p>
+<p>Solving, the FOCs, you get:</p>
+<p><span class="math display">\[
+  \hat{\alpha} = \frac{1}{n}\sum_{i=1}^n y_i = \bar{y}
+\]</span></p>
+<p>Thus, the residual from this regression-on-a-constant model is:</p>
+<p><span class="math display">\[
+  y_i-\hat{\alpha} = y_i-\bar{y} = \tilde{y}_i
+\]</span></p>
+<p>Given that the same is done for <span class="math inline">\(x\)</span>, the Frisch-Waugh theorem tells us that we solve for <span class="math inline">\(\hat{\beta_1}\)</span> by estimating the regression of</p>
+<p><span class="math display">\[
+  \tilde{y}_i = \beta_1 \tilde{x}_i + \xi_i
+\]</span></p>
+<p>Here’s a demonstration in Stata:</p>
+<div id="3116d1f3" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> *_tilde</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> wage</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> wage_tilde, <span class="kw">resid</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> edu</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> edu_tilde, <span class="kw">resid</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> wage_tilde edu_tilde, <span class="kw">nocons</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       300
+-------------+----------------------------------   F(0, 299)       =      0.00
+       Model |           0         0           .   Prob &gt; F        =         .
+    Residual |  391000.285       299  1307.69326   R-squared       =    0.0000
+-------------+----------------------------------   Adj R-squared   =    0.0000
+       Total |  391000.285       299  1307.69326   Root MSE        =    36.162
+
+------------------------------------------------------------------------------
+        wage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       _cons |   38.72977   2.087816    18.55   0.000      34.6211    42.83845
+------------------------------------------------------------------------------
+
+      Source |       SS           df       MS      Number of obs   =       300
+-------------+----------------------------------   F(0, 299)       =      0.00
+       Model |           0         0           .   Prob &gt; F        =         .
+    Residual |  2294.79667       299  7.67490524   R-squared       =    0.0000
+-------------+----------------------------------   Adj R-squared   =    0.0000
+       Total |  2294.79667       299  7.67490524   Root MSE        =    2.7704
+
+------------------------------------------------------------------------------
+         edu | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       _cons |   14.06333   .1599469    87.93   0.000     13.74857     14.3781
+------------------------------------------------------------------------------
+
+      Source |       SS           df       MS      Number of obs   =       300
+-------------+----------------------------------   F(1, 299)       =     33.09
+       Model |  38958.6637         1  38958.6637   Prob &gt; F        =    0.0000
+    Residual |   352041.64       299  1177.39679   R-squared       =    0.0996
+-------------+----------------------------------   Adj R-squared   =    0.0966
+       Total |  391000.304       300  1303.33435   Root MSE        =    34.313
+
+------------------------------------------------------------------------------
+  wage_tilde | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   edu_tilde |    4.12031   .7162907     5.75   0.000     2.710701     5.52992
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>We estimate the same slope coefficient as the simple bivariate case with an intercept.</p>
+</section>
+<section id="the-model-and-error-term-mean" class="level2">
+<h2 class="anchored" data-anchor-id="the-model-and-error-term-mean">The model and error term mean</h2>
+<p>The above is largely “mechanics” and a function of the OLS problem. However, there is a parallel for the model. Consider the simple linear case,</p>
+<p><span class="math display">\[
+  Y_i = \beta_0 + \beta_1 x_i + u_i
+\]</span></p>
+<p>We typically make the assumption MLR 4 <span class="math inline">\(E[u_i|X_i]=0\Rightarrow E[u_i=0]\)</span>. Suppose, this wasn’t the case. Suppose, <span class="math inline">\(E[u_i|X_i] = \delta\Rightarrow E[u_i=0]=\delta\)</span>, where <span class="math inline">\(\delta\)</span> is a non-zero constant.</p>
+<p>Then,</p>
+<p><span class="math display">\[
+  E[Y_i] = \beta_0 + \beta_1E[x_i] + \underbrace{E[u_i]}_\delta
+\]</span></p>
+<p>Re-organizing, we get,</p>
+<p><span class="math display">\[
+  \beta_0 = E[Y_i] - \beta_1E[x_i] - \delta
+\]</span></p>
+<p>What does this mean? It means that we can’t identify <span class="math inline">\(\beta_0\)</span> unless we know <span class="math inline">\(\delta\)</span>. And, crucially, we don’t know <span class="math inline">\(\delta\)</span> since <span class="math inline">\(u_i\)</span> is not ‘observed’ in the data.</p>
+<p>What do we do? Some <em>economagic</em>. We rewrite the error term as a deviation from its mean:</p>
+<p><span class="math display">\[
+  u_i = \delta + v_i \quad \Rightarrow\quad v_i = u_i-E[u_i]
+\]</span></p>
+<p>Since <span class="math inline">\(v_i\)</span> is a de-meaned version of the error, <span class="math inline">\(E[v_i]=0\)</span>. We substitute in this definition of <span class="math inline">\(u_i\)</span> back into the model and re-arrange,</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  Y_i =&amp; \beta_0 + \beta_1 x_i + \delta + v_i \\
+  =&amp; \beta_0 + \delta + \beta_1 x_i + v_i \\
+  = &amp; \psi_0 + \beta_1 x_i + v_i
+  \end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\psi_0 = \beta_0 + \delta\)</span>. We have the same model (in terms of slope parameter <span class="math inline">\(\beta_1\)</span>), but the intercept now includes the non-zero mean of the original error (<span class="math inline">\(u\)</span>), and the new error term (<span class="math inline">\(v\)</span>) has mean zero.</p>
+<p>This is another way to say that we cannot separate the intercept from the non-zero mean of the error term. And, by this logic, if the model has an intercept, it is reasonable to assume that <span class="math inline">\(E[u_i]=0\)</span>.</p>
+<p>How does this link to estimation? Well, <span class="math inline">\(n^{-1}\sum_{i=1}^n\hat{u}_i = 0\)</span> is the sample analogue of <span class="math inline">\(E[u_i]=0\)</span>. In fact, one approach to estimation, called Methods of Moments <span class="citation" data-cites="wooldridge2025">(mentioned in <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 25</a>)</span>, does just this: it replaces identifying moments with their sample analogue. For the linear model, our identifying moments (in the simple case) are:</p>
+<ol type="1">
+<li><span class="math inline">\(E[u_i]=0\)</span></li>
+<li><span class="math inline">\(E[u_ix_i]=0\)</span></li>
+</ol>
+<p>Their sample analogue are:</p>
+<ol type="a">
+<li><span class="math inline">\(n^{-1}\sum_{i=1}^n\hat{u}_i = 0\)</span></li>
+<li><span class="math inline">\(n^{-1}\sum_{i=1}^n\hat{u}_ix_i = 0\)</span></li>
+</ol>
+<p>where <span class="math inline">\(\hat{u}_i = y_i-\hat{\beta}_0 -\hat{\beta}_1x_i\)</span>. Substituting in this definition, you will see that (a) and (b) are just the FOCs from the LS problem.</p>
+</section>
+<section id="references" class="level2">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-wooldridge2025" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approach.”</span>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -129,7 +129,10 @@ div.csl-indent {
 }</script>
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -365,6 +368,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./lecture-2.html">
  <span class="dropdown-text">Lecture 2</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-3.html">
+ <span class="dropdown-text">Lecture 3</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -379,6 +386,14 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="./lab-1-R.html">
  <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-Stata.html">
+ <span class="dropdown-text">Lab 2 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-R.html">
+ <span class="dropdown-text">Lab 2 (R)</span></a>
   </li>  
     </ul>
   </li>
@@ -405,6 +420,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="./material-cef.html">
  <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-intercept.html">
+ <span class="dropdown-text">The Intercept</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./material-programming-R.html">
@@ -481,7 +500,7 @@ window.Quarto = {
 <li><p>Open Stata and create a new .do file. Save it as “Lab 2/lab-2.do”</p></li>
 <li><p>Add the following to your .do file; editing the file path to match your folder structure.</p></li>
 </ul>
-<div id="4ba5e11f" class="cell" data-execution_count="2">
+<div id="4ba5e11f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>* Title: Econometrics Lab 2: Linear Regression <span class="kw">in</span> Stata</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>* Author: [INSERT NAME]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>* Date: [INSERT DATE]</span>
@@ -516,7 +535,7 @@ window.Quarto = {
 <ol type="1">
 <li>Having run the first few lines of the above .do file code, add the following line under <code>* Part 1</code> and run. This is code from Lab 1.</li>
 </ol>
-<div id="ef0248d1" class="cell" data-execution_count="3">
+<div id="ef0248d1" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> shs2023.dta, <span class="kw">clear</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stata should be able to find the file if the computer director (cd) is set correctly.</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -542,7 +561,7 @@ window.Quarto = {
 <ol start="2" type="1">
 <li>The dataset includes a set of variables <code>htcostsum_1-htcostsum_9</code> and <code>htcostamt_1-htcostamt_9</code>. Try to understand the relationship between each variable by first using <code>tab</code> to check the values of <code>htcostsum_*</code> and then <code>tab htcostsum_*, sum(htcostamt_*)</code> to check how they relate to one another. For example,</li>
 </ol>
-<div id="40410097" class="cell" data-execution_count="5">
+<div id="40410097" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> htcostsum_1</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> htcostsum_1, <span class="kw">sum</span>(htcostamt_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -572,7 +591,7 @@ electricity |  Summary of Cost of electricity -
 <li><p>Create a variable equal to the sum of all energy costs called <code>energy_cost</code>. The most accurate way to do this is using the <code>egen</code> command along with the <code>rowtotal()</code> function (type <code>help egen</code> in the command line to learn about the command). You will want to add the option <code>missing</code>. This command could also have been used to create the <code>payment</code> variable in Lab 1.</p></li>
 <li><p>How many observations have missing, zero, and positive (non-missing values). Check that your output corresponds to mine.</p></li>
 </ol>
-<div id="04129ff0" class="cell" data-execution_count="7">
+<div id="04129ff0" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span> <span class="kw">if</span> energy_cost ==.</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span> <span class="kw">if</span> energy_cost==0</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span> <span class="kw">if</span> energy_cost&gt;0 &amp; !<span class="fu">missing</span>(energy_cost)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -582,7 +601,7 @@ electricity |  Summary of Cost of electricity -
   2,627</code></pre>
 </div>
 </div>
-<div id="06d6298c" class="cell" data-execution_count="8">
+<div id="06d6298c" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> energy_cost, <span class="fu">det</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -607,7 +626,7 @@ electricity |  Summary of Cost of electricity -
 <li><p>Rename <code>payment</code> to <code>housing_cost</code> and give it the label “Household housing costs (monthly £s)”. Does the variable have a similar number of non-missing and zero values to <code>energy_cost</code>? Who would have a housing cost of £0? Wealthier or poorer households?</p></li>
 <li><p>Compare the new <code>housing_cost</code> variable to the variable in the data called <code>hcost_amt</code>. You can also use <code>browse mortgage_amt rent_amt shared_ownership_amt hcost_amt housing_cost</code> to investigate why these two variables are not the same. Should we be concerned?</p></li>
 </ol>
-<div id="b2089254" class="cell" data-execution_count="11">
+<div id="b2089254" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">compare</span> housing_cost hcost_amt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="8" type="1">
@@ -618,20 +637,20 @@ electricity |  Summary of Cost of electricity -
 <ul>
 <li>Select all observations where all variables are <em>not</em> equal to <code>.</code>. (In Stata, not-equal-to is either <code>~=</code> or <code>!=</code>.)</li>
 </ul>
-<div id="dc2454ec" class="cell" data-execution_count="14">
+<div id="dc2454ec" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> <span class="kw">if</span> energy_cost!=. &amp; housing_cost!=. &amp; income!=.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Using the <code>missing()</code> function combined with <code>!</code> symbol to denote not-missing.</li>
 </ul>
-<div id="3f27095f" class="cell" data-execution_count="15">
+<div id="3f27095f" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> <span class="kw">if</span> !<span class="fu">missing</span>(energy_cost) &amp; !<span class="fu">missing</span>(housing_cost) &amp; !<span class="fu">missing</span>(income)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="11" type="1">
 <li><p>Create a scatter plot of <code>energy_cost</code> and <code>income</code> using the command <code>scatter</code>.</p></li>
 <li><p>Use the <code>twoway</code> graph command to overlay the scatter plot with a (linear) line of best fit. Here is what the output should look like:</p></li>
 </ol>
-<div id="cd3f8c24" class="cell" data-execution_count="16">
+<div id="cd3f8c24" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -644,7 +663,7 @@ electricity |  Summary of Cost of electricity -
 <ol start="13" type="1">
 <li>The line of best fit corresponds to the OLS estimator. Is the slope significantly different from 0? Based on the estimates, what fraction of an additional £ of income is spent on energy costs.</li>
 </ol>
-<div id="3dead221" class="cell" data-execution_count="17">
+<div id="3dead221" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> energy_cost income</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -666,12 +685,12 @@ electricity |  Summary of Cost of electricity -
 <ol start="14" type="1">
 <li>Use the <code>predict</code> command to create the predicted energy for each household <code>energy_hat</code> (see <a href="./lecture-2.html">Lecture 2</a> for assistance). Plot the predicted value alongside the actual value of energy.</li>
 </ol>
-<div id="b61cce93" class="cell" data-execution_count="18">
+<div id="b61cce93" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-stdout">
 <pre><code>(option xb assumed; fitted values)</code></pre>
 </div>
 </div>
-<div id="7fd07897" class="cell" data-execution_count="19">
+<div id="7fd07897" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">scatter</span> energy_cost income) (<span class="kw">scatter</span> energy_hat income), <span class="bn">legend</span>(<span class="kw">off</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -684,7 +703,7 @@ electricity |  Summary of Cost of electricity -
 <ol start="15" type="1">
 <li>Create a similar graph for <code>housing_cost</code>. You can combine the graphs into a single figure. Is one slope steeper than the other?</li>
 </ol>
-<div id="b81701d0" class="cell" data-execution_count="20">
+<div id="b81701d0" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">scatter</span> energy_cost income) (<span class="kw">lfit</span> energy_cost income), <span class="kw">ylabel</span>(0(500)1500) <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(energy, <span class="kw">replace</span>) <span class="bn">nodraw</span> <span class="bn">ytitle</span>(Energy costs)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">scatter</span> housing_cost income) (<span class="kw">lfit</span> housing_cost income), <span class="kw">ylabel</span>(0(500)1500)  <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(housing, <span class="kw">replace</span>) <span class="bn">nodraw</span> <span class="bn">ytitle</span>(Housing costs)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="bn">combine</span> energy housing</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -699,7 +718,7 @@ electricity |  Summary of Cost of electricity -
 <ol start="16" type="1">
 <li>Create a new variable <code>energy_share</code> equal to energy costs as a share of energy PLUS housing costs. Check that your variable has a similar mean and sd to the output below.</li>
 </ol>
-<div id="e26cc76d" class="cell" data-execution_count="22">
+<div id="e26cc76d" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> energy_share</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -711,7 +730,7 @@ energy_share |      1,531    .2560186    .1108235          0   .7407407</code></
 <ol start="17" type="1">
 <li>Interpret the slope coefficient and <span class="math inline">\(\mathbf{R}^2\)</span> from the model below. Use the p-value to test whether the relationship is statistically significant at a <span class="math inline">\(\alpha = 0.01\)</span> significance level?</li>
 </ol>
-<div id="90fdf35d" class="cell" data-execution_count="23">
+<div id="90fdf35d" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> ln_income = <span class="fu">ln</span>(income)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> energy_share ln_income</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -734,7 +753,7 @@ energy_share | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval
 <ol start="18" type="1">
 <li>One important factor which may determine a household’s energy usage in Scotland is location. Afterall, it gets a lot darker and colder in the Outer Hebrides compared with the sunny Kingdom of Fife. Try to replicate the following bar graph showing the average share of expenditure on energy by area. See <a href="./lab-1-Stata.html">Lab 1</a> for a reminder of how to make a bar graph.</li>
 </ol>
-<div id="e0e3bcdd" class="cell" data-execution_count="24">
+<div id="e0e3bcdd" class="cell" data-execution_count="25">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -746,7 +765,7 @@ energy_share | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval
 <ol start="19" type="1">
 <li>Estimate the multivariate model below. Why is Edinburgh missing from the model? Has the adjusted-<span class="math inline">\(\mathbf{R}^2\)</span> increased?</li>
 </ol>
-<div id="46ef90c0" class="cell" data-execution_count="25">
+<div id="46ef90c0" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span> hc4 bedrooms</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> energy_share ln_income hhsize bedrooms i.own_grp i.dwell_type i.area</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -762,11 +781,11 @@ energy_share | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval
 <div class="callout-body-container callout-body">
 <p>Categorical variables – like <code>own_grp</code>, <code>dwell_type</code>, and <code>area</code> – are referred to as factor variables in Stata. The values that the variables take on have no cardinal meaning. For example, in the dataset <code>area==1</code> for households in Edinburgh and <code>area==2</code> for households in Glasgow. Does this mean that Glasgow is <span class="math inline">\(2\times\)</span> Edinburgh? No.&nbsp;Categorical variables like this need to enter the model as dummy variables, with each dummy variable denoting a different category.</p>
 <p>The <em>long</em> way to do this is to create all the dummy variables. You can do this as followings,</p>
-<div id="acc4c4bc" class="cell" data-execution_count="26">
+<div id="acc4c4bc" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> area, <span class="kw">gen</span>(area)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Fortunately, there is a way to tell Stata in the <code>reg</code> command that it should treat the variable as a factor variable and include a dummy for each value. You do this by adding <code>i.</code> in front of the regressor; for example,</p>
-<div id="fad24830" class="cell" data-execution_count="27">
+<div id="fad24830" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> energy_share i.area</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -800,7 +819,7 @@ Southern ..  |   .0503178   .0163798     3.07   0.002     .0181884    .0824472
 </div>
 </div>
 <p>The default is to exclude the smallest number as the base category (see start of <a href="./lecture-2.html">Lecture 2</a> for a discussion of base categories). You can change this by declaring the base category.</p>
-<div id="f09d487a" class="cell" data-execution_count="28">
+<div id="f09d487a" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> energy_share ib2.area</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -850,14 +869,14 @@ Southern ..  |   .0191582   .0159328     1.20   0.229    -.0120944    .0504108
 <li><p>Generate a new variable <code>ln_pc_snapben17</code> equal to the log of <code>pc_snapben17</code>. The “VariableList.csv” file will show you that this is SNAP benefits per capita in 2017.</p></li>
 <li><p>Compute the correlation between 3 measures of SNAP exposure (at the county level): <code>ln_pc_snapben17</code>, <code>pct_snap17</code> (% of population participate in SNAP, 2017), and <code>snapspth17</code> (SNAP-authorized stored per 1000 people, 2017). Are the results surprising?</p></li>
 </ol>
-<div id="47f48f59" class="cell" data-execution_count="31">
+<div id="47f48f59" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corr</span> ln_pc_snapben17 snapspth17 pct_snap17</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="4" type="1">
 <li><p>Estimate 3 separate simple regression models of <code>ffrpth20</code> (fast-food stores per 1000 people, 2020) against the above three measures of SNAP exposure. Interpret each slope coefficient. Which model has the highest <span class="math inline">\(\mathbf{R}^2\)</span>.</p></li>
 <li><p>Most SNAP-authorized stores are big grocery stores (e.g.&nbsp;Walmart, Target, Kroger, etc.). The data includes information on the total number of grocery stores (in 2016): <code>grocpth16</code>. Are they highly correlated?</p></li>
 </ol>
-<div id="1f2a7a5e" class="cell" data-execution_count="32">
+<div id="1f2a7a5e" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corr</span> snapspth17 grocpth16</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(obs=3,058)
@@ -872,7 +891,7 @@ Southern ..  |   .0191582   .0159328     1.20   0.229    -.0120944    .0504108
 <ol start="6" type="1">
 <li>Estimate the multivariate model below, that controls for the poverty rate, number of full-service restaurants, number of grocery stores, and a metropolitan dummy variable. Is there a statistically significant relationship between the number of SNAP-authorized stores and fast-food stores, conditional on these other variables? And how does the coefficient compare to the simple model?</li>
 </ol>
-<div id="c7abb2fa" class="cell" data-execution_count="33">
+<div id="c7abb2fa" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> ffrpth20 snapspth17 povrate21 fsrpth16 grocpth16  metro23 pct_nhblack20 pct_hisp20 pct_65older20 pct_18younger20 </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -903,7 +922,7 @@ pct_18you~20 |  -.0037655    .001913    -1.97   0.049    -.0075166   -.0000144
 <li><p>Estimate the same multivariate model, but for the other measures of SNAP exposure. Are these relationships statistically significant?</p></li>
 <li><p>The data has information about other federal nutrition programmes: (1) <a href="https://www.fna.usda.gov/wic">WIC</a> (Women, Infants, Children); (2) National School Lunch Programme; (3) Summer Food Service Programme. Compare the participation rates of these programmes. Note, the latter two programmes measure participation as % of eligible children.</p></li>
 </ol>
-<div id="27e3a174" class="cell" data-execution_count="34">
+<div id="27e3a174" class="cell" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> pct_snap17 pct_wic17 pct_nslp17 pct_sfsp17</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>

@@ -1010,7 +1010,7 @@ Is $\hat{\beta} = \beta$?
 
 - If we are accurate, we can ask: $Pr(\hat{\beta}=\beta)=?$
 
-- The answer is: $Pr(\hat{\beta}=\beta|\mathbf{x})=0$ for any $u$ with a continuous distribution (conditional on $\mathbf{x}$).
+- The answer is: $Pr(\hat{\beta}=\beta|X)=0$ for any $u$ with a continuous distribution (conditional on $X$: the sample of values of independent regressors).
 
 :::
 
