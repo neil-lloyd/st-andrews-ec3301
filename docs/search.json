@@ -2650,7 +2650,7 @@
     "href": "lecture-3-slides.html#endogeneity",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Endogeneity",
-    "text": "Endogeneity\nThere are reasons why E[u|x]\\neq 0 (i.e., ‘sources of endogeneity’)\n\nomitted variables (confounding factors not included in the model)\nmeasurement error (certain types)\nmodel mis-specification\nselection into “treatment”\nsample selection\nreverse causality (Y\\rightarrow X) or simultaneity (Y\\leftrightharpoons X)\n\n\n\n\n\n\n\n\n\nEndogenous\n\n\nThe language of ‘endogeneity’/‘exogeneity’ is not universal. In the modern causal inference literature, the discussion centers around selection into “treatment”. As we will see at a later stage, this can be described as an omitted variable problem. The problem is typically solved through randomization, which results in unconfounded assignment. You could think of random assignment as a source of ‘exogenous’ variation in assignment, but this language is not always applied."
+    "text": "Endogeneity\nThere are reasons why E[u|x]\\neq 0 (i.e., ‘sources of endogeneity’)\n\nomitted variables (confounding factors not included in the model)\nmeasurement error (certain types)\nmodel mis-specification\nselection into “treatment”\nsample selection\nreverse causality (y\\rightarrow x) or simultaneity (y\\leftrightharpoons x)\n\n\n\n\n\n\n\n\n\nEndogenous\n\n\nThe language of ‘endogeneity’/‘exogeneity’ is not universal. In the modern causal inference literature, the discussion centers around selection into “treatment”. As we will see at a later stage, this can be described as an omitted variable problem. The problem is typically solved through randomization, which results in unconfounded assignment. You could think of random assignment as a source of ‘exogenous’ variation in assignment, but this language is not always applied."
   },
   {
     "objectID": "lecture-3-slides.html#efficiency",
@@ -2678,7 +2678,7 @@
     "href": "lecture-3-slides.html#section-8",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "After some math…(exploiting MLR-2)\n\n  Var(\\hat{\\beta}_1|X) = \\frac{E[u_i^2|X]}{SST_x}= \\frac{Var(u_i|x_i)}{SST_x} = \\frac{\\sigma^2}{SST_x}\n\n\nUsing MLR-5 (Homoskedasticity).\n\nThe larger the variance of error term, the bigger the variance of the estimator\n\n\\Rightarrow if you add variables that explain more of y you can reduce the variance.\n\nIf you increase the variance in x, you reduce the variance of the estimator.\n\n\n\n\n\n\n\n\nOptimal experiment\n\n\nIn Randomized Control Trials the regressor is a single dummy variable: x_i=1 (=0) if treated (if control). In this case, SST_x=n\\bar{x}(1-\\bar{x}): a function that is quadratic in \\bar{x}=n^{-1}\\sum_i x_i - the share of treated individuals. This function is concave, with a maximum at \\bar{x} = 0.5. This tells us that the most efficient assignment is 50-50. For a given sample size, equal treatment minimizes the variance of the estimator."
+    "text": "After some math…(exploiting MLR-2)\n\n  Var(\\hat{\\beta}_1|X) = \\frac{E[u_i^2|X]}{SST_x}= \\frac{Var(u_i|x_i)}{SST_x} = \\frac{\\sigma^2}{SST_x}\n\n\nUsing MLR-5 (Homoskedasticity).\n\nThe larger the variance of error term, the bigger the variance of the estimator\n\n\\Rightarrow if you add variables that explain more of y you may reduce the variance.\n\nIf you increase the variance in x, you reduce the variance of the estimator.\n\n\n\n\n\n\n\n\nOptimal experiment\n\n\nIn Randomized Control Trials the regressor is a single dummy variable: x_i=1 (=0) if treated (if control). In this case, SST_x=n\\bar{x}(1-\\bar{x}): a function that is quadratic in \\bar{x}=n^{-1}\\sum_i x_i - the share of treated individuals. This function is concave, with a maximum at \\bar{x} = 0.5. This tells us that the most efficient assignment is 50-50. For a given sample size, equal treatment minimizes the variance of the estimator."
   },
   {
     "objectID": "lecture-3-slides.html#simulation",
@@ -2692,21 +2692,21 @@
     "href": "lecture-3-slides.html#multivariate-case",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Multivariate case",
-    "text": "Multivariate case\nThere is an equivalent formula for the multivariate estimator:\n\n  Var(\\hat{\\beta}_j|X) = \\frac{Var(u_i|X)}{\\text{SSR}_j} = \\frac{\\sigma^2}{\\text{SSR}_j}\n\nwhere \\text{SSR}_j is the residual sum of squares from regressing x_j on all other regressors.\n\nrelates to idea of partialling out from Lecture 2"
+    "text": "Multivariate case\nThere is an equivalent formula for the multivariate estimator:\n\n  Var(\\hat{\\beta}_j|X) = \\frac{Var(u_i|X)}{\\text{SSR}_j} = \\frac{\\sigma^2}{\\text{SSR}_j}\\quad j=1,\\dots,k\n\nwhere \\text{SSR}_j is the residual sum of squares from regressing x_j on all other regressors.\n\nrelates to idea of partialling out from Lecture 2\nas before, this is NOT the definition for \\hat{\\beta}_0. (We will not cover that, but you can trust that R/Stata is programmed correctly to give you the correct estimate.)"
   },
   {
     "objectID": "lecture-3-slides.html#section-9",
     "href": "lecture-3-slides.html#section-9",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "Since,\n\n  \\mathbf{R}^2_j = 1-\\frac{\\text{SSR}_j}{\\text{SST}_j}\\Rightarrow \\text{SSR}_j = \\text{SST}_j(1-\\mathbf{R}^2_j)\n\n\nThis is the definition then that Wooldridge uses (2025, 89)\n\n  Var(\\hat{\\beta}_j|X) = \\frac{\\sigma^2}{\\text{SST}_j(1-\\mathbf{R}^2_j)}\n\n\nWooldridge just writes Var(\\hat{\\beta}_j) and adds “conditional on the sample values of the independent variables” (p. 89) to his description."
+    "text": "Since,\n\n  \\mathbf{R}^2_j = 1-\\frac{\\text{SSR}_j}{\\text{SST}_j}\\Rightarrow \\text{SSR}_j = \\text{SST}_j(1-\\mathbf{R}^2_j)\n\n\nThis is the definition then that Wooldridge uses (2025, 89)\n\n  Var(\\hat{\\beta}_j|X) = \\frac{\\sigma^2}{\\text{SST}_j(1-\\mathbf{R}^2_j)}\n\n\nWooldridge just writes Var(\\hat{\\beta}_j) and adds “conditional on the sample values of the independent variables” (p. 89) to his description.1\n\n\nYou may write Var(\\hat{\\beta}_j) instead of Var(\\hat{\\beta}_j|X) too. The notes include the X to emphasize that this definition is conditional on sample values of the regressors."
   },
   {
     "objectID": "lecture-3-slides.html#intuition-1",
     "href": "lecture-3-slides.html#intuition-1",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Intuition",
-    "text": "Intuition\n\nif other regressors explain a lot of the variation in x_j, the \\downarrow\\text{SSR}_j\\Rightarrow \\uparrow Var\n\nalternatively, then \\uparrow\\mathbf{R}^2_j\\Rightarrow \\downarrow (1-\\mathbf{R}^2_j)\\Rightarrow\\uparrow Var\n\nadding regressors has competing effects in terms of efficiency.\n\npotentially explain more of y_i\\Rightarrow \\downarrow \\sigma^2\nchanges the variance of other estimators through correlation between regressors."
+    "text": "Intuition\n\nif other regressors explain a lot of the variation in x_j, the \\downarrow\\text{SSR}_j\\Rightarrow \\uparrow Var(\\hat{\\beta}_j)\n\nalternatively, then \\uparrow\\mathbf{R}^2_j\\Rightarrow \\downarrow (1-\\mathbf{R}^2_j)\\Rightarrow\\uparrow Var(\\hat{\\beta}_j)\n\nadding regressors has competing effects in terms of efficiency.\n\npotentially explain more of y_i\\Rightarrow \\downarrow \\sigma^2\nchanges the variance of other estimators through correlation between regressors."
   },
   {
     "objectID": "lecture-3-slides.html#gauss-markov-theorem",
@@ -2839,21 +2839,21 @@
     "href": "lecture-3-slides.html#confidence-intervals-1",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Confidence intervals",
-    "text": "Confidence intervals\nWe mentioned that the \\text{CI}_{0.095} can be used for hypothesis testing.\n\n  \\text{CI}_{0.95} = \\big[\\hat{\\beta}_j - \\text{z}_{0.975}\\times sd(\\hat{\\beta}_j),\\hat{\\beta}_j + \\text{z}_{0.975}\\times sd(\\hat{\\beta}_j)\\big]\n\n\nFor two-side test, our rejection rule is:\n\n  \\begin{aligned}\n  \\text{Reject}\\;&H_0\\;\\text{if}\\quad |z-\\text{stat}|&gt; \\text{z}_{0.95} \\\\\n  \\Rightarrow & z-\\text{stat}&gt; \\text{z}_{0.95} \\quad\\text{or} \\quad z-\\text{stat}&lt;-\\text{z}_{0.95}\n  \\end{aligned}"
+    "text": "Confidence intervals\nWe mentioned that the \\text{CI}_{0.095} can be used for hypothesis testing.\n\n  \\text{CI}_{0.95} = \\big[\\hat{\\beta}_j - \\text{z}_{0.975}\\times sd(\\hat{\\beta}_j),\\hat{\\beta}_j + \\text{z}_{0.975}\\times sd(\\hat{\\beta}_j)\\big]\n\n\nFor two-side test, our rejection rule is:\n\n  \\begin{aligned}\n  \\text{Reject}\\;&H_0\\;\\text{if}\\quad |z-\\text{stat}|&gt; \\text{z}_{0.975} \\\\\n  \\Rightarrow & z-\\text{stat}&gt; \\text{z}_{0.975} \\quad\\text{or} \\quad z-\\text{stat}&lt;-\\text{z}_{0.975}\n  \\end{aligned}"
   },
   {
     "objectID": "lecture-3-slides.html#section-16",
     "href": "lecture-3-slides.html#section-16",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "Let H_0: \\beta_j = \\kappa_0 (some constant chosen for the null), then\n\n  z-\\text{stat} = \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}\n\n\nThen, our rejection rule can be written as: Reject H_0 if\n\n  \\begin{aligned}\n  \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&gt; \\text{z}_{0.95} \\quad&\\text{or} \\quad \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&lt;-\\text{z}_{0.95} \\\\\n  \\Rightarrow -\\kappa_0&gt; \\text{z}_{0.95}\\times sd(\\hat{\\beta}_j) - \\hat{\\beta}_j \\quad&\\text{or} \\quad -\\kappa_0&lt;-\\text{z}_{0.95}\\times sd(\\hat{\\beta}_j)-\\hat{\\beta}_j \\\\\n  \\Rightarrow \\kappa_0&lt; \\hat{\\beta}_j-\\text{z}_{0.95}\\times sd(\\hat{\\beta}_j)  \\quad&\\text{or} \\quad \\kappa_0&gt;\\hat{\\beta}_j +\\text{z}_{0.95}\\times sd(\\hat{\\beta}_j)\\\\\n  & \\\\\n  \\Rightarrow \\kappa_0 &\\not\\in \\text{CI}_{0.95}\n  \\end{aligned}"
+    "text": "Let H_0: \\beta_j = \\kappa_0 (some constant chosen for the null), then\n\n  z-\\text{stat} = \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}\n\n\nThen, our rejection rule can be written as: Reject H_0 if\n\n  \\begin{aligned}\n  \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&gt; \\text{z}_{0.975} \\quad&\\text{or} \\quad \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&lt;-\\text{z}_{0.975} \\\\\n  \\Rightarrow -\\kappa_0&gt; \\text{z}_{0.975}\\times sd(\\hat{\\beta}_j) - \\hat{\\beta}_j \\quad&\\text{or} \\quad -\\kappa_0&lt;-\\text{z}_{0.975}\\times sd(\\hat{\\beta}_j)-\\hat{\\beta}_j \\\\\n  \\Rightarrow \\kappa_0&lt; \\hat{\\beta}_j-\\text{z}_{0.975}\\times sd(\\hat{\\beta}_j)  \\quad&\\text{or} \\quad \\kappa_0&gt;\\hat{\\beta}_j +\\text{z}_{0.975}\\times sd(\\hat{\\beta}_j)\\\\\n  & \\\\\n  \\Rightarrow \\kappa_0 &\\not\\in \\text{CI}_{0.95}\n  \\end{aligned}"
   },
   {
     "objectID": "lecture-3-slides.html#example",
     "href": "lecture-3-slides.html#example",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Example",
-    "text": "Example\nBack to our example where our estimate of \\hat{\\beta}_j is 0.35, with sd=0.12. The constructed the 95% confidence interval is:\n\n  [0.35 - \\text{z}_{0.975}\\times 0.12,0.35 + \\text{z}_{0.975}\\times 0.12] = [0.115,0.585]\n\n\n\nat a \\alpha = 0.05, we FAIL to reject any H_0: \\beta_j  = \\kappa_0 where\n\\kappa_0\\in [0.115,0.585]\n\nWe would reject H_0: \\beta_j  = 0\nBut fail to reject H_0: \\beta_j  = 0.2"
+    "text": "Example\nBack to our example where our estimate of \\hat{\\beta}_j is 0.35, with sd=0.12. The computed 95% confidence interval is:\n\n  [0.35 - \\text{z}_{0.975}\\times 0.12,0.35 + \\text{z}_{0.975}\\times 0.12] = [0.115,0.585]\n\n\n\nat a \\alpha = 0.05, we FAIL to reject any H_0: \\beta_j  = \\kappa_0 where\n\\kappa_0\\in [0.115,0.585]\n\nWe would reject H_0: \\beta_j  = 0\nBut fail to reject H_0: \\beta_j  = 0.2"
   },
   {
     "objectID": "lecture-3-slides.html#type-2-errors",
@@ -2874,7 +2874,7 @@
     "href": "lecture-3-slides.html#section-17",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "We know what this function looks like:\n\n  \\begin{aligned}\n    &Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa) \\\\\n    =& Pr(|z\\text{-stat}|&gt;1.96|\\beta_j = \\kappa) \\\\\n    =& Pr\\Bigg(\\Bigg| \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}\\Bigg|&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg) \\\\\n    =& Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&lt;-1.96\\Bigg|\\beta_j = \\kappa\\Bigg) + Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg)\n  \\end{aligned}\n\nThis probability is not 0.05 because \\beta_j \\neq 0."
+    "text": "We know what this function looks like:\n\n  \\begin{aligned}\n    &Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa) \\\\\n    =& Pr(|z\\text{-stat}|&gt;1.96|\\beta_j = \\kappa) \\\\\n    =& Pr\\Bigg(\\Bigg| \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}\\Bigg|&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg) \\\\\n    =& Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&lt;-1.96\\Bigg|\\beta_j = \\kappa\\Bigg) + Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg)\n  \\end{aligned}\n\nThis probability is not 0.05 because \\beta_j \\neq \\kappa_0."
   },
   {
     "objectID": "lecture-3-slides.html#section-18",
@@ -2930,7 +2930,7 @@
     "href": "lecture-3-slides.html#t-test-statistic",
     "title": "Properties of OLS and Statistical Inference",
     "section": "t test-statistic",
-    "text": "t test-statistic\nFor H_0: \\beta_j = 0\n\n  t\\text{-stat} = \\frac{\\hat{\\beta}_j}{se(\\hat{\\beta}_j)} | X \\underset{H_0}{\\sim} t_{n-k-1}\n\nThis is often referred to as the t-statistic in is reported as a default test parameter in regression output.\n\n\nYou can perform all the same inference steps (critical values, p-values, CI) replacing normal distribution with t-distribution\nUsing the t-distribution leads to slightly more “conservative” decisions.\n\nthe tests have less statistical power relative to their normal counterpart (if you knew \\sigma^2)"
+    "text": "t test-statistic\nFor H_0: \\beta_j = 0\n\n  t\\text{-stat} = \\frac{\\hat{\\beta}_j}{se(\\hat{\\beta}_j)} | X \\underset{H_0}{\\sim} t_{n-k-1}\n\nThis is often referred to as the t-statistic and is reported as a default test parameter in regression output.\n\n\nYou can perform all the same inference steps (critical values, p-values, CI) replacing normal distribution with t-distribution\nUsing the t-distribution leads to slightly more “conservative” decisions.\n\nthe tests have less statistical power relative to their normal counterpart (if you knew \\sigma^2)"
   },
   {
     "objectID": "lecture-3-slides.html#critical-values",
@@ -3063,7 +3063,7 @@
     "href": "lecture-3.html#endogeneity",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Endogeneity",
-    "text": "Endogeneity\nThere are reasons why \\(E[u|x]\\neq 0\\) (i.e., ‘sources of endogeneity’)\n\nomitted variables (confounding factors not included in the model)\nmeasurement error (certain types)\nmodel mis-specification\nselection into “treatment”\nsample selection\nreverse causality (\\(Y\\rightarrow X\\)) or simultaneity (\\(Y\\leftrightharpoons X\\))\n\n\n\n\n\n\n\n\nImportantEndogenous\n\n\n\nThe language of ‘endogeneity’/‘exogeneity’ is not universal. In the modern causal inference literature, the discussion centers around selection into “treatment”. As we will see at a later stage, this can be described as an omitted variable problem. The problem is typically solved through randomization, which results in unconfounded assignment. You could think of random assignment as a source of ‘exogenous’ variation in assignment, but this language is not always applied.\n\n\n\n\n\n\n\n\n\nTipHeckman Selection\n\n\n\n\n\nA famous paper by Jim Heckman shows that selection into the sample can lead to biased estimates (Heckman 1979). The example that is often studied is the labour market: if we want to study the relationship between hours of work and the wage rate (i.e. elasticty of labour supply), we need to account for the fact that we don’t observe data for people who choose not work. And since that choice not to work may depend on the wage offers an individual receives, the selection of the sample may lead to biased estimates of the elasticity of labour supply.\nHeckman (1979) proposes a rather simple solution to this problem using a two-step estimation procedure. In Stata the command is called heckman, while in R you can use the selection() function from the sampleSelection package. The method is discussed in Wooldridge (2025, ch. 17.6).\nThis sample selection problem should not be confused with the problem of selection into “treatment”."
+    "text": "Endogeneity\nThere are reasons why \\(E[u|x]\\neq 0\\) (i.e., ‘sources of endogeneity’)\n\nomitted variables (confounding factors not included in the model)\nmeasurement error (certain types)\nmodel mis-specification\nselection into “treatment”\nsample selection\nreverse causality (\\(y\\rightarrow x\\)) or simultaneity (\\(y\\leftrightharpoons x\\))\n\n\n\n\n\n\n\n\nImportantEndogenous\n\n\n\nThe language of ‘endogeneity’/‘exogeneity’ is not universal. In the modern causal inference literature, the discussion centers around selection into “treatment”. As we will see at a later stage, this can be described as an omitted variable problem. The problem is typically solved through randomization, which results in unconfounded assignment. You could think of random assignment as a source of ‘exogenous’ variation in assignment, but this language is not always applied.\n\n\n\n\n\n\n\n\n\nTipHeckman Selection\n\n\n\n\n\nA famous paper by Jim Heckman shows that selection into the sample can lead to biased estimates (Heckman 1979). The example that is often studied is the labour market: if we want to study the relationship between hours of work and the wage rate (i.e. elasticty of labour supply), we need to account for the fact that we don’t observe data for people who choose not work. And since that choice not to work may depend on the wage offers an individual receives, the selection of the sample may lead to biased estimates of the elasticity of labour supply.\nHeckman (1979) proposes a rather simple solution to this problem using a two-step estimation procedure. In Stata the command is called heckman, while in R you can use the selection() function from the sampleSelection package. The method is discussed in Wooldridge (2025, ch. 17.6).\nThis sample selection problem should not be confused with the problem of selection into “treatment”."
   },
   {
     "objectID": "lecture-3.html#efficiency",
@@ -3091,7 +3091,7 @@
     "href": "lecture-3.html#section-8",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "After some math…(exploiting MLR-2)\n\\[\n  Var(\\hat{\\beta}_1|X) = \\frac{E[u_i^2|X]}{SST_x}= \\frac{Var(u_i|x_i)}{SST_x} = \\frac{\\sigma^2}{SST_x}\n\\]\n\nUsing MLR-5 (Homoskedasticity).\n\nThe larger the variance of error term, the bigger the variance of the estimator\n\n\\(\\Rightarrow\\) if you add variables that explain more of \\(y\\) you can reduce the variance.\n\nIf you increase the variance in \\(x\\), you reduce the variance of the estimator.\n\n\n\n\n\n\n\nNoteOptimal experiment\n\n\n\nIn Randomized Control Trials the regressor is a single dummy variable: \\(x_i=1\\) (\\(=0\\)) if treated (if control). In this case, \\(SST_x=n\\bar{x}(1-\\bar{x})\\): a function that is quadratic in \\(\\bar{x}=n^{-1}\\sum_i x_i\\) - the share of treated individuals. This function is concave, with a maximum at \\(\\bar{x} = 0.5\\). This tells us that the most efficient assignment is 50-50. For a given sample size, equal treatment minimizes the variance of the estimator."
+    "text": "After some math…(exploiting MLR-2)\n\\[\n  Var(\\hat{\\beta}_1|X) = \\frac{E[u_i^2|X]}{SST_x}= \\frac{Var(u_i|x_i)}{SST_x} = \\frac{\\sigma^2}{SST_x}\n\\]\n\nUsing MLR-5 (Homoskedasticity).\n\nThe larger the variance of error term, the bigger the variance of the estimator\n\n\\(\\Rightarrow\\) if you add variables that explain more of \\(y\\) you may reduce the variance.\n\nIf you increase the variance in \\(x\\), you reduce the variance of the estimator.\n\n\n\n\n\n\n\nNoteOptimal experiment\n\n\n\nIn Randomized Control Trials the regressor is a single dummy variable: \\(x_i=1\\) (\\(=0\\)) if treated (if control). In this case, \\(SST_x=n\\bar{x}(1-\\bar{x})\\): a function that is quadratic in \\(\\bar{x}=n^{-1}\\sum_i x_i\\) - the share of treated individuals. This function is concave, with a maximum at \\(\\bar{x} = 0.5\\). This tells us that the most efficient assignment is 50-50. For a given sample size, equal treatment minimizes the variance of the estimator."
   },
   {
     "objectID": "lecture-3.html#simulation",
@@ -3105,28 +3105,28 @@
     "href": "lecture-3.html#multivariate-case",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Multivariate case",
-    "text": "Multivariate case\nThere is an equivalent formula for the multivariate estimator:\n\\[\n  Var(\\hat{\\beta}_j|X) = \\frac{Var(u_i|X)}{\\text{SSR}_j} = \\frac{\\sigma^2}{\\text{SSR}_j}\n\\]\nwhere \\(\\text{SSR}_j\\) is the residual sum of squares from regressing \\(x_j\\) on all other regressors.\n\nrelates to idea of partialling out from Lecture 2"
+    "text": "Multivariate case\nThere is an equivalent formula for the multivariate estimator:\n\\[\n  Var(\\hat{\\beta}_j|X) = \\frac{Var(u_i|X)}{\\text{SSR}_j} = \\frac{\\sigma^2}{\\text{SSR}_j}\\quad j=1,\\dots,k\n\\]\nwhere \\(\\text{SSR}_j\\) is the residual sum of squares from regressing \\(x_j\\) on all other regressors.\n\nrelates to idea of partialling out from Lecture 2\nas before, this is NOT the definition for \\(\\hat{\\beta}_0\\). (We will not cover that, but you can trust that R/Stata is programmed correctly to give you the correct estimate.)"
   },
   {
     "objectID": "lecture-3.html#section-9",
     "href": "lecture-3.html#section-9",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "Since,\n\\[\n  \\mathbf{R}^2_j = 1-\\frac{\\text{SSR}_j}{\\text{SST}_j}\\Rightarrow \\text{SSR}_j = \\text{SST}_j(1-\\mathbf{R}^2_j)\n\\]\n\nThis is the definition then that Wooldridge uses (2025, 89)\n\\[\n  Var(\\hat{\\beta}_j|X) = \\frac{\\sigma^2}{\\text{SST}_j(1-\\mathbf{R}^2_j)}\n\\]\n\nWooldridge just writes \\(Var(\\hat{\\beta}_j)\\) and adds “conditional on the sample values of the independent variables” (p. 89) to his description."
+    "text": "Since,\n\\[\n  \\mathbf{R}^2_j = 1-\\frac{\\text{SSR}_j}{\\text{SST}_j}\\Rightarrow \\text{SSR}_j = \\text{SST}_j(1-\\mathbf{R}^2_j)\n\\]\n\nThis is the definition then that Wooldridge uses (2025, 89)\n\\[\n  Var(\\hat{\\beta}_j|X) = \\frac{\\sigma^2}{\\text{SST}_j(1-\\mathbf{R}^2_j)}\n\\]\n\nWooldridge just writes \\(Var(\\hat{\\beta}_j)\\) and adds “conditional on the sample values of the independent variables” (p. 89) to his description.3"
   },
   {
     "objectID": "lecture-3.html#intuition-1",
     "href": "lecture-3.html#intuition-1",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Intuition",
-    "text": "Intuition\n\n\nif other regressors explain a lot of the variation in \\(x_j\\), the \\(\\downarrow\\text{SSR}_j\\Rightarrow \\uparrow Var\\)\n\nalternatively, then \\(\\uparrow\\mathbf{R}^2_j\\Rightarrow \\downarrow (1-\\mathbf{R}^2_j)\\Rightarrow\\uparrow Var\\)\n\nadding regressors has competing effects in terms of efficiency.\n\npotentially explain more of \\(y_i\\Rightarrow \\downarrow \\sigma^2\\)\nchanges the variance of other estimators through correlation between regressors."
+    "text": "Intuition\n\n\nif other regressors explain a lot of the variation in \\(x_j\\), the \\(\\downarrow\\text{SSR}_j\\Rightarrow \\uparrow Var(\\hat{\\beta}_j)\\)\n\nalternatively, then \\(\\uparrow\\mathbf{R}^2_j\\Rightarrow \\downarrow (1-\\mathbf{R}^2_j)\\Rightarrow\\uparrow Var(\\hat{\\beta}_j)\\)\n\nadding regressors has competing effects in terms of efficiency.\n\npotentially explain more of \\(y_i\\Rightarrow \\downarrow \\sigma^2\\)\nchanges the variance of other estimators through correlation between regressors."
   },
   {
     "objectID": "lecture-3.html#gauss-markov-theorem",
     "href": "lecture-3.html#gauss-markov-theorem",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Gauss-Markov Theorem",
-    "text": "Gauss-Markov Theorem\nThe Gauss-Markov Theorem states that under MLR 1-53\n\nOLS is the Best Linear Unbiased Estimator (BLUE)\n\n\n\n‘Best’: most efficient (i.e. lowest variance)\nCrucially:\n\nAmong linear estimators (there are more efficient non-linear options)\nAmong unbiased estimators (you can trade off a bit of bias for more efficiency)\nAssumes homoskedasticity (MLR 5)\n\nIf for heteroskedastic error variance, Generalized Least Squares is more efficient."
+    "text": "Gauss-Markov Theorem\nThe Gauss-Markov Theorem states that under MLR 1-54\n\nOLS is the Best Linear Unbiased Estimator (BLUE)\n\n\n\n‘Best’: most efficient (i.e. lowest variance)\nCrucially:\n\nAmong linear estimators (there are more efficient non-linear options)\nAmong unbiased estimators (you can trade off a bit of bias for more efficiency)\nAssumes homoskedasticity (MLR 5)\n\nIf for heteroskedastic error variance, Generalized Least Squares is more efficient."
   },
   {
     "objectID": "lecture-3.html#recap-1",
@@ -3210,7 +3210,7 @@
     "href": "lecture-3.html#significance-level",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Significance level",
-    "text": "Significance level\n\nPick a significance level (\\(\\alpha\\)).4 This is the permitted probability of a type 1 error:\n\n\\[\n  \\alpha = Pr(\\text{Reject}\\; H_0|H_0\\;\\text{is true}, X)\n\\]\nIn Economics, we typically use \\(\\alpha = \\{0.01,0.05,0.10\\}\\)."
+    "text": "Significance level\n\nPick a significance level (\\(\\alpha\\)).5 This is the permitted probability of a type 1 error:\n\n\\[\n  \\alpha = Pr(\\text{Reject}\\; H_0|H_0\\;\\text{is true}, X)\n\\]\nIn Economics, we typically use \\(\\alpha = \\{0.01,0.05,0.10\\}\\)."
   },
   {
     "objectID": "lecture-3.html#rejection-rule",
@@ -3252,21 +3252,21 @@
     "href": "lecture-3.html#confidence-intervals-1",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Confidence intervals",
-    "text": "Confidence intervals\nWe mentioned that the \\(\\text{CI}_{0.095}\\) can be used for hypothesis testing.\n\\[\n  \\text{CI}_{0.95} = \\big[\\hat{\\beta}_j - \\text{z}_{0.975}\\times sd(\\hat{\\beta}_j),\\hat{\\beta}_j + \\text{z}_{0.975}\\times sd(\\hat{\\beta}_j)\\big]\n\\]\n\nFor two-side test, our rejection rule is:\n\\[\n  \\begin{aligned}\n  \\text{Reject}\\;&H_0\\;\\text{if}\\quad |z-\\text{stat}|&gt; \\text{z}_{0.95} \\\\\n  \\Rightarrow & z-\\text{stat}&gt; \\text{z}_{0.95} \\quad\\text{or} \\quad z-\\text{stat}&lt;-\\text{z}_{0.95}\n  \\end{aligned}\n\\]"
+    "text": "Confidence intervals\nWe mentioned that the \\(\\text{CI}_{0.095}\\) can be used for hypothesis testing.\n\\[\n  \\text{CI}_{0.95} = \\big[\\hat{\\beta}_j - \\text{z}_{0.975}\\times sd(\\hat{\\beta}_j),\\hat{\\beta}_j + \\text{z}_{0.975}\\times sd(\\hat{\\beta}_j)\\big]\n\\]\n\nFor two-side test, our rejection rule is:\n\\[\n  \\begin{aligned}\n  \\text{Reject}\\;&H_0\\;\\text{if}\\quad |z-\\text{stat}|&gt; \\text{z}_{0.975} \\\\\n  \\Rightarrow & z-\\text{stat}&gt; \\text{z}_{0.975} \\quad\\text{or} \\quad z-\\text{stat}&lt;-\\text{z}_{0.975}\n  \\end{aligned}\n\\]"
   },
   {
     "objectID": "lecture-3.html#section-16",
     "href": "lecture-3.html#section-16",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "Let \\(H_0: \\beta_j = \\kappa_0\\) (some constant chosen for the null), then\n\\[\n  z-\\text{stat} = \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}\n\\]\n\nThen, our rejection rule can be written as: Reject \\(H_0\\) if\n\\[\n  \\begin{aligned}\n  \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&gt; \\text{z}_{0.95} \\quad&\\text{or} \\quad \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&lt;-\\text{z}_{0.95} \\\\\n  \\Rightarrow -\\kappa_0&gt; \\text{z}_{0.95}\\times sd(\\hat{\\beta}_j) - \\hat{\\beta}_j \\quad&\\text{or} \\quad -\\kappa_0&lt;-\\text{z}_{0.95}\\times sd(\\hat{\\beta}_j)-\\hat{\\beta}_j \\\\\n  \\Rightarrow \\kappa_0&lt; \\hat{\\beta}_j-\\text{z}_{0.95}\\times sd(\\hat{\\beta}_j)  \\quad&\\text{or} \\quad \\kappa_0&gt;\\hat{\\beta}_j +\\text{z}_{0.95}\\times sd(\\hat{\\beta}_j)\\\\\n  & \\\\\n  \\Rightarrow \\kappa_0 &\\not\\in \\text{CI}_{0.95}\n  \\end{aligned}\n\\]"
+    "text": "Let \\(H_0: \\beta_j = \\kappa_0\\) (some constant chosen for the null), then\n\\[\n  z-\\text{stat} = \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}\n\\]\n\nThen, our rejection rule can be written as: Reject \\(H_0\\) if\n\\[\n  \\begin{aligned}\n  \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&gt; \\text{z}_{0.975} \\quad&\\text{or} \\quad \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&lt;-\\text{z}_{0.975} \\\\\n  \\Rightarrow -\\kappa_0&gt; \\text{z}_{0.975}\\times sd(\\hat{\\beta}_j) - \\hat{\\beta}_j \\quad&\\text{or} \\quad -\\kappa_0&lt;-\\text{z}_{0.975}\\times sd(\\hat{\\beta}_j)-\\hat{\\beta}_j \\\\\n  \\Rightarrow \\kappa_0&lt; \\hat{\\beta}_j-\\text{z}_{0.975}\\times sd(\\hat{\\beta}_j)  \\quad&\\text{or} \\quad \\kappa_0&gt;\\hat{\\beta}_j +\\text{z}_{0.975}\\times sd(\\hat{\\beta}_j)\\\\\n  & \\\\\n  \\Rightarrow \\kappa_0 &\\not\\in \\text{CI}_{0.95}\n  \\end{aligned}\n\\]"
   },
   {
     "objectID": "lecture-3.html#example",
     "href": "lecture-3.html#example",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Example",
-    "text": "Example\nBack to our example where our estimate of \\(\\hat{\\beta}_j\\) is \\(0.35\\), with \\(sd=0.12\\). The constructed the 95% confidence interval is:\n\\[\n  [0.35 - \\text{z}_{0.975}\\times 0.12,0.35 + \\text{z}_{0.975}\\times 0.12] = [0.115,0.585]\n\\]\n\n\nat a \\(\\alpha = 0.05\\), we FAIL to reject any \\(H_0: \\beta_j  = \\kappa_0\\) where\n\\[\\kappa_0\\in [0.115,0.585]\\]\n\nWe would reject \\(H_0: \\beta_j  = 0\\)\nBut fail to reject \\(H_0: \\beta_j  = 0.2\\)"
+    "text": "Example\nBack to our example where our estimate of \\(\\hat{\\beta}_j\\) is \\(0.35\\), with \\(sd=0.12\\). The computed 95% confidence interval is:\n\\[\n  [0.35 - \\text{z}_{0.975}\\times 0.12,0.35 + \\text{z}_{0.975}\\times 0.12] = [0.115,0.585]\n\\]\n\n\nat a \\(\\alpha = 0.05\\), we FAIL to reject any \\(H_0: \\beta_j  = \\kappa_0\\) where\n\\[\\kappa_0\\in [0.115,0.585]\\]\n\nWe would reject \\(H_0: \\beta_j  = 0\\)\nBut fail to reject \\(H_0: \\beta_j  = 0.2\\)"
   },
   {
     "objectID": "lecture-3.html#type-2-errors",
@@ -3287,7 +3287,7 @@
     "href": "lecture-3.html#section-17",
     "title": "Properties of OLS and Statistical Inference",
     "section": "",
-    "text": "We know what this function looks like:\n\\[\n  \\begin{aligned}\n    &Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa) \\\\\n    =& Pr(|z\\text{-stat}|&gt;1.96|\\beta_j = \\kappa) \\\\\n    =& Pr\\Bigg(\\Bigg| \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}\\Bigg|&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg) \\\\\n    =& Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&lt;-1.96\\Bigg|\\beta_j = \\kappa\\Bigg) + Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg)\n  \\end{aligned}\n\\]\nThis probability is not \\(0.05\\) because \\(\\beta_j \\neq 0\\)."
+    "text": "We know what this function looks like:\n\\[\n  \\begin{aligned}\n    &Pr(\\text{Reject}\\;H_0|\\beta_j = \\kappa) \\\\\n    =& Pr(|z\\text{-stat}|&gt;1.96|\\beta_j = \\kappa) \\\\\n    =& Pr\\Bigg(\\Bigg| \\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}\\Bigg|&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg) \\\\\n    =& Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&lt;-1.96\\Bigg|\\beta_j = \\kappa\\Bigg) + Pr\\Bigg(\\frac{\\hat{\\beta}_j-\\kappa_0}{sd(\\hat{\\beta}_j)}&gt;1.96\\Bigg|\\beta_j = \\kappa\\Bigg)\n  \\end{aligned}\n\\]\nThis probability is not \\(0.05\\) because \\(\\beta_j \\neq \\kappa_0\\)."
   },
   {
     "objectID": "lecture-3.html#section-18",
@@ -3343,7 +3343,7 @@
     "href": "lecture-3.html#t-test-statistic",
     "title": "Properties of OLS and Statistical Inference",
     "section": "\\(t\\) test-statistic",
-    "text": "\\(t\\) test-statistic\nFor \\(H_0: \\beta_j = 0\\)\n\\[\n  t\\text{-stat} = \\frac{\\hat{\\beta}_j}{se(\\hat{\\beta}_j)} | X \\underset{H_0}{\\sim} t_{n-k-1}\n\\]\nThis is often referred to as the t-statistic in is reported as a default test parameter in regression output.\n\n\nYou can perform all the same inference steps (critical values, \\(p\\)-values, CI) replacing normal distribution with \\(t\\)-distribution\nUsing the \\(t\\)-distribution leads to slightly more “conservative” decisions.\n\nthe tests have less statistical power relative to their normal counterpart (if you knew \\(\\sigma^2\\))"
+    "text": "\\(t\\) test-statistic\nFor \\(H_0: \\beta_j = 0\\)\n\\[\n  t\\text{-stat} = \\frac{\\hat{\\beta}_j}{se(\\hat{\\beta}_j)} | X \\underset{H_0}{\\sim} t_{n-k-1}\n\\]\nThis is often referred to as the \\(t\\)-statistic and is reported as a default test parameter in regression output.\n\n\nYou can perform all the same inference steps (critical values, \\(p\\)-values, CI) replacing normal distribution with \\(t\\)-distribution\nUsing the \\(t\\)-distribution leads to slightly more “conservative” decisions.\n\nthe tests have less statistical power relative to their normal counterpart (if you knew \\(\\sigma^2\\))"
   },
   {
     "objectID": "lecture-3.html#critical-values",
@@ -3385,7 +3385,7 @@
     "href": "lecture-3.html#footnotes",
     "title": "Properties of OLS and Statistical Inference",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nWe can also use the Frisch-Waugh Theorem to define the multivariate estimator as a biavariate estimator.↩︎\nThe sample values of regressors is \\(X=[x_1,x_2,\\dots,x_n]'\\); a column vector (or matrix in the multivariate case). In my notation, I use capital \\(X\\) to denote the column vector of \\(\\{x_i\\}_{i=1,\\dots,n}\\), and to distinguish it from \\(\\mathbf{x}_i\\) used to denote the row vector of regressors for observation \\(i\\): \\(\\{x_{ij}\\}_{j=1,\\dots,k}\\). We will use the fact that, under random sampling \\(E[u_i|x_i]=0\\Rightarrow E[u_i|X]=0\\).↩︎\nWe will not prove this theorem. Plenty are available online, but the proof is not examinable.↩︎\nAlso referred to as the ‘size’ of the test.↩︎"
+    "text": "Footnotes\n\n\nWe can also use the Frisch-Waugh Theorem to define the multivariate estimator as a biavariate estimator.↩︎\nThe sample values of regressors is \\(X=[x_1,x_2,\\dots,x_n]'\\); a column vector (or matrix in the multivariate case). In my notation, I use capital \\(X\\) to denote the column vector of \\(\\{x_i\\}_{i=1,\\dots,n}\\), and to distinguish it from \\(\\mathbf{x}_i\\) used to denote the row vector of regressors for observation \\(i\\): \\(\\{x_{ij}\\}_{j=1,\\dots,k}\\). We will use the fact that, under random sampling \\(E[u_i|x_i]=0\\Rightarrow E[u_i|X]=0\\).↩︎\nYou may write \\(Var(\\hat{\\beta}_j)\\) instead of \\(Var(\\hat{\\beta}_j|X)\\) too. The notes include the \\(X\\) to emphasize that this definition is conditional on sample values of the regressors.↩︎\nWe will not prove this theorem. Plenty are available online, but the proof is not examinable.↩︎\nAlso referred to as the ‘size’ of the test.↩︎"
   },
   {
     "objectID": "material-intercept.html",
@@ -3526,5 +3526,19 @@
     "title": "Tutorial 2 (Solutions)",
     "section": "Properties of OLS",
     "text": "Properties of OLS\nConsider the following decomposition of \\(y_i\\) based upon the OLS estimator,\n\\[\n  y_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 x_{1i}+ \\hat{\\beta}_2 x_{2i} + \\hat{u}_i\n\\]\ncorresponding to the multivariate model\n\\[\n  y_i = \\beta_0 + \\beta_1x_{1i} + \\beta_2 x_{2i} + u_i\n\\]\n\nUnder MLR. 1-4, you can show that \\(E[\\hat{\\beta}_1] = \\beta_1\\). What is this property called and what does it mean?\n\n\nThis is the formal definition of unbiasedness. It means that in expectation the OLS estimator will be equal to the true population parameter. Another way to describe this is if we were to draw an infinite number of equally sized samples from the population, the average realized value of the estimator will be \\(\\beta_1\\). It does NOT mean that OLS estimator will be equal to \\(\\beta\\): \\(\\hat{\\beta}_1 \\neq \\beta_1\\). Indeed, the probability that such an event occurs is theoretically 0.\n\n\nIn Lecture 3, we defined\n\\[\n   se(\\hat{\\beta}_1) = \\frac{\\hat{\\sigma}}{\\sqrt{n} sd(x_1) \\sqrt{1-R^2_1}}\n\\]\nExplain each component of this equation and how you would compute it.\n\n\n\\(\\hat{\\sigma}\\) is the given by the square-root of,\n\\[\n  \\hat{\\sigma}^2 = \\frac{1}{n-k-1}\\sum_{i=1}^n \\hat{u}_i^2\n\\]\nwhere \\(k=2\\) and \\(\\hat{u}_i\\) is the residual from the main regression.\n\\(\\sqrt{n}sd(x_1)\\) is another solution for the square-root of,\n\\[\n  SST_1 = \\sum_{i=1}^n (x_{i1}-\\bar{x}_1)^2\n\\]\nsince \\(sd(x_1)\\) is just the square-root of,\n\\[\n  Var(x_{i1}) = \\frac{1}{n}\\sum_{i=1}^n (x_{i1}-\\bar{x}_1)^2\n\\]\nFinally, \\(R^2_1\\) is the \\(R^2\\) from a regression of \\(x_1\\) on \\(x_2\\).\n\n\nWhat happens to the variance of the estimator if \\(x_1\\) and \\(x_2\\) are highly correlated?\n\n\n\n\n\n\n\nImportantMulticollinearity\n\n\n\nIn the limit, you can consider what happens as \\(R_{j}^2\\rightarrow 1\\). This is the problem of multicollinearity discussed on p. 91 of Wooldridge (2025).\n\n\n\nA higher correlation between \\(x_1\\) and \\(x_2\\) means a higher variance of the estimator for both variables. This is one reason to think critically before adding additional regressors to a model.\n\n\nHow does the equation above relate to the material from Lecture 2 on partialling out (i.e. Frisch-Waugh Theorem)?\n\n\nThe Frisch-Waugh Theorem tells us that we can estimate \\(\\hat{\\beta}_1\\) by first residualizing \\(y\\) and \\(x_1\\) in a regression on \\(x_2\\). Thus, you learn about the relationship between \\(y\\) and \\(x\\) by first partialling out the effect of \\(x_2\\). If \\(x_1\\) and \\(x_2\\) are highly correlated, there the residualize \\(\\tilde{x}_1\\) has a very low variance. This inflates the standard error of the estimator.\n\n\nWould the problem of correlated regressors be a problem in the evaluation of a Randomized Control Trial? As we saw in the regression from Karlan, Rigol, and Roth (2026, 24) (in Lecture 1), authors often estimate the impact of treatment in a randomized control trial by estimating a linear regression model with additional controls.\n\\[\n  y_i = \\alpha + \\beta T_i + \\mathbf{x}_i\\delta + \\varepsilon_i\n\\]\n\n\nRandom allocation should mean that the characteristics of firms are balanced (in expectation) across treatment and control. There may be a slight correlation in the realized allocation, but it should not be statistically significant. This is usually checked in a balance table.\nFor that reason, the inclusion of \\(\\mathbf{x}\\) firm characteristics should not reduce the variance of the estimator through its correlation with \\(T_i\\). Instead, it should lower the variance by explaining more the variation in \\(y\\) and lowering the \\(SSR\\).\n\n\nWhat would the impact of an increase in sample size be?\n\n\nThe effect of an increase in sample size will be to reduce the SE of the estimator. Increasing the sample size should not (in expectation) change \\(R_1^2\\).\n\n\nRandomized control trials are famously low powered. Given the discussion above, what are some of the ways that researchers might increase the power of their test to reject the null hypothesis of no effect (\\(H_0: \\beta=0\\)).\n\n\nTo increase power, you need an estimator with a lower variance. Here are three approaches researchers use:\n\nSample size. A larger sample size reduces the variance of the estimator. This option has the problem that it is costly when running a RCT.\nTreatment allocation. For discrete \\(x_1\\), \\(SST_1=n\\bar{x}_1(1-\\bar{x}_1)\\) where \\(\\bar{x}_1\\) is the share of the sample treated (\\(x_1=1\\)). For the lowest variance, you should treat 50% of the sample.\nGood controls. Adding in controls that explain \\(y\\) helps to lower the variance of the estimator.\n\n\n\nIf the error term in the underlying model is heteroskedastic, will the estimated variance be smaller or larger?\n\n\nThe estimator for heteroskedastic SEs need not yield a larger estimate. In fact, heteroskedastic robust SE estimates are often small than their homoskedastic counterparts.\n\n\nWhen the error variance is not homoskedastic, why can you no longer use the \\(t\\) or \\(F\\) distribution? [This is an advanced question, not covered by material in the lectures. See what you can find out.]\n\n\nIn the context we use them, the \\(t\\)-distribution and \\(F\\)-distribution take on the following forms:\n\n\\(t\\)-distribution\n\\[\n  T_{n-k-1} = \\frac{N(0,1)}{\\chi^2_{n-k-1}/(n-k-1)}\n\\]\n\\(F\\)-distribution\n\\[\n  F_{q,n-k-1} = \\frac{\\chi^2_{q}/q}{\\chi^2_{n-k-1}/(n-k-1)}\n\\]\n\nThey share the same denominator: \\(\\chi^2_{n-k-1}\\). This distribution has a direct link to the error variance. It arises from:\n\\[\n  \\sum_{i=1}^{n-k-1}\\bigg(\\frac{\\hat{u}_i}{\\sigma}\\bigg)^2 = \\sum_{i=1}^{n-k-1}z_{i}^2 = \\chi^2_{n-k-1}\n\\]\nwhere \\(\\hat{u}_i/\\sigma|\\mathbf{x}_i=z_i\\sim N(0,1)\\) only if \\(Var(u_i|\\mathbf{x}_i)=\\sigma^2\\) and \\(u_i|\\mathbf{x}_i\\sim N(0,\\sigma^2)\\). If the error variance is heteroskedastic then the denominator term no longer has a chi-squared distribution."
+  },
+  {
+    "objectID": "lecture-3.html#standardization",
+    "href": "lecture-3.html#standardization",
+    "title": "Properties of OLS and Statistical Inference",
+    "section": "Standardization",
+    "text": "Standardization\nWe can therefore standardize the distribution:\n\\[\n  \\frac{\\hat{\\beta}_j-\\beta_j}{sd(\\hat{\\beta}_j)} | X \\sim N(0,1)\n\\]\nwhere \\(sd(\\hat{\\beta}_j) = \\sqrt{Var(\\hat{\\beta}_j|X)}\\)"
+  },
+  {
+    "objectID": "lecture-3-slides.html#standardization",
+    "href": "lecture-3-slides.html#standardization",
+    "title": "Properties of OLS and Statistical Inference",
+    "section": "Standardization",
+    "text": "Standardization\nWe can therefore standardize the distribution:\n\n  \\frac{\\hat{\\beta}_j-\\beta_j}{sd(\\hat{\\beta}_j)} | X \\sim N(0,1)\n\nwhere sd(\\hat{\\beta}_j) = \\sqrt{Var(\\hat{\\beta}_j|X)}"
   }
 ]

@@ -764,7 +764,7 @@ E[\hat{\beta}_1] = E\big[E[\hat{\beta}_1|X]\big] = E[\beta_1] = \beta_1
 <li>model mis-specification</li>
 <li>selection into “treatment”</li>
 <li>sample selection</li>
-<li>reverse causality (<span class="math inline">\(Y\rightarrow X\)</span>) or simultaneity (<span class="math inline">\(Y\leftrightharpoons X\)</span>)</li>
+<li>reverse causality (<span class="math inline">\(y\rightarrow x\)</span>) or simultaneity (<span class="math inline">\(y\leftrightharpoons x\)</span>)</li>
 </ul>
 <div class="fragment fade-in">
 <div class="callout callout-style-default callout-important callout-titled" title="Endogenous">
@@ -858,7 +858,7 @@ E[\hat{\beta}_1] = E\big[E[\hat{\beta}_1|X]\big] = E[\beta_1] = \beta_1
 <ul>
 <li><p>The larger the variance of error term, the bigger the variance of the estimator</p>
 <ul>
-<li><span class="math inline">\(\Rightarrow\)</span> if you add variables that explain more of <span class="math inline">\(y\)</span> you can reduce the variance.</li>
+<li><span class="math inline">\(\Rightarrow\)</span> if you add variables that explain more of <span class="math inline">\(y\)</span> you <strong>may</strong> reduce the variance.</li>
 </ul></li>
 <li><p>If you increase the variance in <span class="math inline">\(x\)</span>, you reduce the variance of the estimator.</p></li>
 </ul>
@@ -924,11 +924,12 @@ E[\hat{\beta}_1] = E\big[E[\hat{\beta}_1|X]\big] = E[\beta_1] = \beta_1
 <h2 class="anchored" data-anchor-id="multivariate-case">Multivariate case</h2>
 <p>There is an equivalent formula for the multivariate estimator:</p>
 <p><span class="math display">\[
-  Var(\hat{\beta}_j|X) = \frac{Var(u_i|X)}{\text{SSR}_j} = \frac{\sigma^2}{\text{SSR}_j}
+  Var(\hat{\beta}_j|X) = \frac{Var(u_i|X)}{\text{SSR}_j} = \frac{\sigma^2}{\text{SSR}_j}\quad j=1,\dots,k
 \]</span></p>
 <p>where <span class="math inline">\(\text{SSR}_j\)</span> is the residual sum of squares from regressing <span class="math inline">\(x_j\)</span> on all other regressors.</p>
 <ul>
-<li>relates to idea of partialling out from <a href="./lecture-2.html">Lecture 2</a></li>
+<li><p>relates to idea of partialling out from <a href="./lecture-2.html">Lecture 2</a></p></li>
+<li><p>as before, this is NOT the definition for <span class="math inline">\(\hat{\beta}_0\)</span>. (We will not cover that, but you can trust that R/Stata is programmed correctly to give you the correct estimate.)</p></li>
 </ul>
 </section>
 <section id="section-9" class="level2">
@@ -943,7 +944,7 @@ E[\hat{\beta}_1] = E\big[E[\hat{\beta}_1|X]\big] = E[\beta_1] = \beta_1
   Var(\hat{\beta}_j|X) = \frac{\sigma^2}{\text{SST}_j(1-\mathbf{R}^2_j)}
 \]</span></p>
 <ul>
-<li>Wooldridge just writes <span class="math inline">\(Var(\hat{\beta}_j)\)</span> and adds “conditional on the sample values of the independent variables” (p.&nbsp;89) to his description.</li>
+<li>Wooldridge just writes <span class="math inline">\(Var(\hat{\beta}_j)\)</span> and adds “conditional on the sample values of the independent variables” (p.&nbsp;89) to his description.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
 </ul>
 </div>
 </section>
@@ -951,9 +952,9 @@ E[\hat{\beta}_1] = E\big[E[\hat{\beta}_1|X]\big] = E[\beta_1] = \beta_1
 <h2 class="anchored" data-anchor-id="intuition-1">Intuition</h2>
 <div class="incremental">
 <ul class="incremental">
-<li><p>if other regressors explain a lot of the variation in <span class="math inline">\(x_j\)</span>, the <span class="math inline">\(\downarrow\text{SSR}_j\Rightarrow \uparrow Var\)</span></p>
+<li><p>if other regressors explain a lot of the variation in <span class="math inline">\(x_j\)</span>, the <span class="math inline">\(\downarrow\text{SSR}_j\Rightarrow \uparrow Var(\hat{\beta}_j)\)</span></p>
 <ul class="incremental">
-<li>alternatively, then <span class="math inline">\(\uparrow\mathbf{R}^2_j\Rightarrow \downarrow (1-\mathbf{R}^2_j)\Rightarrow\uparrow Var\)</span></li>
+<li>alternatively, then <span class="math inline">\(\uparrow\mathbf{R}^2_j\Rightarrow \downarrow (1-\mathbf{R}^2_j)\Rightarrow\uparrow Var(\hat{\beta}_j)\)</span></li>
 </ul></li>
 <li><p>adding regressors has competing effects in terms of efficiency.</p>
 <ul class="incremental">
@@ -965,7 +966,7 @@ E[\hat{\beta}_1] = E\big[E[\hat{\beta}_1|X]\big] = E[\beta_1] = \beta_1
 </section>
 <section id="gauss-markov-theorem" class="level2">
 <h2 class="anchored" data-anchor-id="gauss-markov-theorem">Gauss-Markov Theorem</h2>
-<p>The Gauss-Markov Theorem states that under MLR 1-5<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>The Gauss-Markov Theorem states that under MLR 1-5<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <ul>
 <li>OLS is the <strong>Best Linear Unbiased Estimator</strong> (BLUE)</li>
 </ul>
@@ -1024,11 +1025,11 @@ E[\hat{\beta}_1] = E\big[E[\hat{\beta}_1|X]\big] = E[\beta_1] = \beta_1
 <li><p>conditional on <span class="math inline">\(X\)</span> (the sample values of regressors), <span class="math inline">\(\hat{\beta}\)</span> is a linear transformation of <span class="math inline">\(u\)</span>.</p></li>
 </ul>
 </section>
-<section id="normalization" class="level2">
-<h2 class="anchored" data-anchor-id="normalization">Normalization</h2>
+<section id="standardization" class="level2">
+<h2 class="anchored" data-anchor-id="standardization">Standardization</h2>
 <p>We can therefore standardize the distribution:</p>
 <p><span class="math display">\[
-  \frac{\hat{\beta}_j-\beta_j}{sd(\hat{\beta}_j)} | x \sim N(0,1)
+  \frac{\hat{\beta}_j-\beta_j}{sd(\hat{\beta}_j)} | X \sim N(0,1)
 \]</span></p>
 <p>where <span class="math inline">\(sd(\hat{\beta}_j) = \sqrt{Var(\hat{\beta}_j|X)}\)</span></p>
 </section>
@@ -1192,7 +1193,7 @@ Important
 <section id="significance-level" class="level2">
 <h2 class="anchored" data-anchor-id="significance-level">Significance level</h2>
 <ol start="4" type="1">
-<li>Pick a significance level (<span class="math inline">\(\alpha\)</span>).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> This is the permitted probability of a type 1 error:</li>
+<li>Pick a significance level (<span class="math inline">\(\alpha\)</span>).<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> This is the permitted probability of a type 1 error:</li>
 </ol>
 <p><span class="math display">\[
   \alpha = Pr(\text{Reject}\; H_0|H_0\;\text{is true}, X)
@@ -1375,8 +1376,8 @@ Warning
 <p>For two-side test, our rejection rule is:</p>
 <p><span class="math display">\[
   \begin{aligned}
-  \text{Reject}\;&amp;H_0\;\text{if}\quad |z-\text{stat}|&gt; \text{z}_{0.95} \\
-  \Rightarrow &amp; z-\text{stat}&gt; \text{z}_{0.95} \quad\text{or} \quad z-\text{stat}&lt;-\text{z}_{0.95}
+  \text{Reject}\;&amp;H_0\;\text{if}\quad |z-\text{stat}|&gt; \text{z}_{0.975} \\
+  \Rightarrow &amp; z-\text{stat}&gt; \text{z}_{0.975} \quad\text{or} \quad z-\text{stat}&lt;-\text{z}_{0.975}
   \end{aligned}
 \]</span></p>
 </div>
@@ -1391,9 +1392,9 @@ Warning
 <p>Then, our rejection rule can be written as: <strong>Reject <span class="math inline">\(H_0\)</span> if</strong></p>
 <p><span class="math display">\[
   \begin{aligned}
-  \frac{\hat{\beta}_j-\kappa_0}{sd(\hat{\beta}_j)}&gt; \text{z}_{0.95} \quad&amp;\text{or} \quad \frac{\hat{\beta}_j-\kappa_0}{sd(\hat{\beta}_j)}&lt;-\text{z}_{0.95} \\
-  \Rightarrow -\kappa_0&gt; \text{z}_{0.95}\times sd(\hat{\beta}_j) - \hat{\beta}_j \quad&amp;\text{or} \quad -\kappa_0&lt;-\text{z}_{0.95}\times sd(\hat{\beta}_j)-\hat{\beta}_j \\
-  \Rightarrow \kappa_0&lt; \hat{\beta}_j-\text{z}_{0.95}\times sd(\hat{\beta}_j)  \quad&amp;\text{or} \quad \kappa_0&gt;\hat{\beta}_j +\text{z}_{0.95}\times sd(\hat{\beta}_j)\\
+  \frac{\hat{\beta}_j-\kappa_0}{sd(\hat{\beta}_j)}&gt; \text{z}_{0.975} \quad&amp;\text{or} \quad \frac{\hat{\beta}_j-\kappa_0}{sd(\hat{\beta}_j)}&lt;-\text{z}_{0.975} \\
+  \Rightarrow -\kappa_0&gt; \text{z}_{0.975}\times sd(\hat{\beta}_j) - \hat{\beta}_j \quad&amp;\text{or} \quad -\kappa_0&lt;-\text{z}_{0.975}\times sd(\hat{\beta}_j)-\hat{\beta}_j \\
+  \Rightarrow \kappa_0&lt; \hat{\beta}_j-\text{z}_{0.975}\times sd(\hat{\beta}_j)  \quad&amp;\text{or} \quad \kappa_0&gt;\hat{\beta}_j +\text{z}_{0.975}\times sd(\hat{\beta}_j)\\
   &amp; \\
   \Rightarrow \kappa_0 &amp;\not\in \text{CI}_{0.95}
   \end{aligned}
@@ -1402,7 +1403,7 @@ Warning
 </section>
 <section id="example" class="level2">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
-<p>Back to our example where our <strong>estimate</strong> of <span class="math inline">\(\hat{\beta}_j\)</span> is <span class="math inline">\(0.35\)</span>, with <span class="math inline">\(sd=0.12\)</span>. The constructed the 95% confidence interval is:</p>
+<p>Back to our example where our <strong>estimate</strong> of <span class="math inline">\(\hat{\beta}_j\)</span> is <span class="math inline">\(0.35\)</span>, with <span class="math inline">\(sd=0.12\)</span>. The computed 95% confidence interval is:</p>
 <p><span class="math display">\[
   [0.35 - \text{z}_{0.975}\times 0.12,0.35 + \text{z}_{0.975}\times 0.12] = [0.115,0.585]
 \]</span></p>
@@ -1461,7 +1462,7 @@ Warning
     =&amp; Pr\Bigg(\frac{\hat{\beta}_j-\kappa_0}{sd(\hat{\beta}_j)}&lt;-1.96\Bigg|\beta_j = \kappa\Bigg) + Pr\Bigg(\frac{\hat{\beta}_j-\kappa_0}{sd(\hat{\beta}_j)}&gt;1.96\Bigg|\beta_j = \kappa\Bigg)
   \end{aligned}
 \]</span></p>
-<p>This probability is not <span class="math inline">\(0.05\)</span> because <span class="math inline">\(\beta_j \neq 0\)</span>.</p>
+<p>This probability is not <span class="math inline">\(0.05\)</span> because <span class="math inline">\(\beta_j \neq \kappa_0\)</span>.</p>
 </section>
 <section id="section-18" class="level2">
 <h2 class="anchored" data-anchor-id="section-18"></h2>
@@ -1665,7 +1666,7 @@ Warning
 <p><span class="math display">\[
   t\text{-stat} = \frac{\hat{\beta}_j}{se(\hat{\beta}_j)} | X \underset{H_0}{\sim} t_{n-k-1}
 \]</span></p>
-<p>This is often referred to as the <strong>t-statistic</strong> in is reported as a default test parameter in regression output.</p>
+<p>This is often referred to as the <strong><span class="math inline">\(t\)</span>-statistic</strong> and is reported as a default test parameter in regression output.</p>
 <div class="fragment fade-in">
 <ul>
 <li><p>You can perform all the same inference steps (critical values, <span class="math inline">\(p\)</span>-values, CI) replacing normal distribution with <span class="math inline">\(t\)</span>-distribution</p></li>
@@ -1911,8 +1912,9 @@ Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approa
 <ol>
 <li id="fn1"><p>We can also use the Frisch-Waugh Theorem to define the multivariate estimator as a biavariate estimator.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>The sample values of regressors is <span class="math inline">\(X=[x_1,x_2,\dots,x_n]'\)</span>; a column vector (or matrix in the multivariate case). In my notation, I use capital <span class="math inline">\(X\)</span> to denote the column vector of <span class="math inline">\(\{x_i\}_{i=1,\dots,n}\)</span>, and to distinguish it from <span class="math inline">\(\mathbf{x}_i\)</span> used to denote the row vector of regressors for observation <span class="math inline">\(i\)</span>: <span class="math inline">\(\{x_{ij}\}_{j=1,\dots,k}\)</span>. We will use the fact that, under random sampling <span class="math inline">\(E[u_i|x_i]=0\Rightarrow E[u_i|X]=0\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>We will not prove this theorem. Plenty are available online, but the proof is not examinable.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Also referred to as the ‘size’ of the test.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>You may write <span class="math inline">\(Var(\hat{\beta}_j)\)</span> instead of <span class="math inline">\(Var(\hat{\beta}_j|X)\)</span> too. The notes include the <span class="math inline">\(X\)</span> to emphasize that this definition is conditional on sample values of the regressors.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>We will not prove this theorem. Plenty are available online, but the proof is not examinable.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Also referred to as the ‘size’ of the test.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

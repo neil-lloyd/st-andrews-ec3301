@@ -344,7 +344,7 @@ There are reasons why $E[u|x]\neq 0$ (i.e., 'sources of endogeneity')
   - model mis-specification
   - selection into "treatment" 
   - sample selection
-  - reverse causality ($Y\rightarrow X$) or simultaneity ($Y\leftrightharpoons X$)
+  - reverse causality ($y\rightarrow x$) or simultaneity ($y\leftrightharpoons x$)
 
 :::: {.fragment .fade-in}
 :::{.callout-important title="Endogenous"}
@@ -432,7 +432,7 @@ Using MLR-5 (Homoskedasticity).
 
 - The larger the variance of error term, the bigger the variance of the estimator
 
-  - $\Rightarrow$ if you add variables that explain more of $y$ you can reduce the variance. 
+  - $\Rightarrow$ if you add variables that explain more of $y$ you **may** reduce the variance. 
   
 - If you increase the variance in $x$, you reduce the variance of the estimator. 
 
@@ -486,13 +486,14 @@ abline(v = b1, col = "red", lwd = 2)
 There is an equivalent formula for the multivariate estimator:
 
 $$
-  Var(\hat{\beta}_j|X) = \frac{Var(u_i|X)}{\text{SSR}_j} = \frac{\sigma^2}{\text{SSR}_j}
+  Var(\hat{\beta}_j|X) = \frac{Var(u_i|X)}{\text{SSR}_j} = \frac{\sigma^2}{\text{SSR}_j}\quad j=1,\dots,k
 $$
 
 where $\text{SSR}_j$ is the residual sum of squares from regressing $x_j$ on all other regressors. 
 
 - relates to idea of partialling out from [Lecture 2](lecture-2-multi.qmd)
 
+- as before, this is NOT the definition for $\hat{\beta}_0$. (We will not cover that, but you can trust that R/Stata is programmed correctly to give you the correct estimate.) 
 
 
 ## 
@@ -510,16 +511,18 @@ $$
   Var(\hat{\beta}_j|X) = \frac{\sigma^2}{\text{SST}_j(1-\mathbf{R}^2_j)}
 $$
 
-- Wooldridge just writes $Var(\hat{\beta}_j)$ and adds "conditional on the sample values of the independent variables" (p. 89) to his description.
+- Wooldridge just writes $Var(\hat{\beta}_j)$ and adds "conditional on the sample values of the independent variables" (p. 89) to his description.[^3]
+
+[^3]: You may write $Var(\hat{\beta}_j)$ instead of $Var(\hat{\beta}_j|X)$ too. The notes include the $X$ to emphasize that this definition is conditional on sample values of the regressors. 
 
 :::
 
 ## Intuition
 
 :::{.incremental}
-- if other regressors explain a lot of the variation in $x_j$, the $\downarrow\text{SSR}_j\Rightarrow \uparrow Var$
+- if other regressors explain a lot of the variation in $x_j$, the $\downarrow\text{SSR}_j\Rightarrow \uparrow Var(\hat{\beta}_j)$
 
-  - alternatively, then $\uparrow\mathbf{R}^2_j\Rightarrow \downarrow (1-\mathbf{R}^2_j)\Rightarrow\uparrow Var$
+  - alternatively, then $\uparrow\mathbf{R}^2_j\Rightarrow \downarrow (1-\mathbf{R}^2_j)\Rightarrow\uparrow Var(\hat{\beta}_j)$
 
 - adding regressors has competing effects in terms of efficiency. 
 
@@ -530,9 +533,9 @@ $$
 
 ## Gauss-Markov Theorem
 
-The Gauss-Markov Theorem states that under MLR 1-5[^3]
+The Gauss-Markov Theorem states that under MLR 1-5[^4]
 
-[^3]: We will not prove this theorem. Plenty are available online, but the proof is not examinable.
+[^4]: We will not prove this theorem. Plenty are available online, but the proof is not examinable.
 
 - OLS is the **Best Linear Unbiased Estimator** (BLUE)
 
@@ -587,12 +590,12 @@ Why?
 
 - conditional on $X$ (the sample values of regressors), $\hat{\beta}$ is a linear transformation of $u$.
 
-## Normalization
+## Standardization
 
 We can therefore standardize the distribution: 
 
 $$
-  \frac{\hat{\beta}_j-\beta_j}{sd(\hat{\beta}_j)} | x \sim N(0,1)
+  \frac{\hat{\beta}_j-\beta_j}{sd(\hat{\beta}_j)} | X \sim N(0,1)
 $$
 
 where $sd(\hat{\beta}_j) = \sqrt{Var(\hat{\beta}_j|X)}$
@@ -739,9 +742,9 @@ In this case, the test statics only has a normal distribution under $H_0$. If $H
 
 ## Significance level
 
-4. Pick a significance level ($\alpha$).[^4] This is the permitted probability of a type 1 error:
+4. Pick a significance level ($\alpha$).[^5] This is the permitted probability of a type 1 error:
 
-[^4]: Also referred to as the 'size' of the test. 
+[^5]: Also referred to as the 'size' of the test. 
 
 $$
   \alpha = Pr(\text{Reject}\; H_0|H_0\;\text{is true}, X)
@@ -921,8 +924,8 @@ For two-side test, our rejection rule is:
 
 $$
   \begin{aligned}
-  \text{Reject}\;&H_0\;\text{if}\quad |z-\text{stat}|> \text{z}_{0.95} \\
-  \Rightarrow & z-\text{stat}> \text{z}_{0.95} \quad\text{or} \quad z-\text{stat}<-\text{z}_{0.95}
+  \text{Reject}\;&H_0\;\text{if}\quad |z-\text{stat}|> \text{z}_{0.975} \\
+  \Rightarrow & z-\text{stat}> \text{z}_{0.975} \quad\text{or} \quad z-\text{stat}<-\text{z}_{0.975}
   \end{aligned}
 $$
 :::
@@ -941,9 +944,9 @@ Then, our rejection rule can be written as: **Reject $H_0$ if**
 
 $$
   \begin{aligned}
-  \frac{\hat{\beta}_j-\kappa_0}{sd(\hat{\beta}_j)}> \text{z}_{0.95} \quad&\text{or} \quad \frac{\hat{\beta}_j-\kappa_0}{sd(\hat{\beta}_j)}<-\text{z}_{0.95} \\
-  \Rightarrow -\kappa_0> \text{z}_{0.95}\times sd(\hat{\beta}_j) - \hat{\beta}_j \quad&\text{or} \quad -\kappa_0<-\text{z}_{0.95}\times sd(\hat{\beta}_j)-\hat{\beta}_j \\
-  \Rightarrow \kappa_0< \hat{\beta}_j-\text{z}_{0.95}\times sd(\hat{\beta}_j)  \quad&\text{or} \quad \kappa_0>\hat{\beta}_j +\text{z}_{0.95}\times sd(\hat{\beta}_j)\\
+  \frac{\hat{\beta}_j-\kappa_0}{sd(\hat{\beta}_j)}> \text{z}_{0.975} \quad&\text{or} \quad \frac{\hat{\beta}_j-\kappa_0}{sd(\hat{\beta}_j)}<-\text{z}_{0.975} \\
+  \Rightarrow -\kappa_0> \text{z}_{0.975}\times sd(\hat{\beta}_j) - \hat{\beta}_j \quad&\text{or} \quad -\kappa_0<-\text{z}_{0.975}\times sd(\hat{\beta}_j)-\hat{\beta}_j \\
+  \Rightarrow \kappa_0< \hat{\beta}_j-\text{z}_{0.975}\times sd(\hat{\beta}_j)  \quad&\text{or} \quad \kappa_0>\hat{\beta}_j +\text{z}_{0.975}\times sd(\hat{\beta}_j)\\
   & \\
   \Rightarrow \kappa_0 &\not\in \text{CI}_{0.95}
   \end{aligned}
@@ -953,7 +956,7 @@ $$
 ## Example
 
 
-Back to our example where our **estimate** of $\hat{\beta}_j$ is $0.35$, with $sd=0.12$. The constructed the 95% confidence interval is:
+Back to our example where our **estimate** of $\hat{\beta}_j$ is $0.35$, with $sd=0.12$. The computed 95% confidence interval is:
 
 $$
   [0.35 - \text{z}_{0.975}\times 0.12,0.35 + \text{z}_{0.975}\times 0.12] = [0.115,0.585]
@@ -1023,7 +1026,7 @@ $$
   \end{aligned}
 $$
 
-This probability is not $0.05$ because $\beta_j \neq 0$. 
+This probability is not $0.05$ because $\beta_j \neq \kappa_0$. 
 
 ##
 
@@ -1222,7 +1225,7 @@ $$
   t\text{-stat} = \frac{\hat{\beta}_j}{se(\hat{\beta}_j)} | X \underset{H_0}{\sim} t_{n-k-1}
 $$
 
-This is often referred to as the **t-statistic** in is reported as a default test parameter in regression output. 
+This is often referred to as the **$t$-statistic** and is reported as a default test parameter in regression output. 
 
 :::{.fragment .fade-in}
 
