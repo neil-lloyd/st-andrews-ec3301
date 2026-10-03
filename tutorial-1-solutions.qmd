@@ -132,7 +132,7 @@ As $n=100$, we find that $se = 0.2082121$; exactly equal to the $\hat{\sigma}/10
 
 :::{.border}
 $$
-    \frac{\bar{y}-2}{\hat{\sigma}/\sqrt{n}} \sim T_{n-1}
+    \frac{\bar{y}-2}{\hat{\sigma}/\sqrt{n}} \sim t_{n-1}
 $$
 :::
 
@@ -140,7 +140,7 @@ $$
 
 :::{.border}
 $$
-  \frac{\bar{y}-1.85}{\hat{\sigma}/\sqrt{n}} \underset{H_0}{\sim} T_{n-1}
+  \frac{\bar{y}-1.85}{\hat{\sigma}/\sqrt{n}} \underset{H_0}{\sim} t_{n-1}
 $$
 
 Compute the test statistic:
@@ -158,21 +158,23 @@ The `mean` command stores estimates in a similar way to `regress`. They are both
 To see the full list of stored estimates, type `ereturn list`. Note, this does not work for `summarize`, which is a r-class command. After `sum` you can run `return list` to see the format of its stored estimates.  
 
 It is good practice to used stored estimates in this way as it prevents typing errors and improves replicability. 
+
+R users tend define a model as a **list** before summarizing it: e.g. `model <- lm(yvar ~ xvar, data)` followed by `summary(model)`. You can then reference the slope coefficient of the stored model using `coef(model)["xvar"]` or `model$coefficients["xvar"]` (replacing `xvar` with the name of the variable). The get the standard error, you need to do a bit more work: `summary(model)$coefficients["xvar", "Std. Error"]` references a value from the summary or `sqrt(diag(vcov(model)))["xvar"]` (compute the square-root of the diagonal of the covariance matrix). 
 :::
 
 Rejection rule:
 
-- Since this is a two-sided test, we will reject if $|\text{test-stat}|<\text{t}_{99,0.975}$.
+- Since this is a two-sided test, we will reject if $|t\text{-stat}|<\text{t}_{99,0.975}$.
 
 The test static remains the same. 
 
-Critical values of t-distribution (which is symmetric):
+Critical values of $t$-distribution (which is symmetric):
 
 ```{stata}
 dis invt(99,0.975)
 ```
 
-Since $|\text{test-stat}|<\text{t}_{99,0.975}$, we fail to reject. 
+Since $|t\text{-stat}|<\text{t}_{99,0.975}$, we fail to reject. 
 :::
 
 8. Using the properties of the sample, test the null hypothesis $H_0: \mu \leq 1.85$.
@@ -180,9 +182,9 @@ Since $|\text{test-stat}|<\text{t}_{99,0.975}$, we fail to reject.
 :::{.border}
 Rejection rule:
 
-- Since this is a one-sided test, we will reject if $\text{test-stat}>\text{t}_{99,0.95}$.
+- Since this is a one-sided test, we will reject if $t\text{-stat}>\text{t}_{99,0.95}$.
 
-Critical values of t-distribution (which is symmetric):
+Critical values of $t$-distribution (which is symmetric):
 
 ```{stata}
 dis invt(99,0.95)
@@ -208,9 +210,11 @@ $$
   =& Pr\Bigg(\frac{\bar{y}-1.85}{se}<\text{t}_{99,0.025}\Bigg|\mu = 2\Bigg) + Pr\Bigg(\frac{\bar{y}-1.85}{se}>\text{t}_{99,0.975}\Bigg|\mu = 2\Bigg) \\
   =& Pr\Bigg(\frac{\bar{y}-2}{se}<\text{t}_{99,0.025}-\frac{0.15}{se}\Bigg|\mu = 2\Bigg) \\ 
   &+ Pr\Bigg(\frac{\bar{y}-2}{se}>\text{t}_{99,0.975}-\frac{0.15}{se}\Bigg|\mu = 2\Bigg) \\
-  =& T_{n-1}(\text{t}_{99,0.025}-\frac{0.15}{se}) + 1-T_{n-1}(\text{t}_{99,0.975}-\frac{0.15}{se}) \\
+  =& t_{n-1}\big(\text{t}_{99,0.025}-0.15/se\big) + 1-t_{n-1}\big(\text{t}_{99,0.975}-0.15/se\big) \\
   \end{aligned}
 $$
+
+where $t_{n-1}(\cdot)$ is the CDF of the $t$-distribution.
 
 ```{stata}
 dis t(99,invt(99,0.025)-0.15/_se[y]) + 1 - t(99,invt(99,0.975)-0.15/_se[y])
@@ -222,7 +226,7 @@ $$
   \begin{aligned}
   Pr(\text{Reject}\;H_0|\mu = 2) =& Pr\Bigg(\frac{\bar{y}-1.85}{se}>\text{t}_{99,0.95}\Bigg|\mu = 2\Bigg) \\
   =& Pr\Bigg(\frac{\bar{y}-2}{se}>\text{t}_{99,0.95}-\frac{0.15}{se}\Bigg|\mu = 2\Bigg) \\
-  =& 1-T_{n-1}(\text{t}_{99,0.95}-\frac{0.15}{se}) \\
+  =& 1-t_{n-1}\big(\text{t}_{99,0.95}-0.15/se\big) \\
   \end{aligned}
 $$
 
@@ -406,7 +410,7 @@ reg lnwage edu exp expsq
 5. Interpret the coefficient on `edu`. 
 
 :::{.border}
-A 1 year increase in years of education is associated with a $\sim 10\%$ increase in average wages, holding other factors constant. This coefficient is right on the edge of values for which it is appropriate to use the $\hat{\beta}\times 100$ approximation. The exact value is given by,
+A 1 year increase in years of education increases predicted wages by approximately $\sim 10\%$, holding other factors constant. This coefficient is right on the edge of values for which it is appropriate to use the $\hat{\beta}\times 100$ approximation. The exact value is given by,
 
 ```{stata}
 dis (exp(_b[edu])-1)*100
@@ -427,8 +431,10 @@ A query, using Claude, cited a few key studies and meta-analyses. The conclusion
 This test is designed to check whether or model estimates a return to education that is significantly higher than the using 0.08 value. It is a one-sided test, so we will reject if 
 
 $$
-  \text{test-stat} = \frac{\hat{\beta_1}-0.08}{se(\hat{\beta_1})}>T^{-1}_{300-4}(0.99)
+  t\text{-stat} = \frac{\hat{\beta_1}-0.08}{se(\hat{\beta_1})}>t^{-1}_{300-4}(0.99)
 $$
+
+Where $t^{-1}_{n-k-1}(\cdot)$ is the inverse of the CDF, so $t^{-1}_{300-4}(0.99)$ is the $99^{th}$ percentile of a $t$-distribution with 296 degrees of freedom.
 
 ```{stata}
 dis (_b[edu]-0.08)/_se[edu]
@@ -445,7 +451,7 @@ We fail to reject this null hypothesis at 1% significance level. We would reject
 This is a two-sided test. We will reject if, 
 
 $$
-  |\text{test-stat}| = \Bigg|\frac{\hat{\beta_2}}{se(\hat{\beta_2})}\Bigg|>T^{-1}_{300-4}(0.975)
+  |t\text{-stat}| = \Bigg|\frac{\hat{\beta_2}}{se(\hat{\beta_2})}\Bigg|>t^{-1}_{300-4}(0.975)
 $$
 
 ```{stata}
@@ -461,7 +467,7 @@ We reject this null hypothesis.
 This is a one-sided test. We will reject if, 
 
 $$
-  \text{test-stat} = \frac{\hat{\beta_3}}{se(\hat{\beta_3})}<T^{-1}_{300-4}(0.05)
+  t\text{-stat} = \frac{\hat{\beta_3}}{se(\hat{\beta_3})}<t^{-1}_{300-4}(0.05)
 $$
 ```{stata}
 dis _b[expsq]/_se[expsq]
@@ -542,7 +548,7 @@ There is unlikely to be a firm of this nature in the SEC filings. Some firms may
 3. Interpret each of the slope coefficients. For `size`, consider a 10% increase in assets. For `profitability` and `tangibility`, the regressor is a ratio. Consider the impact of an increase in the ratio of $\Delta x = 0.01$ (or 1%).
 
 :::{.border}
-- `size`:  a 10% increase in assets increase predicted leverage by 
+- `size`:  holding other factors fixed, a 10% increase in assets increases predicted leverage by 
 
 ```{stata}
 dis _b[size]*ln(1.1)
@@ -550,8 +556,8 @@ dis _b[size]*ln(1.1)
 
 A reduction of 0.02 in leverage, or in 2% in liabilities *as a share of assets*.
 
-- `profitability`: a 1% increase in profitability is associated with a -0.51% reduction in leverage (liabilities/assets).
-- `tangibility`:  a 1% increase in tangibility is associated with a 0.87% increase in leverage (liabilities/assets). However, this coefficient is not significantly different from 0. 
+- `profitability`: holding other factors fixed, a 1% increase in profitability reduced predicted leverage (liabilities/assets) by 0.51%.
+- `tangibility`:  holding other factors fixed, a 1% increase in tangibility increases predicted leverafe by 0.87%. However, this coefficient is not significantly different from 0. 
 :::
 
 4. These results are very different to those of @frank2009capital. For example, in their Table V the coefficient estimate for tangibility is $0.092$. What are some of the factors that could explain our vastly different results.
