@@ -4564,6 +4564,30 @@ E[\hat{\beta}_1] = E\big[E[\hat{\beta}_1|X]\big] = E[\beta_1] = \beta_1
 </div>
 </div>
 </div>
+<div title="Null and research question (NEW)">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Null and research question (NEW)</strong></p>
+</div>
+<div class="callout-content">
+<p>Given a research question, the null is set as the hypothesis you aim to reject. For example, if you want to know if there is a relationship (regardless of sign) between <span class="math inline">x_j</span> and <span class="math inline">y</span>, then the null is <span class="math inline">H_0: \beta_j=0</span> (i.e. no relationship). This is the most common null. If you specifically want to test whether an increase in <span class="math inline">x_j</span> decreases <span class="math inline">y</span>, you can set the null as <span class="math inline">H_0: \beta_j\geq 0</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="reject-not-prove-new" class="slide level2">
+<h2>Reject, not prove (NEW)</h2>
+<p>Why do we rule out hypothesis and instead of ruling them in? The answer two fold:</p>
+<ol type="1">
+<li><p>The estimator is a random variable, with infinite support. Consistent with <span class="math inline">\beta_j=0</span>, the estimator can take on any real value <span class="math inline">\mathbb{R}:(-\infty,\infty)</span>. This means that every value the estimator could take on, is consistent with every unknown value of the true <span class="math inline">\beta_j</span>.</p></li>
+<li><p>We solve this problem by restricting probability of rejecting the null hypothesis when it is true (Type 1 error). That is, we design a test to <em>rule out</em> <span class="math inline">H_0</span>, not rule it in.</p></li>
+</ol>
+<p>If you want to establish that there is a relationship between, for example, smoking and lung cancer, you need to rule out the hypothesis that there is no relationship.</p>
 </section>
 <section id="alternative-hypothesis" class="slide level2">
 <h2>Alternative hypothesis</h2>

@@ -642,8 +642,12 @@ $$
 This is the most common null hypothesis as it essentially states that there is no relationship between $y$ and $x_j$. In empirical research, we are often trying to establish whether there is a (causal) relationship bewteen two variables. In order to test this theory we state a null hypothesis that we will reject if the evidence supports our claim.
 :::
 
-::::{.content-visible unless-format="revealjs"}
-:::{.callout-tip title="Reject, not prove" collapse="true"}
+::: {.callout-important title="Null and research question (NEW)"}
+Given a research question, the null is set as the hypothesis you aim to reject. For example, if you want to know if there is a relationship (regardless of sign) between $x_j$ and $y$, then the null is $H_0: \beta_j=0$ (i.e. no relationship). This is the most common null. If you specifically want to test whether an increase in $x_j$ decreases $y$, you can set the null as $H_0: \beta_j\geq 0$.
+:::
+
+## Reject, not prove (NEW)
+
 Why do we rule out hypothesis and instead of ruling them in? The answer two fold:
 
 1. The estimator is a random variable, with infinite support. Consistent with $\beta_j=0$, the estimator can take on any real value $\mathbb{R}:(-\infty,\infty)$. This means that every value the estimator could take on, is consistent with every unknown value of the true $\beta_j$.
@@ -651,8 +655,6 @@ Why do we rule out hypothesis and instead of ruling them in? The answer two fold
 2. We solve this problem by restricting probability of rejecting the null hypothesis when it is true (Type 1 error). That is, we design a test to *rule out* $H_0$, not rule it in. 
 
 If you want to establish that there is a relationship between, for example, smoking and lung cancer, you need to rule out the hypothesis that there is no relationship. 
-:::
-::::
 
 ## Alternative hypothesis
 
