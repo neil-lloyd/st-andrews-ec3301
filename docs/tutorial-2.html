@@ -410,6 +410,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./tutorial-1-solutions.html">
  <span class="dropdown-text">Tutorial 1 (Solutions)</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2.html">
+ <span class="dropdown-text">Tutorial 2</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -552,7 +556,7 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 </div>
 </div>
 <ol start="7" type="1">
-<li>Test the null hypothesis <span class="math inline">\(\beta_{stratio}&lt;-0.025\)</span> at a signficance level of 0.05. You will need the following information on $T_{n-k-1}^{-1}(0.05)</li>
+<li>Test the null hypothesis <span class="math inline">\(H_0:\beta_5\geq-0.025\)</span> at a signficance level of 0.05. You will need the following information on <span class="math inline">\(t_{n-k-1}^{-1}(0.05)\)</span></li>
 </ol>
 <div id="a51bad0d" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dis invt(<span class="fu">e</span>(df_r),0.05)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -561,7 +565,7 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 </div>
 </div>
 <ol start="8" type="1">
-<li>Replicate the 95% CI interval for <code>ldist</code> shown above. You need the following information on <span class="math inline">\(T_{n-k-1}^{-1}(0.975)\)</span>,</li>
+<li>Replicate the 95% CI interval for <code>ldist</code> shown above. You need the following information on <span class="math inline">\(t_{n-k-1}^{-1}(0.975)\)</span>,</li>
 </ol>
 <div id="2ee971fc" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dis invt(<span class="fu">e</span>(df_r),0.975)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

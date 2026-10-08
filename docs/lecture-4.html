@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Testing Linear Hypotheses – EC3301 Econometrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cf201e8c159c64e39451d1a718f2f573.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">EC3301 Econometrics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lectures" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lectures</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lectures">    
+        <li>
+    <a class="dropdown-item" href="./lecture-0.html">
+ <span class="dropdown-text">Pre-sessional Lecture</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-1.html">
+ <span class="dropdown-text">Lecture 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-2.html">
+ <span class="dropdown-text">Lecture 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-3.html">
+ <span class="dropdown-text">Lecture 3</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="./lab-1-Stata.html">
+ <span class="dropdown-text">Lab 1 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-1-R.html">
+ <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-Stata.html">
+ <span class="dropdown-text">Lab 2 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-R.html">
+ <span class="dropdown-text">Lab 2 (R)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./tutorial-1.html">
+ <span class="dropdown-text">Tutorial 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-1-solutions.html">
+ <span class="dropdown-text">Tutorial 1 (Solutions)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2.html">
+ <span class="dropdown-text">Tutorial 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-extra-material" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Extra Material</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-extra-material">    
+        <li>
+    <a class="dropdown-item" href="./material-interpretation.html">
+ <span class="dropdown-text">Interpreting Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-cef.html">
+ <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-intercept.html">
+ <span class="dropdown-text">The Intercept</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-R.html">
+ <span class="dropdown-text">Basic Programming in R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-Stata.html">
+ <span class="dropdown-text">Basic Programming in Stata</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="light-content">
+<p><img src="img/01-standard-vertical-black-text.png" class="img-fluid"></p>
+</div>
+<div class="dark-content">
+<p><img src="img/02-standard-vertical-white-text.png" class="img-fluid"></p>
+</div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#hypothesis-tests" id="toc-hypothesis-tests" class="nav-link active" data-scroll-target="#hypothesis-tests">Hypothesis Tests</a></li>
+  <li><a href="#structural-change" id="toc-structural-change" class="nav-link" data-scroll-target="#structural-change">Structural Change</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-4-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Testing Linear Hypotheses</h1>
+<p class="subtitle lead">Lecture 4</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="reading" class="level2">
+<h2 class="anchored" data-anchor-id="reading">Reading</h2>
+<p>This lecture covers material from <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>:</p>
+<ul>
+<li>Chapter 4.4 - “Testing Hypotheses about a Single Linear Combination of the Parameters”</li>
+<li>Chapter 4.5 - “Testing Multiple Linear Restrictions”</li>
+<li>Chapter 7.4 - “Interactions Involving Dummy Variables”</li>
+</ul>
+<p>Note: I have edited the syllabus slightly to move Heteroskedasticity to Week 5 with Asymptotics.</p>
+</section>
+<section id="hypothesis-tests" class="level1">
+<h1>Hypothesis Tests</h1>
+<section id="simple-hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="simple-hypotheses">Simple hypotheses</h2>
+<p>So far, we have considered hypotheses that involve a single estimator:</p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><p><span class="math inline">\(H_0: \beta_j=\kappa_0\)</span></p></li>
+<li><p><span class="math inline">\(H_0: \beta_j\geq \kappa_0\)</span></p></li>
+<li><p><span class="math inline">\(H_0: \beta_j\leq \kappa_0\)</span></p></li>
+</ol>
+</div>
+</section>
+<section id="linear-combinations" class="level2">
+<h2 class="anchored" data-anchor-id="linear-combinations">Linear combinations</h2>
+<p>Today, we consider hypotheses of the form:</p>
+<p><span class="math display">\[
+  H_0: a_0\beta_0 + a_1 \beta_1 + \cdots + a_k \beta_j = \kappa_0
+\]</span></p>
+<p>for constants <span class="math inline">\(\{a_j\}_{j=0,1,\dots,k}\)</span>. This is a <strong>linear combination of parameters</strong>.</p>
+<div class="fragment fade-in">
+<p>For example, <span class="math inline">\(H_0: \beta_1= 2\beta_2-0.5\)</span> can be written as,</p>
+<p><span class="math display">\[
+  H_0: \underbrace{0}_{a_0}\beta_0+\underbrace{1}_{a_1}\beta_1 +\underbrace{(- 2)}_{a_2}\beta_2 = \underbrace{-0.5}_{\kappa_0}
+\]</span></p>
+</div>
+</section>
+<section id="multiple-linear-combinations" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-combinations">Multiple linear combinations</h2>
+<p>Similarly, we could have <span class="math inline">\(q\)</span> of these statements,</p>
+<p><span class="math display">\[
+  \begin{aligned}
+   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_j &amp;= \kappa^1_0 \\
+    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_j &amp;= \kappa^2_0 \\
+    &amp;\vdots \\
+    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_j &amp;= \kappa^q_0 \\
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="single-linear-combinations" class="level2">
+<h2 class="anchored" data-anchor-id="single-linear-combinations">Single linear combinations</h2>
+<p>Consider the following example related to environmental and health economics</p>
+<p><span class="math display">\[
+  \ln(PM2.5_\ell) = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+\]</span></p>
+<p>where,</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p><span class="math inline">\(PM2.5\)</span> is micrograms of particulate matter (with diameter <span class="math inline">\(\leq 2.5\)</span> micrometres) per cubic metre in location <span class="math inline">\(\ell\)</span>.</p>
+<ul class="incremental">
+<li>standard measure for health effects as absorbable by lungs and bloodstream</li>
+</ul></li>
+<li><p><span class="math inline">\(EV\)</span> and <span class="math inline">\(hybrid\)</span> are number of registered vehicles (/1000) by fuel type in location <span class="math inline">\(\ell\)</span>.</p></li>
+</ul>
+</div>
+</section>
+<section id="example-pm2.5" class="level2">
+<h2 class="anchored" data-anchor-id="example-pm2.5">Example: PM2.5</h2>
+<p>The following estimates use local authority level data for 2019 in the UK.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>* Open CSV <span class="kw">data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>import delimited <span class="st">"$data_dir\pm25.csv"</span>, <span class="kw">clear</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>* Estimate univariate linear regression</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> ln_pm25 ev_k hybrid_k petrol_k diesel_k ln_pop</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(encoding automatically selected: ISO-8859-1)
+(17 vars, 291 obs)
+
+      Source |       SS           df       MS      Number of obs   =       291
+-------------+----------------------------------   F(5, 285)       =     33.45
+       Model |  2.84542086         5  .569084172   Prob &gt; F        =    0.0000
+    Residual |  4.84835963       285  .017011788   R-squared       =    0.3698
+-------------+----------------------------------   Adj R-squared   =    0.3588
+       Total |  7.69378049       290  .026530278   Root MSE        =    .13043
+
+------------------------------------------------------------------------------
+     ln_pm25 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        ev_k |   .0779783     .03734     2.09   0.038     .0044811    .1514755
+    hybrid_k |   .0322276   .0063524     5.07   0.000      .019724    .0447312
+    petrol_k |   .0000559   .0007053     0.08   0.937    -.0013323    .0014442
+    diesel_k |   -.003546   .0005762    -6.15   0.000    -.0046802   -.0024119
+      ln_pop |    .088135   .0208428     4.23   0.000     .0471096    .1291604
+       _cons |   1.264753   .2325884     5.44   0.000     .8069436    1.722562
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the Stata file</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pm25_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"pm25.csv"</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate univariate linear regression</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ln_pm25 <span class="sc">~</span> ev_k <span class="sc">+</span> hybrid_k <span class="sc">+</span> petrol_k <span class="sc">+</span> diesel_k <span class="sc">+</span> ln_pop, <span class="at">data =</span> pm25_data)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + 
+    ln_pop, data = pm25_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.39959 -0.05714  0.03222  0.08413  0.47799 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.265e+00  2.326e-01   5.438 1.16e-07 ***
+ev_k         7.798e-02  3.734e-02   2.088   0.0377 *  
+hybrid_k     3.223e-02  6.352e-03   5.073 7.06e-07 ***
+petrol_k     5.591e-05  7.053e-04   0.079   0.9369    
+diesel_k    -3.546e-03  5.762e-04  -6.154 2.55e-09 ***
+ln_pop       8.814e-02  2.084e-02   4.229 3.17e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1304 on 285 degrees of freedom
+Multiple R-squared:  0.3698,    Adjusted R-squared:  0.3588 
+F-statistic: 33.45 on 5 and 285 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="null-hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="null-hypotheses">Null hypotheses</h2>
+<p>From a public policy perspective (if you consider designing subsidies), you want to estimate both <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span>, BUT also know if</p>
+<p><span class="math display">\[
+  H_0: \beta_1=\beta_2
+\]</span></p>
+<p>That is, should the policy discriminate bewteen electrified fuel types?</p>
+<ul>
+<li>Engineers may be able provide mechanical differences, but they can’t tell you about differences in usage (driver behaviour) which is important for realized pollution mitigation.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not take these estimates too seriously. This model is a classic example of selection into “treatment”: those who live in higher pollution areas (e.g.&nbsp;dense urban centres) are also more likely to buy EVs. A better research design would use panel data to evaluate this question dyanmically.</p>
+</div>
+</div>
+</section>
+<section id="alternative-hypothesis" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-hypothesis">Alternative hypothesis</h2>
+<p>The alternative in this case, may be</p>
+<p><span class="math display">\[
+  H_1: \beta_1\neq \beta_2
+\]</span></p>
+<p>But may also be,</p>
+<p><span class="math display">\[
+  H_1: \beta_1&lt;\beta_2
+\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+  H_1: \beta_1&gt;\beta_2
+\]</span></p>
+<p>if there is a strong case for ruling out one case <span class="citation" data-cites="wooldridge2025">(see <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 139</a>)</span>.</p>
+</section>
+<section id="test-statistic" class="level2">
+<h2 class="anchored" data-anchor-id="test-statistic">Test statistic</h2>
+<p>For <span class="math inline">\(H_0: \beta_1=\beta_2\Rightarrow H_0:\beta_1-\beta_2=0\)</span></p>
+<p><span class="math display">\[
+  \text{test-stat} = \frac{\hat{\beta}_1-\hat{\beta}_2}{\sqrt{Var(\hat{\beta}_1-\hat{\beta}_2)}}
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The more general case would be <span class="math inline">\(H_0: a_1\beta_1+a_2\beta_2=\kappa_0\)</span></p>
+<p><span class="math display">\[
+  \text{test-stat} = \frac{a_1\hat{\beta}_1+a_2\hat{\beta}_2-\kappa_0}{\sqrt{Var(a_1\hat{\beta}_1+a_2\hat{\beta}_2)}}
+\]</span></p>
+<p>which can be extended to include more parameters.</p>
+</div>
+</div>
+</section>
+<section id="variance" class="level2">
+<h2 class="anchored" data-anchor-id="variance">Variance</h2>
+<p>The key to understanding and executing this test is,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p><span class="math display">\[
+  Var(\hat{\beta}_1-\hat{\beta}_2) \neq Var(\hat{\beta}_1) + Var(\hat{\beta}_2)
+\]</span></p>
+<div class="fragment fade-in">
+<p>This is because,</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  Var(a_1z_1+a_2z_2) =&amp; Var(a_1z_1) + Var(a_2z_2) + 2\times Cov(a_1z_1,a_2z_2) \\
+  =&amp;a_1^2Var(z_1) + a_2^2 Var(z_2) + 2\times a_1a_2Cov(z_1,z_2)
+  \end{aligned}
+\]</span></p>
+<p>for random variables <span class="math inline">\(z_1\)</span> and <span class="math inline">\(z_2\)</span> and constants <span class="math inline">\(a_1\)</span> and <span class="math inline">\(a_2\)</span>.</p>
+</div>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2"></h2>
+<p>So,</p>
+<p><span class="math display">\[
+  Var(\hat{\beta}_1-\hat{\beta}_2) = Var(\hat{\beta}_1) + Var(\hat{\beta}_2) - \textcolor{red}{2\times}\underbrace{\textcolor{blue}{Cov(\hat{\beta}_1,\hat{\beta}_2)}}_{\neq 0}
+\]</span></p>
+<div class="fragment fade-in">
+<p><strong>Why <span class="math inline">\(-2\)</span>?</strong></p>
+<ul>
+<li><p>For this <span class="math inline">\(H_0\)</span>, <span class="math inline">\(a_1 = 1\)</span> and <span class="math inline">\(a_2 = -1\)</span>.</p>
+<p><span class="math display">\[
+  \Rightarrow H_0: \underbrace{\beta_1-\beta_2 = 0}_{a_1\beta_1 + a_2\beta_2 = \kappa_0}
+\]</span></p></li>
+</ul>
+</div>
+</section>
+<section id="distribution" class="level2">
+<h2 class="anchored" data-anchor-id="distribution">Distribution</h2>
+<p>Under MLR 1-6, the <strong>conditional</strong> distribution of this test-statistic is <span class="math inline">\(t_{n-k-1}\)</span></p>
+<p><span class="math display">\[
+  t\text{-stat} = \frac{\hat{\beta}_1-\hat{\beta}_2}{\sqrt{Var(\hat{\beta}_1-\hat{\beta}_2)}}
+  \underset{H_0}{\sim} t_{n-k-1}
+\]</span></p>
+<p><strong>under the hull</strong>.</p>
+<ul>
+<li><p>You can use the same steps from <a href="./lecture-3.html">Lecture 3</a> to conduct inference: <span class="math inline">\(p\)</span>-value, critical value.</p></li>
+<li><p>We tend not to construct confidence intervals in such cases.</p></li>
+<li><p>Similarly, you can compute the power under the alternative <span class="math inline">\(\beta_1-\beta_2 = \kappa\)</span>.</p></li>
+</ul>
+</section>
+<section id="example-pm2.5-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-pm2.5-1">Example: PM2.5</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>* t-<span class="kw">test</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">lincom</span> ev_k - hybrid_k</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>last estimates not found
+r(301);
+
+r(301);</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>In R, you can use the <code>marginaleffects</code> package. However, this is NOT available in AppsAnywhere. Do not worry, there is an alternative coming up.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marginaleffects)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate linear hypothesis</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hypotheses</span>(model1, <span class="st">"ev_k - hybrid_k = 0"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Hypothesis Estimate Std. Error    z Pr(&gt;|z|)   S   2.5 % 97.5 %
+ ev_k-hybrid_k=0   0.0458     0.0423 1.08     0.28 1.8 -0.0373  0.129</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-linear-hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-hypotheses">Multiple linear hypotheses</h2>
+<p>Another common form of hypothesis concerns <strong>multiple</strong> linear combinations of estimators.</p>
+<p><span class="math display">\[
+  \begin{aligned}
+   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_j &amp;= \kappa^1_0 \\
+    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_j &amp;= \kappa^2_0 \\
+    &amp;\vdots \\
+    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_j &amp;= \kappa^q_0 \\
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="example-pm2.5-2" class="level2">
+<h2 class="anchored" data-anchor-id="example-pm2.5-2">Example: PM2.5</h2>
+<p>In our example of</p>
+<p><span class="math display">\[
+  PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+\]</span></p>
+<p>This could be as simple as,</p>
+<p><span class="math display">\[
+  H_0: \beta_1 = 0\;\text{and}\; \beta_2 = 0
+\]</span></p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Multiple hypothesis testing">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Multiple hypothesis testing
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why not test <span class="math inline">\(H^{(1)}_0: \beta_1=0\)</span> and then <span class="math inline">\(H^{(2)}_0: \beta_2 = 0\)</span> as separate individual hypotheses? The combined size of these tests would not be <span class="math inline">\(\alpha\)</span>. Why? The estimators are are correlated which implies:</p>
+<p><span class="math display">\[
+  Pr\big(\text{Reject}\;H^{(1)}_0\;\text{or}\;H^{(2)}_0 \big|\beta_1=0,\beta_1=0\big) \neq \alpha
+\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Multiple hyopthesis testing">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Multiple hyopthesis testing
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>There are a number of ways to correctly do multiple hypothesis testing. One is the <a href="https://en.wikipedia.org/wiki/Bonferroni_correction">Bonferroni correction</a> which gets you to reject separate hypotheses sequentially using an algorithim. It does so by ensuring that the family-wise error rate (the probability of rejecting at least one true <span class="math inline">\(H_0\)</span> across a “family” of hypotheses) is <span class="math inline">\(\leq \alpha\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="test" class="level2">
+<h2 class="anchored" data-anchor-id="test">Test</h2>
+<p>The test is performed by considering two models:</p>
+<ol type="1">
+<li><strong>Unrestricted</strong> model; using our example,</li>
+</ol>
+<p><span class="math display">\[
+  PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+\]</span></p>
+<ul>
+<li>storing the <span class="math inline">\(RSS_{ur}\)</span> from this model</li>
+</ul>
+<div class="fragment fade-in">
+<ol start="2" type="1">
+<li><strong>Restricted model</strong>, which imposes <span class="math inline">\(H_0: \beta_1 = 0\;\text{and}\; \beta_2 = 0\)</span>,</li>
+</ol>
+<p><span class="math display">\[
+  PM2.5_\ell = \beta_0 + \mathbf{x}_i\gamma + u_i
+\]</span></p>
+<ul>
+<li>storing the <span class="math inline">\(RSS_{r}\)</span> from this model</li>
+</ul>
+</div>
+</section>
+<section id="test-statistic-1" class="level2">
+<h2 class="anchored" data-anchor-id="test-statistic-1">Test statistic</h2>
+<p>The test static that is then given by,</p>
+<p><span class="math display">\[
+  F\text{-stat} = \frac{(SSR_{r}-SSR_{ur})/q}{SSR_{ur}/df_{ur}}
+\]</span></p>
+<div class="fragment fade-in">
+<p>where,</p>
+<div class="incremental">
+<ul class="incremental">
+<li><span class="math inline">\(SSR_r\)</span> and <span class="math inline">\(SSR_{ur}\)</span> come from the restricted (<span class="math inline">\(r\)</span>) and unrestricted models (<span class="math inline">\(ur\)</span>).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+</ul>
+<p><span class="math display">\[
+    SSR_{r}-SSR_{ur}&gt;0
+  \]</span></p>
+<ul class="incremental">
+<li><p><span class="math inline">\(q\)</span> is the number of restrictions (i.e.&nbsp;equations tested) and is given by the difference in resiual degrees of freedom</p>
+<p><span class="math display">\[
+  q = df_r-df_{ur}
+\]</span></p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="distribution-1" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-1">Distribution</h2>
+<p>Under the null, <span class="math inline">\(F\)</span>-stat has an <span class="math inline">\(F\)</span> distribution (hence the name)</p>
+<p><span class="math display">\[
+  F\text{-stat} \underset{H_0}{\sim}F_{q,n-k-1}
+\]</span></p>
+<p>We reject <span class="math inline">\(H_0\)</span> if</p>
+<p><span class="math display">\[
+  F\text{-stat} &gt; F_{q,n-k-1}^{-1}(1-\alpha) = f_{q,n-k-1,1-\alpha}
+\]</span></p>
+<p>where <span class="math inline">\(F_{q,n-k-1}^{-1}(1-\alpha)\)</span> is the <span class="math inline">\(1-\alpha\)</span> percentile of the distribution.</p>
+<div class="fragment fade-in">
+<ul>
+<li>Always a one-sided test, as test-statistic is strictly positive.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
+</ul>
+<ul>
+<li>Implies the <span class="math inline">\(H_1:\; H_0 is not true\)</span>’; <span class="math inline">\(H_1: \beta_1\neq0\;\text{or}\; \beta_2\neq0\)</span></li>
+</ul>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="$F$ distribution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><span class="math inline">\(F\)</span> distribution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <span class="math inline">\(F\)</span> distribution is defined as the ratio of two chi-squared distributions,</p>
+<p><span class="math display">\[
+  F_{q,m} = \frac{\chi^2_q/q}{\chi^2_m/m}
+\]</span></p>
+<p>each normalized by their corresponding degrees of freedom.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="alternative-form" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-form">Alternative form</h2>
+<p>Recall, <span class="math inline">\(SSR = (1-\mathbf{R}^2)SST\)</span>. This means that we can write the <span class="math inline">\(F\)</span>-stat as,</p>
+<p><span class="math display">\[
+  F\text{-stat} = \frac{(\mathbf{R}^2_{ur}-\mathbf{R}^2_{r})/q}{(1-\mathbf{R}^2_{ur})/(n-k-1)}
+\]</span></p>
+<p>Note,</p>
+<ul>
+<li><p>The order switches in the numerator (but remains positive since <span class="math inline">\(\mathbf{R}^2_{ur}&gt;\mathbf{R}^2_{r}\)</span>)</p></li>
+<li><p><span class="math inline">\(n-k-1=df_{ur}\)</span>, with <span class="math inline">\(k\)</span> the number of parameters in the unrestricted model</p></li>
+</ul>
+</section>
+<section id="example-pm2.5-3" class="level2">
+<h2 class="anchored" data-anchor-id="example-pm2.5-3">Example: PM2.5</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>* <span class="fu">F</span>-<span class="kw">test</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> ev_k hybrid_k</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>last estimates not found
+r(301);
+
+
+last estimates not found
+r(301);
+
+r(301);</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>In R, you can use the <code>car</code> package, which is available in AppsAnywhere.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate linear hypothesis</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(model1, <span class="fu">c</span>(<span class="st">"ev_k = 0"</span>, <span class="st">"hybrid_k = 0"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear hypothesis test:
+ev_k = 0
+hybrid_k = 0
+
+Model 1: restricted model
+Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
+
+  Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+1    287 6.6816                                  
+2    285 4.8484  2    1.8332 53.881 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="revisiting-single-linear-restriction" class="level2">
+<h2 class="anchored" data-anchor-id="revisiting-single-linear-restriction">Revisiting single linear restriction</h2>
+<p>You can think of a single linear hypothesis as a special case of multiple where <span class="math inline">\(q=1\)</span>. For example,</p>
+<p><span class="math display">\[
+  H_0: \textcolor{red}{\beta_1} = \textcolor{blue}{\beta_2}
+\]</span></p>
+<ul>
+<li><p>Restricted model:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  PM2.5_\ell =&amp; \beta_0 + \textcolor{red}{\beta_1} EV_\ell + \underbrace{\textcolor{red}{\beta_1}}_{=\textcolor{blue}{\beta_2}} hybrid_\ell + \mathbf{x}_i\gamma + u_i \\
+  = &amp; \beta_0 + \textcolor{red}{\beta_1} (EV_\ell + hybrid_\ell)   + \mathbf{x}_i\gamma + u_i
+  \end{aligned}            
+\]</span></p>
+<p>A regression with a new transformed variable: <span class="math inline">\(EV_\ell + hybrid_\ell\)</span></p></li>
+</ul>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3"></h2>
+<p>Moreover, you can show that for <span class="math inline">\(q=1\)</span></p>
+<p><span class="math display">\[
+  F\text{-stat} = \frac{SSR_{r}-SSR_{ur}}{SSR_{ur}/(n-k-1)} = (t\text{-stat})^2
+\]</span></p>
+</section>
+<section id="example-pm2.5-4" class="level2">
+<h2 class="anchored" data-anchor-id="example-pm2.5-4">Example: PM2.5</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>* t-<span class="kw">test</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">lincom</span> ev_k - hybrid_k</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>* <span class="fu">F</span>-<span class="kw">test</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> ev_k=hybrid_k</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>* check</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">sqrt</span>(<span class="fu">r</span>(<span class="fu">F</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>last estimates not found
+r(301);
+
+
+last estimates not found
+r(301);
+
+r(301);</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hypotheses</span>(model1, <span class="st">"ev_k - hybrid_k = 0"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Hypothesis Estimate Std. Error    z Pr(&gt;|z|)   S   2.5 % 97.5 %
+ ev_k-hybrid_k=0   0.0458     0.0423 1.08     0.28 1.8 -0.0373  0.129</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># F-test</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(model1, <span class="st">"ev_k = hybrid_k"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear hypothesis test:
+ev_k - hybrid_k = 0
+
+Model 1: restricted model
+Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
+
+  Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+1    286 4.8682                           
+2    285 4.8484  1  0.019855 1.1671 0.2809</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="regression-significance" class="level2">
+<h2 class="anchored" data-anchor-id="regression-significance">Regression significance</h2>
+<p>A special case of this form of test concerns the joint significance of all the <em>slope</em> parameters in a model:</p>
+<p><span class="math display">\[
+  H_0: \beta_1 = 0,\; \beta_1 = 0,\;\dots,\;\beta_k=0
+\]</span></p>
+<p>In this case,</p>
+<ul>
+<li><p>The restricted model is a regression on a constant (alone) where <span class="math inline">\(\Rightarrow \mathbf{R}^2_{r}=0\)</span></p></li>
+<li><p>And <span class="math inline">\(\mathbf{R}^2_{ur}\)</span> is simply the <span class="math inline">\(\mathbf{R}^2\)</span> from the model</p></li>
+<li><p>The number of restrictions is <span class="math inline">\(q=k\)</span></p></li>
+</ul>
+</section>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4"></h2>
+<p>We define the <span class="math inline">\(F\)</span>-stat as,</p>
+<p><span class="math display">\[
+    F\text{-stat} = \frac{\mathbf{R}^2/k}{(1-\mathbf{R}^2)/(n-k-1)}
+  \]</span></p>
+</section>
+<section id="stata-output" class="level2">
+<h2 class="anchored" data-anchor-id="stata-output">Stata output</h2>
+<p>This test is reported as standard with the Stata output as:</p>
+<ul>
+<li><span class="math inline">\(\texttt{F( , )}\)</span>: <span class="math inline">\(F\)</span>-stat</li>
+<li><span class="math inline">\(\texttt{Prob &gt; F}\)</span>: corresponding <span class="math inline">\(p\)</span>-value of <span class="math inline">\(F\)</span>-test</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      Source |       SS           df       MS      Number of obs   =       291
+-------------+----------------------------------   F(5, 285)       =     33.45
+       Model |  2.84542086         5  .569084172   Prob &gt; F        =    0.0000
+    Residual |  4.84835963       285  .017011788   R-squared       =    0.3698
+-------------+----------------------------------   Adj R-squared   =    0.3588
+       Total |  7.69378049       290  .026530278   Root MSE        =    .13043
+
+------------------------------------------------------------------------------
+     ln_pm25 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        ev_k |   .0779783     .03734     2.09   0.038     .0044811    .1514755
+    hybrid_k |   .0322276   .0063524     5.07   0.000      .019724    .0447312
+    petrol_k |   .0000559   .0007053     0.08   0.937    -.0013323    .0014442
+    diesel_k |   -.003546   .0005762    -6.15   0.000    -.0046802   -.0024119
+      ln_pop |    .088135   .0208428     4.23   0.000     .0471096    .1291604
+       _cons |   1.264753   .2325884     5.44   0.000     .8069436    1.722562
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="structural-change" class="level1">
+<h1>Structural Change</h1>
+<section id="dummy-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="dummy-interactions">Dummy interactions</h2>
+<p>We begin thinking about the interpretation of an interaction between a dummy variable.</p>
+<ul>
+<li><p>The typical example is the returns to education for men and women <span class="citation" data-cites="wooldridge2025">(as in <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 243</a>)</span></p></li>
+<li><p>But, given what we know about the ‘parent penalty’ <span class="citation" data-cites="kleven2019child">(<a href="#ref-kleven2019child" role="doc-biblioref">Kleven et al. 2019</a>)</span>, it seems more pertinent to focus on experience</p>
+<p><span class="math display">\[
+  \ln(wage_i) = \beta_0 + \beta_1 exp_i + u_i
+\]</span></p></li>
+</ul>
+</section>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5"></h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>last estimates not found
+r(301);
+
+
+file \morg24_bothgen.dta not found
+r(601);
+
+r(601);</code></pre>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-4/bysex-scatter.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%"></p>
+</figure>
+</div>
+</section>
+<section id="section-6" class="level2">
+<h2 class="anchored" data-anchor-id="section-6"></h2>
+<p>If we overlay the fitted lines we get</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>last estimates not found
+r(301);
+
+
+sex not found
+r(111);
+
+r(111);</code></pre>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-4/bysex-lfit.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%"></p>
+</figure>
+</div>
+</section>
+<section id="f-tests-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="f-tests-in-practice">F-tests in practice</h2>
+<p>F-tests are also used in applied econometrics to test for differences in a model between groups.</p>
+<ul>
+<li><p>A classic example of this is the test for whether the Mincer equation (from <a href="./tutorial-1.html">Tutorial 1</a>) differs by gender.</p>
+<p><span class="math display">\[
+  \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i  + u_i
+\]</span></p></li>
+<li><p>We estimated this model for the male-only sample</p></li>
+<li><p>The quadratic term in <span class="math inline">\(exp\)</span> has been dropped for simplification</p></li>
+<li><p>The model has <span class="math inline">\(k+1=3\)</span> parameters</p></li>
+</ul>
+</section>
+<section id="test-1" class="level2">
+<h2 class="anchored" data-anchor-id="test-1">Test:</h2>
+<p>We may wish to ask whether:</p>
+<ul>
+<li><p>the model for men (group = 1; e.g.&nbsp;“Male”)</p>
+<p><span class="math display">\[
+  \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i + u_i
+\]</span></p></li>
+</ul>
+<p>is the same as,</p>
+<ul>
+<li><p>the model for women (group = 2; e.g.&nbsp;“Female”)</p>
+<p><span class="math display">\[
+  \ln(wage_i) = \alpha_0 + \alpha_1 edu_i + \alpha_2 exp_i + u_i
+\]</span></p></li>
+</ul>
+</section>
+<section id="null-hypothesis" class="level2">
+<h2 class="anchored" data-anchor-id="null-hypothesis">Null hypothesis</h2>
+<p>This implies a null hypothesis:</p>
+<p><span class="math display">\[
+  H_0: \beta_0 = \alpha_0,\;\beta_1 = \alpha_1,\;\beta_2 = \alpha_2
+\]</span></p>
+<ul>
+<li>stretches across samples.</li>
+</ul>
+</section>
+<section id="test-2" class="level2">
+<h2 class="anchored" data-anchor-id="test-2">Test</h2>
+<p>The <span class="math inline">\(F\)</span>-test for this hypothesis has the form:</p>
+<p><span class="math display">\[
+  F\text{-stat} = \frac{(SSR_P - (SSR_1 + SSR_2))/(k+1)}{(SSR_1 + SSR_2)/(n-2(k+1))}
+\]</span></p>
+<p>where,</p>
+<ul>
+<li><p><span class="math inline">\(SSR_P\)</span> is the “pooled” (<span class="math inline">\(P\)</span>) <span class="math inline">\(SSR\)</span> from a regression of the joint sample.</p></li>
+<li><p><span class="math inline">\(SSR_1\)</span> is the <span class="math inline">\(SSR\)</span> from a regression for just group 1.</p></li>
+<li><p><span class="math inline">\(SSR_2\)</span> is the <span class="math inline">\(SSR\)</span> from a regression for just group 2.</p>
+<ul>
+<li>together <span class="math inline">\(SSR_1\)</span> and <span class="math inline">\(SSR_2\)</span> represent the unrestricted model.</li>
+</ul></li>
+<li><p><span class="math inline">\(n-2(k+1)\)</span> is the <strong>total</strong> degrees of freedom across the unrestricted model.</p>
+<ul>
+<li><span class="math inline">\(k+1\)</span> parameters are estimated in each sample.</li>
+</ul></li>
+</ul>
+</section>
+<section id="distribution-2" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-2">Distribution</h2>
+<p>The <span class="math inline">\(F\)</span>-stat is (unsurprisingly) <span class="math inline">\(F\)</span>-distributed,</p>
+<p><span class="math display">\[
+  F\text{-stat} \underset{\sim}_{H_0} F_{k+1,n-2(k+1)}
+\]</span></p>
+</section>
+<section id="dummy-equivalent" class="level2">
+<h2 class="anchored" data-anchor-id="dummy-equivalent">Dummy equivalent</h2>
+<p>This test has an equivalent form using interactions. Let,</p>
+<p><span class="math display">\[
+  d_i= \mathbf{1}\{\text{`Group 2'}\}
+\]</span></p>
+<p>For example,</p>
+<p><span class="math display">\[
+  d_i= \mathbf{1}\{\text{`Female'}\}
+\]</span></p>
+</section>
+<section id="interactions" class="level2">
+<h2 class="anchored" data-anchor-id="interactions">Interactions</h2>
+<p>We can write the unrestricted model as,</p>
+<p><span class="math display">\[
+  \ln(wage_i) = \beta_0 + \gamma_0 d_i + \beta_1 edu_i+\gamma_1 edu_i\cdot d_i + \beta_2 exp_i +\gamma_2 exp_i\cdot d_i +u_i
+\]</span></p>
+<p>We now have 6 parameters (<span class="math inline">\(2\times (k+1)\)</span> for <span class="math inline">\(k=2\)</span>)</p>
+<ul>
+<li><p><span class="math inline">\(\gamma_0 = E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i=0,exp_i=0]-E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i=0,exp_i=0]\)</span></p></li>
+<li><p>for <span class="math inline">\(\gamma_1,\gamma_2\)</span></p>
+<p><span class="math display">\[
+  \gamma_j = \frac{E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i=0,exp_i=0]}{\partial x_{ij}}-\frac{E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i=0,exp_i=0]}{\partial x_{ij}}
+\]</span></p></li>
+</ul>
+</section>
+<section id="test-3" class="level2">
+<h2 class="anchored" data-anchor-id="test-3">Test</h2>
+<p>Intuitively, the test for whether the model differs by group is given by,</p>
+<p><span class="math display">\[
+  H_0: \gamma_0 = 0,\;\gamma_1=0,\;\gamma_2=0
+\]</span></p>
+<p>where,</p>
+<ul>
+<li><strong>unrestricted</strong> model is given by,</li>
+</ul>
+<p><span class="math display">\[
+  \ln(wage_i) = \beta_0 + \gamma_0 d_i + \beta_1 edu_i+\gamma_1 edu_i\cdot d_i + \beta_2 exp_i +\gamma_2 exp_i\cdot d_i +u_i
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(df_{ur} = n-6\)</span></p></li>
+<li><p><strong>restricted</strong> model is given by,</p></li>
+</ul>
+<p><span class="math display">\[
+  \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i +u_i
+\]</span></p>
+<ul>
+<li><span class="math inline">\(df_{ur} = n-3\)</span></li>
+</ul>
+</section>
+<section id="f-stat" class="level2">
+<h2 class="anchored" data-anchor-id="f-stat"><span class="math inline">\(F\)</span>-stat</h2>
+<p>The <span class="math inline">\(F\)</span>-stat is given by,</p>
+<p><span class="math display">\[
+  F\text{-stat} = \frac{(SSR_{r}-SSR_{ur})/3}{SSR_{ur}/(n-6)}
+\]</span></p>
+<p>Compared with the first approach:</p>
+<p><span class="math display">\[
+  F\text{-stat} = \frac{(SSR_P - (SSR_1 + SSR_2))/3}{(SSR_1 + SSR_2)/(n-6)}
+\]</span></p>
+</section>
+<section id="equivalence" class="level2">
+<h2 class="anchored" data-anchor-id="equivalence">Equivalence</h2>
+<p>These are the same since,</p>
+<ol type="1">
+<li><p><span class="math inline">\(SSR_P=SSR_r\)</span></p></li>
+<li><p><span class="math inline">\(SSR_1+SSR_2 = SSR_{ur}\)</span></p></li>
+</ol>
+
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-kleven2019child" class="csl-entry" role="listitem">
+Kleven, Henrik, Camille Landais, Johanna Posch, Andreas Steinhauer, and Josef Zweimüller. 2019. <span>“Child Penalties Across Countries: Evidence and Explanations.”</span> In <em>Aea Papers and Proceedings</em>, 109:122–26. American Economic Association 2014 Broadway, Suite 305, Nashville, TN 37203.
+</div>
+<div id="ref-wooldridge2025" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approach.”</span>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>We drop the <span class="math inline">\(Var(\cdot |X)\)</span> notation from <a href="./lecture-3.html">Lecture 3</a>. However, all these variances are conditional on the sample values of the independent variables.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This inequality is how you can remember the order. The <span class="math inline">\(F\)</span>-stat is strictly positive.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This does not mean that <span class="math inline">\(F\)</span>-distributed tests are always one-sided, but rather that multiple linear hypotheses of this form are.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

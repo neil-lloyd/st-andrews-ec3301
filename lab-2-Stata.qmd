@@ -2,12 +2,11 @@
 title: Econometrics Lab 2
 subtitle: Linear Regression in Stata
 format: 
-  html: default
-#  html:
-#    other-links:
-#      - text: "Solution .do file"
-#        href: "material/lab-2/ec3301-lab-2.do"
-#        icon: code-square
+  html:
+    other-links:
+      - text: "Solution .do file"
+        href: "material/lab-2/ec3301-lab-2.do"
+        icon: code-square
 jupyter: nbstata
 ---
 

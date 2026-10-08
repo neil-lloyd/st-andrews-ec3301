@@ -1,0 +1,865 @@
+---
+title: Testing Linear Hypotheses
+subtitle: Lecture 4
+format: 
+  html: 
+    output-file: lecture-4.html
+#    other-links:
+#      - text: "PDF with Stata"
+#        href: "lecture-4-notes-Stata.pdf"
+#        icon: file-pdf
+#      - text: "PDF with R"
+#        href: "lecture-4-notes-R.pdf"
+#        icon: file-pdf
+  revealjs: 
+    output-file: lecture-4-slides.html
+    footer: "[Lecture 4](lecture-4.qmd) - St Andrews Business School - Martinmas 2026/27"
+engine: knitr
+---
+
+```{r}
+#| include: false
+#| cache: false
+
+library(Statamarkdown)
+knitr::opts_chunk$set(collectcode = TRUE)
+```
+
+
+```{r}
+#| include: false
+
+# Packages
+library(haven)    
+
+source(here::here("config.R"))
+```
+
+```{stata}
+#| include: false
+
+do "config.do"
+```
+
+::: {.content-visible unless-format="revealjs"}
+## Reading
+
+This lecture covers material from @wooldridge2025:
+
+- Chapter 4.4 - "Testing Hypotheses about a Single Linear Combination of the Parameters"
+- Chapter 4.5 - "Testing Multiple Linear Restrictions"
+- Chapter 7.4 - "Interactions Involving Dummy Variables"
+
+Note: I have edited the syllabus slightly to move Heteroskedasticity to Week 5 with Asymptotics.
+:::
+
+:::: {.content-visible when-format="revealjs"}
+## Recap
+
+::: incremental
+1. Properties of OLS
+
+   - Bias (Mean) - MLR 1-4
+   - Efficiency (Variance) - MLR 1-5
+   - Distribution - MLR 1-6
+
+2. Simple hypothesis tests
+  
+   - Critical value, $p$-value, and confidence interval
+   - $z$-stat (know error variance)
+   - $t$-stat (estimate error variance)
+   - Power of the test
+:::
+ 
+## Power: example
+
+**Why it's important?**
+
+::: {.fragment .fade-in}
+Suppose, you want you evaluate a policy - like the [Scottish Child Payment](https://www.mygov.scot/scottish-child-payment).
+
+  - Weekly payment of £28.20
+  - For children under 16
+  - One of [5 policies](https://www.mygov.scot/best-start-grant-best-start-foods) designed to reduce child povery in Scotland. 
+
+:::
+   
+## 
+
+You estimate a model to test whether recipients of the childpayment payment ($CP$) are less likely to be recorded as living in poverty.[^1]
+
+[^1]: This is what we call a linear probability model, as the outcome is a binary variable (see not on [Interpreting Linear Models](material-interpretation.qmd)). 
+
+$$
+  poor_i = \alpha + \beta CP_i + \mathbf{x}_i\gamma + \varepsilon_i
+$$
+
+In Scotland, the child povery rate is 21% ([source](https://www.gov.scot/news/latest-poverty-statistics-published/))
+
+## 
+
+Your estimate of $\beta$ is,
+
+$$
+  0.02 (se = 0.016)
+$$
+
+- The $t$-stat is $1.25$ (which is not significant at 10% level for any reasonable sample size)
+
+- If the result was significant it would mean that the CP reduced child poverty by $\approx 10\%$. A sizeable reduction.
+
+- BUT, you cannot reject the null that the SCP has had no effect, $H_0: \beta=0$.
+
+::: {.fragment .fade-in}
+Is that because the policy *truly* had no effect or because your test has little **statistical power** to reject the null when the effect is indeed $\beta=0.02$. 
+
+$$
+  Pr(\text{Reject}\;H_0|\beta=0.02) = ?
+$$
+
+- The power of the test ultimately depends on the **variance** of the estimator. 
+
+:::
+   
+::::
+
+# Hypothesis Tests
+
+## Simple hypotheses
+
+So far, we have considered hypotheses that involve a single estimator:
+
+::: incremental
+
+1. $H_0: \beta_j=\kappa_0$
+
+2. $H_0: \beta_j\geq \kappa_0$
+
+3. $H_0: \beta_j\leq \kappa_0$
+
+:::
+
+## Linear combinations
+
+Today, we consider hypotheses of the form:
+
+$$ 
+  H_0: a_0\beta_0 + a_1 \beta_1 + \cdots + a_k \beta_j = \kappa_0 
+$$
+
+for constants $\{a_j\}_{j=0,1,\dots,k}$. This is a **linear combination of parameters**.
+
+::: {.fragment .fade-in}
+For example, $H_0: \beta_1= 2\beta_2-0.5$ can be written as, 
+
+$$
+  H_0: \underbrace{0}_{a_0}\beta_0+\underbrace{1}_{a_1}\beta_1 +\underbrace{(- 2)}_{a_2}\beta_2 = \underbrace{-0.5}_{\kappa_0}
+$$
+
+:::
+
+## Multiple linear combinations
+
+Similarly, we could have $q$ of these statements,
+
+$$
+  \begin{aligned}
+   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_j &= \kappa^1_0 \\
+    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_j &= \kappa^2_0 \\
+    &\vdots \\
+    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_j &= \kappa^q_0 \\
+  \end{aligned}
+$$
+
+## Single linear combinations
+
+Consider the following example related to environmental and health economics
+
+$$
+  \ln(PM2.5_\ell) = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+$$
+
+where, 
+
+::: incremental
+
+- $PM2.5$ is micrograms of particulate matter (with diameter $\leq 2.5$ micrometres) per cubic metre in location $\ell$. 
+
+  - standard measure for health effects as absorbable by lungs and bloodstream
+  
+- $EV$ and $hybrid$ are number of registered vehicles (/1000) by fuel type in location $\ell$. 
+
+:::
+
+## Example: PM2.5
+
+The following estimates use local authority level data for 2019 in the UK. 
+
+::: {.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| code-fold: true
+#| output: true
+
+* Open CSV data
+import delimited "$data_dir\pm25.csv", clear
+
+* Estimate univariate linear regression
+reg ln_pm25 ev_k hybrid_k petrol_k diesel_k ln_pop
+```
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+    
+
+# Load the Stata file
+pm25_data <- read.csv(file.path(data_dir, "pm25.csv"))
+
+# Estimate univariate linear regression
+model1 <- lm(ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop, data = pm25_data)
+
+# View results
+summary(model1)
+```
+:::
+
+## Null hypotheses
+
+From a public policy perspective (if you consider designing subsidies), you want to estimate both $\beta_1$ and $\beta_2$, BUT also know if
+
+$$
+  H_0: \beta_1=\beta_2
+$$
+
+That is, should the policy discriminate bewteen electrified fuel types?
+
+- Engineers may be able provide mechanical differences, but they can't tell you about differences in usage (driver behaviour) which is important for realized pollution mitigation.
+
+:::{.callout-warning}
+Do not take these estimates too seriously. This model is a classic example of selection into "treatment": those who live in higher pollution areas (e.g. dense urban centres) are also more likely to buy EVs. A better research design would use panel data to evaluate this question dyanmically.
+:::
+
+## Alternative hypothesis
+
+The alternative in this case, may be 
+
+$$
+  H_1: \beta_1\neq \beta_2
+$$
+
+But may also be, 
+
+$$
+  H_1: \beta_1<\beta_2
+$$
+
+or
+
+$$
+  H_1: \beta_1>\beta_2
+$$
+
+if there is a strong case for ruling out one case [see @wooldridge2025, p. 139].
+
+## Test statistic
+
+For $H_0: \beta_1=\beta_2\Rightarrow H_0:\beta_1-\beta_2=0$
+
+
+$$
+  \text{test-stat} = \frac{\hat{\beta}_1-\hat{\beta}_2}{\sqrt{Var(\hat{\beta}_1-\hat{\beta}_2)}}
+$$
+
+:::{.callout-note}
+The more general case would be $H_0: a_1\beta_1+a_2\beta_2=\kappa_0$
+
+$$
+  \text{test-stat} = \frac{a_1\hat{\beta}_1+a_2\hat{\beta}_2-\kappa_0}{\sqrt{Var(a_1\hat{\beta}_1+a_2\hat{\beta}_2)}}
+$$
+
+which can be extended to include more parameters. 
+:::
+
+## Variance
+
+The key to understanding and executing this test is,[^2]
+
+[^2]: We drop the $Var(\cdot |X)$ notation from [Lecture 3](lecture-3-multi.qmd). However, all these variances are conditional on the sample values of the independent variables. 
+
+$$
+  Var(\hat{\beta}_1-\hat{\beta}_2) \neq Var(\hat{\beta}_1) + Var(\hat{\beta}_2)
+$$
+
+::: {.fragment .fade-in}
+This is because, 
+
+$$
+  \begin{aligned}
+  Var(a_1z_1+a_2z_2) =& Var(a_1z_1) + Var(a_2z_2) + 2\times Cov(a_1z_1,a_2z_2) \\
+  =&a_1^2Var(z_1) + a_2^2 Var(z_2) + 2\times a_1a_2Cov(z_1,z_2)
+  \end{aligned}
+$$
+
+for random variables $z_1$ and $z_2$ and constants $a_1$ and $a_2$.
+:::
+
+## 
+
+So, 
+
+$$
+  Var(\hat{\beta}_1-\hat{\beta}_2) = Var(\hat{\beta}_1) + Var(\hat{\beta}_2) - \textcolor{red}{2\times}\underbrace{\textcolor{blue}{Cov(\hat{\beta}_1,\hat{\beta}_2)}}_{\neq 0}
+$$
+
+::: {.fragment .fade-in}
+**Why $-2$?**
+
+- For this $H_0$, $a_1 = 1$ and $a_2 = -1$. 
+
+  $$
+    \Rightarrow H_0: \underbrace{\beta_1-\beta_2 = 0}_{a_1\beta_1 + a_2\beta_2 = \kappa_0}
+  $$
+
+:::
+
+## Distribution
+
+Under MLR 1-6, the **conditional** distribution of this test-statistic is $t_{n-k-1}$
+
+$$
+  t\text{-stat} = \frac{\hat{\beta}_1-\hat{\beta}_2}{\sqrt{Var(\hat{\beta}_1-\hat{\beta}_2)}}
+  \underset{H_0}{\sim} t_{n-k-1}
+$$
+
+**under the hull**.
+
+- You can use the same steps from [Lecture 3](lecture-3-multi.qmd) to conduct inference: $p$-value, critical value. 
+
+- We tend not to construct confidence intervals in such cases. 
+
+- Similarly, you can compute the power under the alternative $\beta_1-\beta_2 = \kappa$. 
+
+## Example: PM2.5
+
+::: {.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| output: true
+
+* t-test
+lincom ev_k - hybrid_k
+```
+
+### R
+
+In R, you can use the `marginaleffects` package. However, this is NOT available in AppsAnywhere. Do not worry, there is an alternative coming up.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+    
+# Load package
+library(marginaleffects)
+
+# Estimate linear hypothesis
+hypotheses(model1, "ev_k - hybrid_k = 0")
+```
+:::
+
+
+## Multiple linear hypotheses
+
+Another common form of hypothesis concerns **multiple** linear combinations of estimators. 
+
+$$
+  \begin{aligned}
+   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_j &= \kappa^1_0 \\
+    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_j &= \kappa^2_0 \\
+    &\vdots \\
+    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_j &= \kappa^q_0 \\
+  \end{aligned}
+$$
+
+## Example: PM2.5
+
+In our example of 
+
+$$
+  PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+$$
+
+This could be as simple as, 
+
+$$
+  H_0: \beta_1 = 0\;\text{and}\; \beta_2 = 0
+$$
+
+:::{.callout-caution title="Multiple hypothesis testing"}
+Why not test $H^{(1)}_0: \beta_1=0$ and then $H^{(2)}_0: \beta_2 = 0$ as separate individual hypotheses? The combined size of these tests would not be $\alpha$. Why? The estimators are are correlated which implies:
+
+$$
+  Pr\big(\text{Reject}\;H^{(1)}_0\;\text{or}\;H^{(2)}_0 \big|\beta_1=0,\beta_1=0\big) \neq \alpha
+$$
+
+:::
+
+::::{.content-visible unless-format="revealjs"}
+:::{.callout-tip title="Multiple hyopthesis testing" collapse=true}
+There are a number of ways to correctly do multiple hypothesis testing. One is the [Bonferroni correction](https://en.wikipedia.org/wiki/Bonferroni_correction) which gets you to reject separate hypotheses sequentially using an algorithim. It does so by ensuring that the family-wise error rate (the probability of rejecting at least one true $H_0$ across a "family" of hypotheses) is $\leq \alpha$. 
+:::
+::::
+
+## Test
+
+The test is performed by considering two models:
+
+1. **Unrestricted** model; using our example,
+
+$$
+  PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+$$
+
+   - storing the $RSS_{ur}$ from this model
+
+::: {.fragment .fade-in}
+
+2. **Restricted model**, which imposes $H_0: \beta_1 = 0\;\text{and}\; \beta_2 = 0$,
+
+$$
+  PM2.5_\ell = \beta_0 + \mathbf{x}_i\gamma + u_i
+$$
+
+   - storing the $RSS_{r}$ from this model
+
+:::
+
+## Test statistic
+
+The test static that is then given by, 
+
+$$
+  F\text{-stat} = \frac{(SSR_{r}-SSR_{ur})/q}{SSR_{ur}/df_{ur}}
+$$
+
+:::: {.fragment .fade-in}
+where, 
+
+::: incremental
+
+- $SSR_r$ and $SSR_{ur}$ come from the restricted ($r$) and unrestricted models ($ur$).[^3]
+
+[^3]: This inequality is how you can remember the order. The $F$-stat is strictly positive.
+
+  $$
+    SSR_{r}-SSR_{ur}>0
+  $$
+  
+  
+- $q$ is the number of restrictions (i.e. equations tested) and is given by the difference in resiual degrees of freedom
+
+  $$
+    q = df_r-df_{ur}
+  $$
+
+:::
+::::
+
+## Distribution
+
+Under the null, $F$-stat has an $F$ distribution (hence the name)
+
+$$
+  F\text{-stat} \underset{H_0}{\sim}F_{q,n-k-1}
+$$
+
+We reject $H_0$ if 
+
+
+$$
+  F\text{-stat} > F_{q,n-k-1}^{-1}(1-\alpha) = f_{q,n-k-1,1-\alpha}
+$$
+
+where $F_{q,n-k-1}^{-1}(1-\alpha)$ is the $1-\alpha$ percentile of the distribution. 
+
+::: {.fragment .fade-in}
+
+- Always a one-sided test, as test-statistic is strictly positive.[^4]
+
+[^4]: This does not mean that $F$-distributed tests are always one-sided, but rather that multiple linear hypotheses of this form are. 
+
+- Implies the $H_1:\; H_0 is not true$'; $H_1: \beta_1\neq0\;\text{or}\; \beta_2\neq0$
+
+:::
+
+::::{.content-visible unless-format="revealjs"}
+::: {.callout-tip title="$F$ distribution" collapse="true"}
+
+The $F$ distribution is defined as the ratio of two chi-squared distributions, 
+
+$$
+  F_{q,m} = \frac{\chi^2_q/q}{\chi^2_m/m}
+$$
+
+each normalized by their corresponding degrees of freedom. 
+
+:::
+::::
+
+## Alternative form
+
+Recall, $SSR = (1-\mathbf{R}^2)SST$. This means that we can write the $F$-stat as, 
+
+$$
+  F\text{-stat} = \frac{(\mathbf{R}^2_{ur}-\mathbf{R}^2_{r})/q}{(1-\mathbf{R}^2_{ur})/(n-k-1)}
+$$
+
+Note, 
+
+- The order switches in the numerator (but remains positive since $\mathbf{R}^2_{ur}>\mathbf{R}^2_{r}$)
+
+- $n-k-1=df_{ur}$, with $k$ the number of parameters in the unrestricted model
+
+## Example: PM2.5
+
+::: {.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| output: true
+
+* F-test
+test ev_k hybrid_k
+```
+
+### R
+
+In R, you can use the `car` package, which is available in AppsAnywhere.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+    
+# Load package
+library(car)
+
+# Estimate linear hypothesis
+linearHypothesis(model1, c("ev_k = 0", "hybrid_k = 0"))
+```
+:::
+
+## Revisiting single linear restriction
+
+You can think of a single linear hypothesis as a special case of multiple where $q=1$. For example, 
+
+$$
+  H_0: \textcolor{red}{\beta_1} = \textcolor{blue}{\beta_2}
+$$
+
+- Restricted model:
+
+  $$
+    \begin{aligned}
+    PM2.5_\ell =& \beta_0 + \textcolor{red}{\beta_1} EV_\ell + \underbrace{\textcolor{red}{\beta_1}}_{=\textcolor{blue}{\beta_2}} hybrid_\ell + \mathbf{x}_i\gamma + u_i \\
+    = & \beta_0 + \textcolor{red}{\beta_1} (EV_\ell + hybrid_\ell)   + \mathbf{x}_i\gamma + u_i
+    \end{aligned}            
+  $$
+  
+  A regression with a new transformed variable: $EV_\ell + hybrid_\ell$
+
+## 
+
+Moreover, you can show that for $q=1$
+
+$$
+  F\text{-stat} = \frac{SSR_{r}-SSR_{ur}}{SSR_{ur}/(n-k-1)} = (t\text{-stat})^2
+$$
+
+## Example: PM2.5
+
+::: {.panel-tabset}
+
+### Stata 
+
+```{stata}
+#| echo: true
+#| output: true
+
+* t-test
+lincom ev_k - hybrid_k
+
+* F-test
+test ev_k=hybrid_k
+
+* check
+dis sqrt(r(F))
+```
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+    
+# t-test
+hypotheses(model1, "ev_k - hybrid_k = 0")
+
+# F-test
+linearHypothesis(model1, "ev_k = hybrid_k")
+```
+:::
+
+
+
+## Regression significance
+
+A special case of this form of test concerns the joint significance of all the *slope* parameters in a model:
+
+$$
+  H_0: \beta_1 = 0,\; \beta_1 = 0,\;\dots,\;\beta_k=0
+$$
+
+In this case, 
+
+- The restricted model is a regression on a constant (alone) where $\Rightarrow \mathbf{R}^2_{r}=0$
+
+- And $\mathbf{R}^2_{ur}$ is simply the $\mathbf{R}^2$ from the model
+
+- The number of restrictions is $q=k$
+
+##
+
+We define the $F$-stat as, 
+
+  $$
+    F\text{-stat} = \frac{\mathbf{R}^2/k}{(1-\mathbf{R}^2)/(n-k-1)}
+  $$
+
+## Stata output
+
+This test is reported as standard with the Stata output as: 
+
+- $\texttt{F( , )}$: $F$-stat 
+- $\texttt{Prob > F}$: corresponding $p$-value of $F$-test 
+
+```{stata}
+#| echo: false
+#| output: true
+
+* Estimate linear regression
+reg ln_pm25 ev_k hybrid_k petrol_k diesel_k ln_pop
+```
+
+
+
+# Structural Change
+
+## Dummy interactions
+
+We begin thinking about the interpretation of an interaction between a dummy variable. 
+
+- The typical example is the returns to education for men and women [as in @wooldridge2025, p. 243]
+
+- But, given what we know about the 'parent penalty' [@kleven2019child], it seems more pertinent to focus on experience
+
+  $$
+    \ln(wage_i) = \beta_0 + \beta_1 exp_i + u_i
+  $$
+
+##
+
+```{stata}
+#| echo: false
+
+use "$data_dir\morg24_bothgen.dta", clear
+
+* Scatter
+twoway (scatter lnwage exp, mc(blue%50)) (lfit lnwage exp, lwidth(*2)), by(sex,  legend(off) note("") ) xtitle("Potential Experience (=Age-(Years of Education +6))")
+
+graph export "material/lecture-4/bysex-scatter.png", replace
+```
+
+![](material/lecture-4/bysex-scatter.png){fig-align="center" width=67%}
+
+##
+
+If we overlay the fitted lines we get
+
+
+```{stata}
+#| echo: false
+
+* Scatter
+twoway (lfit lnwage exp if sex==1, lc(blue)) (lfit lnwage exp if sex==2, lc(red) lwidth(*2)), xtitle("Potential Experience (=Age-(Years of Education +6))") legend(order(1 "Male" 2 "Female") r(2) ring(0) pos(5))
+
+graph export "material/lecture-4/bysex-lfit.png", replace
+```
+
+![](material/lecture-4/bysex-lfit.png){fig-align="center" width=67%}
+
+## F-tests in practice
+
+F-tests are also used in applied econometrics to test for differences in a model between groups. 
+
+- A classic example of this is the test for whether the Mincer equation (from [Tutorial 1](tutorial-1.qmd)) differs by gender. 
+
+  $$
+    \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i  + u_i
+  $$
+
+- We estimated this model for the male-only sample
+
+- The quadratic term in $exp$ has been dropped for simplification
+
+- The model has $k+1=3$ parameters
+
+## Test:
+
+We may wish to ask whether:
+
+- the model for men (group = 1; e.g. "Male")
+
+  $$
+    \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i + u_i
+  $$
+
+is the same as, 
+
+- the model for women (group = 2; e.g. "Female")
+
+  $$
+    \ln(wage_i) = \alpha_0 + \alpha_1 edu_i + \alpha_2 exp_i + u_i
+  $$
+
+## Null hypothesis
+
+This implies a null hypothesis:
+
+$$
+  H_0: \beta_0 = \alpha_0,\;\beta_1 = \alpha_1,\;\beta_2 = \alpha_2
+$$
+
+- stretches across samples. 
+
+## Test
+
+The $F$-test for this hypothesis has the form:
+
+$$
+  F\text{-stat} = \frac{(SSR_P - (SSR_1 + SSR_2))/(k+1)}{(SSR_1 + SSR_2)/(n-2(k+1))}
+$$
+
+where, 
+
+- $SSR_P$ is the "pooled" ($P$) $SSR$ from a regression of the joint sample. 
+- $SSR_1$ is the $SSR$ from a regression for just group 1.
+- $SSR_2$ is the $SSR$ from a regression for just group 2.
+
+  - together $SSR_1$ and $SSR_2$ represent the unrestricted model. 
+
+- $n-2(k+1)$ is the **total** degrees of freedom across the unrestricted model. 
+
+  - $k+1$ parameters are estimated in each sample. 
+  
+## Distribution
+
+The $F$-stat is (unsurprisingly) $F$-distributed,
+
+$$
+  F\text{-stat} \underset{\sim}_{H_0} F_{k+1,n-2(k+1)}
+$$
+
+## Dummy equivalent
+
+This test has an equivalent form using interactions. Let, 
+
+$$
+  d_i= \mathbf{1}\{\text{`Group 2'}\}
+$$
+
+For example, 
+
+$$
+  d_i= \mathbf{1}\{\text{`Female'}\}
+$$
+
+## Interactions
+
+We can write the unrestricted model as, 
+
+$$
+  \ln(wage_i) = \beta_0 + \gamma_0 d_i + \beta_1 edu_i+\gamma_1 edu_i\cdot d_i + \beta_2 exp_i +\gamma_2 exp_i\cdot d_i +u_i
+$$
+
+We now have 6 parameters ($2\times (k+1)$ for $k=2$)
+
+- $\gamma_0 = E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i=0,exp_i=0]-E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i=0,exp_i=0]$ 
+
+- for $\gamma_1,\gamma_2$
+
+  $$
+    \gamma_j = \frac{E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i=0,exp_i=0]}{\partial x_{ij}}-\frac{E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i=0,exp_i=0]}{\partial x_{ij}}
+  $$
+  
+## Test
+
+Intuitively, the test for whether the model differs by group is given by,
+
+$$
+  H_0: \gamma_0 = 0,\;\gamma_1=0,\;\gamma_2=0
+$$
+
+where,
+
+- **unrestricted** model is given by,
+
+$$
+  \ln(wage_i) = \beta_0 + \gamma_0 d_i + \beta_1 edu_i+\gamma_1 edu_i\cdot d_i + \beta_2 exp_i +\gamma_2 exp_i\cdot d_i +u_i
+$$
+
+  - $df_{ur} = n-6$
+
+- **restricted** model is given by,
+
+$$
+  \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i +u_i
+$$
+
+  - $df_{ur} = n-3$
+  
+## $F$-stat
+
+The $F$-stat is given by, 
+
+$$
+  F\text{-stat} = \frac{(SSR_{r}-SSR_{ur})/3}{SSR_{ur}/(n-6)} 
+$$
+
+Compared with the first approach:
+
+$$
+  F\text{-stat} = \frac{(SSR_P - (SSR_1 + SSR_2))/3}{(SSR_1 + SSR_2)/(n-6)}
+$$
+
+## Equivalence
+
+These are the same since, 
+
+1. $SSR_P=SSR_r$
+
+2. $SSR_1+SSR_2 = SSR_{ur}$
+

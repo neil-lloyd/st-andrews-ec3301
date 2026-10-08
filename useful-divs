@@ -1,0 +1,49 @@
+
+
+::: {.fragment .fade-in}
+
+:::
+
+
+::: incremental
+
+:::
+
+
+::: {.content-visible when-format="revealjs"}
+
+:::
+
+
+
+::::{.content-visible unless-format="revealjs"}
+:::{.callout-tip title="" collapse=true}
+
+:::
+::::
+
+
+```{r}
+#| include: false
+#| cache: false
+
+library(Statamarkdown)
+knitr::opts_chunk$set(collectcode = TRUE)
+```
+
+
+```{r}
+#| include: false
+
+# Packages
+library(haven)    
+
+source(here::here("config.R"))
+```
+
+```{stata}
+#| include: false
+
+do "config.do"
+```
+

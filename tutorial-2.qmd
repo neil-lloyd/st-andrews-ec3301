@@ -61,13 +61,13 @@ reg lprice rooms lproptax ldist crime stratio
 The data comes a rather old study by @harrison1978hedonic titled *Hedonic housing prices and the demand for clean air*. The answer you get for this question will not seem realistic given the housing market today. The mean of the `price` variable (which captures median house price in a neighbourhood) is \$22,512. That would not be enough to buy a new car in the US today. 
 :::
 
-7. Test the null hypothesis $\beta_{stratio}<-0.025$ at a signficance level of 0.05. You will need the following information on $T_{n-k-1}^{-1}(0.05)
+7. Test the null hypothesis $H_0:\beta_5\geq-0.025$ at a signficance level of 0.05. You will need the following information on $t_{n-k-1}^{-1}(0.05)$
 
 ```{stata}
 dis invt(e(df_r),0.05)
 ```
 
-8. Replicate the 95% CI interval for `ldist` shown above. You need the following information on $T_{n-k-1}^{-1}(0.975)$,
+8. Replicate the 95% CI interval for `ldist` shown above. You need the following information on $t_{n-k-1}^{-1}(0.975)$,
 
 ```{stata}
 dis invt(e(df_r),0.975)

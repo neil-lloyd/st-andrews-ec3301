@@ -33,6 +33,22 @@ source(here::here("config.R"))
 do "config.do"
 ```
 
+::: {.content-visible unless-format="revealjs"}
+## Reading
+
+This lecture covers material from @wooldridge2025:
+
+- Chapter 2.5 - "Expected Values and Variances of the OLS Estimators"
+- Chapter 3.3 - "The Expected Value of the OLS Estimators"
+- Chapter 3.4 - "The Variance of the OLS Estimators"
+- Chapter 3.5 - "Efficiency of OLS: The Gauss-Markov Theorem"
+- Chapter 4.1 - "Sampling distributions of the OLS Estimators"
+- Chapter 4.2 - "Testing Hypotheses about a Single Population Parameter: The $t$ test"
+- Chapter 4.3 - "Confidence Intervals"
+
+We will return to discussions of omitted variables (Chapter 3.3b/c) and "bad controls" (Chapter 3.8) after the ILW.
+:::
+
 :::{.content-visible unless-format="revealjs"}
 In this lecture we investigate the properties of the OLS estimator and how it relates to the assumptions we make about the unobserved population regression model. As we do so it will help to keep in mind the distinction between the estimand, the estimator, and the estimate. 
 
@@ -1128,9 +1144,9 @@ $$
 
 - $n-k-1$ are referred to as the residual *degrees of freedom*
 
-## $t$-distribution
+## $t$ distribution
 
-When we substitue $\sigma^2$ for $\hat{\sigma}^2$, the re-centered estimator has a (Student's) $t$-distribution
+When we substitue $\sigma^2$ for $\hat{\sigma}^2$, the re-centered estimator has a (Student's) $t$ distribution
 
 $$
   \frac{\hat{\beta}_j-\beta_j}{se(\hat{\beta}_j)} | x \sim t_{n-k-1}
@@ -1143,7 +1159,7 @@ $$
 $$
 
 ::::{.content-visible unless-format="revealjs"}
-::: {.callout-tip title="Student's t-distribution" collapse="true"}
+::: {.callout-tip title="Student's $t$ distribution" collapse="true"}
 
 If $z\sim N(0,1)$ and $w\sim \chi^2_{m}$ then, 
 
@@ -1171,9 +1187,9 @@ This is often referred to as the **$t$-statistic** and is reported as a default 
 
 :::{.fragment .fade-in}
 
-- You can perform all the same inference steps (critical values, $p$-values, CI) replacing normal distribution with $t$-distribution
+- You can perform all the same inference steps (critical values, $p$-values, CI) replacing normal distribution with $t$ distribution
 
-- Using the $t$-distribution leads to slightly more "conservative" decisions. 
+- Using the $t$ distribution leads to slightly more "conservative" decisions. 
   
   - the tests have less statistical power relative to their normal counterpart (if you knew $\sigma^2$)
   

@@ -410,6 +410,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./tutorial-1-solutions.html">
  <span class="dropdown-text">Tutorial 1 (Solutions)</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2.html">
+ <span class="dropdown-text">Tutorial 2</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -539,7 +543,7 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 <p>With <span class="math inline">\(\gamma_0 = \beta_0 + \beta_2\times\ln(1000)\)</span> and <span class="math inline">\(\gamma_4 = \beta_4/100\)</span>. For <span class="math inline">\(j = 1,2,3,5\)</span>, <span class="math inline">\(\gamma_j= \beta_j\)</span>.</p>
 </div>
 <p>The following questions relate to the regression output below:</p>
-<div id="8bafc68f" class="cell" data-execution_count="3">
+<div id="29ab1bf0" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> lprice rooms lproptax ldist crime stratio</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -567,7 +571,7 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 </ol>
 <div class="border">
 <p>An additional room increases the predicted median sale price of a house by 30.1 percent.</p>
-<div id="92e9d960" class="cell" data-execution_count="4">
+<div id="b1c13b76" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">exp</span>(_b[rooms])-1)*100</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>30.126096</code></pre>
@@ -580,7 +584,7 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 <div class="border">
 <p>A 1% increase in proximity to 5 employment centers increases predicted median house price of a community by 0.004 %. However, this slope coefficient is NOT statistically distinguishable from 0.</p>
 <p>A 1 unit increase in crime (per capita) <em>decreases</em> predicted median house price by approximately 1.28% or more precisely,</p>
-<div id="f4c1d189" class="cell" data-execution_count="5">
+<div id="35115bdd" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">exp</span>(_b[crime])-1)*100</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-1.2673186</code></pre>
@@ -605,15 +609,18 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 </div>
 <div class="border">
 <p>Since, <span class="math inline">\(\ln(1)=0\)</span>, the predicted value is given by:</p>
-<div id="e56f3bf4" class="cell" data-execution_count="6">
+<div id="852f7483" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">exp</span>(_b[<span class="dt">_cons</span>] + _b[rooms]*4 + _b[lproptax]*<span class="fu">ln</span>(30) + _b[crime]*20 + _b[stratio]*16)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>16564.116</code></pre>
+</div>
 </div>
 </div>
 <ol start="7" type="1">
-<li>Test the null hypothesis <span class="math inline">\(\beta_{stratio}&lt;-0.025\)</span> at a signficance level of 0.05. You will need the following information on $T_{n-k-1}^{-1}(0.05)</li>
+<li>Test the null hypothesis <span class="math inline">\(H_0:\beta_5\geq-0.025\)</span> at a signficance level of 0.05. You will need the following information on <span class="math inline">\(t_{n-k-1}^{-1}(0.05)\)</span></li>
 </ol>
-<div id="e90d183d" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dis invt(<span class="fu">e</span>(df_r),0.05)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9ebae357" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dis invt(<span class="fu">e</span>(df_r),0.05)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-1.6479069</code></pre>
 </div>
@@ -621,22 +628,22 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 <div class="border">
 <p>The relevant <span class="math inline">\(t\)</span>-dsitributed test static is given by,</p>
 <p><span class="math display">\[
-  \frac{\hat{\beta}-(-0.025)}{se(\hat{\beta})}
+  \frac{\hat{\beta}_5-(-0.025)}{se(\hat{\beta}_5)}
 \]</span></p>
 <p>The realized value is:</p>
-<div id="b412f568" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dis (_b[stratio]+0.025)/_se[stratio]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c871330a" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dis (_b[stratio]+0.025)/_se[stratio]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-1.4210139</code></pre>
 </div>
 </div>
-<p>Since the realized value of the test-statistic is to the right (i.e.&nbsp;<span class="math inline">\(&gt;\)</span>) of the critical value, we do NOT reject <span class="math inline">\(H_0\)</span>.</p>
+<p>Since the realized value of the test-statistic is to the right (i.e.&nbsp;<span class="math inline">\(&gt;\)</span>) of the critical value, we fail to reject <span class="math inline">\(H_0\)</span>.</p>
 </div>
 <ol start="8" type="1">
-<li>Replicate the 95% CI interval for <code>ldist</code> shown above. You need the following information on <span class="math inline">\(T_{n-k-1}^{-1}(0.975)\)</span>,</li>
+<li>Replicate the 95% CI interval for <code>ldist</code> shown above. You need the following information on <span class="math inline">\(t_{n-k-1}^{-1}(0.975)\)</span>,</li>
 </ol>
-<div id="8d265be9" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dis invt(<span class="fu">e</span>(df_r),0.975)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="941b1011" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dis invt(<span class="fu">e</span>(df_r),0.975)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1.9647198</code></pre>
 </div>
@@ -644,12 +651,12 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 <div class="border">
 <p>The confidence interval is given by:</p>
 <p><span class="math display">\[
-  \big[\hat{\beta}-\text{t}_{n-k-1,0.975}\times se(\hat{\beta}),\hat{\beta}+\text{t}_{n-k-1,0.975}\times se(\hat{\beta})\big]
+  \big[\hat{\beta}_3-\text{t}_{n-k-1,0.975}\times se(\hat{\beta}_3),\hat{\beta}_3+\text{t}_{n-k-1,0.975}\times se(\hat{\beta}_3)\big]
 \]</span></p>
 <p>This estimated CI is:</p>
-<div id="0820b06b" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dis _b[ldist]-invt(<span class="fu">e</span>(df_r),0.975)*_se[ldist]</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dis _b[ldist]+invt(<span class="fu">e</span>(df_r),0.975)*_se[ldist]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="1b821274" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dis _b[ldist]-invt(<span class="fu">e</span>(df_r),0.975)*_se[ldist]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dis _b[ldist]+invt(<span class="fu">e</span>(df_r),0.975)*_se[ldist]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-.04795743
 .05673044</code></pre>
@@ -664,8 +671,8 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
   \mathbf{R}^2 = \frac{SSE}{SST} = \frac{SSE}{SSE+SSR}
 \]</span></p>
 <p>Using the stored results, we can replicate this as:</p>
-<div id="d77cbe3e" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(mss)/(<span class="fu">e</span>(mss)+<span class="fu">e</span>(rss))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="1e9781e8" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(mss)/(<span class="fu">e</span>(mss)+<span class="fu">e</span>(rss))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.62558792</code></pre>
 </div>
@@ -680,15 +687,15 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
   F-\text{stat} = \frac{R^2/k}{(1-R^2)/(n-k-1)}
 \]</span></p>
 <p>Using the stored results, we can replicate this as:</p>
-<div id="ef9018c0" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">e</span>(r2)/<span class="fu">e</span>(df_m))/((1-<span class="fu">e</span>(r2))/<span class="fu">e</span>(df_r))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="7e903ba7" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">e</span>(r2)/<span class="fu">e</span>(df_m))/((1-<span class="fu">e</span>(r2))/<span class="fu">e</span>(df_r))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>167.0854</code></pre>
 </div>
 </div>
 <p>The critical value is given by <span class="math inline">\(F^{-1}{k,n-k-1}(0.95)\)</span> (i.e.&nbsp;one-sided test):</p>
-<div id="c9f3261d" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">invF</span>(<span class="fu">e</span>(df_m),<span class="fu">e</span>(df_r),0.95)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="eb4ac351" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">invF</span>(<span class="fu">e</span>(df_m),<span class="fu">e</span>(df_r),0.95)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2.2320424</code></pre>
 </div>
@@ -706,10 +713,10 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>Before the next two questions, I will store some relevant Stata output from the first model:</p>
-<div id="80980214" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> r2_ur = <span class="fu">e</span>(r2)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> ssr_ur = <span class="fu">e</span>(rss)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> df_ur = <span class="fu">e</span>(df_r)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="3eb74a59" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> r2_ur = <span class="fu">e</span>(r2)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> ssr_ur = <span class="fu">e</span>(rss)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> df_ur = <span class="fu">e</span>(df_r)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This will be wiped from memory after estimating a different model.</p>
 </div>
@@ -717,9 +724,9 @@ Note
 <ol start="11" type="1">
 <li>Test the <span class="math inline">\(H_0: \beta_{\ln(dist)}=\beta_{\ln(proptax)}=0\)</span> using the reported information below. [The code the <span class="math inline">\(\mathbf{R}^2\)</span> from a model that excludes <code>ldist</code> and <code>lproptax</code>.]</li>
 </ol>
-<div id="e7736aee" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lprice rooms crime stratio</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(r2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="0c982056" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lprice rooms crime stratio</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(r2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.60187703</code></pre>
 </div>
@@ -731,25 +738,27 @@ Note
 \]</span></p>
 <p>where <span class="math inline">\(q\)</span> is the difference bewteen the residual degrees of freedom of the restricted and unrestricted model.</p>
 <p>This is computed as:</p>
-<div id="08b4f2b0" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> <span class="fu">q</span> = <span class="fu">e</span>(df_r)-df_ur</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dis ((r2_ur-<span class="fu">e</span>(r2))/<span class="fu">q</span>)/((1-r2_ur)/df_ur)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="398284f9" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> <span class="fu">q</span> = <span class="fu">e</span>(df_r)-df_ur</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>dis ((r2_ur-<span class="fu">e</span>(r2))/<span class="fu">q</span>)/((1-r2_ur)/df_ur)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>15.832081</code></pre>
 </div>
 </div>
 <p>The relevant critical value is <span class="math inline">\(F^{-1}{q,n-k-1}(0.95)\)</span></p>
-<div id="32dcff2b" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">invF</span>(<span class="fu">q</span>,df_ur,0.95)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="419c5674" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">invF</span>(<span class="fu">q</span>,df_ur,0.95)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3.013753</code></pre>
+</div>
 </div>
 <p>We evidently reject <span class="math inline">\(H_0\)</span>.</p>
 <p>To check our solution, the output should replicate</p>
-<div id="f04a5217" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> lprice rooms lproptax ldist crime stratio</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> lproptax ldist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="a5ac2d72" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> lprice rooms lproptax ldist crime stratio</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> lproptax ldist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>3.013753
-
+<pre><code>
       Source |       SS           df       MS      Number of obs   =       506
 -------------+----------------------------------   F(5, 500)       =    167.09
        Model |  52.9136182         5  10.5827236   Prob &gt; F        =    0.0000
@@ -779,9 +788,9 @@ Note
 <ol start="12" type="1">
 <li>Test the <span class="math inline">\(H_0: \beta_{\ln(dist)}=0\)</span> using the reported information below. [The code the <span class="math inline">\(SSR\)</span> from a model that excludes <code>ldist</code>.] Compute the relevant p-value for this test. What is the relationship between the <span class="math inline">\(F\)</span>-statistic computed here and the <span class="math inline">\(t\)</span>-statistic shown in the original output.</li>
 </ol>
-<div id="f6a70150" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lprice rooms lproptax crime stratio</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2f77956f" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lprice rooms lproptax crime stratio</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>31.670324</code></pre>
 </div>
@@ -793,32 +802,32 @@ Note
 \]</span></p>
 <p>where <span class="math inline">\(q\)</span> is the difference bewteen the residual degrees of freedom of the restricted and unrestricted model.</p>
 <p>This is computed as:</p>
-<div id="2d143988" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> <span class="fu">q</span> = <span class="fu">e</span>(df_r)-df_ur</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>dis ((<span class="fu">e</span>(rss)-ssr_ur)/<span class="fu">q</span>)/(ssr_ur/df_ur)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="49fa4b0c" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> <span class="fu">q</span> = <span class="fu">e</span>(df_r)-df_ur</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>dis ((<span class="fu">e</span>(rss)-ssr_ur)/<span class="fu">q</span>)/(ssr_ur/df_ur)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.02710852</code></pre>
 </div>
 </div>
 <p>To solve for the p-value we must solve for: <span class="math inline">\(1-F{q,n-k-1}(F-\text{stat})\)</span></p>
-<div id="4b4029b7" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> fstat = ((<span class="fu">e</span>(rss)-ssr_ur)/<span class="fu">q</span>)/(ssr_ur/df_ur)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>dis 1-<span class="fu">F</span>(<span class="fu">q</span>,df_ur,fstat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="6f7ea572" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span> fstat = ((<span class="fu">e</span>(rss)-ssr_ur)/<span class="fu">q</span>)/(ssr_ur/df_ur)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>dis 1-<span class="fu">F</span>(<span class="fu">q</span>,df_ur,fstat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.86928865</code></pre>
 </div>
 </div>
 <p>This matches the reported p-value from the original regression. Moreover, <span class="math inline">\(F\)</span>-stat is equal to the square of the <span class="math inline">\(t\)</span>-stat from the original (unrestricted) model:</p>
-<div id="aeefc954" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">sqrt</span>(fstat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="1403e38b" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">sqrt</span>(fstat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.16464666</code></pre>
 </div>
 </div>
 <p>To check our solution, the output should replicate</p>
-<div id="3cb650f9" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> lprice rooms lproptax ldist crime stratio</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> ldist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="3597523b" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> lprice rooms lproptax ldist crime stratio</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> ldist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
       Source |       SS           df       MS      Number of obs   =       506
@@ -952,7 +961,7 @@ Note
 <ul>
 <li><p><span class="math inline">\(t\)</span>-distribution</p>
 <p><span class="math display">\[
-  T_{n-k-1} = \frac{N(0,1)}{\chi^2_{n-k-1}/(n-k-1)}
+  t_{n-k-1} = \frac{N(0,1)}{\chi^2_{n-k-1}/(n-k-1)}
 \]</span></p></li>
 <li><p><span class="math inline">\(F\)</span>-distribution</p>
 <p><span class="math display">\[

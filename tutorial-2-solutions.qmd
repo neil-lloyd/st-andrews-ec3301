@@ -123,7 +123,7 @@ dis exp(_b[_cons] + _b[rooms]*4 + _b[lproptax]*ln(30) + _b[crime]*20 + _b[strati
 
 :::
 
-7. Test the null hypothesis $\beta_{stratio}<-0.025$ at a signficance level of 0.05. You will need the following information on $T_{n-k-1}^{-1}(0.05)
+7. Test the null hypothesis $H_0:\beta_5\geq-0.025$ at a signficance level of 0.05. You will need the following information on $t_{n-k-1}^{-1}(0.05)$
 
 ```{stata}
 dis invt(e(df_r),0.05)
@@ -133,7 +133,7 @@ dis invt(e(df_r),0.05)
 The relevant $t$-dsitributed test static is given by, 
 
 $$
-  \frac{\hat{\beta}-(-0.025)}{se(\hat{\beta})}
+  \frac{\hat{\beta}_5-(-0.025)}{se(\hat{\beta}_5)}
 $$
 
 The realized value is:
@@ -142,11 +142,11 @@ The realized value is:
 dis (_b[stratio]+0.025)/_se[stratio]
 ```
 
-Since the realized value of the test-statistic is to the right (i.e. $>$) of the critical value, we do NOT reject $H_0$. 
+Since the realized value of the test-statistic is to the right (i.e. $>$) of the critical value, we fail to reject $H_0$. 
 :::
 
 
-8. Replicate the 95% CI interval for `ldist` shown above. You need the following information on $T_{n-k-1}^{-1}(0.975)$,
+8. Replicate the 95% CI interval for `ldist` shown above. You need the following information on $t_{n-k-1}^{-1}(0.975)$,
 
 ```{stata}
 dis invt(e(df_r),0.975)
@@ -156,7 +156,7 @@ dis invt(e(df_r),0.975)
 The confidence interval is given by:
 
 $$
-  \big[\hat{\beta}-\text{t}_{n-k-1,0.975}\times se(\hat{\beta}),\hat{\beta}+\text{t}_{n-k-1,0.975}\times se(\hat{\beta})\big]
+  \big[\hat{\beta}_3-\text{t}_{n-k-1,0.975}\times se(\hat{\beta}_3),\hat{\beta}_3+\text{t}_{n-k-1,0.975}\times se(\hat{\beta}_3)\big]
 $$
 
 This estimated CI is:
@@ -250,7 +250,6 @@ dis ((r2_ur-e(r2))/q)/((1-r2_ur)/df_ur)
 ```
 
 The relevant critical value is $F^{-1}{q,n-k-1}(0.95)$
-
 
 ```{stata}
 dis invF(q,df_ur,0.95)
@@ -428,7 +427,7 @@ In the context we use them, the $t$-distribution and $F$-distribution take on th
 - $t$-distribution
 
   $$
-    T_{n-k-1} = \frac{N(0,1)}{\chi^2_{n-k-1}/(n-k-1)}
+    t_{n-k-1} = \frac{N(0,1)}{\chi^2_{n-k-1}/(n-k-1)}
   $$
 
 - $F$-distribution
