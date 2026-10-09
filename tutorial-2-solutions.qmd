@@ -41,7 +41,7 @@ In this section we examine the an example of multivariate regression model: the 
 
 - 1 extra room increases expected (median) price by $\beta_1$; all else constant. Expect $\beta_1>0$. 
 - A \$100 increase in property tax increases expected (median) price by $\beta_2\times 0.1$; all else constant. Expect $\beta_2<0$. 
-- being 1 mile closer to employment centers increases expected (median) price by $\beta_3$; all else constant. Expect $\beta_3>0$. 
+- being 1 mile closer to employment centers increases expected (median) price by $\beta_3$; all else constant. Expect $\beta_3<0$. 
 - 1 additional crime per capita increases expected (median) price by $\beta_4$; all else constant. Expect $\beta_4<0$. 
 - 1 additional student per teacher increase expected (median) price by $\beta_5$; all else constant. Expect $\beta_5<0$. 
 

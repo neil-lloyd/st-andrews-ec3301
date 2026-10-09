@@ -366,6 +366,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./lecture-3.html">
  <span class="dropdown-text">Lecture 3</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-4.html">
+ <span class="dropdown-text">Lecture 4</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -463,8 +467,9 @@ window.Quarto = {
   <ul>
   <li><a href="#hypothesis-tests" id="toc-hypothesis-tests" class="nav-link active" data-scroll-target="#hypothesis-tests">Hypothesis Tests</a></li>
   <li><a href="#structural-change" id="toc-structural-change" class="nav-link" data-scroll-target="#structural-change">Structural Change</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-4-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-4-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="lecture-4-notes-Stata.pdf"><i class="bi bi-file-pdf"></i>PDF with Stata</a></li><li><a href="lecture-4-notes-R.pdf"><i class="bi bi-file-pdf"></i>PDF with R</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -498,7 +503,7 @@ window.Quarto = {
 <li>Chapter 4.5 - “Testing Multiple Linear Restrictions”</li>
 <li>Chapter 7.4 - “Interactions Involving Dummy Variables”</li>
 </ul>
-<p>Note: I have edited the syllabus slightly to move Heteroskedasticity to Week 5 with Asymptotics.</p>
+<p>Note: I have edited the syllabus slightly to move the topic of heteroskedasticity to Week 5 with asymptotics.</p>
 </section>
 <section id="hypothesis-tests" class="level1">
 <h1>Hypothesis Tests</h1>
@@ -729,10 +734,11 @@ Note
 <div class="fragment fade-in">
 <p><strong>Why <span class="math inline">\(-2\)</span>?</strong></p>
 <ul>
-<li><p>For this <span class="math inline">\(H_0\)</span>, <span class="math inline">\(a_1 = 1\)</span> and <span class="math inline">\(a_2 = -1\)</span>.</p>
+<li><p>For this <span class="math inline">\(H_0\)</span>,</p>
 <p><span class="math display">\[
   \Rightarrow H_0: \underbrace{\beta_1-\beta_2 = 0}_{a_1\beta_1 + a_2\beta_2 = \kappa_0}
-\]</span></p></li>
+\]</span></p>
+<p>So, <span class="math inline">\(a_1 = 1\)</span> and <span class="math inline">\(a_2 = -1\)</span>.</p></li>
 </ul>
 </div>
 </section>
@@ -743,7 +749,7 @@ Note
   t\text{-stat} = \frac{\hat{\beta}_1-\hat{\beta}_2}{\sqrt{Var(\hat{\beta}_1-\hat{\beta}_2)}}
   \underset{H_0}{\sim} t_{n-k-1}
 \]</span></p>
-<p><strong>under the hull</strong>.</p>
+<p><strong>under the null</strong>.</p>
 <ul>
 <li><p>You can use the same steps from <a href="./lecture-3.html">Lecture 3</a> to conduct inference: <span class="math inline">\(p\)</span>-value, critical value.</p></li>
 <li><p>We tend not to construct confidence intervals in such cases.</p></li>
@@ -760,24 +766,24 @@ Note
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>* t-<span class="kw">test</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">lincom</span> ev_k - hybrid_k</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>last estimates not found
-r(301);
+<pre><code> ( 1)  ev_k - hybrid_k = 0
 
-r(301);</code></pre>
+------------------------------------------------------------------------------
+     ln_pm25 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |   .0457507   .0423487     1.08   0.281    -.0376053    .1291066
+------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <p>In R, you can use the <code>marginaleffects</code> package. However, this is NOT available in AppsAnywhere. Do not worry, there is an alternative coming up.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marginaleffects)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate linear hypothesis</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hypotheses</span>(model1, <span class="st">"ev_k - hybrid_k = 0"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
       Hypothesis Estimate Std. Error    z Pr(&gt;|z|)   S   2.5 % 97.5 %
@@ -799,6 +805,26 @@ r(301);</code></pre>
     a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_j &amp;= \kappa^q_0 \\
   \end{aligned}
 \]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Linear transformation">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Linear transformation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You can think of this as a linear transformation of <span class="math inline">\(\beta\)</span>.</p>
+<p><span class="math display">\[
+  H_0: R\beta = r
+\]</span></p>
+<p>Where <span class="math inline">\(R\)</span> is a <span class="math inline">\(q\times k\)</span> matrix of constants and <span class="math inline">\(r\)</span> a <span class="math inline">\(q\)</span>-dimensional column vector of constants.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="example-pm2.5-2" class="level2">
 <h2 class="anchored" data-anchor-id="example-pm2.5-2">Example: PM2.5</h2>
@@ -827,7 +853,7 @@ r(301);</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Multiple hyopthesis testing">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -836,7 +862,7 @@ r(301);</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>There are a number of ways to correctly do multiple hypothesis testing. One is the <a href="https://en.wikipedia.org/wiki/Bonferroni_correction">Bonferroni correction</a> which gets you to reject separate hypotheses sequentially using an algorithim. It does so by ensuring that the family-wise error rate (the probability of rejecting at least one true <span class="math inline">\(H_0\)</span> across a “family” of hypotheses) is <span class="math inline">\(\leq \alpha\)</span>.</p>
 </div>
@@ -853,7 +879,7 @@ r(301);</code></pre>
   PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
 \]</span></p>
 <ul>
-<li>storing the <span class="math inline">\(RSS_{ur}\)</span> from this model</li>
+<li>storing the <span class="math inline">\(SSR_{ur}\)</span> from this model</li>
 </ul>
 <div class="fragment fade-in">
 <ol start="2" type="1">
@@ -863,7 +889,7 @@ r(301);</code></pre>
   PM2.5_\ell = \beta_0 + \mathbf{x}_i\gamma + u_i
 \]</span></p>
 <ul>
-<li>storing the <span class="math inline">\(RSS_{r}\)</span> from this model</li>
+<li>storing the <span class="math inline">\(SSR_{r}\)</span> from this model</li>
 </ul>
 </div>
 </section>
@@ -875,21 +901,27 @@ r(301);</code></pre>
 \]</span></p>
 <div class="fragment fade-in">
 <p>where,</p>
-<div class="incremental">
-<ul class="incremental">
+<ul>
 <li><span class="math inline">\(SSR_r\)</span> and <span class="math inline">\(SSR_{ur}\)</span> come from the restricted (<span class="math inline">\(r\)</span>) and unrestricted models (<span class="math inline">\(ur\)</span>).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 </ul>
 <p><span class="math display">\[
     SSR_{r}-SSR_{ur}&gt;0
   \]</span></p>
-<ul class="incremental">
-<li><p><span class="math inline">\(q\)</span> is the number of restrictions (i.e.&nbsp;equations tested) and is given by the difference in resiual degrees of freedom</p>
+</div>
+</section>
+<section id="test-statistic-2" class="level2">
+<h2 class="anchored" data-anchor-id="test-statistic-2">Test statistic</h2>
+<p>The test static that is then given by,</p>
+<p><span class="math display">\[
+  F\text{-stat} = \frac{(SSR_{r}-SSR_{ur})/q}{SSR_{ur}/df_{ur}}
+\]</span></p>
+<p>and,</p>
+<ul>
+<li><p><span class="math inline">\(q\)</span> is the number of restrictions (i.e.&nbsp;equations tested) and is given by the difference in residual degrees of freedom</p>
 <p><span class="math display">\[
   q = df_r-df_{ur}
 \]</span></p></li>
 </ul>
-</div>
-</div>
 </section>
 <section id="distribution-1" class="level2">
 <h2 class="anchored" data-anchor-id="distribution-1">Distribution</h2>
@@ -902,16 +934,26 @@ r(301);</code></pre>
   F\text{-stat} &gt; F_{q,n-k-1}^{-1}(1-\alpha) = f_{q,n-k-1,1-\alpha}
 \]</span></p>
 <p>where <span class="math inline">\(F_{q,n-k-1}^{-1}(1-\alpha)\)</span> is the <span class="math inline">\(1-\alpha\)</span> percentile of the distribution.</p>
-<div class="fragment fade-in">
-<ul>
-<li>Always a one-sided test, as test-statistic is strictly positive.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
+</section>
+<section id="rejection-rule" class="level2">
+<h2 class="anchored" data-anchor-id="rejection-rule">Rejection rule</h2>
+<p><span class="math display">\[
+  F\text{-stat} &gt; f_{q,n-k-1,1-\alpha}
+\]</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Always a one-sided test</strong>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
 </ul>
-<ul>
-<li>Implies the <span class="math inline">\(H_1:\; H_0 is not true\)</span>’; <span class="math inline">\(H_1: \beta_1\neq0\;\text{or}\; \beta_2\neq0\)</span></li>
+<ul class="incremental">
+<li><p>Doesn’t mean that <span class="math inline">\(H_1\)</span> is one-sided.</p>
+<ul class="incremental">
+<li>You cannot tell which direction the deviation from the null is, because F-stat uses squared-deviations (i.e.&nbsp;sign is lossed) .</li>
+</ul></li>
+<li><p><span class="math inline">\(H_1:\; H_0\;\text{false}\)</span>, or <span class="math inline">\(H_1: \beta_1\neq0\;\text{or}\; \beta_2\neq0\)</span></p></li>
 </ul>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="$F$ distribution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -920,7 +962,7 @@ r(301);</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The <span class="math inline">\(F\)</span> distribution is defined as the ratio of two chi-squared distributions,</p>
 <p><span class="math display">\[
@@ -933,13 +975,14 @@ r(301);</code></pre>
 </section>
 <section id="alternative-form" class="level2">
 <h2 class="anchored" data-anchor-id="alternative-form">Alternative form</h2>
-<p>Recall, <span class="math inline">\(SSR = (1-\mathbf{R}^2)SST\)</span>. This means that we can write the <span class="math inline">\(F\)</span>-stat as,</p>
+<p>Since <span class="math inline">\(SSR = (1-\mathbf{R}^2)SST\)</span> and <span class="math inline">\(SST_{r}=SST_{ur}\)</span>,</p>
+<p>We can write the <span class="math inline">\(F\)</span>-stat as,</p>
 <p><span class="math display">\[
   F\text{-stat} = \frac{(\mathbf{R}^2_{ur}-\mathbf{R}^2_{r})/q}{(1-\mathbf{R}^2_{ur})/(n-k-1)}
 \]</span></p>
 <p>Note,</p>
 <ul>
-<li><p>The order switches in the numerator (but remains positive since <span class="math inline">\(\mathbf{R}^2_{ur}&gt;\mathbf{R}^2_{r}\)</span>)</p></li>
+<li><p>The order switches in the numerator, but remains positive since <span class="math inline">\(\mathbf{R}^2_{ur}&gt;\mathbf{R}^2_{r}\)</span></p></li>
 <li><p><span class="math inline">\(n-k-1=df_{ur}\)</span>, with <span class="math inline">\(k\)</span> the number of parameters in the unrestricted model</p></li>
 </ul>
 </section>
@@ -953,28 +996,22 @@ r(301);</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>* <span class="fu">F</span>-<span class="kw">test</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> ev_k hybrid_k</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>last estimates not found
-r(301);
+<pre><code> ( 1)  ev_k = 0
+ ( 2)  hybrid_k = 0
 
-
-last estimates not found
-r(301);
-
-r(301);</code></pre>
+       F(  2,   285) =   53.88
+            Prob &gt; F =    0.0000</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <p>In R, you can use the <code>car</code> package, which is available in AppsAnywhere.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate linear hypothesis</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(model1, <span class="fu">c</span>(<span class="st">"ev_k = 0"</span>, <span class="st">"hybrid_k = 0"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Linear hypothesis test:
@@ -1026,6 +1063,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>* t-<span class="kw">test</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">lincom</span> ev_k - hybrid_k</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1034,15 +1073,23 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>* check</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">sqrt</span>(<span class="fu">r</span>(<span class="fu">F</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>last estimates not found
-r(301);
+<pre><code> ( 1)  ev_k - hybrid_k = 0
+
+------------------------------------------------------------------------------
+     ln_pm25 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |   .0457507   .0423487     1.08   0.281    -.0376053    .1291066
+------------------------------------------------------------------------------
 
 
-last estimates not found
-r(301);
+ ( 1)  ev_k - hybrid_k = 0
 
-r(301);</code></pre>
+       F(  1,   285) =    1.17
+            Prob &gt; F =    0.2809
+
+1.0803322</code></pre>
 </div>
 </div>
 </div>
@@ -1100,8 +1147,8 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
     F\text{-stat} = \frac{\mathbf{R}^2/k}{(1-\mathbf{R}^2)/(n-k-1)}
   \]</span></p>
 </section>
-<section id="stata-output" class="level2">
-<h2 class="anchored" data-anchor-id="stata-output">Stata output</h2>
+<section id="stata-output" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="stata-output">Stata output</h2>
 <p>This test is reported as standard with the Stata output as:</p>
 <ul>
 <li><span class="math inline">\(\texttt{F( , )}\)</span>: <span class="math inline">\(F\)</span>-stat</li>
@@ -1132,63 +1179,180 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 </section>
 <section id="structural-change" class="level1">
 <h1>Structural Change</h1>
-<section id="dummy-interactions" class="level2">
-<h2 class="anchored" data-anchor-id="dummy-interactions">Dummy interactions</h2>
-<p>We begin thinking about the interpretation of an interaction between a dummy variable.</p>
+<section id="dummy-variables-recap" class="level2">
+<h2 class="anchored" data-anchor-id="dummy-variables-recap">Dummy variables: recap</h2>
+<p>Recall, when we have the model:</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 d_i + u_i
+\]</span></p>
+<p>where <span class="math inline">\(d_i\in\{0,1\}\)</span>. Then,</p>
+<p><span class="math display">\[
+  \beta_1 = E[y_i|d_i=1]-E[y_i|d_i=0]
+\]</span></p>
+</section>
+<section id="dummy-variable-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="dummy-variable-interactions">Dummy variable interactions</h2>
+<p>Now, suppose the model was</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_i + \beta_2 d_i + \beta_3 x_i\times d_i + u_i
+\]</span></p>
+<p>where <span class="math inline">\(x_i\)</span> is continuous.</p>
 <ul>
-<li><p>The typical example is the returns to education for men and women <span class="citation" data-cites="wooldridge2025">(as in <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 243</a>)</span></p></li>
+<li>What is the interpretation of each parameter?</li>
+</ul>
+</section>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5"></h2>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_i + \beta_2 d_i + \beta_3 x_i\times d_i + u_i
+\]</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><span class="math inline">\(\beta_0=E[y_i|d_i=0,x_i=0]\)</span></li>
+<li><span class="math inline">\(\beta_1 = \frac{dE[y_i |d_i=0,x_i]}{dx_i}\)</span></li>
+<li><span class="math inline">\(\beta_2=E[y_i|d_i=1,x_i=0]-E[y_i|d_i=0,x_i=0]\)</span></li>
+<li><span class="math inline">\(\beta_3 = \frac{dE[y_i |d_i=1,x_i]}{dx_i}-\frac{dE[y_i |d_i=0,x_i]}{dx_i}\)</span></li>
+</ul>
+</div>
+</section>
+<section id="section-6" class="level2">
+<h2 class="anchored" data-anchor-id="section-6"></h2>
+<p>Another way of thinking about it:</p>
+<ul>
+<li><p>For <span class="math inline">\(d_i=0\)</span>, the model is:</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_i + u_i
+\]</span></p></li>
+<li><p>For <span class="math inline">\(d_i = 1\)</span>, the model is:</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_i + \beta_2 +  \beta_3 x_i + u_i
+\]</span></p>
+<p>Which can be rewritten as:</p>
+<p><span class="math display">\[
+  y_i = \underbrace{(\beta_0 + \beta_2)}_{\gamma_0} +  \underbrace{(\beta_1 + \beta_3)}_{\gamma_1} x_i + u_i
+\]</span></p></li>
+</ul>
+</section>
+<section id="section-7" class="level2">
+<h2 class="anchored" data-anchor-id="section-7"></h2>
+<p>We have two models: for <span class="math inline">\(d_i=0\)</span> and <span class="math inline">\(d_i=1\)</span>.</p>
+<ul>
+<li><p><span class="math inline">\(\beta_2\)</span> is the difference in intercept</p></li>
+<li><p><span class="math inline">\(\beta_3\)</span> is the difference in slope</p></li>
+</ul>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>The typical example is the returns to education for men and women <span class="citation" data-cites="wooldridge2025">(as in <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 243</a>)</span></p>
+<ul>
 <li><p>But, given what we know about the ‘parent penalty’ <span class="citation" data-cites="kleven2019child">(<a href="#ref-kleven2019child" role="doc-biblioref">Kleven et al. 2019</a>)</span>, it seems more pertinent to focus on experience</p>
 <p><span class="math display">\[
   \ln(wage_i) = \beta_0 + \beta_1 exp_i + u_i
 \]</span></p></li>
 </ul>
 </section>
-<section id="section-5" class="level2">
-<h2 class="anchored" data-anchor-id="section-5"></h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>last estimates not found
-r(301);
-
-
-file \morg24_bothgen.dta not found
-r(601);
-
-r(601);</code></pre>
+<section id="section-8" class="level2">
+<h2 class="anchored" data-anchor-id="section-8"></h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="cell" data-layout-align="center" data-stata.fig="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="st">"$data_dir\morg24_bothgen.dta"</span>, <span class="kw">clear</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>* Scatter</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">scatter</span> lnwage <span class="fu">exp</span>, mc(<span class="bn">blue</span>%50)) (<span class="kw">lfit</span> lnwage <span class="fu">exp</span>, lwidth(*2)), <span class="kw">by</span>(sex,  <span class="bn">legend</span>(<span class="kw">off</span>) <span class="kw">note</span>(<span class="st">""</span>) ) <span class="bn">xtitle</span>(<span class="st">"Potential Experience (=Age-(Years of Education +6))"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 </div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>wage_data <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"morg24_bothgen.dta"</span>))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage_data, <span class="fu">aes</span>(<span class="at">x =</span> exp, <span class="at">y =</span> lnwage)) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> <span class="fu">as_factor</span>(sex)) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Potential Experience (=Age-(Years of Education +6))"</span>) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="material/lecture-4/bysex-scatter.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%"></p>
+<p><img src="lecture-4-multi_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%"></p>
 </figure>
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="section-6" class="level2">
-<h2 class="anchored" data-anchor-id="section-6"></h2>
+<section id="section-9" class="level2">
+<h2 class="anchored" data-anchor-id="section-9"></h2>
 <p>If we overlay the fitted lines we get</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>last estimates not found
-r(301);
-
-
-sex not found
-r(111);
-
-r(111);</code></pre>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="cell" data-layout-align="center" data-stata.fig="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>* overlay <span class="kw">fitted</span> lines</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">lfit</span> lnwage <span class="fu">exp</span> <span class="kw">if</span> sex==1, lc(<span class="bn">blue</span>)) (<span class="kw">lfit</span> lnwage <span class="fu">exp</span> <span class="kw">if</span> sex==2, lc(<span class="kw">red</span>) lwidth(*2)), <span class="bn">xtitle</span>(<span class="st">"Potential Experience (=Age-(Years of Education +6))"</span>) <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Male"</span> 2 <span class="st">"Female"</span>) <span class="fu">r</span>(2) <span class="bn">ring</span>(0) pos(5)) <span class="kw">ylabel</span>(2(1)6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 </div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>wage_data<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(wage_data<span class="sc">$</span>sex, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage_data, <span class="fu">aes</span>(<span class="at">x =</span> exp, <span class="at">y =</span> lnwage, <span class="at">colour =</span> group)) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> <span class="fu">subset</span>(wage_data, sex <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> <span class="fu">subset</span>(wage_data, sex <span class="sc">==</span> <span class="dv">2</span>),</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">Male =</span> <span class="st">"blue"</span>, <span class="at">Female =</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">6</span>)) <span class="sc">+</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Potential Experience (=Age-(Years of Education +6))"</span>,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"lnwage"</span>, <span class="at">colour =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"inside"</span>,</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position.inside =</span> <span class="fu">c</span>(<span class="fl">0.98</span>, <span class="fl">0.02</span>),</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'
+`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="material/lecture-4/bysex-lfit.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%"></p>
+<p><img src="lecture-4-multi_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%"></p>
 </figure>
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="f-tests-in-practice" class="level2">
-<h2 class="anchored" data-anchor-id="f-tests-in-practice">F-tests in practice</h2>
-<p>F-tests are also used in applied econometrics to test for differences in a model between groups.</p>
+<section id="f-test" class="level2">
+<h2 class="anchored" data-anchor-id="f-test"><span class="math inline">\(F\)</span>-test</h2>
+<p>The <span class="math inline">\(F\)</span>-test can be used to test differences in a model across groups.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <ul>
-<li><p>A classic example of this is the test for whether the Mincer equation (from <a href="./tutorial-1.html">Tutorial 1</a>) differs by gender.</p>
+<li><p>For example, whether the Mincer equation (from <a href="./tutorial-1.html">Tutorial 1</a>) differs by gender.</p>
 <p><span class="math display">\[
   \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i  + u_i
 \]</span></p></li>
@@ -1208,24 +1372,25 @@ r(111);</code></pre>
 </ul>
 <p>is the same as,</p>
 <ul>
-<li><p>the model for women (group = 2; e.g.&nbsp;“Female”)</p>
+<li><p>the model for women (group = 2; e.g.&nbsp;“Female”)?</p>
 <p><span class="math display">\[
-  \ln(wage_i) = \alpha_0 + \alpha_1 edu_i + \alpha_2 exp_i + u_i
+  \ln(wage_i) = \gamma_0 + \gamma_1 edu_i + \gamma_2 exp_i + u_i
 \]</span></p></li>
 </ul>
 </section>
 <section id="null-hypothesis" class="level2">
 <h2 class="anchored" data-anchor-id="null-hypothesis">Null hypothesis</h2>
-<p>This implies a null hypothesis:</p>
+<p>This question implies a null hypothesis:</p>
 <p><span class="math display">\[
-  H_0: \beta_0 = \alpha_0,\;\beta_1 = \alpha_1,\;\beta_2 = \alpha_2
+  H_0: \beta_0 = \gamma_0,\;\beta_1 = \gamma_1,\;\beta_2 = \gamma_2
 \]</span></p>
-<ul>
-<li>stretches across samples.</li>
-</ul>
+<p>against,</p>
+<p><span class="math display">\[
+  H_1: H_0\;\text{false}
+\]</span></p>
 </section>
-<section id="test-2" class="level2">
-<h2 class="anchored" data-anchor-id="test-2">Test</h2>
+<section id="approach-1" class="level2">
+<h2 class="anchored" data-anchor-id="approach-1">Approach 1</h2>
 <p>The <span class="math inline">\(F\)</span>-test for this hypothesis has the form:</p>
 <p><span class="math display">\[
   F\text{-stat} = \frac{(SSR_P - (SSR_1 + SSR_2))/(k+1)}{(SSR_1 + SSR_2)/(n-2(k+1))}
@@ -1238,9 +1403,9 @@ r(111);</code></pre>
 <ul>
 <li>together <span class="math inline">\(SSR_1\)</span> and <span class="math inline">\(SSR_2\)</span> represent the unrestricted model.</li>
 </ul></li>
-<li><p><span class="math inline">\(n-2(k+1)\)</span> is the <strong>total</strong> degrees of freedom across the unrestricted model.</p>
+<li><p><span class="math inline">\(n-2(k+1)\)</span> is the <strong>combined</strong> degrees of freedom from group 1 and 2.</p>
 <ul>
-<li><span class="math inline">\(k+1\)</span> parameters are estimated in each sample.</li>
+<li><span class="math inline">\(k+1\)</span> parameters are estimated in each group.</li>
 </ul></li>
 </ul>
 </section>
@@ -1248,11 +1413,11 @@ r(111);</code></pre>
 <h2 class="anchored" data-anchor-id="distribution-2">Distribution</h2>
 <p>The <span class="math inline">\(F\)</span>-stat is (unsurprisingly) <span class="math inline">\(F\)</span>-distributed,</p>
 <p><span class="math display">\[
-  F\text{-stat} \underset{\sim}_{H_0} F_{k+1,n-2(k+1)}
+  F\text{-stat} \underset{H_0}{\sim} F_{k+1,n-2(k+1)}
 \]</span></p>
 </section>
-<section id="dummy-equivalent" class="level2">
-<h2 class="anchored" data-anchor-id="dummy-equivalent">Dummy equivalent</h2>
+<section id="approach-2" class="level2">
+<h2 class="anchored" data-anchor-id="approach-2">Approach 2</h2>
 <p>This test has an equivalent form using interactions. Let,</p>
 <p><span class="math display">\[
   d_i= \mathbf{1}\{\text{`Group 2'}\}
@@ -1266,36 +1431,45 @@ r(111);</code></pre>
 <h2 class="anchored" data-anchor-id="interactions">Interactions</h2>
 <p>We can write the unrestricted model as,</p>
 <p><span class="math display">\[
-  \ln(wage_i) = \beta_0 + \gamma_0 d_i + \beta_1 edu_i+\gamma_1 edu_i\cdot d_i + \beta_2 exp_i +\gamma_2 exp_i\cdot d_i +u_i
+  \ln(wage_i) = \beta_0 + \beta_1 edu_i+\beta_2 exp_i +\beta_3 d_i + \beta_4 edu_i\times d_i + \beta_5 exp_i\times d_i +u_i
 \]</span></p>
-<p>We now have 6 parameters (<span class="math inline">\(2\times (k+1)\)</span> for <span class="math inline">\(k=2\)</span>)</p>
-<ul>
-<li><p><span class="math inline">\(\gamma_0 = E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i=0,exp_i=0]-E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i=0,exp_i=0]\)</span></p></li>
-<li><p>for <span class="math inline">\(\gamma_1,\gamma_2\)</span></p>
-<p><span class="math display">\[
-  \gamma_j = \frac{E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i=0,exp_i=0]}{\partial x_{ij}}-\frac{E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i=0,exp_i=0]}{\partial x_{ij}}
-\]</span></p></li>
-</ul>
+<p>We now have 6 parameters: <span class="math inline">\(2\times (k+1)\)</span> (for <span class="math inline">\(k=2\)</span>)</p>
 </section>
-<section id="test-3" class="level2">
-<h2 class="anchored" data-anchor-id="test-3">Test</h2>
+<section id="section-10" class="level2">
+<h2 class="anchored" data-anchor-id="section-10"></h2>
+<p>As before, the dummy and dummy-interactions tell you about differences,</p>
+<p><span class="math display">\[
+  \beta_3 = E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i=0,exp_i=0]-E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i=0,exp_i=0]
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+  \beta_j = \frac{\partial E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i,exp_i]}{\partial x_{ij}}-\frac{\partial E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i,exp_i]}{\partial x_{ij}} \qquad j=4,5
+\]</span></p>
+</section>
+<section id="test-2" class="level2">
+<h2 class="anchored" data-anchor-id="test-2">Test</h2>
 <p>Intuitively, the test for whether the model differs by group is given by,</p>
 <p><span class="math display">\[
-  H_0: \gamma_0 = 0,\;\gamma_1=0,\;\gamma_2=0
+  H_0: \beta_3 = 0,\;\beta_4=0,\;\beta_5=0
 \]</span></p>
 <p>where,</p>
 <ul>
 <li><strong>unrestricted</strong> model is given by,</li>
 </ul>
 <p><span class="math display">\[
-  \ln(wage_i) = \beta_0 + \gamma_0 d_i + \beta_1 edu_i+\gamma_1 edu_i\cdot d_i + \beta_2 exp_i +\gamma_2 exp_i\cdot d_i +u_i
+  \ln(wage_i) = \beta_0 + \beta_1 edu_i+\beta_2 exp_i +\beta_3 d_i + \beta_4 edu_i\times d_i + \beta_5 exp_i\times d_i +u_i
 \]</span></p>
 <ul>
-<li><p><span class="math inline">\(df_{ur} = n-6\)</span></p></li>
-<li><p><strong>restricted</strong> model is given by,</p></li>
+<li><span class="math inline">\(df_{ur} = n-6\)</span></li>
+</ul>
+</section>
+<section id="section-11" class="level2">
+<h2 class="anchored" data-anchor-id="section-11"></h2>
+<ul>
+<li><strong>restricted</strong> model is given by,</li>
 </ul>
 <p><span class="math display">\[
-  \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i +u_i
+  \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i +v_i
 \]</span></p>
 <ul>
 <li><span class="math inline">\(df_{ur} = n-3\)</span></li>
@@ -1307,18 +1481,179 @@ r(111);</code></pre>
 <p><span class="math display">\[
   F\text{-stat} = \frac{(SSR_{r}-SSR_{ur})/3}{SSR_{ur}/(n-6)}
 \]</span></p>
-<p>Compared with the first approach:</p>
+<div class="fragment fade-in">
+<p>Compare this to the first approach:</p>
 <p><span class="math display">\[
   F\text{-stat} = \frac{(SSR_P - (SSR_1 + SSR_2))/3}{(SSR_1 + SSR_2)/(n-6)}
 \]</span></p>
+</div>
 </section>
 <section id="equivalence" class="level2">
 <h2 class="anchored" data-anchor-id="equivalence">Equivalence</h2>
-<p>These are the same since,</p>
+<p>These two test-statics are equivalent because,</p>
 <ol type="1">
 <li><p><span class="math inline">\(SSR_P=SSR_r\)</span></p></li>
 <li><p><span class="math inline">\(SSR_1+SSR_2 = SSR_{ur}\)</span></p></li>
 </ol>
+</section>
+<section id="demonstration" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="demonstration">Demonstration</h2>
+<p>Here are the SSR for each version:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<ul>
+<li>Model for group 1 (i.e.&nbsp;“male”)</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span> <span class="kw">if</span> sex==1</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>715.90864</code></pre>
+</div>
+</div>
+<ul>
+<li>Model for group 2 (i.e.&nbsp;“female”)</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span> <span class="kw">if</span> sex==2</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>539.59768</code></pre>
+</div>
+</div>
+<ul>
+<li>Unrestricted model (i.e.&nbsp;with interactions)</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage i.sex##c.edu i.sex##c.<span class="fu">exp</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1255.5063</code></pre>
+</div>
+</div>
+<ul>
+<li>Restricted model (i.e.&nbsp;without interactions)</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1307.1667</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sex a factor variable</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>wage_data<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(wage_data<span class="sc">$</span>sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<ul>
+<li>Model for group 1 (i.e.&nbsp;“male”)</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model_m <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> edu <span class="sc">+</span> exp, <span class="at">data =</span> wage_data, <span class="at">subset =</span> sex <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 715.9086</code></pre>
+</div>
+</div>
+<ul>
+<li>Model for group 2 (i.e.&nbsp;“female”)</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model_f <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> edu <span class="sc">+</span> exp, <span class="at">data =</span> wage_data, <span class="at">subset =</span> sex <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 539.5977</code></pre>
+</div>
+</div>
+<ul>
+<li>Unrestricted model (i.e.&nbsp;with interactions)</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model_ur <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> sex <span class="sc">*</span> edu <span class="sc">+</span> sex <span class="sc">*</span> exp, <span class="at">data =</span> wage_data)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_ur)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1255.506</code></pre>
+</div>
+</div>
+<ul>
+<li>Restricted model (i.e.&nbsp;without interactions)</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>model_r <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> edu <span class="sc">+</span> exp, <span class="at">data =</span> wage_data)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_r)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1307.167</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="section-12" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="section-12"></h2>
+<p>Here is how you would programme the test</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<ul>
+<li>Estimate interacted model</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage i.sex##c.edu i.sex##c.<span class="fu">exp</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> 2.sex 2.sex#c.edu 2.sex#c.<span class="fu">exp</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> ( 1)  2.sex = 0
+ ( 2)  2.sex#c.edu = 0
+ ( 3)  2.sex#c.exp = 0
+
+       F(  3,  4994) =   68.50
+            Prob &gt; F =    0.0000</code></pre>
+</div>
+</div>
+<p>The notation <code>2.sex</code> is how Stata names the coefficient on level <code>2</code> of the factor variable <code>sex</code>, and <code>2.sex#c.edu</code> is the interaction with <code>c.edu</code> (a <code>c</code>ontinuous variable).</p>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<ul>
+<li>Estimate interacted model</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>model_ur <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> sex <span class="sc">*</span> edu <span class="sc">+</span> sex <span class="sc">*</span> exp, <span class="at">data =</span> wage_data)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(model_ur, <span class="fu">c</span>(<span class="st">"sex2 = 0"</span>, <span class="st">"sex2:edu = 0"</span>, <span class="st">"sex2:exp = 0"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear hypothesis test:
+sex2 = 0
+sex2:edu = 0
+sex2:exp = 0
+
+Model 1: restricted model
+Model 2: lnwage ~ sex * edu + sex * exp
+
+  Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+1   4997 1307.2                                  
+2   4994 1255.5  3     51.66 68.496 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The notation <code>sex2</code> is how R names the coefficient on level <code>2</code> of the factor <code>sex</code>, and <code>sex2:edu</code> its interaction with <code>edu</code> (a continuous variable).</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<section id="bibliography" class="level2">
+
 
 
 
@@ -1326,7 +1661,7 @@ r(111);</code></pre>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliography</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-kleven2019child" class="csl-entry" role="listitem">
 Kleven, Henrik, Camille Landais, Johanna Posch, Andreas Steinhauer, and Josef Zweimüller. 2019. <span>“Child Penalties Across Countries: Evidence and Explanations.”</span> In <em>Aea Papers and Proceedings</em>, 109:122–26. American Economic Association 2014 Broadway, Suite 305, Nashville, TN 37203.
 </div>
@@ -1339,6 +1674,7 @@ Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approa
 <li id="fn1"><p>We drop the <span class="math inline">\(Var(\cdot |X)\)</span> notation from <a href="./lecture-3.html">Lecture 3</a>. However, all these variances are conditional on the sample values of the independent variables.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This inequality is how you can remember the order. The <span class="math inline">\(F\)</span>-stat is strictly positive.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>This does not mean that <span class="math inline">\(F\)</span>-distributed tests are always one-sided, but rather that multiple linear hypotheses of this form are.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>We will look at the case of two groups, but the approach can be extended to multiple groups.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

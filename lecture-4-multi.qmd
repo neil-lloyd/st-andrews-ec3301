@@ -4,13 +4,13 @@ subtitle: Lecture 4
 format: 
   html: 
     output-file: lecture-4.html
-#    other-links:
-#      - text: "PDF with Stata"
-#        href: "lecture-4-notes-Stata.pdf"
-#        icon: file-pdf
-#      - text: "PDF with R"
-#        href: "lecture-4-notes-R.pdf"
-#        icon: file-pdf
+    other-links:
+      - text: "PDF with Stata"
+        href: "lecture-4-notes-Stata.pdf"
+        icon: file-pdf
+      - text: "PDF with R"
+        href: "lecture-4-notes-R.pdf"
+        icon: file-pdf
   revealjs: 
     output-file: lecture-4-slides.html
     footer: "[Lecture 4](lecture-4.qmd) - St Andrews Business School - Martinmas 2026/27"
@@ -31,12 +31,13 @@ knitr::opts_chunk$set(collectcode = TRUE)
 
 # Packages
 library(haven)    
+library(ggplot2)
 
 source(here::here("config.R"))
 ```
 
 ```{stata}
-#| include: false
+*| include: false
 
 do "config.do"
 ```
@@ -50,7 +51,7 @@ This lecture covers material from @wooldridge2025:
 - Chapter 4.5 - "Testing Multiple Linear Restrictions"
 - Chapter 7.4 - "Interactions Involving Dummy Variables"
 
-Note: I have edited the syllabus slightly to move Heteroskedasticity to Week 5 with Asymptotics.
+Note: I have edited the syllabus slightly to move the topic of heteroskedasticity to Week 5 with asymptotics.
 :::
 
 :::: {.content-visible when-format="revealjs"}
@@ -200,9 +201,9 @@ The following estimates use local authority level data for 2019 in the UK.
 ### Stata 
 
 ```{stata}
-#| echo: true
-#| code-fold: true
-#| output: true
+*| echo: true
+*| code-fold: true
+*| output: true
 
 * Open CSV data
 import delimited "$data_dir\pm25.csv", clear
@@ -321,11 +322,13 @@ $$
 ::: {.fragment .fade-in}
 **Why $-2$?**
 
-- For this $H_0$, $a_1 = 1$ and $a_2 = -1$. 
+- For this $H_0$, 
 
   $$
     \Rightarrow H_0: \underbrace{\beta_1-\beta_2 = 0}_{a_1\beta_1 + a_2\beta_2 = \kappa_0}
   $$
+  
+  So, $a_1 = 1$ and $a_2 = -1$. 
 
 :::
 
@@ -338,7 +341,7 @@ $$
   \underset{H_0}{\sim} t_{n-k-1}
 $$
 
-**under the hull**.
+**under the null**.
 
 - You can use the same steps from [Lecture 3](lecture-3-multi.qmd) to conduct inference: $p$-value, critical value. 
 
@@ -353,8 +356,8 @@ $$
 ### Stata 
 
 ```{stata}
-#| echo: true
-#| output: true
+*| echo: true
+*| output: true
 
 * t-test
 lincom ev_k - hybrid_k
@@ -366,7 +369,6 @@ In R, you can use the `marginaleffects` package. However, this is NOT available 
 
 ```{r}
 #| echo: true
-#| code-fold: true
 #| warning: false
     
 # Load package
@@ -390,6 +392,18 @@ $$
     a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_j &= \kappa^q_0 \\
   \end{aligned}
 $$
+
+::::{.content-visible unless-format="revealjs"}
+:::{.callout-tip title="Linear transformation" collapse=true}
+You can  think of this as a linear transformation of $\beta$. 
+
+$$
+  H_0: R\beta = r
+$$
+
+Where $R$ is a $q\times k$ matrix of constants and $r$ a $q$-dimensional column vector of constants. 
+:::
+::::
 
 ## Example: PM2.5
 
@@ -430,7 +444,7 @@ $$
   PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
 $$
 
-   - storing the $RSS_{ur}$ from this model
+   - storing the $SSR_{ur}$ from this model
 
 ::: {.fragment .fade-in}
 
@@ -440,7 +454,7 @@ $$
   PM2.5_\ell = \beta_0 + \mathbf{x}_i\gamma + u_i
 $$
 
-   - storing the $RSS_{r}$ from this model
+   - storing the $SSR_{r}$ from this model
 
 :::
 
@@ -452,10 +466,8 @@ $$
   F\text{-stat} = \frac{(SSR_{r}-SSR_{ur})/q}{SSR_{ur}/df_{ur}}
 $$
 
-:::: {.fragment .fade-in}
+::: {.fragment .fade-in}
 where, 
-
-::: incremental
 
 - $SSR_r$ and $SSR_{ur}$ come from the restricted ($r$) and unrestricted models ($ur$).[^3]
 
@@ -464,16 +476,24 @@ where,
   $$
     SSR_{r}-SSR_{ur}>0
   $$
-  
-  
-- $q$ is the number of restrictions (i.e. equations tested) and is given by the difference in resiual degrees of freedom
+ 
+:::
+
+## Test statistic
+
+The test static that is then given by, 
+
+$$
+  F\text{-stat} = \frac{(SSR_{r}-SSR_{ur})/q}{SSR_{ur}/df_{ur}}
+$$
+
+and, 
+
+- $q$ is the number of restrictions (i.e. equations tested) and is given by the difference in residual degrees of freedom
 
   $$
     q = df_r-df_{ur}
   $$
-
-:::
-::::
 
 ## Distribution
 
@@ -492,13 +512,23 @@ $$
 
 where $F_{q,n-k-1}^{-1}(1-\alpha)$ is the $1-\alpha$ percentile of the distribution. 
 
-::: {.fragment .fade-in}
+## Rejection rule
 
-- Always a one-sided test, as test-statistic is strictly positive.[^4]
+$$
+  F\text{-stat} > f_{q,n-k-1,1-\alpha}
+$$
+
+::: incremental
+
+- **Always a one-sided test**.[^4]
 
 [^4]: This does not mean that $F$-distributed tests are always one-sided, but rather that multiple linear hypotheses of this form are. 
 
-- Implies the $H_1:\; H_0 is not true$'; $H_1: \beta_1\neq0\;\text{or}\; \beta_2\neq0$
+- Doesn't mean that $H_1$ is one-sided. 
+
+  - You cannot tell which direction the deviation from the null is, because F-stat uses squared-deviations (i.e. sign is lossed)  . 
+
+- $H_1:\; H_0\;\text{false}$, or $H_1: \beta_1\neq0\;\text{or}\; \beta_2\neq0$
 
 :::
 
@@ -518,7 +548,9 @@ each normalized by their corresponding degrees of freedom.
 
 ## Alternative form
 
-Recall, $SSR = (1-\mathbf{R}^2)SST$. This means that we can write the $F$-stat as, 
+Since $SSR = (1-\mathbf{R}^2)SST$ and $SST_{r}=SST_{ur}$, 
+
+We can write the $F$-stat as, 
 
 $$
   F\text{-stat} = \frac{(\mathbf{R}^2_{ur}-\mathbf{R}^2_{r})/q}{(1-\mathbf{R}^2_{ur})/(n-k-1)}
@@ -526,7 +558,7 @@ $$
 
 Note, 
 
-- The order switches in the numerator (but remains positive since $\mathbf{R}^2_{ur}>\mathbf{R}^2_{r}$)
+- The order switches in the numerator, but remains positive since $\mathbf{R}^2_{ur}>\mathbf{R}^2_{r}$
 
 - $n-k-1=df_{ur}$, with $k$ the number of parameters in the unrestricted model
 
@@ -537,8 +569,8 @@ Note,
 ### Stata 
 
 ```{stata}
-#| echo: true
-#| output: true
+*| echo: true
+*| output: true
 
 * F-test
 test ev_k hybrid_k
@@ -550,7 +582,6 @@ In R, you can use the `car` package, which is available in AppsAnywhere.
 
 ```{r}
 #| echo: true
-#| code-fold: true
 #| warning: false
     
 # Load package
@@ -595,8 +626,9 @@ $$
 ### Stata 
 
 ```{stata}
-#| echo: true
-#| output: true
+*| echo: true
+*| code-fold: true
+*| output: true
 
 * t-test
 lincom ev_k - hybrid_k
@@ -649,7 +681,7 @@ We define the $F$-stat as,
     F\text{-stat} = \frac{\mathbf{R}^2/k}{(1-\mathbf{R}^2)/(n-k-1)}
   $$
 
-## Stata output
+## Stata output {.scrollable}
 
 This test is reported as standard with the Stata output as: 
 
@@ -657,8 +689,8 @@ This test is reported as standard with the Stata output as:
 - $\texttt{Prob > F}$: corresponding $p$-value of $F$-test 
 
 ```{stata}
-#| echo: false
-#| output: true
+*| echo: false
+*| output: true
 
 * Estimate linear regression
 reg ln_pm25 ev_k hybrid_k petrol_k diesel_k ln_pop
@@ -668,11 +700,83 @@ reg ln_pm25 ev_k hybrid_k petrol_k diesel_k ln_pop
 
 # Structural Change
 
-## Dummy interactions
+## Dummy variables: recap
 
-We begin thinking about the interpretation of an interaction between a dummy variable. 
+Recall, when we have the model:
 
-- The typical example is the returns to education for men and women [as in @wooldridge2025, p. 243]
+$$
+  y_i = \beta_0 + \beta_1 d_i + u_i
+$$
+
+where $d_i\in\{0,1\}$. Then, 
+
+$$
+  \beta_1 = E[y_i|d_i=1]-E[y_i|d_i=0]
+$$
+
+## Dummy variable interactions
+
+Now, suppose the model was 
+
+$$
+  y_i = \beta_0 + \beta_1 x_i + \beta_2 d_i + \beta_3 x_i\times d_i + u_i
+$$
+
+where $x_i$ is continuous. 
+
+- What is the interpretation of each parameter?
+
+
+## 
+
+$$
+  y_i = \beta_0 + \beta_1 x_i + \beta_2 d_i + \beta_3 x_i\times d_i + u_i
+$$
+
+::: incremental
+
+- $\beta_0=E[y_i|d_i=0,x_i=0]$
+- $\beta_1 = \frac{dE[y_i |d_i=0,x_i]}{dx_i}$
+- $\beta_2=E[y_i|d_i=1,x_i=0]-E[y_i|d_i=0,x_i=0]$
+- $\beta_3 = \frac{dE[y_i |d_i=1,x_i]}{dx_i}-\frac{dE[y_i |d_i=0,x_i]}{dx_i}$
+
+:::
+
+## 
+
+Another way of thinking about it:
+
+- For $d_i=0$, the model is: 
+
+  $$
+    y_i = \beta_0 + \beta_1 x_i + u_i
+  $$
+
+- For $d_i = 1$, the model is:
+
+  $$
+    y_i = \beta_0 + \beta_1 x_i + \beta_2 +  \beta_3 x_i + u_i
+  $$
+
+  Which can be rewritten as:
+  
+  $$
+    y_i = \underbrace{(\beta_0 + \beta_2)}_{\gamma_0} +  \underbrace{(\beta_1 + \beta_3)}_{\gamma_1} x_i + u_i
+  $$
+
+##
+
+We have two models: for $d_i=0$ and $d_i=1$. 
+
+- $\beta_2$ is the difference in intercept
+
+- $\beta_3$ is the difference in slope
+
+
+
+## Example
+
+The typical example is the returns to education for men and women [as in @wooldridge2025, p. 243]
 
 - But, given what we know about the 'parent penalty' [@kleven2019child], it seems more pertinent to focus on experience
 
@@ -682,40 +786,99 @@ We begin thinking about the interpretation of an interaction between a dummy var
 
 ##
 
+::: {.panel-tabset}
+
+### Stata
+
 ```{stata}
-#| echo: false
+*| echo: true
+*| code-fold: true
+*| stata.fig: true
+*| fig-align: center
+*| out-width: "67%"
 
 use "$data_dir\morg24_bothgen.dta", clear
 
 * Scatter
 twoway (scatter lnwage exp, mc(blue%50)) (lfit lnwage exp, lwidth(*2)), by(sex,  legend(off) note("") ) xtitle("Potential Experience (=Age-(Years of Education +6))")
 
-graph export "material/lecture-4/bysex-scatter.png", replace
 ```
 
-![](material/lecture-4/bysex-scatter.png){fig-align="center" width=67%}
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| fig-align: center
+#| out-width: "67%"
+
+wage_data <- read_dta(file.path(data_dir, "morg24_bothgen.dta"))
+
+ggplot(wage_data, aes(x = exp, y = lnwage)) +
+  geom_point(colour = "blue", alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1.5) +
+  facet_wrap(~ as_factor(sex)) +
+  labs(x = "Potential Experience (=Age-(Years of Education +6))") +
+  theme_minimal()
+```
+
+:::
 
 ##
 
 If we overlay the fitted lines we get
 
+::: {.panel-tabset}
+
+### Stata
 
 ```{stata}
-#| echo: false
+*| echo: true
+*| code-fold: true
+*| stata.fig: true
+*| fig-align: center
+*| out-width: "67%"
 
-* Scatter
-twoway (lfit lnwage exp if sex==1, lc(blue)) (lfit lnwage exp if sex==2, lc(red) lwidth(*2)), xtitle("Potential Experience (=Age-(Years of Education +6))") legend(order(1 "Male" 2 "Female") r(2) ring(0) pos(5))
-
-graph export "material/lecture-4/bysex-lfit.png", replace
+* overlay fitted lines
+twoway (lfit lnwage exp if sex==1, lc(blue)) (lfit lnwage exp if sex==2, lc(red) lwidth(*2)), xtitle("Potential Experience (=Age-(Years of Education +6))") legend(order(1 "Male" 2 "Female") r(2) ring(0) pos(5)) ylabel(2(1)6)
 ```
 
-![](material/lecture-4/bysex-lfit.png){fig-align="center" width=67%}
+### R
 
-## F-tests in practice
+```{r}
+#| echo: true
+#| code-fold: true
+#| fig-align: center
+#| out-width: "67%"
 
-F-tests are also used in applied econometrics to test for differences in a model between groups. 
+wage_data$group <- factor(wage_data$sex, levels = c(1, 2),
+                          labels = c("Male", "Female"))
 
-- A classic example of this is the test for whether the Mincer equation (from [Tutorial 1](tutorial-1.qmd)) differs by gender. 
+ggplot(wage_data, aes(x = exp, y = lnwage, colour = group)) +
+  geom_smooth(data = subset(wage_data, sex == 1),
+              method = "lm", se = FALSE, linewidth = 0.75) +
+  geom_smooth(data = subset(wage_data, sex == 2),
+              method = "lm", se = FALSE, linewidth = 1.5) +
+  scale_colour_manual(values = c(Male = "blue", Female = "red")) +
+  scale_y_continuous(breaks = 2:6) +
+  coord_cartesian(ylim = c(2, 6)) +
+  labs(x = "Potential Experience (=Age-(Years of Education +6))",
+       y = "lnwage", colour = NULL) +
+  theme_minimal() +
+  theme(legend.position = "inside",
+        legend.position.inside = c(0.98, 0.02),
+        legend.justification = c(1, 0))
+```
+
+:::
+
+## $F$-test
+
+The $F$-test can be used to test differences in a model across groups.[^5]
+
+[^5]: We will look at the case of two groups, but the approach can be extended to multiple groups. 
+
+- For example, whether the Mincer equation (from [Tutorial 1](tutorial-1.qmd)) differs by gender. 
 
   $$
     \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i  + u_i
@@ -739,23 +902,27 @@ We may wish to ask whether:
 
 is the same as, 
 
-- the model for women (group = 2; e.g. "Female")
+- the model for women (group = 2; e.g. "Female")?
 
   $$
-    \ln(wage_i) = \alpha_0 + \alpha_1 edu_i + \alpha_2 exp_i + u_i
+    \ln(wage_i) = \gamma_0 + \gamma_1 edu_i + \gamma_2 exp_i + u_i
   $$
 
 ## Null hypothesis
 
-This implies a null hypothesis:
+This question implies a null hypothesis:
 
 $$
-  H_0: \beta_0 = \alpha_0,\;\beta_1 = \alpha_1,\;\beta_2 = \alpha_2
+  H_0: \beta_0 = \gamma_0,\;\beta_1 = \gamma_1,\;\beta_2 = \gamma_2
 $$
 
-- stretches across samples. 
+against, 
 
-## Test
+$$
+  H_1: H_0\;\text{false}
+$$
+
+## Approach 1
 
 The $F$-test for this hypothesis has the form:
 
@@ -771,19 +938,19 @@ where,
 
   - together $SSR_1$ and $SSR_2$ represent the unrestricted model. 
 
-- $n-2(k+1)$ is the **total** degrees of freedom across the unrestricted model. 
+- $n-2(k+1)$ is the **combined** degrees of freedom from group 1 and 2. 
 
-  - $k+1$ parameters are estimated in each sample. 
+  - $k+1$ parameters are estimated in each group. 
   
 ## Distribution
 
 The $F$-stat is (unsurprisingly) $F$-distributed,
 
 $$
-  F\text{-stat} \underset{\sim}_{H_0} F_{k+1,n-2(k+1)}
+  F\text{-stat} \underset{H_0}{\sim} F_{k+1,n-2(k+1)}
 $$
 
-## Dummy equivalent
+## Approach 2
 
 This test has an equivalent form using interactions. Let, 
 
@@ -802,25 +969,31 @@ $$
 We can write the unrestricted model as, 
 
 $$
-  \ln(wage_i) = \beta_0 + \gamma_0 d_i + \beta_1 edu_i+\gamma_1 edu_i\cdot d_i + \beta_2 exp_i +\gamma_2 exp_i\cdot d_i +u_i
+  \ln(wage_i) = \beta_0 + \beta_1 edu_i+\beta_2 exp_i +\beta_3 d_i + \beta_4 edu_i\times d_i + \beta_5 exp_i\times d_i +u_i
 $$
 
-We now have 6 parameters ($2\times (k+1)$ for $k=2$)
+We now have 6 parameters: $2\times (k+1)$ (for $k=2$)
 
-- $\gamma_0 = E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i=0,exp_i=0]-E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i=0,exp_i=0]$ 
+##
 
-- for $\gamma_1,\gamma_2$
+As before, the dummy and dummy-interactions tell you about differences,
 
-  $$
-    \gamma_j = \frac{E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i=0,exp_i=0]}{\partial x_{ij}}-\frac{E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i=0,exp_i=0]}{\partial x_{ij}}
-  $$
+$$
+  \beta_3 = E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i=0,exp_i=0]-E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i=0,exp_i=0]
+$$
+
+and
+
+$$
+  \beta_j = \frac{\partial E[\ln(wage_i)|\textcolor{red}{d_i=1},edu_i,exp_i]}{\partial x_{ij}}-\frac{\partial E[\ln(wage_i)|\textcolor{blue}{d_i=0},edu_i,exp_i]}{\partial x_{ij}} \qquad j=4,5
+$$
   
 ## Test
 
 Intuitively, the test for whether the model differs by group is given by,
 
 $$
-  H_0: \gamma_0 = 0,\;\gamma_1=0,\;\gamma_2=0
+  H_0: \beta_3 = 0,\;\beta_4=0,\;\beta_5=0
 $$
 
 where,
@@ -828,15 +1001,17 @@ where,
 - **unrestricted** model is given by,
 
 $$
-  \ln(wage_i) = \beta_0 + \gamma_0 d_i + \beta_1 edu_i+\gamma_1 edu_i\cdot d_i + \beta_2 exp_i +\gamma_2 exp_i\cdot d_i +u_i
+  \ln(wage_i) = \beta_0 + \beta_1 edu_i+\beta_2 exp_i +\beta_3 d_i + \beta_4 edu_i\times d_i + \beta_5 exp_i\times d_i +u_i
 $$
 
   - $df_{ur} = n-6$
 
+##
+
 - **restricted** model is given by,
 
 $$
-  \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i +u_i
+  \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i +v_i
 $$
 
   - $df_{ur} = n-3$
@@ -849,17 +1024,139 @@ $$
   F\text{-stat} = \frac{(SSR_{r}-SSR_{ur})/3}{SSR_{ur}/(n-6)} 
 $$
 
-Compared with the first approach:
+::: {.fragment .fade-in}
+Compare this to the first approach:
 
 $$
   F\text{-stat} = \frac{(SSR_P - (SSR_1 + SSR_2))/3}{(SSR_1 + SSR_2)/(n-6)}
 $$
 
+:::
+
 ## Equivalence
 
-These are the same since, 
+These two test-statics are equivalent because, 
 
 1. $SSR_P=SSR_r$
 
 2. $SSR_1+SSR_2 = SSR_{ur}$
 
+## Demonstration {.scrollable}
+
+Here are the SSR for each version:
+
+::: {.panel-tabset}
+
+### Stata
+
+- Model for group 1 (i.e. "male")
+
+```{stata}
+*| echo: true
+qui reg lnwage edu exp if sex==1
+dis e(rss)
+```
+
+- Model for group 2 (i.e. "female")
+
+```{stata}
+*| echo: true
+qui reg lnwage edu exp if sex==2
+dis e(rss)
+```
+
+- Unrestricted model (i.e. with interactions)
+
+```{stata}
+*| echo: true
+qui reg lnwage i.sex##c.edu i.sex##c.exp
+dis e(rss)
+```
+
+- Restricted model (i.e. without interactions)
+
+```{stata}
+*| echo: true
+qui reg lnwage edu exp
+dis e(rss)
+```
+
+### R
+
+```{r}
+#| code-fold: true
+
+# make sex a factor variable
+wage_data$sex <- factor(wage_data$sex)
+```
+
+- Model for group 1 (i.e. "male")
+
+```{r}
+#| echo: true
+model_m <- lm(lnwage ~ edu + exp, data = wage_data, subset = sex == 1)
+deviance(model_m)
+```
+
+- Model for group 2 (i.e. "female")
+
+```{r}
+#| echo: true
+model_f <- lm(lnwage ~ edu + exp, data = wage_data, subset = sex == 2)
+deviance(model_f)
+```
+
+- Unrestricted model (i.e. with interactions)
+
+```{r}
+#| echo: true
+model_ur <- lm(lnwage ~ sex * edu + sex * exp, data = wage_data)
+deviance(model_ur)
+```
+
+- Restricted model (i.e. without interactions)
+
+```{r}
+#| echo: true
+model_r <- lm(lnwage ~ edu + exp, data = wage_data)
+deviance(model_r)
+```
+
+:::
+
+## {.scrollable}
+
+Here is how you would programme the test
+
+::: {.panel-tabset}
+
+### Stata
+
+- Estimate interacted model
+
+```{stata}
+*| echo: true
+qui reg lnwage i.sex##c.edu i.sex##c.exp
+test 2.sex 2.sex#c.edu 2.sex#c.exp
+```
+
+The notation `2.sex` is how Stata names the coefficient on level `2` of the factor variable `sex`, and `2.sex#c.edu` is the interaction with `c.edu` (a `c`ontinuous variable). 
+
+### R
+
+- Estimate interacted model
+
+```{r}
+#| echo: true
+model_ur <- lm(lnwage ~ sex * edu + sex * exp, data = wage_data)
+linearHypothesis(model_ur, c("sex2 = 0", "sex2:edu = 0", "sex2:exp = 0"))
+```
+
+The notation `sex2` is how R names the coefficient on level `2` of the factor `sex`, and `sex2:edu` its interaction with `edu` (a continuous variable).
+:::
+
+
+
+# References
+
+## Bibliography

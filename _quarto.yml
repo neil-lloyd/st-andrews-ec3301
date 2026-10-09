@@ -24,8 +24,8 @@ website:
             text: Lecture 2
           - href: lecture-3-multi.qmd
             text: Lecture 3
-#          - href: lecture-4-multi.qmd
-#            text: Lecture 4
+          - href: lecture-4-multi.qmd
+            text: Lecture 4
 #          - href: lecture-5-multi.qmd
 #            text: Lecture 5
 #          - href: lecture-6-multi.qmd
