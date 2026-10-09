@@ -102,7 +102,7 @@ In Scotland, the child povery rate is 21% ([source](https://www.gov.scot/news/la
 Your estimate of $\beta$ is,
 
 $$
-  0.02 (se = 0.016)
+  -0.02 \;(se = 0.016)
 $$
 
 - The $t$-stat is $1.25$ (which is not significant at 10% level for any reasonable sample size)
@@ -112,10 +112,10 @@ $$
 - BUT, you cannot reject the null that the SCP has had no effect, $H_0: \beta=0$.
 
 ::: {.fragment .fade-in}
-Is that because the policy *truly* had no effect or because your test has little **statistical power** to reject the null when the effect is indeed $\beta=0.02$. 
+Is that because the policy *truly* had no effect or because your test has little **statistical power** to reject the null when the effect is indeed $\beta=-0.02$. 
 
 $$
-  Pr(\text{Reject}\;H_0|\beta=0.02) = ?
+  Pr(\text{Reject}\;H_0|\beta=-0.02) = ?
 $$
 
 - The power of the test ultimately depends on the **variance** of the estimator. 
@@ -145,7 +145,7 @@ So far, we have considered hypotheses that involve a single estimator:
 Today, we consider hypotheses of the form:
 
 $$ 
-  H_0: a_0\beta_0 + a_1 \beta_1 + \cdots + a_k \beta_j = \kappa_0 
+  H_0: a_0\beta_0 + a_1 \beta_1 + \cdots + a_k \beta_k = \kappa_0 
 $$
 
 for constants $\{a_j\}_{j=0,1,\dots,k}$. This is a **linear combination of parameters**.
@@ -165,10 +165,10 @@ Similarly, we could have $q$ of these statements,
 
 $$
   \begin{aligned}
-   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_j &= \kappa^1_0 \\
-    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_j &= \kappa^2_0 \\
+   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_k &= \kappa^1_0 \\
+    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_k &= \kappa^2_0 \\
     &\vdots \\
-    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_j &= \kappa^q_0 \\
+    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_k &= \kappa^q_0 \\
   \end{aligned}
 $$
 
@@ -177,7 +177,7 @@ $$
 Consider the following example related to environmental and health economics
 
 $$
-  \ln(PM2.5_\ell) = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+  \ln(PM2.5_\ell) = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_\ell\gamma + u_\ell
 $$
 
 where, 
@@ -386,10 +386,10 @@ Another common form of hypothesis concerns **multiple** linear combinations of e
 
 $$
   \begin{aligned}
-   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_j &= \kappa^1_0 \\
-    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_j &= \kappa^2_0 \\
+   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_k &= \kappa^1_0 \\
+    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_k &= \kappa^2_0 \\
     &\vdots \\
-    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_j &= \kappa^q_0 \\
+    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_k &= \kappa^q_0 \\
   \end{aligned}
 $$
 
@@ -410,7 +410,7 @@ Where $R$ is a $q\times k$ matrix of constants and $r$ a $q$-dimensional column 
 In our example of 
 
 $$
-  PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+  PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_\ell\gamma + u_\ell
 $$
 
 This could be as simple as, 
@@ -441,7 +441,7 @@ The test is performed by considering two models:
 1. **Unrestricted** model; using our example,
 
 $$
-  PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+  \ln(PM2.5_\ell) = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_\ell\gamma + u_\ell
 $$
 
    - storing the $SSR_{ur}$ from this model
@@ -451,7 +451,7 @@ $$
 2. **Restricted model**, which imposes $H_0: \beta_1 = 0\;\text{and}\; \beta_2 = 0$,
 
 $$
-  PM2.5_\ell = \beta_0 + \mathbf{x}_i\gamma + u_i
+  \ln(PM2.5_\ell) = \beta_0 + \mathbf{x}_\ell\gamma + u_\ell
 $$
 
    - storing the $SSR_{r}$ from this model
@@ -604,8 +604,8 @@ $$
 
   $$
     \begin{aligned}
-    PM2.5_\ell =& \beta_0 + \textcolor{red}{\beta_1} EV_\ell + \underbrace{\textcolor{red}{\beta_1}}_{=\textcolor{blue}{\beta_2}} hybrid_\ell + \mathbf{x}_i\gamma + u_i \\
-    = & \beta_0 + \textcolor{red}{\beta_1} (EV_\ell + hybrid_\ell)   + \mathbf{x}_i\gamma + u_i
+    \ln(PM2.5_\ell) =& \beta_0 + \textcolor{red}{\beta_1} EV_\ell + \underbrace{\textcolor{red}{\beta_1}}_{=\textcolor{blue}{\beta_2}} hybrid_\ell + \mathbf{x}_\ell\gamma + u_\ell \\
+    = & \beta_0 + \textcolor{red}{\beta_1} (EV_\ell + hybrid_\ell)   + \mathbf{x}_\ell\gamma + u_\ell
     \end{aligned}            
   $$
   
@@ -662,7 +662,7 @@ linearHypothesis(model1, "ev_k = hybrid_k")
 A special case of this form of test concerns the joint significance of all the *slope* parameters in a model:
 
 $$
-  H_0: \beta_1 = 0,\; \beta_1 = 0,\;\dots,\;\beta_k=0
+  H_0: \beta_1 = 0,\; \beta_2 = 0,\;\dots,\;\beta_k=0
 $$
 
 In this case, 
@@ -735,10 +735,13 @@ $$
 
 ::: incremental
 
-- $\beta_0=E[y_i|d_i=0,x_i=0]$
-- $\beta_1 = \frac{dE[y_i |d_i=0,x_i]}{dx_i}$
-- $\beta_2=E[y_i|d_i=1,x_i=0]-E[y_i|d_i=0,x_i=0]$
-- $\beta_3 = \frac{dE[y_i |d_i=1,x_i]}{dx_i}-\frac{dE[y_i |d_i=0,x_i]}{dx_i}$
+- $\beta_0=E[y_i|\textcolor{blue}{d_i=0},x_i=0]$
+
+- $\beta_1 = \frac{dE[y_i |\textcolor{blue}{d_i=0},x_i]}{dx_i}$
+
+- $\beta_2=E[y_i|\textcolor{red}{d_i=1},x_i=0]-E[y_i|\textcolor{blue}{d_i=0},x_i=0]$
+
+- $\beta_3 = \frac{dE[y_i |\textcolor{red}{d_i=1},x_i]}{dx_i}-\frac{dE[y_i |\textcolor{blue}{d_i=0},x_i]}{dx_i}$
 
 :::
 
@@ -749,7 +752,7 @@ Another way of thinking about it:
 - For $d_i=0$, the model is: 
 
   $$
-    y_i = \beta_0 + \beta_1 x_i + u_i
+    y_i = \textcolor{blue}{\beta_0} + \textcolor{blue}{\beta_1} x_i + u_i
   $$
 
 - For $d_i = 1$, the model is:
@@ -761,7 +764,7 @@ Another way of thinking about it:
   Which can be rewritten as:
   
   $$
-    y_i = \underbrace{(\beta_0 + \beta_2)}_{\gamma_0} +  \underbrace{(\beta_1 + \beta_3)}_{\gamma_1} x_i + u_i
+    y_i = \underbrace{(\beta_0 + \beta_2)}_{\textcolor{red}{\gamma_0}} +  \underbrace{(\beta_1 + \beta_3)}_{\textcolor{red}{\gamma_1}} x_i + u_i
   $$
 
 ##
@@ -864,7 +867,7 @@ ggplot(wage_data, aes(x = exp, y = lnwage, colour = group)) +
   coord_cartesian(ylim = c(2, 6)) +
   labs(x = "Potential Experience (=Age-(Years of Education +6))",
        y = "lnwage", colour = NULL) +
-  theme_minimal() +
+  theme_minimal() +/
   theme(legend.position = "inside",
         legend.position.inside = c(0.98, 0.02),
         legend.justification = c(1, 0))
@@ -897,7 +900,7 @@ We may wish to ask whether:
 - the model for men (group = 1; e.g. "Male")
 
   $$
-    \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i + u_i
+    \ln(wage_i) = \textcolor{blue}{\beta_0} + \textcolor{blue}{\beta_1} edu_i + \textcolor{blue}{\beta_2} exp_i + u_i
   $$
 
 is the same as, 
@@ -905,7 +908,7 @@ is the same as,
 - the model for women (group = 2; e.g. "Female")?
 
   $$
-    \ln(wage_i) = \gamma_0 + \gamma_1 edu_i + \gamma_2 exp_i + u_i
+    \ln(wage_i) = \textcolor{red}{\gamma_0} + \textcolor{red}{\gamma_1} edu_i + \textcolor{red}{\gamma_2} exp_i + u_i
   $$
 
 ## Null hypothesis
@@ -913,7 +916,7 @@ is the same as,
 This question implies a null hypothesis:
 
 $$
-  H_0: \beta_0 = \gamma_0,\;\beta_1 = \gamma_1,\;\beta_2 = \gamma_2
+  H_0: \textcolor{blue}{\beta_0} = \textcolor{red}{\gamma_0},\;\textcolor{blue}{\beta_1} = \textcolor{red}{\gamma_1},\;\textcolor{blue}{\beta_2} = \textcolor{red}{\gamma_2}
 $$
 
 against, 
@@ -927,16 +930,16 @@ $$
 The $F$-test for this hypothesis has the form:
 
 $$
-  F\text{-stat} = \frac{(SSR_P - (SSR_1 + SSR_2))/(k+1)}{(SSR_1 + SSR_2)/(n-2(k+1))}
+  F\text{-stat} = \frac{(SSR_P - (\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2}))/(k+1)}{(\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2})/(n-2(k+1))}
 $$
 
 where, 
 
 - $SSR_P$ is the "pooled" ($P$) $SSR$ from a regression of the joint sample. 
-- $SSR_1$ is the $SSR$ from a regression for just group 1.
-- $SSR_2$ is the $SSR$ from a regression for just group 2.
+- $\textcolor{blue}{SSR_1}$ is the $SSR$ from a regression for just group 1.
+- $\textcolor{red}{SSR_2}$ is the $SSR$ from a regression for just group 2.
 
-  - together $SSR_1$ and $SSR_2$ represent the unrestricted model. 
+  - together $\textcolor{blue}{SSR_1}$ and $\textcolor{red}{SSR_2}$ represent the unrestricted model. 
 
 - $n-2(k+1)$ is the **combined** degrees of freedom from group 1 and 2. 
 
@@ -1014,7 +1017,7 @@ $$
   \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i +v_i
 $$
 
-  - $df_{ur} = n-3$
+  - $df_{r} = n-3$
   
 ## $F$-stat
 
@@ -1028,7 +1031,7 @@ $$
 Compare this to the first approach:
 
 $$
-  F\text{-stat} = \frac{(SSR_P - (SSR_1 + SSR_2))/3}{(SSR_1 + SSR_2)/(n-6)}
+  F\text{-stat} = \frac{(SSR_P - (\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2}))/3}{(\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2})/(n-6)}
 $$
 
 :::
@@ -1039,7 +1042,7 @@ These two test-statics are equivalent because,
 
 1. $SSR_P=SSR_r$
 
-2. $SSR_1+SSR_2 = SSR_{ur}$
+2. $\textcolor{blue}{SSR_1} +\textcolor{red}{SSR_2} = SSR_{ur}$
 
 ## Demonstration {.scrollable}
 

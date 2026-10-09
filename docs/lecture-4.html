@@ -522,7 +522,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="linear-combinations">Linear combinations</h2>
 <p>Today, we consider hypotheses of the form:</p>
 <p><span class="math display">\[
-  H_0: a_0\beta_0 + a_1 \beta_1 + \cdots + a_k \beta_j = \kappa_0
+  H_0: a_0\beta_0 + a_1 \beta_1 + \cdots + a_k \beta_k = \kappa_0
 \]</span></p>
 <p>for constants <span class="math inline">\(\{a_j\}_{j=0,1,\dots,k}\)</span>. This is a <strong>linear combination of parameters</strong>.</p>
 <div class="fragment fade-in">
@@ -537,10 +537,10 @@ window.Quarto = {
 <p>Similarly, we could have <span class="math inline">\(q\)</span> of these statements,</p>
 <p><span class="math display">\[
   \begin{aligned}
-   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_j &amp;= \kappa^1_0 \\
-    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_j &amp;= \kappa^2_0 \\
+   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_k &amp;= \kappa^1_0 \\
+    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_k &amp;= \kappa^2_0 \\
     &amp;\vdots \\
-    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_j &amp;= \kappa^q_0 \\
+    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_k &amp;= \kappa^q_0 \\
   \end{aligned}
 \]</span></p>
 </section>
@@ -548,7 +548,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="single-linear-combinations">Single linear combinations</h2>
 <p>Consider the following example related to environmental and health economics</p>
 <p><span class="math display">\[
-  \ln(PM2.5_\ell) = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+  \ln(PM2.5_\ell) = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_\ell\gamma + u_\ell
 \]</span></p>
 <p>where,</p>
 <div class="incremental">
@@ -799,10 +799,10 @@ Note
 <p>Another common form of hypothesis concerns <strong>multiple</strong> linear combinations of estimators.</p>
 <p><span class="math display">\[
   \begin{aligned}
-   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_j &amp;= \kappa^1_0 \\
-    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_j &amp;= \kappa^2_0 \\
+   H_0: a^1_0\beta_0 + a^1_1 \beta_1 + \cdots + a^1_k \beta_k &amp;= \kappa^1_0 \\
+    a^2_0\beta_0 + a^2_1 \beta_1 + \cdots + a^2_k \beta_k &amp;= \kappa^2_0 \\
     &amp;\vdots \\
-    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_j &amp;= \kappa^q_0 \\
+    a^q_0\beta_0 + a^q_1 \beta_1 + \cdots + a^q_k \beta_k &amp;= \kappa^q_0 \\
   \end{aligned}
 \]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Linear transformation">
@@ -830,7 +830,7 @@ Note
 <h2 class="anchored" data-anchor-id="example-pm2.5-2">Example: PM2.5</h2>
 <p>In our example of</p>
 <p><span class="math display">\[
-  PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+  PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_\ell\gamma + u_\ell
 \]</span></p>
 <p>This could be as simple as,</p>
 <p><span class="math display">\[
@@ -876,7 +876,7 @@ Note
 <li><strong>Unrestricted</strong> model; using our example,</li>
 </ol>
 <p><span class="math display">\[
-  PM2.5_\ell = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_i\gamma + u_i
+  \ln(PM2.5_\ell) = \beta_0 + \beta_1 EV_\ell + \beta_2 hybrid_\ell + \mathbf{x}_\ell\gamma + u_\ell
 \]</span></p>
 <ul>
 <li>storing the <span class="math inline">\(SSR_{ur}\)</span> from this model</li>
@@ -886,7 +886,7 @@ Note
 <li><strong>Restricted model</strong>, which imposes <span class="math inline">\(H_0: \beta_1 = 0\;\text{and}\; \beta_2 = 0\)</span>,</li>
 </ol>
 <p><span class="math display">\[
-  PM2.5_\ell = \beta_0 + \mathbf{x}_i\gamma + u_i
+  \ln(PM2.5_\ell) = \beta_0 + \mathbf{x}_\ell\gamma + u_\ell
 \]</span></p>
 <ul>
 <li>storing the <span class="math inline">\(SSR_{r}\)</span> from this model</li>
@@ -1042,8 +1042,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><p>Restricted model:</p>
 <p><span class="math display">\[
   \begin{aligned}
-  PM2.5_\ell =&amp; \beta_0 + \textcolor{red}{\beta_1} EV_\ell + \underbrace{\textcolor{red}{\beta_1}}_{=\textcolor{blue}{\beta_2}} hybrid_\ell + \mathbf{x}_i\gamma + u_i \\
-  = &amp; \beta_0 + \textcolor{red}{\beta_1} (EV_\ell + hybrid_\ell)   + \mathbf{x}_i\gamma + u_i
+  \ln(PM2.5_\ell) =&amp; \beta_0 + \textcolor{red}{\beta_1} EV_\ell + \underbrace{\textcolor{red}{\beta_1}}_{=\textcolor{blue}{\beta_2}} hybrid_\ell + \mathbf{x}_\ell\gamma + u_\ell \\
+  = &amp; \beta_0 + \textcolor{red}{\beta_1} (EV_\ell + hybrid_\ell)   + \mathbf{x}_\ell\gamma + u_\ell
   \end{aligned}            
 \]</span></p>
 <p>A regression with a new transformed variable: <span class="math inline">\(EV_\ell + hybrid_\ell\)</span></p></li>
@@ -1131,7 +1131,7 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <h2 class="anchored" data-anchor-id="regression-significance">Regression significance</h2>
 <p>A special case of this form of test concerns the joint significance of all the <em>slope</em> parameters in a model:</p>
 <p><span class="math display">\[
-  H_0: \beta_1 = 0,\; \beta_1 = 0,\;\dots,\;\beta_k=0
+  H_0: \beta_1 = 0,\; \beta_2 = 0,\;\dots,\;\beta_k=0
 \]</span></p>
 <p>In this case,</p>
 <ul>
@@ -1208,10 +1208,10 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 \]</span></p>
 <div class="incremental">
 <ul class="incremental">
-<li><span class="math inline">\(\beta_0=E[y_i|d_i=0,x_i=0]\)</span></li>
-<li><span class="math inline">\(\beta_1 = \frac{dE[y_i |d_i=0,x_i]}{dx_i}\)</span></li>
-<li><span class="math inline">\(\beta_2=E[y_i|d_i=1,x_i=0]-E[y_i|d_i=0,x_i=0]\)</span></li>
-<li><span class="math inline">\(\beta_3 = \frac{dE[y_i |d_i=1,x_i]}{dx_i}-\frac{dE[y_i |d_i=0,x_i]}{dx_i}\)</span></li>
+<li><p><span class="math inline">\(\beta_0=E[y_i|\textcolor{blue}{d_i=0},x_i=0]\)</span></p></li>
+<li><p><span class="math inline">\(\beta_1 = \frac{dE[y_i |\textcolor{blue}{d_i=0},x_i]}{dx_i}\)</span></p></li>
+<li><p><span class="math inline">\(\beta_2=E[y_i|\textcolor{red}{d_i=1},x_i=0]-E[y_i|\textcolor{blue}{d_i=0},x_i=0]\)</span></p></li>
+<li><p><span class="math inline">\(\beta_3 = \frac{dE[y_i |\textcolor{red}{d_i=1},x_i]}{dx_i}-\frac{dE[y_i |\textcolor{blue}{d_i=0},x_i]}{dx_i}\)</span></p></li>
 </ul>
 </div>
 </section>
@@ -1221,7 +1221,7 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <ul>
 <li><p>For <span class="math inline">\(d_i=0\)</span>, the model is:</p>
 <p><span class="math display">\[
-  y_i = \beta_0 + \beta_1 x_i + u_i
+  y_i = \textcolor{blue}{\beta_0} + \textcolor{blue}{\beta_1} x_i + u_i
 \]</span></p></li>
 <li><p>For <span class="math inline">\(d_i = 1\)</span>, the model is:</p>
 <p><span class="math display">\[
@@ -1229,7 +1229,7 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 \]</span></p>
 <p>Which can be rewritten as:</p>
 <p><span class="math display">\[
-  y_i = \underbrace{(\beta_0 + \beta_2)}_{\gamma_0} +  \underbrace{(\beta_1 + \beta_3)}_{\gamma_1} x_i + u_i
+  y_i = \underbrace{(\beta_0 + \beta_2)}_{\textcolor{red}{\gamma_0}} +  \underbrace{(\beta_1 + \beta_3)}_{\textcolor{red}{\gamma_1}} x_i + u_i
 \]</span></p></li>
 </ul>
 </section>
@@ -1327,21 +1327,16 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">6</span>)) <span class="sc">+</span></span>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Potential Experience (=Age-(Years of Education +6))"</span>,</span>
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"lnwage"</span>, <span class="at">colour =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span><span class="er">/</span></span>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"inside"</span>,</span>
 <span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position.inside =</span> <span class="fu">c</span>(<span class="fl">0.98</span>, <span class="fl">0.02</span>),</span>
 <span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'
-`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lecture-4-multi_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%"></p>
-</figure>
-</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in parse(text = input): &lt;text&gt;:14:20: unexpected '/'
+13:        y = "lnwage", colour = NULL) +
+14:   theme_minimal() +/
+                       ^</code></pre>
 </div>
 </div>
 </div>
@@ -1367,14 +1362,14 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <ul>
 <li><p>the model for men (group = 1; e.g.&nbsp;“Male”)</p>
 <p><span class="math display">\[
-  \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i + u_i
+  \ln(wage_i) = \textcolor{blue}{\beta_0} + \textcolor{blue}{\beta_1} edu_i + \textcolor{blue}{\beta_2} exp_i + u_i
 \]</span></p></li>
 </ul>
 <p>is the same as,</p>
 <ul>
 <li><p>the model for women (group = 2; e.g.&nbsp;“Female”)?</p>
 <p><span class="math display">\[
-  \ln(wage_i) = \gamma_0 + \gamma_1 edu_i + \gamma_2 exp_i + u_i
+  \ln(wage_i) = \textcolor{red}{\gamma_0} + \textcolor{red}{\gamma_1} edu_i + \textcolor{red}{\gamma_2} exp_i + u_i
 \]</span></p></li>
 </ul>
 </section>
@@ -1382,7 +1377,7 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <h2 class="anchored" data-anchor-id="null-hypothesis">Null hypothesis</h2>
 <p>This question implies a null hypothesis:</p>
 <p><span class="math display">\[
-  H_0: \beta_0 = \gamma_0,\;\beta_1 = \gamma_1,\;\beta_2 = \gamma_2
+  H_0: \textcolor{blue}{\beta_0} = \textcolor{red}{\gamma_0},\;\textcolor{blue}{\beta_1} = \textcolor{red}{\gamma_1},\;\textcolor{blue}{\beta_2} = \textcolor{red}{\gamma_2}
 \]</span></p>
 <p>against,</p>
 <p><span class="math display">\[
@@ -1393,15 +1388,15 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <h2 class="anchored" data-anchor-id="approach-1">Approach 1</h2>
 <p>The <span class="math inline">\(F\)</span>-test for this hypothesis has the form:</p>
 <p><span class="math display">\[
-  F\text{-stat} = \frac{(SSR_P - (SSR_1 + SSR_2))/(k+1)}{(SSR_1 + SSR_2)/(n-2(k+1))}
+  F\text{-stat} = \frac{(SSR_P - (\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2}))/(k+1)}{(\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2})/(n-2(k+1))}
 \]</span></p>
 <p>where,</p>
 <ul>
 <li><p><span class="math inline">\(SSR_P\)</span> is the “pooled” (<span class="math inline">\(P\)</span>) <span class="math inline">\(SSR\)</span> from a regression of the joint sample.</p></li>
-<li><p><span class="math inline">\(SSR_1\)</span> is the <span class="math inline">\(SSR\)</span> from a regression for just group 1.</p></li>
-<li><p><span class="math inline">\(SSR_2\)</span> is the <span class="math inline">\(SSR\)</span> from a regression for just group 2.</p>
+<li><p><span class="math inline">\(\textcolor{blue}{SSR_1}\)</span> is the <span class="math inline">\(SSR\)</span> from a regression for just group 1.</p></li>
+<li><p><span class="math inline">\(\textcolor{red}{SSR_2}\)</span> is the <span class="math inline">\(SSR\)</span> from a regression for just group 2.</p>
 <ul>
-<li>together <span class="math inline">\(SSR_1\)</span> and <span class="math inline">\(SSR_2\)</span> represent the unrestricted model.</li>
+<li>together <span class="math inline">\(\textcolor{blue}{SSR_1}\)</span> and <span class="math inline">\(\textcolor{red}{SSR_2}\)</span> represent the unrestricted model.</li>
 </ul></li>
 <li><p><span class="math inline">\(n-2(k+1)\)</span> is the <strong>combined</strong> degrees of freedom from group 1 and 2.</p>
 <ul>
@@ -1472,7 +1467,7 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
   \ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 exp_i +v_i
 \]</span></p>
 <ul>
-<li><span class="math inline">\(df_{ur} = n-3\)</span></li>
+<li><span class="math inline">\(df_{r} = n-3\)</span></li>
 </ul>
 </section>
 <section id="f-stat" class="level2">
@@ -1484,7 +1479,7 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <div class="fragment fade-in">
 <p>Compare this to the first approach:</p>
 <p><span class="math display">\[
-  F\text{-stat} = \frac{(SSR_P - (SSR_1 + SSR_2))/3}{(SSR_1 + SSR_2)/(n-6)}
+  F\text{-stat} = \frac{(SSR_P - (\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2}))/3}{(\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2})/(n-6)}
 \]</span></p>
 </div>
 </section>
@@ -1493,7 +1488,7 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <p>These two test-statics are equivalent because,</p>
 <ol type="1">
 <li><p><span class="math inline">\(SSR_P=SSR_r\)</span></p></li>
-<li><p><span class="math inline">\(SSR_1+SSR_2 = SSR_{ur}\)</span></p></li>
+<li><p><span class="math inline">\(\textcolor{blue}{SSR_1} +\textcolor{red}{SSR_2} = SSR_{ur}\)</span></p></li>
 </ol>
 </section>
 <section id="demonstration" class="level2 scrollable">

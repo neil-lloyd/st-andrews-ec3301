@@ -3434,7 +3434,7 @@
     "href": "lecture-4-slides.html#section-1",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "Your estimate of \\beta is,\n\n  0.02 (se = 0.016)\n\n\nThe t-stat is 1.25 (which is not significant at 10% level for any reasonable sample size)\nIf the result was significant it would mean that the CP reduced child poverty by \\approx 10\\%. A sizeable reduction.\nBUT, you cannot reject the null that the SCP has had no effect, H_0: \\beta=0.\n\n\nIs that because the policy truly had no effect or because your test has little statistical power to reject the null when the effect is indeed \\beta=0.02.\n\n  Pr(\\text{Reject}\\;H_0|\\beta=0.02) = ?\n\n\nThe power of the test ultimately depends on the variance of the estimator."
+    "text": "Your estimate of \\beta is,\n\n  -0.02 \\;(se = 0.016)\n\n\nThe t-stat is 1.25 (which is not significant at 10% level for any reasonable sample size)\nIf the result was significant it would mean that the CP reduced child poverty by \\approx 10\\%. A sizeable reduction.\nBUT, you cannot reject the null that the SCP has had no effect, H_0: \\beta=0.\n\n\nIs that because the policy truly had no effect or because your test has little statistical power to reject the null when the effect is indeed \\beta=-0.02.\n\n  Pr(\\text{Reject}\\;H_0|\\beta=-0.02) = ?\n\n\nThe power of the test ultimately depends on the variance of the estimator."
   },
   {
     "objectID": "lecture-4-slides.html#simple-hypotheses",
@@ -3448,21 +3448,21 @@
     "href": "lecture-4-slides.html#linear-combinations",
     "title": "Testing Linear Hypotheses",
     "section": "Linear combinations",
-    "text": "Linear combinations\nToday, we consider hypotheses of the form:\n\n  H_0: a_0\\beta_0 + a_1 \\beta_1 + \\cdots + a_k \\beta_j = \\kappa_0\n\nfor constants \\{a_j\\}_{j=0,1,\\dots,k}. This is a linear combination of parameters.\n\nFor example, H_0: \\beta_1= 2\\beta_2-0.5 can be written as,\n\n  H_0: \\underbrace{0}_{a_0}\\beta_0+\\underbrace{1}_{a_1}\\beta_1 +\\underbrace{(- 2)}_{a_2}\\beta_2 = \\underbrace{-0.5}_{\\kappa_0}"
+    "text": "Linear combinations\nToday, we consider hypotheses of the form:\n\n  H_0: a_0\\beta_0 + a_1 \\beta_1 + \\cdots + a_k \\beta_k = \\kappa_0\n\nfor constants \\{a_j\\}_{j=0,1,\\dots,k}. This is a linear combination of parameters.\n\nFor example, H_0: \\beta_1= 2\\beta_2-0.5 can be written as,\n\n  H_0: \\underbrace{0}_{a_0}\\beta_0+\\underbrace{1}_{a_1}\\beta_1 +\\underbrace{(- 2)}_{a_2}\\beta_2 = \\underbrace{-0.5}_{\\kappa_0}"
   },
   {
     "objectID": "lecture-4-slides.html#multiple-linear-combinations",
     "href": "lecture-4-slides.html#multiple-linear-combinations",
     "title": "Testing Linear Hypotheses",
     "section": "Multiple linear combinations",
-    "text": "Multiple linear combinations\nSimilarly, we could have q of these statements,\n\n  \\begin{aligned}\n   H_0: a^1_0\\beta_0 + a^1_1 \\beta_1 + \\cdots + a^1_k \\beta_j &= \\kappa^1_0 \\\\\n    a^2_0\\beta_0 + a^2_1 \\beta_1 + \\cdots + a^2_k \\beta_j &= \\kappa^2_0 \\\\\n    &\\vdots \\\\\n    a^q_0\\beta_0 + a^q_1 \\beta_1 + \\cdots + a^q_k \\beta_j &= \\kappa^q_0 \\\\\n  \\end{aligned}"
+    "text": "Multiple linear combinations\nSimilarly, we could have q of these statements,\n\n  \\begin{aligned}\n   H_0: a^1_0\\beta_0 + a^1_1 \\beta_1 + \\cdots + a^1_k \\beta_k &= \\kappa^1_0 \\\\\n    a^2_0\\beta_0 + a^2_1 \\beta_1 + \\cdots + a^2_k \\beta_k &= \\kappa^2_0 \\\\\n    &\\vdots \\\\\n    a^q_0\\beta_0 + a^q_1 \\beta_1 + \\cdots + a^q_k \\beta_k &= \\kappa^q_0 \\\\\n  \\end{aligned}"
   },
   {
     "objectID": "lecture-4-slides.html#single-linear-combinations",
     "href": "lecture-4-slides.html#single-linear-combinations",
     "title": "Testing Linear Hypotheses",
     "section": "Single linear combinations",
-    "text": "Single linear combinations\nConsider the following example related to environmental and health economics\n\n  \\ln(PM2.5_\\ell) = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_i\\gamma + u_i\n\nwhere,\n\nPM2.5 is micrograms of particulate matter (with diameter \\leq 2.5 micrometres) per cubic metre in location \\ell.\n\nstandard measure for health effects as absorbable by lungs and bloodstream\n\nEV and hybrid are number of registered vehicles (/1000) by fuel type in location \\ell."
+    "text": "Single linear combinations\nConsider the following example related to environmental and health economics\n\n  \\ln(PM2.5_\\ell) = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\nwhere,\n\nPM2.5 is micrograms of particulate matter (with diameter \\leq 2.5 micrometres) per cubic metre in location \\ell.\n\nstandard measure for health effects as absorbable by lungs and bloodstream\n\nEV and hybrid are number of registered vehicles (/1000) by fuel type in location \\ell."
   },
   {
     "objectID": "lecture-4-slides.html#example-pm2.5",
@@ -3525,21 +3525,21 @@
     "href": "lecture-4-slides.html#multiple-linear-hypotheses",
     "title": "Testing Linear Hypotheses",
     "section": "Multiple linear hypotheses",
-    "text": "Multiple linear hypotheses\nAnother common form of hypothesis concerns multiple linear combinations of estimators.\n\n  \\begin{aligned}\n   H_0: a^1_0\\beta_0 + a^1_1 \\beta_1 + \\cdots + a^1_k \\beta_j &= \\kappa^1_0 \\\\\n    a^2_0\\beta_0 + a^2_1 \\beta_1 + \\cdots + a^2_k \\beta_j &= \\kappa^2_0 \\\\\n    &\\vdots \\\\\n    a^q_0\\beta_0 + a^q_1 \\beta_1 + \\cdots + a^q_k \\beta_j &= \\kappa^q_0 \\\\\n  \\end{aligned}"
+    "text": "Multiple linear hypotheses\nAnother common form of hypothesis concerns multiple linear combinations of estimators.\n\n  \\begin{aligned}\n   H_0: a^1_0\\beta_0 + a^1_1 \\beta_1 + \\cdots + a^1_k \\beta_k &= \\kappa^1_0 \\\\\n    a^2_0\\beta_0 + a^2_1 \\beta_1 + \\cdots + a^2_k \\beta_k &= \\kappa^2_0 \\\\\n    &\\vdots \\\\\n    a^q_0\\beta_0 + a^q_1 \\beta_1 + \\cdots + a^q_k \\beta_k &= \\kappa^q_0 \\\\\n  \\end{aligned}"
   },
   {
     "objectID": "lecture-4-slides.html#example-pm2.5-2",
     "href": "lecture-4-slides.html#example-pm2.5-2",
     "title": "Testing Linear Hypotheses",
     "section": "Example: PM2.5",
-    "text": "Example: PM2.5\nIn our example of\n\n  PM2.5_\\ell = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_i\\gamma + u_i\n\nThis could be as simple as,\n\n  H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0\n\n\n\n\n\n\n\n\nMultiple hypothesis testing\n\n\nWhy not test H^{(1)}_0: \\beta_1=0 and then H^{(2)}_0: \\beta_2 = 0 as separate individual hypotheses? The combined size of these tests would not be \\alpha. Why? The estimators are are correlated which implies:\n\n  Pr\\big(\\text{Reject}\\;H^{(1)}_0\\;\\text{or}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_1=0\\big) \\neq \\alpha"
+    "text": "Example: PM2.5\nIn our example of\n\n  PM2.5_\\ell = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\nThis could be as simple as,\n\n  H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0\n\n\n\n\n\n\n\n\nMultiple hypothesis testing\n\n\nWhy not test H^{(1)}_0: \\beta_1=0 and then H^{(2)}_0: \\beta_2 = 0 as separate individual hypotheses? The combined size of these tests would not be \\alpha. Why? The estimators are are correlated which implies:\n\n  Pr\\big(\\text{Reject}\\;H^{(1)}_0\\;\\text{or}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_1=0\\big) \\neq \\alpha"
   },
   {
     "objectID": "lecture-4-slides.html#test",
     "href": "lecture-4-slides.html#test",
     "title": "Testing Linear Hypotheses",
     "section": "Test",
-    "text": "Test\nThe test is performed by considering two models:\n\nUnrestricted model; using our example,\n\n\n  PM2.5_\\ell = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_i\\gamma + u_i\n\n\nstoring the SSR_{ur} from this model\n\n\n\nRestricted model, which imposes H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0,\n\n\n  PM2.5_\\ell = \\beta_0 + \\mathbf{x}_i\\gamma + u_i\n\n\nstoring the SSR_{r} from this model"
+    "text": "Test\nThe test is performed by considering two models:\n\nUnrestricted model; using our example,\n\n\n  \\ln(PM2.5_\\ell) = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\n\nstoring the SSR_{ur} from this model\n\n\n\nRestricted model, which imposes H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0,\n\n\n  \\ln(PM2.5_\\ell) = \\beta_0 + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\n\nstoring the SSR_{r} from this model"
   },
   {
     "objectID": "lecture-4-slides.html#test-statistic-1",
@@ -3588,7 +3588,7 @@
     "href": "lecture-4-slides.html#revisiting-single-linear-restriction",
     "title": "Testing Linear Hypotheses",
     "section": "Revisiting single linear restriction",
-    "text": "Revisiting single linear restriction\nYou can think of a single linear hypothesis as a special case of multiple where q=1. For example,\n\n  H_0: \\textcolor{red}{\\beta_1} = \\textcolor{blue}{\\beta_2}\n\n\nRestricted model:\n\n  \\begin{aligned}\n  PM2.5_\\ell =& \\beta_0 + \\textcolor{red}{\\beta_1} EV_\\ell + \\underbrace{\\textcolor{red}{\\beta_1}}_{=\\textcolor{blue}{\\beta_2}} hybrid_\\ell + \\mathbf{x}_i\\gamma + u_i \\\\\n  = & \\beta_0 + \\textcolor{red}{\\beta_1} (EV_\\ell + hybrid_\\ell)   + \\mathbf{x}_i\\gamma + u_i\n  \\end{aligned}            \n\nA regression with a new transformed variable: EV_\\ell + hybrid_\\ell"
+    "text": "Revisiting single linear restriction\nYou can think of a single linear hypothesis as a special case of multiple where q=1. For example,\n\n  H_0: \\textcolor{red}{\\beta_1} = \\textcolor{blue}{\\beta_2}\n\n\nRestricted model:\n\n  \\begin{aligned}\n  \\ln(PM2.5_\\ell) =& \\beta_0 + \\textcolor{red}{\\beta_1} EV_\\ell + \\underbrace{\\textcolor{red}{\\beta_1}}_{=\\textcolor{blue}{\\beta_2}} hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell \\\\\n  = & \\beta_0 + \\textcolor{red}{\\beta_1} (EV_\\ell + hybrid_\\ell)   + \\mathbf{x}_\\ell\\gamma + u_\\ell\n  \\end{aligned}            \n\nA regression with a new transformed variable: EV_\\ell + hybrid_\\ell"
   },
   {
     "objectID": "lecture-4-slides.html#section-3",
@@ -3609,7 +3609,7 @@
     "href": "lecture-4-slides.html#regression-significance",
     "title": "Testing Linear Hypotheses",
     "section": "Regression significance",
-    "text": "Regression significance\nA special case of this form of test concerns the joint significance of all the slope parameters in a model:\n\n  H_0: \\beta_1 = 0,\\; \\beta_1 = 0,\\;\\dots,\\;\\beta_k=0\n\nIn this case,\n\nThe restricted model is a regression on a constant (alone) where \\Rightarrow \\mathbf{R}^2_{r}=0\nAnd \\mathbf{R}^2_{ur} is simply the \\mathbf{R}^2 from the model\nThe number of restrictions is q=k"
+    "text": "Regression significance\nA special case of this form of test concerns the joint significance of all the slope parameters in a model:\n\n  H_0: \\beta_1 = 0,\\; \\beta_2 = 0,\\;\\dots,\\;\\beta_k=0\n\nIn this case,\n\nThe restricted model is a regression on a constant (alone) where \\Rightarrow \\mathbf{R}^2_{r}=0\nAnd \\mathbf{R}^2_{ur} is simply the \\mathbf{R}^2 from the model\nThe number of restrictions is q=k"
   },
   {
     "objectID": "lecture-4-slides.html#section-4",
@@ -3644,14 +3644,14 @@
     "href": "lecture-4-slides.html#section-5",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "y_i = \\beta_0 + \\beta_1 x_i + \\beta_2 d_i + \\beta_3 x_i\\times d_i + u_i\n\n\n\\beta_0=E[y_i|d_i=0,x_i=0]\n\\beta_1 = \\frac{dE[y_i |d_i=0,x_i]}{dx_i}\n\\beta_2=E[y_i|d_i=1,x_i=0]-E[y_i|d_i=0,x_i=0]\n\\beta_3 = \\frac{dE[y_i |d_i=1,x_i]}{dx_i}-\\frac{dE[y_i |d_i=0,x_i]}{dx_i}"
+    "text": "y_i = \\beta_0 + \\beta_1 x_i + \\beta_2 d_i + \\beta_3 x_i\\times d_i + u_i\n\n\n\\beta_0=E[y_i|\\textcolor{blue}{d_i=0},x_i=0]\n\\beta_1 = \\frac{dE[y_i |\\textcolor{blue}{d_i=0},x_i]}{dx_i}\n\\beta_2=E[y_i|\\textcolor{red}{d_i=1},x_i=0]-E[y_i|\\textcolor{blue}{d_i=0},x_i=0]\n\\beta_3 = \\frac{dE[y_i |\\textcolor{red}{d_i=1},x_i]}{dx_i}-\\frac{dE[y_i |\\textcolor{blue}{d_i=0},x_i]}{dx_i}"
   },
   {
     "objectID": "lecture-4-slides.html#section-6",
     "href": "lecture-4-slides.html#section-6",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "Another way of thinking about it:\n\nFor d_i=0, the model is:\n\n  y_i = \\beta_0 + \\beta_1 x_i + u_i\n\nFor d_i = 1, the model is:\n\n  y_i = \\beta_0 + \\beta_1 x_i + \\beta_2 +  \\beta_3 x_i + u_i\n\nWhich can be rewritten as:\n\n  y_i = \\underbrace{(\\beta_0 + \\beta_2)}_{\\gamma_0} +  \\underbrace{(\\beta_1 + \\beta_3)}_{\\gamma_1} x_i + u_i"
+    "text": "Another way of thinking about it:\n\nFor d_i=0, the model is:\n\n  y_i = \\textcolor{blue}{\\beta_0} + \\textcolor{blue}{\\beta_1} x_i + u_i\n\nFor d_i = 1, the model is:\n\n  y_i = \\beta_0 + \\beta_1 x_i + \\beta_2 +  \\beta_3 x_i + u_i\n\nWhich can be rewritten as:\n\n  y_i = \\underbrace{(\\beta_0 + \\beta_2)}_{\\textcolor{red}{\\gamma_0}} +  \\underbrace{(\\beta_1 + \\beta_3)}_{\\textcolor{red}{\\gamma_1}} x_i + u_i"
   },
   {
     "objectID": "lecture-4-slides.html#section-7",
@@ -3672,14 +3672,14 @@
     "href": "lecture-4-slides.html#section-8",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "StataR\n\n\n\n\nCode\nuse \"$data_dir\\morg24_bothgen.dta\", clear\n\n* Scatter\ntwoway (scatter lnwage exp, mc(blue%50)) (lfit lnwage exp, lwidth(*2)), by(sex,  legend(off) note(\"\") ) xtitle(\"Potential Experience (=Age-(Years of Education +6))\")\n\n\n\n\n\n\nCode\nwage_data &lt;- read_dta(file.path(data_dir, \"morg24_bothgen.dta\"))\n\nggplot(wage_data, aes(x = exp, y = lnwage)) +\n  geom_point(colour = \"blue\", alpha = 0.5) +\n  geom_smooth(method = \"lm\", se = FALSE, linewidth = 1.5) +\n  facet_wrap(~ as_factor(sex)) +\n  labs(x = \"Potential Experience (=Age-(Years of Education +6))\") +\n  theme_minimal()\n\n\n`geom_smooth()` using formula = 'y ~ x'"
+    "text": "StataR\n\n\n\n\nCode\nuse \"$data_dir\\morg24_bothgen.dta\", clear\n\n* Scatter\ntwoway (scatter lnwage exp, mc(blue%50)) (lfit lnwage exp, lwidth(*2)), by(sex,  legend(off) note(\"\") ) xtitle(\"Potential Experience (=Age-(Years of Education +6))\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nwage_data &lt;- read_dta(file.path(data_dir, \"morg24_bothgen.dta\"))\n\nggplot(wage_data, aes(x = exp, y = lnwage)) +\n  geom_point(colour = \"blue\", alpha = 0.5) +\n  geom_smooth(method = \"lm\", se = FALSE, linewidth = 1.5) +\n  facet_wrap(~ as_factor(sex)) +\n  labs(x = \"Potential Experience (=Age-(Years of Education +6))\") +\n  theme_minimal()"
   },
   {
     "objectID": "lecture-4-slides.html#section-9",
     "href": "lecture-4-slides.html#section-9",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "If we overlay the fitted lines we get\n\nStataR\n\n\n\n\nCode\n* overlay fitted lines\ntwoway (lfit lnwage exp if sex==1, lc(blue)) (lfit lnwage exp if sex==2, lc(red) lwidth(*2)), xtitle(\"Potential Experience (=Age-(Years of Education +6))\") legend(order(1 \"Male\" 2 \"Female\") r(2) ring(0) pos(5)) ylabel(2(1)6)\n\n\n\n\n\n\nCode\nwage_data$group &lt;- factor(wage_data$sex, levels = c(1, 2),\n                          labels = c(\"Male\", \"Female\"))\n\nggplot(wage_data, aes(x = exp, y = lnwage, colour = group)) +\n  geom_smooth(data = subset(wage_data, sex == 1),\n              method = \"lm\", se = FALSE, linewidth = 0.75) +\n  geom_smooth(data = subset(wage_data, sex == 2),\n              method = \"lm\", se = FALSE, linewidth = 1.5) +\n  scale_colour_manual(values = c(Male = \"blue\", Female = \"red\")) +\n  scale_y_continuous(breaks = 2:6) +\n  coord_cartesian(ylim = c(2, 6)) +\n  labs(x = \"Potential Experience (=Age-(Years of Education +6))\",\n       y = \"lnwage\", colour = NULL) +\n  theme_minimal() +\n  theme(legend.position = \"inside\",\n        legend.position.inside = c(0.98, 0.02),\n        legend.justification = c(1, 0))\n\n\n`geom_smooth()` using formula = 'y ~ x'\n`geom_smooth()` using formula = 'y ~ x'"
+    "text": "If we overlay the fitted lines we get\n\nStataR\n\n\n\n\nCode\n* overlay fitted lines\ntwoway (lfit lnwage exp if sex==1, lc(blue)) (lfit lnwage exp if sex==2, lc(red) lwidth(*2)), xtitle(\"Potential Experience (=Age-(Years of Education +6))\") legend(order(1 \"Male\" 2 \"Female\") r(2) ring(0) pos(5)) ylabel(2(1)6)\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nwage_data$group &lt;- factor(wage_data$sex, levels = c(1, 2),\n                          labels = c(\"Male\", \"Female\"))\n\nggplot(wage_data, aes(x = exp, y = lnwage, colour = group)) +\n  geom_smooth(data = subset(wage_data, sex == 1),\n              method = \"lm\", se = FALSE, linewidth = 0.75) +\n  geom_smooth(data = subset(wage_data, sex == 2),\n              method = \"lm\", se = FALSE, linewidth = 1.5) +\n  scale_colour_manual(values = c(Male = \"blue\", Female = \"red\")) +\n  scale_y_continuous(breaks = 2:6) +\n  coord_cartesian(ylim = c(2, 6)) +\n  labs(x = \"Potential Experience (=Age-(Years of Education +6))\",\n       y = \"lnwage\", colour = NULL) +\n  theme_minimal() +/\n  theme(legend.position = \"inside\",\n        legend.position.inside = c(0.98, 0.02),\n        legend.justification = c(1, 0))\n\n\nError in parse(text = input): &lt;text&gt;:14:20: unexpected '/'\n13:        y = \"lnwage\", colour = NULL) +\n14:   theme_minimal() +/\n                       ^"
   },
   {
     "objectID": "lecture-4-slides.html#f-test",
@@ -3693,21 +3693,21 @@
     "href": "lecture-4-slides.html#test-1",
     "title": "Testing Linear Hypotheses",
     "section": "Test:",
-    "text": "Test:\nWe may wish to ask whether:\n\nthe model for men (group = 1; e.g. “Male”)\n\n  \\ln(wage_i) = \\beta_0 + \\beta_1 edu_i + \\beta_2 exp_i + u_i\n\n\nis the same as,\n\nthe model for women (group = 2; e.g. “Female”)?\n\n  \\ln(wage_i) = \\gamma_0 + \\gamma_1 edu_i + \\gamma_2 exp_i + u_i"
+    "text": "Test:\nWe may wish to ask whether:\n\nthe model for men (group = 1; e.g. “Male”)\n\n  \\ln(wage_i) = \\textcolor{blue}{\\beta_0} + \\textcolor{blue}{\\beta_1} edu_i + \\textcolor{blue}{\\beta_2} exp_i + u_i\n\n\nis the same as,\n\nthe model for women (group = 2; e.g. “Female”)?\n\n  \\ln(wage_i) = \\textcolor{red}{\\gamma_0} + \\textcolor{red}{\\gamma_1} edu_i + \\textcolor{red}{\\gamma_2} exp_i + u_i"
   },
   {
     "objectID": "lecture-4-slides.html#null-hypothesis",
     "href": "lecture-4-slides.html#null-hypothesis",
     "title": "Testing Linear Hypotheses",
     "section": "Null hypothesis",
-    "text": "Null hypothesis\nThis question implies a null hypothesis:\n\n  H_0: \\beta_0 = \\gamma_0,\\;\\beta_1 = \\gamma_1,\\;\\beta_2 = \\gamma_2\n\nagainst,\n\n  H_1: H_0\\;\\text{false}"
+    "text": "Null hypothesis\nThis question implies a null hypothesis:\n\n  H_0: \\textcolor{blue}{\\beta_0} = \\textcolor{red}{\\gamma_0},\\;\\textcolor{blue}{\\beta_1} = \\textcolor{red}{\\gamma_1},\\;\\textcolor{blue}{\\beta_2} = \\textcolor{red}{\\gamma_2}\n\nagainst,\n\n  H_1: H_0\\;\\text{false}"
   },
   {
     "objectID": "lecture-4-slides.html#approach-1",
     "href": "lecture-4-slides.html#approach-1",
     "title": "Testing Linear Hypotheses",
     "section": "Approach 1",
-    "text": "Approach 1\nThe F-test for this hypothesis has the form:\n\n  F\\text{-stat} = \\frac{(SSR_P - (SSR_1 + SSR_2))/(k+1)}{(SSR_1 + SSR_2)/(n-2(k+1))}\n\nwhere,\n\nSSR_P is the “pooled” (P) SSR from a regression of the joint sample.\nSSR_1 is the SSR from a regression for just group 1.\nSSR_2 is the SSR from a regression for just group 2.\n\ntogether SSR_1 and SSR_2 represent the unrestricted model.\n\nn-2(k+1) is the combined degrees of freedom from group 1 and 2.\n\nk+1 parameters are estimated in each group."
+    "text": "Approach 1\nThe F-test for this hypothesis has the form:\n\n  F\\text{-stat} = \\frac{(SSR_P - (\\textcolor{blue}{SSR_1} + \\textcolor{red}{SSR_2}))/(k+1)}{(\\textcolor{blue}{SSR_1} + \\textcolor{red}{SSR_2})/(n-2(k+1))}\n\nwhere,\n\nSSR_P is the “pooled” (P) SSR from a regression of the joint sample.\n\\textcolor{blue}{SSR_1} is the SSR from a regression for just group 1.\n\\textcolor{red}{SSR_2} is the SSR from a regression for just group 2.\n\ntogether \\textcolor{blue}{SSR_1} and \\textcolor{red}{SSR_2} represent the unrestricted model.\n\nn-2(k+1) is the combined degrees of freedom from group 1 and 2.\n\nk+1 parameters are estimated in each group."
   },
   {
     "objectID": "lecture-4-slides.html#distribution-2",
@@ -3749,28 +3749,28 @@
     "href": "lecture-4-slides.html#section-11",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "restricted model is given by,\n\n\n  \\ln(wage_i) = \\beta_0 + \\beta_1 edu_i + \\beta_2 exp_i +v_i\n\n\ndf_{ur} = n-3"
+    "text": "restricted model is given by,\n\n\n  \\ln(wage_i) = \\beta_0 + \\beta_1 edu_i + \\beta_2 exp_i +v_i\n\n\ndf_{r} = n-3"
   },
   {
     "objectID": "lecture-4-slides.html#f-stat",
     "href": "lecture-4-slides.html#f-stat",
     "title": "Testing Linear Hypotheses",
     "section": "F-stat",
-    "text": "F-stat\nThe F-stat is given by,\n\n  F\\text{-stat} = \\frac{(SSR_{r}-SSR_{ur})/3}{SSR_{ur}/(n-6)}\n\n\nCompare this to the first approach:\n\n  F\\text{-stat} = \\frac{(SSR_P - (SSR_1 + SSR_2))/3}{(SSR_1 + SSR_2)/(n-6)}"
+    "text": "F-stat\nThe F-stat is given by,\n\n  F\\text{-stat} = \\frac{(SSR_{r}-SSR_{ur})/3}{SSR_{ur}/(n-6)}\n\n\nCompare this to the first approach:\n\n  F\\text{-stat} = \\frac{(SSR_P - (\\textcolor{blue}{SSR_1} + \\textcolor{red}{SSR_2}))/3}{(\\textcolor{blue}{SSR_1} + \\textcolor{red}{SSR_2})/(n-6)}"
   },
   {
     "objectID": "lecture-4-slides.html#equivalence",
     "href": "lecture-4-slides.html#equivalence",
     "title": "Testing Linear Hypotheses",
     "section": "Equivalence",
-    "text": "Equivalence\nThese two test-statics are equivalent because,\n\nSSR_P=SSR_r\nSSR_1+SSR_2 = SSR_{ur}"
+    "text": "Equivalence\nThese two test-statics are equivalent because,\n\nSSR_P=SSR_r\n\\textcolor{blue}{SSR_1} +\\textcolor{red}{SSR_2} = SSR_{ur}"
   },
   {
     "objectID": "lecture-4-slides.html#demonstration",
     "href": "lecture-4-slides.html#demonstration",
     "title": "Testing Linear Hypotheses",
     "section": "Demonstration",
-    "text": "Demonstration\nHere are the SSR for each version:\n\nStataR\n\n\n\nModel for group 1 (i.e. “male”)\n\n\nqui reg lnwage edu exp if sex==1\ndis e(rss)\n\n715.90864\n\n\n\nModel for group 2 (i.e. “female”)\n\n\nqui reg lnwage edu exp if sex==2\ndis e(rss)\n\n539.59768\n\n\n\nUnrestricted model (i.e. with interactions)\n\n\nqui reg lnwage i.sex##c.edu i.sex##c.exp\ndis e(rss)\n\n1255.5063\n\n\n\nRestricted model (i.e. without interactions)\n\n\nqui reg lnwage edu exp\ndis e(rss)\n\n1307.1667\n\n\n\n\n\n\nCode\n# make sex a factor variable\nwage_data$sex &lt;- factor(wage_data$sex)\n\n\n\nModel for group 1 (i.e. “male”)\n\n\nmodel_m &lt;- lm(lnwage ~ edu + exp, data = wage_data, subset = sex == 1)\ndeviance(model_m)\n\n[1] 715.9086\n\n\n\nModel for group 2 (i.e. “female”)\n\n\nmodel_f &lt;- lm(lnwage ~ edu + exp, data = wage_data, subset = sex == 2)\ndeviance(model_f)\n\n[1] 539.5977\n\n\n\nUnrestricted model (i.e. with interactions)\n\n\nmodel_ur &lt;- lm(lnwage ~ sex * edu + sex * exp, data = wage_data)\ndeviance(model_ur)\n\n[1] 1255.506\n\n\n\nRestricted model (i.e. without interactions)\n\n\nmodel_r &lt;- lm(lnwage ~ edu + exp, data = wage_data)\ndeviance(model_r)\n\n[1] 1307.167"
+    "text": "Demonstration\nHere are the SSR for each version:\n\nStataR\n\n\n\nModel for group 1 (i.e. “male”)\n\n\nqui reg lnwage edu exp if sex==1\ndis e(rss)\n\n715.90864\n\n\n\nModel for group 2 (i.e. “female”)\n\n\nqui reg lnwage edu exp if sex==2\ndis e(rss)\n\n539.59768\n\n\n\nUnrestricted model (i.e. with interactions)\n\n\nqui reg lnwage i.sex##c.edu i.sex##c.exp\ndis e(rss)\n\n1255.5063\n\n\n\nRestricted model (i.e. without interactions)\n\n\nqui reg lnwage edu exp\ndis e(rss)\n\n1307.1667\n\n\n\n\n\nModel for group 1 (i.e. “male”)\n\n\nmodel_m &lt;- lm(lnwage ~ edu + exp, data = wage_data, subset = sex == 1)\ndeviance(model_m)\n\n[1] 715.9086\n\n\n\nModel for group 2 (i.e. “female”)\n\n\nmodel_f &lt;- lm(lnwage ~ edu + exp, data = wage_data, subset = sex == 2)\ndeviance(model_f)\n\n[1] 539.5977\n\n\n\nUnrestricted model (i.e. with interactions)\n\n\nmodel_ur &lt;- lm(lnwage ~ sex * edu + sex * exp, data = wage_data)\ndeviance(model_ur)\n\n[1] 1255.506\n\n\n\nRestricted model (i.e. without interactions)\n\n\nmodel_r &lt;- lm(lnwage ~ edu + exp, data = wage_data)\ndeviance(model_r)\n\n[1] 1307.167"
   },
   {
     "objectID": "lecture-4-slides.html#section-12",
@@ -3812,21 +3812,21 @@
     "href": "lecture-4.html#linear-combinations",
     "title": "Testing Linear Hypotheses",
     "section": "Linear combinations",
-    "text": "Linear combinations\nToday, we consider hypotheses of the form:\n\\[\n  H_0: a_0\\beta_0 + a_1 \\beta_1 + \\cdots + a_k \\beta_j = \\kappa_0\n\\]\nfor constants \\(\\{a_j\\}_{j=0,1,\\dots,k}\\). This is a linear combination of parameters.\n\nFor example, \\(H_0: \\beta_1= 2\\beta_2-0.5\\) can be written as,\n\\[\n  H_0: \\underbrace{0}_{a_0}\\beta_0+\\underbrace{1}_{a_1}\\beta_1 +\\underbrace{(- 2)}_{a_2}\\beta_2 = \\underbrace{-0.5}_{\\kappa_0}\n\\]"
+    "text": "Linear combinations\nToday, we consider hypotheses of the form:\n\\[\n  H_0: a_0\\beta_0 + a_1 \\beta_1 + \\cdots + a_k \\beta_k = \\kappa_0\n\\]\nfor constants \\(\\{a_j\\}_{j=0,1,\\dots,k}\\). This is a linear combination of parameters.\n\nFor example, \\(H_0: \\beta_1= 2\\beta_2-0.5\\) can be written as,\n\\[\n  H_0: \\underbrace{0}_{a_0}\\beta_0+\\underbrace{1}_{a_1}\\beta_1 +\\underbrace{(- 2)}_{a_2}\\beta_2 = \\underbrace{-0.5}_{\\kappa_0}\n\\]"
   },
   {
     "objectID": "lecture-4.html#multiple-linear-combinations",
     "href": "lecture-4.html#multiple-linear-combinations",
     "title": "Testing Linear Hypotheses",
     "section": "Multiple linear combinations",
-    "text": "Multiple linear combinations\nSimilarly, we could have \\(q\\) of these statements,\n\\[\n  \\begin{aligned}\n   H_0: a^1_0\\beta_0 + a^1_1 \\beta_1 + \\cdots + a^1_k \\beta_j &= \\kappa^1_0 \\\\\n    a^2_0\\beta_0 + a^2_1 \\beta_1 + \\cdots + a^2_k \\beta_j &= \\kappa^2_0 \\\\\n    &\\vdots \\\\\n    a^q_0\\beta_0 + a^q_1 \\beta_1 + \\cdots + a^q_k \\beta_j &= \\kappa^q_0 \\\\\n  \\end{aligned}\n\\]"
+    "text": "Multiple linear combinations\nSimilarly, we could have \\(q\\) of these statements,\n\\[\n  \\begin{aligned}\n   H_0: a^1_0\\beta_0 + a^1_1 \\beta_1 + \\cdots + a^1_k \\beta_k &= \\kappa^1_0 \\\\\n    a^2_0\\beta_0 + a^2_1 \\beta_1 + \\cdots + a^2_k \\beta_k &= \\kappa^2_0 \\\\\n    &\\vdots \\\\\n    a^q_0\\beta_0 + a^q_1 \\beta_1 + \\cdots + a^q_k \\beta_k &= \\kappa^q_0 \\\\\n  \\end{aligned}\n\\]"
   },
   {
     "objectID": "lecture-4.html#single-linear-combinations",
     "href": "lecture-4.html#single-linear-combinations",
     "title": "Testing Linear Hypotheses",
     "section": "Single linear combinations",
-    "text": "Single linear combinations\nConsider the following example related to environmental and health economics\n\\[\n  \\ln(PM2.5_\\ell) = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_i\\gamma + u_i\n\\]\nwhere,\n\n\n\\(PM2.5\\) is micrograms of particulate matter (with diameter \\(\\leq 2.5\\) micrometres) per cubic metre in location \\(\\ell\\).\n\nstandard measure for health effects as absorbable by lungs and bloodstream\n\n\\(EV\\) and \\(hybrid\\) are number of registered vehicles (/1000) by fuel type in location \\(\\ell\\)."
+    "text": "Single linear combinations\nConsider the following example related to environmental and health economics\n\\[\n  \\ln(PM2.5_\\ell) = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\\]\nwhere,\n\n\n\\(PM2.5\\) is micrograms of particulate matter (with diameter \\(\\leq 2.5\\) micrometres) per cubic metre in location \\(\\ell\\).\n\nstandard measure for health effects as absorbable by lungs and bloodstream\n\n\\(EV\\) and \\(hybrid\\) are number of registered vehicles (/1000) by fuel type in location \\(\\ell\\)."
   },
   {
     "objectID": "lecture-4.html#example-pm2.5",
@@ -3889,21 +3889,21 @@
     "href": "lecture-4.html#multiple-linear-hypotheses",
     "title": "Testing Linear Hypotheses",
     "section": "Multiple linear hypotheses",
-    "text": "Multiple linear hypotheses\nAnother common form of hypothesis concerns multiple linear combinations of estimators.\n\\[\n  \\begin{aligned}\n   H_0: a^1_0\\beta_0 + a^1_1 \\beta_1 + \\cdots + a^1_k \\beta_j &= \\kappa^1_0 \\\\\n    a^2_0\\beta_0 + a^2_1 \\beta_1 + \\cdots + a^2_k \\beta_j &= \\kappa^2_0 \\\\\n    &\\vdots \\\\\n    a^q_0\\beta_0 + a^q_1 \\beta_1 + \\cdots + a^q_k \\beta_j &= \\kappa^q_0 \\\\\n  \\end{aligned}\n\\]\n\n\n\n\n\n\nTipLinear transformation\n\n\n\n\n\nYou can think of this as a linear transformation of \\(\\beta\\).\n\\[\n  H_0: R\\beta = r\n\\]\nWhere \\(R\\) is a \\(q\\times k\\) matrix of constants and \\(r\\) a \\(q\\)-dimensional column vector of constants."
+    "text": "Multiple linear hypotheses\nAnother common form of hypothesis concerns multiple linear combinations of estimators.\n\\[\n  \\begin{aligned}\n   H_0: a^1_0\\beta_0 + a^1_1 \\beta_1 + \\cdots + a^1_k \\beta_k &= \\kappa^1_0 \\\\\n    a^2_0\\beta_0 + a^2_1 \\beta_1 + \\cdots + a^2_k \\beta_k &= \\kappa^2_0 \\\\\n    &\\vdots \\\\\n    a^q_0\\beta_0 + a^q_1 \\beta_1 + \\cdots + a^q_k \\beta_k &= \\kappa^q_0 \\\\\n  \\end{aligned}\n\\]\n\n\n\n\n\n\nTipLinear transformation\n\n\n\n\n\nYou can think of this as a linear transformation of \\(\\beta\\).\n\\[\n  H_0: R\\beta = r\n\\]\nWhere \\(R\\) is a \\(q\\times k\\) matrix of constants and \\(r\\) a \\(q\\)-dimensional column vector of constants."
   },
   {
     "objectID": "lecture-4.html#example-pm2.5-2",
     "href": "lecture-4.html#example-pm2.5-2",
     "title": "Testing Linear Hypotheses",
     "section": "Example: PM2.5",
-    "text": "Example: PM2.5\nIn our example of\n\\[\n  PM2.5_\\ell = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_i\\gamma + u_i\n\\]\nThis could be as simple as,\n\\[\n  H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0\n\\]\n\n\n\n\n\n\nCautionMultiple hypothesis testing\n\n\n\nWhy not test \\(H^{(1)}_0: \\beta_1=0\\) and then \\(H^{(2)}_0: \\beta_2 = 0\\) as separate individual hypotheses? The combined size of these tests would not be \\(\\alpha\\). Why? The estimators are are correlated which implies:\n\\[\n  Pr\\big(\\text{Reject}\\;H^{(1)}_0\\;\\text{or}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_1=0\\big) \\neq \\alpha\n\\]\n\n\n\n\n\n\n\n\nTipMultiple hyopthesis testing\n\n\n\n\n\nThere are a number of ways to correctly do multiple hypothesis testing. One is the Bonferroni correction which gets you to reject separate hypotheses sequentially using an algorithim. It does so by ensuring that the family-wise error rate (the probability of rejecting at least one true \\(H_0\\) across a “family” of hypotheses) is \\(\\leq \\alpha\\)."
+    "text": "Example: PM2.5\nIn our example of\n\\[\n  PM2.5_\\ell = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\\]\nThis could be as simple as,\n\\[\n  H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0\n\\]\n\n\n\n\n\n\nCautionMultiple hypothesis testing\n\n\n\nWhy not test \\(H^{(1)}_0: \\beta_1=0\\) and then \\(H^{(2)}_0: \\beta_2 = 0\\) as separate individual hypotheses? The combined size of these tests would not be \\(\\alpha\\). Why? The estimators are are correlated which implies:\n\\[\n  Pr\\big(\\text{Reject}\\;H^{(1)}_0\\;\\text{or}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_1=0\\big) \\neq \\alpha\n\\]\n\n\n\n\n\n\n\n\nTipMultiple hyopthesis testing\n\n\n\n\n\nThere are a number of ways to correctly do multiple hypothesis testing. One is the Bonferroni correction which gets you to reject separate hypotheses sequentially using an algorithim. It does so by ensuring that the family-wise error rate (the probability of rejecting at least one true \\(H_0\\) across a “family” of hypotheses) is \\(\\leq \\alpha\\)."
   },
   {
     "objectID": "lecture-4.html#test",
     "href": "lecture-4.html#test",
     "title": "Testing Linear Hypotheses",
     "section": "Test",
-    "text": "Test\nThe test is performed by considering two models:\n\nUnrestricted model; using our example,\n\n\\[\n  PM2.5_\\ell = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_i\\gamma + u_i\n\\]\n\nstoring the \\(SSR_{ur}\\) from this model\n\n\n\nRestricted model, which imposes \\(H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0\\),\n\n\\[\n  PM2.5_\\ell = \\beta_0 + \\mathbf{x}_i\\gamma + u_i\n\\]\n\nstoring the \\(SSR_{r}\\) from this model"
+    "text": "Test\nThe test is performed by considering two models:\n\nUnrestricted model; using our example,\n\n\\[\n  \\ln(PM2.5_\\ell) = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\\]\n\nstoring the \\(SSR_{ur}\\) from this model\n\n\n\nRestricted model, which imposes \\(H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0\\),\n\n\\[\n  \\ln(PM2.5_\\ell) = \\beta_0 + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\\]\n\nstoring the \\(SSR_{r}\\) from this model"
   },
   {
     "objectID": "lecture-4.html#test-statistic-1",
@@ -3952,7 +3952,7 @@
     "href": "lecture-4.html#revisiting-single-linear-restriction",
     "title": "Testing Linear Hypotheses",
     "section": "Revisiting single linear restriction",
-    "text": "Revisiting single linear restriction\nYou can think of a single linear hypothesis as a special case of multiple where \\(q=1\\). For example,\n\\[\n  H_0: \\textcolor{red}{\\beta_1} = \\textcolor{blue}{\\beta_2}\n\\]\n\nRestricted model:\n\\[\n  \\begin{aligned}\n  PM2.5_\\ell =& \\beta_0 + \\textcolor{red}{\\beta_1} EV_\\ell + \\underbrace{\\textcolor{red}{\\beta_1}}_{=\\textcolor{blue}{\\beta_2}} hybrid_\\ell + \\mathbf{x}_i\\gamma + u_i \\\\\n  = & \\beta_0 + \\textcolor{red}{\\beta_1} (EV_\\ell + hybrid_\\ell)   + \\mathbf{x}_i\\gamma + u_i\n  \\end{aligned}            \n\\]\nA regression with a new transformed variable: \\(EV_\\ell + hybrid_\\ell\\)"
+    "text": "Revisiting single linear restriction\nYou can think of a single linear hypothesis as a special case of multiple where \\(q=1\\). For example,\n\\[\n  H_0: \\textcolor{red}{\\beta_1} = \\textcolor{blue}{\\beta_2}\n\\]\n\nRestricted model:\n\\[\n  \\begin{aligned}\n  \\ln(PM2.5_\\ell) =& \\beta_0 + \\textcolor{red}{\\beta_1} EV_\\ell + \\underbrace{\\textcolor{red}{\\beta_1}}_{=\\textcolor{blue}{\\beta_2}} hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell \\\\\n  = & \\beta_0 + \\textcolor{red}{\\beta_1} (EV_\\ell + hybrid_\\ell)   + \\mathbf{x}_\\ell\\gamma + u_\\ell\n  \\end{aligned}            \n\\]\nA regression with a new transformed variable: \\(EV_\\ell + hybrid_\\ell\\)"
   },
   {
     "objectID": "lecture-4.html#section-3",
@@ -3973,7 +3973,7 @@
     "href": "lecture-4.html#regression-significance",
     "title": "Testing Linear Hypotheses",
     "section": "Regression significance",
-    "text": "Regression significance\nA special case of this form of test concerns the joint significance of all the slope parameters in a model:\n\\[\n  H_0: \\beta_1 = 0,\\; \\beta_1 = 0,\\;\\dots,\\;\\beta_k=0\n\\]\nIn this case,\n\nThe restricted model is a regression on a constant (alone) where \\(\\Rightarrow \\mathbf{R}^2_{r}=0\\)\nAnd \\(\\mathbf{R}^2_{ur}\\) is simply the \\(\\mathbf{R}^2\\) from the model\nThe number of restrictions is \\(q=k\\)"
+    "text": "Regression significance\nA special case of this form of test concerns the joint significance of all the slope parameters in a model:\n\\[\n  H_0: \\beta_1 = 0,\\; \\beta_2 = 0,\\;\\dots,\\;\\beta_k=0\n\\]\nIn this case,\n\nThe restricted model is a regression on a constant (alone) where \\(\\Rightarrow \\mathbf{R}^2_{r}=0\\)\nAnd \\(\\mathbf{R}^2_{ur}\\) is simply the \\(\\mathbf{R}^2\\) from the model\nThe number of restrictions is \\(q=k\\)"
   },
   {
     "objectID": "lecture-4.html#section-4",
@@ -4008,14 +4008,14 @@
     "href": "lecture-4.html#section-5",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "\\[\n  y_i = \\beta_0 + \\beta_1 x_i + \\beta_2 d_i + \\beta_3 x_i\\times d_i + u_i\n\\]\n\n\n\\(\\beta_0=E[y_i|d_i=0,x_i=0]\\)\n\\(\\beta_1 = \\frac{dE[y_i |d_i=0,x_i]}{dx_i}\\)\n\\(\\beta_2=E[y_i|d_i=1,x_i=0]-E[y_i|d_i=0,x_i=0]\\)\n\\(\\beta_3 = \\frac{dE[y_i |d_i=1,x_i]}{dx_i}-\\frac{dE[y_i |d_i=0,x_i]}{dx_i}\\)"
+    "text": "\\[\n  y_i = \\beta_0 + \\beta_1 x_i + \\beta_2 d_i + \\beta_3 x_i\\times d_i + u_i\n\\]\n\n\n\\(\\beta_0=E[y_i|\\textcolor{blue}{d_i=0},x_i=0]\\)\n\\(\\beta_1 = \\frac{dE[y_i |\\textcolor{blue}{d_i=0},x_i]}{dx_i}\\)\n\\(\\beta_2=E[y_i|\\textcolor{red}{d_i=1},x_i=0]-E[y_i|\\textcolor{blue}{d_i=0},x_i=0]\\)\n\\(\\beta_3 = \\frac{dE[y_i |\\textcolor{red}{d_i=1},x_i]}{dx_i}-\\frac{dE[y_i |\\textcolor{blue}{d_i=0},x_i]}{dx_i}\\)"
   },
   {
     "objectID": "lecture-4.html#section-6",
     "href": "lecture-4.html#section-6",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "Another way of thinking about it:\n\nFor \\(d_i=0\\), the model is:\n\\[\n  y_i = \\beta_0 + \\beta_1 x_i + u_i\n\\]\nFor \\(d_i = 1\\), the model is:\n\\[\n  y_i = \\beta_0 + \\beta_1 x_i + \\beta_2 +  \\beta_3 x_i + u_i\n\\]\nWhich can be rewritten as:\n\\[\n  y_i = \\underbrace{(\\beta_0 + \\beta_2)}_{\\gamma_0} +  \\underbrace{(\\beta_1 + \\beta_3)}_{\\gamma_1} x_i + u_i\n\\]"
+    "text": "Another way of thinking about it:\n\nFor \\(d_i=0\\), the model is:\n\\[\n  y_i = \\textcolor{blue}{\\beta_0} + \\textcolor{blue}{\\beta_1} x_i + u_i\n\\]\nFor \\(d_i = 1\\), the model is:\n\\[\n  y_i = \\beta_0 + \\beta_1 x_i + \\beta_2 +  \\beta_3 x_i + u_i\n\\]\nWhich can be rewritten as:\n\\[\n  y_i = \\underbrace{(\\beta_0 + \\beta_2)}_{\\textcolor{red}{\\gamma_0}} +  \\underbrace{(\\beta_1 + \\beta_3)}_{\\textcolor{red}{\\gamma_1}} x_i + u_i\n\\]"
   },
   {
     "objectID": "lecture-4.html#section-7",
@@ -4043,7 +4043,7 @@
     "href": "lecture-4.html#section-9",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "If we overlay the fitted lines we get\n\nStataR\n\n\n\n\nCode\n* overlay fitted lines\ntwoway (lfit lnwage exp if sex==1, lc(blue)) (lfit lnwage exp if sex==2, lc(red) lwidth(*2)), xtitle(\"Potential Experience (=Age-(Years of Education +6))\") legend(order(1 \"Male\" 2 \"Female\") r(2) ring(0) pos(5)) ylabel(2(1)6)\n\n\n\n\n\n\nCode\nwage_data$group &lt;- factor(wage_data$sex, levels = c(1, 2),\n                          labels = c(\"Male\", \"Female\"))\n\nggplot(wage_data, aes(x = exp, y = lnwage, colour = group)) +\n  geom_smooth(data = subset(wage_data, sex == 1),\n              method = \"lm\", se = FALSE, linewidth = 0.75) +\n  geom_smooth(data = subset(wage_data, sex == 2),\n              method = \"lm\", se = FALSE, linewidth = 1.5) +\n  scale_colour_manual(values = c(Male = \"blue\", Female = \"red\")) +\n  scale_y_continuous(breaks = 2:6) +\n  coord_cartesian(ylim = c(2, 6)) +\n  labs(x = \"Potential Experience (=Age-(Years of Education +6))\",\n       y = \"lnwage\", colour = NULL) +\n  theme_minimal() +\n  theme(legend.position = \"inside\",\n        legend.position.inside = c(0.98, 0.02),\n        legend.justification = c(1, 0))\n\n\n`geom_smooth()` using formula = 'y ~ x'\n`geom_smooth()` using formula = 'y ~ x'"
+    "text": "If we overlay the fitted lines we get\n\nStataR\n\n\n\n\nCode\n* overlay fitted lines\ntwoway (lfit lnwage exp if sex==1, lc(blue)) (lfit lnwage exp if sex==2, lc(red) lwidth(*2)), xtitle(\"Potential Experience (=Age-(Years of Education +6))\") legend(order(1 \"Male\" 2 \"Female\") r(2) ring(0) pos(5)) ylabel(2(1)6)\n\n\n\n\n\n\nCode\nwage_data$group &lt;- factor(wage_data$sex, levels = c(1, 2),\n                          labels = c(\"Male\", \"Female\"))\n\nggplot(wage_data, aes(x = exp, y = lnwage, colour = group)) +\n  geom_smooth(data = subset(wage_data, sex == 1),\n              method = \"lm\", se = FALSE, linewidth = 0.75) +\n  geom_smooth(data = subset(wage_data, sex == 2),\n              method = \"lm\", se = FALSE, linewidth = 1.5) +\n  scale_colour_manual(values = c(Male = \"blue\", Female = \"red\")) +\n  scale_y_continuous(breaks = 2:6) +\n  coord_cartesian(ylim = c(2, 6)) +\n  labs(x = \"Potential Experience (=Age-(Years of Education +6))\",\n       y = \"lnwage\", colour = NULL) +\n  theme_minimal() +/\n  theme(legend.position = \"inside\",\n        legend.position.inside = c(0.98, 0.02),\n        legend.justification = c(1, 0))\n\n\nError in parse(text = input): &lt;text&gt;:14:20: unexpected '/'\n13:        y = \"lnwage\", colour = NULL) +\n14:   theme_minimal() +/\n                       ^"
   },
   {
     "objectID": "lecture-4.html#f-test",
@@ -4057,21 +4057,21 @@
     "href": "lecture-4.html#test-1",
     "title": "Testing Linear Hypotheses",
     "section": "Test:",
-    "text": "Test:\nWe may wish to ask whether:\n\nthe model for men (group = 1; e.g. “Male”)\n\\[\n  \\ln(wage_i) = \\beta_0 + \\beta_1 edu_i + \\beta_2 exp_i + u_i\n\\]\n\nis the same as,\n\nthe model for women (group = 2; e.g. “Female”)?\n\\[\n  \\ln(wage_i) = \\gamma_0 + \\gamma_1 edu_i + \\gamma_2 exp_i + u_i\n\\]"
+    "text": "Test:\nWe may wish to ask whether:\n\nthe model for men (group = 1; e.g. “Male”)\n\\[\n  \\ln(wage_i) = \\textcolor{blue}{\\beta_0} + \\textcolor{blue}{\\beta_1} edu_i + \\textcolor{blue}{\\beta_2} exp_i + u_i\n\\]\n\nis the same as,\n\nthe model for women (group = 2; e.g. “Female”)?\n\\[\n  \\ln(wage_i) = \\textcolor{red}{\\gamma_0} + \\textcolor{red}{\\gamma_1} edu_i + \\textcolor{red}{\\gamma_2} exp_i + u_i\n\\]"
   },
   {
     "objectID": "lecture-4.html#null-hypothesis",
     "href": "lecture-4.html#null-hypothesis",
     "title": "Testing Linear Hypotheses",
     "section": "Null hypothesis",
-    "text": "Null hypothesis\nThis question implies a null hypothesis:\n\\[\n  H_0: \\beta_0 = \\gamma_0,\\;\\beta_1 = \\gamma_1,\\;\\beta_2 = \\gamma_2\n\\]\nagainst,\n\\[\n  H_1: H_0\\;\\text{false}\n\\]"
+    "text": "Null hypothesis\nThis question implies a null hypothesis:\n\\[\n  H_0: \\textcolor{blue}{\\beta_0} = \\textcolor{red}{\\gamma_0},\\;\\textcolor{blue}{\\beta_1} = \\textcolor{red}{\\gamma_1},\\;\\textcolor{blue}{\\beta_2} = \\textcolor{red}{\\gamma_2}\n\\]\nagainst,\n\\[\n  H_1: H_0\\;\\text{false}\n\\]"
   },
   {
     "objectID": "lecture-4.html#approach-1",
     "href": "lecture-4.html#approach-1",
     "title": "Testing Linear Hypotheses",
     "section": "Approach 1",
-    "text": "Approach 1\nThe \\(F\\)-test for this hypothesis has the form:\n\\[\n  F\\text{-stat} = \\frac{(SSR_P - (SSR_1 + SSR_2))/(k+1)}{(SSR_1 + SSR_2)/(n-2(k+1))}\n\\]\nwhere,\n\n\\(SSR_P\\) is the “pooled” (\\(P\\)) \\(SSR\\) from a regression of the joint sample.\n\\(SSR_1\\) is the \\(SSR\\) from a regression for just group 1.\n\\(SSR_2\\) is the \\(SSR\\) from a regression for just group 2.\n\ntogether \\(SSR_1\\) and \\(SSR_2\\) represent the unrestricted model.\n\n\\(n-2(k+1)\\) is the combined degrees of freedom from group 1 and 2.\n\n\\(k+1\\) parameters are estimated in each group."
+    "text": "Approach 1\nThe \\(F\\)-test for this hypothesis has the form:\n\\[\n  F\\text{-stat} = \\frac{(SSR_P - (\\textcolor{blue}{SSR_1} + \\textcolor{red}{SSR_2}))/(k+1)}{(\\textcolor{blue}{SSR_1} + \\textcolor{red}{SSR_2})/(n-2(k+1))}\n\\]\nwhere,\n\n\\(SSR_P\\) is the “pooled” (\\(P\\)) \\(SSR\\) from a regression of the joint sample.\n\\(\\textcolor{blue}{SSR_1}\\) is the \\(SSR\\) from a regression for just group 1.\n\\(\\textcolor{red}{SSR_2}\\) is the \\(SSR\\) from a regression for just group 2.\n\ntogether \\(\\textcolor{blue}{SSR_1}\\) and \\(\\textcolor{red}{SSR_2}\\) represent the unrestricted model.\n\n\\(n-2(k+1)\\) is the combined degrees of freedom from group 1 and 2.\n\n\\(k+1\\) parameters are estimated in each group."
   },
   {
     "objectID": "lecture-4.html#distribution-2",
@@ -4113,21 +4113,21 @@
     "href": "lecture-4.html#section-11",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "restricted model is given by,\n\n\\[\n  \\ln(wage_i) = \\beta_0 + \\beta_1 edu_i + \\beta_2 exp_i +v_i\n\\]\n\n\\(df_{ur} = n-3\\)"
+    "text": "restricted model is given by,\n\n\\[\n  \\ln(wage_i) = \\beta_0 + \\beta_1 edu_i + \\beta_2 exp_i +v_i\n\\]\n\n\\(df_{r} = n-3\\)"
   },
   {
     "objectID": "lecture-4.html#f-stat",
     "href": "lecture-4.html#f-stat",
     "title": "Testing Linear Hypotheses",
     "section": "\\(F\\)-stat",
-    "text": "\\(F\\)-stat\nThe \\(F\\)-stat is given by,\n\\[\n  F\\text{-stat} = \\frac{(SSR_{r}-SSR_{ur})/3}{SSR_{ur}/(n-6)}\n\\]\n\nCompare this to the first approach:\n\\[\n  F\\text{-stat} = \\frac{(SSR_P - (SSR_1 + SSR_2))/3}{(SSR_1 + SSR_2)/(n-6)}\n\\]"
+    "text": "\\(F\\)-stat\nThe \\(F\\)-stat is given by,\n\\[\n  F\\text{-stat} = \\frac{(SSR_{r}-SSR_{ur})/3}{SSR_{ur}/(n-6)}\n\\]\n\nCompare this to the first approach:\n\\[\n  F\\text{-stat} = \\frac{(SSR_P - (\\textcolor{blue}{SSR_1} + \\textcolor{red}{SSR_2}))/3}{(\\textcolor{blue}{SSR_1} + \\textcolor{red}{SSR_2})/(n-6)}\n\\]"
   },
   {
     "objectID": "lecture-4.html#equivalence",
     "href": "lecture-4.html#equivalence",
     "title": "Testing Linear Hypotheses",
     "section": "Equivalence",
-    "text": "Equivalence\nThese two test-statics are equivalent because,\n\n\\(SSR_P=SSR_r\\)\n\\(SSR_1+SSR_2 = SSR_{ur}\\)"
+    "text": "Equivalence\nThese two test-statics are equivalent because,\n\n\\(SSR_P=SSR_r\\)\n\\(\\textcolor{blue}{SSR_1} +\\textcolor{red}{SSR_2} = SSR_{ur}\\)"
   },
   {
     "objectID": "lecture-4.html#demonstration",
