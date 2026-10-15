@@ -624,7 +624,6 @@ The typical example is the returns to education for men and women [as in @wooldr
 *| code-fold: true
 *| stata.fig: true
 *| fig-align: center
-*| out-width: "67%"
 
 use "$data_dir\morg24_bothgen.dta", clear
 
@@ -642,7 +641,7 @@ If we overlay the fitted lines we get
 *| code-fold: true
 *| stata.fig: true
 *| fig-align: center
-*| out-width: "67%"
+
 
 * overlay fitted lines
 twoway (lfit lnwage exp if sex==1, lc(blue)) (lfit lnwage exp if sex==2, lc(red) lwidth(*2)), xtitle("Potential Experience (=Age-(Years of Education +6))") legend(order(1 "Male" 2 "Female") r(2) ring(0) pos(5)) ylabel(2(1)6)
@@ -698,9 +697,9 @@ $$
   H_1: H_0\;\text{false}
 $$
 
-## Approach 1
+## Chow test
 
-The $F$-test for this hypothesis has the form:
+The relevant $F$-statistic for this test is referred to as the Chow statistic:
 
 $$
   F\text{-stat} = \frac{(SSR_P - (\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2}))/(k+1)}{(\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2})/(n-2(k+1))}

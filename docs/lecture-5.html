@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Asymptotics and Heteroskedasticity – EC3301 Econometrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cf201e8c159c64e39451d1a718f2f573.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">EC3301 Econometrics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lectures" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lectures</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lectures">    
+        <li>
+    <a class="dropdown-item" href="./lecture-0.html">
+ <span class="dropdown-text">Pre-sessional Lecture</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-1.html">
+ <span class="dropdown-text">Lecture 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-2.html">
+ <span class="dropdown-text">Lecture 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-3.html">
+ <span class="dropdown-text">Lecture 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-4.html">
+ <span class="dropdown-text">Lecture 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-5.html">
+ <span class="dropdown-text">Lecture 5</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="./lab-1-Stata.html">
+ <span class="dropdown-text">Lab 1 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-1-R.html">
+ <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-Stata.html">
+ <span class="dropdown-text">Lab 2 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-R.html">
+ <span class="dropdown-text">Lab 2 (R)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./tutorial-1.html">
+ <span class="dropdown-text">Tutorial 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-1-solutions.html">
+ <span class="dropdown-text">Tutorial 1 (Solutions)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2.html">
+ <span class="dropdown-text">Tutorial 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-extra-material" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Extra Material</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-extra-material">    
+        <li>
+    <a class="dropdown-item" href="./material-interpretation.html">
+ <span class="dropdown-text">Interpreting Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-cef.html">
+ <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-intercept.html">
+ <span class="dropdown-text">The Intercept</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-R.html">
+ <span class="dropdown-text">Basic Programming in R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-Stata.html">
+ <span class="dropdown-text">Basic Programming in Stata</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="light-content">
+<p><img src="img/01-standard-vertical-black-text.png" class="img-fluid"></p>
+</div>
+<div class="dark-content">
+<p><img src="img/02-standard-vertical-white-text.png" class="img-fluid"></p>
+</div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#consistency" id="toc-consistency" class="nav-link active" data-scroll-target="#consistency">Consistency</a></li>
+  <li><a href="#asymptotic-normality" id="toc-asymptotic-normality" class="nav-link" data-scroll-target="#asymptotic-normality">Asymptotic Normality</a></li>
+  <li><a href="#asymptotic-tests" id="toc-asymptotic-tests" class="nav-link" data-scroll-target="#asymptotic-tests">Asymptotic Tests</a></li>
+  <li><a href="#heteroskedasticity" id="toc-heteroskedasticity" class="nav-link" data-scroll-target="#heteroskedasticity">Heteroskedasticity</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-5-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="lecture-5-notes-Stata.pdf"><i class="bi bi-file-pdf"></i>PDF with Stata</a></li><li><a href="lecture-5-notes-R.pdf"><i class="bi bi-file-pdf"></i>PDF with R</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Asymptotics and Heteroskedasticity</h1>
+<p class="subtitle lead">Lecture 5</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="reading" class="level2">
+<h2 class="anchored" data-anchor-id="reading">Reading</h2>
+<p>This lecture covers material from <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>:</p>
+<ul>
+<li>Chapter 5.1 - “Consistency”</li>
+<li>Chapter 5.2 - “Asymptotic Normality and Large Sample Inference”</li>
+<li>Chapter 5.3 - “Asymptotic Efficiency of OLS”</li>
+<li>Chapter 8.1 - “Consequences of Heteroskedasticity for OLS”</li>
+<li>Chapter 8.2 - “Heteroskedasticity-Robust Inference after OLS Estimation”</li>
+<li>Chapter 8.3 - “Testing for Heteroskedasticity”</li>
+</ul>
+<p>Note: we will not cover 5.4 (“Testing Normality of the Error Term”) and 8.2a (“Computing Heteroskedasticity-Robust LM Tests”).</p>
+</section>
+<section id="exact-properties" class="level2">
+<h2 class="anchored" data-anchor-id="exact-properties">Exact properties</h2>
+<p>The properties of OLS from <a href="./lecture-3.html">Lecture 3</a> and <a href="./lecture-4.html">Lecture 4</a> all hold for the <strong>exact</strong> sample</p>
+<ul>
+<li><em>exact</em>: for a given, finite <span class="math inline">\(n\)</span></li>
+<li>also referred to as <em>finite</em> or <em>small</em> sample properties</li>
+</ul>
+<div class="fragment fade-in">
+<p><strong>Begs the question:</strong></p>
+<ul>
+<li>does anything change as <span class="math inline">\(n\)</span> increases?</li>
+<li>what happens in the limit as <span class="math inline">\(n\rightarrow \infty\)</span>?</li>
+</ul>
+</div>
+</section>
+<section id="asymptotic-properties" class="level2">
+<h2 class="anchored" data-anchor-id="asymptotic-properties">Asymptotic properties</h2>
+<p>Today we will discuss the <em>asymptotic properties</em> of OLS</p>
+<ul>
+<li>also referred to as <strong>large sample</strong> properties</li>
+</ul>
+<div class="fragment fade-in">
+<p>Noteably,</p>
+<ol type="1">
+<li><p>Consistency</p></li>
+<li><p>Asymptotic normality</p></li>
+</ol>
+</div>
+</section>
+<section id="clrm" class="level2">
+<h2 class="anchored" data-anchor-id="clrm">CLRM</h2>
+<p>We will see that as <span class="math inline">\(n\)</span> gets large, we will be able to relax certain assumptions.</p>
+<ol type="1">
+<li><p>Replace MLR 4 (<span class="math inline">\(E[u|\mathbf{x}]=0\)</span>) with a weaker uncorrelatedness: <span class="math inline">\(E[u\mathbf{x}]=0\)</span></p></li>
+<li><p>Relax MLR 6 (<span class="math inline">\(u|\mathbf{x}\sim N(0,\sigma^2)\)</span>) entirely</p></li>
+</ol>
+<div class="fragment fade-in">
+<p>In the second half of the lecture, we will look at heteroskedasticity</p>
+<ol start="3" type="1">
+<li>Relax MLR 5 (<span class="math inline">\(Var(u|\mathbf{x})=\sigma^2\)</span>)</li>
+</ol>
+</div>
+</section>
+<section id="consistency" class="level1">
+<h1>Consistency</h1>
+<p>In <a href="./lecture-3.html">Lecture 3</a> we solved for,</p>
+<p><span class="math display">\[
+    \hat{\beta}_1 = \beta_1 + \underbrace{\textcolor{red}{\frac{1}{\text{SST}_x}\sum_{i=1}^{n}(x_{i}-\bar{x})}}_{\text{all depends on }X}u_i
+\]</span></p>
+<p>where,</p>
+<p><span class="math display">\[
+    \text{SST}_x=\sum_{i=1}^{n}(x_{i}-\bar{x})^2
+\]</span></p>
+<p>This was for the <em>simple linear model</em>.</p>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<p>We can re-write this as,</p>
+<p><span class="math display">\[
+    \hat{\beta}_1 = \beta_1 + \frac{\sum_{i=1}^{n}(x_{i}-\bar{x})u_i}{\sum_{i=1}^{n}(x_{i}-\bar{x})^2} = \beta_1 + \frac{\textcolor{blue}{n^{-1}}\sum_{i=1}^{n}(x_{i}-\bar{x})u_i}{\textcolor{blue}{n^{-1}}\sum_{i=1}^{n}(x_{i}-\bar{x})^2}
+\]</span></p>
+<div class="fragment fade-in">
+<p>Then, as <span class="math inline">\(n\rightarrow \infty\)</span></p>
+<p><span class="math display">\[
+    \hat{\beta}_1 \rightarrow_p \beta_1 + \frac{Cov(x_i,u_i)}{Var(x_i)}
+\]</span></p>
+</div>
+</section>
+<section id="probability-limit" class="level2">
+<h2 class="anchored" data-anchor-id="probability-limit">Probability limit</h2>
+<p>We say that the probability limit of the OLS estimator is:</p>
+<p><span class="math display">\[
+  \text{plim}\; \hat{\beta}_1 = \beta_1 + \frac{Cov(x_i,u_i)}{Var(x_i)}
+\]</span></p>
+<p>So long as,</p>
+<p><span class="math display">\[
+Var(x_i) \neq 0
+\]</span></p>
+<p>Which is true under MLR 3 (eqiv. SLR 3).</p>
+</section>
+<section id="proof" class="level2">
+<h2 class="anchored" data-anchor-id="proof">Proof</h2>
+<p><strong>Why?</strong> This is an application of the <strong>Weak Law of Large Numbers</strong>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Which holds, so long as the terms have a finite variance.</p>
+<ul>
+<li><p><span class="math inline">\(Var(x_i)&lt;\infty\)</span></p></li>
+<li><p><span class="math inline">\(Var(u_i)&lt;\infty\)</span></p></li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled" title="Weak Law of Large Numbers">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Weak Law of Large Numbers
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The WLLN states that the sample mean converges in probability to the expected value of a random variable under iid sampling:</p>
+<p><span class="math display">\[
+  \bar{x}_n = n^{-1}\sum_{i=1}^n x_i \rightarrow_p E[x_i]
+\]</span> as <span class="math inline">\(n\rightarrow \infty\)</span>. We typically assume that the variable has a finite variance; though, it is not strictly necessary.</p>
+</div>
+</div>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
+<p>So,</p>
+<p><span class="math display">\[
+  n^{-1}\sum_{i=1}^{n}(x_{i}-\bar{x})u_i \rightarrow_p Cov(x_i,u_i)
+\]</span></p>
+<p>and,</p>
+<p><span class="math display">\[
+  n^{-1}\sum_{i=1}^{n}(x_{i}-\bar{x})^2 \rightarrow_p Var(x_i)
+\]</span></p>
+<p>Any by Slutzky’s theorem, the ratio of the two terms converges in probability too.</p>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2"></h2>
+<p>Assuming <span class="math inline">\(Cov(x_i,u_i)=0\)</span> (<em>weaker than</em> MLR 4)</p>
+<p><span class="math display">\[
+  \text{plim}\; \hat{\beta}_1 = \beta_1
+\]</span></p>
+<p><span class="math inline">\(\rightarrow\)</span> the OLS estimator is <strong>consistent</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Probability limit">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Probability limit
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The formal definition of consistency is given by,</p>
+<p><span class="math display">\[
+  Pr(|\hat{\beta}_1 - \beta_1|&gt;\varepsilon)\rightarrow 0\quad \text{as}\quad n\rightarrow \infty
+\]</span></p>
+<p>for any positive value <span class="math inline">\(\varepsilon\)</span>. There is also where the phrase “probability limit” comes from. If you fix <span class="math inline">\(\varepsilon\)</span>, then there is a sufficiently large <span class="math inline">\(n\)</span> such that the probability that the estimator is <span class="math inline">\(\varepsilon\)</span> away from the true value is close to 0.</p>
+<p>We say then that <span class="math inline">\(\hat{\beta}_1\)</span> converges <strong>in probability</strong> to <span class="math inline">\(\beta_1\)</span>: <span class="math inline">\(\hat{\beta}_1 \rightarrow_p \beta_1\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="consistency-1" class="level2">
+<h2 class="anchored" data-anchor-id="consistency-1">Consistency</h2>
+<p>So, under MLR 1-3 PLUS<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<blockquote class="blockquote">
+<p><strong>MLR-4a: Zero mean and Zero Correlation</strong></p>
+<p><span class="math inline">\(E[u]=0\)</span> and <span class="math inline">\(E[ux_{j}]=0\)</span> for <span class="math inline">\(j=1,\dots,k\)</span>.</p>
+</blockquote>
+<p>OLS is consistent.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consistent is not the same as unbiased. Unbiasedness is a property for an exact <span class="math inline">\(n\)</span>, while constistency concerns the probability limit of the estimator as <span class="math inline">\(n\rightarrow \infty\)</span>. Estimators can be consistent, but biased. In some instances, estimators can be unbiased but not consistent because their variances do not shrink as <span class="math inline">\(n\)</span> increases.</p>
+</div>
+</div>
+</section>
+<section id="mlr-4-vs-mlr-4a" class="level2">
+<h2 class="anchored" data-anchor-id="mlr-4-vs-mlr-4a">MLR 4 vs MLR 4a</h2>
+<p><strong>What is difference?</strong> Under MLR 4, the population regression function is correctly specified</p>
+<p><span class="math display">\[
+  E[y_i|\mathbf{x}] = \beta_0 + \beta_1x_{i1} + \dots + \beta_kx_{ik}
+\]</span></p>
+<div class="fragment fade-in">
+<p>Under MLR 4a this need not hold.</p>
+<ul>
+<li>the model may be missing some non-linear functions of <span class="math inline">\(x_j\)</span>: terms in <span class="math inline">\(x_j^2\)</span>, <span class="math inline">\(x_j^3\)</span>, etc.</li>
+<li>the model may be missing interactions of regressors.</li>
+</ul>
+</div>
+</section>
+<section id="simulation" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="simulation">Simulation</h2>
+<p>We can demonstrate consistency by showing that as <span class="math inline">\(n\)</span> increases, the variance of the estimator collapses around the true value.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>Mean of slope estimates:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  n=50  n=100  n=200  n=400  n=800 n=1600 n=3200 n=6400 
+0.4915 0.4984 0.4933 0.4892 0.5026 0.5034 0.4997 0.4981 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SD of slope estimates:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  n=50  n=100  n=200  n=400  n=800 n=1600 n=3200 n=6400 
+0.4888 0.3646 0.2409 0.1633 0.1198 0.0886 0.0599 0.0419 </code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecture-5-multi_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="multivariate-case" class="level2">
+<h2 class="anchored" data-anchor-id="multivariate-case">Multivariate case</h2>
+<p>Is anything different in the multivariate case? <strong>No</strong></p>
+<div class="fragment fade-in">
+<p>We know that we can define the OLS estimator for <span class="math inline">\(\beta_1\)</span> from,</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_{i1} + \dots + \beta_kx_{ik} + u_i
+\]</span></p>
+<p>As a simple linear regression of residualized variables <span class="math inline">\(\tilde y\)</span> and <span class="math inline">\(\tilde x\)</span>:</p>
+<p><span class="math display">\[
+  \tilde y_i = \beta_0 + \beta_1 \tilde x_{i1} + v_i
+\]</span></p>
+</div>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3"></h2>
+<p>So,</p>
+<p><span class="math display">\[
+  \text{plim}\; \hat{\beta}_1 = \beta_1 + \frac{Cov(x_{i1}^*,u_i)}{Var(x_{i1}^*)}
+\]</span></p>
+<p>where <span class="math inline">\(x_{i1}^* = \text{plim}\; \tilde x_{i1}\)</span>.</p>
+<div class="fragment fade-in">
+<p>Under, MLR 4a</p>
+<p><span class="math display">\[
+  Cov(x_{i1}^*,u_i) = 0
+\]</span></p>
+<p>since <span class="math inline">\(x_{i1}^*\)</span> is just a linear function of <span class="math inline">\(x_{i1},\dots,x_{ik}\)</span>; all of which are uncorrelated with <span class="math inline">\(u_i\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="asymptotic-normality" class="level1">
+<h1>Asymptotic Normality</h1>
+<section id="result" class="level2">
+<h2 class="anchored" data-anchor-id="result">Result</h2>
+<p><span class="math display">\[
+  \sqrt{n} (\hat{\beta}_j - \beta_j) \rightarrow_d N\big(0,Var(\hat{\beta}_j)\big)
+\]</span></p>
+<p>where,</p>
+<p><span class="math display">\[
+  Var(\hat\beta_j) = \text{plim}\;\frac{\sigma^2}{n^{-1}SSR_j}
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This formula for limiting variance has an <span class="math inline">\(n^{-1}\)</span> in the denominator that doesn’t appear in the exact sample formula for the conditional variance. <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 174</a>)</span> includes the formula:</p>
+<p><span class="math display">\[
+  n^{-1}SSR_j = n^{-1}\sum_{i=1}^n\hat{r}_{ij}^2
+\]</span></p>
+<p>where <span class="math inline">\(\hat{r}_{ij}\)</span> is the residual from a regression of <span class="math inline">\(x_j\)</span> on all other regressors; <em>including a constant</em>.</p>
+</div>
+</div>
+</section>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4"></h2>
+<p><strong>Why this strange form?</strong> With the <span class="math inline">\(\sqrt{n}\)</span>.</p>
+<div class="fragment fade-in">
+<ol type="1">
+<li><p><span class="math inline">\(\hat{\beta_j} \rightarrow_p \beta_j\)</span></p></li>
+<li><p>In the limit, the estimator has no distribution (variance=0); degenerate</p></li>
+<li><p>The speed of convergence is <span class="math inline">\(n^{-1/2}\)</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p></li>
+</ol>
+<ol start="4" type="1">
+<li><p>If we scale the estimator (minus it’s limit (<span class="math inline">\(\beta_j\)</span>)) we end up with a non-degenerate distribution</p></li>
+<li><p>This is why SEs of estimator shrinks at roughly <span class="math inline">\(n^{-1/2}\)</span>: if you quadruple the sample size, the SE halves.</p></li>
+</ol>
+</div>
+<div class="fragment fade-in">
+<p>BUT, if you de-mean <span class="math inline">\(\hat\beta_j\)</span> and scale by <span class="math inline">\(\sqrt{n}\)</span>, the term converges to a stable, <strong>normal</strong> distribution.</p>
+</div>
+</section>
+<section id="proof-1" class="level2">
+<h2 class="anchored" data-anchor-id="proof-1">Proof</h2>
+<p>The result is a direct application of the <strong>Central Limit Theorem</strong></p>
+<ul>
+<li><span class="math inline">\(\sqrt{n}\)</span> (root-<span class="math inline">\(n\)</span>) is the scaling applied to a series of random variables to make them converge to a normal distribution.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled" title="Central Limit Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Limit Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>CLT states that given a <strong>sequence</strong> of iid random variables <span class="math inline">\(x_1,x_2,...,x_n\)</span>, such <span class="math inline">\(E[x_j]=0\)</span> and <span class="math inline">\(Var(x_j)=\sigma^2&lt;\infty\)</span>.</p>
+<p><span class="math display">\[
+  \sqrt{n}\bar{x}_n = n^{-1/2}\sum_{i=1}^nx_i \rightarrow_d N(0,\sigma^2)
+\]</span></p>
+<p>as <span class="math inline">\(n\rightarrow \infty\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="standardization" class="level2">
+<h2 class="anchored" data-anchor-id="standardization">Standardization</h2>
+<p>The result can be standardized,</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  \frac{\textcolor{blue}{\sqrt{n}}(\hat{\beta}_j - \beta_j)}{\sqrt{\sigma^2/(\textcolor{red}{n^{-1}} SSR_j)}} &amp;= \frac{\textcolor{blue}{\sqrt{n}}(\hat{\beta}_j - \beta_j)}{\textcolor{red}{\sqrt{n}}\sqrt{\sigma^2/ SSR_j}} \\
+  &amp;= \frac{(\hat{\beta}_j - \beta_j)}{sd(\hat\beta_j)} \\
+  &amp;\rightarrow_d N(0,1)
+  \end{aligned}
+\]</span></p>
+<p>Under MLR 1-5; <strong>even without MLR 6</strong></p>
+</section>
+<section id="approximate-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="approximate-distribution">Approximate distribution</h2>
+<p>We say that,</p>
+<p><span class="math display">\[
+  \frac{(\hat{\beta}_j - \beta_j)}{sd(\hat\beta_j)} \overset{a}{\sim} N(0,1)
+\]</span></p>
+<p>where <span class="math inline">\(\overset{a}{\sim}\)</span> means “approximately distributed”.</p>
+<ul>
+<li>for a large enough <span class="math inline">\(n\)</span>, it does not matter that you do not know the distribution of <span class="math inline">\(u|\mathbf{x}\)</span>.</li>
+</ul>
+</section>
+<section id="estimated-variance" class="level2">
+<h2 class="anchored" data-anchor-id="estimated-variance">Estimated variance</h2>
+<p>Likewise,</p>
+<p><span class="math display">\[
+  \frac{(\hat{\beta}_j - \beta_j)}{se(\hat\beta_j)} \rightarrow_d N(0,1)
+\]</span></p>
+<p>where <span class="math inline">\(se(\hat\beta_j) = \sqrt{\hat\sigma^2/SSR_j}\)</span></p>
+<ul>
+<li>for a large enough <span class="math inline">\(n\)</span>, it does not matter that you do not know <span class="math inline">\(\sigma^2\)</span> either.</li>
+</ul>
+</section>
+<section id="t-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="t-distribution"><span class="math inline">\(t\)</span>-distribution</h2>
+<p>As was suggested in <a href="./lecture-3.html">Lecture 3</a>,</p>
+<p><span class="math display">\[
+  t_{n-k-1}\rightarrow N(0,1)\quad \text{as}\quad n\rightarrow \infty
+\]</span></p>
+<p>BUT remember</p>
+<ul>
+<li><p><span class="math inline">\(t\)</span> distribution result relies on MLR 1-6.</p></li>
+<li><p>MLR 1-5 gives you normality, by CLT.</p></li>
+</ul>
+</section>
+<section id="f-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="f-distribution"><span class="math inline">\(F\)</span>-distribution</h2>
+<p>Also under MLR 1-6, we had a range of tests that had a <span class="math inline">\(F\)</span> distribution (see <a href="./lecture-4.html">Lecture-4</a>)</p>
+<p><span class="math display">\[
+  F_{q,n-k-1}\rightarrow \chi^2_q/q\quad \text{as}\quad n\rightarrow \infty
+\]</span></p>
+<p>As above,</p>
+<ul>
+<li><p><span class="math inline">\(F\)</span> distribution of linear tests relies on MLR 1-6.</p></li>
+<li><p>MLR 1-5 gives you chi-squared, by CLT.</p></li>
+<li><p>Notice, <span class="math inline">\(q\times F_{q,n-k-1}\rightarrow \chi^2_q\quad \text{as}\quad n\rightarrow \infty\)</span></p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="$t$ and $F$ distribution limits">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><span class="math inline">\(t\)</span> and <span class="math inline">\(F\)</span> distribution limits
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <span class="math inline">\(t\)</span> and <span class="math inline">\(F\)</span> distributions share a common denominator:</p>
+<p><span class="math display">\[
+  t_{n-k-1} = \frac{z}{\chi^2_{n-k-1}/(n-k-1)}\quad\text{and}\quad F_{q,n-k-1} = \frac{\chi^2_{q}/q}{\chi^2_{n-k-1}/(n-k-1)}
+\]</span></p>
+<p>The distribution in the denominator arises from the variance estimator, which has a <span class="math inline">\(\chi^2_{n-k-1}/(n-k-1)\)</span> (conditional) distribution (under MLR 1-6).</p>
+<p>As <span class="math inline">\(n\rightarrow \infty\)</span>,</p>
+<p><span class="math display">\[
+  \chi^2_{n-k-1}/(n-k-1)\rightarrow 1
+\]</span></p>
+<p>And in neither cases does the numerator depend on <span class="math inline">\(n\)</span>. This explains the results above.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="hypothesis-tests" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-tests">Hypothesis tests</h2>
+<p>Having said that, it is equally accurate to say</p>
+<p><span class="math display">\[
+  t\text{-stat} \overset{a}{\sim}t_{n-k-1}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+  F\text{-stat} \overset{a}{\sim}F_{q,n-k-1}
+\]</span></p>
+<p><strong>without MLR 6</strong>.</p>
+<ul>
+<li>Likewise for Chow test.</li>
+</ul>
+</section>
+<section id="demonstration" class="level2">
+<h2 class="anchored" data-anchor-id="demonstration">Demonstration</h2>
+<p>Let’s simulate a model:</p>
+<p><span class="math display">\[
+  y_i = 2 + 0.5x_i + u_i
+\]</span></p>
+<p>where,</p>
+<p><span class="math display">\[
+  u_i+1|x_i \sim \text{Exp} (1)
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\Rightarrow E[u_i|x_i = 0]\)</span></li>
+<li><span class="math inline">\(\Rightarrow Var(u_i|x_i) = 1\)</span></li>
+<li>BUT the error has a <strong>skewness</strong> factor of 2.</li>
+</ul>
+</section>
+<section id="simulation-1" class="level2">
+<h2 class="anchored" data-anchor-id="simulation-1">Simulation</h2>
+<p>Here we plot the standardized coefficients.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecture-5-multi_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="asymptotic-tests" class="level1">
+<h1>Asymptotic Tests</h1>
+<section id="the-lagrange-multiplier-lm-statistic" class="level2">
+<h2 class="anchored" data-anchor-id="the-lagrange-multiplier-lm-statistic">The Lagrange Multiplier (LM) statistic</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We are covering this because it is relevant to tests for Heteroskedasticity (Ch. 8.3).</p>
+</div>
+</div>
+<p>The <span class="math inline">\(LM\)</span>-stat can be used under MLR 1-5 (therefore MLR 6 is not needed).</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1x_{i1} + \dots + \beta_{k-q}x_{i,k-q} + \textcolor{blue}{\beta_{k-q+1}}x_{i,k-q+1} + \dots + \textcolor{blue}{\beta_k}x_{ik}+u_i
+\]</span></p>
+<div class="fragment fade-in">
+<p>Suppose, you want to test</p>
+<p><span class="math display">\[
+  H_0: \textcolor{blue}{\beta_{k-q+1}}=0,\dots,\textcolor{blue}{\beta_k}=0
+\]</span></p>
+<ul>
+<li><p>The last q parameters are all 0.</p></li>
+<li><p>We saw a version of this for the <span class="math inline">\(F\)</span>-test</p></li>
+</ul>
+</div>
+</section>
+<section id="lm-stat" class="level2">
+<h2 class="anchored" data-anchor-id="lm-stat"><span class="math inline">\(LM\)</span>-stat</h2>
+<p>You can compute the <span class="math inline">\(LM\)</span>-stat as follows:</p>
+<ol type="1">
+<li>estimate the <strong>restricted</strong> model</li>
+</ol>
+<p><span class="math display">\[
+  y_i = \tilde\beta_0 + \tilde\beta_1x_{i1}+\dots+\tilde\beta_{k-q}x_{i,k-q} + \tilde u_i
+\]</span></p>
+<p>where <span class="math inline">\(\tilde u_i\)</span> is the residual from this restricted-model regression.</p>
+</section>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5"></h2>
+<div class="incremental">
+<ol class="incremental" start="2" type="1">
+<li><p>regress <span class="math inline">\(\tilde u_i\)</span> on <span class="math inline">\(x_1,\dots,x_k\)</span> (all <span class="math inline">\(k\)</span> regressors)</p>
+<ul class="incremental">
+<li>intuitively none of the regressors should be significant under the <span class="math inline">\(H_0\)</span></li>
+</ul></li>
+<li><p>store the <span class="math inline">\(\mathbf{R}_{\tilde u}^2\)</span> from this <em>auxilliary</em> regression</p></li>
+<li><p>construct the <span class="math inline">\(LM\)</span>-stat</p></li>
+</ol>
+<p><span class="math display">\[
+  LM\text{-stat} = n\times \mathbf{R}_{\tilde u}^2
+\]</span></p>
+<ol class="incremental" start="5" type="1">
+<li><p>Under the null (and assuming MLR 1-5): <span class="math inline">\(LM\text{-stat}\rightarrow_d \chi^2_q\)</span></p></li>
+<li><p>Compute <span class="math inline">\(p\)</span>-value or use critical value to form rejection rule.</p></li>
+</ol>
+</div>
+</section>
+<section id="recap-2" class="level2">
+<h2 class="anchored" data-anchor-id="recap-2">Recap</h2>
+<ol type="1">
+<li><p>We can relax MLR 4</p>
+<ul>
+<li>Under MLR 4a OLS is consistent, but potentially biased in the finite sample<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></li>
+</ul></li>
+</ol>
+<ol start="2" type="1">
+<li><p>We can drop MLR 6</p>
+<ul>
+<li><p>Regardless the true (conditional) distribution of <span class="math inline">\(u_i\)</span>, the OLS estimator will be approximately normal for <span class="math inline">\(n\)</span> large</p></li>
+<li><p>Conduct inference based on standard normal and chi-squared distributions.</p></li>
+<li><p>Tests using <span class="math inline">\(t\)</span>/<span class="math inline">\(F\)</span> distribution remain slightly more conservative if distribution is unknown.</p></li>
+<li><p><span class="math inline">\(LM\)</span> test option</p></li>
+</ul></li>
+<li><p>OLS is asymptotically efficient under Gauss-Markov assumptions (MLR 1-5) <span class="citation" data-cites="wooldridge2025">(read <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025</a>, ch.&nbsp;5.3)</span></p></li>
+</ol>
+</section>
+</section>
+<section id="heteroskedasticity" class="level1">
+<h1>Heteroskedasticity</h1>
+<section id="mlr-5" class="level2">
+<h2 class="anchored" data-anchor-id="mlr-5">MLR #5</h2>
+<blockquote class="blockquote">
+<p><strong>MLR-5: Homoskedasticity</strong></p>
+<p>The variance of the error term is the same given any value of <span class="math inline">\(\mathbf{x}\)</span>.</p>
+<p><span class="math display">\[
+  Var(u|\mathbf{x}) = \sigma^2
+\]</span></p>
+</blockquote>
+<ul>
+<li>States the error variance is the same constant, independent of <span class="math inline">\(\mathbf{x}\)</span></li>
+</ul>
+<p><strong>What if this is NOT true?</strong></p>
+</section>
+<section id="heteroskedasticity-1" class="level2">
+<h2 class="anchored" data-anchor-id="heteroskedasticity-1">Heteroskedasticity</h2>
+<p>A heteroskedastic error variance can be denoted:</p>
+<p><span class="math display">\[
+  Var(u_i|\mathbf{x}_i) = \sigma^2_i
+\]</span></p>
+<ul>
+<li>the <span class="math inline">\(i\)</span> shows that the variance depends on <span class="math inline">\(i\)</span> (or the value of <span class="math inline">\(\mathbf{x}_i\)</span>)<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></li>
+</ul>
+<ul>
+<li>implies that the sampling error is NOT iid (independently and <em>identically</em> distributed)</li>
+</ul>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>Years of education (modelled here with quadratic term in <code>edu</code>; using MORG 2024).</p>
+<div class="cell" data-layout-align="center" data-stata.fig="true">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecture-5-multi_files/figure-html/unnamed-chunk-6-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="implications" class="level2">
+<h2 class="anchored" data-anchor-id="implications">Implications</h2>
+<p>From <a href="./lecture-3.html">Lecture 3</a>, for the <em>simple linear regression</em> case,</p>
+<p><span class="math display">\[
+  Var(\hat{\beta}_1|X) = E\Bigg[\bigg(\frac{1}{\text{SST}_x}\sum_{i=1}^{n}(x_{i}-\bar{x})u_i\bigg)^2\Bigg|X\Bigg]
+\]</span></p>
+<p>To get the result from Lecture 3 we used MLR 5, <strong>which no longer holds</strong>.</p>
+</section>
+<section id="variance" class="level2">
+<h2 class="anchored" data-anchor-id="variance">Variance</h2>
+<p><span class="math display">\[
+  Var(\hat{\beta}_1|X) = \frac{\sum_{i=1}^{n}(x_{i}-\bar{x})^2E[u_i^2|X]}{\text{SST}_x^2}=\frac{\sum_{i=1}^{n}(x_{i}-\bar{x})^2\textcolor{red}{\sigma_i^2}}{\text{SST}_x^2}
+\]</span></p>
+<div class="fragment fade-in">
+<p>The formula is very similar to what you have under homoskedasticity,</p>
+<p><span class="math display">\[
+  Var(\hat{\beta}_1|X) = \frac{\sum_{i=1}^{n}(x_{i}-\bar{x})^2\sigma^2}{\text{SST}_x^2}=\frac{\textcolor{blue}{\sigma^2}}{\text{SST}_x}
+\]</span></p>
+<p>except it cannot be simplified, because <span class="math inline">\(\textcolor{red}{\sigma^2_i}\)</span> depends on <span class="math inline">\(i\)</span>.</p>
+</div>
+</section>
+<section id="estimator" class="level2">
+<h2 class="anchored" data-anchor-id="estimator">Estimator</h2>
+<p>The most intuitive estimator for the variance is given by,</p>
+<p><span class="math display">\[
+  \widehat{Var}(\hat{\beta}_1|X) = \frac{\sum_{i=1}^{n}(x_{i}-\bar{x})^2\hat{u}_i^2}{\text{SST}_x^2}
+\]</span></p>
+<p>as it replaces the error term with the estimated residual.</p>
+<ul>
+<li>Referred to as the White (1980) estimator.</li>
+<li>The estimator has the appropriate asympotitic limit.</li>
+</ul>
+</section>
+<section id="multivariate-case-1" class="level2">
+<h2 class="anchored" data-anchor-id="multivariate-case-1">Multivariate case</h2>
+<p>In the multivariate case,</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_k x_{ik} + u_i
+\]</span></p>
+<p>we had that under <strong>homoskedasticity</strong>,</p>
+<p><span class="math display">\[
+  Var(\hat{\beta}_j|X) = \frac{\sigma^2}{\text{SSR}_j}
+\]</span> - where <span class="math inline">\(SSR_j\)</span> is from a regression of regressor <span class="math inline">\(x_j\)</span> on all other regressors.</p>
+</section>
+<section id="section-6" class="level2">
+<h2 class="anchored" data-anchor-id="section-6"></h2>
+<p>Under <strong>heteroskedasticity</strong>, we</p>
+<p><span class="math display">\[
+  Var(\hat{\beta}_j|X) = \frac{\sum_{i=1}^{n}(\tilde x_{ij}-\bar{\tilde x}_j)^2\sigma_i^2}{\text{SSR}_j^2}
+\]</span></p>
+<p>where <span class="math inline">\(\tilde x_{ij}\)</span> is the residual from the regression of <span class="math inline">\(x_j\)</span> on all other regressors.</p>
+</section>
+<section id="estimator-1" class="level2">
+<h2 class="anchored" data-anchor-id="estimator-1">Estimator</h2>
+<p>The following formula appears in <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 279</a>)</span> for the estimator:</p>
+<p><span class="math display">\[
+  \widehat{Var}(\hat{\beta}_j|X) = \frac{\sum_{i=1}^{n}\hat{r}_{ij}^2\hat{u}_i^2}{\text{SSR}_j^2}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\hat{r}_{ij}\)</span> is the residual from a regression of <span class="math inline">\(x_j\)</span> on all other regressors <strong>as well as a constant</strong>.</p>
+<ul>
+<li><span class="math inline">\(\sum_{i=1}^n\hat{r}_{ij}=0\)</span>: the mean of the residual is zero</li>
+<li><span class="math inline">\((\tilde x_{ij}-\bar{\tilde x}_j)^2\)</span> is replaced with <span class="math inline">\(\hat{r}_{ij}^2\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="hcs" class="level2">
+<h2 class="anchored" data-anchor-id="hcs">HC’s</h2>
+<p>Note: this is not the only <strong>heteroskedastic-consistent</strong> (HC) SE estimator.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<ul>
+<li><p><strong>HC0</strong>: Original White (1980) formula that uses the unadjusted squares of the residuals. <strong>Formula from <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>.</strong></p></li>
+<li><p><strong>HC1</strong>: Huber-White sandwich formula. Correct’s HC0 for degrees of freedom: HC0 <span class="math inline">\(\times n/(n-k-1)\)</span>. <strong>Stata default.</strong></p></li>
+<li><p><strong>HC2</strong>: Adjusts residuals by a regressor-specific leverage term. Better for small samples and corresponds to Neyman variance estimator (in simple linear case with dummy regressor).</p></li>
+<li><p><strong>HC3</strong>: The `jackknife’ estimator. Different adjustment for leverage term. Better small-sample bias adjustment and recommended for small sample settings: <span class="math inline">\(n&lt;250\)</span>.</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Robust SEs">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Robust SEs
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Heteroskedasticity is not the only concern related to SEs. As you read applied work you will see corrections for clustering, auto-correlation, spatial correlations, etc. And when you look into the options, you will read about approaches like bootstrap and jackknife SE estimation. For example, MacKinnon and White’s (1985) HC3 correction is the algebraic equivalent of a jackknife (“leave-one-out”) estimator.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="consequences" class="level2">
+<h2 class="anchored" data-anchor-id="consequences">Consequences</h2>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><p>Does heteroskedasticity make OLS biased?</p>
+<ul class="incremental">
+<li><p><strong>No!</strong> (Un)biasedness depends on MLR 1-4</p></li>
+<li><p>the estimation of heteroskedastic-robust SEs has no bearing on the estimated OLS coefficients.</p></li>
+<li><p>heteroskedasticity <em>may</em> be the result of omitted variables and/or model mis-specification.</p></li>
+</ul></li>
+<li><p>Does it make it less efficient?</p>
+<ul class="incremental">
+<li><p><strong>Yes</strong>. Under heteroskedasticity, OLS is no longer BLUE</p></li>
+<li><p>See Weighted Least Squares Estimation (Ch. 8.4, not examinable)</p></li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section id="section-7" class="level2">
+<h2 class="anchored" data-anchor-id="section-7"></h2>
+<div class="incremental">
+<ol class="incremental" start="3" type="1">
+<li><p><span class="math inline">\(t\)</span> tests</p>
+<ul class="incremental">
+<li><p>exact distribution of <span class="math inline">\(t\)</span>-stats is not <span class="math inline">\(t\)</span> distributed</p></li>
+<li><p>the asymptotic distributions remain normal</p></li>
+<li><p>can use <span class="math inline">\(t\)</span> distributions as an approximation for larger <span class="math inline">\(n\)</span> (slightly more conservative)</p></li>
+</ul></li>
+<li><p><span class="math inline">\(F\)</span> tests</p>
+<ul class="incremental">
+<li><p>there is a heteroskedastic-robust <span class="math inline">\(F\)</span>-stat (also referred to Wald Statistic)</p></li>
+<li><p>Chow test is not valid, but can use dummy variable interaction method with robust <span class="math inline">\(F\)</span> test.</p></li>
+<li><p>Can use heteroskedasticity-robust LM test method</p></li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section id="example-morg-2024" class="level2">
+<h2 class="anchored" data-anchor-id="example-morg-2024">Example: MORG (2024)</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>* Use the <span class="kw">vce</span>() option with <span class="kw">robust</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> lnwage edu <span class="fu">exp</span> expsq female unioncov, <span class="kw">vce</span>(<span class="kw">robust</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>* You can also just say,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>* <span class="kw">reg</span> lnwage edu <span class="fu">exp</span> expsq female unioncov, <span class="kw">robust</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear regression                               Number of obs     =      8,955
+                                                F(5, 8949)        =     549.77
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.2822
+                                                Root MSE          =     .52055
+
+------------------------------------------------------------------------------
+             |               Robust
+      lnwage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         edu |    .112617   .0023257    48.42   0.000     .1080581    .1171759
+         exp |   .0219653   .0013864    15.84   0.000     .0192476     .024683
+       expsq |  -.0003148   .0000284   -11.07   0.000    -.0003706   -.0002591
+      female |  -.2026692   .0111009   -18.26   0.000    -.2244295    -.180909
+    unioncov |   .1091537   .0407743     2.68   0.007     .0292268    .1890807
+       _cons |   1.380385     .08791    15.70   0.000     1.208061    1.552708
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the Stata file</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>morg_data <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"morg24_all.dta"</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate bivariate linear regression</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> edu <span class="sc">+</span> exp <span class="sc">+</span> expsq <span class="sc">+</span> female <span class="sc">+</span> unioncov, <span class="at">data=</span>morg_data)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute HC1 robust SEs</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>vce <span class="ot">=</span> <span class="fu">vcovHC</span>(model, <span class="at">type=</span><span class="st">"HC1"</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Display</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(model, <span class="at">vcov =</span> vce)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+               Estimate  Std. Error t value  Pr(&gt;|t|)    
+(Intercept)  1.3804e+00  8.7910e-02  15.702 &lt; 2.2e-16 ***
+edu          1.1262e-01  2.3257e-03  48.423 &lt; 2.2e-16 ***
+exp          2.1965e-02  1.3864e-03  15.843 &lt; 2.2e-16 ***
+expsq       -3.1483e-04  2.8434e-05 -11.072 &lt; 2.2e-16 ***
+female      -2.0267e-01  1.1101e-02 -18.257 &lt; 2.2e-16 ***
+unioncov     1.0915e-01  4.0774e-02   2.677  0.007441 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or do this in one step</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#coeftest(model, vcov = vcovHC(model, type="HC1"))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="robust-ses" class="level2">
+<h2 class="anchored" data-anchor-id="robust-ses">Robust SEs</h2>
+<p>Are heteroskedastic-robust SEs bigger? <strong>Not necessarily</strong>.</p>
+<ul>
+<li><p>In practice, they can return smaller SEs.</p></li>
+<li><p>Implications for power of the test are therefore ambiguous</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>* Use the <span class="kw">vce</span>() option with <span class="kw">robust</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span> expsq female unioncov</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">store</span> Homoskedastic</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span> expsq female unioncov, <span class="kw">vce</span>(<span class="kw">robust</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">store</span> HC1_Robust</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>etable, <span class="kw">est</span>(Homoskedastic HC1_Robust) column(<span class="kw">estimates</span>) novarlabel cstat(_r_b, nformat(%5.4f)) cstat(_r_se, nformat(%5.4f))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       Homoskedastic HC1_Robust
+-----------------------------------------------
+edu                           0.1126     0.1126
+                            (0.0021)   (0.0023)
+exp                           0.0220     0.0220
+                            (0.0014)   (0.0014)
+expsq                        -0.0003    -0.0003
+                            (0.0000)   (0.0000)
+female                       -0.2027    -0.2027
+                            (0.0111)   (0.0111)
+unioncov                      0.1092     0.1092
+                            (0.0473)   (0.0408)
+_cons                         1.3804     1.3804
+                            (0.0997)   (0.0879)
+Number of observations          8955       8955
+-----------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="why-bother" class="level2">
+<h2 class="anchored" data-anchor-id="why-bother">Why bother?</h2>
+<p>Why bother with homoskedastic errors?</p>
+<ul>
+<li><p>if the error variance is homoskedastic <strong>and normally distributed</strong> then the exact distribution of <span class="math inline">\(t\)</span>-stat (<span class="math inline">\(F\)</span>-stat) is known for <strong>small sample</strong>.</p></li>
+<li><p>no need to use asymptotic approximation</p></li>
+<li><p>heteroskedastic-robust SEs (and <span class="math inline">\(t\)</span>-stats) are only valid for larger sample sizes.</p></li>
+</ul>
+</section>
+<section id="test-for-heterskedasticity" class="level2">
+<h2 class="anchored" data-anchor-id="test-for-heterskedasticity">Test for heterskedasticity</h2>
+<p>Can we test whether the data exhibits heteroskedasticity? <strong>Yes</strong></p>
+<ol type="1">
+<li><p>Breusch Pragan test</p></li>
+<li><p>White test (read about this in Ch. 8.3)</p></li>
+</ol>
+</section>
+<section id="breusch-pagan-test" class="level2">
+<h2 class="anchored" data-anchor-id="breusch-pagan-test">Breusch-Pagan test</h2>
+<p><span class="math display">\[
+  H_0: Var(u|\mathbf{x}) = \sigma^2
+\]</span> Which implies,</p>
+<p><span class="math display">\[
+  H_0: E(u^2|\mathbf{x}) = \sigma^2
+\]</span></p>
+<ul>
+<li>We are testing whether the conditional expectation function of <span class="math inline">\(u^2\)</span> is independent of <span class="math inline">\(\mathbf{x}\)</span>.</li>
+</ul>
+</section>
+<section id="section-8" class="level2">
+<h2 class="anchored" data-anchor-id="section-8"></h2>
+<p>For a random sample, if<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p><span class="math display">\[
+  u^2_i = \delta_0 + \delta_1 x_{i1} + \delta_2 x_{i2} + \dots + \delta_k x_{ik} + \nu_i
+\]</span></p>
+<p>Then the null is:</p>
+<p><span class="math display">\[
+  H_0: \delta_1 = \delta_2 = \dots = \delta_k=0
+\]</span></p>
+<ul>
+<li>These are multiple linear hypotheses</li>
+</ul>
+</section>
+<section id="section-9" class="level2">
+<h2 class="anchored" data-anchor-id="section-9"></h2>
+<p>We can test this using a <span class="math inline">\(F\)</span>-test of the above regression.</p>
+<ul>
+<li><p><strong>However</strong>, we do not observe <span class="math inline">\(u_i^2\)</span>.</p></li>
+<li><p>Replace with <span class="math inline">\(\hat u_i^2\)</span></p></li>
+<li><p>Regress:</p></li>
+</ul>
+<p><span class="math display">\[
+  \hat{u}^2_i = \delta_0 + \delta_1 x_{i1} + \delta_2 x_{i2} + \dots + \delta_k x_{ik} + v_i
+\]</span></p>
+<ul>
+<li>Compute <span class="math inline">\(F\)</span>-stat or <span class="math inline">\(LM\)</span>-stat<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></li>
+</ul>
+<p><span class="math display">\[
+  F\text{-stat} = \frac{\mathbf{R}^2_{\hat{u}^2}/k}{(1-\mathbf{R}^2_{\hat{u}^2})/(n-k-1)} \quad \text{or}\quad LM\text{-stat}=n\times \mathbf{R}_{\hat u^2}^2
+\]</span></p>
+</section>
+<section id="example-morg-2024-1" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="example-morg-2024-1">Example: MORG (2024)</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Breusch-Pagan test (<span class="math inline">\(F\)</span>-stat)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>* Use the <span class="kw">vce</span>() option with <span class="kw">robust</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span> expsq female unioncov</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>* <span class="fu">F</span>-statistic</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> <span class="kw">hettest</span>, rhs fstat</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>* The <span class="kw">default</span> <span class="kw">test</span> (i.<span class="fu">e</span>. without rhs) tests <span class="kw">for</span> <span class="kw">more</span> general forms <span class="kw">of</span> heteroskedasticity.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Breusch–Pagan/Cook–Weisberg test for heteroskedasticity 
+Assumption: i.i.d. error terms
+Variables: All independent variables
+
+H0: Constant variance
+
+F(5, 8949) =  59.01
+  Prob &gt; F = 0.0000</code></pre>
+</div>
+</div>
+<p>Breusch-Pagan test (<span class="math inline">\(LM\)</span>-stat)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>* LM-statistic</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> <span class="kw">hettest</span>, rhs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Breusch–Pagan/Cook–Weisberg test for heteroskedasticity 
+Assumption: Normal error terms
+Variables: All independent variables
+
+H0: Constant variance
+
+    chi2(5) = 573.26
+Prob &gt; chi2 = 0.0000</code></pre>
+</div>
+</div>
+<p>White test (<span class="math inline">\(LM\)</span>-stat)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>* White <span class="kw">test</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> <span class="kw">imtest</span>, <span class="bn">white</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>White's test
+H0: Homoskedasticity
+Ha: Unrestricted heteroskedasticity
+
+   chi2(17) = 402.96
+Prob &gt; chi2 = 0.0000
+
+Cameron &amp; Trivedi's decomposition of IM-test
+
+--------------------------------------------------
+              Source |       chi2     df         p
+---------------------+----------------------------
+  Heteroskedasticity |     402.96     17    0.0000
+            Skewness |     193.57      5    0.0000
+            Kurtosis |     168.45      1    0.0000
+---------------------+----------------------------
+               Total |     764.97     23    0.0000
+--------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>In R, the relevant tests are a part of the <code>lmtest</code> package.</p>
+<p>Breusch-Pagan test (<span class="math inline">\(F\)</span>-stat) - can’t find matching R version.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Extract squared residuals and run auxiliary regression</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>aux_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">residuals</span>(model)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">~</span> edu <span class="sc">+</span> exp <span class="sc">+</span> expsq <span class="sc">+</span> female <span class="sc">+</span> unioncov, <span class="at">data=</span><span class="fu">model.frame</span>(model))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. View F-statistic, degrees of freedom, and p-value</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aux_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = I(residuals(model)^2) ~ edu + exp + expsq + female + 
+    unioncov, data = model.frame(model))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.5714 -0.2351 -0.1395  0.0176  5.4707 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -3.794e-01  1.022e-01  -3.711 0.000208 ***
+edu          3.171e-02  2.125e-03  14.921  &lt; 2e-16 ***
+exp          5.373e-03  1.455e-03   3.692 0.000224 ***
+expsq       -3.406e-05  2.857e-05  -1.192 0.233250    
+female      -6.764e-02  1.140e-02  -5.933 3.08e-09 ***
+unioncov     6.575e-02  4.848e-02   1.356 0.175062    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5338 on 8949 degrees of freedom
+Multiple R-squared:  0.03192,   Adjusted R-squared:  0.03138 
+F-statistic: 59.01 on 5 and 8949 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Breusch-Pagan test (<span class="math inline">\(LM\)</span>-stat)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using lmtest package</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(model, <span class="at">studentize =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Breusch-Pagan test
+
+data:  model
+BP = 573.26, df = 5, p-value &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using olsrr package</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(olsrr)       # Not available in AppsAnywhere</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ols_test_breusch_pagan(model, rhs=TRUE)</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Using skedastic package</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#library(skedastic)   # Not available in AppsAnywhere</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#breusch_pagan(model, koenker = FALSE)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>White test (<span class="math inline">\(LM\)</span>-stat)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LM-statistic: e.g. </span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skedastic)    <span class="co"># Not available in AppsAnywhere</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">white</span>(model, <span class="at">interactions =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+  statistic  p.value parameter method       alternative
+      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      
+1      403. 4.97e-73        20 White's Test greater    </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<section id="bibliography" class="level2">
+
+
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliography</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-wooldridge2025" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approach.”</span>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>It also makes use of Slutzky’s theorem which states that if <span class="math inline">\(X_n\rightarrow_p X\)</span> and <span class="math inline">\(Y_n\rightarrow_p Y\)</span>, then <span class="math inline">\(X_n/Y_n\rightarrow_p X/Y\)</span>; so long as <span class="math inline">\(Y\neq 0\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Here I use the label MLR 4a (‘a’ for alternative). Wooldridge uses 4’, which can get lost in notation. Both are acceptable.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>We say OLS is <span class="math inline">\(\sqrt{n}\)</span>-consistent (or “root-<span class="math inline">\(n\)</span>” consistent)<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Recall from <a href="./lecture-3.html">Lecture 3</a>, unbiasedness requires MLR 4.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 278</a>)</span> states “variance of the error depends upon the particular value of <span class="math inline">\(x_i\)</span>”. This is one form of heteroskedasticity; e.g.&nbsp;<span class="math inline">\(\sigma^2_i = \sigma^2x_i\)</span>. But heteroskedasticity can be more general than this.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>For a detailed discussion, you can read this <a href="https://blog.stata.com/2022/10/06/heteroskedasticity-robust-standard-errors-some-practical-considerations/">Stata blog</a> from 2022.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>The White test allows for higher order polynomials of <span class="math inline">\(x\)</span>’s and interactions, which reflects the fact that we do not the know the exact form of the CEF.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>The name Breusch Pragan test is usually reserved for the LM test equivalent where the test-statistic is <span class="math inline">\(LM = n\times\mathbf{R}^2_{\hat{u}^2}\)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

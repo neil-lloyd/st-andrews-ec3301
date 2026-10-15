@@ -634,7 +634,6 @@ The typical example is the returns to education for men and women [as in @wooldr
 #| echo: true
 #| code-fold: true
 #| fig-align: center
-#| out-width: "67%"
 
 wage_data <- read_dta(file.path(data_dir, "morg24_bothgen.dta"))
 
@@ -654,7 +653,6 @@ If we overlay the fitted lines we get
 #| echo: true
 #| code-fold: true
 #| fig-align: center
-#| out-width: "67%"
 
 wage_data$group <- factor(wage_data$sex, levels = c(1, 2),
                           labels = c("Male", "Female"))
@@ -669,7 +667,7 @@ ggplot(wage_data, aes(x = exp, y = lnwage, colour = group)) +
   coord_cartesian(ylim = c(2, 6)) +
   labs(x = "Potential Experience (=Age-(Years of Education +6))",
        y = "lnwage", colour = NULL) +
-  theme_minimal() +/
+  theme_minimal() +
   theme(legend.position = "inside",
         legend.position.inside = c(0.98, 0.02),
         legend.justification = c(1, 0))
@@ -725,9 +723,9 @@ $$
   H_1: H_0\;\text{false}
 $$
 
-## Approach 1
+## Chow test
 
-The $F$-test for this hypothesis has the form:
+The relevant $F$-statistic for this test is referred to as the Chow statistic:
 
 $$
   F\text{-stat} = \frac{(SSR_P - (\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2}))/(k+1)}{(\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2})/(n-2(k+1))}

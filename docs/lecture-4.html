@@ -370,6 +370,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./lecture-4.html">
  <span class="dropdown-text">Lecture 4</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-5.html">
+ <span class="dropdown-text">Lecture 5</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -1265,6 +1269,13 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>* Scatter</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">scatter</span> lnwage <span class="fu">exp</span>, mc(<span class="bn">blue</span>%50)) (<span class="kw">lfit</span> lnwage <span class="fu">exp</span>, lwidth(*2)), <span class="kw">by</span>(sex,  <span class="bn">legend</span>(<span class="kw">off</span>) <span class="kw">note</span>(<span class="st">""</span>) ) <span class="bn">xtitle</span>(<span class="st">"Potential Experience (=Age-(Years of Education +6))"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecture-4-multi_files/figure-revealjs/unnamed-chunk-13-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
@@ -1280,13 +1291,10 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Potential Experience (=Age-(Years of Education +6))"</span>) <span class="sc">+</span></span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lecture-4-multi_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%"></p>
+<p><img src="lecture-4-multi_files/figure-revealjs/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1305,38 +1313,47 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <div class="cell" data-layout-align="center" data-stata.fig="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>* overlay <span class="kw">fitted</span> lines</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">lfit</span> lnwage <span class="fu">exp</span> <span class="kw">if</span> sex==1, lc(<span class="bn">blue</span>)) (<span class="kw">lfit</span> lnwage <span class="fu">exp</span> <span class="kw">if</span> sex==2, lc(<span class="kw">red</span>) lwidth(*2)), <span class="bn">xtitle</span>(<span class="st">"Potential Experience (=Age-(Years of Education +6))"</span>) <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Male"</span> 2 <span class="st">"Female"</span>) <span class="fu">r</span>(2) <span class="bn">ring</span>(0) pos(5)) <span class="kw">ylabel</span>(2(1)6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>* overlay <span class="kw">fitted</span> lines</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">lfit</span> lnwage <span class="fu">exp</span> <span class="kw">if</span> sex==1, lc(<span class="bn">blue</span>)) (<span class="kw">lfit</span> lnwage <span class="fu">exp</span> <span class="kw">if</span> sex==2, lc(<span class="kw">red</span>) lwidth(*2)), <span class="bn">xtitle</span>(<span class="st">"Potential Experience (=Age-(Years of Education +6))"</span>) <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Male"</span> 2 <span class="st">"Female"</span>) <span class="fu">r</span>(2) <span class="bn">ring</span>(0) pos(5)) <span class="kw">ylabel</span>(2(1)6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecture-4-multi_files/figure-revealjs/unnamed-chunk-15-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 <div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>wage_data<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(wage_data<span class="sc">$</span>sex, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage_data, <span class="fu">aes</span>(<span class="at">x =</span> exp, <span class="at">y =</span> lnwage, <span class="at">colour =</span> group)) <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> <span class="fu">subset</span>(wage_data, sex <span class="sc">==</span> <span class="dv">1</span>),</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> <span class="fu">subset</span>(wage_data, sex <span class="sc">==</span> <span class="dv">2</span>),</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">Male =</span> <span class="st">"blue"</span>, <span class="at">Female =</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">+</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">6</span>)) <span class="sc">+</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Potential Experience (=Age-(Years of Education +6))"</span>,</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"lnwage"</span>, <span class="at">colour =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span><span class="er">/</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"inside"</span>,</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position.inside =</span> <span class="fu">c</span>(<span class="fl">0.98</span>, <span class="fl">0.02</span>),</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>wage_data<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(wage_data<span class="sc">$</span>sex, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage_data, <span class="fu">aes</span>(<span class="at">x =</span> exp, <span class="at">y =</span> lnwage, <span class="at">colour =</span> group)) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> <span class="fu">subset</span>(wage_data, sex <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> <span class="fu">subset</span>(wage_data, sex <span class="sc">==</span> <span class="dv">2</span>),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">Male =</span> <span class="st">"blue"</span>, <span class="at">Female =</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">6</span>)) <span class="sc">+</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Potential Experience (=Age-(Years of Education +6))"</span>,</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"lnwage"</span>, <span class="at">colour =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"inside"</span>,</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position.inside =</span> <span class="fu">c</span>(<span class="fl">0.98</span>, <span class="fl">0.02</span>),</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in parse(text = input): &lt;text&gt;:14:20: unexpected '/'
-13:        y = "lnwage", colour = NULL) +
-14:   theme_minimal() +/
-                       ^</code></pre>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecture-4-multi_files/figure-revealjs/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1384,9 +1401,9 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
   H_1: H_0\;\text{false}
 \]</span></p>
 </section>
-<section id="approach-1" class="level2">
-<h2 class="anchored" data-anchor-id="approach-1">Approach 1</h2>
-<p>The <span class="math inline">\(F\)</span>-test for this hypothesis has the form:</p>
+<section id="chow-test" class="level2">
+<h2 class="anchored" data-anchor-id="chow-test">Chow test</h2>
+<p>The relevant <span class="math inline">\(F\)</span>-statistic for this test is referred to as the Chow statistic:</p>
 <p><span class="math display">\[
   F\text{-stat} = \frac{(SSR_P - (\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2}))/(k+1)}{(\textcolor{blue}{SSR_1} + \textcolor{red}{SSR_2})/(n-2(k+1))}
 \]</span></p>
@@ -1502,8 +1519,8 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <li>Model for group 1 (i.e.&nbsp;“male”)</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span> <span class="kw">if</span> sex==1</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span> <span class="kw">if</span> sex==1</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>715.90864</code></pre>
 </div>
@@ -1512,8 +1529,8 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <li>Model for group 2 (i.e.&nbsp;“female”)</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span> <span class="kw">if</span> sex==2</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span> <span class="kw">if</span> sex==2</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>539.59768</code></pre>
 </div>
@@ -1522,8 +1539,8 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <li>Unrestricted model (i.e.&nbsp;with interactions)</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage i.sex##c.edu i.sex##c.<span class="fu">exp</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage i.sex##c.edu i.sex##c.<span class="fu">exp</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1255.5063</code></pre>
 </div>
@@ -1532,27 +1549,20 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <li>Restricted model (i.e.&nbsp;without interactions)</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(rss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1307.1667</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sex a factor variable</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>wage_data<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(wage_data<span class="sc">$</span>sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
 <ul>
 <li>Model for group 1 (i.e.&nbsp;“male”)</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model_m <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> edu <span class="sc">+</span> exp, <span class="at">data =</span> wage_data, <span class="at">subset =</span> sex <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>model_m <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> edu <span class="sc">+</span> exp, <span class="at">data =</span> wage_data, <span class="at">subset =</span> sex <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 715.9086</code></pre>
 </div>
@@ -1561,8 +1571,8 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <li>Model for group 2 (i.e.&nbsp;“female”)</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model_f <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> edu <span class="sc">+</span> exp, <span class="at">data =</span> wage_data, <span class="at">subset =</span> sex <span class="sc">==</span> <span class="dv">2</span>)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>model_f <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> edu <span class="sc">+</span> exp, <span class="at">data =</span> wage_data, <span class="at">subset =</span> sex <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 539.5977</code></pre>
 </div>
@@ -1571,8 +1581,8 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <li>Unrestricted model (i.e.&nbsp;with interactions)</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model_ur <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> sex <span class="sc">*</span> edu <span class="sc">+</span> sex <span class="sc">*</span> exp, <span class="at">data =</span> wage_data)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_ur)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>model_ur <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> sex <span class="sc">*</span> edu <span class="sc">+</span> sex <span class="sc">*</span> exp, <span class="at">data =</span> wage_data)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_ur)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1255.506</code></pre>
 </div>
@@ -1581,8 +1591,8 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <li>Restricted model (i.e.&nbsp;without interactions)</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>model_r <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> edu <span class="sc">+</span> exp, <span class="at">data =</span> wage_data)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_r)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>model_r <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> edu <span class="sc">+</span> exp, <span class="at">data =</span> wage_data)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(model_r)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1307.167</code></pre>
 </div>
@@ -1602,8 +1612,8 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <li>Estimate interacted model</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage i.sex##c.edu i.sex##c.<span class="fu">exp</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> 2.sex 2.sex#c.edu 2.sex#c.<span class="fu">exp</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage i.sex##c.edu i.sex##c.<span class="fu">exp</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> 2.sex 2.sex#c.edu 2.sex#c.<span class="fu">exp</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> ( 1)  2.sex = 0
  ( 2)  2.sex#c.edu = 0
@@ -1620,8 +1630,8 @@ Model 2: ln_pm25 ~ ev_k + hybrid_k + petrol_k + diesel_k + ln_pop
 <li>Estimate interacted model</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>model_ur <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> sex <span class="sc">*</span> edu <span class="sc">+</span> sex <span class="sc">*</span> exp, <span class="at">data =</span> wage_data)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(model_ur, <span class="fu">c</span>(<span class="st">"sex2 = 0"</span>, <span class="st">"sex2:edu = 0"</span>, <span class="st">"sex2:exp = 0"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>model_ur <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> sex <span class="sc">*</span> edu <span class="sc">+</span> sex <span class="sc">*</span> exp, <span class="at">data =</span> wage_data)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(model_ur, <span class="fu">c</span>(<span class="st">"sex2 = 0"</span>, <span class="st">"sex2:edu = 0"</span>, <span class="st">"sex2:exp = 0"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Linear hypothesis test:
@@ -1672,6 +1682,82 @@ Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approa
 <li id="fn4"><p>We will look at the case of two groups, but the approach can be extended to multiple groups.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
+
+
+<script>
+
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+  // slide changes (different for each slide format).
+
+  (function () {
+
+    // dispatch for htmlwidgets
+
+    function fireSlideEnter() {
+
+      const event = window.document.createEvent("Event");
+
+      event.initEvent("slideenter", true, true);
+
+      window.document.dispatchEvent(event);
+
+    }
+
+
+
+    function fireSlideChanged(previousSlide, currentSlide) {
+
+      fireSlideEnter();
+
+
+
+      // dispatch for shiny
+
+      if (window.jQuery) {
+
+        if (previousSlide) {
+
+          window.jQuery(previousSlide).trigger("hidden");
+
+        }
+
+        if (currentSlide) {
+
+          window.jQuery(currentSlide).trigger("shown");
+
+        }
+
+      }
+
+    }
+
+
+
+    // hookup for slidy
+
+    if (window.w3c_slidy) {
+
+      window.w3c_slidy.add_observer(function (slide_num) {
+
+        // slide_num starts at position 1
+
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+      });
+
+    }
+
+
+
+  })();
+
+</script>
+
+
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
