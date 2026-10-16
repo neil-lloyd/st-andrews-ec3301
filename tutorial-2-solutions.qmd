@@ -45,6 +45,8 @@ In this section we examine the an example of multivariate regression model: the 
 - 1 additional crime per capita increases expected (median) price by $\beta_4$; all else constant. Expect $\beta_4<0$. 
 - 1 additional student per teacher increase expected (median) price by $\beta_5$; all else constant. Expect $\beta_5<0$. 
 
+For both $\beta_4$ and $\beta_5$, interpreting the slope in terms of a 1 unit change in the $x$ variable is not very realistic. Both variables are measured as ratios (crimes/population and students/teachers). Without more information it is understandable to interpret them in terms of a 1 unit increase, but a better option would be to choose a value that is reasonable relative to the mean (say 10% of the mean), or use the standard deviation of the variable: 1 sd increase in $x$ is associated with a $\beta_j\times sd_x$ increase in expected value of $y$. 
+
 :::
 
 2. How does the interpretation of $\beta_1$, $\beta_2$, and $\beta_3$ change in the model below:
@@ -57,7 +59,7 @@ In this section we examine the an example of multivariate regression model: the 
 
 - 1 extra room increases expected (median) price by $(\exp(\beta_1)-1)\times 100$ %; all else constant. This is a semi-elasticity.
 - 1% increase in property tax increases increases expected (median) price by $\beta_2$ %; all else constant. This is an elasticity. 
-- being 1% closer to employment centers increases expected (median) price by $\beta_3$ %; all else constant. This is an elasticity.
+- being 1% further from employment centers increases expected (median) price by $\beta_3$ %; all else constant. This is an elasticity.
 
 :::   
 
@@ -66,7 +68,7 @@ In this section we examine the an example of multivariate regression model: the 
 :::{.border}
 Since, $\ln(proptax_i\times 1000) = \ln(proptax_i)+\ln(1000)$, the scaling the variable does not change the interpretation. As you change the scaling of the variable, you change only the interpretation of the intercept.  
 
-If crimes were measure per 100 people it would be equivalent to dividing the denominator (total crimes divided by population) by 1000. This is eqivalent to multiplying the variable by 100: $crimes\times 100$. The effect of this change would be to divide the slope coefficient by 100: $\beta_4/100$. 
+If crimes were measure per 100 people it would be equivalent to dividing the denominator (total crimes divided by population) by 100. This is eqivalent to multiplying the variable by 100: $crimes\times 100$. The effect of this change would be to divide the slope coefficient by 100: $\beta_4/100$. 
 
 Together these changes would yield the model:
 

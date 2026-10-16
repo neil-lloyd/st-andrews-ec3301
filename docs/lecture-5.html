@@ -416,6 +416,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./tutorial-2.html">
  <span class="dropdown-text">Tutorial 2</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2-solutions.html">
+ <span class="dropdown-text">Tutorial 2 (Solutions)</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -628,7 +632,7 @@ Var(x_i) \neq 0
 <p><span class="math display">\[
   n^{-1}\sum_{i=1}^{n}(x_{i}-\bar{x})^2 \rightarrow_p Var(x_i)
 \]</span></p>
-<p>Any by Slutzky’s theorem, the ratio of the two terms converges in probability too.</p>
+<p>And by Slutzky’s theorem, the ratio of the two terms converges in probability too.</p>
 </section>
 <section id="section-2" class="level2">
 <h2 class="anchored" data-anchor-id="section-2"></h2>
@@ -1093,7 +1097,7 @@ Note
 <div class="fragment fade-in">
 <p>The formula is very similar to what you have under homoskedasticity,</p>
 <p><span class="math display">\[
-  Var(\hat{\beta}_1|X) = \frac{\sum_{i=1}^{n}(x_{i}-\bar{x})^2\sigma^2}{\text{SST}_x^2}=\frac{\textcolor{blue}{\sigma^2}}{\text{SST}_x}
+  Var(\hat{\beta}_1|X) = \frac{\sum_{i=1}^{n}(x_{i}-\bar{x})^2\textcolor{blue}{\sigma^2}}{\text{SST}_x^2}=\frac{\textcolor{blue}{\sigma^2}}{\text{SST}_x}
 \]</span></p>
 <p>except it cannot be simplified, because <span class="math inline">\(\textcolor{red}{\sigma^2_i}\)</span> depends on <span class="math inline">\(i\)</span>.</p>
 </div>
@@ -1107,7 +1111,7 @@ Note
 <p>as it replaces the error term with the estimated residual.</p>
 <ul>
 <li>Referred to as the White (1980) estimator.</li>
-<li>The estimator has the appropriate asympotitic limit.</li>
+<li>The estimator has the appropriate asymptotic limit.</li>
 </ul>
 </section>
 <section id="multivariate-case-1" class="level2">

@@ -129,10 +129,7 @@ div.csl-indent {
 }</script>
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
-
-
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -422,6 +419,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./tutorial-2.html">
  <span class="dropdown-text">Tutorial 2</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2-solutions.html">
+ <span class="dropdown-text">Tutorial 2 (Solutions)</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -524,6 +525,7 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 <li>1 additional crime per capita increases expected (median) price by <span class="math inline">\(\beta_4\)</span>; all else constant. Expect <span class="math inline">\(\beta_4&lt;0\)</span>.</li>
 <li>1 additional student per teacher increase expected (median) price by <span class="math inline">\(\beta_5\)</span>; all else constant. Expect <span class="math inline">\(\beta_5&lt;0\)</span>.</li>
 </ul>
+<p>For both <span class="math inline">\(\beta_4\)</span> and <span class="math inline">\(\beta_5\)</span>, interpreting the slope in terms of a 1 unit change in the <span class="math inline">\(x\)</span> variable is not very realistic. Both variables are measured as ratios (crimes/population and students/teachers). Without more information it is understandable to interpret them in terms of a 1 unit increase, but a better option would be to choose a value that is reasonable relative to the mean (say 10% of the mean), or use the standard deviation of the variable: 1 sd increase in <span class="math inline">\(x\)</span> is associated with a <span class="math inline">\(\beta_j\times sd_x\)</span> increase in expected value of <span class="math inline">\(y\)</span>.</p>
 </div>
 <ol start="2" type="1">
 <li><p>How does the interpretation of <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>, and <span class="math inline">\(\beta_3\)</span> change in the model below:</p>
@@ -535,7 +537,7 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 <ul>
 <li>1 extra room increases expected (median) price by <span class="math inline">\((\exp(\beta_1)-1)\times 100\)</span> %; all else constant. This is a semi-elasticity.</li>
 <li>1% increase in property tax increases increases expected (median) price by <span class="math inline">\(\beta_2\)</span> %; all else constant. This is an elasticity.</li>
-<li>being 1% closer to employment centers increases expected (median) price by <span class="math inline">\(\beta_3\)</span> %; all else constant. This is an elasticity.</li>
+<li>being 1% further from employment centers increases expected (median) price by <span class="math inline">\(\beta_3\)</span> %; all else constant. This is an elasticity.</li>
 </ul>
 </div>
 <ol start="3" type="1">
@@ -543,7 +545,7 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 </ol>
 <div class="border">
 <p>Since, <span class="math inline">\(\ln(proptax_i\times 1000) = \ln(proptax_i)+\ln(1000)\)</span>, the scaling the variable does not change the interpretation. As you change the scaling of the variable, you change only the interpretation of the intercept.</p>
-<p>If crimes were measure per 100 people it would be equivalent to dividing the denominator (total crimes divided by population) by 1000. This is eqivalent to multiplying the variable by 100: <span class="math inline">\(crimes\times 100\)</span>. The effect of this change would be to divide the slope coefficient by 100: <span class="math inline">\(\beta_4/100\)</span>.</p>
+<p>If crimes were measure per 100 people it would be equivalent to dividing the denominator (total crimes divided by population) by 100. This is eqivalent to multiplying the variable by 100: <span class="math inline">\(crimes\times 100\)</span>. The effect of this change would be to divide the slope coefficient by 100: <span class="math inline">\(\beta_4/100\)</span>.</p>
 <p>Together these changes would yield the model:</p>
 <p><span class="math display">\[
   \ln(price_i) = \gamma_0 + \gamma_1 rooms_i + \gamma_2 \ln(proptax_i) + \gamma_3 \ln(dist_i) + \gamma_4 crime_i + \gamma_5 statio_i + u_i
