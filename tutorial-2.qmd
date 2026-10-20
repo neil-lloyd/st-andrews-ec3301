@@ -16,7 +16,7 @@ do "config.do"
 use "$data_dir\wooldridge_HPRICE2.dta", clear
 ```
 
-## Hedonic regression models
+# Hedonic regression models
 
 In this section we examine the an example of multivariate regression model: the hedonic regression model. These models are widely used in real estate to estimate the value of various characteristics of a house: its size, number of rooms, school access, neighbourhood quality, etc. Having decomposed the price, one can then predict the value of another house using its characteristics. In this case, we will make use a small dataset made available with the @wooldridge2025 [p. 131] textbook which includes the price and housing characteristic information for 506 nieghbourhoods (unit of observation) in the Boston area. 
 
@@ -103,7 +103,7 @@ qui reg lprice rooms lproptax crime stratio
 dis e(rss)
 ```
 
-## Properties of OLS
+# Properties of OLS
 
 Consider the following decomposition of $y_i$ based upon the OLS estimator,
 
@@ -148,3 +148,5 @@ In the limit, you can consider what happens as $R_{j}^2\rightarrow 1$. This is t
 8. If the error term in the underlying model is heteroskedastic, will the estimated variance be smaller or larger?
 
 9. When the error variance is not homoskedastic, why can you no longer use the $t$ or $F$ distribution? [This is an advanced question, not covered by material in the lectures. See what you can find out.]
+
+# References

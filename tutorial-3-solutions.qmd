@@ -1,0 +1,408 @@
+---
+title: Tutorial 3 (Solutions)
+subtitle: EC3301 - Martinmas Semester
+format: 
+  html: default
+  pdf: 
+    output-file: tutorial-3-solutions.pdf
+engine: npstata
+---
+
+```{stata}
+*| include: false
+
+do "config.do"
+
+use "$data_dir\gem2022.dta", clear
+```
+
+# Application: Linear Probability Model
+
+This question makes use of data from the [Global Entrepreneurship Monitor](https://www.gemconsortium.org/). The analysis uses a 10% random sample of the publicly-available 2022 GEM survey. 
+
+Consider the following **linear probability model** of enterpreneurial intent. The outcome variable `futsup` is a discrete variable: $=1$ if answered yes to "Are you, alone or with others, expecting to start a new business, including any type of self-employment, within the next three years?"; and $=0$ if answered no. 
+
+$$
+  futsup_i = \alpha + \mathbf{perceptions}_i\beta + \mathbf{x}_i\gamma + u_i
+$$
+
+There are four $\mathbf{perceptions}_i$ variables:[^1]
+
+[^1]: This grouping of variables comes from GEM ([Source](https://www.gemconsortium.org/wiki/1182)).
+
+- `knowent`: Do you know someone personally who started a business in the past 2 years?
+
+- `opport`: In the next six months, will there be good opportunities for starting a business in the area where you live?
+
+- `suskill`: Do you have the knowledge, skill and experience required to start a new business?
+
+- `fearfail`: Would fear of failure prevent you from starting a business?
+
+With the exception of `knowent`, all responses are provided on a agreement scale: 1 "Strongly disagree"; 2 "Somewhat disagree"; 3 "Neither agree nor disagree"; 4 "Somewhat agree"; and 5 "Strongly agree". For the pusposes of this exercise, the variables have been discretized: $=1$ if answers 4 or 5; $=0$ otherwise (called `AGREEopport`, `AGREEsuskill`, `AGREEfearfail`). The variable `knowent` has been discretized too: $=1$ if knows 2 or more; $=0$ if knows less than two people (called `YESknowent`). 
+
+
+1. Under MLR 1-4, provide an interpretation of the $E[futsup_i|\mathbf{perceptions}_i,\mathbf{x}_i]$ for this linear probability model. **Hint:** take a look at @wooldridge2025 [sec. 7.5].
+
+:::{.border}
+Since the outcome is a binary $\{0,1\}$, 
+
+$$
+E[futsup_i|\mathbf{perceptions}_i,\mathbf{x}_i] = Pr(futsup_i=1|\mathbf{perceptions}_i,\mathbf{x}_i)
+$$
+
+The CEF tells you the conditional probability of entrepreneurial intention. 
+:::
+
+2. Provide an interpretation of the coefficient on `YESknownent` in the model (under MLR 1-4). **Hint:** the extra material on [Interpreting Linear Models](material-interpretation.qmd) includes examples of linear probability models.
+
+::: {.border}
+Under MLR1-4, $\beta_{YESknowent}$ is increase in the probability of demonstrating an intent to be an entrepreneur among those who know 2 or more entrepreneurs versus those who do not; holding other factors constant. 
+:::
+
+Here are the estimates of the initial model:
+
+```{stata}
+reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC
+```
+
+3. The variable `GEMEDU` has five categories: 0 "NONE"; 111 "SOME SECONDARY"; 1212 "SECONDARY DEGREE" (i.e. completed high school); 1316 "POST SECONDARY" (i.e. diploma or bachelors); 1720 "GRAD EXP" (i.e. post-graduate qualification). The lowest education category (0 "NONE") includes individuals with only a primary-level education. According to the estimated model, what increases entrepreneurial intent: a higher level of self-perceived entrepreneurial skills or formal education?
+
+::: {.border}
+In these baseline estimates, the ceofficients on the formal education categories are all negative with the highest level ("Grad exp") significantly different from 0. This suggests that entrepreneurial intent is decreasing in formal education; holding other factors constant. In contrast, `AGREEsuskill` is significantly positive, suggesting that predicted entrepreneurial intent is increasing self-perceived skills. This suggest that self-perceived entrepreneurial skills are more important than formal education.  Note, the model does not allow for an interaction between these two variables. As the interpretation of one self-perceived skills holds fixed formal education; while, self-perception may vary with formal education. 
+:::
+
+4. There are four regions in this global survey: 1 "Middle East & Africa"; 2 "Asia"; 3 "Latin America & Caribbean"; and 4 "Europe & N America". Using the output, replicate the $F$-statistic shown below to test whether there are significant differences in entrepreneurial intent across regions. You must use the formula that uses $SSR$ of the restricted and unrestricted model.
+
+```{stata}
+reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC i.REGION
+
+test 2.REGION 3.REGION 4.REGION
+```
+
+::: {.border}
+
+$$
+  F\text{-stat} = \frac{(SSR_r - SSR_{ur})/3}{SSR_{ur}/{(n-16)}}
+$$
+
+```{stata}
+qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC
+	scalar ssr_r = e(rss)
+	scalar df_r = e(df_r)
+
+qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC i.REGION
+	scalar ssr_ur = e(rss)
+	scalar df_ur = e(df_r)
+	
+	dis ((ssr_r - ssr_ur)/(df_r - df_ur))/(ssr_ur/df_ur)
+```
+
+:::
+
+5. One reason that regional differences might exist is that each region has different attitudes to entrepreneurship. The GEM measures four local attitudes: 
+
+   - `equalinc`: In your country, most people would prefer that everyone had a similar standard of living
+
+   - `nbgoodc`: In your country, most people consider starting a new business a desirable career choice
+
+   - `nbstatus`: In your country, those successful at starting a new business have a high level of status and respect
+
+   - `nbmedia`: In your country, you will often see stories in the public media about successful new businesses
+   
+   As above, each has been discretized to `AGREE*`. Using the output below, test whether significant regional differences remain after controlling for these attitudes using the output below. 
+   
+```{stata}
+est clear
+qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC i.REGION AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia
+	est store unrestricted
+qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia
+	est store restricted
+
+etable, est(unrestricted restricted) novarlabel column(estimates) cstat(_r_se, nformat(%5.4f)) mstat(N) mstat(r2) 
+```
+
+:::{.border}
+As above there are two formulae we can use. 
+
+$$
+  F\text{-stat} = \frac{(R^2_{ur} - R^2_{r})/3}{(1-R^2_{ur})/{(n-16)}}
+$$
+
+```{stata}
+qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC i.REGION AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia
+	scalar r2_ur = e(r2)
+	scalar df_ur = e(df_r)
+qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia
+	scalar r2_r = e(r2)
+	scalar df_r = e(df_r)
+
+dis ((r2_ur - r2_r)/(df_r - df_ur))/((1-r2_ur)/df_ur)
+```
+
+This should replicate
+
+```{stata}
+qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC i.REGION AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia
+	test 2.REGION 3.REGION 4.REGION
+```
+
+:::
+
+6. Compute the adjusted $F$-statistic which has an asymptotic $\chi^2_q$ distribution under the null hypothesis.
+
+:::{.border}
+
+$$
+  3\times F\text{-stat} \rightarrow_d \chi^2_3
+$$
+
+```{stata}
+dis 3*r(F)
+```
+
+:::
+
+7. What is the $LM$-statistic version of this test? Compute the statistic and state its asymptotic distribution. You will need the following information. 
+
+```{stata}
+est clear
+qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia
+	predict residual, resid
+reg residual YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia i.REGION
+```
+
+:::{.border}
+
+$$
+  LM\text{-stat} = n\times R^2_{\tilde u}\rightarrow \chi^2_3
+$$
+
+```{stata}
+dis e(r2)*e(N)
+```
+
+:::
+
+8. Using the information below, do you reject the null under no regional differences in entrepreneurial intent using either the $F$-stat (Q. 6) or $LM$-stat (Q. 7)?
+
+```{stata}
+dis invchi2(3,0.95)	
+```
+
+:::{.border}
+Yes, we reject the null in both instances.
+:::
+
+9. Using the output below, conduct a Chow test for whether the initial model differs by region. You just need to construct the $F$-statistic. 
+
+```{stata}
+est clear
+forvalues i = 1/4{
+qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC if REGION==`i'
+	est store region`i'
+}	
+
+etable, est(region1 region2 region3 region4) column(estimates) novarlabel cstat(_r_b, nformat(%5.4f)) cstat(_r_se, nformat(%5.4f)) mstat(rss)
+```
+
+::: {.border}
+
+$$
+  F\text{-stat} = \frac{(SSR_r - (SSR_1 + SSR_2 + SSR_3 + SSR_4))/(3(k+1))}{(SSR_1 + SSR_2 + SSR_3 + SSR_4)/{(n-4(k+1))}}
+$$
+
+```{stata}
+qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq i.gender hhsize i.GEMEDUC 
+
+	scalar rss0 = e(rss)
+	scalar n = e(N)
+	scalar k = e(df_m)
+	
+forvalues i = 1/4{
+qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC if REGION==`i'
+	scalar rss`i' = e(rss)
+}	
+	
+dis ((rss0 - (rss1 + rss2 + rss3 + rss4))/(3*(k+1)))/((rss1 + rss2 + rss3 + rss4)/(n-4*(k+1)))
+```
+
+:::
+
+10. Is it reasonable to assume that the error term has a (conditional) standard normal distribution (MLR 6) in a linear probability model? Is this a problem for the Chow test in Q.9? And, if so, is there a solution? **Hint:** consider the material in @wooldridge2025 [secs. 7.5, 8.5].
+
+:::{.border}
+The error term cannot be standard normal. Consider, $y_i\in\{0,1\}$. Therefore, error can only take on two values conditional on the value of the regressors,
+
+$$
+  u_i = \begin{cases}
+    1-(\alpha + \mathbf{perceptions}_i\beta + \mathbf{x}_i\gamma) \\
+    -(\alpha + \mathbf{perceptions}_i\beta + \mathbf{x}_i\gamma)
+  \end{cases}
+$$
+
+The error term is has a binomial distribution with a heteroskedastic variance [@wooldridge2025]. Despite this, the OLS estimator will still has an asymptotically normal distribution. And one can estimate heteroskedastic-consistent SEs. 
+
+However, the Chow test is invalid without MLR 5. The alternative would be to estimate a fully interacted model and use either a heteroskedastic-robust $F$-test or $LM$-test. 
+
+Since, the finite sample distribution of these tests are not known, one would have to be confident that the sample size is sufficiently large to approximate the distribution of the test using the asymptotic distribution. 
+:::
+
+# Theory TRUE/FALSE
+
+State whether each of the following is TRUE/FALSE and provide a reason. 
+
+1. The OLS estimator converges in distribution as follows:
+
+$$
+  \hat{\beta}_j \rightarrow_d N\big(\beta_j, Var(\hat{\beta}_j)\big)
+$$
+
+::: {.border}
+**FALSE.** The OLS estimator converges in *probability* to the true population parameter (under MLR 1-4 (or 4a)); while $\sqrt{n}(\hat{\beta}_j-\beta_j)$ converges in distribution. 
+:::
+
+2. The finite sample variance estimator converges in probability to the asymptotic variance of the OLS estimator. 
+
+$$
+  \frac{\sigma^2}{SSR_j} \rightarrow_p Var(\hat{\beta}_j)
+$$
+
+::: {.border}
+**FALSE.** The following holds:
+
+$$
+  \frac{\sigma^2}{n^{-1}SSR_j} \rightarrow_p Var(\hat{\beta}_j)
+$$
+:::
+
+3. $t$-stat $\overset{a}{\sim}N(0,1)$ under MLR 1-5, because $\hat{\sigma}^2\rightarrow_p \sigma^2$. 
+
+:::{.border}
+**TRUE.** Since $\hat{\sigma}^2\rightarrow_p \sigma^2$, 
+
+$$
+  t\text{-stat} = \frac{\hat{\beta}_j-\beta_j}{\sqrt{\hat{\sigma}^2/SSR_j}} = \frac{\sqrt{n}(\hat{\beta}_j-\beta_j)}{\sqrt{\hat{\sigma}^2/(n^{-1}SSR_j)}}
+$$
+
+Since, 
+
+$$
+ \hat{\sigma}^2/(n^{-1}SSR_j) \rightarrow_p Var(\hat{\beta}_j) \quad \text{and}\quad \sqrt{n} (\hat{\beta}_j - \beta_j) \rightarrow_d N\big(0,Var(\hat{\beta}_j)\big) 
+$$
+
+$$
+  t\text{-stat} \rightarrow_d N(0,1)
+$$
+
+:::
+
+Consider the linear regression model for questions 4-6
+
+$$
+  y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \beta_3x_{i3} + u_i
+$$
+
+4. The test statistic for $H_0: 2\beta_1 = 3\beta_2 -5$ is,
+
+$$
+  t\text{-stat} = \frac{2\hat{\beta}_1-3\beta_2-5}{\sqrt{4Var(\hat{\beta}_1)-9Var(\hat{\beta}_2)}}
+$$
+
+::: {.border}
+**FALSE.** There is a mistake in both the numerator and denominator.
+
+$$
+  t\text{-stat} = \frac{2\hat{\beta}_1-3\beta_2+5}{\sqrt{4Var(\hat{\beta}_1)+9Var(\hat{\beta}_2)-6Cov(\hat{\beta}_1,\hat{\beta}_2)}}
+$$
+
+:::
+
+5. The $LM$-stat for $H_0: \beta_1 = \beta_2 = \beta_3 = 0$ is, 
+
+$$
+  LM\text{-stat} = nR^2
+$$
+
+where $R^2$ is the from the regression of $y$ on $x_1,x_2,x_3$. 
+
+::: {.border}
+**TRUE.** The restricted model is a regression of $y$ on a constant (with $R^2=0$). The residual from this model is just $\tilde y = y-\bar{y}$. The auxiliary regression is therefore,
+
+$$
+  \tilde y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \beta_3x_{i3} + v_i
+$$
+
+Which has the same $R^2$ as the original model. 
+
+:::
+
+6. The restricted model for $H_0: \beta_1 = 0.5,\; \beta_3 = 2\beta_2$ is,
+
+$$
+  z_i = \gamma_0 + \gamma_2 w_i + v_i
+$$
+
+where $z_i = y_i-0.5x_{i1}$ and $w_i = x_{i2}+2x_{i3}$.
+
+::: {.border}
+**TRUE.** We arrive at the restricted model by applying the null to the model:
+
+$$
+  y_i = \beta_0 + 0.5 x_{i1} + \beta_2x_{i2} + 2\beta_2 x_{i3} + u_i
+$$
+
+The coefficient on $x_{i1}$ is no longer an unknown parameter, which means we can deduct it from both sides of the equation. In addition, we can collect the common $\beta_2$ terms. This gives us the equation.
+
+$$
+  (y_i-0.5x_{i1}) = \gamma_0 + \gamma_2 (x_{i2}+2x_{i3}) + v_i
+$$
+:::
+
+7. If the error variance is heteroskedastic, OLS is unbiased. 
+
+::: {.border}
+Neither TRUE nor FALSE. Unbiasedness depends on MLR 1-4 only, not MLR 5. MLR 5 has no baring on unbiasedness.
+:::
+
+8. The following variance estimator has the same limit as the White formula (HC0). It is therefore heteroskedastic **consistent**.
+
+$$
+  \frac{(\sum_{i=1}^n \hat{r}^2_{ij}\hat{u}^2_i)/(n-k-1)}{n^{-1}SSR_j^2}
+$$
+
+:::{.border}
+**TRUE.** This formula is just the scaled version of HC0: HC1.
+
+$$
+  \frac{(\sum_{i=1}^n \hat{r}^2_{ij}\hat{u}^2_i)/(n-k-1)}{n^{-1}SSR_j^2} = \frac{\sum_{i=1}^n \hat{r}^2_{ij}\hat{u}^2_i}{SSR_j^2}\times \frac{n}{n-k-1}
+$$
+
+Since HC0 (the White formula) has the appropriate asymptotic limit and $n/(n-k-1)\rightarrow 1$, HC1 is also heteroskedastic consistent. 
+
+:::
+
+9. The following regression can be used to test for heteroskedasticity:
+
+$$
+  \hat{u}^2_i = \delta_0 + \delta_1 x_{i1} + \delta_2 x_{i2} + \dots + \delta_k x_{ik} + v_i
+$$
+
+:::{.border}
+**TRUE.** This auxiliary regression tests for heteroskedasticity related to the regressors in the model. There are however other forms of heteroskedasticity not tested by this model. 
+
+You can use either an $F$-stat or $LM$-stat for this test. 
+:::
+
+10. The following $LM$-stat statistic has a $\chi^2_k$ distribution. 
+
+$$
+  LM\text{-stat}=n\times \mathbf{R}_{\hat u^2}^2
+$$
+
+where $\mathbf{R}_{\hat u^2}^2$ is the R-squared from the auxiliary regression in Q.9.
+
+:::{.border}
+**FALSE.** This is only true *under the null*, since the $LM$ test relies on MLR 5. In addition, we know the asymptotic distribution of this test-static, but not its finite sample distribution. Therefore, there are many settings in which this statistic is not known to have a $\chi^2_k$ distribution.
+:::
+
+# References

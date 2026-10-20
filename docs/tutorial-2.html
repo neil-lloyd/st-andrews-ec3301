@@ -129,10 +129,7 @@ div.csl-indent {
 }</script>
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
-
-
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -426,6 +423,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./tutorial-2-solutions.html">
  <span class="dropdown-text">Tutorial 2 (Solutions)</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-3.html">
+ <span class="dropdown-text">Tutorial 3</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -475,8 +476,16 @@ window.Quarto = {
 <p><img src="img/02-standard-vertical-white-text.png" class="img-fluid"></p>
 </div>
 </div></div>
-        
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="tutorial-2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#hedonic-regression-models" id="toc-hedonic-regression-models" class="nav-link active" data-scroll-target="#hedonic-regression-models">Hedonic regression models</a></li>
+  <li><a href="#properties-of-ols" id="toc-properties-of-ols" class="nav-link" data-scroll-target="#properties-of-ols">Properties of OLS</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="tutorial-2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -501,8 +510,8 @@ window.Quarto = {
 </header>
 
 
-<section id="hedonic-regression-models" class="level2">
-<h2 class="anchored" data-anchor-id="hedonic-regression-models">Hedonic regression models</h2>
+<section id="hedonic-regression-models" class="level1">
+<h1>Hedonic regression models</h1>
 <p>In this section we examine the an example of multivariate regression model: the hedonic regression model. These models are widely used in real estate to estimate the value of various characteristics of a house: its size, number of rooms, school access, neighbourhood quality, etc. Having decomposed the price, one can then predict the value of another house using its characteristics. In this case, we will make use a small dataset made available with the <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 131</a>)</span> textbook which includes the price and housing characteristic information for 506 nieghbourhoods (unit of observation) in the Boston area.</p>
 <ol type="1">
 <li><p>Consider the model below:</p>
@@ -629,8 +638,8 @@ Note
 </div>
 </div>
 </section>
-<section id="properties-of-ols" class="level2">
-<h2 class="anchored" data-anchor-id="properties-of-ols">Properties of OLS</h2>
+<section id="properties-of-ols" class="level1">
+<h1>Properties of OLS</h1>
 <p>Consider the following decomposition of <span class="math inline">\(y_i\)</span> based upon the OLS estimator,</p>
 <p><span class="math display">\[
   y_i = \hat{\beta}_0 + \hat{\beta}_1 x_{1i}+ \hat{\beta}_2 x_{2i} + \hat{u}_i
@@ -672,6 +681,9 @@ Note
 <li><p>If the error term in the underlying model is heteroskedastic, will the estimated variance be smaller or larger?</p></li>
 <li><p>When the error variance is not homoskedastic, why can you no longer use the <span class="math inline">\(t\)</span> or <span class="math inline">\(F\)</span> distribution? [This is an advanced question, not covered by material in the lectures. See what you can find out.]</p></li>
 </ol>
+</section>
+<section id="references" class="level1">
+
 
 
 

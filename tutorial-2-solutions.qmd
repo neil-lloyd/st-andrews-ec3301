@@ -16,7 +16,7 @@ do "config.do"
 use "$data_dir\wooldridge_HPRICE2.dta", clear
 ```
 
-## Hedonic regression models
+# Hedonic regression models
 
 In this section we examine the an example of multivariate regression model: the hedonic regression model. These models are widely used in real estate to estimate the value of various characteristics of a house: its size, number of rooms, school access, neighbourhood quality, etc. Having decomposed the price, one can then predict the value of another house using its characteristics. In this case, we will make use a small dataset made available with the @wooldridge2025 [p. 131] textbook which includes the price and housing characteristic information for 506 nieghbourhoods (unit of observation) in the Boston area. 
 
@@ -316,7 +316,7 @@ test ldist
 
 :::
 
-## Properties of OLS
+# Properties of OLS
 
 Consider the following decomposition of $y_i$ based upon the OLS estimator,
 
@@ -447,3 +447,5 @@ $$
 where $\hat{u}_i/\sigma|\mathbf{x}_i=z_i\sim N(0,1)$ only if $Var(u_i|\mathbf{x}_i)=\sigma^2$ and $u_i|\mathbf{x}_i\sim N(0,\sigma^2)$. If the error variance is heteroskedastic then the denominator term no longer has a chi-squared distribution. 
 
 :::
+
+# References
