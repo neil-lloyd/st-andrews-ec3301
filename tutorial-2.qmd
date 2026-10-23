@@ -16,9 +16,11 @@ do "config.do"
 use "$data_dir\wooldridge_HPRICE2.dta", clear
 ```
 
-# Hedonic regression models
+# Application: Hedonic Regression Models
 
 In this section we examine the an example of multivariate regression model: the hedonic regression model. These models are widely used in real estate to estimate the value of various characteristics of a house: its size, number of rooms, school access, neighbourhood quality, etc. Having decomposed the price, one can then predict the value of another house using its characteristics. In this case, we will make use a small dataset made available with the @wooldridge2025 [p. 131] textbook which includes the price and housing characteristic information for 506 nieghbourhoods (unit of observation) in the Boston area. 
+
+\
 
 1. Consider the model below:
 
@@ -37,23 +39,35 @@ In this section we examine the an example of multivariate regression model: the 
    
    Provide an interpretation for each coefficient and predict its sign. For $proptax$, think about a \$100 increase in tax. 
    
+\
+
 2. How does the interpretation of $\beta_1$, $\beta_2$, and $\beta_3$ change in the model below:
 
    $$
     \ln(price_i) = \beta_0 + \beta_1 rooms_i + \beta_2 \ln(proptax_i) + \beta_3 \ln(dist_i) + \beta_4 crime_i + \beta_5 statio_i + u_i
    $$
    
+\
+
 3. How would this interpretation of $\beta_3$ from the above equation change if $proptax$ was measured in \$ and not \$ per \$1000? And $\beta_4$ if $crime$ was measured in crimes committed per 100 people. Would these changes affect the other coefficients in the model?
    
+\
+
 The following questions relate to the regression output below:
 
 ```{stata}
 reg lprice rooms lproptax ldist crime stratio
 ```
 
+\
+
 4. Provide an accurate interpretation of the `rooms` coefficient (i.e. semi-elasticity).
 
+\
+
 5. Provide an interpretation of the estimated `ldist` and `crime` coefficients. 
+
+\
 
 6. What is the predicted (median) house price of a 4 bedroom home, subject to a $30,000$ property tax, 1 (weighted) mile from 5 economic centers, in a neighbourhood that reports 20 crimes per capita and a student-teacher ratio 16. [You can apply coefficients to the nearest 3 decimal points] 
 
@@ -61,11 +75,15 @@ reg lprice rooms lproptax ldist crime stratio
 The data comes a rather old study by @harrison1978hedonic titled *Hedonic housing prices and the demand for clean air*. The answer you get for this question will not seem realistic given the housing market today. The mean of the `price` variable (which captures median house price in a neighbourhood) is \$22,512. That would not be enough to buy a new car in the US today. 
 :::
 
+\
+
 7. Test the null hypothesis $H_0:\beta_5\geq-0.025$ at a signficance level of 0.05. You will need the following information on $t_{n-k-1}^{-1}(0.05)$
 
 ```{stata}
 dis invt(e(df_r),0.05)
 ```
+
+\
 
 8. Replicate the 95% CI interval for `ldist` shown above. You need the following information on $t_{n-k-1}^{-1}(0.975)$,
 
@@ -73,9 +91,15 @@ dis invt(e(df_r),0.05)
 dis invt(e(df_r),0.975)
 ```
 
+\
+
 9. Replicate the reported $\mathbf{R}^2$ using the information reported above under 'Source'. [Hint: 'SS' stands for Sum of Squares.] 
 
+\
+
 10. Replicate the reported $F$-statistic ('F(5, 500)') using the reported $\mathbf{R}^2$. Is the model statistically significant?
+
+\
 
 :::{.callout-note}
 Before the next two questions, I will store some relevant Stata output from the first model:
@@ -95,6 +119,8 @@ This will be wiped from memory after estimating a different model.
 qui reg lprice rooms crime stratio
 dis e(r2)
 ```
+
+\
 
 12. Test the $H_0: \beta_{\ln(dist)}=0$ using the reported information below. [The code the $SSR$ from a model that excludes `ldist`.] Compute the relevant p-value for this test. What is the relationship between the $F$-statistic computed here and the $t$-statistic shown in the original output. 
 
@@ -117,7 +143,11 @@ $$
   y_i = \beta_0 + \beta_1x_{1i} + \beta_2 x_{2i} + u_i
 $$
 
+\
+
 1. Under MLR. 1-4, you can show that $E[\hat{\beta}_1] = \beta_1$. What is this property called and what does it mean? 
+
+\
 
 2. In [Lecture 3](lecture-3-multi.qmd), we defined 
 
@@ -127,13 +157,19 @@ $$
    
    Explain each component of this equation and how you would compute it. 
    
+\
+
 3. What happens to the variance of the estimator if $x_1$ and $x_2$ are highly correlated? 
 
 :::{.callout-important title="Multicollinearity"}
 In the limit, you can consider what happens as $R_{j}^2\rightarrow 1$. This is the problem of multicollinearity discussed on p. 91 of @wooldridge2025. 
 :::
 
+\
+
 4. How does the equation above relate to the material from [Lecture 2](lecture-2-multi.qmd) on partialling out (i.e. Frisch-Waugh Theorem)?
+
+\
 
 5. Would the problem of correlated regressors be a problem in the evaluation of a Randomized Control Trial? As we saw in the regression from @NBERw35729 [p. 24] (in [Lecture 1](lecture-1-multi.qmd)), authors often estimate the impact of treatment in a randomized control trial by estimating a linear regression model with additional controls.
 
@@ -141,11 +177,19 @@ In the limit, you can consider what happens as $R_{j}^2\rightarrow 1$. This is t
      y_i = \alpha + \beta T_i + \mathbf{x}_i\delta + \varepsilon_i
    $$
 
+\
+
 6. What would the impact of an increase in sample size be? 
+
+\
 
 7. Randomized control trials are famously low powered. Given the discussion above, what are some of the ways that researchers might increase the power of their test to reject the null hypothesis of no effect ($H_0: \beta=0$). 
 
+\
+
 8. If the error term in the underlying model is heteroskedastic, will the estimated variance be smaller or larger?
+
+\
 
 9. When the error variance is not homoskedastic, why can you no longer use the $t$ or $F$ distribution? [This is an advanced question, not covered by material in the lectures. See what you can find out.]
 

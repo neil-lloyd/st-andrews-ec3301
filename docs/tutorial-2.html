@@ -480,7 +480,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hedonic-regression-models" id="toc-hedonic-regression-models" class="nav-link active" data-scroll-target="#hedonic-regression-models">Hedonic regression models</a></li>
+  <li><a href="#application-hedonic-regression-models" id="toc-application-hedonic-regression-models" class="nav-link active" data-scroll-target="#application-hedonic-regression-models">Application: Hedonic Regression Models</a></li>
   <li><a href="#properties-of-ols" id="toc-properties-of-ols" class="nav-link" data-scroll-target="#properties-of-ols">Properties of OLS</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -510,9 +510,11 @@ window.Quarto = {
 </header>
 
 
-<section id="hedonic-regression-models" class="level1">
-<h1>Hedonic regression models</h1>
+<section id="application-hedonic-regression-models" class="level1">
+<h1>Application: Hedonic Regression Models</h1>
 <p>In this section we examine the an example of multivariate regression model: the hedonic regression model. These models are widely used in real estate to estimate the value of various characteristics of a house: its size, number of rooms, school access, neighbourhood quality, etc. Having decomposed the price, one can then predict the value of another house using its characteristics. In this case, we will make use a small dataset made available with the <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 131</a>)</span> textbook which includes the price and housing characteristic information for 506 nieghbourhoods (unit of observation) in the Boston area.</p>
+<p><br>
+</p>
 <ol type="1">
 <li><p>Consider the model below:</p>
 <p><span class="math display">\[
@@ -528,12 +530,22 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 <li><span class="math inline">\(statio\)</span>: average student-teacher ratio of schools in the area</li>
 </ul>
 <p>Provide an interpretation for each coefficient and predict its sign. For <span class="math inline">\(proptax\)</span>, think about a $100 increase in tax.</p></li>
+</ol>
+<p><br>
+</p>
+<ol start="2" type="1">
 <li><p>How does the interpretation of <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>, and <span class="math inline">\(\beta_3\)</span> change in the model below:</p>
 <p><span class="math display">\[
 \ln(price_i) = \beta_0 + \beta_1 rooms_i + \beta_2 \ln(proptax_i) + \beta_3 \ln(dist_i) + \beta_4 crime_i + \beta_5 statio_i + u_i
 \]</span></p></li>
-<li><p>How would this interpretation of <span class="math inline">\(\beta_3\)</span> from the above equation change if <span class="math inline">\(proptax\)</span> was measured in $ and not $ per $1000? And <span class="math inline">\(\beta_4\)</span> if <span class="math inline">\(crime\)</span> was measured in crimes committed per 100 people. Would these changes affect the other coefficients in the model?</p></li>
 </ol>
+<p><br>
+</p>
+<ol start="3" type="1">
+<li>How would this interpretation of <span class="math inline">\(\beta_3\)</span> from the above equation change if <span class="math inline">\(proptax\)</span> was measured in $ and not $ per $1000? And <span class="math inline">\(\beta_4\)</span> if <span class="math inline">\(crime\)</span> was measured in crimes committed per 100 people. Would these changes affect the other coefficients in the model?</li>
+</ol>
+<p><br>
+</p>
 <p>The following questions relate to the regression output below:</p>
 <div id="02c73d12" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> lprice rooms lproptax ldist crime stratio</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -558,10 +570,20 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="4" type="1">
-<li><p>Provide an accurate interpretation of the <code>rooms</code> coefficient (i.e.&nbsp;semi-elasticity).</p></li>
-<li><p>Provide an interpretation of the estimated <code>ldist</code> and <code>crime</code> coefficients.</p></li>
-<li><p>What is the predicted (median) house price of a 4 bedroom home, subject to a <span class="math inline">\(30,000\)</span> property tax, 1 (weighted) mile from 5 economic centers, in a neighbourhood that reports 20 crimes per capita and a student-teacher ratio 16. [You can apply coefficients to the nearest 3 decimal points]</p></li>
+<li>Provide an accurate interpretation of the <code>rooms</code> coefficient (i.e.&nbsp;semi-elasticity).</li>
+</ol>
+<p><br>
+</p>
+<ol start="5" type="1">
+<li>Provide an interpretation of the estimated <code>ldist</code> and <code>crime</code> coefficients.</li>
+</ol>
+<p><br>
+</p>
+<ol start="6" type="1">
+<li>What is the predicted (median) house price of a 4 bedroom home, subject to a <span class="math inline">\(30,000\)</span> property tax, 1 (weighted) mile from 5 economic centers, in a neighbourhood that reports 20 crimes per capita and a student-teacher ratio 16. [You can apply coefficients to the nearest 3 decimal points]</li>
 </ol>
 <div class="callout callout-style-default callout-caution callout-titled" title="Out of date">
 <div class="callout-header d-flex align-content-center">
@@ -576,6 +598,8 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 <p>The data comes a rather old study by <span class="citation" data-cites="harrison1978hedonic">Harrison Jr and Rubinfeld (<a href="#ref-harrison1978hedonic" role="doc-biblioref">1978</a>)</span> titled <em>Hedonic housing prices and the demand for clean air</em>. The answer you get for this question will not seem realistic given the housing market today. The mean of the <code>price</code> variable (which captures median house price in a neighbourhood) is $22,512. That would not be enough to buy a new car in the US today.</p>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="7" type="1">
 <li>Test the null hypothesis <span class="math inline">\(H_0:\beta_5\geq-0.025\)</span> at a signficance level of 0.05. You will need the following information on <span class="math inline">\(t_{n-k-1}^{-1}(0.05)\)</span></li>
 </ol>
@@ -585,6 +609,8 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 <pre><code>-1.6479069</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="8" type="1">
 <li>Replicate the 95% CI interval for <code>ldist</code> shown above. You need the following information on <span class="math inline">\(t_{n-k-1}^{-1}(0.975)\)</span>,</li>
 </ol>
@@ -594,10 +620,18 @@ price_i = \beta_0 + \beta_1 rooms_i + \beta_2 proptax_i + \beta_3 dist_i + \beta
 <pre><code>1.9647198</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="9" type="1">
-<li><p>Replicate the reported <span class="math inline">\(\mathbf{R}^2\)</span> using the information reported above under ‘Source’. [Hint: ‘SS’ stands for Sum of Squares.]</p></li>
-<li><p>Replicate the reported <span class="math inline">\(F\)</span>-statistic (‘F(5, 500)’) using the reported <span class="math inline">\(\mathbf{R}^2\)</span>. Is the model statistically significant?</p></li>
+<li>Replicate the reported <span class="math inline">\(\mathbf{R}^2\)</span> using the information reported above under ‘Source’. [Hint: ‘SS’ stands for Sum of Squares.]</li>
 </ol>
+<p><br>
+</p>
+<ol start="10" type="1">
+<li>Replicate the reported <span class="math inline">\(F\)</span>-statistic (‘F(5, 500)’) using the reported <span class="math inline">\(\mathbf{R}^2\)</span>. Is the model statistically significant?</li>
+</ol>
+<p><br>
+</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -627,6 +661,8 @@ Note
 <pre><code>.60187703</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="12" type="1">
 <li>Test the <span class="math inline">\(H_0: \beta_{\ln(dist)}=0\)</span> using the reported information below. [The code the <span class="math inline">\(SSR\)</span> from a model that excludes <code>ldist</code>.] Compute the relevant p-value for this test. What is the relationship between the <span class="math inline">\(F\)</span>-statistic computed here and the <span class="math inline">\(t\)</span>-statistic shown in the original output.</li>
 </ol>
@@ -648,14 +684,24 @@ Note
 <p><span class="math display">\[
   y_i = \beta_0 + \beta_1x_{1i} + \beta_2 x_{2i} + u_i
 \]</span></p>
+<p><br>
+</p>
 <ol type="1">
-<li><p>Under MLR. 1-4, you can show that <span class="math inline">\(E[\hat{\beta}_1] = \beta_1\)</span>. What is this property called and what does it mean?</p></li>
+<li>Under MLR. 1-4, you can show that <span class="math inline">\(E[\hat{\beta}_1] = \beta_1\)</span>. What is this property called and what does it mean?</li>
+</ol>
+<p><br>
+</p>
+<ol start="2" type="1">
 <li><p>In <a href="./lecture-3.html">Lecture 3</a>, we defined</p>
 <p><span class="math display">\[
    se(\hat{\beta}_1) = \frac{\hat{\sigma}}{\sqrt{n} sd(x_1) \sqrt{1-R^2_1}}
 \]</span></p>
 <p>Explain each component of this equation and how you would compute it.</p></li>
-<li><p>What happens to the variance of the estimator if <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are highly correlated?</p></li>
+</ol>
+<p><br>
+</p>
+<ol start="3" type="1">
+<li>What happens to the variance of the estimator if <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are highly correlated?</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Multicollinearity">
 <div class="callout-header d-flex align-content-center">
@@ -670,16 +716,38 @@ Note
 <p>In the limit, you can consider what happens as <span class="math inline">\(R_{j}^2\rightarrow 1\)</span>. This is the problem of multicollinearity discussed on p.&nbsp;91 of <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>.</p>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="4" type="1">
-<li><p>How does the equation above relate to the material from <a href="./lecture-2.html">Lecture 2</a> on partialling out (i.e.&nbsp;Frisch-Waugh Theorem)?</p></li>
+<li>How does the equation above relate to the material from <a href="./lecture-2.html">Lecture 2</a> on partialling out (i.e.&nbsp;Frisch-Waugh Theorem)?</li>
+</ol>
+<p><br>
+</p>
+<ol start="5" type="1">
 <li><p>Would the problem of correlated regressors be a problem in the evaluation of a Randomized Control Trial? As we saw in the regression from <span class="citation" data-cites="NBERw35729">Karlan, Rigol, and Roth (<a href="#ref-NBERw35729" role="doc-biblioref">2026, 24</a>)</span> (in <a href="./lecture-1.html">Lecture 1</a>), authors often estimate the impact of treatment in a randomized control trial by estimating a linear regression model with additional controls.</p>
 <p><span class="math display">\[
   y_i = \alpha + \beta T_i + \mathbf{x}_i\delta + \varepsilon_i
 \]</span></p></li>
-<li><p>What would the impact of an increase in sample size be?</p></li>
-<li><p>Randomized control trials are famously low powered. Given the discussion above, what are some of the ways that researchers might increase the power of their test to reject the null hypothesis of no effect (<span class="math inline">\(H_0: \beta=0\)</span>).</p></li>
-<li><p>If the error term in the underlying model is heteroskedastic, will the estimated variance be smaller or larger?</p></li>
-<li><p>When the error variance is not homoskedastic, why can you no longer use the <span class="math inline">\(t\)</span> or <span class="math inline">\(F\)</span> distribution? [This is an advanced question, not covered by material in the lectures. See what you can find out.]</p></li>
+</ol>
+<p><br>
+</p>
+<ol start="6" type="1">
+<li>What would the impact of an increase in sample size be?</li>
+</ol>
+<p><br>
+</p>
+<ol start="7" type="1">
+<li>Randomized control trials are famously low powered. Given the discussion above, what are some of the ways that researchers might increase the power of their test to reject the null hypothesis of no effect (<span class="math inline">\(H_0: \beta=0\)</span>).</li>
+</ol>
+<p><br>
+</p>
+<ol start="8" type="1">
+<li>If the error term in the underlying model is heteroskedastic, will the estimated variance be smaller or larger?</li>
+</ol>
+<p><br>
+</p>
+<ol start="9" type="1">
+<li>When the error variance is not homoskedastic, why can you no longer use the <span class="math inline">\(t\)</span> or <span class="math inline">\(F\)</span> distribution? [This is an advanced question, not covered by material in the lectures. See what you can find out.]</li>
 </ol>
 </section>
 <section id="references" class="level1">

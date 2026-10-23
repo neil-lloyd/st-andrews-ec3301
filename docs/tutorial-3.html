@@ -525,12 +525,20 @@ window.Quarto = {
 <li><p><code>fearfail</code>: Would fear of failure prevent you from starting a business?</p></li>
 </ul>
 <p>With the exception of <code>knowent</code>, all responses are provided on a agreement scale: 1 “Strongly disagree”; 2 “Somewhat disagree”; 3 “Neither agree nor disagree”; 4 “Somewhat agree”; and 5 “Strongly agree”. For the pusposes of this exercise, the variables have been discretized: <span class="math inline">\(=1\)</span> if answers 4 or 5; <span class="math inline">\(=0\)</span> otherwise (called <code>AGREEopport</code>, <code>AGREEsuskill</code>, <code>AGREEfearfail</code>). The variable <code>knowent</code> has been discretized too: <span class="math inline">\(=1\)</span> if knows 2 or more; <span class="math inline">\(=0\)</span> if knows less than two people (called <code>YESknowent</code>).</p>
+<p><br>
+</p>
 <ol type="1">
-<li><p>Under MLR 1-4, provide an interpretation of the <span class="math inline">\(E[futsup_i|\mathbf{perceptions}_i,\mathbf{x}_i]\)</span> for this linear probability model. <strong>Hint:</strong> take a look at <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, sec. 7.5</a>)</span>.</p></li>
-<li><p>Provide an interpretation of the coefficient on <code>YESknownent</code> in the model (under MLR 1-4). <strong>Hint:</strong> the extra material on <a href="./material-interpretation.html">Interpreting Linear Models</a> includes examples of linear probability models.</p></li>
+<li>Under MLR 1-4, provide an interpretation of the <span class="math inline">\(E[futsup_i|\mathbf{perceptions}_i,\mathbf{x}_i]\)</span> for this linear probability model. <strong>Hint:</strong> take a look at <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, sec. 7.5</a>)</span>.</li>
 </ol>
+<p><br>
+</p>
+<ol start="2" type="1">
+<li>Provide an interpretation of the coefficient on <code>YESknownent</code> in the model (under MLR 1-4). <strong>Hint:</strong> the extra material on <a href="./material-interpretation.html">Interpreting Linear Models</a> includes examples of linear probability models.</li>
+</ol>
+<p><br>
+</p>
 <p>Here are the estimates of the initial model:</p>
-<div id="8b6c300b" class="cell" data-execution_count="2">
+<div id="7ae9386f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -563,11 +571,17 @@ AGREEfearf~L |  -.0382071   .0096642    -3.95   0.000    -.0571514   -.0192628
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="3" type="1">
-<li><p>The variable <code>GEMEDU</code> has five categories: 0 “NONE”; 111 “SOME SECONDARY”; 1212 “SECONDARY DEGREE” (i.e.&nbsp;completed high school); 1316 “POST SECONDARY” (i.e.&nbsp;diploma or bachelors); 1720 “GRAD EXP” (i.e.&nbsp;post-graduate qualification). The lowest education category (0 “NONE”) includes individuals with only a primary-level education. According to the estimated model, what increases entrepreneurial intent: a higher level of self-perceived entrepreneurial skills or formal education?</p></li>
-<li><p>There are four regions in this global survey: 1 “Middle East &amp; Africa”; 2 “Asia”; 3 “Latin America &amp; Caribbean”; and 4 “Europe &amp; N America”. Using the output, replicate the <span class="math inline">\(F\)</span>-statistic shown below to test whether there are significant differences in entrepreneurial intent across regions. You must use the formula that uses <span class="math inline">\(SSR\)</span> of the restricted and unrestricted model.</p></li>
+<li>The variable <code>GEMEDU</code> has five categories: 0 “NONE”; 111 “SOME SECONDARY”; 1212 “SECONDARY DEGREE” (i.e.&nbsp;completed high school); 1316 “POST SECONDARY” (i.e.&nbsp;diploma or bachelors); 1720 “GRAD EXP” (i.e.&nbsp;post-graduate qualification). The lowest education category (0 “NONE”) includes individuals with only a primary-level education. According to the estimated model, what increases entrepreneurial intent: a higher level of self-perceived entrepreneurial skills or formal education?</li>
 </ol>
-<div id="f54ee97d" class="cell" data-execution_count="3">
+<p><br>
+</p>
+<ol start="4" type="1">
+<li>There are four regions in this global survey: 1 “Middle East &amp; Africa”; 2 “Asia”; 3 “Latin America &amp; Caribbean”; and 4 “Europe &amp; N America”. Using the output, replicate the <span class="math inline">\(F\)</span>-statistic shown below to test whether there are significant differences in entrepreneurial intent across regions. You must use the formula that uses <span class="math inline">\(SSR\)</span> of the restricted and unrestricted model.</li>
+</ol>
+<div id="afb74cf9" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC i.REGION</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> 2.REGION 3.REGION 4.REGION</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -614,6 +628,8 @@ AGREEfearf~L |  -.0368748   .0095332    -3.87   0.000    -.0555624   -.0181872
             Prob &gt; F =    0.0000</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="5" type="1">
 <li><p>One reason that regional differences might exist is that each region has different attitudes to entrepreneurship. The GEM measures four local attitudes:</p>
 <ul>
@@ -624,14 +640,14 @@ AGREEfearf~L |  -.0368748   .0095332    -3.87   0.000    -.0555624   -.0181872
 </ul>
 <p>As above, each has been discretized to <code>AGREE*</code>. Using the output below, test whether significant regional differences remain after controlling for these attitudes using the output below.</p></li>
 </ol>
-<div id="d9f58bb5" class="cell" data-execution_count="4">
+<div id="6b136948" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC i.REGION AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">est</span> <span class="kw">store</span> unrestricted</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">est</span> <span class="kw">store</span> restricted</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>etable, <span class="kw">est</span>(unrestricted restricted) novarlabel column(<span class="kw">estimates</span>) cstat(_r_se, nformat(%5.4f)) mstat(<span class="kw">N</span>) mstat(r2) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>etable, <span class="kw">est</span>(unrestricted restricted) novarlabel column(<span class="kw">estimates</span>) cstat(_r_se, nformat(%5.4f)) mstat(<span class="kw">N</span>) mstat(r2, nformat(%5.4f)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ------------------------------------------------------
@@ -660,15 +676,21 @@ AGREEnbstatus                      (0.0107)   (0.0107)
 AGREEnbmedia                       (0.0104)   (0.0105)
 _cons                              (0.0533)   (0.0526)
 Number of observations                 7863       7863
-R-squared                              0.14       0.12
+R-squared                            0.1449     0.1206
 ------------------------------------------------------</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="6" type="1">
-<li><p>Compute the adjusted <span class="math inline">\(F\)</span>-statistic which has an asymptotic <span class="math inline">\(\chi^2_q\)</span> distribution under the null hypothesis.</p></li>
-<li><p>What is the <span class="math inline">\(LM\)</span>-statistic version of this test? Compute the statistic and state its asymptotic distribution. You will need the following information.</p></li>
+<li>Compute the adjusted <span class="math inline">\(F\)</span>-statistic which has an asymptotic <span class="math inline">\(\chi^2_q\)</span> distribution under the null hypothesis.</li>
 </ol>
-<div id="be285853" class="cell" data-execution_count="5">
+<p><br>
+</p>
+<ol start="7" type="1">
+<li>What is the <span class="math inline">\(LM\)</span>-statistic version of this test? Compute the statistic and state its asymptotic distribution. You will need the following information.</li>
+</ol>
+<div id="f656c6ec" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">predict</span> residual, <span class="kw">resid</span></span>
@@ -714,19 +736,23 @@ AGREEnbmedia |   -.000702   .0103859    -0.07   0.946    -.0210611    .0196571
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="8" type="1">
 <li>Using the information below, do you reject the null under no regional differences in entrepreneurial intent using either the <span class="math inline">\(F\)</span>-stat (Q. 6) or <span class="math inline">\(LM\)</span>-stat (Q. 7)?</li>
 </ol>
-<div id="c25ca9b3" class="cell" data-execution_count="6">
+<div id="f6452923" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">invchi2</span>(3,0.95) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>7.8147279</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="9" type="1">
-<li>Using the output below, conduct a Chow test for whether the initial model differs by region. You just need to construct the <span class="math inline">\(F\)</span>-statistic.</li>
+<li>Using the output below, conduct a Chow test for whether the initial model (shown after Q2) differs by region. You just need to construct the <span class="math inline">\(F\)</span>-statistic.</li>
 </ol>
-<div id="7d82059e" class="cell" data-execution_count="7">
+<div id="a03fed9d" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">forvalues</span> i = 1/4{</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC <span class="kw">if</span> REGION==<span class="ot">`i'</span></span>
@@ -770,38 +796,52 @@ Residual sum of squares    419.78   168.39   485.33   283.41
 ------------------------------------------------------------</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <ol start="10" type="1">
-<li>Is it reasonable to assume that the error term has a (conditional) standard normal distribution (MLR 6) in a linear probability model? Is this a problem for the Chow test in Q.9? And, if so, is there a solution? <strong>Hint:</strong> consider the material in <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, secs. 7.5, 8.5</a>)</span>.</li>
+<li>Is it reasonable to assume that the error term has a constant (conditional) variance (MLR 5) and a (conditional) standard normal distribution (MLR 6) in a linear probability model? Is this a problem for the Chow test in Q.9? And, if so, is there a solution? <strong>Hint:</strong> consider the material in <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, secs. 7.5, 8.5</a>)</span>.</li>
 </ol>
 </section>
 <section id="theory-truefalse" class="level1">
 <h1>Theory TRUE/FALSE</h1>
 <p>State whether each of the following is TRUE/FALSE and provide a reason.</p>
+<p><br>
+</p>
 <ol type="1">
 <li>The OLS estimator converges in distribution as follows:</li>
 </ol>
 <p><span class="math display">\[
   \hat{\beta}_j \rightarrow_d N\big(\beta_j, Var(\hat{\beta}_j)\big)
 \]</span></p>
+<p><br>
+</p>
 <ol start="2" type="1">
 <li>The finite sample variance estimator converges in probability to the asymptotic variance of the OLS estimator.</li>
 </ol>
 <p><span class="math display">\[
   \frac{\sigma^2}{SSR_j} \rightarrow_p Var(\hat{\beta}_j)
 \]</span></p>
+<p><br>
+</p>
 <ol start="3" type="1">
 <li><span class="math inline">\(t\)</span>-stat <span class="math inline">\(\overset{a}{\sim}N(0,1)\)</span> under MLR 1-5, because <span class="math inline">\(\hat{\sigma}^2\rightarrow_p \sigma^2\)</span>.</li>
 </ol>
+<p><br>
+</p>
 <p>Consider the linear regression model for questions 4-6</p>
 <p><span class="math display">\[
   y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \beta_3x_{i3} + u_i
 \]</span></p>
+<p><br>
+</p>
 <ol start="4" type="1">
 <li>The test statistic for <span class="math inline">\(H_0: 2\beta_1 = 3\beta_2 -5\)</span> is,</li>
 </ol>
 <p><span class="math display">\[
   t\text{-stat} = \frac{2\hat{\beta}_1-3\beta_2-5}{\sqrt{4Var(\hat{\beta}_1)-9Var(\hat{\beta}_2)}}
 \]</span></p>
+<p><br>
+</p>
 <ol start="5" type="1">
 <li>The <span class="math inline">\(LM\)</span>-stat for <span class="math inline">\(H_0: \beta_1 = \beta_2 = \beta_3 = 0\)</span> is,</li>
 </ol>
@@ -809,6 +849,8 @@ Residual sum of squares    419.78   168.39   485.33   283.41
   LM\text{-stat} = nR^2
 \]</span></p>
 <p>where <span class="math inline">\(R^2\)</span> is the from the regression of <span class="math inline">\(y\)</span> on <span class="math inline">\(x_1,x_2,x_3\)</span>.</p>
+<p><br>
+</p>
 <ol start="6" type="1">
 <li>The restricted model for <span class="math inline">\(H_0: \beta_1 = 0.5,\; \beta_3 = 2\beta_2\)</span> is,</li>
 </ol>
@@ -816,19 +858,29 @@ Residual sum of squares    419.78   168.39   485.33   283.41
   z_i = \gamma_0 + \gamma_2 w_i + v_i
 \]</span></p>
 <p>where <span class="math inline">\(z_i = y_i-0.5x_{i1}\)</span> and <span class="math inline">\(w_i = x_{i2}+2x_{i3}\)</span>.</p>
+<p><br>
+</p>
 <ol start="7" type="1">
-<li><p>If the error variance is heteroskedastic, OLS is unbiased.</p></li>
-<li><p>The following variance estimator has the same limit as the White formula (HC0). It is therefore heteroskedastic <strong>consistent</strong>.</p></li>
+<li>If the error variance is heteroskedastic, OLS is unbiased.</li>
+</ol>
+<p><br>
+</p>
+<ol start="8" type="1">
+<li>The following variance estimator has the same limit as the White formula (HC0). It is therefore heteroskedastic <strong>consistent</strong>.</li>
 </ol>
 <p><span class="math display">\[
   \frac{(\sum_{i=1}^n \hat{r}^2_{ij}\hat{u}^2_i)/(n-k-1)}{n^{-1}SSR_j^2}
 \]</span></p>
+<p><br>
+</p>
 <ol start="9" type="1">
 <li>The following regression can be used to test for heteroskedasticity:</li>
 </ol>
 <p><span class="math display">\[
   \hat{u}^2_i = \delta_0 + \delta_1 x_{i1} + \delta_2 x_{i2} + \dots + \delta_k x_{ik} + v_i
 \]</span></p>
+<p><br>
+</p>
 <ol start="10" type="1">
 <li>The following <span class="math inline">\(LM\)</span>-stat statistic has a <span class="math inline">\(\chi^2_k\)</span> distribution.</li>
 </ol>
