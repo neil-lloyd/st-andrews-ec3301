@@ -548,7 +548,7 @@ E[futsup_i|\mathbf{perceptions}_i,\mathbf{x}_i] = Pr(futsup_i=1|\mathbf{percepti
 <p><br>
 </p>
 <p>Here are the estimates of the initial model:</p>
-<div id="526a22b4" class="cell" data-execution_count="3">
+<div id="1d898506" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -594,7 +594,7 @@ AGREEfearf~L |  -.0382071   .0096642    -3.95   0.000    -.0571514   -.0192628
 <ol start="4" type="1">
 <li>There are four regions in this global survey: 1 “Middle East &amp; Africa”; 2 “Asia”; 3 “Latin America &amp; Caribbean”; and 4 “Europe &amp; N America”. Using the output, replicate the <span class="math inline">\(F\)</span>-statistic shown below to test whether there are significant differences in entrepreneurial intent across regions. You must use the formula that uses <span class="math inline">\(SSR\)</span> of the restricted and unrestricted model.</li>
 </ol>
-<div id="612f4996" class="cell" data-execution_count="4">
+<div id="bf048890" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC i.REGION</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> 2.REGION 3.REGION 4.REGION</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -645,7 +645,7 @@ AGREEfearf~L |  -.0368748   .0095332    -3.87   0.000    -.0555624   -.0181872
 <p><span class="math display">\[
   F\text{-stat} = \frac{(SSR_r - SSR_{ur})/3}{SSR_{ur}/{(n-15-1)}}
 \]</span></p>
-<div id="e27785a2" class="cell" data-execution_count="5">
+<div id="e42c62c8" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scalar</span> ssr_r = <span class="fu">e</span>(rss)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scalar</span> df_r = <span class="fu">e</span>(df_r)</span>
@@ -672,7 +672,7 @@ AGREEfearf~L |  -.0368748   .0095332    -3.87   0.000    -.0555624   -.0181872
 </ul>
 <p>As above, each has been discretized to <code>AGREE*</code>. Using the output below, test whether significant regional differences remain after controlling for these attitudes using the output below.</p></li>
 </ol>
-<div id="27d5fadf" class="cell" data-execution_count="6">
+<div id="ce5106b7" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC i.REGION AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">est</span> <span class="kw">store</span> unrestricted</span>
@@ -717,7 +717,7 @@ R-squared                            0.1449     0.1206
 <p><span class="math display">\[
   F\text{-stat} = \frac{(R^2_{ur} - R^2_{r})/3}{(1-R^2_{ur})/{(n-19-1)}}
 \]</span></p>
-<div id="390cf664" class="cell" data-execution_count="7">
+<div id="ea4168f5" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC i.REGION AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scalar</span> r2_ur = <span class="fu">e</span>(r2)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scalar</span> df_ur = <span class="fu">e</span>(df_r)</span>
@@ -731,7 +731,7 @@ R-squared                            0.1449     0.1206
 </div>
 </div>
 <p>This should replicate</p>
-<div id="4147d2fc" class="cell" data-execution_count="8">
+<div id="daac6d11" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC i.REGION AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">test</span> 2.REGION 3.REGION 4.REGION</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -754,7 +754,7 @@ R-squared                            0.1449     0.1206
 <p><span class="math display">\[
   3\times F\text{-stat} \rightarrow_d \chi^2_3
 \]</span></p>
-<div id="a6cc0979" class="cell" data-execution_count="9">
+<div id="299e3612" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dis 3*<span class="fu">r</span>(<span class="fu">F</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>222.33177</code></pre>
@@ -766,7 +766,7 @@ R-squared                            0.1449     0.1206
 <ol start="7" type="1">
 <li>What is the <span class="math inline">\(LM\)</span>-statistic version of this test? Compute the statistic and state its asymptotic distribution. You will need the following information.</li>
 </ol>
-<div id="020f3466" class="cell" data-execution_count="10">
+<div id="c7f59bb2" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC AGREEequalinc AGREEnbgoodc AGREEnbstatus AGREEnbmedia</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">predict</span> residual, <span class="kw">resid</span></span>
@@ -816,7 +816,7 @@ AGREEnbmedia |   -.000702   .0103859    -0.07   0.946    -.0210611    .0196571
 <p><span class="math display">\[
   LM\text{-stat} = n\times R^2_{\tilde u}\rightarrow \chi^2_3
 \]</span></p>
-<div id="9d487f8e" class="cell" data-execution_count="11">
+<div id="03888e7f" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">e</span>(r2)*<span class="fu">e</span>(<span class="kw">N</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>216.75422</code></pre>
@@ -828,7 +828,7 @@ AGREEnbmedia |   -.000702   .0103859    -0.07   0.946    -.0210611    .0196571
 <ol start="8" type="1">
 <li>Using the information below, do you reject the null under no regional differences in entrepreneurial intent using either the <span class="math inline">\(F\)</span>-stat (Q. 6) or <span class="math inline">\(LM\)</span>-stat (Q. 7)?</li>
 </ol>
-<div id="283228dd" class="cell" data-execution_count="12">
+<div id="ed85393b" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">invchi2</span>(3,0.95) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>7.8147279</code></pre>
@@ -842,7 +842,7 @@ AGREEnbmedia |   -.000702   .0103859    -0.07   0.946    -.0210611    .0196571
 <ol start="9" type="1">
 <li>Using the output below, conduct a Chow test for whether the initial model (shown after Q2) differs by region. You just need to construct the <span class="math inline">\(F\)</span>-statistic.</li>
 </ol>
-<div id="19dca382" class="cell" data-execution_count="13">
+<div id="ebfd74ec" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">forvalues</span> i = 1/4{</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC <span class="kw">if</span> REGION==<span class="ot">`i'</span></span>
@@ -890,21 +890,22 @@ Residual sum of squares    419.78   168.39   485.33   283.41
 <p><span class="math display">\[
   F\text{-stat} = \frac{(SSR_r - (SSR_1 + SSR_2 + SSR_3 + SSR_4))/(3(12+1))}{(SSR_1 + SSR_2 + SSR_3 + SSR_4)/{(n-4(12+1))}}
 \]</span></p>
-<div id="c3562d90" class="cell" data-execution_count="14">
+<div id="a51a7e9c" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq i.gender hhsize i.GEMEDUC </span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scalar</span> rss0 = <span class="fu">e</span>(rss)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scalar</span> n = <span class="fu">e</span>(<span class="kw">N</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scalar</span> <span class="kw">k</span> = <span class="fu">e</span>(df_m)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scalar</span> nobs = <span class="fu">e</span>(<span class="kw">N</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scalar</span> kparam = <span class="fu">e</span>(df_m)</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="kw">forvalues</span> i = 1/4{</span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC <span class="kw">if</span> REGION==<span class="ot">`i'</span></span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scalar</span> rss<span class="ot">`i'</span> = <span class="fu">e</span>(rss)</span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>}   </span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>dis ((rss0 - (rss1 + rss2 + rss3 + rss4))/(3*(<span class="kw">k</span>+1)))/((rss1 + rss2 + rss3 + rss4)/(n-4*(<span class="kw">k</span>+1)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>dis ((rss0 - (rss1 + rss2 + rss3 + rss4))/(3*(kparam+1)))/((rss1 + rss2 + rss3 + rss4)/(nobs-4*(kparam+1)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>116.78985</code></pre>
+<pre><code>8.9289645</code></pre>
 </div>
 </div>
 </div>

@@ -226,15 +226,16 @@ $$
 qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq i.gender hhsize i.GEMEDUC 
 
 	scalar rss0 = e(rss)
-	scalar n = e(N)
-	scalar k = e(df_m)
+	scalar nobs = e(N)
+	scalar kparam = e(df_m)
 	
 forvalues i = 1/4{
 qui reg futsup YESknowent AGREEopport AGREEsuskill AGREEfearfailL age agesq female hhsize i.GEMEDUC if REGION==`i'
 	scalar rss`i' = e(rss)
 }	
 	
-dis ((rss0 - (rss1 + rss2 + rss3 + rss4))/(3*(k+1)))/((rss1 + rss2 + rss3 + rss4)/(n-4*(k+1)))
+
+dis ((rss0 - (rss1 + rss2 + rss3 + rss4))/(3*(kparam+1)))/((rss1 + rss2 + rss3 + rss4)/(nobs-4*(kparam+1)))
 ```
 
 :::
