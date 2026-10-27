@@ -1,0 +1,844 @@
+---
+title:  Causal Inference
+subtitle: Lecture 6
+format: 
+  html: 
+    output-file: lecture-6.html
+#    other-links:
+#      - text: "PDF with Stata"
+#        href: "lecture-6-notes-Stata.pdf"
+#        icon: file-pdf
+#      - text: "PDF with R"
+#        href: "lecture-6-notes-R.pdf"
+#        icon: file-pdf
+  revealjs: 
+    output-file: lecture-6-slides.html
+#    footer: "[Lecture 6](lecture-6-multi.qmd) - St Andrews Business School - Martinmas 2026/27"
+engine: knitr
+---
+
+```{r}
+#| include: false
+#| cache: false
+
+library(Statamarkdown)
+knitr::opts_chunk$set(collectcode = TRUE)
+```
+
+
+```{r}
+#| include: false
+
+# Packages
+library(haven)    
+library(ggplot2)
+
+source(here::here("config.R"))
+
+```
+
+```{stata}
+*| include: false
+
+do "config.do"
+```
+
+::: {.content-visible unless-format="revealjs"}
+## Reading
+
+This lecture covers material from @wooldridge2025:
+
+- Chapter 2.7 "Regression on a Binary Explanatory Variable"
+  - Chapter 2.7a "Counterfactual (or Potential) Outcomes, Causality, and Policy Analysis"
+- Chapter 7.1 "Describing Qualitative Information"
+- Chapter 7.2 "A Single Dummy Independent Variable"
+- Chapter 7.3 "Using Dummy Variables for Multiple Categories"
+- Chapter 7.6b "Regression Adjustment under Randomized Assignment"
+
+We will discuss the earlier part of Chapter 7.6 (7.6a "Program Evaluation and Unrestricted Regression Adjustment") in Week 8. 
+
+Chapter 7.1-7.3 should probably have been assigned much earlier. However, if you haven't read them, now is a good time to. The lecture this week will not discuss multiple categories as much, as we will focus on understanding potential outcome and causation. 
+
+:::
+
+:::: {.content-visible when-format="revealjs"}
+
+## Part 2
+
+In part 2 of EC3301 we are going to tackle a range of topics that are both, 
+
+1. applied throughout modern empirical research,
+
+2. central to the way economists think about causal inference
+
+:::{.callout-note}
+I may change the syllabus slightly during the last two weeks as I adapt to what we have covered. 
+:::
+
+## Today
+
+Today's lecture is inspired by a sandwich, the quintissential British meal:
+
+![](material/lecture-6/halloumi-sandwich-f_i.jpg){fig-align="center"}
+
+::::
+
+# Example: 
+
+##
+
+Introduce paper
+
+## 
+
+Experiment design
+
+##
+
+Graph of difference between means
+
+## 
+
+Regression of results
+
+
+
+# Potential Outcomes
+
+## Neyman-Rubin Causal Model
+
+The Potential Outcomes Framework is a key component of the Neyman-Rubin Causal Model[^1]
+
+[^1]: Attributed to Jerzy Neymand and Donald Rubin. 
+
+- We won't cover all aspects of this model. 
+
+- I will reference texts you can visit to read further
+
+
+## Example
+
+Consider out example: there are **two states of the world**
+
+1. **Treated** parents receive information about their kids 
+
+2. Untreated (**control**) parents receive no information
+
+::: {.fragment .fade-in}
+We can there think about an outcome (e.g. enrollment) under each state
+
+$$
+  y(\text{info}) \qquad \text{or}\qquad y(\text{status-quo})
+$$
+
+:::
+::: {.fragment .fade-in}
+We call these **potential outcomes**
+:::
+
+## Possible outcomes
+
+For a discrete outcome like enrollment there are 4 possible outcomes:
+
+::: incremental
+1. Enroll only with information
+
+   $$
+     y(\text{info})=\textcolor{red}{\text{enroll}} \qquad \text{and}\qquad y(\text{status-quo})=\textcolor{blue}{\text{don't enroll}}
+   $$
+
+2. Enroll always
+
+   $$
+     y(\text{info})=\textcolor{red}{\text{enroll}} \qquad \text{and}\qquad y(\text{status-quo})=\textcolor{red}{\text{enroll}}
+   $$
+
+3. Don't enroll always
+
+   $$
+     y(\text{info})=\textcolor{blue}{\text{don't enroll}} \qquad \text{and}\qquad y(\text{status-quo})=\textcolor{blue}{\text{don't enroll}}
+   $$
+
+4. Enroll only without information
+
+   $$
+     y(\text{info})=\textcolor{blue}{\text{don't enroll}} \qquad \text{and}\qquad y(\text{status-quo})=\textcolor{red}{\text{enroll}}
+   $$
+:::
+
+## Causal effect
+
+According to the Neyman-Rubin Causal Model, in: 
+
+- scenarios (1) **and** (4) there has been a **causal effect**
+
+- scenarios (2) **and** (3) there has been NO *causal effect*.
+
+:::{.callout-important}
+Notice, to say there has been a causal effect, we must observe both potential outcomes. 
+:::
+
+::::{.content-visible unless-format="revealjs"}
+:::{.callout-tip title="Continuous Treatment" collapse=true}
+Add quote from Imbens & Rubin
+:::
+::::
+
+
+## Notation
+
+Let $w_i \in \{0,1\}$ be an indicator of an individuals *discrete* treatment status.[^2]:
+
+[^2]: This notation of $w_i$ as an indicator of an unit's treatment status is common in the literature on experiments. You will see it in @wooldridge2025 [sec. 7.6]. 
+
+- $y_i(1)$ be the potential outcome when treated
+
+- $y_i(0)$ be the potential outcome when not treated[^3]
+
+[^3]: You will see other notations in the literature. For example, the use of superscripts $\{y_i^1,y_i^0\}$ or subscripts $\{y_{i1},y_{i0}\}$.
+
+
+::::{.content-visible unless-format="revealjs"}
+:::{.callout-tip title="Continuous Treatment" collapse=true}
+
+:::
+::::
+
+## Observed outcome
+
+*A priori*, both potential outcomes could be realised, but in the data you observe:
+
+$$
+  y_i = \begin{cases}y_i(1)\quad \text{if}\; w_i=1 \\
+  y_i(0)\quad \text{if}\; w_i=0
+  \end{cases}
+$$
+
+::: {.fragment .fade-in}
+Which we can write as the linear function:
+
+$$
+  y_i = y_i(0) + w_i\big(y_i(1)-y_i(0)\big)
+$$
+:::
+
+## Discrete treatment
+
+
+
+## ITE
+
+The individual (unit) treatment effect (ITE) is defined as, 
+
+$$
+  \tau_i = y_i(1)-y_i(0)
+$$
+
+However, *you cannot observe (identify) or estimate the ITE*
+
+**WHY?** 
+
+- it would require you to observe **both** potential outcomes of the same unit *in the same period of time*
+
+- "you cannot be in two places at once"
+
+- often referred to as the missing data problem
+
+
+## Average TEs
+
+We focus on identifying and estimating average (or aggregate) TEs
+
+::: incremental
+- Average Treatment Effect (ATE)
+
+  $$
+    \tau_{ate} = E[\tau_i] = E\big[y_i(1)-y_i(0)\big]
+  $$
+
+- Average Treatment Effect of the Treated (ATT)
+
+  $$
+    \tau_{att} = E[\tau_i|w_i = 1] = E\big[y_i(1)-y_i(0)|w_i=1\big]
+  $$
+
+- Average Treatment Effect of the Untreated (ATU)
+
+  $$
+    \tau_{atu} = E[\tau_i|w_i = 0] = E\big[y_i(1)-y_i(0)|w_i=0\big]
+  $$
+  
+  These are called **causal estimands**
+
+:::
+
+## ATE vs ATT
+
+We prefer the ATE if,
+
+- we want to learn about the effect on the entire population; 
+
+- i.e., mandatory exposure.
+
+::: {.fragment .fade-in}
+We prefer the ATT if,
+
+- the population includes individuals that will not take up the treatment/policy;
+
+- e.g., a policy that targets single mothers;
+
+- where the program is voluntary, so those not enrolled will not necessarily
+be treated;
+
+- the ATT is “informative about the effect of entirely eliminating the current
+program” (Imbens and Wooldridge, 2009, pp. 14-15).
+
+:::
+
+# Assignment
+
+## Fundamental problem
+
+Suppose you treat one group of individuals, while observing another untreated. Then *in expectation*, you can learn about
+
+$$
+  E[y_i|w_i = 1] - E[y_i|w_i = 0]
+$$
+
+::: {.fragment .fade-in}
+Substituting in $y_i = y_i(0) + w_i\big(y_i(1)-y_i(0)\big)$
+
+$$
+  E[y_i(1)|w_i = 1] - E[y_i(0)|w_i = 0]
+$$
+:::
+
+## 
+
+Is this equal to either the ATE, ATT, or ATU?
+$$
+  E[y_i(1)|w_i = 1] - E[y_i(0)|w_i = 0]
+$$
+
+::: {.fragment .fade-in}
+**NO!** 
+
+- The conditions are not the same!
+:::
+
+## Decomposition
+
+Let us add and subtract:
+
+$$
+  \textcolor{red}{E[y_i(0)|w_i = 1]} 
+$$
+
+the **unobserved counterfactual** for the treated group.
+
+$$
+  E[y_i(1)|w_i = 1] - \textcolor{red}{E[y_i(0)|w_i = 1]} + \textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]
+$$
+
+## 
+
+The expression now has two terms
+
+$$
+  \begin{aligned}
+  
+    &E[y_i(1)|w_i = 1] - \textcolor{red}{E[y_i(0)|w_i = 1]} + \textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0] \\
+    =& \underbrace{E[y_i(1)-y_i(0)|w_i = 1]}_\text{ATT}+ \underbrace{\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\text{selection}
+  \end{aligned}
+$$
+
+:::{callout-note title="Selection"}
+As alluded to earlier in [Lecture 3](lecture-3-multi.qmd), selection here is different to the problem of sample selection. 
+:::
+
+## Selection
+
+The problem of selection **into treatment** is fundamental to any discussion of causation. 
+
+$$
+  \underbrace{\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\text{selection}
+$$
+
+The term describes the difference between 
+
+1. an unobserved counterfactual outcome of the treated group
+
+   the outcome you *would have* observed, had the group NOT been treated
+   
+2. the observed outcome of the untreated group
+
+## Unconfoundedness
+
+In order to say much more, we need an assumption:
+
+> **Unconfounded assignment:** assignment into the treatment is unconfounded if
+>
+> $$
+>   y_i(1),y_i(0) \perp w_i
+> $$
+
+And if, assignment is randomly assigned, then it is unconfounded. 
+
+:::{.callout-note}
+Some people equate the assumption of uncounfedness with randomization. However, they are better thought of as two separate things: unconfoundedness an important underlying assumption, while randomization is an assignment mechanism that gives rise to unconfounded assignment. 
+:::
+
+:::{.callout-warning title="Unconfounded vs exogenous"}
+
+:::
+
+## Unconfounded assignment
+
+1. $E[y_i(0)|w_i=1] = E[y_i(0)|w_i=0] = E[y_i(0)]$
+
+  $$
+    \Rightarrow \underbrace{\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\text{selection} = 0
+  $$
+
+2. $\underbrace{E[y_i(1)-y_i(0)|w_i = 1]}_\text{ATT}=\underbrace{E[y_i(1)-y_i(0)|w_i = 0]}_\text{ATU}=\underbrace{E[y_i(1)-y_i(0)}_\text{ATE}$
+
+## 
+
+If assignment is unconfounded, then
+
+$$
+  E[y_i|w_i = 1] - E[y_i|w_i = 0] = \tau_{ate}
+$$
+
+We therefore refer to unconfoundedness as the **identifying assumption**. 
+
+- Without unconfoundness we cannot learn about the ATE (or ATT) from the difference between two groups. 
+
+## Balance tests
+
+Researchers test for unconfoundedness using balance tests. 
+
+Need to emphasise what happens in realization vs expectation
+
+# Estimation
+
+## Estimator
+
+Under unconfoundedness, the ATE has a simple difference between means (SDM) estimator [@wooldridge2025, sec. 2.7a]
+
+$$
+  \hat{\tau} = \bar{y}_1 - \bar{y}_0
+$$
+
+where, 
+
+$$
+  \bar{y}_1 = \frac{1}{\textcolor{red}{n_1}}\sum_{\textcolor{red}{i:w_i=1}}y_i\qquad \text{and}\qquad \bar{y}_0 =\frac{1}{\textcolor{blue}{n_0}}\sum_{\textcolor{blue}{i:w_i=0}}y_i
+
+$$
+
+and $n_1$ ($n_0$) is number of treated (control) units
+
+## Variance
+
+The variance of this estimator is 
+
+$$
+  Var(\hat{\tau}) = \frac{\sigma_1^2}{n_1} + \frac{\sigma_0^2}{n_0}
+$$
+
+Which can be estimated by,[^4]
+
+[^4]: Referred to as the Neyman variance estimator.
+
+$$
+  \widehat{Var}(\hat{\tau}) = \frac{\hat{\sigma}_1^2}{n_1} + \frac{\hat{\sigma}_0^2}{n_0}
+$$
+
+where $\hat{\sigma}_j^2 = \frac{1}{n_j-1}\sum_{i: w_i=j} (y_i-\bar{y}_j)^2$ for $j=0,1$.
+
+## Homogeneous vs heterogenous TEs
+
+So far, we have said nothing about whether $\tau_i$ varies at the individual level. If TEs are **homogeneous**:
+
+$$
+  \tau_i=y_i(1)-y_i(0)=\tau \;\forall\; i
+$$
+
+Then, 
+
+$$
+  y_i = y_i(0) + w_i(y_i(1)-y_i(0)) = y_i(0) + w_i\tau
+$$
+
+And, 
+
+$$
+  \sigma_0^2 = \sigma_1^2 = \sigma^2
+$$
+
+## Demonstration
+
+Add graphs demonstrating. 
+
+## Homogenous TEs
+
+If TEs **homogenous** are homogeneous
+
+$$
+  Var(\hat{\tau}) = \frac{\sigma_1^2}{n_1} + \frac{\sigma_0^2}{n_0} = \sigma^2\bigg(\frac{1}{n_1} + \frac{1}{n_0}\bigg)
+$$
+
+Which can be estimated as, 
+
+$$
+\hat{\sigma}^2 = \frac{1}{n-2}\big(\hat\sigma_1^2(n_1-1) + \hat\sigma_0^2(n_0-1)\big)
+$$
+
+We call this the constant variance estimator.
+
+## Distribution
+
+Note, we do not know the distribution of $y_i(0)$ or $y_i(1)$!
+
+- In applied work, researchers prefer not to make an assumption
+
+- Can use CLT to show asymptotic distribution is normal
+
+- In practice, use $t$-distribution to be more conservative
+
+
+
+## Demonstration
+
+Add Stata and R versions of tests with and without difference between means. 
+
+# Linear Model
+
+## Dummy regressor
+
+We know that for a discrete $x_i\in\{0,\}$,
+
+$$
+  y_i = \beta_0 + \beta_1 x_i + u_i
+$$
+
+$$
+  \beta_1 = E[y_i|x_i=1]-E[y_i|x_i=0]
+$$
+
+## OLS
+
+Moreover, we should in [Lecture 2](lecture-2-multi.qmd)8 that the OLS estimator for $\beta_1$ is just, 
+
+$$
+  \hat{\beta}_1 = \bar{y}_1 - \bar{y}_0
+$$
+
+
+
+## Translation of POF
+
+We translate the POF to a linear regression model,[^5]
+
+[^5]: This is a more general version than @wooldridge2025 [sec. 2.7a], which assumes homogeneity. 
+
+$$
+  \begin{aligned}
+    y_i =& y_i(0) + w_i(y_i(1)-y_i(0)) \\
+      =& y_i(0) + \tau_i w_i \\
+      =& \textcolor{blue}{E[y_i(0)]} + \tau_i w_i + y_i(0)-\textcolor{blue}{E[y_i(0)]} \\
+      =& \textcolor{blue}{E[y_i(0)]} + \textcolor{red}{\tau_{ate}} w_i + \underbrace{y_i(0)-\textcolor{blue}{E[y_i(0)]} + (\tau_i-\textcolor{red}{\tau_{ate}})w_i}_{u_i} \\
+      =& \alpha_0 + \textcolor{red}{\tau_{ate}}w_i + u_i
+    
+  \end{aligned}
+$$
+
+##
+
+Consider the error term:
+
+$$
+  \begin{aligned}
+  u_i =& y_i(0)-\textcolor{blue}{E[y_i(0)]} + (\tau_i-\textcolor{red}{\tau_{ate}})w_i \\
+  =& y_i(0)-\textcolor{blue}{E[y_i(0)]} + (y_i(1)-y_i(0)-\textcolor{red}{E[y_i(1)-y_i(0)]})w_i \\
+  \end{aligned}
+$$
+
+1. $E[u_i|w_i=0]$
+
+   $$
+     E[u_i|w_i=0] = E\big[y_i(0)-\textcolor{blue}{E[y_i(0)]}\big|w_i=0\big] = E[y_i(0)|w_i=0]-\textcolor{blue}{E[y_i(0)]}
+   $$
+
+If assignment is unconfounded:
+
+$$
+  E[y_i(0)|w_i=0]-\textcolor{blue}{E[y_i(0)]} = E[y_i(0)]-\textcolor{blue}{E[y_i(0)]} = 0
+$$
+
+##
+
+2. $E[u_i|w_i=1]$
+
+   $$
+    \begin{aligned}
+     E[u_i|w_i=1] =& E\big[y_i(0)-\textcolor{blue}{E[y_i(0)]} + (y_i(1)-y_i(0)-\textcolor{red}{E[y_i(1)-y_i(0)]})\big|w_i=1\big] \\
+     =& E\big[y_i(0)-\textcolor{blue}{E[y_i(0)]} + y_i(1)-y_i(0)-\textcolor{red}{E[y_i(1)]}+\textcolor{red}{E[y_i(0)]}\big|w_i=1\big] \\
+     =& E\big[y_i(1)-\textcolor{red}{E[y_i(1)]}\big|w_i=1\big] \\
+     =& E[y_i(1)|w_i=1] -\textcolor{red}{E[y_i(1)]}
+     \end{aligned}
+   $$
+   
+If assignment is unconfounded:
+
+$$
+  E[y_i(1)|w_i=1] -\textcolor{red}{E[y_i(1)]} = E[y_i(1)]-\textcolor{red}{E[y_i(1)]} = 0
+$$
+
+##
+
+Thus, **under unconfoundedness** we can write, 
+
+$$
+  y_i = \alpha_0 + \tau_{ate}w_i + u_i
+$$
+
+where, 
+
+- slope parameter on $w_i$ identifies the ATE
+- the error term fullfils MLR 4
+- OLS estimator is unbiased
+
+##
+
+:::{.callout-important}
+If given the model $y_i = \beta_0 + \beta_1 x_i + u_i$ with $x_i = \{0,1\}$, then it is trivial to say that $E[u_i|x_i]=0$. This is because we can write the CEF of $y$ given $x$ as a linear function:
+
+$$
+  E[y_i|x_i] = \underbrace{E[y_i|x_i=0]}_{\beta_0} + \underbrace{\big(E[y_i|x_i=1]-E[y_i|x_i=0]\big)}_{\beta_1}x_i
+$$  
+
+All this means is that we can identify the mean of two groups. It does NOT mean that $\beta_1 = E[y_i|x_i=1]-E[y_i|x_i=0]$ is equal to the ATE. **For that, you need unconfoundedness.**
+
+Consider the case where $x_i = \mathbf{1}\{\text{``female''}\}$. Then $\beta_1$ tells you the mean difference between female and male observations. Would you describe this as the ATE of being female? 
+:::
+
+## Error variance
+
+We have show that under unconfoundedness $E[u_i |w_i]=0$. What about $Var(u_i|w_i)=E[u_i^2|w_i]$?
+
+- Suppose TEs are **homogenous**: $\tau_i = \tau = \tau_{ate}\;\forall\;i$
+
+  $$
+    u_i = y_i(0)-\textcolor{blue}{E[y_i(0)]} + \underbrace{(\tau_i-\textcolor{red}{\tau_{ate}})}_{=0}w_i = y_i(0)-\textcolor{blue}{E[y_i(0)]}
+  $$
+
+Then, 
+
+$$
+  E[u_i^2|w_i] = E[(y_i(0)-\textcolor{blue}{E[y_i(0)]})^2|w_i] = E[(y_i(0)-\textcolor{blue}{E[y_i(0)]})^2] = \sigma^2_0 = \sigma^2
+$$  
+
+under unconfoundedness. 
+
+- homogeneity $\rightarrow$ homoskedastic error variance 
+
+##
+
+- If TEs are **heterogenous**: 
+
+ 
+$$
+  E[u_i^2|w_i] = \begin{cases}
+  E[(y_i(0)-\textcolor{blue}{E[y_i(0)]})^2] = \sigma^2_0 \quad \text{if}\;w_i=0 \\
+  E[(y_i(1)-\textcolor{red}{E[y_i(1)]})^2] = \sigma^2_1 \quad \text{if}\;w_i=1 \\
+  \end{cases}
+$$  
+- heterogeneity $\rightarrow$ heteroskedastic error variance 
+
+## Variance
+
+We know from [Lecture 3](lecture-3-multi.qmd) that the (conditional) variance of the OLS estimator for $\tau_{ate}$ is, 
+
+$$
+  \widehat{Var}(\hat{\tau}_{ols}|W) = \frac{\hat{\sigma}^2_{ols}}{SST_w}
+$$
+
+**under MLR 5** (i.e., homogeneous TEs). Where, 
+
+$$
+  \hat{\sigma}^2_{ols} = \frac{1}{n-2}\sum_{i=1}^n \hat{u}_i^2 = \frac{1}{n-2}\big(\hat\sigma_1^2(n_1-1) + \hat\sigma_0^2(n_0-1)\big)
+$$
+
+##
+
+In the denominator is
+
+$$
+  \begin{aligned}
+  SST_w =& \sum_{i=1}^n(w_i-\bar{w})^2 \\
+  =& \sum_{i:w_i=1}(1-\bar{w})^2 + \sum_{i:w_i=0}(0-\bar{w})^2 \\
+  =& n_1(1-2\bar{w} + \bar{w}^2) + n_0 \bar{w}^2 \\
+  =& n_1(1-2\bar{w}) + n\bar{w}^2 \\
+  =& \underbrace{n\bar{w}}_{=n_1}(1-2\bar{w}) + n\bar{w}^2 \\
+  =& n\bar{w}(1-\bar{w}) 
+  \end{aligned}
+$$
+
+This formula is quadratic in $\bar{w}$ - the share of the sample treated. 
+
+- At $\bar{w}=0.5$, $SST_w$ is maximized and $Var(\hat{\tau}^{OLS}|W)$ is minimized. 
+
+## 
+
+What if MLR 5 (i.e. heterogeneous TEs) does not hold. 
+
+- The White (1980) heteroskedastic-consistent estimator from [Lecture 5](lecture-5-multi.qmd) was,
+
+$$
+  \widehat{Var}(\hat{\tau}_{ols}|W) = \frac{\sum_{i=1}^{n}(w_{i}-\bar{w})^2\hat{u}_i^2}{\text{SST}_w^2}
+$$
+
+It can be shown (we will not) that, 
+
+$$
+  \widehat{Var}(\hat{\tau}_{ols}|W) \neq  \frac{\hat{\sigma}_1^2}{n_1} + \frac{\hat{\sigma}_0^2}{n_0}
+$$
+
+the Neyman estimator. The Neyman estimator is numerically equivalent to HC2. 
+
+- in practice, all HC0-HC3 estimators are asymptotically consistent. 
+- HC3 is recommended for smaller samples.
+
+::::{.content-visible unless-format="revealjs"}
+:::{.callout-tip title="" collapse=true}
+You can use the same trick of splitting the summation to show, 
+
+$$
+  \begin{aligned}
+    \widehat{Var}(\hat{\tau}_{ols}|W) =& \frac{\sum_{i=1}^{n}(w_{i}-\bar{w})^2\hat{u}_i^2}{\text{SST}_w^2} \\
+    =& \frac{\sum_{i:w_i=1}^{n}(1-\bar{w})^2(y_i-\hat{\alpha}_{ols}-\hat{\tau}_{ols})^2+\sum_{i:w_i=0}^{n}(-\bar{w})^2(y_i-\hat{\alpha}_{ols})^2}{\text{SST}_w^2} \\
+    =& \frac{(1-\bar{w})^2\sum_{i:w_i=1}^{n}(y_i-\hat{\alpha}_{ols}-\hat{\tau}_{ols})^2+\bar{w}^2\sum_{i:w_i=0}^{n}(y_i-\hat{\alpha}_{ols})^2}{\text{SST}_w^2} \\
+    =& \frac{(1-\bar{w})^2(n_1-1)\hat\sigma_1^2+\bar{w}^2(n_0-1)\hat\sigma_0^2}{(n\bar{w}(1-\bar{w}))^2} \\
+    =& \frac{n_1-1}{n_1^2}\hat\sigma_1^2+\frac{n_0-1}{n_0^2}\hat\sigma_0^2
+  \end{aligned}
+$$
+
+And HC1 (Stata's robust default) will be, 
+
+$$
+  \frac{n}{n-2}\times \Bigg[\frac{n_1-1}{n_1^2}\hat\sigma_1^2+\frac{n_0-1}{n_0^2}\hat\sigma_0^2\Bigg]
+$$
+
+It is evident that for $n$ large, these estimators will be very similar to Neyman's. 
+:::
+::::
+
+
+# Regression Adjustment
+
+## Purpose
+
+The variance of the estimator is (assuming homogeneous TEs), 
+
+$$
+  Var(\hat{\tau}_{ols}|W) = \frac{Var(u_i|w_i)}{SST_w} = \frac{\sigma^2_u}{SST_w}
+$$
+
+where $u_i$ is from the model, 
+
+$$
+  y_i = \alpha_0 + \tau_{ate}w_i + u_i
+$$
+
+- The only variation in $y$ explained by this model is the difference between treatment and control.
+- Will result in high variance and low-powered test. 
+
+## Covariates
+
+Suppose,
+
+$$
+u_i = \gamma x_i + v_i
+$$
+
+where $x$ is a regressor measured before assignment[^6]
+
+[^6]: We can extend the notation to include multiple regressors, but it makes some of the math a little difficult. The conclusion does not change. 
+
+- likely explain part of the outcome (i.e. $\gamma\neq 0$)
+
+- commonly referred to as baseline covariates in RCTs
+
+## Regression adjustment
+
+Instead of the simple regression, we estimate
+
+$$
+  y_i = \alpha_0 + \tau_{ate}w_i + \gamma x_i + v_i
+$$
+
+- Wooldridge refers to this as the Restricted Regression Adjustment (RRA) [~@wooldridge2025, p. 257]
+
+## Variance
+
+$$
+  Var(\hat{\tau}_{rra}|W,X) = \frac{Var(v_i|w_i,x_i)}{SSR_w} =  \frac{\sigma^2_v}{SSR_w}
+$$
+
+where, $SSR_w=SST_w (1-R_w^2)$
+
+- $R^2_w$ is the amount of variance in assignment explained by the covariates. **This should be low.**
+
+- While $R^2_w\neq 0$ in the finite sample, $R^2_w\rightarrow 0$ as $n\rightarrow \infty$
+
+- So, $SSR_w\approx SST_w$. 
+
+## Power
+
+The improvement in power comes from the fact that, 
+
+$$
+  Var(u_i|w_i) = Var(\gamma_ix_i + v_i|w_i) = \underbrace{\gamma^2 Var(x_i)}_{>0} + Var(v_i|w_i,x_i) > \sigma^2_v
+$$
+
+assuming $Cov(x_i,v_i|w_i)=0$. 
+
+## Heterogeneity
+
+This simple story is somewhat complicated by heterogeneity:
+
+- heterogeneity is sits in the error term
+
+- heterogeneity is likely related to $x$
+
+- heterogeneity (that depends on $x$) introduces small-sample bias in models of the form:
+  
+  $$
+    y_i = \alpha_0 + \tau_{ate}w_i + \gamma x_i + v_i
+  $$
+  
+- OLS remains consistent (for the ATE), despite this small-sample bias
+
+
+  
+## URA
+
+To avoid this small-sample bias, you can do Unrestricted Regression Adjustment (URA) [@wooldridge2025, p. 257, 259].
+
+  $$
+    y_i = \alpha_0 + \tau_{ate}w_i + \gamma x_i + \eta w_i\times (x_i-\bar{x}) + \varepsilon_i
+  $$
+  
+- includes an interaction between the treatment indicator and the covariate(s)
+
+- the interactions include demeaned covariate(s) 
+
+  - this changes the interpretation of $\eta$ [see @wooldridge2025, sec. 6.2d]
+  
+  - ensures that the coefficient on $w$ remains the ATE
+
+# Example:
+
+ 

@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Econometrics Lab 3 – EC3301 Econometrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cf201e8c159c64e39451d1a718f2f573.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">EC3301 Econometrics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lectures" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lectures</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lectures">    
+        <li>
+    <a class="dropdown-item" href="./lecture-0.html">
+ <span class="dropdown-text">Pre-sessional Lecture</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-1.html">
+ <span class="dropdown-text">Lecture 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-2.html">
+ <span class="dropdown-text">Lecture 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-3.html">
+ <span class="dropdown-text">Lecture 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-4.html">
+ <span class="dropdown-text">Lecture 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-5.html">
+ <span class="dropdown-text">Lecture 5</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="./lab-1-Stata.html">
+ <span class="dropdown-text">Lab 1 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-1-R.html">
+ <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-Stata.html">
+ <span class="dropdown-text">Lab 2 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-R.html">
+ <span class="dropdown-text">Lab 2 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-3-Stata.html">
+ <span class="dropdown-text">Lab 3 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-3-R.html">
+ <span class="dropdown-text">Lab 3 (R)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./tutorial-1.html">
+ <span class="dropdown-text">Tutorial 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-1-solutions.html">
+ <span class="dropdown-text">Tutorial 1 (Solutions)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2.html">
+ <span class="dropdown-text">Tutorial 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2-solutions.html">
+ <span class="dropdown-text">Tutorial 2 (Solutions)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-3.html">
+ <span class="dropdown-text">Tutorial 3</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-extra-material" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Extra Material</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-extra-material">    
+        <li>
+    <a class="dropdown-item" href="./material-interpretation.html">
+ <span class="dropdown-text">Interpreting Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-cef.html">
+ <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-intercept.html">
+ <span class="dropdown-text">The Intercept</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-R.html">
+ <span class="dropdown-text">Basic Programming in R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-Stata.html">
+ <span class="dropdown-text">Basic Programming in Stata</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="light-content">
+<p><img src="img/01-standard-vertical-black-text.png" class="img-fluid"></p>
+</div>
+<div class="dark-content">
+<p><img src="img/02-standard-vertical-white-text.png" class="img-fluid"></p>
+</div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context">Context</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#replication" id="toc-replication" class="nav-link" data-scroll-target="#replication">Replication</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Econometrics Lab 3</h1>
+<p class="subtitle lead">RCT Replication in R</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>During this lab we will attempt to replicate some of the results in <span class="citation" data-cites="dizon2019parents">Dizon-Ross (<a href="#ref-dizon2019parents" role="doc-biblioref">2019</a>)</span>. The data you have been provided does not need much cleaning. However, you may not get the exact same results as those shown in the paper because some variables are missing and there are small sample size differences. For the most part, your results should be very similar.</p>
+<section id="context" class="level1">
+<h1>Context</h1>
+<p>This RCT was used as an example in <a href="lecture-6-multi.qmd">Lecture 6</a>.</p>
+<ul>
+<li><p><strong>Setting:</strong> primary schools in Machinga and Balaka districts, Malawi, in 2012. Primary school is technically free but still costly: parents spend about 1,750 MWK (US$10.6) per child per year. Schools must send report cards home each term, but 60% of parents say they don’t know their child’s performance from the last report, because the card never arrived or they couldn’t understand it.</p></li>
+<li><p><strong>Sample:</strong> The sampling frame includes households with at least two children in grades 2–6, with two children randomly chosen per household. Of 3,451 sampled households, 2,634 were eligible and surveyed, giving 5,268 parent–child pairs.</p></li>
+<li><p><strong>Randomization:</strong> households were randomly split half into treatment and half into control. Randomization was stratified on the between-sibling score gap and the estimated literacy rate in the household’s village, a proxy for parental education. Half of the treatment group also received more detailed skills information, but the paper pools all treated households and finds no separate effect.</p></li>
+<li><p><strong>Intervention:</strong> surveyors visited every household and ran a baseline survey on spending and beliefs about each child’s scores. In the same visit, treatment parents were walked through an easy-to-read report card for each child, showing math, English, Chichewa and overall scores, grades and class rank.</p></li>
+<li><p><strong>Outcomes:</strong> an endline survey immediately after the visit measured updated beliefs, the free workbook level chosen and willingness to pay for remedial textbooks. Longer-run outcomes came from school attendance records in the following month and a second endline survey about a year later, covering enrolment and spending, for a random subset of about 900 households.</p></li>
+</ul>
+</section>
+<section id="setup" class="level1">
+<h1>Setup</h1>
+<p>On Moodle, under “Week 8”, you find the <a href="https://moody.st-andrews.ac.uk/moodle/mod/folder/view.php?id=1572527">“Lab 3 Data”</a> folder.</p>
+<ol type="1">
+<li><p>Create a folder on OneDrive (or your H drive) for “Lab 3”</p></li>
+<li><p>Download the paper, store it in this folder, and open it on your computer. You will need to reference the various tables and figures.</p></li>
+<li><p>Download the “dizonross2019.dta” file and store it in this folder.</p></li>
+<li><p>Open RStudio and create a new R script. Save it as “Lab 3/lab-3.R”</p></li>
+<li><p>Add the following to your R script; editing the file path to match your folder structure.</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Title: Econometrics Lab 3: RCT Replication in R</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: [INSERT NAME]</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Date: [INSERT DATE]</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================ #</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"haven"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sandwich"</span>)   <span class="co"># robust and clustered standard errors</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lmtest"</span>)     <span class="co"># coeftest(): regression output with robust SEs</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"broom"</span>)      <span class="co"># used by the table helper functions</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"knitr"</span>)      <span class="co"># used by the table helper functions</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear all objects from the R environment</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Set working directory</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"[INSERT FILE PATH]/EC3301/Lab 3"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================ #</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Open data</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>dr19_dta <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"dizonross2019.dta"</span>) <span class="sc">%&gt;%</span> <span class="fu">zap_labels</span>()</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># zap_labels() turns Stata value labels into plain numbers</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># It can be removed. You may get a warning when using fixest about labelled data</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Create between-sibling score gap:</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>dr19_dta <span class="ot">&lt;-</span> dr19_dta <span class="sc">%&gt;%</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hhid) <span class="sc">%&gt;%</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(child, <span class="at">.by_group =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ave_12 =</span> <span class="fu">first</span>(score_ave) <span class="sc">-</span> <span class="fu">nth</span>(score_ave, <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># creates a variable equal to difference between first and second childs score in each household</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================ #</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Table helper functions (copy from the box below)</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================ #</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Assignment</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================ #</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphical analysis</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================ #</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># ATE</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================ #</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression adjustment</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================ #</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Interacted model</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================ #</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Heterogeneity</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="missing-packages" class="level2">
+<h2 class="anchored" data-anchor-id="missing-packages">Missing packages</h2>
+<p>In this lab you will make tables of summary statistics and regression output; just as you see in the paper. This is an important skill needed for the project. Most researchers use user-written packages like <code>modelsummary</code> or <code>stargazer</code> to do this. Unfortunately, these cannot be installed in the AppsAnywhere version of R.</p>
+<p>There is also a popular regression model package called <code>fixest</code> which is used to estimate models with fixed effects. We will get around this, but treating estimating fixed effects using the standard dummy variable approach.</p>
+<p>If you are working on your own computer, consider following the alternative code suggestions shown in the green blocks.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Using modelsummary and fixest (own computer only)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Using modelsummary and fixest (own computer only)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If you are working on your own computer, you can install two packages that make tables and regressions easier. They are <strong>not</strong> available on the university server, so everything in this lab can be done without them.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"fixest"</span>, <span class="st">"modelsummary"</span>))   <span class="co"># only needed once</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"fixest"</span>)        <span class="co"># feols(): regressions with robust/clustered SEs and absorbed FEs</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"modelsummary"</span>)  <span class="co"># modelsummary(): regression tables; datasummary_balance(): balance tables</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Settings used in the modelsummary tables below</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>stars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"*"</span> <span class="ot">=</span> .<span class="dv">1</span>, <span class="st">"**"</span> <span class="ot">=</span> .<span class="dv">05</span>, <span class="st">"***"</span> <span class="ot">=</span> .<span class="dv">01</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>gof   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Load these <strong>after</strong> <code>rm(list = ls())</code>, or the <code>stars</code> and <code>gof</code> settings will be deleted. Look for similar boxes throughout the lab.</p>
+</div>
+</div>
+</div>
+<p>As a substitute, you can use the following AI-written functions to create the tables using R’s <code>knitr</code> and <code>broom</code> packages.</p>
+<ul>
+<li><code>balance_table(data, vars)</code>: means by treatment group, the difference, and the <span class="math inline">\(p\)</span>-value of a <span class="math inline">\(t\)</span>-test (replaces <code>dtable, by(treat, tests)</code>)</li>
+<li><code>reg_table(models, types, keep)</code>: places regression results side-by-side (replaces <code>etable</code>)</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Table helper functions (click to show, then copy into your script)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance matrix for a fitted lm, mirroring Stata's vce() options.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   "classical" = Stata default; "HC1" = vce(robust); "HC2" = vce(hc2);</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   "cluster" = vce(cluster hhid)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>get_vcov <span class="ot">&lt;-</span> <span class="cf">function</span>(m, <span class="at">type =</span> <span class="st">"classical"</span>) {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (type <span class="sc">==</span> <span class="st">"classical"</span>) <span class="fu">return</span>(<span class="fu">vcov</span>(m))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (type <span class="sc">==</span> <span class="st">"cluster"</span>)   <span class="fu">return</span>(<span class="fu">vcovCL</span>(m, <span class="at">cluster =</span> <span class="sc">~</span>hhid, <span class="at">type =</span> <span class="st">"HC1"</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vcovHC</span>(m, <span class="at">type =</span> type)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficient table with the chosen SEs. For clustered SEs, p-values use G-1</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># degrees of freedom, as Stata does.</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>coef_table <span class="ot">&lt;-</span> <span class="cf">function</span>(m, <span class="at">type =</span> <span class="st">"classical"</span>) {</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="cf">if</span> (type <span class="sc">==</span> <span class="st">"cluster"</span>) {</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(<span class="fu">unique</span>(<span class="fu">expand.model.frame</span>(m, <span class="sc">~</span>hhid)<span class="sc">$</span>hhid)) <span class="sc">-</span> <span class="dv">1</span>   <span class="co"># number of clusters - 1</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    m<span class="sc">$</span>df.residual</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>(<span class="fu">coeftest</span>(m, <span class="at">vcov. =</span> <span class="fu">get_vcov</span>(m, type), <span class="at">df =</span> df))</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Side-by-side regression table (replaces etable).</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   models: named list of lm objects</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   types:  one SE type per model (recycled if length 1)</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   keep:   terms to show (NULL = all except intercept and grade/school dummies)</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>reg_table <span class="ot">&lt;-</span> <span class="cf">function</span>(models, <span class="at">types =</span> <span class="st">"classical"</span>, <span class="at">keep =</span> <span class="cn">NULL</span>, <span class="at">digits =</span> <span class="dv">4</span>) {</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  types <span class="ot">&lt;-</span> <span class="fu">rep</span>(types, <span class="at">length.out =</span> <span class="fu">length</span>(models))</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  stars <span class="ot">&lt;-</span> <span class="cf">function</span>(p) <span class="fu">ifelse</span>(p <span class="sc">&lt;</span> .<span class="dv">01</span>, <span class="st">"***"</span>, <span class="fu">ifelse</span>(p <span class="sc">&lt;</span> .<span class="dv">05</span>, <span class="st">"**"</span>, <span class="fu">ifelse</span>(p <span class="sc">&lt;</span> .<span class="dv">1</span>, <span class="st">"*"</span>, <span class="st">""</span>)))</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  tabs  <span class="ot">&lt;-</span> <span class="fu">Map</span>(coef_table, models, types)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  terms <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">is.null</span>(keep)) {</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unique</span>(<span class="fu">unlist</span>(<span class="fu">lapply</span>(tabs, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="st">"term"</span>)))</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> keep</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  terms <span class="ot">&lt;-</span> terms[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Intercept|factor</span><span class="sc">\\</span><span class="st">(grade</span><span class="sc">\\</span><span class="st">)|factor</span><span class="sc">\\</span><span class="st">(school</span><span class="sc">\\</span><span class="st">)"</span>, terms)]</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  rows <span class="ot">&lt;-</span> <span class="fu">lapply</span>(terms, <span class="cf">function</span>(t) {</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    b  <span class="ot">&lt;-</span> <span class="fu">sapply</span>(tabs, <span class="cf">function</span>(x) { r <span class="ot">&lt;-</span> x[x<span class="sc">$</span>term <span class="sc">==</span> t, ]</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">nrow</span>(r)) <span class="fu">paste0</span>(<span class="fu">formatC</span>(r<span class="sc">$</span>estimate, digits, <span class="at">format =</span> <span class="st">"f"</span>), <span class="fu">stars</span>(r<span class="sc">$</span>p.value)) <span class="cf">else</span> <span class="st">""</span> })</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    se <span class="ot">&lt;-</span> <span class="fu">sapply</span>(tabs, <span class="cf">function</span>(x) { r <span class="ot">&lt;-</span> x[x<span class="sc">$</span>term <span class="sc">==</span> t, ]</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">nrow</span>(r)) <span class="fu">paste0</span>(<span class="st">"("</span>, <span class="fu">formatC</span>(r<span class="sc">$</span>std.error, digits, <span class="at">format =</span> <span class="st">"f"</span>), <span class="st">")"</span>) <span class="cf">else</span> <span class="st">""</span> })</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rbind</span>(<span class="fu">c</span>(t, b), <span class="fu">c</span>(<span class="st">""</span>, se))</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, rows)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(out,</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>               <span class="fu">c</span>(<span class="st">"N"</span>,  <span class="fu">sapply</span>(models, nobs)),</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>               <span class="fu">c</span>(<span class="st">"R2"</span>, <span class="fu">sapply</span>(models, <span class="cf">function</span>(m) <span class="fu">formatC</span>(<span class="fu">summary</span>(m)<span class="sc">$</span>r.squared, <span class="dv">3</span>, <span class="at">format =</span> <span class="st">"f"</span>))),</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>               <span class="fu">c</span>(<span class="st">"SE"</span>, types))</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="fu">names</span>(models))</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">kable</span>(out, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="fu">rep</span>(<span class="st">"c"</span>, <span class="fu">length</span>(models)))))</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"* p&lt;0.10, ** p&lt;0.05, *** p&lt;0.01. Standard errors in parentheses.</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Balance table (replaces dtable, by(treat, tests)): means by group,</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="co"># difference, and p-value from an equal-variance t-test (same as reg x treat).</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>balance_table <span class="ot">&lt;-</span> <span class="cf">function</span>(data, vars, <span class="at">by =</span> <span class="st">"treat"</span>, <span class="at">digits =</span> <span class="dv">3</span>) {</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(vars, <span class="cf">function</span>(v) {</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> data[[v]]; g <span class="ot">&lt;-</span> data[[by]]</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>    tt <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x <span class="sc">~</span> g, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="at">Control    =</span> <span class="fu">mean</span>(x[g <span class="sc">==</span> <span class="dv">0</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>      <span class="at">Treatment  =</span> <span class="fu">mean</span>(x[g <span class="sc">==</span> <span class="dv">1</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>      <span class="at">Difference =</span> <span class="fu">mean</span>(x[g <span class="sc">==</span> <span class="dv">1</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">mean</span>(x[g <span class="sc">==</span> <span class="dv">0</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>      <span class="at">p.value    =</span> tt<span class="sc">$</span>p.value,</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>      <span class="at">N          =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)))</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>  }))</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">kable</span>(out, <span class="at">digits =</span> digits))</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+</section>
+<section id="replication" class="level1">
+<h1>Replication</h1>
+<section id="assignment" class="level2">
+<h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
+<p>We begin by understanding assignment and validating randomization. The main variable of interest is the dummy variable <code>treat</code>, which =1 for the treated households.</p>
+<ol type="1">
+<li><p>Use the functions <code>length()</code> and <code>unique()</code> to figure out how many unique schools there are.</p></li>
+<li><p>Use the code below to figure out if there are any households that appear more than twice in the data.</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dr19_dta <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(hhid, <span class="at">name =</span> <span class="st">"copies"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(copies, <span class="at">name =</span> <span class="st">"households"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="3" type="1">
+<li>Create a frequency table of the treatment indicator <code>treat</code>. Is this an efficient experiment design?</li>
+</ol>
+<p>Next, we will try to replicate some of the lines in Table 1 (the balance table).</p>
+<ol start="4" type="1">
+<li><p>We will begin by replicating some of the lines under “Panel A. Respondent background.” These are background characteristics of the parent who responded to the survey.</p>
+<ul>
+<li>Use the <code>balance_table()</code> helper function. The first argument is the data frame; the second is a list of the variables you want to compare across treatment groups.</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">balance_table</span>(dr19_dta, <span class="fu">c</span>(<span class="st">"resp_female"</span>, <span class="st">"resp_decides"</span>, <span class="st">"resp_age"</span>, <span class="st">"resp_secondary"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Your results should replicate:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+|               | Control| Treatment| Difference| p.value|    N|
+|:--------------|-------:|---------:|----------:|-------:|----:|
+|resp_female    |   0.774|     0.759|     -0.015|   0.200| 5268|
+|resp_decides   |   0.915|     0.925|      0.010|   0.185| 5240|
+|resp_age       |  40.645|    40.974|      0.329|   0.299| 4812|
+|resp_secondary |   0.107|     0.112|      0.004|   0.617| 5230|</code></pre>
+</div>
+</div>
+<ol start="5" type="1">
+<li><p>Follow the same steps replicating lines from “Panel C. Student information” for variables <code>grade</code>, <code>child_age</code>, <code>child_female</code>, and <code>attend_bl</code>.</p></li>
+<li><p>Does the evidence support the researchers claim that assignment into treatment is balanced (p.&nbsp;2744)?</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Using modelsummary">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Using modelsummary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>datasummary_balance()</code> creates a balance table in one line. The formula <code>~treat</code> defines the groups, and <code>select()</code> picks the variables to compare.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary_balance</span>(<span class="sc">~</span>treat,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> <span class="fu">select</span>(dr19_dta, treat, resp_female, resp_decides, resp_age, resp_secondary),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dinm_statistic =</span> <span class="st">"p.value"</span>, <span class="at">fmt =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <span class="math inline">\(p\)</span>-values come from an unequal-variance (Welch) <span class="math inline">\(t\)</span>-test, which should match <code>balance_table()</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="graphical-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="graphical-analysis">Graphical analysis</h2>
+<p>In this section we are going to attempt to replicate Figure 3.</p>
+<ol type="1">
+<li><p>Replicate Panel A.</p>
+<ul>
+<li>First, compute the mean of <code>belief_err_bl</code> for each treatment group, as we did in Lab 1.</li>
+<li>Then plot the means using <code>geom_col()</code>, and add the bar heights as labels with <code>geom_text()</code>.</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> dr19_dta <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treat =</span> <span class="fu">factor</span>(treat, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treat"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treat) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_err =</span> <span class="fu">mean</span>(belief_err_bl, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(means, <span class="fu">aes</span>(<span class="at">x =</span> treat, <span class="at">y =</span> mean_err)) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(mean_err, <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"mean of belief_err_bl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Your results should replicate:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab-3-R_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>Replicate Panel C. Follow the same steps as above, but use <code>belief_err_end</code> instead.</p></li>
+<li><p>To replicate Panel B, we won’t try to estimate the flexible functions shown in the paper. Instead, we will use <code>geom_smooth(method = "lm")</code> to fit a linear line between <code>belief_bl</code> and <code>score_ave</code> for both the treated and control groups, and <code>geom_abline()</code> to add the 45-degree line. Here is my version.</p></li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 12 rows containing non-finite outside the scale range
+(`stat_smooth()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab-3-R_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Hint">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Mapping <code>colour</code> (and <code>linetype</code>) to <code>factor(treat)</code> inside <code>aes()</code> tells <code>ggplot()</code> to draw a separate line for each treatment group.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dr19_dta, <span class="fu">aes</span>(<span class="at">x =</span> score_ave, <span class="at">y =</span> belief_bl, <span class="at">colour =</span> <span class="fu">factor</span>(treat))) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Replicate Panel D using similar steps. The lines should have a similar slope.</li>
+</ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Don’t forget to store a copy of your code in the R script.</p>
+</div>
+</div>
+</section>
+<section id="ate" class="level2">
+<h2 class="anchored" data-anchor-id="ate">ATE</h2>
+<p>One of the main outcomes in the study is <code>belief_end</code>: which captures the parents’ beliefs about their children’s performances <strong>after</strong> the intervention.</p>
+<ol type="1">
+<li><p>Test whether there is a statistically significant difference between the mean of <code>belief_end</code> across treatment groups. To do so, we will first use R’s <code>t.test()</code> function.</p>
+<ul>
+<li>The formula <code>belief_end ~ treat</code> compares the mean of <code>belief_end</code> across the two groups defined by <code>treat</code>.</li>
+<li>The option <code>var.equal = TRUE</code> assumes equal variances in the two groups (as Stata’s <code>ttest</code> does by default).</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(belief_end <span class="sc">~</span> treat, <span class="at">data =</span> dr19_dta, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Your results should replicate:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  belief_end by treat
+t = 14.885, df = 5242, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ 6.444300 8.399272
+sample estimates:
+mean in group 0 mean in group 1 
+       63.56283        56.14105 </code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>Now, run the same test without the <code>var.equal = TRUE</code> option. R then allows for unequal variances (Welch’s test). This should compute the Neyman variance estimator.</p></li>
+<li><p>Replicate these results by estimating a linear regression with <code>lm()</code>. The default estimated SE should replicate that from Q1.</p></li>
+<li><p>Estimate the same simple regression with robust SEs: HC1 (Stata’s <code>vce(robust)</code>) and HC2 (Stata’s <code>vce(hc2)</code>). These two should be very similar, since treatment is close to 50-50.</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model_ate <span class="ot">&lt;-</span> <span class="fu">lm</span>(belief_end <span class="sc">~</span> treat, <span class="at">data =</span> dr19_dta)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(model_ate, <span class="at">vcov. =</span> <span class="fu">vcovHC</span>(model_ate, <span class="at">type =</span> <span class="st">"HC1"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>vcovHC()</code> (from <code>sandwich</code>) computes the robust variance matrix, and <code>coeftest()</code> (from <code>lmtest</code>) reports the regression results using it.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Using fixest">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Using fixest
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>feols()</code> from <code>fixest</code> works like <code>lm()</code>, but lets you choose the SEs directly. <code>vcov = "hetero"</code> gives HC1 SEs, the same as Stata’s <code>vce(robust)</code>. <code>fixest</code> does not offer HC2, so use <code>coeftest()</code> for that.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">feols</span>(belief_end <span class="sc">~</span> treat, <span class="at">data =</span> dr19_dta, <span class="at">vcov =</span> <span class="st">"hetero"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="regression-adjustment" class="level2">
+<h2 class="anchored" data-anchor-id="regression-adjustment">Regression adjustment</h2>
+<p>Now we can replicate some of the regression tables.</p>
+<ol type="1">
+<li>The variables <code>wb_math</code> and <code>wb_engl</code> take on values <span class="math inline">\(\{-1,0,1\}\)</span>. Recode these values to <span class="math inline">\(\{0,100,200\}\)</span>. You can either use <code>case_when()</code> or a simple formula.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dr19_dta <span class="ot">&lt;-</span> dr19_dta <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wb_math =</span> <span class="fu">case_when</span>(wb_math <span class="sc">==</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                             wb_math <span class="sc">==</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="dv">100</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                             wb_math <span class="sc">==</span> <span class="dv">1</span>  <span class="sc">~</span> <span class="dv">200</span>))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">## or</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># dr19_dta &lt;- dr19_dta %&gt;%</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(wb_math = (wb_math + 1) * 100)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Estimate the first model from Panel A. of Table A.1 (p.&nbsp;2759), including the following controls and estimating robust SEs. <code>factor(grade)</code> adds a dummy variable for each grade (Stata’s <code>i.grade</code>).</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade),</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> dr19_dta)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(model1, <span class="at">vcov. =</span> <span class="fu">vcovHC</span>(model1, <span class="at">type =</span> <span class="st">"HC1"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+                 Estimate Std. Error  t value  Pr(&gt;|t|)    
+(Intercept)    36.3497242  0.9783687  37.1534 &lt; 2.2e-16 ***
+treat          -7.1489407  0.4366317 -16.3729 &lt; 2.2e-16 ***
+par_educ        0.1163938  0.0791685   1.4702  0.141569    
+resp_female    -0.2481120  0.5169411  -0.4800  0.631276    
+resp_literate   0.7500940  0.6019915   1.2460  0.212815    
+ave_12         -0.0097040  0.0095037  -1.0211  0.307270    
+score_ave       0.5004139  0.0132683  37.7149 &lt; 2.2e-16 ***
+child_female    0.2260491  0.4377077   0.5164  0.605571    
+factor(grade)3  2.0894901  0.6729043   3.1052  0.001912 ** 
+factor(grade)4  3.4658344  0.6434589   5.3863 7.523e-08 ***
+factor(grade)5  4.6173883  0.6733241   6.8576 7.850e-12 ***
+factor(grade)6  5.6380015  0.7078316   7.9652 2.026e-15 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li><p>Next we will try to estimate the remaining models and create a table.</p>
+<ul>
+<li>Estimate each model and store the results as follows. Assigning the model to a name (<code>model1 &lt;- lm(...)</code>) stores the results without printing them.</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade),</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> dr19_dta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li><p>For each additional model, you need to change the name of the stored results: <code>model1</code>, <code>model2</code>, etc.</p></li>
+<li><p>Use the following code to make a table:</p></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reg_table</span>(<span class="fu">list</span>(<span class="at">belief_end =</span> model1, <span class="at">wb_math =</span> model2, <span class="at">wb_engl =</span> model3,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">lnwtp_math_engl =</span> model4, <span class="at">enrolled =</span> model5,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">ln_educ_exp_end =</span> model6, <span class="at">attend_admin =</span> model7),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">types =</span> <span class="st">"HC1"</span>, <span class="at">keep =</span> <span class="st">"treat"</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># list() collects the models; the names become the column headings</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># types = "HC1" computes robust SEs (Stata's vce(robust)) for every model</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># keep = "treat" only displays the coefficient on treat</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Using fixest and modelsummary">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Using fixest and modelsummary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Estimate each model with <code>feols()</code>, collect them in a <code>list()</code>, and pass the list to <code>modelsummary()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">belief_end =</span> <span class="fu">feols</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> dr19_dta, <span class="at">vcov =</span> <span class="st">"hetero"</span>),</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">wb_math =</span> <span class="fu">feols</span>(wb_math <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> dr19_dta, <span class="at">vcov =</span> <span class="st">"hetero"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ... add the remaining five models here</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(models, <span class="at">coef_map =</span> <span class="st">"treat"</span>, <span class="at">stars =</span> stars, <span class="at">gof_map =</span> gof, <span class="at">fmt =</span> <span class="dv">4</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coef_map = "treat" only displays the coefficient on treat</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># stars and gof are the settings defined at the start of the lab</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>The following information is provided in the tables notes of Table A.1</p>
+<blockquote class="blockquote">
+<p>“Standard errors are clustered at the household level. Regressions control for school FE, average parental years of education, parent gender, a parental education proxy used for stratification, the between-child score gap, child baseline performance, child gender, grade FE, and the baseline value of the dependent variable (baseline value not available for enrollment or experimental outcomes).”</p>
+</blockquote>
+<ol start="4" type="1">
+<li>Evidently, the model specifications in Q.3 do not perfectly match those in the paper. We are missing school fixed effects (FE), have replaced “a parental education proxy used for stratification” with <code>resp_literate</code>. Add <code>factor(school)</code> to the model to include school FEs. Does it make a difference to either the estimated coefficient or SE?</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model_fe <span class="ot">&lt;-</span> <span class="fu">lm</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade) <span class="sc">+</span> <span class="fu">factor</span>(school),</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> dr19_dta)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(model_fe, <span class="at">vcov. =</span> <span class="fu">vcovHC</span>(model_fe, <span class="at">type =</span> <span class="st">"HC1"</span>))[<span class="st">"treat"</span>, ]</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ["treat", ] displays only the row for treat, instead of all 39 school dummies</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="5" type="1">
+<li>The authors do not estimate heteroskedastic-robust SEs. Instead, the estimate SEs that are cluster-robust, where the cluster variable is the household. This is because there are two children in the data for every household. We can do this using <code>vcovCL()</code> (Stata’s <code>vce(cluster hhid)</code>).</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(model_fe, <span class="at">vcov. =</span> <span class="fu">vcovCL</span>(model_fe, <span class="at">cluster =</span> <span class="sc">~</span>hhid))[<span class="st">"treat"</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Using fixest">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Using fixest
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>When there is a large number of FEs (as here), it makes sense to use a slightly different estimator that “absorbs” them, like Stata’s <code>areg</code>. In <code>feols()</code>, list the FEs after <code>|</code>. The estimate of <code>treat</code> is identical to adding <code>factor(school)</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">feols</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade) <span class="sc">|</span> school,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> dr19_dta, <span class="at">vcov =</span> <span class="st">"hetero"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">feols</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade) <span class="sc">|</span> school,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> dr19_dta, <span class="at">cluster =</span> <span class="sc">~</span>hhid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Be careful: when the model includes FEs, <code>feols()</code> clusters the SEs by the FE variable unless you say otherwise.</p>
+</div>
+</div>
+</div>
+<ol start="6" type="1">
+<li>Create the following table and comment on whether the various regression adjustments and SE estimates have a big impact on the estimated ATE.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(belief_end <span class="sc">~</span> treat,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> dr19_dta)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> dr19_dta)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade) <span class="sc">+</span> <span class="fu">factor</span>(school),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> dr19_dta)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade) <span class="sc">+</span> <span class="fu">factor</span>(school),</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> dr19_dta)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">reg_table</span>(<span class="fu">list</span>(<span class="st">"(1)"</span> <span class="ot">=</span> model1, <span class="st">"(2)"</span> <span class="ot">=</span> model2, <span class="st">"(3)"</span> <span class="ot">=</span> model3, <span class="st">"(4)"</span> <span class="ot">=</span> model4),</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">types =</span> <span class="fu">c</span>(<span class="st">"HC1"</span>, <span class="st">"HC1"</span>, <span class="st">"HC1"</span>, <span class="st">"cluster"</span>), <span class="at">keep =</span> <span class="st">"treat"</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># models 3 and 4 are the same regression; only the SEs differ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Using fixest and modelsummary">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Using fixest and modelsummary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"(1)"</span> <span class="ot">=</span> <span class="fu">feols</span>(belief_end <span class="sc">~</span> treat,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> dr19_dta, <span class="at">vcov =</span> <span class="st">"hetero"</span>),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"(2)"</span> <span class="ot">=</span> <span class="fu">feols</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> dr19_dta, <span class="at">vcov =</span> <span class="st">"hetero"</span>),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"(3)"</span> <span class="ot">=</span> <span class="fu">feols</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade) <span class="sc">|</span> school,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> dr19_dta, <span class="at">vcov =</span> <span class="st">"hetero"</span>),</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"(4)"</span> <span class="ot">=</span> <span class="fu">feols</span>(belief_end <span class="sc">~</span> treat <span class="sc">+</span> par_educ <span class="sc">+</span> resp_female <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> score_ave <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade) <span class="sc">|</span> school,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> dr19_dta, <span class="at">cluster =</span> <span class="sc">~</span>hhid))</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(models, <span class="at">coef_map =</span> <span class="st">"treat"</span>, <span class="at">stars =</span> stars, <span class="at">gof_map =</span> gof, <span class="at">fmt =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="interacted-model" class="level2">
+<h2 class="anchored" data-anchor-id="interacted-model">Interacted model</h2>
+<p>In the paper, the authors focus on a model that interacts the treatment with baseline academic achievement (see p.&nbsp;2747). The results are shown in Table 2.</p>
+<p><span class="math display">\[
+  y_{ij} = c_o + c_1A_{ij}\times Treat_i + c_2A_{ij} + c_3Treat_i + c_4'X_{ij} + \varepsilon_{ij}
+\]</span></p>
+<ol type="1">
+<li>Here is an example of how to estimate this model for the outcome <code>belief_end</code>. Here I am excluding the FEs and estimating heteroskedastic-robust SEs.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(belief_end <span class="sc">~</span> treat <span class="sc">*</span> score_ave <span class="sc">+</span> par_educ <span class="sc">+</span> resp_literate <span class="sc">+</span> ave_12 <span class="sc">+</span> child_female <span class="sc">+</span> <span class="fu">factor</span>(grade) <span class="sc">+</span> resp_female,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> dr19_dta)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(model1, <span class="at">vcov. =</span> <span class="fu">vcovHC</span>(model1, <span class="at">type =</span> <span class="st">"HC1"</span>))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># treat * score_ave includes treat, score_ave, and their interaction treat:score_ave</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (Stata's i.treat##c.score_ave)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Create a table that replicates the results of columns (1)-(4) in Table 2. As above, you can exclude school FEs and estimate heteroskedastic-robust SEs. Try to replicate the following output.</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+|                | belief_end  |   wb_math   |   wb_engl   | lnwtp_math_engl |
+|:---------------|:-----------:|:-----------:|:-----------:|:---------------:|
+|treat           | -26.1951*** | -86.7123*** | -73.1391*** |     0.1747      |
+|                |  (1.2344)   |  (5.4125)   |  (5.3810)   |    (0.1120)     |
+|treat:score_ave |  0.4087***  |  1.1790***  |  1.2943***  |     -0.0006     |
+|                |  (0.0240)   |  (0.1051)   |  (0.1069)   |    (0.0023)     |
+|score_ave       |  0.2967***  |  0.8436***  |  0.8870***  |    0.0032**     |
+|                |  (0.0179)   |  (0.0770)   |  (0.0829)   |    (0.0015)     |
+|N               |    5026     |    5020     |    5020     |      5001       |
+|R2              |    0.327    |    0.183    |    0.181    |      0.011      |
+|SE              |     HC1     |     HC1     |     HC1     |       HC1       |
+* p&lt;0.10, ** p&lt;0.05, *** p&lt;0.01. Standard errors in parentheses.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Using modelsummary">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Using modelsummary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <code>keep = c("treat", "treat:score_ave", "score_ave")</code> in <code>reg_table()</code> to display only these three coefficients. With <code>modelsummary()</code>, use the same list in <code>coef_map =</code>.</p>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Now try to replicate <em>Panel A. Continuous versions</em> from Table 3 (which focuses on non-experimental outcomes).</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+|                |  enrolled  | ln_educ_exp_end | attend_admin |
+|:---------------|:----------:|:---------------:|:------------:|
+|treat           | -5.3591*** |     -0.0113     |   -0.3200    |
+|                |  (2.0636)  |    (0.1226)     |   (2.6262)   |
+|treat:score_ave | 0.1046***  |     0.0004      |    0.0035    |
+|                |  (0.0370)  |    (0.0024)     |   (0.0488)   |
+|score_ave       |  -0.0104   |    0.0053***    |  0.1049***   |
+|                |  (0.0225)  |    (0.0017)     |   (0.0358)   |
+|N               |    1730    |      1654       |     1778     |
+|R2              |   0.024    |      0.111      |    0.029     |
+|SE              |    HC1     |       HC1       |     HC1      |
+* p&lt;0.10, ** p&lt;0.05, *** p&lt;0.01. Standard errors in parentheses.</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>To replicate <em>Panel B. Binary versions</em> you first need to create a variable that is a dummy variable called <code>above_median</code>: =1 if <code>score_ave</code> is above the sample median and =0 otherwise. Try to do this, and then estimate a model that interacts <code>treat</code> with <code>above_median</code>: <code>treat * above_median</code>. Your results should look like.</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+|                   | enrolled  | ln_educ_exp_end | attend_admin |
+|:------------------|:---------:|:---------------:|:------------:|
+|treat              | -2.1774** |     -0.0121     |   -0.2224    |
+|                   | (1.1093)  |    (0.0610)     |   (1.2568)   |
+|treat:above_median | 3.4931**  |     0.0369      |   -0.0299    |
+|                   | (1.4208)  |    (0.0862)     |   (1.5648)   |
+|above_median       |  -0.3868  |    0.1579**     |  3.2872***   |
+|                   | (1.0089)  |    (0.0622)     |   (1.1153)   |
+|N                  |   1730    |      1654       |     1778     |
+|R2                 |   0.023   |      0.109      |    0.026     |
+|SE                 |    HC1    |       HC1       |     HC1      |
+* p&lt;0.10, ** p&lt;0.05, *** p&lt;0.01. Standard errors in parentheses.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Using median">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Using median
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <code>median()</code> to compute the median of <code>score_ave</code> (remember <code>na.rm = TRUE</code>), and then <code>if_else()</code> inside <code>mutate()</code> to create the dummy variable, as we did for <code>ln_income</code> in Lab 2.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="heterogeneity" class="level2">
+<h2 class="anchored" data-anchor-id="heterogeneity">Heterogeneity</h2>
+<p>Heterogeneity is a crucial step in any paper where the researcher tests to see whether the treatment effect varies with certain characteristics of the sample. Here, the author focuses on parental education.</p>
+<ol type="1">
+<li>As a final exercise try to replicate the results shown in <em>Panel B. Heterogeneity in the treatment effect on the slope, by parent education, for selected experimental outcomes</em> of Table 4.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Interactions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Interactions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A triple interaction, <code>treat * score_ave * par_educ</code>, includes all three variables, all three two-way interactions, and the three-way interaction. For the workbook outcomes, use the subject-specific scores <code>score_math</code> and <code>score_engl</code> instead of <code>score_ave</code>.</p>
+</div>
+</div>
+</section>
+<section id="replicate" class="level2">
+<h2 class="anchored" data-anchor-id="replicate">Replicate</h2>
+<ol type="1">
+<li><p>Check that all the code you executed is in the .R file.</p></li>
+<li><p>Make sure your .R file is saved.</p></li>
+<li><p>Run the whole .R file to check that the results replicate.</p></li>
+</ol>
+</section>
+</section>
+<section id="references" class="level1">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-dizon2019parents" class="csl-entry" role="listitem">
+Dizon-Ross, Rebecca. 2019. <span>“Parents’ Beliefs about Their Children’s Academic Ability: Implications for Educational Investments.”</span> <em>American Economic Review</em> 109 (8): 2728–65.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

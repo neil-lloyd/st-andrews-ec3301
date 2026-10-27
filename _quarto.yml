@@ -48,10 +48,10 @@ website:
             text: Lab 2 (Stata)
           - href: lab-2-R.qmd
             text: Lab 2 (R) 
-#          - href: lab-3-Stata.qmd
-#            text: Lab 3 (Stata)
-#          - href: lab-3-R.qmd
-#            text: Lab 3 (R)  
+          - href: lab-3-Stata.qmd
+            text: Lab 3 (Stata)
+          - href: lab-3-R.qmd
+            text: Lab 3 (R)  
 #          - href: lab-4-Stata.qmd
 #            text: Lab 4 (Stata)
 #          - href: lab-4-R.qmd

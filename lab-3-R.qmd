@@ -1,0 +1,691 @@
+---
+title: Econometrics Lab 3
+subtitle: RCT Replication in R
+format:
+  html: default
+#    other-links:
+#      - text: "Solution .R file (AppsAnywhere)"
+#        href: "material/lab-3/ec3301-lab-3.R"
+#        icon: code-square
+#    other-links:
+#      - text: "Solution .R file"
+#        href: "material/lab-3/ec3301-lab-3-alt.R"
+#        icon: code-square
+engine: knitr
+---
+
+```{r}
+#| include: false
+
+library("haven")
+library("dplyr")
+library("ggplot2")
+library("sandwich")
+library("lmtest")
+library("broom")
+library("knitr")
+
+source(here::here("config.R"))
+```
+
+During this lab we will attempt to replicate some of the results in @dizon2019parents. The data you have been provided does not need much cleaning. However, you may not get the exact same results as those shown in the paper because some variables are missing and there are small sample size differences. For the most part, your results should be very similar.
+
+# Context
+
+This RCT was used as an example in [Lecture 6](lecture-6-multi.qmd).
+
+- **Setting:** primary schools in Machinga and Balaka districts, Malawi, in 2012. Primary school is technically free but still costly: parents spend about 1,750 MWK (US$10.6) per child per year. Schools must send report cards home each term, but 60% of parents say they don’t know their child’s performance from the last report, because the card never arrived or they couldn’t understand it.
+
+- **Sample:** The sampling frame includes households with at least two children in grades 2–6, with two children randomly chosen per household. Of 3,451 sampled households, 2,634 were eligible and surveyed, giving 5,268 parent–child pairs.
+
+- **Randomization:** households were randomly split half into treatment and half into control. Randomization was stratified on the between-sibling score gap and the estimated literacy rate in the household’s village, a proxy for parental education. Half of the treatment group also received more detailed skills information, but the paper pools all treated households and finds no separate effect.
+
+- **Intervention:** surveyors visited every household and ran a baseline survey on spending and beliefs about each child’s scores. In the same visit, treatment parents were walked through an easy-to-read report card for each child, showing math, English, Chichewa and overall scores, grades and class rank.
+
+- **Outcomes:** an endline survey immediately after the visit measured updated beliefs, the free workbook level chosen and willingness to pay for remedial textbooks. Longer-run outcomes came from school attendance records in the following month and a second endline survey about a year later, covering enrolment and spending, for a random subset of about 900 households.
+
+# Setup
+
+On Moodle, under "Week 8", you find the ["Lab 3 Data"](https://moody.st-andrews.ac.uk/moodle/mod/folder/view.php?id=1572527) folder.
+
+1. Create a folder on OneDrive (or your H drive) for "Lab 3"
+
+2. Download the paper, store it in this folder, and open it on your computer. You will need to reference the various tables and figures.
+
+3. Download the "dizonross2019.dta" file and store it in this folder.
+
+4. Open RStudio and create a new R script. Save it as "Lab 3/lab-3.R"
+
+5. Add the following to your R script; editing the file path to match your folder structure.
+
+```{r}
+#| eval: false
+
+# Title: Econometrics Lab 3: RCT Replication in R
+# Author: [INSERT NAME]
+# Date: [INSERT DATE]
+
+# ============================================================================ #
+# Load libraries
+library("haven")
+library("dplyr")
+library("ggplot2")
+library("sandwich")   # robust and clustered standard errors
+library("lmtest")     # coeftest(): regression output with robust SEs
+library("broom")      # used by the table helper functions
+library("knitr")      # used by the table helper functions
+
+# Clear all objects from the R environment
+rm(list = ls())
+
+# Set working directory
+setwd("[INSERT FILE PATH]/EC3301/Lab 3")
+
+# ============================================================================ #
+# Open data
+
+dr19_dta <- read_dta("dizonross2019.dta") %>% zap_labels()
+
+  # zap_labels() turns Stata value labels into plain numbers
+  # It can be removed. You may get a warning when using fixest about labelled data
+
+## Create between-sibling score gap:
+
+dr19_dta <- dr19_dta %>%
+  group_by(hhid) %>%
+  arrange(child, .by_group = TRUE) %>%
+  mutate(ave_12 = first(score_ave) - nth(score_ave, 2)) %>%
+  ungroup()
+
+  # creates a variable equal to difference between first and second childs score in each household
+
+# ============================================================================ #
+# Table helper functions (copy from the box below)
+
+
+# ============================================================================ #
+# Assignment
+
+
+# ============================================================================ #
+# Graphical analysis
+
+
+# ============================================================================ #
+# ATE
+
+
+# ============================================================================ #
+# Regression adjustment
+
+
+# ============================================================================ #
+# Interacted model
+
+
+# ============================================================================ #
+# Heterogeneity
+
+```
+
+## Missing packages
+
+In this lab you will make tables of summary statistics and regression output; just as you see in the paper. This is an important skill needed for the project. Most researchers use user-written packages like `modelsummary` or `stargazer` to do this. Unfortunately, these cannot be installed in the AppsAnywhere version of R.
+
+There is also a popular regression model package called `fixest` which is used to estimate models with fixed effects. We will get around this, but treating estimating fixed effects using the standard dummy variable approach. 
+
+If you are working on your own computer, consider following the alternative code suggestions shown in the green blocks. 
+
+::: {.callout-tip title="Using modelsummary and fixest (own computer only)" collapse="true"}
+If you are working on your own computer, you can install two packages that make tables and regressions easier. They are **not** available on the university server, so everything in this lab can be done without them.
+
+```{r}
+#| eval: false
+
+install.packages(c("fixest", "modelsummary"))   # only needed once
+
+library("fixest")        # feols(): regressions with robust/clustered SEs and absorbed FEs
+library("modelsummary")  # modelsummary(): regression tables; datasummary_balance(): balance tables
+
+# Settings used in the modelsummary tables below
+stars <- c("*" = .1, "**" = .05, "***" = .01)
+gof   <- c("nobs", "r.squared")
+```
+
+Load these **after** `rm(list = ls())`, or the `stars` and `gof` settings will be deleted. Look for similar boxes throughout the lab.
+:::
+
+As a substitute, you can use the following AI-written functions to create the tables using R's `knitr` and `broom` packages. 
+
+  - `balance_table(data, vars)`: means by treatment group, the difference, and the $p$-value of a $t$-test (replaces `dtable, by(treat, tests)`)
+  - `reg_table(models, types, keep)`: places regression results side-by-side (replaces `etable`)
+
+```{r}
+#| code-fold: true
+#| code-summary: "Table helper functions (click to show, then copy into your script)"
+
+# Variance matrix for a fitted lm, mirroring Stata's vce() options.
+#   "classical" = Stata default; "HC1" = vce(robust); "HC2" = vce(hc2);
+#   "cluster" = vce(cluster hhid)
+get_vcov <- function(m, type = "classical") {
+  if (type == "classical") return(vcov(m))
+  if (type == "cluster")   return(vcovCL(m, cluster = ~hhid, type = "HC1"))
+  vcovHC(m, type = type)
+}
+
+# Coefficient table with the chosen SEs. For clustered SEs, p-values use G-1
+# degrees of freedom, as Stata does.
+coef_table <- function(m, type = "classical") {
+  df <- if (type == "cluster") {
+    length(unique(expand.model.frame(m, ~hhid)$hhid)) - 1   # number of clusters - 1
+  } else {
+    m$df.residual
+  }
+  tidy(coeftest(m, vcov. = get_vcov(m, type), df = df))
+}
+
+# Side-by-side regression table (replaces etable).
+#   models: named list of lm objects
+#   types:  one SE type per model (recycled if length 1)
+#   keep:   terms to show (NULL = all except intercept and grade/school dummies)
+reg_table <- function(models, types = "classical", keep = NULL, digits = 4) {
+  types <- rep(types, length.out = length(models))
+  stars <- function(p) ifelse(p < .01, "***", ifelse(p < .05, "**", ifelse(p < .1, "*", "")))
+  tabs  <- Map(coef_table, models, types)
+  terms <- if (is.null(keep)) {
+    unique(unlist(lapply(tabs, `[[`, "term")))
+  } else keep
+  terms <- terms[!grepl("Intercept|factor\\(grade\\)|factor\\(school\\)", terms)]
+
+  rows <- lapply(terms, function(t) {
+    b  <- sapply(tabs, function(x) { r <- x[x$term == t, ]
+      if (nrow(r)) paste0(formatC(r$estimate, digits, format = "f"), stars(r$p.value)) else "" })
+    se <- sapply(tabs, function(x) { r <- x[x$term == t, ]
+      if (nrow(r)) paste0("(", formatC(r$std.error, digits, format = "f"), ")") else "" })
+    rbind(c(t, b), c("", se))
+  })
+  out <- do.call(rbind, rows)
+  out <- rbind(out,
+               c("N",  sapply(models, nobs)),
+               c("R2", sapply(models, function(m) formatC(summary(m)$r.squared, 3, format = "f"))),
+               c("SE", types))
+  colnames(out) <- c("", names(models))
+  print(kable(out, align = c("l", rep("c", length(models)))))
+  cat("* p<0.10, ** p<0.05, *** p<0.01. Standard errors in parentheses.\n")
+}
+
+# Balance table (replaces dtable, by(treat, tests)): means by group,
+# difference, and p-value from an equal-variance t-test (same as reg x treat).
+balance_table <- function(data, vars, by = "treat", digits = 3) {
+  out <- t(sapply(vars, function(v) {
+    x <- data[[v]]; g <- data[[by]]
+    tt <- t.test(x ~ g, var.equal = FALSE)
+    c(Control    = mean(x[g == 0], na.rm = TRUE),
+      Treatment  = mean(x[g == 1], na.rm = TRUE),
+      Difference = mean(x[g == 1], na.rm = TRUE) - mean(x[g == 0], na.rm = TRUE),
+      p.value    = tt$p.value,
+      N          = sum(!is.na(x)))
+  }))
+  print(kable(out, digits = digits))
+}
+```
+
+
+
+```{r}
+#| include: false
+dr19_dta <- read_dta(file.path(data_dir, "dizonross2019.dta")) %>% zap_labels()
+
+dr19_dta <- dr19_dta %>%
+  group_by(hhid) %>%
+  arrange(child, .by_group = TRUE) %>%
+  mutate(ave_12 = first(score_ave) - nth(score_ave, 2)) %>%
+  ungroup()
+```
+
+# Replication
+
+## Assignment
+
+We begin by understanding assignment and validating randomization. The main variable of interest is the dummy variable `treat`, which =1 for the treated households.
+
+1. Use the functions `length()` and `unique()` to figure out how many unique schools there are.
+
+2. Use the code below to figure out if there are any households that appear more than twice in the data.
+
+```{r}
+#| eval: false
+
+dr19_dta %>%
+  count(hhid, name = "copies") %>%
+  count(copies, name = "households")
+```
+
+3. Create a frequency table of the treatment indicator `treat`. Is this an efficient experiment design?
+
+Next, we will try to replicate some of the lines in Table 1 (the balance table).
+
+4. We will begin by replicating some of the lines under "Panel A. Respondent background." These are background characteristics of the parent who responded to the survey.
+
+   - Use the `balance_table()` helper function. The first argument is the data frame; the second is a list of the variables you want to compare across treatment groups.
+
+```{r}
+#| eval: false
+
+balance_table(dr19_dta, c("resp_female", "resp_decides", "resp_age", "resp_secondary"))
+```
+
+   Your results should replicate:
+
+```{r}
+#| echo: false
+
+balance_table(dr19_dta, c("resp_female", "resp_decides", "resp_age", "resp_secondary"))
+```
+
+5. Follow the same steps replicating lines from "Panel C. Student information" for variables `grade`, `child_age`, `child_female`, and `attend_bl`.
+
+6. Does the evidence support the researchers claim that assignment into treatment is balanced (p. 2744)?
+
+::: {.callout-tip title="Using modelsummary" collapse="true"}
+`datasummary_balance()` creates a balance table in one line. The formula `~treat` defines the groups, and `select()` picks the variables to compare.
+
+```{r}
+#| eval: false
+
+datasummary_balance(~treat,
+                    data = select(dr19_dta, treat, resp_female, resp_decides, resp_age, resp_secondary),
+                    dinm_statistic = "p.value", fmt = 3)
+```
+
+The $p$-values come from an unequal-variance (Welch) $t$-test, which should match `balance_table()`.
+:::
+
+## Graphical analysis
+
+In this section we are going to attempt to replicate Figure 3.
+
+1. Replicate Panel A.
+
+   - First, compute the mean of `belief_err_bl` for each treatment group, as we did in Lab 1.
+   - Then plot the means using `geom_col()`, and add the bar heights as labels with `geom_text()`.
+
+```{r}
+#| eval: false
+
+means <- dr19_dta %>%
+  mutate(treat = factor(treat, labels = c("Control", "Treat"))) %>%
+  group_by(treat) %>%
+  summarise(mean_err = mean(belief_err_bl, na.rm = TRUE), .groups = "drop")
+
+ggplot(means, aes(x = treat, y = mean_err)) +
+  geom_col(fill = "lightblue", color = "white") +
+  geom_text(aes(label = round(mean_err, 2)), vjust = -0.4) +
+  labs(x = NULL, y = "mean of belief_err_bl")
+```
+
+   Your results should replicate:
+
+```{r}
+#| echo: false
+
+means <- dr19_dta %>%
+  mutate(treat = factor(treat, labels = c("Control", "Treat"))) %>%
+  group_by(treat) %>%
+  summarise(mean_err = mean(belief_err_bl, na.rm = TRUE), .groups = "drop")
+
+ggplot(means, aes(x = treat, y = mean_err)) +
+  geom_col(fill = "lightblue", color = "white") +
+  geom_text(aes(label = round(mean_err, 2)), vjust = -0.4) +
+  labs(x = NULL, y = "mean of belief_err_bl")
+```
+
+2. Replicate Panel C. Follow the same steps as above, but use `belief_err_end` instead.
+
+3. To replicate Panel B, we won't try to estimate the flexible functions shown in the paper. Instead, we will use `geom_smooth(method = "lm")` to fit a linear line between `belief_bl` and `score_ave` for both the treated and control groups, and `geom_abline()` to add the 45-degree line. Here is my version.
+
+```{r}
+#| echo: false
+
+ggplot(dr19_dta, aes(x = score_ave, y = belief_bl,
+                     colour = factor(treat, labels = c("Control", "Treat")),
+                     linetype = factor(treat, labels = c("Control", "Treat")))) +
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE) +
+  geom_abline(intercept = 0, slope = 1, colour = "grey50") +
+  scale_colour_manual(values = c("blue", "green")) +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 20)) +
+  scale_y_continuous(limits = c(0, 100), breaks = seq(0, 100, 20)) +
+  labs(colour = NULL, linetype = NULL) +
+  theme(legend.position = c(0.85, 0.15))
+```
+
+::: {.callout-note title="Hint" collapse="true"}
+Mapping `colour` (and `linetype`) to `factor(treat)` inside `aes()` tells `ggplot()` to draw a separate line for each treatment group.
+
+```{r}
+#| eval: false
+
+ggplot(dr19_dta, aes(x = score_ave, y = belief_bl, colour = factor(treat))) +
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE) +
+  geom_abline(intercept = 0, slope = 1, colour = "grey50")
+```
+:::
+
+4. Replicate Panel D using similar steps. The lines should have a similar slope.
+
+:::{.callout-warning}
+Don't forget to store a copy of your code in the R script.
+:::
+
+
+## ATE
+
+One of the main outcomes in the study is `belief_end`: which captures the parents' beliefs about their children's performances **after** the intervention.
+
+1. Test whether there is a statistically significant difference between the mean of `belief_end` across treatment groups. To do so, we will first use R's `t.test()` function.
+
+   - The formula `belief_end ~ treat` compares the mean of `belief_end` across the two groups defined by `treat`.
+   - The option `var.equal = TRUE` assumes equal variances in the two groups (as Stata's `ttest` does by default).
+
+```{r}
+#| eval: false
+
+t.test(belief_end ~ treat, data = dr19_dta, var.equal = TRUE)
+```
+
+   Your results should replicate:
+
+```{r}
+#| echo: false
+
+t.test(belief_end ~ treat, data = dr19_dta, var.equal = TRUE)
+```
+
+2. Now, run the same test without the `var.equal = TRUE` option. R then allows for unequal variances (Welch's test). This should compute the Neyman variance estimator.
+
+3. Replicate these results by estimating a linear regression with `lm()`. The default estimated SE should replicate that from Q1.
+
+4. Estimate the same simple regression with robust SEs: HC1 (Stata's `vce(robust)`) and HC2 (Stata's `vce(hc2)`). These two should be very similar, since treatment is close to 50-50.
+
+```{r}
+#| eval: false
+
+model_ate <- lm(belief_end ~ treat, data = dr19_dta)
+
+coeftest(model_ate, vcov. = vcovHC(model_ate, type = "HC1"))
+```
+
+   `vcovHC()` (from `sandwich`) computes the robust variance matrix, and `coeftest()` (from `lmtest`) reports the regression results using it.
+
+::: {.callout-tip title="Using fixest" collapse="true"}
+`feols()` from `fixest` works like `lm()`, but lets you choose the SEs directly. `vcov = "hetero"` gives HC1 SEs, the same as Stata's `vce(robust)`. `fixest` does not offer HC2, so use `coeftest()` for that.
+
+```{r}
+#| eval: false
+
+summary(feols(belief_end ~ treat, data = dr19_dta, vcov = "hetero"))
+```
+:::
+
+## Regression adjustment
+
+Now we can replicate some of the regression tables.
+
+1. The variables `wb_math` and `wb_engl` take on values $\{-1,0,1\}$. Recode these values to $\{0,100,200\}$. You can either use `case_when()` or a simple formula.
+
+```{r}
+#| eval: false
+
+dr19_dta <- dr19_dta %>%
+  mutate(wb_math = case_when(wb_math == -1 ~ 0,
+                             wb_math == 0  ~ 100,
+                             wb_math == 1  ~ 200))
+## or
+# dr19_dta <- dr19_dta %>%
+#   mutate(wb_math = (wb_math + 1) * 100)
+```
+
+```{r}
+#| echo: false
+dr19_dta <- dr19_dta %>%
+  mutate(wb_math = case_when(wb_math == -1 ~ 0,
+                             wb_math == 0  ~ 100,
+                             wb_math == 1  ~ 200),
+         wb_engl = case_when(wb_engl == -1 ~ 0,
+                             wb_engl == 0  ~ 100,
+                             wb_engl == 1  ~ 200))
+```
+
+2. Estimate the first model from Panel A. of Table A.1 (p. 2759), including the following controls and estimating robust SEs. `factor(grade)` adds a dummy variable for each grade (Stata's `i.grade`).
+
+```{r}
+model1 <- lm(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade),
+             data = dr19_dta)
+
+coeftest(model1, vcov. = vcovHC(model1, type = "HC1"))
+```
+
+3. Next we will try to estimate the remaining models and create a table.
+
+   - Estimate each model and store the results as follows. Assigning the model to a name (`model1 <- lm(...)`) stores the results without printing them.
+
+```{r}
+#| eval: false
+model1 <- lm(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade),
+             data = dr19_dta)
+```
+
+   - For each additional model, you need to change the name of the stored results: `model1`, `model2`, etc.
+
+   - Use the following code to make a table:
+
+```{r}
+#| eval: false
+reg_table(list(belief_end = model1, wb_math = model2, wb_engl = model3,
+               lnwtp_math_engl = model4, enrolled = model5,
+               ln_educ_exp_end = model6, attend_admin = model7),
+          types = "HC1", keep = "treat")
+
+  # list() collects the models; the names become the column headings
+  # types = "HC1" computes robust SEs (Stata's vce(robust)) for every model
+  # keep = "treat" only displays the coefficient on treat
+```
+
+::: {.callout-tip title="Using fixest and modelsummary" collapse="true"}
+Estimate each model with `feols()`, collect them in a `list()`, and pass the list to `modelsummary()`.
+
+```{r}
+#| eval: false
+models <- list(
+  belief_end = feols(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade),
+                     data = dr19_dta, vcov = "hetero"),
+  wb_math = feols(wb_math ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade),
+                  data = dr19_dta, vcov = "hetero")
+  # ... add the remaining five models here
+)
+
+modelsummary(models, coef_map = "treat", stars = stars, gof_map = gof, fmt = 4)
+
+  # coef_map = "treat" only displays the coefficient on treat
+  # stars and gof are the settings defined at the start of the lab
+```
+:::
+
+The following information is provided in the tables notes of Table A.1
+
+> "Standard errors are clustered at the household level. Regressions control for school FE, average parental years of education, parent gender, a parental education proxy used for stratification, the between-child score gap, child baseline performance, child gender, grade FE, and the baseline value of the dependent variable (baseline value not available for enrollment or experimental outcomes)."
+
+4. Evidently, the model specifications in Q.3 do not perfectly match those in the paper. We are missing school fixed effects (FE), have replaced "a parental education proxy used for stratification" with `resp_literate`. Add `factor(school)` to the model to include school FEs. Does it make a difference to either the estimated coefficient or SE?
+
+```{r}
+#| eval: false
+model_fe <- lm(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade) + factor(school),
+               data = dr19_dta)
+
+coeftest(model_fe, vcov. = vcovHC(model_fe, type = "HC1"))["treat", ]
+
+  # ["treat", ] displays only the row for treat, instead of all 39 school dummies
+```
+
+5. The authors do not estimate heteroskedastic-robust SEs. Instead, the estimate SEs that are cluster-robust, where the cluster variable is the household. This is because there are two children in the data for every household. We can do this using `vcovCL()` (Stata's `vce(cluster hhid)`).
+
+```{r}
+#| eval: false
+coeftest(model_fe, vcov. = vcovCL(model_fe, cluster = ~hhid))["treat", ]
+```
+
+::: {.callout-tip title="Using fixest" collapse="true"}
+When there is a large number of FEs (as here), it makes sense to use a slightly different estimator that "absorbs" them, like Stata's `areg`. In `feols()`, list the FEs after `|`. The estimate of `treat` is identical to adding `factor(school)`.
+
+```{r}
+#| eval: false
+feols(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade) | school,
+      data = dr19_dta, vcov = "hetero")
+
+feols(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade) | school,
+      data = dr19_dta, cluster = ~hhid)
+```
+
+Be careful: when the model includes FEs, `feols()` clusters the SEs by the FE variable unless you say otherwise.
+:::
+
+6. Create the following table and comment on whether the various regression adjustments and SE estimates have a big impact on the estimated ATE.
+
+```{r}
+#| eval: false
+model1 <- lm(belief_end ~ treat,
+             data = dr19_dta)
+model2 <- lm(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade),
+             data = dr19_dta)
+model3 <- lm(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade) + factor(school),
+             data = dr19_dta)
+model4 <- lm(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade) + factor(school),
+             data = dr19_dta)
+
+reg_table(list("(1)" = model1, "(2)" = model2, "(3)" = model3, "(4)" = model4),
+          types = c("HC1", "HC1", "HC1", "cluster"), keep = "treat")
+
+  # models 3 and 4 are the same regression; only the SEs differ
+```
+
+::: {.callout-tip title="Using fixest and modelsummary" collapse="true"}
+```{r}
+#| eval: false
+models <- list(
+  "(1)" = feols(belief_end ~ treat,
+                data = dr19_dta, vcov = "hetero"),
+  "(2)" = feols(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade),
+                data = dr19_dta, vcov = "hetero"),
+  "(3)" = feols(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade) | school,
+                data = dr19_dta, vcov = "hetero"),
+  "(4)" = feols(belief_end ~ treat + par_educ + resp_female + resp_literate + ave_12 + score_ave + child_female + factor(grade) | school,
+                data = dr19_dta, cluster = ~hhid))
+
+modelsummary(models, coef_map = "treat", stars = stars, gof_map = gof, fmt = 4)
+```
+:::
+
+
+## Interacted model
+
+In the paper, the authors focus on a model that interacts the treatment with baseline academic achievement (see p. 2747). The results are shown in Table 2.
+
+$$
+  y_{ij} = c_o + c_1A_{ij}\times Treat_i + c_2A_{ij} + c_3Treat_i + c_4'X_{ij} + \varepsilon_{ij}
+$$
+
+1. Here is an example of how to estimate this model for the outcome `belief_end`. Here I am excluding the FEs and estimating heteroskedastic-robust SEs.
+
+```{r}
+#| eval: false
+
+model1 <- lm(belief_end ~ treat * score_ave + par_educ + resp_literate + ave_12 + child_female + factor(grade) + resp_female,
+             data = dr19_dta)
+
+coeftest(model1, vcov. = vcovHC(model1, type = "HC1"))
+
+  # treat * score_ave includes treat, score_ave, and their interaction treat:score_ave
+  # (Stata's i.treat##c.score_ave)
+```
+
+2. Create a table that replicates the results of columns (1)-(4) in Table 2. As above, you can exclude school FEs and estimate heteroskedastic-robust SEs. Try to replicate the following output.
+
+```{r}
+#| echo: false
+
+model1 <- lm(belief_end ~ treat * score_ave + par_educ + resp_literate + ave_12 + child_female + factor(grade) + resp_female,
+             data = dr19_dta)
+model2 <- lm(wb_math ~ treat * score_ave + par_educ + resp_literate + ave_12 + child_female + factor(grade) + resp_female,
+             data = dr19_dta)
+model3 <- lm(wb_engl ~ treat * score_ave + par_educ + resp_literate + ave_12 + child_female + factor(grade) + resp_female,
+             data = dr19_dta)
+model4 <- lm(lnwtp_math_engl ~ treat * score_ave + par_educ + resp_literate + ave_12 + child_female + factor(grade) + resp_female,
+             data = dr19_dta)
+
+reg_table(list(belief_end = model1, wb_math = model2, wb_engl = model3, lnwtp_math_engl = model4),
+          types = "HC1", keep = c("treat", "treat:score_ave", "score_ave"))
+```
+
+::: {.callout-tip title="Using modelsummary" collapse="true"}
+Use `keep = c("treat", "treat:score_ave", "score_ave")` in `reg_table()` to display only these three coefficients. With `modelsummary()`, use the same list in `coef_map = `.
+:::
+
+3. Now try to replicate *Panel A. Continuous versions* from Table 3 (which focuses on non-experimental outcomes).
+
+```{r}
+#| echo: false
+
+model1 <- lm(enrolled ~ treat * score_ave + par_educ + resp_literate + ave_12 + child_female + factor(grade) + resp_female,
+             data = dr19_dta)
+model2 <- lm(ln_educ_exp_end ~ treat * score_ave + par_educ + resp_literate + ave_12 + child_female + factor(grade) + resp_female,
+             data = dr19_dta)
+model3 <- lm(attend_admin ~ treat * score_ave + par_educ + resp_literate + ave_12 + child_female + factor(grade) + resp_female,
+             data = dr19_dta)
+
+reg_table(list(enrolled = model1, ln_educ_exp_end = model2, attend_admin = model3),
+          types = "HC1", keep = c("treat", "treat:score_ave", "score_ave"))
+```
+
+4. To replicate *Panel B. Binary versions* you first need to create a variable that is a dummy variable called `above_median`: =1 if `score_ave` is above the sample median and =0 otherwise. Try to do this, and then estimate a model that interacts `treat` with `above_median`: `treat * above_median`. Your results should look like.
+
+```{r}
+#| echo: false
+
+med <- median(dr19_dta$score_ave, na.rm = TRUE)
+dr19_dta <- dr19_dta %>%
+  mutate(above_median = if_else(score_ave > med, 1, 0))
+
+model1 <- lm(enrolled ~ treat * above_median + par_educ + resp_literate + ave_12 + child_female + factor(grade) + resp_female,
+             data = dr19_dta)
+model2 <- lm(ln_educ_exp_end ~ treat * above_median + par_educ + resp_literate + ave_12 + child_female + factor(grade) + resp_female,
+             data = dr19_dta)
+model3 <- lm(attend_admin ~ treat * above_median + par_educ + resp_literate + ave_12 + child_female + factor(grade) + resp_female,
+             data = dr19_dta)
+
+reg_table(list(enrolled = model1, ln_educ_exp_end = model2, attend_admin = model3),
+          types = "HC1", keep = c("treat", "treat:above_median", "above_median"))
+```
+
+::: {.callout-note title="Using median" collapse="true"}
+Use `median()` to compute the median of `score_ave` (remember `na.rm = TRUE`), and then `if_else()` inside `mutate()` to create the dummy variable, as we did for `ln_income` in Lab 2.
+:::
+
+## Heterogeneity
+
+Heterogeneity is a crucial step in any paper where the researcher tests to see whether the treatment effect varies with certain characteristics of the sample. Here, the author focuses on parental education.
+
+1. As a final exercise try to replicate the results shown in *Panel B. Heterogeneity in the treatment effect on the slope, by parent education, for selected experimental outcomes* of Table 4.
+
+::: {.callout-note title="Interactions"}
+A triple interaction, `treat * score_ave * par_educ`, includes all three variables, all three two-way interactions, and the three-way interaction. For the workbook outcomes, use the subject-specific scores `score_math` and `score_engl` instead of `score_ave`.
+:::
+
+## Replicate
+
+1. Check that all the code you executed is in the .R file. 
+
+2. Make sure your .R file is saved. 
+
+3. Run the whole .R file to check that the results replicate.  
+
+# References
