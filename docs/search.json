@@ -4979,723 +4979,961 @@
   {
     "objectID": "lecture-6-slides.html#part-2",
     "href": "lecture-6-slides.html#part-2",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Part 2",
-    "text": "Part 2\nIn part 2 of EC3301 we are going to tackle a range of topics that are both,\n\napplied throughout modern empirical research,\ncentral to the way economists think about causal inference\n\n\n\n\n\n\n\nNote\n\n\nI may change the syllabus slightly during the last two weeks as I adapt to what we have covered."
+    "text": "Part 2\nIn part 2 of EC3301 we are going to tackle a range of topics that are both,\n\napplied throughout modern empirical research;\ncentral to the way economists think about causal inference.\n\n\n\n\n\n\n\nWarning\n\n\nI may make small changes to the syllabus over the next few weeks as I develope the material."
   },
   {
     "objectID": "lecture-6-slides.html#today",
     "href": "lecture-6-slides.html#today",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Today",
-    "text": "Today\nToday’s lecture is inspired by a sandwich, the quintissential British meal:"
+    "text": "Today\nToday’s lecture is inspired by the humble sandwich.\n\nThe quintessential British meal."
   },
   {
     "objectID": "lecture-6-slides.html#section",
     "href": "lecture-6-slides.html#section",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "Introduce paper"
+    "text": "In a nutshell\n\n\nRural Malawi in 2012. School is free, but parents still spend money on their children’s education. They have to decide on how much to invest based on what they know their children’s academic potential. In reality, they have very poor (inaccurate) knowledge of their children’s academic performance.\n\nWhat would happen if you provided parents with more accessible information? Would they invest more? Differently?"
   },
   {
-    "objectID": "lecture-6-slides.html#section-1",
-    "href": "lecture-6-slides.html#section-1",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "Experiment design"
+    "objectID": "lecture-6-slides.html#research-design",
+    "href": "lecture-6-slides.html#research-design",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Research Design",
+    "text": "Research Design\n\nFigure 2 (p. 2741)"
   },
   {
-    "objectID": "lecture-6-slides.html#section-2",
-    "href": "lecture-6-slides.html#section-2",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "Graph of difference between means"
+    "objectID": "lecture-6-slides.html#balance",
+    "href": "lecture-6-slides.html#balance",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Balance",
+    "text": "Balance\n\nTable 1 (p. 2743)"
   },
   {
-    "objectID": "lecture-6-slides.html#section-3",
-    "href": "lecture-6-slides.html#section-3",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "Regression of results"
+    "objectID": "lecture-6-slides.html#simple-difference-between-means",
+    "href": "lecture-6-slides.html#simple-difference-between-means",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Simple difference between means",
+    "text": "Simple difference between means\n\nFigure 3 (p. 2745)"
+  },
+  {
+    "objectID": "lecture-6-slides.html#heterogeneity",
+    "href": "lecture-6-slides.html#heterogeneity",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Heterogeneity",
+    "text": "Heterogeneity\n\nFigure 3 (p. 2745)"
+  },
+  {
+    "objectID": "lecture-6-slides.html#regression",
+    "href": "lecture-6-slides.html#regression",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Regression",
+    "text": "Regression"
   },
   {
     "objectID": "lecture-6-slides.html#neyman-rubin-causal-model",
     "href": "lecture-6-slides.html#neyman-rubin-causal-model",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Neyman-Rubin Causal Model",
-    "text": "Neyman-Rubin Causal Model\nThe Potential Outcomes Framework is a key component of the Neyman-Rubin Causal Model1\n\nWe won’t cover all aspects of this model.\nI will reference texts you can visit to read further\n\nAttributed to Jerzy Neymand and Donald Rubin."
+    "text": "Neyman-Rubin Causal Model\nThe Potential Outcomes Framework is a key component of the Neyman-Rubin Causal Model1\n\nWe won’t cover all aspects of this model.\nI will reference texts in green boxes that you can visit to read further\n\nAlso referred to as the Rubin Causal Model (originally by Holland 1986). The framework is attributed to both Jerzy Neyman and Donald Rubin; as well as Paul Holland (Heckman and Pinto 2022)."
   },
   {
-    "objectID": "lecture-6-slides.html#example-1",
-    "href": "lecture-6-slides.html#example-1",
-    "title": "Causal Inference",
+    "objectID": "lecture-6-slides.html#component-1",
+    "href": "lecture-6-slides.html#component-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Component 1",
+    "text": "Component 1\nThe Neyman-Rubin model has three important components (Imbens and Rubin 2015)\n\n\nPotential Outcomes: The outcomes corresponding to different levels of treatment or manipulation: “no causation without manipulation” (Rubin 1975, 238)\n\n\nPotential outcomes are a priori observable, but a posteriori only one outcome is observable.\nA variable can only be a “cause” if it is possible, at least in principle, to conceive of a hypothetical or physical intervention (“treatment”) that manipulates it. We tend not to discuss the causal effect of demographic characteristics.1\n\nThe caveat here might be hypothetical resume studies; e.g. Bertrand and Mullainathan (2004) and Oreopoulos (2011)."
+  },
+  {
+    "objectID": "lecture-6-slides.html#components-2",
+    "href": "lecture-6-slides.html#components-2",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Components 2",
+    "text": "Components 2\n\nMultiple units: Given the limit on observation, one must observe multiple units to infer a causal effect.\n\n\nNeed to make a key stability assumption: Stable Unit Treatment Value Assumption (SUTVA)."
+  },
+  {
+    "objectID": "lecture-6-slides.html#component-3",
+    "href": "lecture-6-slides.html#component-3",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Component 3",
+    "text": "Component 3\n\nAssignment mechanism: The function that determines the manipulation of units.\n\nAssignment may be:\n\nprobabilistic; e.g. randomized experiment\ndeterministic; e.g. thresholds/cutoffs\nconditional; depend partly depend on observable characteristics (\\mathbf{x}_i).\ncontrolled (by the researcher); e.g. randomized control trial\nexogenous (to the treatment unit); e.g. public policy or natural experiments1\n\n\nknown (by the researcher); e.g. controlled or natural experiments\nunknown; e.g. observational study,\n\nOften referred to as quasi-experiment."
+  },
+  {
+    "objectID": "lecture-6-slides.html#example",
+    "href": "lecture-6-slides.html#example",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Example",
-    "text": "Example\nConsider out example: there are two states of the world\n\nTreated parents receive information about their kids\nUntreated (control) parents receive no information\n\n\nWe can there think about an outcome (e.g. enrollment) under each state\n\n  y(\\text{info}) \\qquad \\text{or}\\qquad y(\\text{status-quo})\n\n\n\nWe call these potential outcomes"
+    "text": "Example\nConsider the example of Dizon-Ross (2019): there are two possible states of the world:\n\n\nTreated:\n\nreceive information\n\n\n\nResearcher observes:\n\ny(\\text{info})\n\n\n\nUntreated: (control)\n\nno information (status-quo)\n\n\n\nResearcher observes: \n  y(\\text{status-quo})\n\n\n\n\nWe call these potential outcomes."
   },
   {
     "objectID": "lecture-6-slides.html#possible-outcomes",
     "href": "lecture-6-slides.html#possible-outcomes",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Possible outcomes",
-    "text": "Possible outcomes\nFor a discrete outcome like enrollment there are 4 possible outcomes:\n\nEnroll only with information\n\n  y(\\text{info})=\\textcolor{red}{\\text{enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{blue}{\\text{don't enroll}}\n\nEnroll always\n\n  y(\\text{info})=\\textcolor{red}{\\text{enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{red}{\\text{enroll}}\n\nDon’t enroll always\n\n  y(\\text{info})=\\textcolor{blue}{\\text{don't enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{blue}{\\text{don't enroll}}\n\nEnroll only without information\n\n  y(\\text{info})=\\textcolor{blue}{\\text{don't enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{red}{\\text{enroll}}"
+    "text": "Possible outcomes\nFor a discrete outcome like enrollment there are 4 possible outcomes:\n\nEnroll only with information\n\n  y(\\text{info})=\\textcolor{red}{\\text{enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{blue}{\\text{don't enroll}}\n\nEnroll, regardless\n\n  y(\\text{info})=\\textcolor{red}{\\text{enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{red}{\\text{enroll}}\n\nDon’t enroll, regardless\n\n  y(\\text{info})=\\textcolor{blue}{\\text{don't enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{blue}{\\text{don't enroll}}\n\nEnroll only without information\n\n  y(\\text{info})=\\textcolor{blue}{\\text{don't enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{red}{\\text{enroll}}"
   },
   {
     "objectID": "lecture-6-slides.html#causal-effect",
     "href": "lecture-6-slides.html#causal-effect",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Causal effect",
-    "text": "Causal effect\nAccording to the Neyman-Rubin Causal Model, in:\n\nscenarios (1) and (4) there has been a causal effect\nscenarios (2) and (3) there has been NO causal effect.\n\n\n\n\n\n\n\nImportant\n\n\nNotice, to say there has been a causal effect, we must observe both potential outcomes."
+    "text": "Causal effect\nAccording to the Neyman-Rubin Causal Model, in:\n\nscenarios (1) and (4) there has been a causal effect\nscenarios (2) and (3) there has been NO causal effect.\n\n\n\n\n\n\n\nImportant\n\n\nNotice two things (Imbens and Rubin 2015, 6),\n\n“First, the definition of the causal effect depends on the potential outcomes, but it does not depend on which outcome is actually observed.”\n\n2 “Second, the causal effect is the comparison of potential outcomes, for the same unit, at the same moment in time post-treatment. In particular, the causal effect is not defined in terms of comparisons of outcomes at different times.”"
   },
   {
     "objectID": "lecture-6-slides.html#notation",
     "href": "lecture-6-slides.html#notation",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Notation",
-    "text": "Notation\nLet w_i \\in \\{0,1\\} be an indicator of an individuals discrete treatment status.1:\n\ny_i(1) be the potential outcome when treated\ny_i(0) be the potential outcome when not treated2\n\nThis notation of w_i as an indicator of an unit’s treatment status is common in the literature on experiments. You will see it in Wooldridge (2025, sec. 7.6).You will see other notations in the literature. For example, the use of superscripts \\{y_i^1,y_i^0\\} or subscripts \\{y_{i1},y_{i0}\\}."
+    "text": "Notation\nLet w_i \\in \\{0,1\\} be an indicator of an individuals discrete treatment status.1:\n\ny_i\\small{(1)} be the potential outcome when treated\ny_i\\small{(0)} be the potential outcome when not treated2\n\nThis notation of w_i as an indicator of an unit’s treatment status is common in the literature on experiments and is used in one of the seminal books on the topic: Imbens and Rubin (2015)’s Causal Inference in Statistics, Social, and Biomedical Sciences. You will see it in Wooldridge (2025, sec. 7.6).You will see other notations in the literature. For example, the use of superscripts \\{y_i^1,y_i^0\\} or subscripts \\{y_{i1},y_{i0}\\}."
   },
   {
     "objectID": "lecture-6-slides.html#observed-outcome",
     "href": "lecture-6-slides.html#observed-outcome",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Observed outcome",
-    "text": "Observed outcome\nA priori, both potential outcomes could be realised, but in the data you observe:\n\n  y_i = \\begin{cases}y_i(1)\\quad \\text{if}\\; w_i=1 \\\\\n  y_i(0)\\quad \\text{if}\\; w_i=0\n  \\end{cases}\n\n\nWhich we can write as the linear function:\n\n  y_i = y_i(0) + w_i\\big(y_i(1)-y_i(0)\\big)"
-  },
-  {
-    "objectID": "lecture-6-slides.html#discrete-treatment",
-    "href": "lecture-6-slides.html#discrete-treatment",
-    "title": "Causal Inference",
-    "section": "Discrete treatment",
-    "text": "Discrete treatment"
+    "text": "Observed outcome\nA priori, both potential outcomes could be realised, but in the data you observe only one:\n\n  y_i = \\begin{cases}y_i\\small{(1)}\\quad \\text{if}\\; w_i=1 \\\\\n  y_i\\small{(0)}\\quad \\text{if}\\; w_i=0\n  \\end{cases}\n\n\n“fundamental problem of causal inference” (Holland 1986, 947)\n\n\nWhich we can write this as a linear function:\n\n  y_i = y_i\\small{(0)} + w_i\\big(y_i\\small{(1)}-y_i\\small{(0)}\\big)"
   },
   {
     "objectID": "lecture-6-slides.html#ite",
     "href": "lecture-6-slides.html#ite",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "ITE",
-    "text": "ITE\nThe individual (unit) treatment effect (ITE) is defined as,\n\n  \\tau_i = y_i(1)-y_i(0)\n\nHowever, you cannot observe (identify) or estimate the ITE\nWHY?\n\nit would require you to observe both potential outcomes of the same unit in the same period of time\n“you cannot be in two places at once”\noften referred to as the missing data problem"
+    "text": "ITE\nThe individual (unit) treatment effect (ITE) is defined as,\n\n  \\tau_i = y_i\\small{(1)}-y_i\\small{(0)}\n\n\n\nHowever, you cannot observe (identify) or estimate the ITE\n\nWHY?\n\nit would require you to observe both potential outcomes of the same unit in the same period\nreferred to as the “missing data problem” (Imbens and Rubin 2015, 34)\n\n\n\nNotice!\n\nthe individual level treatment effect varies at the individual level: \\tau_i"
+  },
+  {
+    "objectID": "lecture-6-slides.html#visualization",
+    "href": "lecture-6-slides.html#visualization",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Visualization",
+    "text": "Visualization\nA priori, both potential outcomes are observable"
+  },
+  {
+    "objectID": "lecture-6-slides.html#section-1",
+    "href": "lecture-6-slides.html#section-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "Then, treatment is assigned"
+  },
+  {
+    "objectID": "lecture-6-slides.html#section-2",
+    "href": "lecture-6-slides.html#section-2",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "Treatment determines which PO you observe"
+  },
+  {
+    "objectID": "lecture-6-slides.html#section-3",
+    "href": "lecture-6-slides.html#section-3",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "There is an observed outcome and (theoretically) a missing one"
   },
   {
     "objectID": "lecture-6-slides.html#average-tes",
     "href": "lecture-6-slides.html#average-tes",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Average TEs",
-    "text": "Average TEs\nWe focus on identifying and estimating average (or aggregate) TEs\n\nAverage Treatment Effect (ATE)\n\n  \\tau_{ate} = E[\\tau_i] = E\\big[y_i(1)-y_i(0)\\big]\n\nAverage Treatment Effect of the Treated (ATT)\n\n  \\tau_{att} = E[\\tau_i|w_i = 1] = E\\big[y_i(1)-y_i(0)|w_i=1\\big]\n\nAverage Treatment Effect of the Untreated (ATU)\n\n  \\tau_{atu} = E[\\tau_i|w_i = 0] = E\\big[y_i(1)-y_i(0)|w_i=0\\big]\n\nThese are called causal estimands"
+    "text": "Average TEs\nIn place of the ITE, we focus on identifying and estimating average TEs\n\nAverage Treatment Effect (ATE)\n\n  \\tau_{ate} = E[\\tau_i] = E\\big[y_i\\small{(1)}-y_i\\small{(0)}\\big]\n\nAverage Treatment Effect of the Treated (ATT)\n\n  \\tau_{att} = E[\\tau_i|w_i = 1] = E\\big[y_i\\small{(1)}-y_i\\small{(0)}|w_i=1\\big]\n\nAverage Treatment Effect of the Untreated (ATU)\n\n  \\tau_{atu} = E[\\tau_i|w_i = 0] = E\\big[y_i\\small{(1)}-y_i\\small{(0)}|w_i=0\\big]\n\nThese are called causal estimands"
   },
   {
     "objectID": "lecture-6-slides.html#ate-vs-att",
     "href": "lecture-6-slides.html#ate-vs-att",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "ATE vs ATT",
-    "text": "ATE vs ATT\nWe prefer the ATE if,\n\nwe want to learn about the effect on the entire population;\ni.e., mandatory exposure.\n\n\nWe prefer the ATT if,\n\nthe population includes individuals that will not take up the treatment/policy;\ne.g., a policy that targets single mothers;\nwhere the program is voluntary, so those not enrolled will not necessarily be treated;\nthe ATT is “informative about the effect of entirely eliminating the current program” (Imbens and Wooldridge, 2009, pp. 14-15)."
+    "text": "ATE vs ATT\n\n\nWe prefer the ATE if,\n\nwe want to learn about the effect on the entire population;\ni.e., mandatory exposure.\nor lottery\n\n\nWe prefer the ATT if,\n\nthe population includes individuals that will not take up the treatment/policy;\ne.g., a policy that targets single mothers;\nor program is voluntary,\n\n\n\nThe ATT is “informative about the effect of entirely eliminating the current program” (Imbens and Wooldridge 2009, 14–15)."
   },
   {
-    "objectID": "lecture-6-slides.html#fundamental-problem",
-    "href": "lecture-6-slides.html#fundamental-problem",
-    "title": "Causal Inference",
-    "section": "Fundamental problem",
-    "text": "Fundamental problem\nSuppose you treat one group of individuals, while observing another untreated. Then in expectation, you can learn about\n\n  E[y_i|w_i = 1] - E[y_i|w_i = 0]\n\n\nSubstituting in y_i = y_i(0) + w_i\\big(y_i(1)-y_i(0)\\big)\n\n  E[y_i(1)|w_i = 1] - E[y_i(0)|w_i = 0]"
+    "objectID": "lecture-6-slides.html#two-groups",
+    "href": "lecture-6-slides.html#two-groups",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Two groups",
+    "text": "Two groups\nSuppose you treat one group of individuals, while observing another untreated. Then in expectation, you can learn about\n\n  E[y_i|w_i = 1] - E[y_i|w_i = 0]\n\n\n\n\nSubstituting in y_i = y_i\\small{(0)} + w_i\\big(y_i\\small{(1)}-y_i\\small{(0)}\\big)\n\n  E[y_i\\small{(1)}|w_i = 1] - E[y_i\\small{(0)}|w_i = 0]"
   },
   {
     "objectID": "lecture-6-slides.html#section-4",
     "href": "lecture-6-slides.html#section-4",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "Is this equal to either the ATE, ATT, or ATU? \n  E[y_i(1)|w_i = 1] - E[y_i(0)|w_i = 0]\n\n\nNO!\n\nThe conditions are not the same!"
+    "text": "Is this equal to either the ATE, ATT, or ATU? NO! \n  E[y_i\\small{(1)}|\\textcolor{red}{w_i = 1}] - E[y_i\\small{(0)}|\\textcolor{blue}{w_i = 0}]\n\n\nWhy?\n\nThe conditions are not the same!"
   },
   {
     "objectID": "lecture-6-slides.html#decomposition",
     "href": "lecture-6-slides.html#decomposition",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Decomposition",
-    "text": "Decomposition\nLet us add and subtract:\n\n  \\textcolor{red}{E[y_i(0)|w_i = 1]}\n\nthe unobserved counterfactual for the treated group.\n\n  E[y_i(1)|w_i = 1] - \\textcolor{red}{E[y_i(0)|w_i = 1]} + \\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]"
+    "text": "Decomposition\nLet us add and subtract:\n\n  \\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}\n\nthe unobserved counterfactual for the treated group.\n\n\n\n\n  E[y_i\\small{(1)}|w_i = 1] - \\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]} + \\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}- E[y_i\\small{(0)}|w_i = 0]"
   },
   {
     "objectID": "lecture-6-slides.html#section-5",
     "href": "lecture-6-slides.html#section-5",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "The expression now has two terms\n$$\n\\begin{aligned}\n  \n    &E[y_i(1)|w_i = 1] - \\textcolor{red}{E[y_i(0)|w_i = 1]} + \\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0] \\\\\n    =& \\underbrace{E[y_i(1)-y_i(0)|w_i = 1]}_\\text{ATT}+ \\underbrace{\\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\\text{selection}\n  \\end{aligned}\n$$\n:::{callout-note title=“Selection”} As alluded to earlier in Lecture 3, selection here is different to the problem of sample selection. :::"
+    "text": "The expression has two parts:\n\n  \\begin{aligned}\n    &\\underbrace{E[y_i\\small{(1)}|w_i = 1] - \\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}} + \\underbrace{\\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}- E[y_i\\small{(0)}|w_i = 0]} \\\\\n    =& \\underbrace{E[y_i\\small{(1)}-y_i\\small{(0)}|w_i = 1]}_\\text{ATT}+ \\underbrace{\\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}- E[y_i\\small{(0)}|w_i = 0]}_\\text{selection}\n  \\end{aligned}\n\n\n\n\n\n\n\n\n\n\nSelf-selection\n\n\nAs alluded to earlier in Lecture 3, selection here is different to the problem of sample selection. This selection problem can more aptly described as the “self-selection problem” (Wooldridge 2025, 255)."
   },
   {
     "objectID": "lecture-6-slides.html#selection",
     "href": "lecture-6-slides.html#selection",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Selection",
-    "text": "Selection\nThe problem of selection into treatment is fundamental to any discussion of causation.\n\n  \\underbrace{\\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\\text{selection}\n\nThe term describes the difference between\n\nan unobserved counterfactual outcome of the treated group\nthe outcome you would have observed, had the group NOT been treated\nthe observed outcome of the untreated group"
+    "text": "Selection\nThe problem of selection into treatment is fundamental to any discussion of causation.\n\n  \\underbrace{\\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}- E[y_i\\small{(0)}|w_i = 0]}_\\text{selection}\n\nThe term describes the difference between\n\nan unobserved counterfactual outcome of the treated group: the outcome mean you would have observed, had the group NOT been treated\nthe observed outcome mean of the untreated (control) group"
   },
   {
     "objectID": "lecture-6-slides.html#unconfoundedness",
     "href": "lecture-6-slides.html#unconfoundedness",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Unconfoundedness",
-    "text": "Unconfoundedness\nIn order to say much more, we need an assumption:\n\nUnconfounded assignment: assignment into the treatment is unconfounded if\n\n  y_i(1),y_i(0) \\perp w_i\n\n\nAnd if, assignment is randomly assigned, then it is unconfounded.\n\n\n\n\n\n\nNote\n\n\nSome people equate the assumption of uncounfedness with randomization. However, they are better thought of as two separate things: unconfoundedness an important underlying assumption, while randomization is an assignment mechanism that gives rise to unconfounded assignment.\n\n\n\n\n\n\n\n\n\n\nUnconfounded vs exogenous"
+    "text": "Unconfoundedness\nIn order to say much more, we need an assumption:\n\nUnconfounded assignment: assignment into the treatment is unconfounded if\n\n  y_i\\small{(1)},y_i\\small{(0)} \\perp w_i\n\n\n\n\nAnd, if assignment is random, then it is unconfounded.\n\n\n\n\n\n\nNote\n\n\nSome people equate unconfoundedness with randomization, but they are distinct. Unconfoundedness is a property of an assignment mechanism: treatment assignment is independent of potential outcomes, possibly conditional on covariates. Randomization is one particular assignment mechanism that guarantees this property by design. In observational studies, by contrast, unconfoundedness can’t be guaranteed and must instead be assumed."
   },
   {
     "objectID": "lecture-6-slides.html#unconfounded-assignment",
     "href": "lecture-6-slides.html#unconfounded-assignment",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Unconfounded assignment",
-    "text": "Unconfounded assignment\n\nE[y_i(0)|w_i=1] = E[y_i(0)|w_i=0] = E[y_i(0)]\n\n\n    \\Rightarrow \\underbrace{\\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\\text{selection} = 0\n  \n\n\\underbrace{E[y_i(1)-y_i(0)|w_i = 1]}_\\text{ATT}=\\underbrace{E[y_i(1)-y_i(0)|w_i = 0]}_\\text{ATU}=\\underbrace{E[y_i(1)-y_i(0)}_\\text{ATE}"
+    "text": "Unconfounded assignment\n\nE[y_i\\small{(0)}|w_i=1] = E[y_i\\small{(0)}|w_i=0] = E[y_i\\small{(0)}]\n\n  \\Rightarrow \\underbrace{\\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}- E[y_i\\small{(0)}|w_i = 0]}_\\text{selection} = 0\n\n\n\n\n\\underbrace{E[y_i\\small{(1)}-y_i\\small{(0)}|w_i = 1]}_\\text{ATT}=\\underbrace{E[y_i\\small{(1)}-y_i\\small{(0)}|w_i = 0]}_\\text{ATU}=\\underbrace{E[y_i\\small{(1)}-y_i\\small{(0)}}_\\text{ATE}"
   },
   {
     "objectID": "lecture-6-slides.html#section-6",
     "href": "lecture-6-slides.html#section-6",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "If assignment is unconfounded, then\n\n  E[y_i|w_i = 1] - E[y_i|w_i = 0] = \\tau_{ate}\n\nWe therefore refer to unconfoundedness as the identifying assumption.\n\nWithout unconfoundness we cannot learn about the ATE (or ATT) from the difference between two groups."
+    "text": "If assignment is unconfounded, then\n\n  E[y_i|w_i = 1] - E[y_i|w_i = 0] = \\tau_{ate}\n\n\nWe therefore refer to unconfoundedness as the identifying assumption.\n\nwithout it we cannot learn about the ATE (or ATT) from the difference between two groups."
   },
   {
-    "objectID": "lecture-6-slides.html#balance-tests",
-    "href": "lecture-6-slides.html#balance-tests",
-    "title": "Causal Inference",
-    "section": "Balance tests",
-    "text": "Balance tests\nResearchers test for unconfoundedness using balance tests.\nNeed to emphasise what happens in realization vs expectation"
+    "objectID": "lecture-6-slides.html#testing-unconfoundedness",
+    "href": "lecture-6-slides.html#testing-unconfoundedness",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Testing unconfoundedness",
+    "text": "Testing unconfoundedness\nIn practice, researchers attempt to demonstrate that “randomization has worked” through the construction of a balance table\n\nTest difference in baseline covariates across treatment-control\nCan do a joint ANOVA test or adjust p-values for multiple inference.\nCovariates must be observable (hence, baseline survey)\nResearcher hopes to fail to reject H_0: difference. Does not prove unconfounded assignment.\n\n\n\n\n\n\n\n\n\n\nExpectation vs Realization\n\n\nRandom assignment gives you unconfoundedness, which in expectation means that the treatment and control group are (theoretically) the same. The realized allocation will consist of two groups that are NOT the same.\nWe can rely on LLN to say that for a large enough sample, the mean of each group approaches its expected value. But, many RCTs do not have very large samples."
   },
   {
     "objectID": "lecture-6-slides.html#estimator",
     "href": "lecture-6-slides.html#estimator",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Estimator",
-    "text": "Estimator\nUnder unconfoundedness, the ATE has a simple difference between means (SDM) estimator (Wooldridge 2025, sec. 2.7a)\n\n  \\hat{\\tau} = \\bar{y}_1 - \\bar{y}_0\n\nwhere,\n$$ {y}1 = {}y_i{y}0 ={}y_i\n$$\nand n_1 (n_0) is number of treated (control) units"
+    "text": "Estimator\nUnder unconfoundedness, the ATE has a simple difference between means (SDM) estimator (Wooldridge 2025, sec. 2.7a)\n\n  \\hat{\\tau} = \\bar{y}_1 - \\bar{y}_0\n\nwhere,\n\n  \\bar{y}_1 = \\frac{1}{\\textcolor{red}{n_1}}\\sum_{i:\\textcolor{red}{w_i=1}}y_i \\qquad \\text{and}\\qquad \\bar{y}_0 =\\frac{1}{\\textcolor{blue}{n_0}}\\sum_{i:\\textcolor{blue}{w_i=0}}y_i\n\nand n_1 (n_0) is number of treated (control) units"
   },
   {
     "objectID": "lecture-6-slides.html#variance",
     "href": "lecture-6-slides.html#variance",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Variance",
-    "text": "Variance\nThe variance of this estimator is\n\n  Var(\\hat{\\tau}) = \\frac{\\sigma_1^2}{n_1} + \\frac{\\sigma_0^2}{n_0}\n\nWhich can be estimated by,1\n\n  \\widehat{Var}(\\hat{\\tau}) = \\frac{\\hat{\\sigma}_1^2}{n_1} + \\frac{\\hat{\\sigma}_0^2}{n_0}\n\nwhere \\hat{\\sigma}_j^2 = \\frac{1}{n_j-1}\\sum_{i: w_i=j} (y_i-\\bar{y}_j)^2 for j=0,1.\nReferred to as the Neyman variance estimator."
+    "text": "Variance\nThe variance of this estimator is\n\n  Var(\\hat{\\tau}) = \\frac{\\sigma_0^2}{n_0} + \\frac{\\sigma_1^2}{n_1}\n\nWhich can be estimated by,\n\n  \\widehat{Var}(\\hat{\\tau}) =  \\frac{\\hat{\\sigma}_0^2}{n_0} + \\frac{\\hat{\\sigma}_1^2}{n_1}\n\nwhere \\hat{\\sigma}_j^2 = \\frac{1}{n_j-1}\\sum_{i: w_i=j} (y_i-\\bar{y}_j)^2 for j=0,1.\n\nWe call this the Neyman variance estimator within Causal Inference literature.1\n\nAlso referred to as the Welch test/estimator."
   },
   {
     "objectID": "lecture-6-slides.html#homogeneous-vs-heterogenous-tes",
     "href": "lecture-6-slides.html#homogeneous-vs-heterogenous-tes",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Homogeneous vs heterogenous TEs",
-    "text": "Homogeneous vs heterogenous TEs\nSo far, we have said nothing about whether \\tau_i varies at the individual level. If TEs are homogeneous:\n\n  \\tau_i=y_i(1)-y_i(0)=\\tau \\;\\forall\\; i\n\nThen,\n\n  y_i = y_i(0) + w_i(y_i(1)-y_i(0)) = y_i(0) + w_i\\tau\n\nAnd,\n\n  \\sigma_0^2 = \\sigma_1^2 = \\sigma^2"
+    "text": "Homogeneous vs heterogenous TEs\nIf TEs are homogeneous:\n\n  \\tau_i=y_i\\small{(1)}-y_i\\small{(0)}=\\tau \\;\\forall\\; i\n\nThen,\n\n  y_i = y_i\\small{(0)} + w_i(y_i\\small{(1)}-y_i\\small{(0)}) = y_i\\small{(0)} + w_i\\tau\n\nAnd,\n\n  \\sigma_0^2 = \\sigma_1^2 = \\sigma^2"
   },
   {
     "objectID": "lecture-6-slides.html#demonstration",
     "href": "lecture-6-slides.html#demonstration",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Demonstration",
-    "text": "Demonstration\nAdd graphs demonstrating."
-  },
-  {
-    "objectID": "lecture-6-slides.html#homogenous-tes",
-    "href": "lecture-6-slides.html#homogenous-tes",
-    "title": "Causal Inference",
-    "section": "Homogenous TEs",
-    "text": "Homogenous TEs\nIf TEs homogenous are homogeneous\n\n  Var(\\hat{\\tau}) = \\frac{\\sigma_1^2}{n_1} + \\frac{\\sigma_0^2}{n_0} = \\sigma^2\\bigg(\\frac{1}{n_1} + \\frac{1}{n_0}\\bigg)\n\nWhich can be estimated as,\n\n\\hat{\\sigma}^2 = \\frac{1}{n-2}\\big(\\hat\\sigma_1^2(n_1-1) + \\hat\\sigma_0^2(n_0-1)\\big)\n\nWe call this the constant variance estimator."
-  },
-  {
-    "objectID": "lecture-6-slides.html#distribution",
-    "href": "lecture-6-slides.html#distribution",
-    "title": "Causal Inference",
-    "section": "Distribution",
-    "text": "Distribution\nNote, we do not know the distribution of y_i(0) or y_i(1)!\n\nIn applied work, researchers prefer not to make an assumption\nCan use CLT to show asymptotic distribution is normal\nIn practice, use t-distribution to be more conservative"
-  },
-  {
-    "objectID": "lecture-6-slides.html#demonstration-1",
-    "href": "lecture-6-slides.html#demonstration-1",
-    "title": "Causal Inference",
-    "section": "Demonstration",
-    "text": "Demonstration\nAdd Stata and R versions of tests with and without difference between means."
-  },
-  {
-    "objectID": "lecture-6-slides.html#dummy-regressor",
-    "href": "lecture-6-slides.html#dummy-regressor",
-    "title": "Causal Inference",
-    "section": "Dummy regressor",
-    "text": "Dummy regressor\nWe know that for a discrete x_i\\in\\{0,\\},\n\n  y_i = \\beta_0 + \\beta_1 x_i + u_i\n\n\n  \\beta_1 = E[y_i|x_i=1]-E[y_i|x_i=0]"
-  },
-  {
-    "objectID": "lecture-6-slides.html#ols",
-    "href": "lecture-6-slides.html#ols",
-    "title": "Causal Inference",
-    "section": "OLS",
-    "text": "OLS\nMoreover, we should in Lecture 28 that the OLS estimator for \\beta_1 is just,\n\n  \\hat{\\beta}_1 = \\bar{y}_1 - \\bar{y}_0"
-  },
-  {
-    "objectID": "lecture-6-slides.html#translation-of-pof",
-    "href": "lecture-6-slides.html#translation-of-pof",
-    "title": "Causal Inference",
-    "section": "Translation of POF",
-    "text": "Translation of POF\nWe translate the POF to a linear regression model,1\n$$\n\\begin{aligned}\n    y_i =& y_i(0) + w_i(y_i(1)-y_i(0)) \\\\\n      =& y_i(0) + \\tau_i w_i \\\\\n      =& \\textcolor{blue}{E[y_i(0)]} + \\tau_i w_i + y_i(0)-\\textcolor{blue}{E[y_i(0)]} \\\\\n      =& \\textcolor{blue}{E[y_i(0)]} + \\textcolor{red}{\\tau_{ate}} w_i + \\underbrace{y_i(0)-\\textcolor{blue}{E[y_i(0)]} + (\\tau_i-\\textcolor{red}{\\tau_{ate}})w_i}_{u_i} \\\\\n      =& \\alpha_0 + \\textcolor{red}{\\tau_{ate}}w_i + u_i\n    \n  \\end{aligned}\n$$\nThis is a more general version than Wooldridge (2025, sec. 2.7a), which assumes homogeneity."
+    "text": "Demonstration\nConsider the following (simulated) distribution of y_0, which need not not be normal."
   },
   {
     "objectID": "lecture-6-slides.html#section-7",
     "href": "lecture-6-slides.html#section-7",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "Consider the error term:\n\n  \\begin{aligned}\n  u_i =& y_i(0)-\\textcolor{blue}{E[y_i(0)]} + (\\tau_i-\\textcolor{red}{\\tau_{ate}})w_i \\\\\n  =& y_i(0)-\\textcolor{blue}{E[y_i(0)]} + (y_i(1)-y_i(0)-\\textcolor{red}{E[y_i(1)-y_i(0)]})w_i \\\\\n  \\end{aligned}\n\n\nE[u_i|w_i=0]\n\n  E[u_i|w_i=0] = E\\big[y_i(0)-\\textcolor{blue}{E[y_i(0)]}\\big|w_i=0\\big] = E[y_i(0)|w_i=0]-\\textcolor{blue}{E[y_i(0)]}\n\n\nIf assignment is unconfounded:\n\n  E[y_i(0)|w_i=0]-\\textcolor{blue}{E[y_i(0)]} = E[y_i(0)]-\\textcolor{blue}{E[y_i(0)]} = 0"
+    "text": "If TEs are homogeneous, then y_i\\small{(1)} = y_i\\small{(0)} + \\tau (i.e. a mean shift)\n\nThe variance does not change."
+  },
+  {
+    "objectID": "lecture-6-slides.html#homogenous-tes",
+    "href": "lecture-6-slides.html#homogenous-tes",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Homogenous TEs",
+    "text": "Homogenous TEs\nIf TEs are homogenous\n\n  Var(\\hat{\\tau}) = \\frac{\\sigma_0^2}{n_0} + \\frac{\\sigma_1^2}{n_1} = \\sigma^2\\bigg(\\frac{1}{n_1} + \\frac{1}{n_0}\\bigg)\n\nWhich can be estimated as,\n\n\\hat{\\sigma}^2 = \\frac{1}{n-2}\\big((n_0-1)\\times \\hat\\sigma_0^2 + (n_1-1)\\times \\hat\\sigma_1^2 \\big)\n\nWe call this the constant variance estimator."
   },
   {
     "objectID": "lecture-6-slides.html#section-8",
     "href": "lecture-6-slides.html#section-8",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "E[u_i|w_i=1]\n\n\\begin{aligned}\n  E[u_i|w_i=1] =& E\\big[y_i(0)-\\textcolor{blue}{E[y_i(0)]} + (y_i(1)-y_i(0)-\\textcolor{red}{E[y_i(1)-y_i(0)]})\\big|w_i=1\\big] \\\\\n  =& E\\big[y_i(0)-\\textcolor{blue}{E[y_i(0)]} + y_i(1)-y_i(0)-\\textcolor{red}{E[y_i(1)]}+\\textcolor{red}{E[y_i(0)]}\\big|w_i=1\\big] \\\\\n  =& E\\big[y_i(1)-\\textcolor{red}{E[y_i(1)]}\\big|w_i=1\\big] \\\\\n  =& E[y_i(1)|w_i=1] -\\textcolor{red}{E[y_i(1)]}\n  \\end{aligned}\n\n\nIf assignment is unconfounded:\n\n  E[y_i(1)|w_i=1] -\\textcolor{red}{E[y_i(1)]} = E[y_i(1)]-\\textcolor{red}{E[y_i(1)]} = 0"
+    "text": "If the TEs are heterogeneous, then y_i\\small{(1)} = y_i\\small{(0)} + \\tau_i"
+  },
+  {
+    "objectID": "lecture-6-slides.html#distribution",
+    "href": "lecture-6-slides.html#distribution",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Distribution",
+    "text": "Distribution\nNote, we do not know the distribution of y_i\\small{(0)} or y_i\\small{(1)}!\n\nIn applied work, researchers prefer not to make any assumptions\nRely on CLT to show asymptotic distribution is normal\nIn practice, and since RCTs often have a small sample, use t-distribution to be more conservative\nThere are other approaches to inference (e.g., permutation tests like Fisher’s exact p-value) that we won’t cover here, but are more relevant for small samples."
+  },
+  {
+    "objectID": "lecture-6-slides.html#in-statar",
+    "href": "lecture-6-slides.html#in-statar",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "In Stata/R",
+    "text": "In Stata/R\nExample uses a 10% sample of the replication data for Dizon-Ross (2019).\n\nStataR\n\n\nConstant variance test\n\nttest belief_err_bl, by(treat)\n\nTwo-sample t test with equal variances\n------------------------------------------------------------------------------\n   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]\n---------+--------------------------------------------------------------------\n       0 |     674    20.61721    .5519379    14.32914    19.53348    21.70094\n       1 |     638    20.23511    .5867858    14.82142    19.08284    21.38738\n---------+--------------------------------------------------------------------\nCombined |   1,312     20.4314    .4021444    14.56629    19.64249    21.22032\n---------+--------------------------------------------------------------------\n    diff |             .382101    .8048296               -1.196795    1.960997\n------------------------------------------------------------------------------\n    diff = mean(0) - mean(1)                                      t =   0.4748\nH0: diff = 0                                     Degrees of freedom =     1310\n\n    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0\n Pr(T &lt; t) = 0.6825         Pr(|T| &gt; |t|) = 0.6350          Pr(T &gt; t) = 0.3175\n\n\nUnequal variance test (Neyman)\n\nttest belief_err_bl, by(treat) unequal\n\nTwo-sample t test with unequal variances\n------------------------------------------------------------------------------\n   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]\n---------+--------------------------------------------------------------------\n       0 |     674    20.61721    .5519379    14.32914    19.53348    21.70094\n       1 |     638    20.23511    .5867858    14.82142    19.08284    21.38738\n---------+--------------------------------------------------------------------\nCombined |   1,312     20.4314    .4021444    14.56629    19.64249    21.22032\n---------+--------------------------------------------------------------------\n    diff |             .382101    .8055762               -1.198271    1.962473\n------------------------------------------------------------------------------\n    diff = mean(0) - mean(1)                                      t =   0.4743\nH0: diff = 0                     Satterthwaite's degrees of freedom =  1299.78\n\n    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0\n Pr(T &lt; t) = 0.6823         Pr(|T| &gt; |t|) = 0.6354          Pr(T &gt; t) = 0.3177\n\n\n\n\nConstant variance test\n\nt.test(belief_err_bl ~ treat, data = dr19_dta, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  belief_err_bl by treat\nt = 0.47476, df = 1310, p-value = 0.635\nalternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0\n95 percent confidence interval:\n -1.196795  1.960997\nsample estimates:\nmean in group 0 mean in group 1 \n       20.61721        20.23511 \n\n\nUnequal variance test (Neyman)\n\nt.test(belief_err_bl ~ treat, data = dr19_dta, var.equal = FALSE)\n\n\n    Welch Two Sample t-test\n\ndata:  belief_err_bl by treat\nt = 0.47432, df = 1299.8, p-value = 0.6354\nalternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0\n95 percent confidence interval:\n -1.198271  1.962473\nsample estimates:\nmean in group 0 mean in group 1 \n       20.61721        20.23511"
+  },
+  {
+    "objectID": "lecture-6-slides.html#dummy-regressor",
+    "href": "lecture-6-slides.html#dummy-regressor",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Dummy regressor",
+    "text": "Dummy regressor\nWe know that for a discrete x_i\\in\\{0,1\\},\n\n  y_i = \\beta_0 + \\beta_1 x_i + u_i\n\n\n\nwhere, \n  \\beta_1 = E[y_i|x_i=1]-E[y_i|x_i=0]"
+  },
+  {
+    "objectID": "lecture-6-slides.html#ols",
+    "href": "lecture-6-slides.html#ols",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "OLS",
+    "text": "OLS\nMoreover, we showed in Lecture 2 that the OLS estimator for \\beta_1 is just,\n\n  \\hat{\\beta}_1 = \\bar{y}_1 - \\bar{y}_0"
+  },
+  {
+    "objectID": "lecture-6-slides.html#translation-of-pof",
+    "href": "lecture-6-slides.html#translation-of-pof",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Translation of POF",
+    "text": "Translation of POF\nWe can translate the POF to a linear regression model,1\n\n  \\begin{aligned}\n    y_i =& y_i\\small{(0)} + w_i(y_i\\small{(1)}-y_i\\small{(0)}) \\\\\n      =& y_i\\small{(0)} + \\tau_i w_i \\\\\n      =& \\textcolor{blue}{E[y_i\\small{(0)}]} + \\tau_i w_i + y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} \\\\\n      =& \\textcolor{blue}{E[y_i\\small{(0)}]} + \\textcolor{red}{\\tau_{ate}} w_i + \\underbrace{y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} + (\\tau_i-\\textcolor{red}{\\tau_{ate}})w_i}_{u_i} \\\\\n      =& \\alpha_0 + \\textcolor{red}{\\tau_{ate}}w_i + u_i\n  \\end{aligned}\n\nWooldridge (2025, sec. 2.7a) also includes a version with homogeneous TEs. This is the more general case."
   },
   {
     "objectID": "lecture-6-slides.html#section-9",
     "href": "lecture-6-slides.html#section-9",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "Thus, under unconfoundedness we can write,\n\n  y_i = \\alpha_0 + \\tau_{ate}w_i + u_i\n\nwhere,\n\nslope parameter on w_i identifies the ATE\nthe error term fullfils MLR 4\nOLS estimator is unbiased"
+    "text": "Consider the error term:\n\n  u_i = \\underbrace{y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]}}_{1.} + \\underbrace{(\\tau_i-\\textcolor{red}{\\tau_{ate}})}_{2.}\\underbrace{w_i}_{3.}\n\nit includes,\n\nthe deviation of y_i(0) from its unconditional mean\nthe devation of \\tau_i from its unconditional mean (i.e. \\tau_{ate}) \\Leftarrow heterogeneity\nw_i is found in the error term, as well"
   },
   {
     "objectID": "lecture-6-slides.html#section-10",
     "href": "lecture-6-slides.html#section-10",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "Important\n\n\nIf given the model y_i = \\beta_0 + \\beta_1 x_i + u_i with x_i = \\{0,1\\}, then it is trivial to say that E[u_i|x_i]=0. This is because we can write the CEF of y given x as a linear function:\n\n  E[y_i|x_i] = \\underbrace{E[y_i|x_i=0]}_{\\beta_0} + \\underbrace{\\big(E[y_i|x_i=1]-E[y_i|x_i=0]\\big)}_{\\beta_1}x_i\n\nAll this means is that we can identify the mean of two groups. It does NOT mean that \\beta_1 = E[y_i|x_i=1]-E[y_i|x_i=0] is equal to the ATE. For that, you need unconfoundedness.\nConsider the case where x_i = \\mathbf{1}\\{\\text{``female''}\\}. Then \\beta_1 tells you the mean difference between female and male observations. Would you describe this as the ATE of being female?"
-  },
-  {
-    "objectID": "lecture-6-slides.html#error-variance",
-    "href": "lecture-6-slides.html#error-variance",
-    "title": "Causal Inference",
-    "section": "Error variance",
-    "text": "Error variance\nWe have show that under unconfoundedness E[u_i |w_i]=0. What about Var(u_i|w_i)=E[u_i^2|w_i]?\n\nSuppose TEs are homogenous: \\tau_i = \\tau = \\tau_{ate}\\;\\forall\\;i\n\n  u_i = y_i(0)-\\textcolor{blue}{E[y_i(0)]} + \\underbrace{(\\tau_i-\\textcolor{red}{\\tau_{ate}})}_{=0}w_i = y_i(0)-\\textcolor{blue}{E[y_i(0)]}\n\n\nThen,\n\n  E[u_i^2|w_i] = E[(y_i(0)-\\textcolor{blue}{E[y_i(0)]})^2|w_i] = E[(y_i(0)-\\textcolor{blue}{E[y_i(0)]})^2] = \\sigma^2_0 = \\sigma^2\n\nunder unconfoundedness.\n\nhomogeneity \\rightarrow homoskedastic error variance"
+    "text": "Solve for E[u_i|w_i=0]\n\n  \\begin{aligned}\n  E[u_i|w_i=0] =& E\\big[y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} + (\\tau_i-\\textcolor{red}{\\tau_{ate}})w_i\\big|w_i=0\\big] \\\\\n  =&E\\big[y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]}\\big|w_i=0\\big] \\\\\n  =& E[y_i\\small{(0)}|w_i=0]-\\textcolor{blue}{E[y_i\\small{(0)}]} \\\\\n  \\end{aligned}\n\n\n\n\nIf assignment is unconfounded:\n\n  E[y_i\\small{(0)}|w_i=0]-\\textcolor{blue}{E[y_i\\small{(0)}]} = E[y_i\\small{(0)}]-\\textcolor{blue}{E[y_i\\small{(0)}]} = 0"
   },
   {
     "objectID": "lecture-6-slides.html#section-11",
     "href": "lecture-6-slides.html#section-11",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "If TEs are heterogenous:\n\n\n  E[u_i^2|w_i] = \\begin{cases}\n  E[(y_i(0)-\\textcolor{blue}{E[y_i(0)]})^2] = \\sigma^2_0 \\quad \\text{if}\\;w_i=0 \\\\\n  E[(y_i(1)-\\textcolor{red}{E[y_i(1)]})^2] = \\sigma^2_1 \\quad \\text{if}\\;w_i=1 \\\\\n  \\end{cases}\n\n- heterogeneity \\rightarrow heteroskedastic error variance"
-  },
-  {
-    "objectID": "lecture-6-slides.html#variance-1",
-    "href": "lecture-6-slides.html#variance-1",
-    "title": "Causal Inference",
-    "section": "Variance",
-    "text": "Variance\nWe know from Lecture 3 that the (conditional) variance of the OLS estimator for \\tau_{ate} is,\n\n  \\widehat{Var}(\\hat{\\tau}_{ols}|W) = \\frac{\\hat{\\sigma}^2_{ols}}{SST_w}\n\nunder MLR 5 (i.e., homogeneous TEs). Where,\n\n  \\hat{\\sigma}^2_{ols} = \\frac{1}{n-2}\\sum_{i=1}^n \\hat{u}_i^2 = \\frac{1}{n-2}\\big(\\hat\\sigma_1^2(n_1-1) + \\hat\\sigma_0^2(n_0-1)\\big)"
+    "text": "Solve for E[u_i|w_i=1]\n\n  \\begin{aligned}\n    E[u_i|w_i=1] =& E\\big[y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} + (\\tau_i-\\textcolor{red}{\\tau_{ate}})w_i\\big|w_i=1\\big] \\\\\n    =& E\\big[y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} + y_i\\small{(1)}-y_i\\small{(0)}-\\textcolor{red}{E[y_i\\small{(1)}]}+\\textcolor{red}{E[y_i\\small{(0)}]}\\big|w_i=1\\big] \\\\\n    =& E\\big[y_i\\small{(1)}-\\textcolor{red}{E[y_i\\small{(1)}]}\\big|w_i=1\\big] \\\\\n    =& E[y_i\\small{(1)}|w_i=1] -\\textcolor{red}{E[y_i\\small{(1)}]}\n  \\end{aligned}\n\n\n\n\nAgain, if assignment is unconfounded:\n\n  E[y_i\\small{(1)}|w_i=1] -\\textcolor{red}{E[y_i\\small{(1)}]} = E[y_i\\small{(1)}]-\\textcolor{red}{E[y_i\\small{(1)}]} = 0"
   },
   {
     "objectID": "lecture-6-slides.html#section-12",
     "href": "lecture-6-slides.html#section-12",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "In the denominator is\n\n  \\begin{aligned}\n  SST_w =& \\sum_{i=1}^n(w_i-\\bar{w})^2 \\\\\n  =& \\sum_{i:w_i=1}(1-\\bar{w})^2 + \\sum_{i:w_i=0}(0-\\bar{w})^2 \\\\\n  =& n_1(1-2\\bar{w} + \\bar{w}^2) + n_0 \\bar{w}^2 \\\\\n  =& n_1(1-2\\bar{w}) + n\\bar{w}^2 \\\\\n  =& \\underbrace{n\\bar{w}}_{=n_1}(1-2\\bar{w}) + n\\bar{w}^2 \\\\\n  =& n\\bar{w}(1-\\bar{w})\n  \\end{aligned}\n\nThis formula is quadratic in \\bar{w} - the share of the sample treated.\n\nAt \\bar{w}=0.5, SST_w is maximized and Var(\\hat{\\tau}^{OLS}|W) is minimized."
+    "text": "Thus, with unconfounded assignment we can write,\n\n  y_i = \\alpha_0 + \\tau_{ate}w_i + u_i\n\nwhere,\n\nslope parameter on w_i identifies the ATE\nthe error term fulfills MLR 4\nOLS estimator is unbiased (for the ATE)"
+  },
+  {
+    "objectID": "lecture-6-slides.html#error-variance",
+    "href": "lecture-6-slides.html#error-variance",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Error variance",
+    "text": "Error variance\nWe have shown that under unconfoundedness E[u_i |w_i]=0.1 What about:\n\n  Var(u_i|w_i)=E[u_i^2|w_i]=?\n\n\n\nSuppose TEs are homogenous: \\tau_i = \\tau = \\tau_{ate}\\;\\forall\\;i\n\n  u_i = y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} + \\underbrace{(\\tau_i-\\textcolor{red}{\\tau_{ate}})}_{=0}w_i = y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]}\n\n\n\nWhere u_i = y_i - \\alpha_0 - \\tau_{ate}w_i."
+  },
+  {
+    "objectID": "lecture-6-slides.html#homoskedasticity",
+    "href": "lecture-6-slides.html#homoskedasticity",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Homoskedasticity",
+    "text": "Homoskedasticity\nIf treatment effects are homogeneous, then\n\n  E[u_i^2|w_i] = E[(y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]})^2|w_i] = E[(y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]})^2] = \\sigma^2_0 = \\sigma^2\n\nunder unconfoundedness.\n\nhomogeneity \\Rightarrow homoskedastic error variance"
+  },
+  {
+    "objectID": "lecture-6-slides.html#heteroskedasticity",
+    "href": "lecture-6-slides.html#heteroskedasticity",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Heteroskedasticity",
+    "text": "Heteroskedasticity\nIf TEs are heterogenous:\n\n  E[u_i^2|w_i] = \\begin{cases}\n  E[(y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]})^2] = \\sigma^2_0 \\quad \\text{if}\\;w_i=0 \\\\\n  E[(y_i\\small{(1)}-\\textcolor{red}{E[y_i\\small{(1)}]})^2] = \\sigma^2_1 \\quad \\text{if}\\;w_i=1 \\\\\n  \\end{cases}\n\nunder unconfoundedness.\n\nheterogeneity \\Rightarrow heteroskedastic error variance"
+  },
+  {
+    "objectID": "lecture-6-slides.html#variance-estimator",
+    "href": "lecture-6-slides.html#variance-estimator",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Variance estimator",
+    "text": "Variance estimator\nWe know from Lecture 3 that the (conditional) variance of the OLS estimator for \\tau_{ate} is,\n\n  \\widehat{Var}(\\hat{\\tau}_{ols}|W) = \\frac{\\hat{\\sigma}^2_{ols}}{SST_w}\n\nunder MLR 5 (\\Leftarrow homogeneous TEs). Where,\n\n  \\hat{\\sigma}^2_{ols} = \\frac{1}{n-2}\\sum_{i=1}^n \\hat{u}_i^2\n\n\nThis is mathematically equivalent to the constant variance estimator.\n\n= \\frac{1}{n-2}\\big((n_0-1)\\times\\hat\\sigma_0^2 + (n_1-1)\\times\\hat\\sigma_1^2\\big)"
   },
   {
     "objectID": "lecture-6-slides.html#section-13",
     "href": "lecture-6-slides.html#section-13",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "What if MLR 5 (i.e. heterogeneous TEs) does not hold.\n\nThe White (1980) heteroskedastic-consistent estimator from Lecture 5 was,\n\n\n  \\widehat{Var}(\\hat{\\tau}_{ols}|W) = \\frac{\\sum_{i=1}^{n}(w_{i}-\\bar{w})^2\\hat{u}_i^2}{\\text{SST}_w^2}\n\nIt can be shown (we will not) that,\n\n  \\widehat{Var}(\\hat{\\tau}_{ols}|W) \\neq  \\frac{\\hat{\\sigma}_1^2}{n_1} + \\frac{\\hat{\\sigma}_0^2}{n_0}\n\nthe Neyman estimator. The Neyman estimator is numerically equivalent to HC2.\n\nin practice, all HC0-HC3 estimators are asymptotically consistent.\nHC3 is recommended for smaller samples."
+    "text": "In the denominator is\n\n  SST_w = n\\bar{w}(1-\\bar{w})\n\n\nThis formula is quadratic in \\bar{w} - the share of the sample treated.\n\nAt \\bar{w}=0.5, SST_w is maximized and Var(\\hat{\\tau}^{OLS}|W) is minimized (holding other factors fixed).\nA balanced treatment is good for statistical power, as is a larger sample size."
+  },
+  {
+    "objectID": "lecture-6-slides.html#section-14",
+    "href": "lecture-6-slides.html#section-14",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "What if MLR 5 (\\Leftarrow heterogeneous TEs) does not hold?\n\nThe White (1980) heteroskedastic-consistent estimator from Lecture 5 was,\n\n\n  HC0 = \\frac{\\sum_{i=1}^{n}(w_{i}-\\bar{w})^2\\hat{u}_i^2}{\\text{SST}_w^2}\n\n\nIt can be shown (we will not) that,\n\n  HC0 \\neq  \\frac{\\hat{\\sigma}_0^2}{n_0} + \\frac{\\hat{\\sigma}_1^2}{n_1} = HC2\n\nThe Neyman estimator is numerically equivalent to HC2.\n\nin practice, all HC0-HC3 estimators are asymptotically consistent.\nHC3 is recommended for smaller samples."
   },
   {
     "objectID": "lecture-6-slides.html#purpose",
     "href": "lecture-6-slides.html#purpose",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Purpose",
-    "text": "Purpose\nThe variance of the estimator is (assuming homogeneous TEs),\n\n  Var(\\hat{\\tau}_{ols}|W) = \\frac{Var(u_i|w_i)}{SST_w} = \\frac{\\sigma^2_u}{SST_w}\n\nwhere u_i is from the model,\n\n  y_i = \\alpha_0 + \\tau_{ate}w_i + u_i\n\n\nThe only variation in y explained by this model is the difference between treatment and control.\nWill result in high variance and low-powered test."
+    "text": "Purpose\nThe variance of the estimator is (assuming homogeneous TEs),\n\n  Var(\\hat{\\tau}_{ols}|W) = \\frac{Var(u_i|w_i)}{SST_w} = \\frac{\\sigma^2_u}{SST_w}\n\nwhere u_i is from the model,\n\n  y_i = \\alpha_0 + \\tau_{ate}w_i + u_i\n\n\nThe only variation in y explained by this model is the difference between treatment-control.\nWill result in high variance and low-powered test."
   },
   {
     "objectID": "lecture-6-slides.html#covariates",
     "href": "lecture-6-slides.html#covariates",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Covariates",
     "text": "Covariates\nSuppose,\n\nu_i = \\gamma x_i + v_i\n\nwhere x is a regressor measured before assignment1\n\nlikely explain part of the outcome (i.e. \\gamma\\neq 0)\ncommonly referred to as baseline covariates in RCTs\n\nWe can extend the notation to include multiple regressors, but it makes some of the math a little difficult. The conclusion does not change."
   },
   {
     "objectID": "lecture-6-slides.html#regression-adjustment-1",
     "href": "lecture-6-slides.html#regression-adjustment-1",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Regression adjustment",
-    "text": "Regression adjustment\nInstead of the simple regression, we estimate\n\n  y_i = \\alpha_0 + \\tau_{ate}w_i + \\gamma x_i + v_i\n\n\nWooldridge refers to this as the Restricted Regression Adjustment (RRA) (~ Wooldridge 2025, 257)"
+    "text": "Regression adjustment\nInstead of the simple regression, we estimate\n\n  y_i = \\alpha_0 + \\tau_{ate}w_i + \\gamma x_i + v_i\n\n\nWooldridge (2025, 257) refers to this as the Restricted Regression Adjustment (RRA)"
   },
   {
-    "objectID": "lecture-6-slides.html#variance-2",
-    "href": "lecture-6-slides.html#variance-2",
-    "title": "Causal Inference",
+    "objectID": "lecture-6-slides.html#variance-1",
+    "href": "lecture-6-slides.html#variance-1",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Variance",
-    "text": "Variance\n\n  Var(\\hat{\\tau}_{rra}|W,X) = \\frac{Var(v_i|w_i,x_i)}{SSR_w} =  \\frac{\\sigma^2_v}{SSR_w}\n\nwhere, SSR_w=SST_w (1-R_w^2)\n\nR^2_w is the amount of variance in assignment explained by the covariates. This should be low.\nWhile R^2_w\\neq 0 in the finite sample, R^2_w\\rightarrow 0 as n\\rightarrow \\infty\nSo, SSR_w\\approx SST_w."
+    "text": "Variance\nFrom Lecture 3 we know,\n\n  Var(\\hat{\\tau}_{rra}|W,X) = \\frac{Var(v_i|w_i,x_i)}{SSR_w} =  \\frac{\\sigma^2_v}{SSR_w}\n\nwhere,\n\n  SSR_w=SST_w (1-R_w^2)\n\n\n\nR^2_w is the amount of variance in assignment explained by the covariates. This should be low, but won’t be zero.\nWhile R^2_w\\neq 0 in the finite sample, R^2_w\\rightarrow 0 as n\\rightarrow \\infty\nSo, SSR_w\\approx SST_w."
+  },
+  {
+    "objectID": "lecture-6-slides.html#error-variance-1",
+    "href": "lecture-6-slides.html#error-variance-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Error variance",
+    "text": "Error variance\nThe improvement in power comes from the fact that,\n\n   \\underbrace{Var(u_i|w_i)}_{\\sigma^2_u} = Var(\\gamma x_i + v_i|w_i) = \\underbrace{\\gamma^2 Var(x_i)}_{&gt;0} + \\underbrace{Var(v_i|w_i,x_i)}_{\\sigma^2_v}\n\nassuming\n\nCov(x_i,v_i|w_i)=0\nw_i is assigned independently of x_i: Var(x_i|w_i) = Var(x_i)\nVar(v_i|w_i)=Var(v_i|w_i,x_i) (\\Leftarrow heterogeneity unrelated to x)"
   },
   {
     "objectID": "lecture-6-slides.html#power",
     "href": "lecture-6-slides.html#power",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Power",
-    "text": "Power\nThe improvement in power comes from the fact that,\n\n  Var(u_i|w_i) = Var(\\gamma_ix_i + v_i|w_i) = \\underbrace{\\gamma^2 Var(x_i)}_{&gt;0} + Var(v_i|w_i,x_i) &gt; \\sigma^2_v\n\nassuming Cov(x_i,v_i|w_i)=0."
+    "text": "Power\nPutting these two together,\n\nAvar(\\hat{\\tau}_{rra}) \\leq Avar(\\hat{\\tau}_{ols})\n\nwhere Avar() is the asymptotic variance.1\n\nAdding covariates,\n\nReduces variance of the estimator by reducing the error variance\nLittle trade-off in terms of the correlation between w and x (i.e., R^2_w) under assignment that is unconfounded (w.r.t. x’s).\n\nAny finite sample correlation disappears as n\\rightarrow \\infty.\nCovariates must not be potential outcomes of the experiment (i.e. baseline).\n\n\n\nThis is a place holder for p\\lim \\hat\\sigma^2/(n^{-1}SSR_w)."
   },
   {
-    "objectID": "lecture-6-slides.html#heterogeneity",
-    "href": "lecture-6-slides.html#heterogeneity",
-    "title": "Causal Inference",
+    "objectID": "lecture-6-slides.html#research-design-1",
+    "href": "lecture-6-slides.html#research-design-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Research Design",
+    "text": "Research Design\n\n\nBaseline survey:\n\nMeasure covariates: balance and power\n\nEndline survey:\n\nMeasure outcomes\nNeed to think about attrition"
+  },
+  {
+    "objectID": "lecture-6-slides.html#balance-1",
+    "href": "lecture-6-slides.html#balance-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Balance",
+    "text": "Balance\n\n\nBalance:\n\nTest on observables\nDoesn’t consider unobservables\nWill be non-zero correlation in data"
+  },
+  {
+    "objectID": "lecture-6-slides.html#simple-difference-between-means-1",
+    "href": "lecture-6-slides.html#simple-difference-between-means-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Simple difference between means",
+    "text": "Simple difference between means\n\n\nSDM:\n\nMeasures ATE under unconfoundedness\nMight have a high variance"
+  },
+  {
+    "objectID": "lecture-6-slides.html#heterogeneity-2",
+    "href": "lecture-6-slides.html#heterogeneity-2",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Heterogeneity",
-    "text": "Heterogeneity\nThis simple story is somewhat complicated by heterogeneity:\n\nheterogeneity is sits in the error term\nheterogeneity is likely related to x\nheterogeneity (that depends on x) introduces small-sample bias in models of the form:\n\n  y_i = \\alpha_0 + \\tau_{ate}w_i + \\gamma x_i + v_i\n\nOLS remains consistent (for the ATE), despite this small-sample bias"
+    "text": "Heterogeneity\n\n\nHeterogeneity:\n\nPOF developed to understand heterogeneous TEs\nResearchers will often commit to important margins of heterogeneity in their pre-analysis."
   },
   {
-    "objectID": "lecture-6-slides.html#ura",
-    "href": "lecture-6-slides.html#ura",
-    "title": "Causal Inference",
-    "section": "URA",
-    "text": "URA\nTo avoid this small-sample bias, you can do Unrestricted Regression Adjustment (URA) (Wooldridge 2025, 257, 259).\n\n    y_i = \\alpha_0 + \\tau_{ate}w_i + \\gamma x_i + \\eta w_i\\times (x_i-\\bar{x}) + \\varepsilon_i\n  \n\nincludes an interaction between the treatment indicator and the covariate(s)\nthe interactions include demeaned covariate(s)\n\nthis changes the interpretation of \\eta (see Wooldridge 2025, sec. 6.2d)\nensures that the coefficient on w remains the ATE"
+    "objectID": "lecture-6-slides.html#regression-1",
+    "href": "lecture-6-slides.html#regression-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Regression",
+    "text": "Regression\n\n\nRegression adjustment:\n\nCan correct for any imbalance\nMore valuable as a source of improved power\nCovariates from baseline (i.e. not outcomes of experiment)"
+  },
+  {
+    "objectID": "lecture-6-slides.html#bibliography",
+    "href": "lecture-6-slides.html#bibliography",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Bibliography",
+    "text": "Bibliography\n\n\n\n\nBertrand, Marianne, and Sendhil Mullainathan. 2004. “Are Emily and Greg More Employable Than Lakisha and Jamal? A Field Experiment on Labor Market Discrimination.” American Economic Review 94 (4): 991–1013.\n\n\nDizon-Ross, Rebecca. 2019. “Parents’ Beliefs about Their Children’s Academic Ability: Implications for Educational Investments.” American Economic Review 109 (8): 2728–65.\n\n\nHeckman, James J, and Rodrigo Pinto. 2022. “Causality and Econometrics.” National Bureau of Economic Research.\n\n\nHolland, Paul W. 1986. “Statistics and Causal Inference.” Journal of the American Statistical Association 81 (396): 945–60.\n\n\nImbens, Guido W, and Donald B Rubin. 2015. “Causal Inference in Statistics, Social, and Biomedical Sciences.” New York 517.\n\n\nImbens, Guido W, and Jeffrey M Wooldridge. 2009. “Recent Developments in the Econometrics of Program Evaluation.” Journal of Economic Literature 47 (1): 5–86.\n\n\nOreopoulos, Philip. 2011. “Why Do Skilled Immigrants Struggle in the Labor Market? A Field Experiment with Thirteen Thousand Resumes.” American Economic Journal: Economic Policy 3 (4): 148–71.\n\n\nRubin, Donald B. 1975. “Bayesian Inference for Causality: The Importance of Randomization.” In Proceedings of the Social Statistics Section of the American Statistical Association, 233–39. American Statistical Association, Alexandria, VA.\n\n\nWooldridge, Jeffrey M. 2025. “Introductory Econometrics: A Modern Approach.”"
   },
   {
     "objectID": "lecture-6.html",
     "href": "lecture-6.html",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
     "text": "This lecture covers material from Wooldridge (2025):\n\nChapter 2.7 “Regression on a Binary Explanatory Variable”\n\nChapter 2.7a “Counterfactual (or Potential) Outcomes, Causality, and Policy Analysis”\n\nChapter 7.1 “Describing Qualitative Information”\nChapter 7.2 “A Single Dummy Independent Variable”\nChapter 7.3 “Using Dummy Variables for Multiple Categories”\nChapter 7.6b “Regression Adjustment under Randomized Assignment”\n\nWe will discuss the earlier part of Chapter 7.6 (7.6a “Program Evaluation and Unrestricted Regression Adjustment”) in Week 8.\nChapter 7.1-7.3 should probably have been assigned much earlier. However, if you haven’t read them, now is a good time to. The lecture this week will not discuss multiple categories as much, as we will focus on understanding potential outcome and causation."
   },
   {
     "objectID": "lecture-6.html#reading",
     "href": "lecture-6.html#reading",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
     "text": "This lecture covers material from Wooldridge (2025):\n\nChapter 2.7 “Regression on a Binary Explanatory Variable”\n\nChapter 2.7a “Counterfactual (or Potential) Outcomes, Causality, and Policy Analysis”\n\nChapter 7.1 “Describing Qualitative Information”\nChapter 7.2 “A Single Dummy Independent Variable”\nChapter 7.3 “Using Dummy Variables for Multiple Categories”\nChapter 7.6b “Regression Adjustment under Randomized Assignment”\n\nWe will discuss the earlier part of Chapter 7.6 (7.6a “Program Evaluation and Unrestricted Regression Adjustment”) in Week 8.\nChapter 7.1-7.3 should probably have been assigned much earlier. However, if you haven’t read them, now is a good time to. The lecture this week will not discuss multiple categories as much, as we will focus on understanding potential outcome and causation."
   },
   {
     "objectID": "lecture-6.html#section",
     "href": "lecture-6.html#section",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "",
-    "text": "Introduce paper"
+    "text": "NoteIn a nutshell\n\n\n\nRural Malawi in 2012. School is free, but parents still spend money on their children’s education. They have to decide on how much to invest based on what they know their children’s academic potential. In reality, they have very poor (inaccurate) knowledge of their children’s academic performance.\n\nWhat would happen if you provided parents with more accessible information? Would they invest more? Differently?"
   },
   {
-    "objectID": "lecture-6.html#section-1",
-    "href": "lecture-6.html#section-1",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "Experiment design"
+    "objectID": "lecture-6.html#research-design",
+    "href": "lecture-6.html#research-design",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Research Design",
+    "text": "Research Design\n\n\n\nFigure 2 (p. 2741)"
   },
   {
-    "objectID": "lecture-6.html#section-2",
-    "href": "lecture-6.html#section-2",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "Graph of difference between means"
+    "objectID": "lecture-6.html#balance",
+    "href": "lecture-6.html#balance",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Balance",
+    "text": "Balance\n\n\n\nTable 1 (p. 2743)"
   },
   {
-    "objectID": "lecture-6.html#section-3",
-    "href": "lecture-6.html#section-3",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "Regression of results"
-  },
-  {
-    "objectID": "lecture-6.html#neyman-rubin-causal-model",
-    "href": "lecture-6.html#neyman-rubin-causal-model",
-    "title": "Causal Inference",
-    "section": "Neyman-Rubin Causal Model",
-    "text": "Neyman-Rubin Causal Model\nThe Potential Outcomes Framework is a key component of the Neyman-Rubin Causal Model1\n\nWe won’t cover all aspects of this model.\nI will reference texts you can visit to read further"
-  },
-  {
-    "objectID": "lecture-6.html#example-1",
-    "href": "lecture-6.html#example-1",
-    "title": "Causal Inference",
-    "section": "Example",
-    "text": "Example\nConsider out example: there are two states of the world\n\nTreated parents receive information about their kids\nUntreated (control) parents receive no information\n\n\nWe can there think about an outcome (e.g. enrollment) under each state\n\\[\n  y(\\text{info}) \\qquad \\text{or}\\qquad y(\\text{status-quo})\n\\]\n\n\nWe call these potential outcomes"
-  },
-  {
-    "objectID": "lecture-6.html#possible-outcomes",
-    "href": "lecture-6.html#possible-outcomes",
-    "title": "Causal Inference",
-    "section": "Possible outcomes",
-    "text": "Possible outcomes\nFor a discrete outcome like enrollment there are 4 possible outcomes:\n\n\nEnroll only with information\n\\[\n  y(\\text{info})=\\textcolor{red}{\\text{enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{blue}{\\text{don't enroll}}\n\\]\nEnroll always\n\\[\n  y(\\text{info})=\\textcolor{red}{\\text{enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{red}{\\text{enroll}}\n\\]\nDon’t enroll always\n\\[\n  y(\\text{info})=\\textcolor{blue}{\\text{don't enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{blue}{\\text{don't enroll}}\n\\]\nEnroll only without information\n\\[\n  y(\\text{info})=\\textcolor{blue}{\\text{don't enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{red}{\\text{enroll}}\n\\]"
-  },
-  {
-    "objectID": "lecture-6.html#causal-effect",
-    "href": "lecture-6.html#causal-effect",
-    "title": "Causal Inference",
-    "section": "Causal effect",
-    "text": "Causal effect\nAccording to the Neyman-Rubin Causal Model, in:\n\nscenarios (1) and (4) there has been a causal effect\nscenarios (2) and (3) there has been NO causal effect.\n\n\n\n\n\n\n\nImportant\n\n\n\nNotice, to say there has been a causal effect, we must observe both potential outcomes.\n\n\n\n\n\n\n\n\nTipContinuous Treatment\n\n\n\n\n\nAdd quote from Imbens & Rubin"
-  },
-  {
-    "objectID": "lecture-6.html#notation",
-    "href": "lecture-6.html#notation",
-    "title": "Causal Inference",
-    "section": "Notation",
-    "text": "Notation\nLet \\(w_i \\in \\{0,1\\}\\) be an indicator of an individuals discrete treatment status.2:\n\n\\(y_i(1)\\) be the potential outcome when treated\n\\(y_i(0)\\) be the potential outcome when not treated3\n\n\n\n\n\n\n\nTipContinuous Treatment"
-  },
-  {
-    "objectID": "lecture-6.html#observed-outcome",
-    "href": "lecture-6.html#observed-outcome",
-    "title": "Causal Inference",
-    "section": "Observed outcome",
-    "text": "Observed outcome\nA priori, both potential outcomes could be realised, but in the data you observe:\n\\[\n  y_i = \\begin{cases}y_i(1)\\quad \\text{if}\\; w_i=1 \\\\\n  y_i(0)\\quad \\text{if}\\; w_i=0\n  \\end{cases}\n\\]\n\nWhich we can write as the linear function:\n\\[\n  y_i = y_i(0) + w_i\\big(y_i(1)-y_i(0)\\big)\n\\]"
-  },
-  {
-    "objectID": "lecture-6.html#discrete-treatment",
-    "href": "lecture-6.html#discrete-treatment",
-    "title": "Causal Inference",
-    "section": "Discrete treatment",
-    "text": "Discrete treatment"
-  },
-  {
-    "objectID": "lecture-6.html#ite",
-    "href": "lecture-6.html#ite",
-    "title": "Causal Inference",
-    "section": "ITE",
-    "text": "ITE\nThe individual (unit) treatment effect (ITE) is defined as,\n\\[\n  \\tau_i = y_i(1)-y_i(0)\n\\]\nHowever, you cannot observe (identify) or estimate the ITE\nWHY?\n\nit would require you to observe both potential outcomes of the same unit in the same period of time\n“you cannot be in two places at once”\noften referred to as the missing data problem"
-  },
-  {
-    "objectID": "lecture-6.html#average-tes",
-    "href": "lecture-6.html#average-tes",
-    "title": "Causal Inference",
-    "section": "Average TEs",
-    "text": "Average TEs\nWe focus on identifying and estimating average (or aggregate) TEs\n\n\nAverage Treatment Effect (ATE)\n\\[\n  \\tau_{ate} = E[\\tau_i] = E\\big[y_i(1)-y_i(0)\\big]\n\\]\nAverage Treatment Effect of the Treated (ATT)\n\\[\n  \\tau_{att} = E[\\tau_i|w_i = 1] = E\\big[y_i(1)-y_i(0)|w_i=1\\big]\n\\]\nAverage Treatment Effect of the Untreated (ATU)\n\\[\n  \\tau_{atu} = E[\\tau_i|w_i = 0] = E\\big[y_i(1)-y_i(0)|w_i=0\\big]\n\\]\nThese are called causal estimands"
-  },
-  {
-    "objectID": "lecture-6.html#ate-vs-att",
-    "href": "lecture-6.html#ate-vs-att",
-    "title": "Causal Inference",
-    "section": "ATE vs ATT",
-    "text": "ATE vs ATT\nWe prefer the ATE if,\n\nwe want to learn about the effect on the entire population;\ni.e., mandatory exposure.\n\n\nWe prefer the ATT if,\n\nthe population includes individuals that will not take up the treatment/policy;\ne.g., a policy that targets single mothers;\nwhere the program is voluntary, so those not enrolled will not necessarily be treated;\nthe ATT is “informative about the effect of entirely eliminating the current program” (Imbens and Wooldridge, 2009, pp. 14-15)."
-  },
-  {
-    "objectID": "lecture-6.html#fundamental-problem",
-    "href": "lecture-6.html#fundamental-problem",
-    "title": "Causal Inference",
-    "section": "Fundamental problem",
-    "text": "Fundamental problem\nSuppose you treat one group of individuals, while observing another untreated. Then in expectation, you can learn about\n\\[\n  E[y_i|w_i = 1] - E[y_i|w_i = 0]\n\\]\n\nSubstituting in \\(y_i = y_i(0) + w_i\\big(y_i(1)-y_i(0)\\big)\\)\n\\[\n  E[y_i(1)|w_i = 1] - E[y_i(0)|w_i = 0]\n\\]"
-  },
-  {
-    "objectID": "lecture-6.html#section-4",
-    "href": "lecture-6.html#section-4",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "Is this equal to either the ATE, ATT, or ATU? \\[\n  E[y_i(1)|w_i = 1] - E[y_i(0)|w_i = 0]\n\\]\n\nNO!\n\nThe conditions are not the same!"
-  },
-  {
-    "objectID": "lecture-6.html#decomposition",
-    "href": "lecture-6.html#decomposition",
-    "title": "Causal Inference",
-    "section": "Decomposition",
-    "text": "Decomposition\nLet us add and subtract:\n\\[\n  \\textcolor{red}{E[y_i(0)|w_i = 1]}\n\\]\nthe unobserved counterfactual for the treated group.\n\\[\n  E[y_i(1)|w_i = 1] - \\textcolor{red}{E[y_i(0)|w_i = 1]} + \\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]\n\\]"
-  },
-  {
-    "objectID": "lecture-6.html#section-5",
-    "href": "lecture-6.html#section-5",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "The expression now has two terms\n$$\n\\[\\begin{aligned}\n  \n    &E[y_i(1)|w_i = 1] - \\textcolor{red}{E[y_i(0)|w_i = 1]} + \\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0] \\\\\n    =& \\underbrace{E[y_i(1)-y_i(0)|w_i = 1]}_\\text{ATT}+ \\underbrace{\\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\\text{selection}\n  \\end{aligned}\\]\n$$\n:::{callout-note title=“Selection”} As alluded to earlier in Lecture 3, selection here is different to the problem of sample selection. :::"
-  },
-  {
-    "objectID": "lecture-6.html#selection",
-    "href": "lecture-6.html#selection",
-    "title": "Causal Inference",
-    "section": "Selection",
-    "text": "Selection\nThe problem of selection into treatment is fundamental to any discussion of causation.\n\\[\n  \\underbrace{\\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\\text{selection}\n\\]\nThe term describes the difference between\n\nan unobserved counterfactual outcome of the treated group\nthe outcome you would have observed, had the group NOT been treated\nthe observed outcome of the untreated group"
-  },
-  {
-    "objectID": "lecture-6.html#unconfoundedness",
-    "href": "lecture-6.html#unconfoundedness",
-    "title": "Causal Inference",
-    "section": "Unconfoundedness",
-    "text": "Unconfoundedness\nIn order to say much more, we need an assumption:\n\nUnconfounded assignment: assignment into the treatment is unconfounded if\n\\[\n  y_i(1),y_i(0) \\perp w_i\n\\]\n\nAnd if, assignment is randomly assigned, then it is unconfounded.\n\n\n\n\n\n\nNote\n\n\n\nSome people equate the assumption of uncounfedness with randomization. However, they are better thought of as two separate things: unconfoundedness an important underlying assumption, while randomization is an assignment mechanism that gives rise to unconfounded assignment.\n\n\n\n\n\n\n\n\nWarningUnconfounded vs exogenous"
-  },
-  {
-    "objectID": "lecture-6.html#unconfounded-assignment",
-    "href": "lecture-6.html#unconfounded-assignment",
-    "title": "Causal Inference",
-    "section": "Unconfounded assignment",
-    "text": "Unconfounded assignment\n\n\\(E[y_i(0)|w_i=1] = E[y_i(0)|w_i=0] = E[y_i(0)]\\)\n\n\\[\n    \\Rightarrow \\underbrace{\\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\\text{selection} = 0\n  \\]\n\n\\(\\underbrace{E[y_i(1)-y_i(0)|w_i = 1]}_\\text{ATT}=\\underbrace{E[y_i(1)-y_i(0)|w_i = 0]}_\\text{ATU}=\\underbrace{E[y_i(1)-y_i(0)}_\\text{ATE}\\)"
-  },
-  {
-    "objectID": "lecture-6.html#section-6",
-    "href": "lecture-6.html#section-6",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "If assignment is unconfounded, then\n\\[\n  E[y_i|w_i = 1] - E[y_i|w_i = 0] = \\tau_{ate}\n\\]\nWe therefore refer to unconfoundedness as the identifying assumption.\n\nWithout unconfoundness we cannot learn about the ATE (or ATT) from the difference between two groups."
-  },
-  {
-    "objectID": "lecture-6.html#balance-tests",
-    "href": "lecture-6.html#balance-tests",
-    "title": "Causal Inference",
-    "section": "Balance tests",
-    "text": "Balance tests\nResearchers test for unconfoundedness using balance tests.\nNeed to emphasise what happens in realization vs expectation"
-  },
-  {
-    "objectID": "lecture-6.html#estimator",
-    "href": "lecture-6.html#estimator",
-    "title": "Causal Inference",
-    "section": "Estimator",
-    "text": "Estimator\nUnder unconfoundedness, the ATE has a simple difference between means (SDM) estimator (Wooldridge 2025, sec. 2.7a)\n\\[\n  \\hat{\\tau} = \\bar{y}_1 - \\bar{y}_0\n\\]\nwhere,\n$$ {y}1 = {}y_i{y}0 ={}y_i\n$$\nand \\(n_1\\) (\\(n_0\\)) is number of treated (control) units"
-  },
-  {
-    "objectID": "lecture-6.html#variance",
-    "href": "lecture-6.html#variance",
-    "title": "Causal Inference",
-    "section": "Variance",
-    "text": "Variance\nThe variance of this estimator is\n\\[\n  Var(\\hat{\\tau}) = \\frac{\\sigma_1^2}{n_1} + \\frac{\\sigma_0^2}{n_0}\n\\]\nWhich can be estimated by,4\n\\[\n  \\widehat{Var}(\\hat{\\tau}) = \\frac{\\hat{\\sigma}_1^2}{n_1} + \\frac{\\hat{\\sigma}_0^2}{n_0}\n\\]\nwhere \\(\\hat{\\sigma}_j^2 = \\frac{1}{n_j-1}\\sum_{i: w_i=j} (y_i-\\bar{y}_j)^2\\) for \\(j=0,1\\)."
-  },
-  {
-    "objectID": "lecture-6.html#homogeneous-vs-heterogenous-tes",
-    "href": "lecture-6.html#homogeneous-vs-heterogenous-tes",
-    "title": "Causal Inference",
-    "section": "Homogeneous vs heterogenous TEs",
-    "text": "Homogeneous vs heterogenous TEs\nSo far, we have said nothing about whether \\(\\tau_i\\) varies at the individual level. If TEs are homogeneous:\n\\[\n  \\tau_i=y_i(1)-y_i(0)=\\tau \\;\\forall\\; i\n\\]\nThen,\n\\[\n  y_i = y_i(0) + w_i(y_i(1)-y_i(0)) = y_i(0) + w_i\\tau\n\\]\nAnd,\n\\[\n  \\sigma_0^2 = \\sigma_1^2 = \\sigma^2\n\\]"
-  },
-  {
-    "objectID": "lecture-6.html#demonstration",
-    "href": "lecture-6.html#demonstration",
-    "title": "Causal Inference",
-    "section": "Demonstration",
-    "text": "Demonstration\nAdd graphs demonstrating."
-  },
-  {
-    "objectID": "lecture-6.html#homogenous-tes",
-    "href": "lecture-6.html#homogenous-tes",
-    "title": "Causal Inference",
-    "section": "Homogenous TEs",
-    "text": "Homogenous TEs\nIf TEs homogenous are homogeneous\n\\[\n  Var(\\hat{\\tau}) = \\frac{\\sigma_1^2}{n_1} + \\frac{\\sigma_0^2}{n_0} = \\sigma^2\\bigg(\\frac{1}{n_1} + \\frac{1}{n_0}\\bigg)\n\\]\nWhich can be estimated as,\n\\[\n\\hat{\\sigma}^2 = \\frac{1}{n-2}\\big(\\hat\\sigma_1^2(n_1-1) + \\hat\\sigma_0^2(n_0-1)\\big)\n\\]\nWe call this the constant variance estimator."
-  },
-  {
-    "objectID": "lecture-6.html#distribution",
-    "href": "lecture-6.html#distribution",
-    "title": "Causal Inference",
-    "section": "Distribution",
-    "text": "Distribution\nNote, we do not know the distribution of \\(y_i(0)\\) or \\(y_i(1)\\)!\n\nIn applied work, researchers prefer not to make an assumption\nCan use CLT to show asymptotic distribution is normal\nIn practice, use \\(t\\)-distribution to be more conservative"
-  },
-  {
-    "objectID": "lecture-6.html#demonstration-1",
-    "href": "lecture-6.html#demonstration-1",
-    "title": "Causal Inference",
-    "section": "Demonstration",
-    "text": "Demonstration\nAdd Stata and R versions of tests with and without difference between means."
-  },
-  {
-    "objectID": "lecture-6.html#dummy-regressor",
-    "href": "lecture-6.html#dummy-regressor",
-    "title": "Causal Inference",
-    "section": "Dummy regressor",
-    "text": "Dummy regressor\nWe know that for a discrete \\(x_i\\in\\{0,\\}\\),\n\\[\n  y_i = \\beta_0 + \\beta_1 x_i + u_i\n\\]\n\\[\n  \\beta_1 = E[y_i|x_i=1]-E[y_i|x_i=0]\n\\]"
-  },
-  {
-    "objectID": "lecture-6.html#ols",
-    "href": "lecture-6.html#ols",
-    "title": "Causal Inference",
-    "section": "OLS",
-    "text": "OLS\nMoreover, we should in Lecture 28 that the OLS estimator for \\(\\beta_1\\) is just,\n\\[\n  \\hat{\\beta}_1 = \\bar{y}_1 - \\bar{y}_0\n\\]"
-  },
-  {
-    "objectID": "lecture-6.html#translation-of-pof",
-    "href": "lecture-6.html#translation-of-pof",
-    "title": "Causal Inference",
-    "section": "Translation of POF",
-    "text": "Translation of POF\nWe translate the POF to a linear regression model,5\n$$\n\\[\\begin{aligned}\n    y_i =& y_i(0) + w_i(y_i(1)-y_i(0)) \\\\\n      =& y_i(0) + \\tau_i w_i \\\\\n      =& \\textcolor{blue}{E[y_i(0)]} + \\tau_i w_i + y_i(0)-\\textcolor{blue}{E[y_i(0)]} \\\\\n      =& \\textcolor{blue}{E[y_i(0)]} + \\textcolor{red}{\\tau_{ate}} w_i + \\underbrace{y_i(0)-\\textcolor{blue}{E[y_i(0)]} + (\\tau_i-\\textcolor{red}{\\tau_{ate}})w_i}_{u_i} \\\\\n      =& \\alpha_0 + \\textcolor{red}{\\tau_{ate}}w_i + u_i\n    \n  \\end{aligned}\\]\n$$"
-  },
-  {
-    "objectID": "lecture-6.html#section-7",
-    "href": "lecture-6.html#section-7",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "Consider the error term:\n\\[\n  \\begin{aligned}\n  u_i =& y_i(0)-\\textcolor{blue}{E[y_i(0)]} + (\\tau_i-\\textcolor{red}{\\tau_{ate}})w_i \\\\\n  =& y_i(0)-\\textcolor{blue}{E[y_i(0)]} + (y_i(1)-y_i(0)-\\textcolor{red}{E[y_i(1)-y_i(0)]})w_i \\\\\n  \\end{aligned}\n\\]\n\n\\(E[u_i|w_i=0]\\)\n\\[\n  E[u_i|w_i=0] = E\\big[y_i(0)-\\textcolor{blue}{E[y_i(0)]}\\big|w_i=0\\big] = E[y_i(0)|w_i=0]-\\textcolor{blue}{E[y_i(0)]}\n\\]\n\nIf assignment is unconfounded:\n\\[\n  E[y_i(0)|w_i=0]-\\textcolor{blue}{E[y_i(0)]} = E[y_i(0)]-\\textcolor{blue}{E[y_i(0)]} = 0\n\\]"
-  },
-  {
-    "objectID": "lecture-6.html#section-8",
-    "href": "lecture-6.html#section-8",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "\\(E[u_i|w_i=1]\\)\n\\[\n\\begin{aligned}\n  E[u_i|w_i=1] =& E\\big[y_i(0)-\\textcolor{blue}{E[y_i(0)]} + (y_i(1)-y_i(0)-\\textcolor{red}{E[y_i(1)-y_i(0)]})\\big|w_i=1\\big] \\\\\n  =& E\\big[y_i(0)-\\textcolor{blue}{E[y_i(0)]} + y_i(1)-y_i(0)-\\textcolor{red}{E[y_i(1)]}+\\textcolor{red}{E[y_i(0)]}\\big|w_i=1\\big] \\\\\n  =& E\\big[y_i(1)-\\textcolor{red}{E[y_i(1)]}\\big|w_i=1\\big] \\\\\n  =& E[y_i(1)|w_i=1] -\\textcolor{red}{E[y_i(1)]}\n  \\end{aligned}\n\\]\n\nIf assignment is unconfounded:\n\\[\n  E[y_i(1)|w_i=1] -\\textcolor{red}{E[y_i(1)]} = E[y_i(1)]-\\textcolor{red}{E[y_i(1)]} = 0\n\\]"
-  },
-  {
-    "objectID": "lecture-6.html#section-9",
-    "href": "lecture-6.html#section-9",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "Thus, under unconfoundedness we can write,\n\\[\n  y_i = \\alpha_0 + \\tau_{ate}w_i + u_i\n\\]\nwhere,\n\nslope parameter on \\(w_i\\) identifies the ATE\nthe error term fullfils MLR 4\nOLS estimator is unbiased"
-  },
-  {
-    "objectID": "lecture-6.html#section-10",
-    "href": "lecture-6.html#section-10",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "Important\n\n\n\nIf given the model \\(y_i = \\beta_0 + \\beta_1 x_i + u_i\\) with \\(x_i = \\{0,1\\}\\), then it is trivial to say that \\(E[u_i|x_i]=0\\). This is because we can write the CEF of \\(y\\) given \\(x\\) as a linear function:\n\\[\n  E[y_i|x_i] = \\underbrace{E[y_i|x_i=0]}_{\\beta_0} + \\underbrace{\\big(E[y_i|x_i=1]-E[y_i|x_i=0]\\big)}_{\\beta_1}x_i\n\\]\nAll this means is that we can identify the mean of two groups. It does NOT mean that \\(\\beta_1 = E[y_i|x_i=1]-E[y_i|x_i=0]\\) is equal to the ATE. For that, you need unconfoundedness.\nConsider the case where \\(x_i = \\mathbf{1}\\{\\text{``female''}\\}\\). Then \\(\\beta_1\\) tells you the mean difference between female and male observations. Would you describe this as the ATE of being female?"
-  },
-  {
-    "objectID": "lecture-6.html#error-variance",
-    "href": "lecture-6.html#error-variance",
-    "title": "Causal Inference",
-    "section": "Error variance",
-    "text": "Error variance\nWe have show that under unconfoundedness \\(E[u_i |w_i]=0\\). What about \\(Var(u_i|w_i)=E[u_i^2|w_i]\\)?\n\nSuppose TEs are homogenous: \\(\\tau_i = \\tau = \\tau_{ate}\\;\\forall\\;i\\)\n\\[\n  u_i = y_i(0)-\\textcolor{blue}{E[y_i(0)]} + \\underbrace{(\\tau_i-\\textcolor{red}{\\tau_{ate}})}_{=0}w_i = y_i(0)-\\textcolor{blue}{E[y_i(0)]}\n\\]\n\nThen,\n\\[\n  E[u_i^2|w_i] = E[(y_i(0)-\\textcolor{blue}{E[y_i(0)]})^2|w_i] = E[(y_i(0)-\\textcolor{blue}{E[y_i(0)]})^2] = \\sigma^2_0 = \\sigma^2\n\\]\nunder unconfoundedness.\n\nhomogeneity \\(\\rightarrow\\) homoskedastic error variance"
-  },
-  {
-    "objectID": "lecture-6.html#section-11",
-    "href": "lecture-6.html#section-11",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "If TEs are heterogenous:\n\n\\[\n  E[u_i^2|w_i] = \\begin{cases}\n  E[(y_i(0)-\\textcolor{blue}{E[y_i(0)]})^2] = \\sigma^2_0 \\quad \\text{if}\\;w_i=0 \\\\\n  E[(y_i(1)-\\textcolor{red}{E[y_i(1)]})^2] = \\sigma^2_1 \\quad \\text{if}\\;w_i=1 \\\\\n  \\end{cases}\n\\]\n- heterogeneity \\(\\rightarrow\\) heteroskedastic error variance"
-  },
-  {
-    "objectID": "lecture-6.html#variance-1",
-    "href": "lecture-6.html#variance-1",
-    "title": "Causal Inference",
-    "section": "Variance",
-    "text": "Variance\nWe know from Lecture 3 that the (conditional) variance of the OLS estimator for \\(\\tau_{ate}\\) is,\n\\[\n  \\widehat{Var}(\\hat{\\tau}_{ols}|W) = \\frac{\\hat{\\sigma}^2_{ols}}{SST_w}\n\\]\nunder MLR 5 (i.e., homogeneous TEs). Where,\n\\[\n  \\hat{\\sigma}^2_{ols} = \\frac{1}{n-2}\\sum_{i=1}^n \\hat{u}_i^2 = \\frac{1}{n-2}\\big(\\hat\\sigma_1^2(n_1-1) + \\hat\\sigma_0^2(n_0-1)\\big)\n\\]"
-  },
-  {
-    "objectID": "lecture-6.html#section-12",
-    "href": "lecture-6.html#section-12",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "In the denominator is\n\\[\n  \\begin{aligned}\n  SST_w =& \\sum_{i=1}^n(w_i-\\bar{w})^2 \\\\\n  =& \\sum_{i:w_i=1}(1-\\bar{w})^2 + \\sum_{i:w_i=0}(0-\\bar{w})^2 \\\\\n  =& n_1(1-2\\bar{w} + \\bar{w}^2) + n_0 \\bar{w}^2 \\\\\n  =& n_1(1-2\\bar{w}) + n\\bar{w}^2 \\\\\n  =& \\underbrace{n\\bar{w}}_{=n_1}(1-2\\bar{w}) + n\\bar{w}^2 \\\\\n  =& n\\bar{w}(1-\\bar{w})\n  \\end{aligned}\n\\]\nThis formula is quadratic in \\(\\bar{w}\\) - the share of the sample treated.\n\nAt \\(\\bar{w}=0.5\\), \\(SST_w\\) is maximized and \\(Var(\\hat{\\tau}^{OLS}|W)\\) is minimized."
-  },
-  {
-    "objectID": "lecture-6.html#section-13",
-    "href": "lecture-6.html#section-13",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "What if MLR 5 (i.e. heterogeneous TEs) does not hold.\n\nThe White (1980) heteroskedastic-consistent estimator from Lecture 5 was,\n\n\\[\n  \\widehat{Var}(\\hat{\\tau}_{ols}|W) = \\frac{\\sum_{i=1}^{n}(w_{i}-\\bar{w})^2\\hat{u}_i^2}{\\text{SST}_w^2}\n\\]\nIt can be shown (we will not) that,\n\\[\n  \\widehat{Var}(\\hat{\\tau}_{ols}|W) \\neq  \\frac{\\hat{\\sigma}_1^2}{n_1} + \\frac{\\hat{\\sigma}_0^2}{n_0}\n\\]\nthe Neyman estimator. The Neyman estimator is numerically equivalent to HC2.\n\nin practice, all HC0-HC3 estimators are asymptotically consistent.\nHC3 is recommended for smaller samples.\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nYou can use the same trick of splitting the summation to show,\n\\[\n  \\begin{aligned}\n    \\widehat{Var}(\\hat{\\tau}_{ols}|W) =& \\frac{\\sum_{i=1}^{n}(w_{i}-\\bar{w})^2\\hat{u}_i^2}{\\text{SST}_w^2} \\\\\n    =& \\frac{\\sum_{i:w_i=1}^{n}(1-\\bar{w})^2(y_i-\\hat{\\alpha}_{ols}-\\hat{\\tau}_{ols})^2+\\sum_{i:w_i=0}^{n}(-\\bar{w})^2(y_i-\\hat{\\alpha}_{ols})^2}{\\text{SST}_w^2} \\\\\n    =& \\frac{(1-\\bar{w})^2\\sum_{i:w_i=1}^{n}(y_i-\\hat{\\alpha}_{ols}-\\hat{\\tau}_{ols})^2+\\bar{w}^2\\sum_{i:w_i=0}^{n}(y_i-\\hat{\\alpha}_{ols})^2}{\\text{SST}_w^2} \\\\\n    =& \\frac{(1-\\bar{w})^2(n_1-1)\\hat\\sigma_1^2+\\bar{w}^2(n_0-1)\\hat\\sigma_0^2}{(n\\bar{w}(1-\\bar{w}))^2} \\\\\n    =& \\frac{n_1-1}{n_1^2}\\hat\\sigma_1^2+\\frac{n_0-1}{n_0^2}\\hat\\sigma_0^2\n  \\end{aligned}\n\\]\nAnd HC1 (Stata’s robust default) will be,\n\\[\n  \\frac{n}{n-2}\\times \\Bigg[\\frac{n_1-1}{n_1^2}\\hat\\sigma_1^2+\\frac{n_0-1}{n_0^2}\\hat\\sigma_0^2\\Bigg]\n\\]\nIt is evident that for \\(n\\) large, these estimators will be very similar to Neyman’s."
-  },
-  {
-    "objectID": "lecture-6.html#purpose",
-    "href": "lecture-6.html#purpose",
-    "title": "Causal Inference",
-    "section": "Purpose",
-    "text": "Purpose\nThe variance of the estimator is (assuming homogeneous TEs),\n\\[\n  Var(\\hat{\\tau}_{ols}|W) = \\frac{Var(u_i|w_i)}{SST_w} = \\frac{\\sigma^2_u}{SST_w}\n\\]\nwhere \\(u_i\\) is from the model,\n\\[\n  y_i = \\alpha_0 + \\tau_{ate}w_i + u_i\n\\]\n\nThe only variation in \\(y\\) explained by this model is the difference between treatment and control.\nWill result in high variance and low-powered test."
-  },
-  {
-    "objectID": "lecture-6.html#covariates",
-    "href": "lecture-6.html#covariates",
-    "title": "Causal Inference",
-    "section": "Covariates",
-    "text": "Covariates\nSuppose,\n\\[\nu_i = \\gamma x_i + v_i\n\\]\nwhere \\(x\\) is a regressor measured before assignment6\n\nlikely explain part of the outcome (i.e. \\(\\gamma\\neq 0\\))\ncommonly referred to as baseline covariates in RCTs"
-  },
-  {
-    "objectID": "lecture-6.html#regression-adjustment-1",
-    "href": "lecture-6.html#regression-adjustment-1",
-    "title": "Causal Inference",
-    "section": "Regression adjustment",
-    "text": "Regression adjustment\nInstead of the simple regression, we estimate\n\\[\n  y_i = \\alpha_0 + \\tau_{ate}w_i + \\gamma x_i + v_i\n\\]\n\nWooldridge refers to this as the Restricted Regression Adjustment (RRA) (~ Wooldridge 2025, 257)"
-  },
-  {
-    "objectID": "lecture-6.html#variance-2",
-    "href": "lecture-6.html#variance-2",
-    "title": "Causal Inference",
-    "section": "Variance",
-    "text": "Variance\n\\[\n  Var(\\hat{\\tau}_{rra}|W,X) = \\frac{Var(v_i|w_i,x_i)}{SSR_w} =  \\frac{\\sigma^2_v}{SSR_w}\n\\]\nwhere, \\(SSR_w=SST_w (1-R_w^2)\\)\n\n\\(R^2_w\\) is the amount of variance in assignment explained by the covariates. This should be low.\nWhile \\(R^2_w\\neq 0\\) in the finite sample, \\(R^2_w\\rightarrow 0\\) as \\(n\\rightarrow \\infty\\)\nSo, \\(SSR_w\\approx SST_w\\)."
-  },
-  {
-    "objectID": "lecture-6.html#power",
-    "href": "lecture-6.html#power",
-    "title": "Causal Inference",
-    "section": "Power",
-    "text": "Power\nThe improvement in power comes from the fact that,\n\\[\n  Var(u_i|w_i) = Var(\\gamma_ix_i + v_i|w_i) = \\underbrace{\\gamma^2 Var(x_i)}_{&gt;0} + Var(v_i|w_i,x_i) &gt; \\sigma^2_v\n\\]\nassuming \\(Cov(x_i,v_i|w_i)=0\\)."
+    "objectID": "lecture-6.html#simple-difference-between-means",
+    "href": "lecture-6.html#simple-difference-between-means",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Simple difference between means",
+    "text": "Simple difference between means\n\n\n\nFigure 3 (p. 2745)"
   },
   {
     "objectID": "lecture-6.html#heterogeneity",
     "href": "lecture-6.html#heterogeneity",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Heterogeneity",
-    "text": "Heterogeneity\nThis simple story is somewhat complicated by heterogeneity:\n\nheterogeneity is sits in the error term\nheterogeneity is likely related to \\(x\\)\nheterogeneity (that depends on \\(x\\)) introduces small-sample bias in models of the form:\n\\[\n  y_i = \\alpha_0 + \\tau_{ate}w_i + \\gamma x_i + v_i\n\\]\nOLS remains consistent (for the ATE), despite this small-sample bias"
+    "text": "Heterogeneity\n\n\n\nFigure 3 (p. 2745)"
+  },
+  {
+    "objectID": "lecture-6.html#regression",
+    "href": "lecture-6.html#regression",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Regression",
+    "text": "Regression"
+  },
+  {
+    "objectID": "lecture-6.html#neyman-rubin-causal-model",
+    "href": "lecture-6.html#neyman-rubin-causal-model",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Neyman-Rubin Causal Model",
+    "text": "Neyman-Rubin Causal Model\nThe Potential Outcomes Framework is a key component of the Neyman-Rubin Causal Model1\n\nWe won’t cover all aspects of this model.\nI will reference texts in green boxes that you can visit to read further\n\n\n\n\n\n\n\nTipOn Causation\n\n\n\n\n\nThe Neyman-Rubin Causal Model is not the only framework for defining causal relationships. In addition, it is a model well suited to the analysis of experimental data. Another causal framework Directed Acyclic Graphs (DAGs) has become very influential in computer and data sciences. See Pearl and Mackenzie (2018)’s now famous book, They Book of Why, on the topic. G. W. Imbens (2020) provides an excellent discussion of DAG versus POF, and why POF is a more natural fit for economists (see also Heckman and Pinto 2022).\nFinally, there are other notions of causal relations in Econometrics. For example, in time series there is the concept of Granger causation which relates more to temporal prediction and structural modelling thinks about causation outside of the “no causation without manipulation” notion of causation within the Neyman-Rubin model (Rubin 1975, 238). You might enjoy Hoover (2008)’s discussion on the topic."
+  },
+  {
+    "objectID": "lecture-6.html#component-1",
+    "href": "lecture-6.html#component-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Component 1",
+    "text": "Component 1\nThe Neyman-Rubin model has three important components (G. W. Imbens and Rubin 2015)\n\n\nPotential Outcomes: The outcomes corresponding to different levels of treatment or manipulation: “no causation without manipulation” (Rubin 1975, 238)\n\n\nPotential outcomes are a priori observable, but a posteriori only one outcome is observable.\nA variable can only be a “cause” if it is possible, at least in principle, to conceive of a hypothetical or physical intervention (“treatment”) that manipulates it. We tend not to discuss the causal effect of demographic characteristics.2"
+  },
+  {
+    "objectID": "lecture-6.html#components-2",
+    "href": "lecture-6.html#components-2",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Components 2",
+    "text": "Components 2\n\nMultiple units: Given the limit on observation, one must observe multiple units to infer a causal effect.\n\n\nNeed to make a key stability assumption: Stable Unit Treatment Value Assumption (SUTVA).\n\n\n\n\n\n\n\nTipSUTVA\n\n\n\n\n\nThe Stable Unit Treatment Value Assumption (SUTVA) is an overarching assumption for this entire Neyman-Rubin Causal Model\n\n“The potential outcomes for any unit do not vary with the treatments assigned to other units, and, for each unit, there are no different forms or versions of each treatment level, which lead to different potential outcomes.” (G. W. Imbens and Rubin 2015, 10)\n\nThis assumption,\n\nRules out interference between treatment units. This rules out any spillover effects between ‘treatment’ and ‘control’.\nEnsures that there are no hidden variations in the treatment level. It is okay for there to be different levels of treatment, so long as they are explicit and well-defined a priori."
+  },
+  {
+    "objectID": "lecture-6.html#component-3",
+    "href": "lecture-6.html#component-3",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Component 3",
+    "text": "Component 3\n\nAssignment mechanism: The function that determines the manipulation of units.\n\nAssignment may be:\n\nprobabilistic; e.g. randomized experiment\ndeterministic; e.g. thresholds/cutoffs\nconditional; depend partly depend on observable characteristics (\\(\\mathbf{x}_i\\)).\ncontrolled (by the researcher); e.g. randomized control trial\nexogenous (to the treatment unit); e.g. public policy or natural experiments3\n\n\nknown (by the researcher); e.g. controlled or natural experiments\nunknown; e.g. observational study,\n\n\n\n\n\n\n\nTipPropensity score\n\n\n\n\n\nIf you continue to study causal inference you learn about methodologies like propensity score matching. The propensity score is the probability of treatment conditional on a set of observable characteristics.\n\\[\n  \\rho(\\mathbf{x_i}) = Pr(w_i=1|\\mathbf{x}_i)\n\\]\nThis measure is key to many causal inference results. You can re-frame the question “do we know the assignment mechanism” to “do we know the functional form of the propensity score”."
+  },
+  {
+    "objectID": "lecture-6.html#example",
+    "href": "lecture-6.html#example",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Example",
+    "text": "Example\nConsider the example of Dizon-Ross (2019): there are two possible states of the world:\n\n\nTreated:\n\nreceive information\n\n\n\nResearcher observes:\n\\[\ny(\\text{info})\n\\]\n\n\nUntreated: (control)\n\nno information (status-quo)\n\n\n\nResearcher observes: \\[\n  y(\\text{status-quo})\n\\]\n\n\n\n\nWe call these potential outcomes."
+  },
+  {
+    "objectID": "lecture-6.html#possible-outcomes",
+    "href": "lecture-6.html#possible-outcomes",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Possible outcomes",
+    "text": "Possible outcomes\nFor a discrete outcome like enrollment there are 4 possible outcomes:\n\n\nEnroll only with information\n\\[\n  y(\\text{info})=\\textcolor{red}{\\text{enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{blue}{\\text{don't enroll}}\n\\]\nEnroll, regardless\n\\[\n  y(\\text{info})=\\textcolor{red}{\\text{enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{red}{\\text{enroll}}\n\\]\nDon’t enroll, regardless\n\\[\n  y(\\text{info})=\\textcolor{blue}{\\text{don't enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{blue}{\\text{don't enroll}}\n\\]\nEnroll only without information\n\\[\n  y(\\text{info})=\\textcolor{blue}{\\text{don't enroll}} \\qquad \\text{and}\\qquad y(\\text{status-quo})=\\textcolor{red}{\\text{enroll}}\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#causal-effect",
+    "href": "lecture-6.html#causal-effect",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Causal effect",
+    "text": "Causal effect\nAccording to the Neyman-Rubin Causal Model, in:\n\nscenarios (1) and (4) there has been a causal effect\nscenarios (2) and (3) there has been NO causal effect.\n\n\n\n\n\n\n\nImportant\n\n\n\nNotice two things (G. W. Imbens and Rubin 2015, 6),\n\n“First, the definition of the causal effect depends on the potential outcomes, but it does not depend on which outcome is actually observed.”\n\n2 “Second, the causal effect is the comparison of potential outcomes, for the same unit, at the same moment in time post-treatment. In particular, the causal effect is not defined in terms of comparisons of outcomes at different times.”"
+  },
+  {
+    "objectID": "lecture-6.html#notation",
+    "href": "lecture-6.html#notation",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Notation",
+    "text": "Notation\nLet \\(w_i \\in \\{0,1\\}\\) be an indicator of an individuals discrete treatment status.4:\n\n\\(y_i\\small{(1)}\\) be the potential outcome when treated\n\\(y_i\\small{(0)}\\) be the potential outcome when not treated5\n\n\n\n\n\n\n\nTipContinuous Treatment\n\n\n\n\n\nWe focus here on discrete treatments. It is straight forward to incorporate additional, separate treatments, but to model a continuous treatment you need to make additional assumptions about the functional form of the causal model. The only assumption we have made here is that of additive treatment effects: \\(y_i\\small{(1)} = y_i\\small{(0)}+\\tau_i\\).\nThe model may in fact be multiplicative: \\(y_i\\small{(1)} = y_i\\small{(0)}\\times\\tau_i\\). This distinction becomes important when you consider that many researchers use this framework to estimate treatment effects measured in log-transformed outcome variables.\nOne solution to the continuous treatment problem is to think about different treatment “dosages” (as in medicine). This approach discretizes the continuous treatment and returns the problem to the simple binary case."
+  },
+  {
+    "objectID": "lecture-6.html#observed-outcome",
+    "href": "lecture-6.html#observed-outcome",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Observed outcome",
+    "text": "Observed outcome\nA priori, both potential outcomes could be realised, but in the data you observe only one:\n\\[\n  y_i = \\begin{cases}y_i\\small{(1)}\\quad \\text{if}\\; w_i=1 \\\\\n  y_i\\small{(0)}\\quad \\text{if}\\; w_i=0\n  \\end{cases}\n\\]\n\n“fundamental problem of causal inference” (Holland 1986, 947)\n\n\nWhich we can write this as a linear function:\n\\[\n  y_i = y_i\\small{(0)} + w_i\\big(y_i\\small{(1)}-y_i\\small{(0)}\\big)\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#ite",
+    "href": "lecture-6.html#ite",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "ITE",
+    "text": "ITE\nThe individual (unit) treatment effect (ITE) is defined as,\n\\[\n  \\tau_i = y_i\\small{(1)}-y_i\\small{(0)}\n\\]\n\n\nHowever, you cannot observe (identify) or estimate the ITE\n\nWHY?\n\nit would require you to observe both potential outcomes of the same unit in the same period\nreferred to as the “missing data problem” (G. W. Imbens and Rubin 2015, 34)\n\n\n\nNotice!\n\nthe individual level treatment effect varies at the individual level: \\(\\tau_i\\)"
+  },
+  {
+    "objectID": "lecture-6.html#visualization",
+    "href": "lecture-6.html#visualization",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Visualization",
+    "text": "Visualization\nA priori, both potential outcomes are observable"
+  },
+  {
+    "objectID": "lecture-6.html#section-1",
+    "href": "lecture-6.html#section-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "Then, treatment is assigned"
+  },
+  {
+    "objectID": "lecture-6.html#section-2",
+    "href": "lecture-6.html#section-2",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "Treatment determines which PO you observe"
+  },
+  {
+    "objectID": "lecture-6.html#section-3",
+    "href": "lecture-6.html#section-3",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "There is an observed outcome and (theoretically) a missing one"
+  },
+  {
+    "objectID": "lecture-6.html#average-tes",
+    "href": "lecture-6.html#average-tes",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Average TEs",
+    "text": "Average TEs\nIn place of the ITE, we focus on identifying and estimating average TEs\n\n\nAverage Treatment Effect (ATE)\n\\[\n  \\tau_{ate} = E[\\tau_i] = E\\big[y_i\\small{(1)}-y_i\\small{(0)}\\big]\n\\]\nAverage Treatment Effect of the Treated (ATT)\n\\[\n  \\tau_{att} = E[\\tau_i|w_i = 1] = E\\big[y_i\\small{(1)}-y_i\\small{(0)}|w_i=1\\big]\n\\]\nAverage Treatment Effect of the Untreated (ATU)\n\\[\n  \\tau_{atu} = E[\\tau_i|w_i = 0] = E\\big[y_i\\small{(1)}-y_i\\small{(0)}|w_i=0\\big]\n\\]\nThese are called causal estimands\n\n\n\n\n\n\n\n\nTipFinite vs Super Population\n\n\n\n\n\nThese are all super population casual estimands, denoted in terms of the expected values. There is a corresponding set of finite sample causal estimands in which the realized sample is held constant (see G. W. Imbens and Rubin 2015).\nIn our discussion of regression models, the primary source of randomness was sampling. The super population definition of causal estimands takes the same approach: the expectation here is with respect to the (unobservable) population distributions.\nHowever, in this world of randomized experiments there is a second source of randomness: assignment (i.e. \\(w_i\\)). In a different realization of the experiment, a different set of individuals within the same sample could have been treated. You can therefore think about the ATE of the finite, fixed sample.\n\\[\n  \\tau^{fs}_{ate} = \\frac{1}{n}\\sum_{i=1}^n\\tau_i = \\frac{1}{n}\\sum_{i=1}^n (y_i\\small{(1)}-y_i\\small{(0)})\n\\]\nAs with the super population ATE, you can observe this in the data. It would require knowing both \\(y_i\\small{(1)}\\) and \\(y_i\\small{(0)}\\) for every individual.\nThis finite sample approach tends not to be used extensively in applied economics research. Economists tend to take the approach of thinking about the fixed sample as a draw from the sampled (super) population and use their estimates to learn about the wider population. You see this in the way economists evaluate public policies."
+  },
+  {
+    "objectID": "lecture-6.html#ate-vs-att",
+    "href": "lecture-6.html#ate-vs-att",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "ATE vs ATT",
+    "text": "ATE vs ATT\n\n\nWe prefer the ATE if,\n\nwe want to learn about the effect on the entire population;\ni.e., mandatory exposure.\nor lottery\n\n\nWe prefer the ATT if,\n\nthe population includes individuals that will not take up the treatment/policy;\ne.g., a policy that targets single mothers;\nor program is voluntary,\n\n\n\n\nThe ATT is “informative about the effect of entirely eliminating the current program” (G. W. Imbens and Wooldridge 2009, 14–15)."
+  },
+  {
+    "objectID": "lecture-6.html#two-groups",
+    "href": "lecture-6.html#two-groups",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Two groups",
+    "text": "Two groups\nSuppose you treat one group of individuals, while observing another untreated. Then in expectation, you can learn about\n\\[\n  E[y_i|w_i = 1] - E[y_i|w_i = 0]\n\\]\n\n\n\nSubstituting in \\(y_i = y_i\\small{(0)} + w_i\\big(y_i\\small{(1)}-y_i\\small{(0)}\\big)\\)\n\\[\n  E[y_i\\small{(1)}|w_i = 1] - E[y_i\\small{(0)}|w_i = 0]\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#section-4",
+    "href": "lecture-6.html#section-4",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "Is this equal to either the ATE, ATT, or ATU? NO! \\[\n  E[y_i\\small{(1)}|\\textcolor{red}{w_i = 1}] - E[y_i\\small{(0)}|\\textcolor{blue}{w_i = 0}]\n\\]\n\nWhy?\n\nThe conditions are not the same!"
+  },
+  {
+    "objectID": "lecture-6.html#decomposition",
+    "href": "lecture-6.html#decomposition",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Decomposition",
+    "text": "Decomposition\nLet us add and subtract:\n\\[\n  \\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}\n\\]\nthe unobserved counterfactual for the treated group.\n\n\n\n\\[\n  E[y_i\\small{(1)}|w_i = 1] - \\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]} + \\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}- E[y_i\\small{(0)}|w_i = 0]\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#section-5",
+    "href": "lecture-6.html#section-5",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "The expression has two parts:\n\\[\n  \\begin{aligned}\n    &\\underbrace{E[y_i\\small{(1)}|w_i = 1] - \\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}} + \\underbrace{\\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}- E[y_i\\small{(0)}|w_i = 0]} \\\\\n    =& \\underbrace{E[y_i\\small{(1)}-y_i\\small{(0)}|w_i = 1]}_\\text{ATT}+ \\underbrace{\\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}- E[y_i\\small{(0)}|w_i = 0]}_\\text{selection}\n  \\end{aligned}\n\\]\n\n\n\n\n\n\n\n\nImportantSelf-selection\n\n\n\nAs alluded to earlier in Lecture 3, selection here is different to the problem of sample selection. This selection problem can more aptly described as the “self-selection problem” (Wooldridge 2025, 255)."
+  },
+  {
+    "objectID": "lecture-6.html#selection",
+    "href": "lecture-6.html#selection",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Selection",
+    "text": "Selection\nThe problem of selection into treatment is fundamental to any discussion of causation.\n\\[\n  \\underbrace{\\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}- E[y_i\\small{(0)}|w_i = 0]}_\\text{selection}\n\\]\nThe term describes the difference between\n\nan unobserved counterfactual outcome of the treated group: the outcome mean you would have observed, had the group NOT been treated\nthe observed outcome mean of the untreated (control) group"
+  },
+  {
+    "objectID": "lecture-6.html#unconfoundedness",
+    "href": "lecture-6.html#unconfoundedness",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Unconfoundedness",
+    "text": "Unconfoundedness\nIn order to say much more, we need an assumption:\n\nUnconfounded assignment: assignment into the treatment is unconfounded if\n\\[\n  y_i\\small{(1)},y_i\\small{(0)} \\perp w_i\n\\]\n\n\n\nAnd, if assignment is random, then it is unconfounded.\n\n\n\n\n\n\nNote\n\n\n\nSome people equate unconfoundedness with randomization, but they are distinct. Unconfoundedness is a property of an assignment mechanism: treatment assignment is independent of potential outcomes, possibly conditional on covariates. Randomization is one particular assignment mechanism that guarantees this property by design. In observational studies, by contrast, unconfoundedness can’t be guaranteed and must instead be assumed.\n\n\n\n\n\n\n\n\nTipUnconfounded vs exogenous\n\n\n\n\n\nUnconfoundedness should also be distinguished from exogeneity, a term that is used in several different senses. In applied work it often means simply that a treatment is imposed from outside, as with a government policy change, but external imposition does not ensure that assignment is unrelated to the factors that determine outcomes. In econometrics it more formally means that a regressor is uncorrelated with the error term of a particular model, which is both a weaker condition than independence and one that depends on how the model is specified. Unconfoundedness, by contrast, is defined directly in terms of the assignment mechanism and the potential outcomes: assignment is independent of the potential outcomes given covariates, that is, as if randomly assigned."
+  },
+  {
+    "objectID": "lecture-6.html#unconfounded-assignment",
+    "href": "lecture-6.html#unconfounded-assignment",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Unconfounded assignment",
+    "text": "Unconfounded assignment\n\n\\(E[y_i\\small{(0)}|w_i=1] = E[y_i\\small{(0)}|w_i=0] = E[y_i\\small{(0)}]\\)\n\\[\n  \\Rightarrow \\underbrace{\\textcolor{red}{E[y_i\\small{(0)}|w_i = 1]}- E[y_i\\small{(0)}|w_i = 0]}_\\text{selection} = 0\n\\]\n\n\n\n\\(\\underbrace{E[y_i\\small{(1)}-y_i\\small{(0)}|w_i = 1]}_\\text{ATT}=\\underbrace{E[y_i\\small{(1)}-y_i\\small{(0)}|w_i = 0]}_\\text{ATU}=\\underbrace{E[y_i\\small{(1)}-y_i\\small{(0)}}_\\text{ATE}\\)"
+  },
+  {
+    "objectID": "lecture-6.html#section-6",
+    "href": "lecture-6.html#section-6",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "If assignment is unconfounded, then\n\\[\n  E[y_i|w_i = 1] - E[y_i|w_i = 0] = \\tau_{ate}\n\\]\n\nWe therefore refer to unconfoundedness as the identifying assumption.\n\nwithout it we cannot learn about the ATE (or ATT) from the difference between two groups."
+  },
+  {
+    "objectID": "lecture-6.html#testing-unconfoundedness",
+    "href": "lecture-6.html#testing-unconfoundedness",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Testing unconfoundedness",
+    "text": "Testing unconfoundedness\nIn practice, researchers attempt to demonstrate that “randomization has worked” through the construction of a balance table\n\nTest difference in baseline covariates across treatment-control\nCan do a joint ANOVA test or adjust \\(p\\)-values for multiple inference.\nCovariates must be observable (hence, baseline survey)\nResearcher hopes to fail to reject \\(H_0:\\) difference. Does not prove unconfounded assignment.\n\n\n\n\n\n\n\n\n\nImportantExpectation vs Realization\n\n\n\nRandom assignment gives you unconfoundedness, which in expectation means that the treatment and control group are (theoretically) the same. The realized allocation will consist of two groups that are NOT the same.\nWe can rely on LLN to say that for a large enough sample, the mean of each group approaches its expected value. But, many RCTs do not have very large samples."
+  },
+  {
+    "objectID": "lecture-6.html#estimator",
+    "href": "lecture-6.html#estimator",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Estimator",
+    "text": "Estimator\nUnder unconfoundedness, the ATE has a simple difference between means (SDM) estimator (Wooldridge 2025, sec. 2.7a)\n\\[\n  \\hat{\\tau} = \\bar{y}_1 - \\bar{y}_0\n\\]\nwhere,\n\\[\n  \\bar{y}_1 = \\frac{1}{\\textcolor{red}{n_1}}\\sum_{i:\\textcolor{red}{w_i=1}}y_i \\qquad \\text{and}\\qquad \\bar{y}_0 =\\frac{1}{\\textcolor{blue}{n_0}}\\sum_{i:\\textcolor{blue}{w_i=0}}y_i\n\\]\nand \\(n_1\\) (\\(n_0\\)) is number of treated (control) units"
+  },
+  {
+    "objectID": "lecture-6.html#variance",
+    "href": "lecture-6.html#variance",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Variance",
+    "text": "Variance\nThe variance of this estimator is\n\\[\n  Var(\\hat{\\tau}) = \\frac{\\sigma_0^2}{n_0} + \\frac{\\sigma_1^2}{n_1}\n\\]\nWhich can be estimated by,\n\\[\n  \\widehat{Var}(\\hat{\\tau}) =  \\frac{\\hat{\\sigma}_0^2}{n_0} + \\frac{\\hat{\\sigma}_1^2}{n_1}\n\\]\nwhere \\(\\hat{\\sigma}_j^2 = \\frac{1}{n_j-1}\\sum_{i: w_i=j} (y_i-\\bar{y}_j)^2\\) for \\(j=0,1\\).\n\nWe call this the Neyman variance estimator within Causal Inference literature.6"
+  },
+  {
+    "objectID": "lecture-6.html#homogeneous-vs-heterogenous-tes",
+    "href": "lecture-6.html#homogeneous-vs-heterogenous-tes",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Homogeneous vs heterogenous TEs",
+    "text": "Homogeneous vs heterogenous TEs\nIf TEs are homogeneous:\n\\[\n  \\tau_i=y_i\\small{(1)}-y_i\\small{(0)}=\\tau \\;\\forall\\; i\n\\]\nThen,\n\\[\n  y_i = y_i\\small{(0)} + w_i(y_i\\small{(1)}-y_i\\small{(0)}) = y_i\\small{(0)} + w_i\\tau\n\\]\nAnd,\n\\[\n  \\sigma_0^2 = \\sigma_1^2 = \\sigma^2\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#demonstration",
+    "href": "lecture-6.html#demonstration",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Demonstration",
+    "text": "Demonstration\nConsider the following (simulated) distribution of \\(y_0\\), which need not not be normal."
+  },
+  {
+    "objectID": "lecture-6.html#section-7",
+    "href": "lecture-6.html#section-7",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "If TEs are homogeneous, then \\(y_i\\small{(1)} = y_i\\small{(0)} + \\tau\\) (i.e. a mean shift)\n\n\n\n\n\n\n\n\n\nThe variance does not change."
+  },
+  {
+    "objectID": "lecture-6.html#homogenous-tes",
+    "href": "lecture-6.html#homogenous-tes",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Homogenous TEs",
+    "text": "Homogenous TEs\nIf TEs are homogenous\n\\[\n  Var(\\hat{\\tau}) = \\frac{\\sigma_0^2}{n_0} + \\frac{\\sigma_1^2}{n_1} = \\sigma^2\\bigg(\\frac{1}{n_1} + \\frac{1}{n_0}\\bigg)\n\\]\nWhich can be estimated as,\n\\[\n\\hat{\\sigma}^2 = \\frac{1}{n-2}\\big((n_0-1)\\times \\hat\\sigma_0^2 + (n_1-1)\\times \\hat\\sigma_1^2 \\big)\n\\]\nWe call this the constant variance estimator."
+  },
+  {
+    "objectID": "lecture-6.html#section-8",
+    "href": "lecture-6.html#section-8",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "If the TEs are heterogeneous, then \\(y_i\\small{(1)} = y_i\\small{(0)} + \\tau_i\\)"
+  },
+  {
+    "objectID": "lecture-6.html#distribution",
+    "href": "lecture-6.html#distribution",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Distribution",
+    "text": "Distribution\nNote, we do not know the distribution of \\(y_i\\small{(0)}\\) or \\(y_i\\small{(1)}\\)!\n\nIn applied work, researchers prefer not to make any assumptions\nRely on CLT to show asymptotic distribution is normal\nIn practice, and since RCTs often have a small sample, use \\(t\\)-distribution to be more conservative\nThere are other approaches to inference (e.g., permutation tests like Fisher’s exact \\(p\\)-value) that we won’t cover here, but are more relevant for small samples."
+  },
+  {
+    "objectID": "lecture-6.html#in-statar",
+    "href": "lecture-6.html#in-statar",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "In Stata/R",
+    "text": "In Stata/R\nExample uses a 10% sample of the replication data for Dizon-Ross (2019).\n\nStataR\n\n\nConstant variance test\n\nttest belief_err_bl, by(treat)\n\nTwo-sample t test with equal variances\n------------------------------------------------------------------------------\n   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]\n---------+--------------------------------------------------------------------\n       0 |     674    20.61721    .5519379    14.32914    19.53348    21.70094\n       1 |     638    20.23511    .5867858    14.82142    19.08284    21.38738\n---------+--------------------------------------------------------------------\nCombined |   1,312     20.4314    .4021444    14.56629    19.64249    21.22032\n---------+--------------------------------------------------------------------\n    diff |             .382101    .8048296               -1.196795    1.960997\n------------------------------------------------------------------------------\n    diff = mean(0) - mean(1)                                      t =   0.4748\nH0: diff = 0                                     Degrees of freedom =     1310\n\n    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0\n Pr(T &lt; t) = 0.6825         Pr(|T| &gt; |t|) = 0.6350          Pr(T &gt; t) = 0.3175\n\n\nUnequal variance test (Neyman)\n\nttest belief_err_bl, by(treat) unequal\n\nTwo-sample t test with unequal variances\n------------------------------------------------------------------------------\n   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]\n---------+--------------------------------------------------------------------\n       0 |     674    20.61721    .5519379    14.32914    19.53348    21.70094\n       1 |     638    20.23511    .5867858    14.82142    19.08284    21.38738\n---------+--------------------------------------------------------------------\nCombined |   1,312     20.4314    .4021444    14.56629    19.64249    21.22032\n---------+--------------------------------------------------------------------\n    diff |             .382101    .8055762               -1.198271    1.962473\n------------------------------------------------------------------------------\n    diff = mean(0) - mean(1)                                      t =   0.4743\nH0: diff = 0                     Satterthwaite's degrees of freedom =  1299.78\n\n    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0\n Pr(T &lt; t) = 0.6823         Pr(|T| &gt; |t|) = 0.6354          Pr(T &gt; t) = 0.3177\n\n\n\n\nConstant variance test\n\nt.test(belief_err_bl ~ treat, data = dr19_dta, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  belief_err_bl by treat\nt = 0.47476, df = 1310, p-value = 0.635\nalternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0\n95 percent confidence interval:\n -1.196795  1.960997\nsample estimates:\nmean in group 0 mean in group 1 \n       20.61721        20.23511 \n\n\nUnequal variance test (Neyman)\n\nt.test(belief_err_bl ~ treat, data = dr19_dta, var.equal = FALSE)\n\n\n    Welch Two Sample t-test\n\ndata:  belief_err_bl by treat\nt = 0.47432, df = 1299.8, p-value = 0.6354\nalternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0\n95 percent confidence interval:\n -1.198271  1.962473\nsample estimates:\nmean in group 0 mean in group 1 \n       20.61721        20.23511"
+  },
+  {
+    "objectID": "lecture-6.html#dummy-regressor",
+    "href": "lecture-6.html#dummy-regressor",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Dummy regressor",
+    "text": "Dummy regressor\nWe know that for a discrete \\(x_i\\in\\{0,1\\}\\),\n\\[\n  y_i = \\beta_0 + \\beta_1 x_i + u_i\n\\]\n\n\nwhere, \\[\n  \\beta_1 = E[y_i|x_i=1]-E[y_i|x_i=0]\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#ols",
+    "href": "lecture-6.html#ols",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "OLS",
+    "text": "OLS\nMoreover, we showed in Lecture 2 that the OLS estimator for \\(\\beta_1\\) is just,\n\\[\n  \\hat{\\beta}_1 = \\bar{y}_1 - \\bar{y}_0\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#translation-of-pof",
+    "href": "lecture-6.html#translation-of-pof",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Translation of POF",
+    "text": "Translation of POF\nWe can translate the POF to a linear regression model,7\n\\[\n  \\begin{aligned}\n    y_i =& y_i\\small{(0)} + w_i(y_i\\small{(1)}-y_i\\small{(0)}) \\\\\n      =& y_i\\small{(0)} + \\tau_i w_i \\\\\n      =& \\textcolor{blue}{E[y_i\\small{(0)}]} + \\tau_i w_i + y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} \\\\\n      =& \\textcolor{blue}{E[y_i\\small{(0)}]} + \\textcolor{red}{\\tau_{ate}} w_i + \\underbrace{y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} + (\\tau_i-\\textcolor{red}{\\tau_{ate}})w_i}_{u_i} \\\\\n      =& \\alpha_0 + \\textcolor{red}{\\tau_{ate}}w_i + u_i\n  \\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#section-9",
+    "href": "lecture-6.html#section-9",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "Consider the error term:\n\\[\n  u_i = \\underbrace{y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]}}_{1.} + \\underbrace{(\\tau_i-\\textcolor{red}{\\tau_{ate}})}_{2.}\\underbrace{w_i}_{3.}\n\\]\nit includes,\n\nthe deviation of \\(y_i(0)\\) from its unconditional mean\nthe devation of \\(\\tau_i\\) from its unconditional mean (i.e. \\(\\tau_{ate}\\)) \\(\\Leftarrow\\) heterogeneity\n\\(w_i\\) is found in the error term, as well"
+  },
+  {
+    "objectID": "lecture-6.html#wooldridges-notation",
+    "href": "lecture-6.html#wooldridges-notation",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Wooldridge’s notation",
+    "text": "Wooldridge’s notation\nWooldridge (2025, sec. 7.2a) defines:\n\\[\n  \\begin{aligned}\n    u_i\\small{(0)} =& y_i\\small{(0)}-E[y_i\\small{(0)}] \\\\\n    u_i\\small{(1)} =& y_i\\small{(1)}-E[y_i\\small{(1)}] \\\\\n  \\end{aligned}  \n\\]\nwhich then gives you,\n\\[\n  u_i = u_i\\small{(0)} = w_i(u_i\\small{(1)}-u_i\\small{(0)})\n\\]\nfrom p. 55. We will not use this notation here. However, it helps you, feel free to use it."
+  },
+  {
+    "objectID": "lecture-6.html#section-10",
+    "href": "lecture-6.html#section-10",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "Solve for \\(E[u_i|w_i=0]\\)\n\\[\n  \\begin{aligned}\n  E[u_i|w_i=0] =& E\\big[y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} + (\\tau_i-\\textcolor{red}{\\tau_{ate}})w_i\\big|w_i=0\\big] \\\\\n  =&E\\big[y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]}\\big|w_i=0\\big] \\\\\n  =& E[y_i\\small{(0)}|w_i=0]-\\textcolor{blue}{E[y_i\\small{(0)}]} \\\\\n  \\end{aligned}\n\\]\n\n\n\nIf assignment is unconfounded:\n\\[\n  E[y_i\\small{(0)}|w_i=0]-\\textcolor{blue}{E[y_i\\small{(0)}]} = E[y_i\\small{(0)}]-\\textcolor{blue}{E[y_i\\small{(0)}]} = 0\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#section-11",
+    "href": "lecture-6.html#section-11",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "Solve for \\(E[u_i|w_i=1]\\)\n\\[\n  \\begin{aligned}\n    E[u_i|w_i=1] =& E\\big[y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} + (\\tau_i-\\textcolor{red}{\\tau_{ate}})w_i\\big|w_i=1\\big] \\\\\n    =& E\\big[y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} + y_i\\small{(1)}-y_i\\small{(0)}-\\textcolor{red}{E[y_i\\small{(1)}]}+\\textcolor{red}{E[y_i\\small{(0)}]}\\big|w_i=1\\big] \\\\\n    =& E\\big[y_i\\small{(1)}-\\textcolor{red}{E[y_i\\small{(1)}]}\\big|w_i=1\\big] \\\\\n    =& E[y_i\\small{(1)}|w_i=1] -\\textcolor{red}{E[y_i\\small{(1)}]}\n  \\end{aligned}\n\\]\n\n\n\nAgain, if assignment is unconfounded:\n\\[\n  E[y_i\\small{(1)}|w_i=1] -\\textcolor{red}{E[y_i\\small{(1)}]} = E[y_i\\small{(1)}]-\\textcolor{red}{E[y_i\\small{(1)}]} = 0\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#section-12",
+    "href": "lecture-6.html#section-12",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "Thus, with unconfounded assignment we can write,\n\\[\n  y_i = \\alpha_0 + \\tau_{ate}w_i + u_i\n\\]\nwhere,\n\nslope parameter on \\(w_i\\) identifies the ATE\nthe error term fulfills MLR 4\nOLS estimator is unbiased (for the ATE)\n\n\n\n\n\n\n\nWarning\n\n\n\nIf given the model \\(y_i = \\beta_0 + \\beta_1 x_i + u_i\\) with \\(x_i = \\{0,1\\}\\), then it is trivial to say that \\(E[u_i|x_i]=0\\). This is because we can write the CEF of \\(y\\) given \\(x\\) as a linear function:\n\\[\n  E[y_i|x_i] = \\underbrace{E[y_i|x_i=0]}_{\\beta_0} + \\underbrace{\\big(E[y_i|x_i=1]-E[y_i|x_i=0]\\big)}_{\\beta_1}x_i\n\\]\nAll this means is that we can identify the mean of two groups. It does NOT mean that \\(\\beta_1 = E[y_i|x_i=1]-E[y_i|x_i=0]\\) is equal to the ATE. For that, you need unconfoundedness.\nConsider the case where \\(x_i = \\mathbf{1}\\{\\text{``female''}\\}\\). Then \\(\\beta_1\\) tells you the mean difference between female and male observations. Would you describe this as the ATE of being female?"
+  },
+  {
+    "objectID": "lecture-6.html#error-variance",
+    "href": "lecture-6.html#error-variance",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Error variance",
+    "text": "Error variance\nWe have shown that under unconfoundedness \\(E[u_i |w_i]=0\\).8 What about:\n\\[\n  Var(u_i|w_i)=E[u_i^2|w_i]=?\n\\]\n\n\nSuppose TEs are homogenous: \\(\\tau_i = \\tau = \\tau_{ate}\\;\\forall\\;i\\)\n\\[\n  u_i = y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]} + \\underbrace{(\\tau_i-\\textcolor{red}{\\tau_{ate}})}_{=0}w_i = y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]}\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#homoskedasticity",
+    "href": "lecture-6.html#homoskedasticity",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Homoskedasticity",
+    "text": "Homoskedasticity\nIf treatment effects are homogeneous, then\n\\[\n  E[u_i^2|w_i] = E[(y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]})^2|w_i] = E[(y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]})^2] = \\sigma^2_0 = \\sigma^2\n\\]\nunder unconfoundedness.\n\nhomogeneity \\(\\Rightarrow\\) homoskedastic error variance"
+  },
+  {
+    "objectID": "lecture-6.html#heteroskedasticity",
+    "href": "lecture-6.html#heteroskedasticity",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Heteroskedasticity",
+    "text": "Heteroskedasticity\nIf TEs are heterogenous:\n\\[\n  E[u_i^2|w_i] = \\begin{cases}\n  E[(y_i\\small{(0)}-\\textcolor{blue}{E[y_i\\small{(0)}]})^2] = \\sigma^2_0 \\quad \\text{if}\\;w_i=0 \\\\\n  E[(y_i\\small{(1)}-\\textcolor{red}{E[y_i\\small{(1)}]})^2] = \\sigma^2_1 \\quad \\text{if}\\;w_i=1 \\\\\n  \\end{cases}\n\\]\nunder unconfoundedness.\n\nheterogeneity \\(\\Rightarrow\\) heteroskedastic error variance\n\n\n\n\n\n\n\nTipDeaton’s critique\n\n\n\n\n\nAngus Deaton - a noble laureate in economics - is famous for not being overly enthusiastic about the use of RCTs in Economics; in particular, in Development Econonomics (see Athey and Imbens 2017). His critiques of the field range from the ethics of RCTs in poor countries, questions about the real-world policy relevance of RCT-based causal estimates, and more technical points G. Imbens (2018).\n\n““I argue that evidence from randomized experiments has no special priority. … Randomized experiments cannot automatically trump other evidence, they do not occupy any special place in some hierarchy of evidence” (Deaton 2010, 426)\n\nOne technical point Deaton emphasized - especially early on - was the apparent lack of attention/care shown to the correct estimation of SEs in RCT-based research.\n\n“If the regression … is run with the standard heteroskedasticity correction to the standard error, the result will be the same as the formula for the standard error of the difference between two means, but not otherwise except in the special case where there are equal numbers of experimental and controls, in which case it turns out that the correction makes no difference and the OLS standard error is correct. It is not clear in the experimental development literature whether the correction is routinely done in practice…” (Deaton 2010, 442)\n\nIt is fair to say that the research on best practice has come a long way since then and there is a vaste literature topics like SE estimation for randomized experiments (Athey and Imbens 2017). Moreover, the debate over the significance of RCTs in Economics has largely been won, and not by Deaton. In 2019 Esther Duflo, Abhijit Banerjee, and Michael Kremer won the Nobel Prize in Economics “for their experimental approach to alleviating global poverty”. The use of RCTs to answer important empirical questions about how the lives of the poor has fundamentally shaped how we design and evaluate real world policies (see Duflo and Banerjee 2011)."
+  },
+  {
+    "objectID": "lecture-6.html#variance-estimator",
+    "href": "lecture-6.html#variance-estimator",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Variance estimator",
+    "text": "Variance estimator\nWe know from Lecture 3 that the (conditional) variance of the OLS estimator for \\(\\tau_{ate}\\) is,\n\\[\n  \\widehat{Var}(\\hat{\\tau}_{ols}|W) = \\frac{\\hat{\\sigma}^2_{ols}}{SST_w}\n\\]\nunder MLR 5 (\\(\\Leftarrow\\) homogeneous TEs). Where,\n\\[\n  \\hat{\\sigma}^2_{ols} = \\frac{1}{n-2}\\sum_{i=1}^n \\hat{u}_i^2\n\\]\n\nThis is mathematically equivalent to the constant variance estimator.\n\\[\n= \\frac{1}{n-2}\\big((n_0-1)\\times\\hat\\sigma_0^2 + (n_1-1)\\times\\hat\\sigma_1^2\\big)\n\\]\n\n\n\n\n\n\n\nNoteProof\n\n\n\nThe proof follows a simple trick of splitting the sample into two groups: (1) \\(w_i = 0\\) and (2) \\(w_i = 1\\).\n\\[\n  \\begin{aligned}\n  \\sum_{i=1}^n \\hat{u}_i^2  =& \\sum_{i=1}^n(y_i-\\hat{\\alpha}_0-\\hat{\\tau}_{ols}w_i)^2 \\\\\n  =& \\sum_{i:w_i=0}(y_i-\\hat{\\alpha}_0-\\hat{\\tau}_{ols}w_i)^2 + \\sum_{i:w_i=1}(y_i-\\hat{\\alpha}_0-\\hat{\\tau}_{ols}w_i)^2 \\\\\n  =& \\sum_{i:w_i=0}(y_i-\\hat{\\alpha}_0)^2 + \\sum_{i:w_i=1}(y_i-\\hat{\\alpha}_0-\\hat{\\tau}_{ols})^2\n  \\end{aligned}\n\\]\nSince \\(\\hat{\\alpha}_0 = \\bar{y}_0\\) and \\(\\hat{\\alpha}_0 + \\hat{\\tau}_{ols}= \\bar{y}_1\\), the above is just\n\\[\n  \\begin{aligned}\n  & \\sum_{i:w_i=1}(y_i-\\bar{y}_0)^2 + \\sum_{i:w_i=0}(y_i-\\bar{y}_1)^2 \\\\\n  =& (n_0-1)\\times\\hat\\sigma_0^2 + (n_1-1)\\times\\hat\\sigma_1^2\n  \\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "lecture-6.html#section-13",
+    "href": "lecture-6.html#section-13",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "In the denominator is\n\\[\n  SST_w = n\\bar{w}(1-\\bar{w})\n\\]\n\nThis formula is quadratic in \\(\\bar{w}\\) - the share of the sample treated.\n\nAt \\(\\bar{w}=0.5\\), \\(SST_w\\) is maximized and \\(Var(\\hat{\\tau}^{OLS}|W)\\) is minimized (holding other factors fixed).\nA balanced treatment is good for statistical power, as is a larger sample size.\n\n\n\n\n\n\n\n\nNoteProof\n\n\n\nThis proof follows the same simple trick of splitting the sample into two groups: (1) \\(w_i = 0\\) and (2) \\(w_i = 1\\).\n\\[\n  \\begin{aligned}\n  SST_w =& \\sum_{i=1}^n(w_i-\\bar{w})^2 \\\\\n  =& \\sum_{i:w_i=0}(0-\\bar{w})^2 + \\sum_{i:w_i=1}(1-\\bar{w})^2 \\\\\n  =& n_0 \\bar{w}^2 + n_1(1-\\bar{w})^2 \\\\\n  =& \\underbrace{n(1-\\bar{w})}_{=n_0}\\bar{w}^2 + \\underbrace{n\\bar{w}}_{=n_1}(1-\\bar{w})^2 \\\\\n  =& n\\bar{w}(1-\\bar{w})(\\bar{w}+1-\\bar{w}) \\\\\n  =& n\\bar{w}(1-\\bar{w})\n  \\end{aligned}\n\\]\nThe proof exploits the fact that \\(\\bar{w}\\) is just the share of the sample that is treated: \\(n_1/n\\). Likewise, \\(1-\\bar{w} = n_0/n\\), the share of the sample untreated."
+  },
+  {
+    "objectID": "lecture-6.html#section-14",
+    "href": "lecture-6.html#section-14",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "",
+    "text": "What if MLR 5 (\\(\\Leftarrow\\) heterogeneous TEs) does not hold?\n\nThe White (1980) heteroskedastic-consistent estimator from Lecture 5 was,\n\n\\[\n  HC0 = \\frac{\\sum_{i=1}^{n}(w_{i}-\\bar{w})^2\\hat{u}_i^2}{\\text{SST}_w^2}\n\\]\n\nIt can be shown (we will not) that,\n\\[\n  HC0 \\neq  \\frac{\\hat{\\sigma}_0^2}{n_0} + \\frac{\\hat{\\sigma}_1^2}{n_1} = HC2\n\\]\nThe Neyman estimator is numerically equivalent to HC2.\n\nin practice, all HC0-HC3 estimators are asymptotically consistent.\nHC3 is recommended for smaller samples.\n\n\n\n\n\n\n\n\nTipProof\n\n\n\n\n\nYou can use the same trick of splitting the summation to show,\n\\[\n  \\begin{aligned}\n    \\widehat{Var}(\\hat{\\tau}_{ols}|W) =& \\frac{\\sum_{i=1}^{n}(w_{i}-\\bar{w})^2\\hat{u}_i^2}{\\text{SST}_w^2} \\\\\n    =& \\frac{\\sum_{i:w_i=1}^{n}(1-\\bar{w})^2(y_i-\\hat{\\alpha}_{ols}-\\hat{\\tau}_{ols})^2+\\sum_{i:w_i=0}^{n}(-\\bar{w})^2(y_i-\\hat{\\alpha}_{ols})^2}{\\text{SST}_w^2} \\\\\n    =& \\frac{(1-\\bar{w})^2\\sum_{i:w_i=1}^{n}(y_i-\\hat{\\alpha}_{ols}-\\hat{\\tau}_{ols})^2+\\bar{w}^2\\sum_{i:w_i=0}^{n}(y_i-\\hat{\\alpha}_{ols})^2}{\\text{SST}_w^2} \\\\\n    =& \\frac{(1-\\bar{w})^2(n_1-1)\\hat\\sigma_1^2+\\bar{w}^2(n_0-1)\\hat\\sigma_0^2}{(n\\bar{w}(1-\\bar{w}))^2} \\\\\n    =& \\frac{n_1-1}{n_1^2}\\hat\\sigma_1^2+\\frac{n_0-1}{n_0^2}\\hat\\sigma_0^2\n  \\end{aligned}\n\\]\nAnd HC1 (Stata’s robust default) will be,\n\\[\n  \\frac{n}{n-2}\\times \\Bigg[\\frac{n_1-1}{n_1^2}\\hat\\sigma_1^2+\\frac{n_0-1}{n_0^2}\\hat\\sigma_0^2\\Bigg]\n\\]\nIt is evident that for \\(n\\) large, these estimators will be very similar to Neyman’s estimator. You can show that HC2 is algebraically equivalent to Neyman (also referred to as Welch test/estimator)."
+  },
+  {
+    "objectID": "lecture-6.html#purpose",
+    "href": "lecture-6.html#purpose",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Purpose",
+    "text": "Purpose\nThe variance of the estimator is (assuming homogeneous TEs),\n\\[\n  Var(\\hat{\\tau}_{ols}|W) = \\frac{Var(u_i|w_i)}{SST_w} = \\frac{\\sigma^2_u}{SST_w}\n\\]\nwhere \\(u_i\\) is from the model,\n\\[\n  y_i = \\alpha_0 + \\tau_{ate}w_i + u_i\n\\]\n\nThe only variation in \\(y\\) explained by this model is the difference between treatment-control.\nWill result in high variance and low-powered test."
+  },
+  {
+    "objectID": "lecture-6.html#covariates",
+    "href": "lecture-6.html#covariates",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Covariates",
+    "text": "Covariates\nSuppose,\n\\[\nu_i = \\gamma x_i + v_i\n\\]\nwhere \\(x\\) is a regressor measured before assignment9\n\nlikely explain part of the outcome (i.e. \\(\\gamma\\neq 0\\))\ncommonly referred to as baseline covariates in RCTs"
+  },
+  {
+    "objectID": "lecture-6.html#regression-adjustment-1",
+    "href": "lecture-6.html#regression-adjustment-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Regression adjustment",
+    "text": "Regression adjustment\nInstead of the simple regression, we estimate\n\\[\n  y_i = \\alpha_0 + \\tau_{ate}w_i + \\gamma x_i + v_i\n\\]\n\nWooldridge (2025, 257) refers to this as the Restricted Regression Adjustment (RRA)"
+  },
+  {
+    "objectID": "lecture-6.html#variance-1",
+    "href": "lecture-6.html#variance-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Variance",
+    "text": "Variance\nFrom Lecture 3 we know,\n\\[\n  Var(\\hat{\\tau}_{rra}|W,X) = \\frac{Var(v_i|w_i,x_i)}{SSR_w} =  \\frac{\\sigma^2_v}{SSR_w}\n\\]\nwhere,\n\\[\n  SSR_w=SST_w (1-R_w^2)\n\\]\n\n\n\\(R^2_w\\) is the amount of variance in assignment explained by the covariates. This should be low, but won’t be zero.\nWhile \\(R^2_w\\neq 0\\) in the finite sample, \\(R^2_w\\rightarrow 0\\) as \\(n\\rightarrow \\infty\\)\nSo, \\(SSR_w\\approx SST_w\\)."
+  },
+  {
+    "objectID": "lecture-6.html#error-variance-1",
+    "href": "lecture-6.html#error-variance-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Error variance",
+    "text": "Error variance\nThe improvement in power comes from the fact that,\n\\[\n   \\underbrace{Var(u_i|w_i)}_{\\sigma^2_u} = Var(\\gamma x_i + v_i|w_i) = \\underbrace{\\gamma^2 Var(x_i)}_{&gt;0} + \\underbrace{Var(v_i|w_i,x_i)}_{\\sigma^2_v}\n\\]\nassuming\n\n\\(Cov(x_i,v_i|w_i)=0\\)\n\\(w_i\\) is assigned independently of \\(x_i\\): \\(Var(x_i|w_i) = Var(x_i)\\)\n\\(Var(v_i|w_i)=Var(v_i|w_i,x_i)\\) (\\(\\Leftarrow\\) heterogeneity unrelated to \\(x\\))"
+  },
+  {
+    "objectID": "lecture-6.html#power",
+    "href": "lecture-6.html#power",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Power",
+    "text": "Power\nPutting these two together,\n\\[\nAvar(\\hat{\\tau}_{rra}) \\leq Avar(\\hat{\\tau}_{ols})\n\\]\nwhere \\(Avar()\\) is the asymptotic variance.10\n\nAdding covariates,\n\nReduces variance of the estimator by reducing the error variance\nLittle trade-off in terms of the correlation between \\(w\\) and \\(x\\) (i.e., \\(R^2_w\\)) under assignment that is unconfounded (w.r.t. \\(x\\)’s).\n\nAny finite sample correlation disappears as \\(n\\rightarrow \\infty\\).\nCovariates must not be potential outcomes of the experiment (i.e. baseline)."
+  },
+  {
+    "objectID": "lecture-6.html#heterogeneity-1",
+    "href": "lecture-6.html#heterogeneity-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Heterogeneity",
+    "text": "Heterogeneity\nThis simple story is somewhat complicated by heterogeneity:\n\nheterogeneity is sits in the error term\nheterogeneity is likely related to \\(x\\)\nheterogeneity (that depends on \\(x\\)) introduces small-sample bias in models of the form:\n\\[\n  y_i = \\alpha_0 + \\tau_{ate}w_i + \\gamma x_i + v_i\n\\]\nOLS remains consistent (for the ATE), despite this small-sample bias (Freedman 2008)"
   },
   {
     "objectID": "lecture-6.html#ura",
     "href": "lecture-6.html#ura",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "URA",
-    "text": "URA\nTo avoid this small-sample bias, you can do Unrestricted Regression Adjustment (URA) (Wooldridge 2025, 257, 259).\n\\[\n    y_i = \\alpha_0 + \\tau_{ate}w_i + \\gamma x_i + \\eta w_i\\times (x_i-\\bar{x}) + \\varepsilon_i\n  \\]\n\nincludes an interaction between the treatment indicator and the covariate(s)\nthe interactions include demeaned covariate(s)\n\nthis changes the interpretation of \\(\\eta\\) (see Wooldridge 2025, sec. 6.2d)\nensures that the coefficient on \\(w\\) remains the ATE"
+    "text": "URA\nTo avoid this small-sample bias, you can do Unrestricted Regression Adjustment (URA) (Wooldridge 2025, 257, 259; Negi and Wooldridge 2021).\n\\[\n    y_i = \\alpha_0 + \\tau_{ate}w_i + \\gamma x_i + \\eta w_i\\times (x_i-\\bar{x}) + \\varepsilon_i\n  \\]\n\nincludes an interaction between the treatment indicator and the covariate(s)\n\nmodels the heterogeneity related \\(x\\)\n\nthe interactions include demeaned covariate(s)\n\nthis changes the interpretation of \\(\\eta\\) (see Wooldridge 2025, sec. 6.2d)\nensures that the coefficient on \\(w\\) remains the ATE"
+  },
+  {
+    "objectID": "lecture-6.html#research-design-1",
+    "href": "lecture-6.html#research-design-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Research Design",
+    "text": "Research Design\n\n\nBaseline survey:\n\nMeasure covariates: balance and power\n\nEndline survey:\n\nMeasure outcomes\nNeed to think about attrition"
+  },
+  {
+    "objectID": "lecture-6.html#balance-1",
+    "href": "lecture-6.html#balance-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Balance",
+    "text": "Balance\n\n\nBalance:\n\nTest on observables\nDoesn’t consider unobservables\nWill be non-zero correlation in data"
+  },
+  {
+    "objectID": "lecture-6.html#simple-difference-between-means-1",
+    "href": "lecture-6.html#simple-difference-between-means-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Simple difference between means",
+    "text": "Simple difference between means\n\n\nSDM:\n\nMeasures ATE under unconfoundedness\nMight have a high variance"
+  },
+  {
+    "objectID": "lecture-6.html#heterogeneity-2",
+    "href": "lecture-6.html#heterogeneity-2",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Heterogeneity",
+    "text": "Heterogeneity\n\n\nHeterogeneity:\n\nPOF developed to understand heterogeneous TEs\nResearchers will often commit to important margins of heterogeneity in their pre-analysis."
+  },
+  {
+    "objectID": "lecture-6.html#regression-1",
+    "href": "lecture-6.html#regression-1",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "Regression",
+    "text": "Regression\n\n\nRegression adjustment:\n\nCan correct for any imbalance\nMore valuable as a source of improved power\nCovariates from baseline (i.e. not outcomes of experiment)"
   },
   {
     "objectID": "lecture-6.html#footnotes",
     "href": "lecture-6.html#footnotes",
-    "title": "Causal Inference",
+    "title": "Causal Inference and Randomized Experiments",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nAttributed to Jerzy Neymand and Donald Rubin.↩︎\nThis notation of \\(w_i\\) as an indicator of an unit’s treatment status is common in the literature on experiments. You will see it in Wooldridge (2025, sec. 7.6).↩︎\nYou will see other notations in the literature. For example, the use of superscripts \\(\\{y_i^1,y_i^0\\}\\) or subscripts \\(\\{y_{i1},y_{i0}\\}\\).↩︎\nReferred to as the Neyman variance estimator.↩︎\nThis is a more general version than Wooldridge (2025, sec. 2.7a), which assumes homogeneity.↩︎\nWe can extend the notation to include multiple regressors, but it makes some of the math a little difficult. The conclusion does not change.↩︎"
+    "text": "Footnotes\n\n\nAlso referred to as the Rubin Causal Model (originally by Holland 1986). The framework is attributed to both Jerzy Neyman and Donald Rubin; as well as Paul Holland (Heckman and Pinto 2022).↩︎\nThe caveat here might be hypothetical resume studies; e.g. Bertrand and Mullainathan (2004) and Oreopoulos (2011).↩︎\nOften referred to as quasi-experiment.↩︎\nThis notation of \\(w_i\\) as an indicator of an unit’s treatment status is common in the literature on experiments and is used in one of the seminal books on the topic: G. W. Imbens and Rubin (2015)’s Causal Inference in Statistics, Social, and Biomedical Sciences. You will see it in Wooldridge (2025, sec. 7.6).↩︎\nYou will see other notations in the literature. For example, the use of superscripts \\(\\{y_i^1,y_i^0\\}\\) or subscripts \\(\\{y_{i1},y_{i0}\\}\\).↩︎\nAlso referred to as the Welch test/estimator.↩︎\nWooldridge (2025, sec. 2.7a) also includes a version with homogeneous TEs. This is the more general case.↩︎\nWhere \\(u_i = y_i - \\alpha_0 - \\tau_{ate}w_i\\).↩︎\nWe can extend the notation to include multiple regressors, but it makes some of the math a little difficult. The conclusion does not change.↩︎\nThis is a place holder for \\(p\\lim \\hat\\sigma^2/(n^{-1}SSR_w)\\).↩︎"
   },
   {
     "objectID": "material-intercept.html",

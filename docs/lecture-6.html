@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal Inference – EC3301 Econometrics</title>
+<title>Causal Inference and Randomized Experiments – EC3301 Econometrics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -339,6 +374,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./lecture-5.html">
  <span class="dropdown-text">Lecture 5</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-6.html">
+ <span class="dropdown-text">Lecture 6</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -450,15 +489,16 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#example" id="toc-example" class="nav-link active" data-scroll-target="#example">Example:</a></li>
-  <li><a href="#potential-outcomes" id="toc-potential-outcomes" class="nav-link" data-scroll-target="#potential-outcomes">Potential Outcomes</a></li>
+  <li><a href="#example-dizon-ross-2019" id="toc-example-dizon-ross-2019" class="nav-link active" data-scroll-target="#example-dizon-ross-2019">Example: Dizon-Ross (2019)</a></li>
+  <li><a href="#potential-outcomes-framework" id="toc-potential-outcomes-framework" class="nav-link" data-scroll-target="#potential-outcomes-framework">Potential Outcomes Framework</a></li>
   <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
   <li><a href="#estimation" id="toc-estimation" class="nav-link" data-scroll-target="#estimation">Estimation</a></li>
   <li><a href="#linear-model" id="toc-linear-model" class="nav-link" data-scroll-target="#linear-model">Linear Model</a></li>
   <li><a href="#regression-adjustment" id="toc-regression-adjustment" class="nav-link" data-scroll-target="#regression-adjustment">Regression Adjustment</a></li>
-  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example:</a></li>
+  <li><a href="#example-reivisiting-dizon-ross-2019" id="toc-example-reivisiting-dizon-ross-2019" class="nav-link" data-scroll-target="#example-reivisiting-dizon-ross-2019">Example: Reivisiting Dizon-Ross (2019)</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-6-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-6-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="lecture-6-notes-Stata.pdf"><i class="bi bi-file-pdf"></i>PDF with Stata</a></li><li><a href="lecture-6-notes-R.pdf"><i class="bi bi-file-pdf"></i>PDF with R</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -466,7 +506,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Causal Inference</h1>
+<h1 class="title">Causal Inference and Randomized Experiments</h1>
 <p class="subtitle lead">Lecture 6</p>
 </div>
 
@@ -500,50 +540,213 @@ window.Quarto = {
 <p>We will discuss the earlier part of Chapter 7.6 (7.6a “Program Evaluation and Unrestricted Regression Adjustment”) in Week 8.</p>
 <p>Chapter 7.1-7.3 should probably have been assigned much earlier. However, if you haven’t read them, now is a good time to. The lecture this week will not discuss multiple categories as much, as we will focus on understanding potential outcome and causation.</p>
 </section>
-<section id="example" class="level1">
-<h1>Example:</h1>
+<section id="example-dizon-ross-2019" class="level1">
+<h1>Example: Dizon-Ross (2019)</h1>
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section"></h2>
-<p>Introduce paper</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/dr2019-title.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="In a nutshell">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>In a nutshell
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Rural Malawi in 2012. School is free, but parents still spend money on their children’s education. They have to decide on how much to invest based on what they know their children’s academic potential. In reality, they have very poor (inaccurate) knowledge of their children’s academic performance.<br>
+</p>
+<p><strong>What would happen if you provided parents with more accessible information?</strong> Would they invest more? Differently?</p>
+</div>
+</div>
 </section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1"></h2>
-<p>Experiment design</p>
+<section id="research-design" class="level2">
+<h2 class="anchored" data-anchor-id="research-design">Research Design</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/dr2019-intervention.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2 (p.&nbsp;2741)</figcaption>
+</figure>
+</div>
 </section>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2"></h2>
-<p>Graph of difference between means</p>
+<section id="balance" class="level2">
+<h2 class="anchored" data-anchor-id="balance">Balance</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/dr2019-balance.png" class="img-fluid figure-img"></p>
+<figcaption>Table 1 (p.&nbsp;2743)</figcaption>
+</figure>
+</div>
 </section>
-<section id="section-3" class="level2">
-<h2 class="anchored" data-anchor-id="section-3"></h2>
-<p>Regression of results</p>
+<section id="simple-difference-between-means" class="level2">
+<h2 class="anchored" data-anchor-id="simple-difference-between-means">Simple difference between means</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/dr2019-figure-3a.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3 (p.&nbsp;2745)</figcaption>
+</figure>
+</div>
+</section>
+<section id="heterogeneity" class="level2">
+<h2 class="anchored" data-anchor-id="heterogeneity">Heterogeneity</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/dr2019-figure-3b.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3 (p.&nbsp;2745)</figcaption>
+</figure>
+</div>
+</section>
+<section id="regression" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="regression">Regression</h2>
+<p><img src="material/lecture-6/dr2019-regression.png" class="img-fluid quarto-figure quarto-figure-center"> <img src="material/lecture-6/dr2019-notes.png" class="img-fluid quarto-figure quarto-figure-center" alt="Figure A.1 (p.&nbsp;2759)"></p>
 </section>
 </section>
-<section id="potential-outcomes" class="level1">
-<h1>Potential Outcomes</h1>
+<section id="potential-outcomes-framework" class="level1">
+<h1>Potential Outcomes Framework</h1>
 <section id="neyman-rubin-causal-model" class="level2">
 <h2 class="anchored" data-anchor-id="neyman-rubin-causal-model">Neyman-Rubin Causal Model</h2>
 <p>The Potential Outcomes Framework is a key component of the Neyman-Rubin Causal Model<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <ul>
 <li><p>We won’t cover all aspects of this model.</p></li>
-<li><p>I will reference texts you can visit to read further</p></li>
+<li><p>I will reference texts in green boxes that you can visit to read further</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="On Causation">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>On Causation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The Neyman-Rubin Causal Model is not the only framework for defining causal relationships. In addition, it is a model well suited to the analysis of experimental data. Another causal framework Directed Acyclic Graphs (DAGs) has become very influential in computer and data sciences. See <span class="citation" data-cites="pearl2018book">Pearl and Mackenzie (<a href="#ref-pearl2018book" role="doc-biblioref">2018</a>)</span>’s now famous book, <em>They Book of Why</em>, on the topic. <span class="citation" data-cites="imbens2020potential">G. W. Imbens (<a href="#ref-imbens2020potential" role="doc-biblioref">2020</a>)</span> provides an excellent discussion of DAG versus POF, and why POF is a more natural fit for economists <span class="citation" data-cites="heckman2022causality">(see also <a href="#ref-heckman2022causality" role="doc-biblioref">Heckman and Pinto 2022</a>)</span>.</p>
+<p>Finally, there are other notions of causal relations in Econometrics. For example, in time series there is the concept of Granger causation which relates more to temporal prediction and structural modelling thinks about causation outside of the “no causation without manipulation” notion of causation within the Neyman-Rubin model <span class="citation" data-cites="rubin1975bayesian">(<a href="#ref-rubin1975bayesian" role="doc-biblioref">Rubin 1975, 238</a>)</span>. You might enjoy <span class="citation" data-cites="hoover2008causality">Hoover (<a href="#ref-hoover2008causality" role="doc-biblioref">2008</a>)</span>’s discussion on the topic.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="component-1" class="level2">
+<h2 class="anchored" data-anchor-id="component-1">Component 1</h2>
+<p>The Neyman-Rubin model has three important components <span class="citation" data-cites="imbens2015causal">(<a href="#ref-imbens2015causal" role="doc-biblioref">G. W. Imbens and Rubin 2015</a>)</span><br>
+</p>
+<blockquote class="blockquote">
+<p><strong>Potential Outcomes</strong>: The outcomes corresponding to different levels of treatment or manipulation: “no causation without manipulation” <span class="citation" data-cites="rubin1975bayesian">(<a href="#ref-rubin1975bayesian" role="doc-biblioref">Rubin 1975, 238</a>)</span></p>
+</blockquote>
+<ul>
+<li><p>Potential outcomes are <em>a priori</em> observable, but <em>a posteriori</em> only one outcome is observable.</p></li>
+<li><p>A variable can only be a “cause” if it is possible, at least in principle, to conceive of a hypothetical or physical intervention (“treatment”) that manipulates it. We tend not to discuss the causal effect of demographic characteristics.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p></li>
 </ul>
 </section>
-<section id="example-1" class="level2">
-<h2 class="anchored" data-anchor-id="example-1">Example</h2>
-<p>Consider out example: there are <strong>two states of the world</strong></p>
+<section id="components-2" class="level2">
+<h2 class="anchored" data-anchor-id="components-2">Components 2</h2>
+<blockquote class="blockquote">
+<p><strong>Multiple units</strong>: Given the limit on observation, one must observe multiple units to infer a causal effect.</p>
+</blockquote>
+<ul>
+<li>Need to make a key stability assumption: Stable Unit Treatment Value Assumption (SUTVA).</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="SUTVA">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>SUTVA
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The Stable Unit Treatment Value Assumption (SUTVA) is an overarching assumption for this entire Neyman-Rubin Causal Model</p>
+<blockquote class="blockquote">
+<p>“The potential outcomes for any unit do not vary with the treatments assigned to other units, and, for each unit, there are no different forms or versions of each treatment level, which lead to different potential outcomes.” <span class="citation" data-cites="imbens2015causal">(<a href="#ref-imbens2015causal" role="doc-biblioref">G. W. Imbens and Rubin 2015, 10</a>)</span></p>
+</blockquote>
+<p>This assumption,</p>
 <ol type="1">
-<li><p><strong>Treated</strong> parents receive information about their kids</p></li>
-<li><p>Untreated (<strong>control</strong>) parents receive no information</p></li>
+<li><p><strong>Rules out interference between treatment units.</strong> This rules out any spillover effects between ‘treatment’ and ‘control’.</p></li>
+<li><p><strong>Ensures that there are no hidden variations in the treatment level.</strong> It is okay for there to be different levels of treatment, so long as they are explicit and well-defined <em>a priori</em>.</p></li>
 </ol>
-<div class="fragment fade-in">
-<p>We can there think about an outcome (e.g.&nbsp;enrollment) under each state</p>
+</div>
+</div>
+</div>
+</section>
+<section id="component-3" class="level2">
+<h2 class="anchored" data-anchor-id="component-3">Component 3</h2>
+<blockquote class="blockquote">
+<p><strong>Assignment mechanism</strong>: The function that determines the manipulation of units.</p>
+</blockquote>
+<p>Assignment may be:</p>
+<ul>
+<li><p><strong>probabilistic</strong>; e.g.&nbsp;randomized experiment</p></li>
+<li><p><strong>deterministic</strong>; e.g.&nbsp;thresholds/cutoffs</p></li>
+<li><p><strong>conditional</strong>; depend partly depend on observable characteristics (<span class="math inline">\(\mathbf{x}_i\)</span>).</p></li>
+<li><p><strong>controlled</strong> (by the researcher); e.g.&nbsp;randomized control trial</p></li>
+<li><p><strong>exogenous</strong> (to the treatment unit); e.g.&nbsp;public policy or natural experiments<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p></li>
+</ul>
+<ul>
+<li><p><strong>known</strong> (by the researcher); e.g.&nbsp;controlled or natural experiments</p></li>
+<li><p><strong>unknown</strong>; e.g.&nbsp;observational study,</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Propensity score">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Propensity score
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If you continue to study causal inference you learn about methodologies like propensity score matching. The propensity score is the probability of treatment conditional on a set of observable characteristics.</p>
 <p><span class="math display">\[
-  y(\text{info}) \qquad \text{or}\qquad y(\text{status-quo})
+  \rho(\mathbf{x_i}) = Pr(w_i=1|\mathbf{x}_i)
+\]</span></p>
+<p>This measure is key to many causal inference results. You can re-frame the question “do we know the assignment mechanism” to “do we know the functional form of the propensity score”.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>Consider the example of <span class="citation" data-cites="dizon2019parents">Dizon-Ross (<a href="#ref-dizon2019parents" role="doc-biblioref">2019</a>)</span>: there are two possible <em>states of the world</em>:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Treated</strong>:</p>
+<ul>
+<li>receive information</li>
+</ul>
+<p><br>
+</p>
+<p>Researcher observes:</p>
+<p><span class="math display">\[
+y(\text{info})
+\]</span></p>
+</div><div class="column" style="width:50%;">
+<div class="fragment fade-in">
+<p><strong>Untreated</strong>: (<em>control</em>)</p>
+<ul>
+<li>no information (status-quo)</li>
+</ul>
+<p><br>
+</p>
+<p>Researcher observes: <span class="math display">\[
+  y(\text{status-quo})
 \]</span></p>
 </div>
+</div>
+</div>
 <div class="fragment fade-in">
-<p>We call these <strong>potential outcomes</strong></p>
+<p>We call these <strong>potential outcomes</strong>.</p>
 </div>
 </section>
 <section id="possible-outcomes" class="level2">
@@ -555,11 +758,11 @@ window.Quarto = {
 <p><span class="math display">\[
   y(\text{info})=\textcolor{red}{\text{enroll}} \qquad \text{and}\qquad y(\text{status-quo})=\textcolor{blue}{\text{don't enroll}}
 \]</span></p></li>
-<li><p>Enroll always</p>
+<li><p>Enroll, regardless</p>
 <p><span class="math display">\[
   y(\text{info})=\textcolor{red}{\text{enroll}} \qquad \text{and}\qquad y(\text{status-quo})=\textcolor{red}{\text{enroll}}
 \]</span></p></li>
-<li><p>Don’t enroll always</p>
+<li><p>Don’t enroll, regardless</p>
 <p><span class="math display">\[
   y(\text{info})=\textcolor{blue}{\text{don't enroll}} \qquad \text{and}\qquad y(\text{status-quo})=\textcolor{blue}{\text{don't enroll}}
 \]</span></p></li>
@@ -587,35 +790,23 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Notice, to say there has been a causal effect, we must observe both potential outcomes.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Continuous Treatment">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Continuous Treatment
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Add quote from Imbens &amp; Rubin</p>
-</div>
+<p>Notice two things <span class="citation" data-cites="imbens2015causal">(<a href="#ref-imbens2015causal" role="doc-biblioref">G. W. Imbens and Rubin 2015, 6</a>)</span>,</p>
+<ol type="1">
+<li>“First, the definition of the causal effect depends on the potential outcomes, but it does not depend on which outcome is actually observed.”</li>
+</ol>
+<p>2 “Second, the causal effect is the comparison of potential outcomes, for the same unit, at the same moment in time post-treatment. In particular, the causal effect is not defined in terms of comparisons of outcomes at different times.”</p>
 </div>
 </div>
 </section>
 <section id="notation" class="level2">
 <h2 class="anchored" data-anchor-id="notation">Notation</h2>
-<p>Let <span class="math inline">\(w_i \in \{0,1\}\)</span> be an indicator of an individuals <em>discrete</em> treatment status.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
+<p>Let <span class="math inline">\(w_i \in \{0,1\}\)</span> be an indicator of an individuals <em>discrete</em> treatment status.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>:</p>
 <ul>
-<li><p><span class="math inline">\(y_i(1)\)</span> be the potential outcome when treated</p></li>
-<li><p><span class="math inline">\(y_i(0)\)</span> be the potential outcome when not treated<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p></li>
+<li><p><span class="math inline">\(y_i\small{(1)}\)</span> be the potential outcome when treated</p></li>
+<li><p><span class="math inline">\(y_i\small{(0)}\)</span> be the potential outcome when not treated<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p></li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-empty-content callout-titled" title="Continuous Treatment">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-tip callout-titled" title="Continuous Treatment">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -624,106 +815,184 @@ Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<p>We focus here on discrete treatments. It is straight forward to incorporate additional, separate treatments, but to model a continuous treatment you need to make additional assumptions about the functional form of the causal model. The only assumption we have made here is that of <strong>additive treatment effects</strong>: <span class="math inline">\(y_i\small{(1)} = y_i\small{(0)}+\tau_i\)</span>.</p>
+<p>The model may in fact be multiplicative: <span class="math inline">\(y_i\small{(1)} = y_i\small{(0)}\times\tau_i\)</span>. This distinction becomes important when you consider that many researchers use this framework to estimate treatment effects measured in log-transformed outcome variables.</p>
+<p>One solution to the continuous treatment problem is to think about different treatment “dosages” (as in medicine). This approach discretizes the continuous treatment and returns the problem to the simple binary case.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="observed-outcome" class="level2">
 <h2 class="anchored" data-anchor-id="observed-outcome">Observed outcome</h2>
-<p><em>A priori</em>, both potential outcomes could be realised, but in the data you observe:</p>
+<p><em>A priori</em>, both potential outcomes could be realised, but <strong>in the data you observe only one</strong>:</p>
 <p><span class="math display">\[
-  y_i = \begin{cases}y_i(1)\quad \text{if}\; w_i=1 \\
-  y_i(0)\quad \text{if}\; w_i=0
+  y_i = \begin{cases}y_i\small{(1)}\quad \text{if}\; w_i=1 \\
+  y_i\small{(0)}\quad \text{if}\; w_i=0
   \end{cases}
 \]</span></p>
+<blockquote class="blockquote">
+<p>“fundamental problem of causal inference” <span class="citation" data-cites="holland1986statistics">(<a href="#ref-holland1986statistics" role="doc-biblioref">Holland 1986, 947</a>)</span></p>
+</blockquote>
 <div class="fragment fade-in">
-<p>Which we can write as the linear function:</p>
+<p>Which we can write this as a linear function:</p>
 <p><span class="math display">\[
-  y_i = y_i(0) + w_i\big(y_i(1)-y_i(0)\big)
+  y_i = y_i\small{(0)} + w_i\big(y_i\small{(1)}-y_i\small{(0)}\big)
 \]</span></p>
 </div>
-</section>
-<section id="discrete-treatment" class="level2">
-<h2 class="anchored" data-anchor-id="discrete-treatment">Discrete treatment</h2>
 </section>
 <section id="ite" class="level2">
 <h2 class="anchored" data-anchor-id="ite">ITE</h2>
 <p>The individual (unit) treatment effect (ITE) is defined as,</p>
 <p><span class="math display">\[
-  \tau_i = y_i(1)-y_i(0)
+  \tau_i = y_i\small{(1)}-y_i\small{(0)}
 \]</span></p>
+<p><br>
+</p>
 <p>However, <em>you cannot observe (identify) or estimate the ITE</em></p>
+<div class="fragment fade-in">
 <p><strong>WHY?</strong></p>
 <ul>
-<li><p>it would require you to observe <strong>both</strong> potential outcomes of the same unit <em>in the same period of time</em></p></li>
-<li><p>“you cannot be in two places at once”</p></li>
-<li><p>often referred to as the missing data problem</p></li>
+<li><p>it would require you to observe <strong>both</strong> potential outcomes of the same unit <em>in the same period</em></p></li>
+<li><p>referred to as the “missing data problem” <span class="citation" data-cites="imbens2015causal">(<a href="#ref-imbens2015causal" role="doc-biblioref">G. W. Imbens and Rubin 2015, 34</a>)</span></p></li>
 </ul>
+</div>
+<div class="fragment fade-in">
+<p><strong>Notice!</strong></p>
+<ul>
+<li>the individual level treatment effect varies at the individual level: <span class="math inline">\(\tau_i\)</span></li>
+</ul>
+</div>
+</section>
+<section id="visualization" class="level2">
+<h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
+<p><em>A priori</em>, both potential outcomes are observable</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/Slide1.PNG" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
+<p>Then, treatment is assigned</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/Slide2.PNG" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2"></h2>
+<p>Treatment determines which PO you observe</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/Slide3.PNG" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3"></h2>
+<p>There is an observed outcome and (theoretically) a missing one</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/Slide4.PNG" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 </section>
 <section id="average-tes" class="level2">
 <h2 class="anchored" data-anchor-id="average-tes">Average TEs</h2>
-<p>We focus on identifying and estimating average (or aggregate) TEs</p>
+<p>In place of the ITE, we focus on identifying and estimating average TEs</p>
 <div class="incremental">
 <ul class="incremental">
 <li><p>Average Treatment Effect (ATE)</p>
 <p><span class="math display">\[
-  \tau_{ate} = E[\tau_i] = E\big[y_i(1)-y_i(0)\big]
+  \tau_{ate} = E[\tau_i] = E\big[y_i\small{(1)}-y_i\small{(0)}\big]
 \]</span></p></li>
 <li><p>Average Treatment Effect of the Treated (ATT)</p>
 <p><span class="math display">\[
-  \tau_{att} = E[\tau_i|w_i = 1] = E\big[y_i(1)-y_i(0)|w_i=1\big]
+  \tau_{att} = E[\tau_i|w_i = 1] = E\big[y_i\small{(1)}-y_i\small{(0)}|w_i=1\big]
 \]</span></p></li>
 <li><p>Average Treatment Effect of the Untreated (ATU)</p>
 <p><span class="math display">\[
-  \tau_{atu} = E[\tau_i|w_i = 0] = E\big[y_i(1)-y_i(0)|w_i=0\big]
+  \tau_{atu} = E[\tau_i|w_i = 0] = E\big[y_i\small{(1)}-y_i\small{(0)}|w_i=0\big]
 \]</span></p>
 <p>These are called <strong>causal estimands</strong></p></li>
 </ul>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Finite vs Super Population">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Finite vs Super Population
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>These are all super population casual estimands, denoted in terms of the expected values. There is a corresponding set of finite sample causal estimands in which the realized sample is held constant <span class="citation" data-cites="imbens2015causal">(see <a href="#ref-imbens2015causal" role="doc-biblioref">G. W. Imbens and Rubin 2015</a>)</span>.</p>
+<p>In our discussion of regression models, the primary source of randomness was sampling. The super population definition of causal estimands takes the same approach: the expectation here is with respect to the (unobservable) population distributions.</p>
+<p>However, in this world of randomized experiments there is a second source of randomness: assignment (i.e.&nbsp;<span class="math inline">\(w_i\)</span>). In a different realization of the experiment, a different set of individuals <em>within the same sample</em> could have been treated. You can therefore think about the ATE of the finite, fixed sample.</p>
+<p><span class="math display">\[
+  \tau^{fs}_{ate} = \frac{1}{n}\sum_{i=1}^n\tau_i = \frac{1}{n}\sum_{i=1}^n (y_i\small{(1)}-y_i\small{(0)})
+\]</span></p>
+<p>As with the super population ATE, you can observe this in the data. It would require knowing both <span class="math inline">\(y_i\small{(1)}\)</span> and <span class="math inline">\(y_i\small{(0)}\)</span> for every individual.</p>
+<p>This finite sample approach tends not to be used extensively in applied economics research. Economists tend to take the approach of thinking about the fixed sample as a draw from the sampled (super) population and use their estimates to learn about the wider population. You see this in the way economists evaluate public policies.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="ate-vs-att" class="level2">
 <h2 class="anchored" data-anchor-id="ate-vs-att">ATE vs ATT</h2>
-<p>We prefer the ATE if,</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>We prefer the <strong>ATE</strong> if,</p>
 <ul>
 <li><p>we want to learn about the effect on the entire population;</p></li>
 <li><p>i.e., mandatory exposure.</p></li>
+<li><p>or lottery</p></li>
 </ul>
-<div class="fragment fade-in">
-<p>We prefer the ATT if,</p>
+</div><div class="column" style="width:50%;">
+<p>We prefer the <strong>ATT</strong> if,</p>
 <ul>
 <li><p>the population includes individuals that will not take up the treatment/policy;</p></li>
 <li><p>e.g., a policy that targets single mothers;</p></li>
-<li><p>where the program is voluntary, so those not enrolled will not necessarily be treated;</p></li>
-<li><p>the ATT is “informative about the effect of entirely eliminating the current program” (Imbens and Wooldridge, 2009, pp.&nbsp;14-15).</p></li>
+<li><p>or program is voluntary,</p></li>
 </ul>
+</div>
+</div>
+<div class="fragment fade-in">
+<p>The ATT is “informative about the effect of entirely eliminating the current program” <span class="citation" data-cites="imbens2009recent">(<a href="#ref-imbens2009recent" role="doc-biblioref">G. W. Imbens and Wooldridge 2009, 14–15</a>)</span>.</p>
 </div>
 </section>
 </section>
 <section id="assignment" class="level1">
 <h1>Assignment</h1>
-<section id="fundamental-problem" class="level2">
-<h2 class="anchored" data-anchor-id="fundamental-problem">Fundamental problem</h2>
+<section id="two-groups" class="level2">
+<h2 class="anchored" data-anchor-id="two-groups">Two groups</h2>
 <p>Suppose you treat one group of individuals, while observing another untreated. Then <em>in expectation</em>, you can learn about</p>
 <p><span class="math display">\[
   E[y_i|w_i = 1] - E[y_i|w_i = 0]
 \]</span></p>
+<p><br>
+</p>
 <div class="fragment fade-in">
-<p>Substituting in <span class="math inline">\(y_i = y_i(0) + w_i\big(y_i(1)-y_i(0)\big)\)</span></p>
+<p>Substituting in <span class="math inline">\(y_i = y_i\small{(0)} + w_i\big(y_i\small{(1)}-y_i\small{(0)}\big)\)</span></p>
 <p><span class="math display">\[
-  E[y_i(1)|w_i = 1] - E[y_i(0)|w_i = 0]
+  E[y_i\small{(1)}|w_i = 1] - E[y_i\small{(0)}|w_i = 0]
 \]</span></p>
 </div>
 </section>
 <section id="section-4" class="level2">
 <h2 class="anchored" data-anchor-id="section-4"></h2>
-<p>Is this equal to either the ATE, ATT, or ATU? <span class="math display">\[
-  E[y_i(1)|w_i = 1] - E[y_i(0)|w_i = 0]
+<p>Is this equal to either the ATE, ATT, or ATU? <strong>NO!</strong> <span class="math display">\[
+  E[y_i\small{(1)}|\textcolor{red}{w_i = 1}] - E[y_i\small{(0)}|\textcolor{blue}{w_i = 0}]
 \]</span></p>
 <div class="fragment fade-in">
-<p><strong>NO!</strong></p>
+<p><strong>Why?</strong></p>
 <ul>
 <li>The conditions are not the same!</li>
 </ul>
@@ -733,36 +1002,52 @@ Important
 <h2 class="anchored" data-anchor-id="decomposition">Decomposition</h2>
 <p>Let us add and subtract:</p>
 <p><span class="math display">\[
-  \textcolor{red}{E[y_i(0)|w_i = 1]}
+  \textcolor{red}{E[y_i\small{(0)}|w_i = 1]}
 \]</span></p>
 <p>the <strong>unobserved counterfactual</strong> for the treated group.</p>
+<p><br>
+</p>
+<div class="fragment fade-in">
 <p><span class="math display">\[
-  E[y_i(1)|w_i = 1] - \textcolor{red}{E[y_i(0)|w_i = 1]} + \textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]
+  E[y_i\small{(1)}|w_i = 1] - \textcolor{red}{E[y_i\small{(0)}|w_i = 1]} + \textcolor{red}{E[y_i\small{(0)}|w_i = 1]}- E[y_i\small{(0)}|w_i = 0]
 \]</span></p>
+</div>
 </section>
 <section id="section-5" class="level2">
 <h2 class="anchored" data-anchor-id="section-5"></h2>
-<p>The expression now has two terms</p>
-$$
-<span class="math display">\[\begin{aligned}
-  
-    &amp;E[y_i(1)|w_i = 1] - \textcolor{red}{E[y_i(0)|w_i = 1]} + \textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0] \\
-    =&amp; \underbrace{E[y_i(1)-y_i(0)|w_i = 1]}_\text{ATT}+ \underbrace{\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\text{selection}
-  \end{aligned}\]</span>
-<p>$$</p>
-<p>:::{callout-note title=“Selection”} As alluded to earlier in <a href="./lecture-3.html">Lecture 3</a>, selection here is different to the problem of sample selection. :::</p>
+<p>The expression has two parts:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+    &amp;\underbrace{E[y_i\small{(1)}|w_i = 1] - \textcolor{red}{E[y_i\small{(0)}|w_i = 1]}} + \underbrace{\textcolor{red}{E[y_i\small{(0)}|w_i = 1]}- E[y_i\small{(0)}|w_i = 0]} \\
+    =&amp; \underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 1]}_\text{ATT}+ \underbrace{\textcolor{red}{E[y_i\small{(0)}|w_i = 1]}- E[y_i\small{(0)}|w_i = 0]}_\text{selection}
+  \end{aligned}
+\]</span></p>
+<p><br>
+</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Self-selection">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Self-selection
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As alluded to earlier in <a href="./lecture-3.html">Lecture 3</a>, selection here is different to the problem of sample selection. This selection problem can more aptly described as the “self-selection problem” <span class="citation" data-cites="wooldridge2025">(<a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 255</a>)</span>.</p>
+</div>
+</div>
 </section>
 <section id="selection" class="level2">
 <h2 class="anchored" data-anchor-id="selection">Selection</h2>
 <p>The problem of selection <strong>into treatment</strong> is fundamental to any discussion of causation.</p>
 <p><span class="math display">\[
-  \underbrace{\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\text{selection}
+  \underbrace{\textcolor{red}{E[y_i\small{(0)}|w_i = 1]}- E[y_i\small{(0)}|w_i = 0]}_\text{selection}
 \]</span></p>
 <p>The term describes the difference between</p>
 <ol type="1">
-<li><p>an unobserved counterfactual outcome of the treated group</p>
-<p>the outcome you <em>would have</em> observed, had the group NOT been treated</p></li>
-<li><p>the observed outcome of the untreated group</p></li>
+<li><p>an unobserved counterfactual outcome of the treated group: the outcome mean you <em>would have</em> observed, had the group NOT been treated</p></li>
+<li><p>the observed outcome mean of the untreated (control) group</p></li>
 </ol>
 </section>
 <section id="unconfoundedness" class="level2">
@@ -771,10 +1056,12 @@ $$
 <blockquote class="blockquote">
 <p><strong>Unconfounded assignment:</strong> assignment into the treatment is unconfounded if</p>
 <p><span class="math display">\[
-  y_i(1),y_i(0) \perp w_i
+  y_i\small{(1)},y_i\small{(0)} \perp w_i
 \]</span></p>
 </blockquote>
-<p>And if, assignment is randomly assigned, then it is unconfounded.</p>
+<p><br>
+</p>
+<p>And, <strong>if assignment is random, then it is unconfounded</strong>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -785,34 +1072,39 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Some people equate the assumption of uncounfedness with randomization. However, they are better thought of as two separate things: unconfoundedness an important underlying assumption, while randomization is an assignment mechanism that gives rise to unconfounded assignment.</p>
+<p>Some people equate unconfoundedness with randomization, but they are distinct. Unconfoundedness is a property of an assignment mechanism: treatment assignment is independent of potential outcomes, possibly conditional on covariates. Randomization is one particular assignment mechanism that guarantees this property by design. In observational studies, by contrast, unconfoundedness can’t be guaranteed and must instead be assumed.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-warning callout-empty-content callout-titled" title="Unconfounded vs exogenous">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-default callout-tip callout-titled" title="Unconfounded vs exogenous">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Unconfounded vs exogenous
+<span class="screen-reader-only">Tip</span>Unconfounded vs exogenous
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<p>Unconfoundedness should also be distinguished from exogeneity, a term that is used in several different senses. In applied work it often means simply that a treatment is imposed from outside, as with a government policy change, but external imposition does not ensure that assignment is unrelated to the factors that determine outcomes. In econometrics it more formally means that a regressor is uncorrelated with the error term of a particular model, which is both a weaker condition than independence and one that depends on how the model is specified. Unconfoundedness, by contrast, is defined directly in terms of the assignment mechanism and the potential outcomes: assignment is independent of the potential outcomes given covariates, that is, as if randomly assigned.</p>
+</div>
 </div>
 </div>
 </section>
 <section id="unconfounded-assignment" class="level2">
 <h2 class="anchored" data-anchor-id="unconfounded-assignment">Unconfounded assignment</h2>
 <ol type="1">
-<li><span class="math inline">\(E[y_i(0)|w_i=1] = E[y_i(0)|w_i=0] = E[y_i(0)]\)</span></li>
-</ol>
+<li><p><span class="math inline">\(E[y_i\small{(0)}|w_i=1] = E[y_i\small{(0)}|w_i=0] = E[y_i\small{(0)}]\)</span></p>
 <p><span class="math display">\[
-    \Rightarrow \underbrace{\textcolor{red}{E[y_i(0)|w_i = 1]}- E[y_i(0)|w_i = 0]}_\text{selection} = 0
-  \]</span></p>
-<ol start="2" type="1">
-<li><span class="math inline">\(\underbrace{E[y_i(1)-y_i(0)|w_i = 1]}_\text{ATT}=\underbrace{E[y_i(1)-y_i(0)|w_i = 0]}_\text{ATU}=\underbrace{E[y_i(1)-y_i(0)}_\text{ATE}\)</span></li>
+  \Rightarrow \underbrace{\textcolor{red}{E[y_i\small{(0)}|w_i = 1]}- E[y_i\small{(0)}|w_i = 0]}_\text{selection} = 0
+\]</span></p></li>
 </ol>
+<div class="fragment fade-in">
+<ol start="2" type="1">
+<li><span class="math inline">\(\underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 1]}_\text{ATT}=\underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 0]}_\text{ATU}=\underbrace{E[y_i\small{(1)}-y_i\small{(0)}}_\text{ATE}\)</span></li>
+</ol>
+</div>
 </section>
 <section id="section-6" class="level2">
 <h2 class="anchored" data-anchor-id="section-6"></h2>
@@ -820,15 +1112,38 @@ Note
 <p><span class="math display">\[
   E[y_i|w_i = 1] - E[y_i|w_i = 0] = \tau_{ate}
 \]</span></p>
+<div class="fragment fade-in">
 <p>We therefore refer to unconfoundedness as the <strong>identifying assumption</strong>.</p>
 <ul>
-<li>Without unconfoundness we cannot learn about the ATE (or ATT) from the difference between two groups.</li>
+<li>without it we cannot learn about the ATE (or ATT) from the difference between two groups.</li>
 </ul>
+</div>
 </section>
-<section id="balance-tests" class="level2">
-<h2 class="anchored" data-anchor-id="balance-tests">Balance tests</h2>
-<p>Researchers test for unconfoundedness using balance tests.</p>
-<p>Need to emphasise what happens in realization vs expectation</p>
+<section id="testing-unconfoundedness" class="level2">
+<h2 class="anchored" data-anchor-id="testing-unconfoundedness">Testing unconfoundedness</h2>
+<p>In practice, researchers attempt to demonstrate that “randomization has worked” through the construction of a <strong>balance table</strong></p>
+<ul>
+<li><p>Test difference in <em>baseline</em> covariates across treatment-control</p></li>
+<li><p>Can do a joint ANOVA test or adjust <span class="math inline">\(p\)</span>-values for multiple inference.</p></li>
+<li><p>Covariates must be <em>observable</em> (hence, baseline survey)</p></li>
+<li><p>Researcher hopes to <em>fail to reject</em> <span class="math inline">\(H_0:\)</span> difference. Does not prove unconfounded assignment.</p></li>
+</ul>
+<p><br>
+</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Expectation vs Realization">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Expectation vs Realization
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Random assignment gives you unconfoundedness, which <strong>in expectation</strong> means that the treatment and control group are (theoretically) the same. The realized allocation will consist of two groups that are NOT the same.</p>
+<p>We can rely on LLN to say that for a large enough sample, the mean of each group approaches its expected value. But, many RCTs do not have very large samples.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="estimation" class="level1">
@@ -840,31 +1155,35 @@ Note
   \hat{\tau} = \bar{y}_1 - \bar{y}_0
 \]</span></p>
 <p>where,</p>
-<p>$$ {y}<em>1 = </em>{}y_i{y}<em>0 =</em>{}y_i</p>
-<p>$$</p>
+<p><span class="math display">\[
+  \bar{y}_1 = \frac{1}{\textcolor{red}{n_1}}\sum_{i:\textcolor{red}{w_i=1}}y_i \qquad \text{and}\qquad \bar{y}_0 =\frac{1}{\textcolor{blue}{n_0}}\sum_{i:\textcolor{blue}{w_i=0}}y_i
+\]</span></p>
 <p>and <span class="math inline">\(n_1\)</span> (<span class="math inline">\(n_0\)</span>) is number of treated (control) units</p>
 </section>
 <section id="variance" class="level2">
 <h2 class="anchored" data-anchor-id="variance">Variance</h2>
 <p>The variance of this estimator is</p>
 <p><span class="math display">\[
-  Var(\hat{\tau}) = \frac{\sigma_1^2}{n_1} + \frac{\sigma_0^2}{n_0}
+  Var(\hat{\tau}) = \frac{\sigma_0^2}{n_0} + \frac{\sigma_1^2}{n_1}
 \]</span></p>
-<p>Which can be estimated by,<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>Which can be estimated by,</p>
 <p><span class="math display">\[
-  \widehat{Var}(\hat{\tau}) = \frac{\hat{\sigma}_1^2}{n_1} + \frac{\hat{\sigma}_0^2}{n_0}
+  \widehat{Var}(\hat{\tau}) =  \frac{\hat{\sigma}_0^2}{n_0} + \frac{\hat{\sigma}_1^2}{n_1}
 \]</span></p>
 <p>where <span class="math inline">\(\hat{\sigma}_j^2 = \frac{1}{n_j-1}\sum_{i: w_i=j} (y_i-\bar{y}_j)^2\)</span> for <span class="math inline">\(j=0,1\)</span>.</p>
+<ul>
+<li>We call this the Neyman variance estimator within Causal Inference literature.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></li>
+</ul>
 </section>
 <section id="homogeneous-vs-heterogenous-tes" class="level2">
 <h2 class="anchored" data-anchor-id="homogeneous-vs-heterogenous-tes">Homogeneous vs heterogenous TEs</h2>
-<p>So far, we have said nothing about whether <span class="math inline">\(\tau_i\)</span> varies at the individual level. If TEs are <strong>homogeneous</strong>:</p>
+<p>If TEs are <strong>homogeneous</strong>:</p>
 <p><span class="math display">\[
-  \tau_i=y_i(1)-y_i(0)=\tau \;\forall\; i
+  \tau_i=y_i\small{(1)}-y_i\small{(0)}=\tau \;\forall\; i
 \]</span></p>
 <p>Then,</p>
 <p><span class="math display">\[
-  y_i = y_i(0) + w_i(y_i(1)-y_i(0)) = y_i(0) + w_i\tau
+  y_i = y_i\small{(0)} + w_i(y_i\small{(1)}-y_i\small{(0)}) = y_i\small{(0)} + w_i\tau
 \]</span></p>
 <p>And,</p>
 <p><span class="math display">\[
@@ -873,127 +1192,278 @@ Note
 </section>
 <section id="demonstration" class="level2">
 <h2 class="anchored" data-anchor-id="demonstration">Demonstration</h2>
-<p>Add graphs demonstrating.</p>
+<p>Consider the following (simulated) distribution of <span class="math inline">\(y_0\)</span>, which need not not be normal.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lecture-6-multi_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="section-7" class="level2">
+<h2 class="anchored" data-anchor-id="section-7"></h2>
+<p>If TEs are homogeneous, then <span class="math inline">\(y_i\small{(1)} = y_i\small{(0)} + \tau\)</span> (i.e.&nbsp;a mean shift)</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lecture-6-multi_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The variance does not change.</p>
 </section>
 <section id="homogenous-tes" class="level2">
 <h2 class="anchored" data-anchor-id="homogenous-tes">Homogenous TEs</h2>
-<p>If TEs <strong>homogenous</strong> are homogeneous</p>
+<p>If TEs are <strong>homogenous</strong></p>
 <p><span class="math display">\[
-  Var(\hat{\tau}) = \frac{\sigma_1^2}{n_1} + \frac{\sigma_0^2}{n_0} = \sigma^2\bigg(\frac{1}{n_1} + \frac{1}{n_0}\bigg)
+  Var(\hat{\tau}) = \frac{\sigma_0^2}{n_0} + \frac{\sigma_1^2}{n_1} = \sigma^2\bigg(\frac{1}{n_1} + \frac{1}{n_0}\bigg)
 \]</span></p>
 <p>Which can be estimated as,</p>
 <p><span class="math display">\[
-\hat{\sigma}^2 = \frac{1}{n-2}\big(\hat\sigma_1^2(n_1-1) + \hat\sigma_0^2(n_0-1)\big)
+\hat{\sigma}^2 = \frac{1}{n-2}\big((n_0-1)\times \hat\sigma_0^2 + (n_1-1)\times \hat\sigma_1^2 \big)
 \]</span></p>
-<p>We call this the constant variance estimator.</p>
+<p>We call this the <strong>constant variance estimator</strong>.</p>
+</section>
+<section id="section-8" class="level2">
+<h2 class="anchored" data-anchor-id="section-8"></h2>
+<p>If the TEs are heterogeneous, then <span class="math inline">\(y_i\small{(1)} = y_i\small{(0)} + \tau_i\)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lecture-6-multi_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="distribution" class="level2">
 <h2 class="anchored" data-anchor-id="distribution">Distribution</h2>
-<p>Note, we do not know the distribution of <span class="math inline">\(y_i(0)\)</span> or <span class="math inline">\(y_i(1)\)</span>!</p>
+<p>Note, we do not know the distribution of <span class="math inline">\(y_i\small{(0)}\)</span> or <span class="math inline">\(y_i\small{(1)}\)</span>!</p>
 <ul>
-<li><p>In applied work, researchers prefer not to make an assumption</p></li>
-<li><p>Can use CLT to show asymptotic distribution is normal</p></li>
-<li><p>In practice, use <span class="math inline">\(t\)</span>-distribution to be more conservative</p></li>
+<li><p>In applied work, researchers prefer not to make any assumptions</p></li>
+<li><p>Rely on CLT to show asymptotic distribution is normal</p></li>
+<li><p>In practice, and since RCTs often have a small sample, use <span class="math inline">\(t\)</span>-distribution to be more conservative</p></li>
+<li><p>There are other approaches to inference (e.g., permutation tests like Fisher’s exact <span class="math inline">\(p\)</span>-value) that we won’t cover here, but are more relevant for small samples.</p></li>
 </ul>
 </section>
-<section id="demonstration-1" class="level2">
-<h2 class="anchored" data-anchor-id="demonstration-1">Demonstration</h2>
-<p>Add Stata and R versions of tests with and without difference between means.</p>
+<section id="in-statar" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="in-statar">In Stata/R</h2>
+<p>Example uses a 10% sample of the replication data for <span class="citation" data-cites="dizon2019parents">Dizon-Ross (<a href="#ref-dizon2019parents" role="doc-biblioref">2019</a>)</span>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Constant variance test</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> belief_err_bl, <span class="kw">by</span>(treat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
+---------+--------------------------------------------------------------------
+       0 |     674    20.61721    .5519379    14.32914    19.53348    21.70094
+       1 |     638    20.23511    .5867858    14.82142    19.08284    21.38738
+---------+--------------------------------------------------------------------
+Combined |   1,312     20.4314    .4021444    14.56629    19.64249    21.22032
+---------+--------------------------------------------------------------------
+    diff |             .382101    .8048296               -1.196795    1.960997
+------------------------------------------------------------------------------
+    diff = mean(0) - mean(1)                                      t =   0.4748
+H0: diff = 0                                     Degrees of freedom =     1310
+
+    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0
+ Pr(T &lt; t) = 0.6825         Pr(|T| &gt; |t|) = 0.6350          Pr(T &gt; t) = 0.3175</code></pre>
+</div>
+</div>
+<p>Unequal variance test (Neyman)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> belief_err_bl, <span class="kw">by</span>(treat) unequal</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Two-sample t test with unequal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
+---------+--------------------------------------------------------------------
+       0 |     674    20.61721    .5519379    14.32914    19.53348    21.70094
+       1 |     638    20.23511    .5867858    14.82142    19.08284    21.38738
+---------+--------------------------------------------------------------------
+Combined |   1,312     20.4314    .4021444    14.56629    19.64249    21.22032
+---------+--------------------------------------------------------------------
+    diff |             .382101    .8055762               -1.198271    1.962473
+------------------------------------------------------------------------------
+    diff = mean(0) - mean(1)                                      t =   0.4743
+H0: diff = 0                     Satterthwaite's degrees of freedom =  1299.78
+
+    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0
+ Pr(T &lt; t) = 0.6823         Pr(|T| &gt; |t|) = 0.6354          Pr(T &gt; t) = 0.3177</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Constant variance test</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(belief_err_bl <span class="sc">~</span> treat, <span class="at">data =</span> dr19_dta, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  belief_err_bl by treat
+t = 0.47476, df = 1310, p-value = 0.635
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ -1.196795  1.960997
+sample estimates:
+mean in group 0 mean in group 1 
+       20.61721        20.23511 </code></pre>
+</div>
+</div>
+<p>Unequal variance test (Neyman)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(belief_err_bl <span class="sc">~</span> treat, <span class="at">data =</span> dr19_dta, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  belief_err_bl by treat
+t = 0.47432, df = 1299.8, p-value = 0.6354
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ -1.198271  1.962473
+sample estimates:
+mean in group 0 mean in group 1 
+       20.61721        20.23511 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="linear-model" class="level1">
 <h1>Linear Model</h1>
 <section id="dummy-regressor" class="level2">
 <h2 class="anchored" data-anchor-id="dummy-regressor">Dummy regressor</h2>
-<p>We know that for a discrete <span class="math inline">\(x_i\in\{0,\}\)</span>,</p>
+<p>We know that for a discrete <span class="math inline">\(x_i\in\{0,1\}\)</span>,</p>
 <p><span class="math display">\[
   y_i = \beta_0 + \beta_1 x_i + u_i
 \]</span></p>
-<p><span class="math display">\[
+<p><br>
+</p>
+<p>where, <span class="math display">\[
   \beta_1 = E[y_i|x_i=1]-E[y_i|x_i=0]
 \]</span></p>
 </section>
 <section id="ols" class="level2">
 <h2 class="anchored" data-anchor-id="ols">OLS</h2>
-<p>Moreover, we should in <a href="./lecture-2.html">Lecture 2</a>8 that the OLS estimator for <span class="math inline">\(\beta_1\)</span> is just,</p>
+<p>Moreover, we showed in <a href="./lecture-2.html">Lecture 2</a> that the OLS estimator for <span class="math inline">\(\beta_1\)</span> is just,</p>
 <p><span class="math display">\[
   \hat{\beta}_1 = \bar{y}_1 - \bar{y}_0
 \]</span></p>
 </section>
 <section id="translation-of-pof" class="level2">
 <h2 class="anchored" data-anchor-id="translation-of-pof">Translation of POF</h2>
-<p>We translate the POF to a linear regression model,<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
-$$
-<span class="math display">\[\begin{aligned}
-    y_i =&amp; y_i(0) + w_i(y_i(1)-y_i(0)) \\
-      =&amp; y_i(0) + \tau_i w_i \\
-      =&amp; \textcolor{blue}{E[y_i(0)]} + \tau_i w_i + y_i(0)-\textcolor{blue}{E[y_i(0)]} \\
-      =&amp; \textcolor{blue}{E[y_i(0)]} + \textcolor{red}{\tau_{ate}} w_i + \underbrace{y_i(0)-\textcolor{blue}{E[y_i(0)]} + (\tau_i-\textcolor{red}{\tau_{ate}})w_i}_{u_i} \\
-      =&amp; \alpha_0 + \textcolor{red}{\tau_{ate}}w_i + u_i
-    
-  \end{aligned}\]</span>
-<p>$$</p>
-</section>
-<section id="section-7" class="level2">
-<h2 class="anchored" data-anchor-id="section-7"></h2>
-<p>Consider the error term:</p>
+<p>We can translate the POF to a linear regression model,<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
 <p><span class="math display">\[
   \begin{aligned}
-  u_i =&amp; y_i(0)-\textcolor{blue}{E[y_i(0)]} + (\tau_i-\textcolor{red}{\tau_{ate}})w_i \\
-  =&amp; y_i(0)-\textcolor{blue}{E[y_i(0)]} + (y_i(1)-y_i(0)-\textcolor{red}{E[y_i(1)-y_i(0)]})w_i \\
+    y_i =&amp; y_i\small{(0)} + w_i(y_i\small{(1)}-y_i\small{(0)}) \\
+      =&amp; y_i\small{(0)} + \tau_i w_i \\
+      =&amp; \textcolor{blue}{E[y_i\small{(0)}]} + \tau_i w_i + y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]} \\
+      =&amp; \textcolor{blue}{E[y_i\small{(0)}]} + \textcolor{red}{\tau_{ate}} w_i + \underbrace{y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]} + (\tau_i-\textcolor{red}{\tau_{ate}})w_i}_{u_i} \\
+      =&amp; \alpha_0 + \textcolor{red}{\tau_{ate}}w_i + u_i
   \end{aligned}
-\]</span></p>
-<ol type="1">
-<li><p><span class="math inline">\(E[u_i|w_i=0]\)</span></p>
-<p><span class="math display">\[
-  E[u_i|w_i=0] = E\big[y_i(0)-\textcolor{blue}{E[y_i(0)]}\big|w_i=0\big] = E[y_i(0)|w_i=0]-\textcolor{blue}{E[y_i(0)]}
-\]</span></p></li>
-</ol>
-<p>If assignment is unconfounded:</p>
-<p><span class="math display">\[
-  E[y_i(0)|w_i=0]-\textcolor{blue}{E[y_i(0)]} = E[y_i(0)]-\textcolor{blue}{E[y_i(0)]} = 0
-\]</span></p>
-</section>
-<section id="section-8" class="level2">
-<h2 class="anchored" data-anchor-id="section-8"></h2>
-<ol start="2" type="1">
-<li><p><span class="math inline">\(E[u_i|w_i=1]\)</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-  E[u_i|w_i=1] =&amp; E\big[y_i(0)-\textcolor{blue}{E[y_i(0)]} + (y_i(1)-y_i(0)-\textcolor{red}{E[y_i(1)-y_i(0)]})\big|w_i=1\big] \\
-  =&amp; E\big[y_i(0)-\textcolor{blue}{E[y_i(0)]} + y_i(1)-y_i(0)-\textcolor{red}{E[y_i(1)]}+\textcolor{red}{E[y_i(0)]}\big|w_i=1\big] \\
-  =&amp; E\big[y_i(1)-\textcolor{red}{E[y_i(1)]}\big|w_i=1\big] \\
-  =&amp; E[y_i(1)|w_i=1] -\textcolor{red}{E[y_i(1)]}
-  \end{aligned}
-\]</span></p></li>
-</ol>
-<p>If assignment is unconfounded:</p>
-<p><span class="math display">\[
-  E[y_i(1)|w_i=1] -\textcolor{red}{E[y_i(1)]} = E[y_i(1)]-\textcolor{red}{E[y_i(1)]} = 0
 \]</span></p>
 </section>
 <section id="section-9" class="level2">
 <h2 class="anchored" data-anchor-id="section-9"></h2>
-<p>Thus, <strong>under unconfoundedness</strong> we can write,</p>
+<p>Consider the error term:</p>
+<p><span class="math display">\[
+  u_i = \underbrace{y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]}}_{1.} + \underbrace{(\tau_i-\textcolor{red}{\tau_{ate}})}_{2.}\underbrace{w_i}_{3.}
+\]</span></p>
+<p>it includes,</p>
+<ol type="1">
+<li><p>the deviation of <span class="math inline">\(y_i(0)\)</span> from its unconditional mean</p></li>
+<li><p>the devation of <span class="math inline">\(\tau_i\)</span> from its unconditional mean (i.e.&nbsp;<span class="math inline">\(\tau_{ate}\)</span>) <span class="math inline">\(\Leftarrow\)</span> <strong>heterogeneity</strong></p></li>
+<li><p><span class="math inline">\(w_i\)</span> is found in the error term, as well</p></li>
+</ol>
+</section>
+<section id="wooldridges-notation" class="level2">
+<h2 class="anchored" data-anchor-id="wooldridges-notation">Wooldridge’s notation</h2>
+<p><span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, sec. 7.2a</a>)</span> defines:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+    u_i\small{(0)} =&amp; y_i\small{(0)}-E[y_i\small{(0)}] \\
+    u_i\small{(1)} =&amp; y_i\small{(1)}-E[y_i\small{(1)}] \\
+  \end{aligned}  
+\]</span></p>
+<p>which then gives you,</p>
+<p><span class="math display">\[
+  u_i = u_i\small{(0)} = w_i(u_i\small{(1)}-u_i\small{(0)})
+\]</span></p>
+<p>from p.&nbsp;55. We will not use this notation here. However, it helps you, feel free to use it.</p>
+</section>
+<section id="section-10" class="level2">
+<h2 class="anchored" data-anchor-id="section-10"></h2>
+<p>Solve for <span class="math inline">\(E[u_i|w_i=0]\)</span></p>
+<p><span class="math display">\[
+  \begin{aligned}
+  E[u_i|w_i=0] =&amp; E\big[y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]} + (\tau_i-\textcolor{red}{\tau_{ate}})w_i\big|w_i=0\big] \\
+  =&amp;E\big[y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]}\big|w_i=0\big] \\
+  =&amp; E[y_i\small{(0)}|w_i=0]-\textcolor{blue}{E[y_i\small{(0)}]} \\
+  \end{aligned}
+\]</span></p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p><em>If assignment is unconfounded</em>:</p>
+<p><span class="math display">\[
+  E[y_i\small{(0)}|w_i=0]-\textcolor{blue}{E[y_i\small{(0)}]} = E[y_i\small{(0)}]-\textcolor{blue}{E[y_i\small{(0)}]} = 0
+\]</span></p>
+</div>
+</section>
+<section id="section-11" class="level2">
+<h2 class="anchored" data-anchor-id="section-11"></h2>
+<p>Solve for <span class="math inline">\(E[u_i|w_i=1]\)</span></p>
+<p><span class="math display">\[
+  \begin{aligned}
+    E[u_i|w_i=1] =&amp; E\big[y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]} + (\tau_i-\textcolor{red}{\tau_{ate}})w_i\big|w_i=1\big] \\
+    =&amp; E\big[y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]} + y_i\small{(1)}-y_i\small{(0)}-\textcolor{red}{E[y_i\small{(1)}]}+\textcolor{red}{E[y_i\small{(0)}]}\big|w_i=1\big] \\
+    =&amp; E\big[y_i\small{(1)}-\textcolor{red}{E[y_i\small{(1)}]}\big|w_i=1\big] \\
+    =&amp; E[y_i\small{(1)}|w_i=1] -\textcolor{red}{E[y_i\small{(1)}]}
+  \end{aligned}
+\]</span></p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>Again, <em>if assignment is unconfounded</em>:</p>
+<p><span class="math display">\[
+  E[y_i\small{(1)}|w_i=1] -\textcolor{red}{E[y_i\small{(1)}]} = E[y_i\small{(1)}]-\textcolor{red}{E[y_i\small{(1)}]} = 0
+\]</span></p>
+</div>
+</section>
+<section id="section-12" class="level2">
+<h2 class="anchored" data-anchor-id="section-12"></h2>
+<p>Thus, with unconfounded assignment we can write,</p>
 <p><span class="math display">\[
   y_i = \alpha_0 + \tau_{ate}w_i + u_i
 \]</span></p>
 <p>where,</p>
 <ul>
 <li>slope parameter on <span class="math inline">\(w_i\)</span> identifies the ATE</li>
-<li>the error term fullfils MLR 4</li>
-<li>OLS estimator is unbiased</li>
+<li>the error term fulfills MLR 4</li>
+<li>OLS estimator is unbiased (for the ATE)</li>
 </ul>
-</section>
-<section id="section-10" class="level2">
-<h2 class="anchored" data-anchor-id="section-10"></h2>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1008,93 +1478,181 @@ Important
 </section>
 <section id="error-variance" class="level2">
 <h2 class="anchored" data-anchor-id="error-variance">Error variance</h2>
-<p>We have show that under unconfoundedness <span class="math inline">\(E[u_i |w_i]=0\)</span>. What about <span class="math inline">\(Var(u_i|w_i)=E[u_i^2|w_i]\)</span>?</p>
+<p>We have shown that under unconfoundedness <span class="math inline">\(E[u_i |w_i]=0\)</span>.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> What about:</p>
+<p><span class="math display">\[
+  Var(u_i|w_i)=E[u_i^2|w_i]=?
+\]</span></p>
+<div class="fragment fade-in">
 <ul>
 <li><p>Suppose TEs are <strong>homogenous</strong>: <span class="math inline">\(\tau_i = \tau = \tau_{ate}\;\forall\;i\)</span></p>
 <p><span class="math display">\[
-  u_i = y_i(0)-\textcolor{blue}{E[y_i(0)]} + \underbrace{(\tau_i-\textcolor{red}{\tau_{ate}})}_{=0}w_i = y_i(0)-\textcolor{blue}{E[y_i(0)]}
+  u_i = y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]} + \underbrace{(\tau_i-\textcolor{red}{\tau_{ate}})}_{=0}w_i = y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]}
 \]</span></p></li>
 </ul>
-<p>Then,</p>
+</div>
+</section>
+<section id="homoskedasticity" class="level2">
+<h2 class="anchored" data-anchor-id="homoskedasticity">Homoskedasticity</h2>
+<p>If treatment effects are <strong>homogeneous</strong>, then</p>
 <p><span class="math display">\[
-  E[u_i^2|w_i] = E[(y_i(0)-\textcolor{blue}{E[y_i(0)]})^2|w_i] = E[(y_i(0)-\textcolor{blue}{E[y_i(0)]})^2] = \sigma^2_0 = \sigma^2
+  E[u_i^2|w_i] = E[(y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]})^2|w_i] = E[(y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]})^2] = \sigma^2_0 = \sigma^2
 \]</span></p>
-<p>under unconfoundedness.</p>
+<p><em>under unconfoundedness</em>.</p>
 <ul>
-<li>homogeneity <span class="math inline">\(\rightarrow\)</span> homoskedastic error variance</li>
+<li>homogeneity <span class="math inline">\(\Rightarrow\)</span> homoskedastic error variance</li>
 </ul>
 </section>
-<section id="section-11" class="level2">
-<h2 class="anchored" data-anchor-id="section-11"></h2>
-<ul>
-<li>If TEs are <strong>heterogenous</strong>:</li>
-</ul>
+<section id="heteroskedasticity" class="level2">
+<h2 class="anchored" data-anchor-id="heteroskedasticity">Heteroskedasticity</h2>
+<p>If TEs are <strong>heterogenous</strong>:</p>
 <p><span class="math display">\[
   E[u_i^2|w_i] = \begin{cases}
-  E[(y_i(0)-\textcolor{blue}{E[y_i(0)]})^2] = \sigma^2_0 \quad \text{if}\;w_i=0 \\
-  E[(y_i(1)-\textcolor{red}{E[y_i(1)]})^2] = \sigma^2_1 \quad \text{if}\;w_i=1 \\
+  E[(y_i\small{(0)}-\textcolor{blue}{E[y_i\small{(0)}]})^2] = \sigma^2_0 \quad \text{if}\;w_i=0 \\
+  E[(y_i\small{(1)}-\textcolor{red}{E[y_i\small{(1)}]})^2] = \sigma^2_1 \quad \text{if}\;w_i=1 \\
   \end{cases}
-\]</span><br>
-- heterogeneity <span class="math inline">\(\rightarrow\)</span> heteroskedastic error variance</p>
-</section>
-<section id="variance-1" class="level2">
-<h2 class="anchored" data-anchor-id="variance-1">Variance</h2>
-<p>We know from <a href="./lecture-3.html">Lecture 3</a> that the (conditional) variance of the OLS estimator for <span class="math inline">\(\tau_{ate}\)</span> is,</p>
-<p><span class="math display">\[
-  \widehat{Var}(\hat{\tau}_{ols}|W) = \frac{\hat{\sigma}^2_{ols}}{SST_w}
 \]</span></p>
-<p><strong>under MLR 5</strong> (i.e., homogeneous TEs). Where,</p>
-<p><span class="math display">\[
-  \hat{\sigma}^2_{ols} = \frac{1}{n-2}\sum_{i=1}^n \hat{u}_i^2 = \frac{1}{n-2}\big(\hat\sigma_1^2(n_1-1) + \hat\sigma_0^2(n_0-1)\big)
-\]</span></p>
-</section>
-<section id="section-12" class="level2">
-<h2 class="anchored" data-anchor-id="section-12"></h2>
-<p>In the denominator is</p>
-<p><span class="math display">\[
-  \begin{aligned}
-  SST_w =&amp; \sum_{i=1}^n(w_i-\bar{w})^2 \\
-  =&amp; \sum_{i:w_i=1}(1-\bar{w})^2 + \sum_{i:w_i=0}(0-\bar{w})^2 \\
-  =&amp; n_1(1-2\bar{w} + \bar{w}^2) + n_0 \bar{w}^2 \\
-  =&amp; n_1(1-2\bar{w}) + n\bar{w}^2 \\
-  =&amp; \underbrace{n\bar{w}}_{=n_1}(1-2\bar{w}) + n\bar{w}^2 \\
-  =&amp; n\bar{w}(1-\bar{w})
-  \end{aligned}
-\]</span></p>
-<p>This formula is quadratic in <span class="math inline">\(\bar{w}\)</span> - the share of the sample treated.</p>
+<p><em>under unconfoundedness</em>.</p>
 <ul>
-<li>At <span class="math inline">\(\bar{w}=0.5\)</span>, <span class="math inline">\(SST_w\)</span> is maximized and <span class="math inline">\(Var(\hat{\tau}^{OLS}|W)\)</span> is minimized.</li>
+<li>heterogeneity <span class="math inline">\(\Rightarrow\)</span> heteroskedastic error variance</li>
 </ul>
-</section>
-<section id="section-13" class="level2">
-<h2 class="anchored" data-anchor-id="section-13"></h2>
-<p>What if MLR 5 (i.e.&nbsp;heterogeneous TEs) does not hold.</p>
-<ul>
-<li>The White (1980) heteroskedastic-consistent estimator from <a href="./lecture-5.html">Lecture 5</a> was,</li>
-</ul>
-<p><span class="math display">\[
-  \widehat{Var}(\hat{\tau}_{ols}|W) = \frac{\sum_{i=1}^{n}(w_{i}-\bar{w})^2\hat{u}_i^2}{\text{SST}_w^2}
-\]</span></p>
-<p>It can be shown (we will not) that,</p>
-<p><span class="math display">\[
-  \widehat{Var}(\hat{\tau}_{ols}|W) \neq  \frac{\hat{\sigma}_1^2}{n_1} + \frac{\hat{\sigma}_0^2}{n_0}
-\]</span></p>
-<p>the Neyman estimator. The Neyman estimator is numerically equivalent to HC2.</p>
-<ul>
-<li>in practice, all HC0-HC3 estimators are asymptotically consistent.</li>
-<li>HC3 is recommended for smaller samples.</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-tip callout-titled" title="Deaton's critique">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Deaton’s critique
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Angus Deaton - a noble laureate in economics - is famous for not being overly enthusiastic about the use of RCTs in Economics; in particular, in Development Econonomics <span class="citation" data-cites="athey2017econometrics">(see <a href="#ref-athey2017econometrics" role="doc-biblioref">Athey and Imbens 2017</a>)</span>. His critiques of the field range from the ethics of RCTs in poor countries, questions about the real-world policy relevance of RCT-based causal estimates, and more technical points <span class="citation" data-cites="deaton2010instruments">G. Imbens (<a href="#ref-imbens2018understanding" role="doc-biblioref">2018</a>)</span>.</p>
+<blockquote class="blockquote">
+<p>““I argue that evidence from randomized experiments has no special priority. … Randomized experiments cannot automatically trump other evidence, they do not occupy any special place in some hierarchy of evidence” <span class="citation" data-cites="deaton2010instruments">(<a href="#ref-deaton2010instruments" role="doc-biblioref">Deaton 2010, 426</a>)</span></p>
+</blockquote>
+<p>One technical point Deaton emphasized - especially early on - was the apparent lack of attention/care shown to the correct estimation of SEs in RCT-based research.</p>
+<blockquote class="blockquote">
+<p>“If the regression … is run with the standard heteroskedasticity correction to the standard error, the result will be the same as the formula for the standard error of the difference between two means, but not otherwise except in the special case where there are equal numbers of experimental and controls, in which case it turns out that the correction makes no difference and the OLS standard error is correct. It is not clear in the experimental development literature whether the correction is routinely done in practice…” <span class="citation" data-cites="deaton2010instruments">(<a href="#ref-deaton2010instruments" role="doc-biblioref">Deaton 2010, 442</a>)</span></p>
+</blockquote>
+<p>It is fair to say that the research on best practice has come a long way since then and there is a vaste literature topics like SE estimation for randomized experiments <span class="citation" data-cites="athey2017econometrics">(<a href="#ref-athey2017econometrics" role="doc-biblioref">Athey and Imbens 2017</a>)</span>. Moreover, the debate over the significance of RCTs in Economics has largely been won, and not by Deaton. In 2019 Esther Duflo, Abhijit Banerjee, and Michael Kremer won the Nobel Prize in Economics “for their experimental approach to alleviating global poverty”. The use of RCTs to answer important empirical questions about how the lives of the poor has fundamentally shaped how we design and evaluate real world policies <span class="citation" data-cites="duflo2011poor">(see <a href="#ref-duflo2011poor" role="doc-biblioref">Duflo and Banerjee 2011</a>)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="variance-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="variance-estimator">Variance estimator</h2>
+<p>We know from <a href="./lecture-3.html">Lecture 3</a> that the (conditional) variance of the OLS estimator for <span class="math inline">\(\tau_{ate}\)</span> is,</p>
+<p><span class="math display">\[
+  \widehat{Var}(\hat{\tau}_{ols}|W) = \frac{\hat{\sigma}^2_{ols}}{SST_w}
+\]</span></p>
+<p><strong>under MLR 5</strong> (<span class="math inline">\(\Leftarrow\)</span> homogeneous TEs). Where,</p>
+<p><span class="math display">\[
+  \hat{\sigma}^2_{ols} = \frac{1}{n-2}\sum_{i=1}^n \hat{u}_i^2
+\]</span></p>
+<div class="fragment fade-in">
+<p>This is mathematically equivalent to the constant variance estimator.</p>
+<p><span class="math display">\[
+= \frac{1}{n-2}\big((n_0-1)\times\hat\sigma_0^2 + (n_1-1)\times\hat\sigma_1^2\big)
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Proof">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The proof follows a simple trick of splitting the sample into two groups: (1) <span class="math inline">\(w_i = 0\)</span> and (2) <span class="math inline">\(w_i = 1\)</span>.</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  \sum_{i=1}^n \hat{u}_i^2  =&amp; \sum_{i=1}^n(y_i-\hat{\alpha}_0-\hat{\tau}_{ols}w_i)^2 \\
+  =&amp; \sum_{i:w_i=0}(y_i-\hat{\alpha}_0-\hat{\tau}_{ols}w_i)^2 + \sum_{i:w_i=1}(y_i-\hat{\alpha}_0-\hat{\tau}_{ols}w_i)^2 \\
+  =&amp; \sum_{i:w_i=0}(y_i-\hat{\alpha}_0)^2 + \sum_{i:w_i=1}(y_i-\hat{\alpha}_0-\hat{\tau}_{ols})^2
+  \end{aligned}
+\]</span></p>
+<p>Since <span class="math inline">\(\hat{\alpha}_0 = \bar{y}_0\)</span> and <span class="math inline">\(\hat{\alpha}_0 + \hat{\tau}_{ols}= \bar{y}_1\)</span>, the above is just</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  &amp; \sum_{i:w_i=1}(y_i-\bar{y}_0)^2 + \sum_{i:w_i=0}(y_i-\bar{y}_1)^2 \\
+  =&amp; (n_0-1)\times\hat\sigma_0^2 + (n_1-1)\times\hat\sigma_1^2
+  \end{aligned}
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="section-13" class="level2">
+<h2 class="anchored" data-anchor-id="section-13"></h2>
+<p>In the denominator is</p>
+<p><span class="math display">\[
+  SST_w = n\bar{w}(1-\bar{w})
+\]</span></p>
+<div class="fragment fade-in">
+<p>This formula is quadratic in <span class="math inline">\(\bar{w}\)</span> - the share of the sample treated.</p>
+<ul>
+<li><p>At <span class="math inline">\(\bar{w}=0.5\)</span>, <span class="math inline">\(SST_w\)</span> is maximized and <span class="math inline">\(Var(\hat{\tau}^{OLS}|W)\)</span> is minimized (holding other factors fixed).</p></li>
+<li><p>A balanced treatment is good for statistical power, as is a larger sample size.</p></li>
+</ul>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Proof">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This proof follows the same simple trick of splitting the sample into two groups: (1) <span class="math inline">\(w_i = 0\)</span> and (2) <span class="math inline">\(w_i = 1\)</span>.</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  SST_w =&amp; \sum_{i=1}^n(w_i-\bar{w})^2 \\
+  =&amp; \sum_{i:w_i=0}(0-\bar{w})^2 + \sum_{i:w_i=1}(1-\bar{w})^2 \\
+  =&amp; n_0 \bar{w}^2 + n_1(1-\bar{w})^2 \\
+  =&amp; \underbrace{n(1-\bar{w})}_{=n_0}\bar{w}^2 + \underbrace{n\bar{w}}_{=n_1}(1-\bar{w})^2 \\
+  =&amp; n\bar{w}(1-\bar{w})(\bar{w}+1-\bar{w}) \\
+  =&amp; n\bar{w}(1-\bar{w})
+  \end{aligned}
+\]</span></p>
+<p>The proof exploits the fact that <span class="math inline">\(\bar{w}\)</span> is just the share of the sample that is treated: <span class="math inline">\(n_1/n\)</span>. Likewise, <span class="math inline">\(1-\bar{w} = n_0/n\)</span>, the share of the sample untreated.</p>
+</div>
+</div>
+</section>
+<section id="section-14" class="level2">
+<h2 class="anchored" data-anchor-id="section-14"></h2>
+<p>What if MLR 5 (<span class="math inline">\(\Leftarrow\)</span> heterogeneous TEs) does not hold?</p>
+<ul>
+<li>The White (1980) heteroskedastic-consistent estimator from <a href="./lecture-5.html">Lecture 5</a> was,</li>
+</ul>
+<p><span class="math display">\[
+  HC0 = \frac{\sum_{i=1}^{n}(w_{i}-\bar{w})^2\hat{u}_i^2}{\text{SST}_w^2}
+\]</span></p>
+<div class="fragment fade-in">
+<p>It can be shown (we will not) that,</p>
+<p><span class="math display">\[
+  HC0 \neq  \frac{\hat{\sigma}_0^2}{n_0} + \frac{\hat{\sigma}_1^2}{n_1} = HC2
+\]</span></p>
+<p>The Neyman estimator is numerically equivalent to HC2.</p>
+<ul>
+<li>in practice, all HC0-HC3 estimators are asymptotically consistent.</li>
+<li>HC3 is recommended for smaller samples.</li>
+</ul>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Proof">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>You can use the same trick of splitting the summation to show,</p>
 <p><span class="math display">\[
@@ -1110,7 +1668,7 @@ Tip
 <p><span class="math display">\[
   \frac{n}{n-2}\times \Bigg[\frac{n_1-1}{n_1^2}\hat\sigma_1^2+\frac{n_0-1}{n_0^2}\hat\sigma_0^2\Bigg]
 \]</span></p>
-<p>It is evident that for <span class="math inline">\(n\)</span> large, these estimators will be very similar to Neyman’s.</p>
+<p>It is evident that for <span class="math inline">\(n\)</span> large, these estimators will be very similar to Neyman’s estimator. You can show that HC2 is algebraically equivalent to Neyman (also referred to as Welch test/estimator).</p>
 </div>
 </div>
 </div>
@@ -1129,7 +1687,7 @@ Tip
   y_i = \alpha_0 + \tau_{ate}w_i + u_i
 \]</span></p>
 <ul>
-<li>The only variation in <span class="math inline">\(y\)</span> explained by this model is the difference between treatment and control.</li>
+<li>The only variation in <span class="math inline">\(y\)</span> explained by this model is the difference between treatment-control.</li>
 <li>Will result in high variance and low-powered test.</li>
 </ul>
 </section>
@@ -1139,7 +1697,7 @@ Tip
 <p><span class="math display">\[
 u_i = \gamma x_i + v_i
 \]</span></p>
-<p>where <span class="math inline">\(x\)</span> is a regressor measured before assignment<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>where <span class="math inline">\(x\)</span> is a regressor measured before assignment<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
 <ul>
 <li><p>likely explain part of the outcome (i.e.&nbsp;<span class="math inline">\(\gamma\neq 0\)</span>)</p></li>
 <li><p>commonly referred to as baseline covariates in RCTs</p></li>
@@ -1152,31 +1710,61 @@ u_i = \gamma x_i + v_i
   y_i = \alpha_0 + \tau_{ate}w_i + \gamma x_i + v_i
 \]</span></p>
 <ul>
-<li>Wooldridge refers to this as the Restricted Regression Adjustment (RRA) <span class="citation" data-cites="wooldridge2025">(~ <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 257</a>)</span></li>
+<li><span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 257</a>)</span> refers to this as the Restricted Regression Adjustment (RRA)</li>
 </ul>
 </section>
-<section id="variance-2" class="level2">
-<h2 class="anchored" data-anchor-id="variance-2">Variance</h2>
+<section id="variance-1" class="level2">
+<h2 class="anchored" data-anchor-id="variance-1">Variance</h2>
+<p>From <a href="./lecture-3.html">Lecture 3</a> we know,</p>
 <p><span class="math display">\[
   Var(\hat{\tau}_{rra}|W,X) = \frac{Var(v_i|w_i,x_i)}{SSR_w} =  \frac{\sigma^2_v}{SSR_w}
 \]</span></p>
-<p>where, <span class="math inline">\(SSR_w=SST_w (1-R_w^2)\)</span></p>
+<p>where,</p>
+<p><span class="math display">\[
+  SSR_w=SST_w (1-R_w^2)
+\]</span></p>
+<div class="fragment fade-in">
 <ul>
-<li><p><span class="math inline">\(R^2_w\)</span> is the amount of variance in assignment explained by the covariates. <strong>This should be low.</strong></p></li>
+<li><p><span class="math inline">\(R^2_w\)</span> is the amount of variance in assignment explained by the covariates. <strong>This should be low, but won’t be zero.</strong></p></li>
 <li><p>While <span class="math inline">\(R^2_w\neq 0\)</span> in the finite sample, <span class="math inline">\(R^2_w\rightarrow 0\)</span> as <span class="math inline">\(n\rightarrow \infty\)</span></p></li>
 <li><p>So, <span class="math inline">\(SSR_w\approx SST_w\)</span>.</p></li>
+</ul>
+</div>
+</section>
+<section id="error-variance-1" class="level2">
+<h2 class="anchored" data-anchor-id="error-variance-1">Error variance</h2>
+<p>The improvement in power comes from the fact that,</p>
+<p><span class="math display">\[
+   \underbrace{Var(u_i|w_i)}_{\sigma^2_u} = Var(\gamma x_i + v_i|w_i) = \underbrace{\gamma^2 Var(x_i)}_{&gt;0} + \underbrace{Var(v_i|w_i,x_i)}_{\sigma^2_v}
+\]</span></p>
+<p>assuming</p>
+<ul>
+<li><p><span class="math inline">\(Cov(x_i,v_i|w_i)=0\)</span></p></li>
+<li><p><span class="math inline">\(w_i\)</span> is assigned independently of <span class="math inline">\(x_i\)</span>: <span class="math inline">\(Var(x_i|w_i) = Var(x_i)\)</span></p></li>
+<li><p><span class="math inline">\(Var(v_i|w_i)=Var(v_i|w_i,x_i)\)</span> (<span class="math inline">\(\Leftarrow\)</span> heterogeneity unrelated to <span class="math inline">\(x\)</span>)</p></li>
 </ul>
 </section>
 <section id="power" class="level2">
 <h2 class="anchored" data-anchor-id="power">Power</h2>
-<p>The improvement in power comes from the fact that,</p>
+<p>Putting these two together,</p>
 <p><span class="math display">\[
-  Var(u_i|w_i) = Var(\gamma_ix_i + v_i|w_i) = \underbrace{\gamma^2 Var(x_i)}_{&gt;0} + Var(v_i|w_i,x_i) &gt; \sigma^2_v
+Avar(\hat{\tau}_{rra}) \leq Avar(\hat{\tau}_{ols})
 \]</span></p>
-<p>assuming <span class="math inline">\(Cov(x_i,v_i|w_i)=0\)</span>.</p>
+<p>where <span class="math inline">\(Avar()\)</span> is the asymptotic variance.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<div class="fragment fade-in">
+<p>Adding covariates,</p>
+<ul>
+<li><p>Reduces variance of the estimator by reducing the error variance</p></li>
+<li><p>Little trade-off in terms of the correlation between <span class="math inline">\(w\)</span> and <span class="math inline">\(x\)</span> (i.e., <span class="math inline">\(R^2_w\)</span>) under assignment that is unconfounded (w.r.t. <span class="math inline">\(x\)</span>’s).</p>
+<ul>
+<li><p>Any finite sample correlation disappears as <span class="math inline">\(n\rightarrow \infty\)</span>.</p></li>
+<li><p><strong>Covariates must not be potential outcomes of the experiment</strong> (i.e.&nbsp;baseline).</p></li>
+</ul></li>
+</ul>
+</div>
 </section>
-<section id="heterogeneity" class="level2">
-<h2 class="anchored" data-anchor-id="heterogeneity">Heterogeneity</h2>
+<section id="heterogeneity-1" class="level2">
+<h2 class="anchored" data-anchor-id="heterogeneity-1">Heterogeneity</h2>
 <p>This simple story is somewhat complicated by heterogeneity:</p>
 <ul>
 <li><p>heterogeneity is sits in the error term</p></li>
@@ -1185,17 +1773,20 @@ u_i = \gamma x_i + v_i
 <p><span class="math display">\[
   y_i = \alpha_0 + \tau_{ate}w_i + \gamma x_i + v_i
 \]</span></p></li>
-<li><p>OLS remains consistent (for the ATE), despite this small-sample bias</p></li>
+<li><p>OLS remains consistent (for the ATE), despite this small-sample bias <span class="citation" data-cites="freedman2008regression">(<a href="#ref-freedman2008regression" role="doc-biblioref">Freedman 2008</a>)</span></p></li>
 </ul>
 </section>
 <section id="ura" class="level2">
 <h2 class="anchored" data-anchor-id="ura">URA</h2>
-<p>To avoid this small-sample bias, you can do Unrestricted Regression Adjustment (URA) <span class="citation" data-cites="wooldridge2025">(<a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 257, 259</a>)</span>.</p>
+<p>To avoid this small-sample bias, you can do Unrestricted Regression Adjustment (URA) <span class="citation" data-cites="wooldridge2025 negi2021revisiting">(<a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 257, 259</a>; <a href="#ref-negi2021revisiting" role="doc-biblioref">Negi and Wooldridge 2021</a>)</span>.</p>
 <p><span class="math display">\[
     y_i = \alpha_0 + \tau_{ate}w_i + \gamma x_i + \eta w_i\times (x_i-\bar{x}) + \varepsilon_i
   \]</span></p>
 <ul>
-<li><p>includes an interaction between the treatment indicator and the covariate(s)</p></li>
+<li><p>includes an interaction between the treatment indicator and the covariate(s)</p>
+<ul>
+<li>models the heterogeneity related <span class="math inline">\(x\)</span></li>
+</ul></li>
 <li><p>the interactions include demeaned covariate(s)</p>
 <ul>
 <li><p>this changes the interpretation of <span class="math inline">\(\eta\)</span> <span class="citation" data-cites="wooldridge2025">(see <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, sec. 6.2d</a>)</span></p></li>
@@ -1204,27 +1795,187 @@ u_i = \gamma x_i + v_i
 </ul>
 </section>
 </section>
-<section id="example-2" class="level1">
+<section id="example-reivisiting-dizon-ross-2019" class="level1">
+<h1>Example: Reivisiting Dizon-Ross (2019)</h1>
+<section id="research-design-1" class="level2">
+<h2 class="anchored" data-anchor-id="research-design-1">Research Design</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Baseline survey:</p>
+<ul>
+<li>Measure covariates: balance and power</li>
+</ul>
+<p>Endline survey:</p>
+<ul>
+<li><p>Measure outcomes</p></li>
+<li><p>Need to think about attrition</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/dr2019-intervention.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="balance-1" class="level2">
+<h2 class="anchored" data-anchor-id="balance-1">Balance</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Balance:</p>
+<ul>
+<li><p>Test on observables</p></li>
+<li><p>Doesn’t consider unobservables</p></li>
+<li><p>Will be non-zero correlation in data</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/dr2019-balance.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="simple-difference-between-means-1" class="level2">
+<h2 class="anchored" data-anchor-id="simple-difference-between-means-1">Simple difference between means</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>SDM:</p>
+<ul>
+<li><p>Measures ATE under unconfoundedness</p></li>
+<li><p>Might have a high variance</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/dr2019-figure-3a.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="heterogeneity-2" class="level2">
+<h2 class="anchored" data-anchor-id="heterogeneity-2">Heterogeneity</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Heterogeneity:</p>
+<ul>
+<li><p>POF developed to understand heterogeneous TEs</p></li>
+<li><p>Researchers will often commit to important margins of heterogeneity in their pre-analysis.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/dr2019-figure-3b.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="regression-1" class="level2">
+<h2 class="anchored" data-anchor-id="regression-1">Regression</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Regression adjustment:</p>
+<ul>
+<li><p>Can correct for any imbalance</p></li>
+<li><p>More valuable as a source of improved power</p></li>
+<li><p>Covariates from baseline (i.e.&nbsp;not outcomes of experiment)</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-6/dr2019-regression.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<section id="bibliography" class="level2 scrollable">
 
 
 
 
 </section>
+</section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Example:</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliography</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-athey2017econometrics" class="csl-entry" role="listitem">
+Athey, Susan, and Guido W Imbens. 2017. <span>“The Econometrics of Randomized Experiments.”</span> In <em>Handbook of Economic Field Experiments</em>, 1:73–140. Elsevier.
+</div>
+<div id="ref-bertrand2004emily" class="csl-entry" role="listitem">
+Bertrand, Marianne, and Sendhil Mullainathan. 2004. <span>“Are Emily and Greg More Employable Than Lakisha and Jamal? A Field Experiment on Labor Market Discrimination.”</span> <em>American Economic Review</em> 94 (4): 991–1013.
+</div>
+<div id="ref-deaton2010instruments" class="csl-entry" role="listitem">
+Deaton, Angus. 2010. <span>“Instruments, Randomization, and Learning about Development.”</span> <em>Journal of Economic Literature</em> 48 (2): 424–55.
+</div>
+<div id="ref-deaton2018understanding" class="csl-entry" role="listitem">
+Deaton, Angus, and Nancy Cartwright. 2018. <span>“Understanding and Misunderstanding Randomized Controlled Trials.”</span> <em>Social Science &amp; Medicine</em> 210: 2–21.
+</div>
+<div id="ref-dizon2019parents" class="csl-entry" role="listitem">
+Dizon-Ross, Rebecca. 2019. <span>“Parents’ Beliefs about Their Children’s Academic Ability: Implications for Educational Investments.”</span> <em>American Economic Review</em> 109 (8): 2728–65.
+</div>
+<div id="ref-duflo2011poor" class="csl-entry" role="listitem">
+Duflo, Esther, and Abhijit Banerjee. 2011. <em>Poor Economics</em>. Vol. 619. PublicAffairs, New York.
+</div>
+<div id="ref-freedman2008regression" class="csl-entry" role="listitem">
+Freedman, David A. 2008. <span>“On Regression Adjustments to Experimental Data.”</span> <em>Advances in Applied Mathematics</em> 40 (2): 180–93.
+</div>
+<div id="ref-heckman2022causality" class="csl-entry" role="listitem">
+Heckman, James J, and Rodrigo Pinto. 2022. <span>“Causality and Econometrics.”</span> National Bureau of Economic Research.
+</div>
+<div id="ref-holland1986statistics" class="csl-entry" role="listitem">
+Holland, Paul W. 1986. <span>“Statistics and Causal Inference.”</span> <em>Journal of the American Statistical Association</em> 81 (396): 945–60.
+</div>
+<div id="ref-hoover2008causality" class="csl-entry" role="listitem">
+Hoover, Kevin D. 2008. <span>“Causality in Economics and Econometrics.”</span> In <em>The New Palgrave Dictionary of Economics</em>, 1–13. Springer.
+</div>
+<div id="ref-imbens2018understanding" class="csl-entry" role="listitem">
+Imbens, Guido. 2018. <span>“Understanding and Misunderstanding Randomized Controlled Trials: A Commentary on Deaton and Cartwright.”</span>
+</div>
+<div id="ref-imbens2020potential" class="csl-entry" role="listitem">
+Imbens, Guido W. 2020. <span>“Potential Outcome and Directed Acyclic Graph Approaches to Causality: Relevance for Empirical Practice in Economics.”</span> <em>Journal of Economic Literature</em> 58 (4): 1129–79.
+</div>
+<div id="ref-imbens2015causal" class="csl-entry" role="listitem">
+Imbens, Guido W, and Donald B Rubin. 2015. <span>“Causal Inference in Statistics, Social, and Biomedical Sciences.”</span> <em>New York</em> 517.
+</div>
+<div id="ref-imbens2009recent" class="csl-entry" role="listitem">
+Imbens, Guido W, and Jeffrey M Wooldridge. 2009. <span>“Recent Developments in the Econometrics of Program Evaluation.”</span> <em>Journal of Economic Literature</em> 47 (1): 5–86.
+</div>
+<div id="ref-negi2021revisiting" class="csl-entry" role="listitem">
+Negi, Akanksha, and Jeffrey M Wooldridge. 2021. <span>“Revisiting Regression Adjustment in Experiments with Heterogeneous Treatment Effects.”</span> <em>Econometric Reviews</em> 40 (5): 504–34.
+</div>
+<div id="ref-oreopoulos2011skilled" class="csl-entry" role="listitem">
+Oreopoulos, Philip. 2011. <span>“Why Do Skilled Immigrants Struggle in the Labor Market? A Field Experiment with Thirteen Thousand Resumes.”</span> <em>American Economic Journal: Economic Policy</em> 3 (4): 148–71.
+</div>
+<div id="ref-pearl2018book" class="csl-entry" role="listitem">
+Pearl, Judea, and Dana Mackenzie. 2018. <span>“The Book of Why.”</span>
+</div>
+<div id="ref-rubin1975bayesian" class="csl-entry" role="listitem">
+Rubin, Donald B. 1975. <span>“Bayesian Inference for Causality: The Importance of Randomization.”</span> In <em>Proceedings of the Social Statistics Section of the American Statistical Association</em>, 233–39. American Statistical Association, Alexandria, VA.
+</div>
 <div id="ref-wooldridge2025" class="csl-entry" role="listitem">
 Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approach.”</span>
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Attributed to Jerzy Neymand and Donald Rubin.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>This notation of <span class="math inline">\(w_i\)</span> as an indicator of an unit’s treatment status is common in the literature on experiments. You will see it in <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, sec. 7.6</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>You will see other notations in the literature. For example, the use of superscripts <span class="math inline">\(\{y_i^1,y_i^0\}\)</span> or subscripts <span class="math inline">\(\{y_{i1},y_{i0}\}\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Referred to as the Neyman variance estimator.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>This is a more general version than <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, sec. 2.7a</a>)</span>, which assumes homogeneity.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>We can extend the notation to include multiple regressors, but it makes some of the math a little difficult. The conclusion does not change.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Also referred to as the Rubin Causal Model <span class="citation" data-cites="holland1986statistics">(originally by <a href="#ref-holland1986statistics" role="doc-biblioref">Holland 1986</a>)</span>. The framework is attributed to both Jerzy Neyman and Donald Rubin; as well as Paul Holland <span class="citation" data-cites="heckman2022causality">(<a href="#ref-heckman2022causality" role="doc-biblioref">Heckman and Pinto 2022</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The caveat here might be hypothetical resume studies; e.g. <span class="citation" data-cites="bertrand2004emily">Bertrand and Mullainathan (<a href="#ref-bertrand2004emily" role="doc-biblioref">2004</a>)</span> and <span class="citation" data-cites="oreopoulos2011skilled">Oreopoulos (<a href="#ref-oreopoulos2011skilled" role="doc-biblioref">2011</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Often referred to as quasi-experiment.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>This notation of <span class="math inline">\(w_i\)</span> as an indicator of an unit’s treatment status is common in the literature on experiments and is used in one of the seminal books on the topic: <span class="citation" data-cites="imbens2015causal">G. W. Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>’s <em>Causal Inference in Statistics, Social, and Biomedical Sciences</em>. You will see it in <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, sec. 7.6</a>)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>You will see other notations in the literature. For example, the use of superscripts <span class="math inline">\(\{y_i^1,y_i^0\}\)</span> or subscripts <span class="math inline">\(\{y_{i1},y_{i0}\}\)</span>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Also referred to as the Welch test/estimator.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, sec. 2.7a</a>)</span> also includes a version with homogeneous TEs. This is the more general case.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Where <span class="math inline">\(u_i = y_i - \alpha_0 - \tau_{ate}w_i\)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>We can extend the notation to include multiple regressors, but it makes some of the math a little difficult. The conclusion does not change.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>This is a place holder for <span class="math inline">\(p\lim \hat\sigma^2/(n^{-1}SSR_w)\)</span>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

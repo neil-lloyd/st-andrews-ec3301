@@ -1,4 +1,6 @@
 
+![](){fig-align="center"}
+![](){fig-align="center" width=67%}
 
 ::: {.fragment .fade-in}
 
@@ -50,3 +52,12 @@ do "config.do"
 ::: {.border}
 
 :::
+
+:::: columns
+::: {.column width="50%"}
+
+:::
+::: {.column width="50%"}
+
+:::
+::::

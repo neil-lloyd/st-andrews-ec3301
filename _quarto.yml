@@ -28,8 +28,8 @@ website:
             text: Lecture 4
           - href: lecture-5-multi.qmd
             text: Lecture 5
-#          - href: lecture-6-multi.qmd
-#            text: Lecture 6
+          - href: lecture-6-multi.qmd
+            text: Lecture 6
 #          - href: lecture-7-multi.qmd
 #            text: Lecture 7.
 #          - href: lecture-8-multi.qmd
