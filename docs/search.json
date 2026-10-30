@@ -5415,7 +5415,7 @@
     "href": "lecture-6-slides.html#balance-1",
     "title": "Causal Inference and Randomized Experiments",
     "section": "Balance",
-    "text": "Balance\n\n\nBalance:\n\nTest on observables\nDoesn’t consider unobservables\nWill be non-zero correlation in data"
+    "text": "Balance\n\n\nBalance:\n\nTest on observables\nDoesn’t consider unobservables\nWill be non-zero correlation in data\nValidates research design"
   },
   {
     "objectID": "lecture-6-slides.html#simple-difference-between-means-1",
@@ -5905,7 +5905,7 @@
     "href": "lecture-6.html#balance-1",
     "title": "Causal Inference and Randomized Experiments",
     "section": "Balance",
-    "text": "Balance\n\n\nBalance:\n\nTest on observables\nDoesn’t consider unobservables\nWill be non-zero correlation in data"
+    "text": "Balance\n\n\nBalance:\n\nTest on observables\nDoesn’t consider unobservables\nWill be non-zero correlation in data\nValidates research design"
   },
   {
     "objectID": "lecture-6.html#simple-difference-between-means-1",
@@ -6046,5 +6046,19 @@
     "title": "Tutorial 3 (Solutions)",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nThis grouping of variables comes from GEM (Source).↩︎"
+  },
+  {
+    "objectID": "lecture-6.html#rct",
+    "href": "lecture-6.html#rct",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "RCT",
+    "text": "RCT\n\n\nWhy randomize?\n\nResolves the problem of self-selection\nInformation parents have is endogenous\nRandomizing who gets information resolves this (in expectation)"
+  },
+  {
+    "objectID": "lecture-6-slides.html#rct",
+    "href": "lecture-6-slides.html#rct",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "RCT",
+    "text": "RCT\n\n\nWhy randomize?\n\nResolves the problem of self-selection\nInformation parents have is endogenous\nRandomizing who gets information resolves this (in expectation)"
   }
 ]

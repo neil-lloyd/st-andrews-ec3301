@@ -1476,6 +1476,25 @@ To avoid this small-sample bias, you can do Unrestricted Regression Adjustment (
 
 # Example: Reivisiting Dizon-Ross (2019)
 
+## RCT
+
+:::: columns
+::: {.column width="50%"}
+Why randomize?
+
+- Resolves the problem of self-selection
+
+- Information parents have is endogenous 
+
+- Randomizing who gets information resolves this (in expectation)
+
+:::
+::: {.column width="50%"}
+![](material/lecture-6/dr2019-title.png){fig-align="center" width=80%}
+
+:::
+::::
+
 ## Research Design
 
 :::: columns
@@ -1509,6 +1528,8 @@ Balance:
 - Doesn't consider unobservables
 
 - Will be non-zero correlation in data
+
+- Validates research design
 
 :::
 ::: {.column width="50%"}
