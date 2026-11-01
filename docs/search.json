@@ -5404,6 +5404,13 @@
     "text": "Power\nPutting these two together,\n\nAvar(\\hat{\\tau}_{rra}) \\leq Avar(\\hat{\\tau}_{ols})\n\nwhere Avar() is the asymptotic variance.1\n\nAdding covariates,\n\nReduces variance of the estimator by reducing the error variance\nLittle trade-off in terms of the correlation between w and x (i.e., R^2_w) under assignment that is unconfounded (w.r.t. x’s).\n\nAny finite sample correlation disappears as n\\rightarrow \\infty.\nCovariates must not be potential outcomes of the experiment (i.e. baseline).\n\n\n\nThis is a place holder for p\\lim \\hat\\sigma^2/(n^{-1}SSR_w)."
   },
   {
+    "objectID": "lecture-6-slides.html#rct",
+    "href": "lecture-6-slides.html#rct",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "RCT",
+    "text": "RCT\n\n\nWhy randomize?\n\nResolves the problem of self-selection\nInformation parents have is endogenous\nRandomizing who gets information resolves this (in expectation)"
+  },
+  {
     "objectID": "lecture-6-slides.html#research-design-1",
     "href": "lecture-6-slides.html#research-design-1",
     "title": "Causal Inference and Randomized Experiments",
@@ -5894,6 +5901,13 @@
     "text": "URA\nTo avoid this small-sample bias, you can do Unrestricted Regression Adjustment (URA) (Wooldridge 2025, 257, 259; Negi and Wooldridge 2021).\n\\[\n    y_i = \\alpha_0 + \\tau_{ate}w_i + \\gamma x_i + \\eta w_i\\times (x_i-\\bar{x}) + \\varepsilon_i\n  \\]\n\nincludes an interaction between the treatment indicator and the covariate(s)\n\nmodels the heterogeneity related \\(x\\)\n\nthe interactions include demeaned covariate(s)\n\nthis changes the interpretation of \\(\\eta\\) (see Wooldridge 2025, sec. 6.2d)\nensures that the coefficient on \\(w\\) remains the ATE"
   },
   {
+    "objectID": "lecture-6.html#rct",
+    "href": "lecture-6.html#rct",
+    "title": "Causal Inference and Randomized Experiments",
+    "section": "RCT",
+    "text": "RCT\n\n\nWhy randomize?\n\nResolves the problem of self-selection\nInformation parents have is endogenous\nRandomizing who gets information resolves this (in expectation)"
+  },
+  {
     "objectID": "lecture-6.html#research-design-1",
     "href": "lecture-6.html#research-design-1",
     "title": "Causal Inference and Randomized Experiments",
@@ -6046,19 +6060,5 @@
     "title": "Tutorial 3 (Solutions)",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nThis grouping of variables comes from GEM (Source).↩︎"
-  },
-  {
-    "objectID": "lecture-6.html#rct",
-    "href": "lecture-6.html#rct",
-    "title": "Causal Inference and Randomized Experiments",
-    "section": "RCT",
-    "text": "RCT\n\n\nWhy randomize?\n\nResolves the problem of self-selection\nInformation parents have is endogenous\nRandomizing who gets information resolves this (in expectation)"
-  },
-  {
-    "objectID": "lecture-6-slides.html#rct",
-    "href": "lecture-6-slides.html#rct",
-    "title": "Causal Inference and Randomized Experiments",
-    "section": "RCT",
-    "text": "RCT\n\n\nWhy randomize?\n\nResolves the problem of self-selection\nInformation parents have is endogenous\nRandomizing who gets information resolves this (in expectation)"
   }
 ]

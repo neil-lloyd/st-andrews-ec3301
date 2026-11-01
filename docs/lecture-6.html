@@ -436,6 +436,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./tutorial-3.html">
  <span class="dropdown-text">Tutorial 3</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-3-solutions.html">
+ <span class="dropdown-text">Tutorial 3 (Solutions)</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -1197,7 +1201,7 @@ Note
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-6-multi_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lecture-6-multi_files/figure-revealjs/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1210,7 +1214,7 @@ Note
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-6-multi_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lecture-6-multi_files/figure-revealjs/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1236,7 +1240,7 @@ Note
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-6-multi_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lecture-6-multi_files/figure-revealjs/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1998,6 +2002,82 @@ Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approa
 <li id="fn10"><p>This is a place holder for <span class="math inline">\(p\lim \hat\sigma^2/(n^{-1}SSR_w)\)</span>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
+
+
+<script>
+
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+  // slide changes (different for each slide format).
+
+  (function () {
+
+    // dispatch for htmlwidgets
+
+    function fireSlideEnter() {
+
+      const event = window.document.createEvent("Event");
+
+      event.initEvent("slideenter", true, true);
+
+      window.document.dispatchEvent(event);
+
+    }
+
+
+
+    function fireSlideChanged(previousSlide, currentSlide) {
+
+      fireSlideEnter();
+
+
+
+      // dispatch for shiny
+
+      if (window.jQuery) {
+
+        if (previousSlide) {
+
+          window.jQuery(previousSlide).trigger("hidden");
+
+        }
+
+        if (currentSlide) {
+
+          window.jQuery(currentSlide).trigger("shown");
+
+        }
+
+      }
+
+    }
+
+
+
+    // hookup for slidy
+
+    if (window.w3c_slidy) {
+
+      window.w3c_slidy.add_observer(function (slide_num) {
+
+        // slide_num starts at position 1
+
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+      });
+
+    }
+
+
+
+  })();
+
+</script>
+
+
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
