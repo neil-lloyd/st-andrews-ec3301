@@ -554,7 +554,7 @@ Unconfoundedness should also be distinguished from exogeneity, a term that is us
 
 ::: {.fragment .fade-in}
 
-2. $\underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 1]}_\text{ATT}=\underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 0]}_\text{ATU}=\underbrace{E[y_i\small{(1)}-y_i\small{(0)}}_\text{ATE}$
+2. $\underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 1]}_\text{ATT}=\underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 0]}_\text{ATU}=\underbrace{E[y_i\small{(1)}-y_i\small{(0)}]}_\text{ATE}$
 
 :::
 

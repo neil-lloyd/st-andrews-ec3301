@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Omitted Variables and Conditional Independence – EC3301 Econometrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cf201e8c159c64e39451d1a718f2f573.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">EC3301 Econometrics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lectures" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lectures</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lectures">    
+        <li>
+    <a class="dropdown-item" href="./lecture-0.html">
+ <span class="dropdown-text">Pre-sessional Lecture</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-1.html">
+ <span class="dropdown-text">Lecture 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-2.html">
+ <span class="dropdown-text">Lecture 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-3.html">
+ <span class="dropdown-text">Lecture 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-4.html">
+ <span class="dropdown-text">Lecture 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-5.html">
+ <span class="dropdown-text">Lecture 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-6.html">
+ <span class="dropdown-text">Lecture 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-7.html">
+ <span class="dropdown-text">Lecture 7.</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="./lab-1-Stata.html">
+ <span class="dropdown-text">Lab 1 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-1-R.html">
+ <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-Stata.html">
+ <span class="dropdown-text">Lab 2 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-R.html">
+ <span class="dropdown-text">Lab 2 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-3-Stata.html">
+ <span class="dropdown-text">Lab 3 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-3-R.html">
+ <span class="dropdown-text">Lab 3 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-4-Stata.html">
+ <span class="dropdown-text">Lab 4 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-4-R.html">
+ <span class="dropdown-text">Lab 4 (R)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./tutorial-1.html">
+ <span class="dropdown-text">Tutorial 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-1-solutions.html">
+ <span class="dropdown-text">Tutorial 1 (Solutions)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2.html">
+ <span class="dropdown-text">Tutorial 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2-solutions.html">
+ <span class="dropdown-text">Tutorial 2 (Solutions)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-3.html">
+ <span class="dropdown-text">Tutorial 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-3-solutions.html">
+ <span class="dropdown-text">Tutorial 3 (Solutions)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-extra-material" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Extra Material</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-extra-material">    
+        <li>
+    <a class="dropdown-item" href="./material-interpretation.html">
+ <span class="dropdown-text">Interpreting Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-cef.html">
+ <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-intercept.html">
+ <span class="dropdown-text">The Intercept</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-R.html">
+ <span class="dropdown-text">Basic Programming in R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-Stata.html">
+ <span class="dropdown-text">Basic Programming in Stata</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="light-content">
+<p><img src="img/01-standard-vertical-black-text.png" class="img-fluid"></p>
+</div>
+<div class="dark-content">
+<p><img src="img/02-standard-vertical-white-text.png" class="img-fluid"></p>
+</div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#example-selective-education" id="toc-example-selective-education" class="nav-link active" data-scroll-target="#example-selective-education">Example: Selective Education</a></li>
+  <li><a href="#traditional-story-omitted-variables" id="toc-traditional-story-omitted-variables" class="nav-link" data-scroll-target="#traditional-story-omitted-variables">Traditional Story: Omitted Variables</a></li>
+  <li><a href="#modern-conditional-independence" id="toc-modern-conditional-independence" class="nav-link" data-scroll-target="#modern-conditional-independence">Modern: Conditional Independence</a></li>
+  <li><a href="#traditional-modern" id="toc-traditional-modern" class="nav-link" data-scroll-target="#traditional-modern">Traditional 🤝 Modern</a></li>
+  <li><a href="#example-selective-education-4" id="toc-example-selective-education-4" class="nav-link" data-scroll-target="#example-selective-education-4">Example: Selective Education</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-7-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="lecture-7-notes-Stata.pdf"><i class="bi bi-file-pdf"></i>PDF with Stata</a></li><li><a href="lecture-7-notes-R.pdf"><i class="bi bi-file-pdf"></i>PDF with R</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Omitted Variables and Conditional Independence</h1>
+<p class="subtitle lead">Lecture 7</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="reading" class="level2">
+<h2 class="anchored" data-anchor-id="reading">Reading</h2>
+<p>This lecture covers material from <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>:</p>
+<ul>
+<li><p>Chapter 3.3 “The Expected Value of the OLS Estimators”</p></li>
+<li><p>Chapter 3.7 “Several Scenarios for Applying Multiple Regression”</p></li>
+<li><p>Chapter 3.8 “Including”Bad Controls” in Regression Analysis”</p></li>
+<li><p>Chapter 4.7 “Revisiting Causal Effects and Policy Analysis”</p></li>
+<li><p>Chapter 7.6 “More on Policy Analysis and Program Evaluation”</p>
+<ul>
+<li>Chapter 7.6a “Program Evaluation and Unrestricted Regression Adjustment”</li>
+</ul></li>
+<li><p>Chapter 9.1 “Function form Misspecification”</p>
+<ul>
+<li>Chapter 9.1a “RESET as a Test for Functional Form Misspecification”</li>
+</ul></li>
+</ul>
+<p>We will leave out 9.1b “Tests against Nonnested Alternatives”</p>
+</section>
+<section id="example-selective-education" class="level1">
+<h1>Example: Selective Education</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The following example comes from <span class="citation" data-cites="angrist2014mastering">Angrist and Pischke (<a href="#ref-angrist2014mastering" role="doc-biblioref">2014</a>, ch.&nbsp;2)</span> <em>Mastering Metrics</em>. The book is an excellent read and worth getting a copy of. The example is inspired by a famous paper <em>Estimating the payoff to attending a more selective college: An application of selection on observables and unobservables</em> <span class="citation" data-cites="dale2002estimating">(<a href="#ref-dale2002estimating" role="doc-biblioref">Dale and Krueger 2002</a>)</span>. Another excellent read.</p>
+</div>
+</div>
+<section id="self-selection" class="level2">
+<h2 class="anchored" data-anchor-id="self-selection">Self-selection</h2>
+<p>Suppose you want to estimate the (causal) impact of attending a selective (<span class="math inline">\(p\)</span>-rivate) university on future earnings (<span class="math inline">\(y\)</span>)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="fragment fade-in">
+<ul>
+<li><p>Individuals <em>self-select</em> into private education</p>
+<ul>
+<li><span class="math inline">\(\Rightarrow p\)</span> is <em>endogenous</em> to factors that plausibly determine future earnings.</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled" title="Terminology">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Terminology
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Take note of how we use these words: self-select, endogenous, exogenous, uncorrelated, independent, unconfounded, etc. They all have important, but slightly different meanings.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="confounding-factors" class="level2">
+<h2 class="anchored" data-anchor-id="confounding-factors">Confounding factors</h2>
+<p>Given a simple (<span class="math inline">\(s\)</span>-hort) linear regression,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><span class="math display">\[
+  y_i = \alpha^s + \beta^s p_i + v_i
+\]</span></p>
+<p>there are likely many <strong>confounding factors</strong> (parental education, ability, etc.) that determine both <span class="math inline">\(y\)</span> and <span class="math inline">\(p\)</span>.</p>
+</section>
+<section id="control-variables" class="level2">
+<h2 class="anchored" data-anchor-id="control-variables">Control variables</h2>
+<p>You might control for these confounding factors by estimating a multivariate model</p>
+<p><span class="math display">\[
+  y_i = \alpha + \beta p + \mathbf{x}_i\gamma + u_i
+\]</span></p>
+</section>
+</section>
+<section id="traditional-story-omitted-variables" class="level1">
+<h1>Traditional Story: Omitted Variables</h1>
+<section id="true-model" class="level2">
+<h2 class="anchored" data-anchor-id="true-model">‘True’ model</h2>
+<p>The ‘true’ model is given by,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + u_i
+\]</span></p>
+<p>with MLR 1-4 holding.</p>
+<ul>
+<li><p><span class="math inline">\(E[\hat{\beta}_1]=\beta_1\)</span></p></li>
+<li><p><span class="math inline">\(\hat{\beta}_1\rightarrow_p \beta_1\)</span> (even under MLR 4a)</p></li>
+</ul>
+</section>
+<section id="omitted-variable" class="level2">
+<h2 class="anchored" data-anchor-id="omitted-variable">Omitted variable</h2>
+<p>In place of the ‘true’ model, you estimate the ‘short’ model,</p>
+<p><span class="math display">\[
+  y_i = \beta_0^s + \beta_1^s x_{i1} + v_i
+\]</span></p>
+<p>which <strong>omits</strong> <span class="math inline">\(x_2\)</span>.</p>
+<p><br>
+</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Model Misspecification">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Model Misspecification
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 85</a>)</span> discusses this problem as an example of misspecification analysis. The ‘short’ model is misspecified since it excludes variables that belong in the ‘true’ model.</p>
+</div>
+</div>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<p>What then is the relationship between,</p>
+<p><span class="math display">\[
+\beta_1^s \overset{?}{=}\beta_1
+\]</span></p>
+<p><br>
+</p>
+<p>And, if you estimate the short model, what - if anything - do you learn about the parameters from the longer (‘true’) model?</p>
+</section>
+<section id="omitted-variable-formula" class="level2">
+<h2 class="anchored" data-anchor-id="omitted-variable-formula">Omitted variable formula</h2>
+<p>From <a href="./lecture-1.html">Lecture 1</a>, we know that <span class="math inline">\(\beta_1^s\)</span> can be defined as,<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p><span class="math display">\[
+  \beta_1^s = \frac{Cov(x_{i1},y_i)}{Var(x_{i1})}
+\]</span></p>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
+<p>If we plug in <span class="math inline">\(\textcolor{blue}{y_i}\)</span> from the ‘true’ model, then</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  \beta_1^s =&amp; \frac{Cov(x_{i1},\textcolor{blue}{y_i})}{Var(x_{i1})} \\
+  =&amp; \frac{Cov(x_{i1},\textcolor{blue}{\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + u_i})}{Var(x_{i1})} \\
+  =&amp; \underbrace{\frac{Cov(x_{i1},\textcolor{blue}{\beta_0})}{Var(x_{i1})}}_{=0} + \underbrace{\frac{Cov(x_{i1},\textcolor{blue}{\beta_1 x_{i1}})}{Var(x_{i1})}}_{=\beta_1}+ \frac{Cov(x_{i1},\textcolor{blue}{\beta_2 x_{i2}})}{Var(x_{i1})}+ \underbrace{\frac{Cov(x_{i1},\textcolor{blue}{u_i})}{Var(x_{i1})}}_{=0} \\
+  =&amp; \beta_1 + \beta_2 \frac{Cov(x_{i1},x_{i2})}{Var(x_{i1})}
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="ov-formula" class="level2">
+<h2 class="anchored" data-anchor-id="ov-formula">OV formula</h2>
+<p>So,</p>
+<p><span class="math display">\[
+  \beta_1^s = \beta_1+\beta_2 \delta_1
+\]</span></p>
+<p>where,</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p><span class="math inline">\(\beta_2\)</span> is the parameter on <span class="math inline">\(x_2\)</span> in the ‘true’ model; i.e.&nbsp;the impact of <span class="math inline">\(x_2\)</span> on <span class="math inline">\(y\)</span>.</p></li>
+<li><p><span class="math inline">\(\delta_1 = \frac{Cov(x_{i1},x_{i2})}{Var(x_{i1})}\)</span> is the slope parameter from a simple regression,</p>
+<p><span class="math display">\[
+  x_{i2} = \delta_0 + \delta_1 x_{i1} + \xi_i
+\]</span></p>
+<p>i.e., the impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span>.</p></li>
+</ul>
+</div>
+</section>
+<section id="ov-bias" class="level2">
+<h2 class="anchored" data-anchor-id="ov-bias">OV ‘bias’</h2>
+<p>Consider the (conditional) expectation of the OLS estimator of the short regression,<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p><span class="math display">\[
+  E[\hat{\beta}^s_1|X] = \beta_1 + \underbrace{\beta_2\frac{\sum_{i=1}^n(x_{i1}-\bar{x}_1)x_{i2}}{\sum_{i=1}^n(x_{i1}-\bar{x}_1)^2}}_\text{`bias'}
+\]</span></p>
+<p>and<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p><span class="math display">\[
+  p\lim\; \hat{\beta}^s_1 = \beta_1 + \beta_2\underbrace{\frac{Cov(x_{i1},x_{i2})}{Var(x_{i1})}}_{\delta_1}
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Why 'bias'?">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Why ‘bias’?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Why do we call this a bias? An estimator of is biased if <span class="math inline">\(E[\hat{\beta}_j]\neq \beta_j\)</span>. We call this a bias because of the model misspecification framing. The question here is whether the misspecified model (the ‘short’ model) can be used to estimate the ‘true’ model.</p>
+<p>Consider the long model,</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + u_i
+\]</span></p>
+<p>If you propose a short model with the same population parameters,</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_{i1} + \varepsilon_i
+\]</span></p>
+<p>then <span class="math inline">\(\varepsilon_i = \beta_2 x_{i2} + u_i\)</span>. Well, suppose you assert that <span class="math inline">\(\beta_1\)</span> denotes the causal impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(y\)</span>. Then, the short model essentially asks whether you can estimate this causal relationship using a model that omits <span class="math inline">\(x_2\)</span>.</p>
+<p>Since, the parameters are the same,</p>
+<p><span class="math display">\[
+  Cov(x_{i1},\varepsilon_i) = \beta_2Cov(x_{i1},x_{i2}) + Cov(x_{i1},u_i)
+\]</span></p>
+<p>Both MLR 4 and 4a fail if <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are correlated OR <span class="math inline">\(\beta_2=0\)</span>. Implying that the OLS estimator for is otherwise biased (for <span class="math inline">\(\beta_1\)</span>).</p>
+<p>However, you could argue that <span class="math inline">\(\hat{\beta}^s_1\)</span> is unbiased estimator of <span class="math inline">\(\beta_1^s\)</span>. And the real difference here is that <span class="math inline">\(\beta_1^s\)</span> need not equal <span class="math inline">\(\beta_1\)</span>. So, the discussion actually concerns the relationship between the population parameters and not the biasedness of the estimator. This second approach better fits the modern causal identification discussion which distinguishes well identified population moments (e.g.&nbsp;mean difference between two groups) and causal parameters/estimands (e.g.&nbsp;ATE).</p>
+<blockquote class="blockquote">
+<p>“This important formula is often motivated by the notion that a longer regression – one with controls–has a causal interpretation, while a shorter rgression does not. The coefficients on the variables included in the shorter regression are therefroe said to be biased. In fact, the OVB formula is a mechanical link between coefficient vectors that applies to short and long regressions whether or not the longer regression is causal.” <span class="citation" data-cites="angrist2009mostly">(<a href="#ref-angrist2009mostly" role="doc-biblioref">Angrist and Pischke 2009, 59</a>)</span></p>
+</blockquote>
+</div>
+</div>
+</div>
+</section>
+<section id="sample-analogue" class="level2">
+<h2 class="anchored" data-anchor-id="sample-analogue">Sample analogue</h2>
+<p>The same formula holds for the OLS estimator:</p>
+<p><span class="math display">\[
+  \hat\beta_1^s =  \hat\beta_1 + \hat\beta_2\hat\delta_1
+\]</span></p>
+<ul>
+<li><p>The fact that <span class="math inline">\(\hat\delta_1\)</span> is from a regression of <span class="math inline">\(x_2\)</span> on <span class="math inline">\(x_1\)</span> relates to the Frisch-Waugh Theorem of <a href="./lecture-2.html">Lecture 2</a>.</p></li>
+<li><p>The multivariate estimate is a simple estimate <em>minus</em> the estimated OVB term</p>
+<p><span class="math display">\[
+  \hat\beta_1  =  \hat\beta_1^s - \hat\beta_2\hat\delta_1
+\]</span></p>
+<ul>
+<li>But this formula works for more general case of adding additional regressors.</li>
+</ul></li>
+</ul>
+</section>
+<section id="demonstration" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="demonstration">Demonstration</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="st">"$data_dir\morg24_bothgen.dta"</span>, <span class="kw">clear</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">est</span> <span class="kw">store</span> mod_short</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">est</span> <span class="kw">store</span> mod_long</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scalar</span> beta1 = _b[edu]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scalar</span> beta2 = _b[<span class="fu">exp</span>]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> <span class="fu">exp</span> edu</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">est</span> <span class="kw">store</span> mod_x2x1</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scalar</span> delta1 = _b[edu]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>etable, <span class="kw">est</span>(mod_short mod_long mod_x2x1) column(depvar) eqrecode(lnwage = <span class="kw">xb</span> <span class="fu">exp</span> = <span class="kw">xb</span>) novarlabel cstat(_r_b, nformat(%5.4f)) cstat(_r_se, nformat(%5.4f))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                        lnwage   lnwage     exp  
+-------------------------------------------------
+edu                      0.1021   0.1074  -0.8341
+                       (0.0027) (0.0027) (0.0694)
+exp                               0.0063         
+                                (0.0005)         
+_cons                    1.9324   1.7119  34.7376
+                       (0.0395) (0.0433) (1.0154)
+Number of observations     5000     5000     5000
+-------------------------------------------------</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dis beta1 + beta2*delta1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.10206761</code></pre>
+</div>
+</div>
+</section>
+<section id="ovb-sign" class="level2">
+<h2 class="anchored" data-anchor-id="ovb-sign">OVB sign</h2>
+<p><span class="math display">\[
+OVB = \beta_1^s-\beta_1 =  \beta_2\delta_1
+\]</span></p>
+<p><br>
+</p>
+<table class="caption-top table">
+<caption>Direction of OVB</caption>
+<colgroup>
+<col style="width: 28%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(\delta_1&lt;0\)</span></th>
+<th><span class="math inline">\(\delta_1=0\)</span></th>
+<th><span class="math inline">\(\delta_1&gt;0\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\beta_2&lt;0\)</span></td>
+<td><span style="color:blue;">Positive</span></td>
+<td>Zero</td>
+<td><span style="color:red;">Negative</span> (‘downward’)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta_2=0\)</span></td>
+<td>Zero</td>
+<td>Zero</td>
+<td>Zero</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\beta_2&gt;0\)</span></td>
+<td><span style="color:red;">Negative</span></td>
+<td>Zero</td>
+<td><span style="color:blue;">Positive</span> (‘upward’)</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment fade-in">
+<div class="incremental">
+<ul class="incremental">
+<li><p>You can predict how the exclusion of a potential confounding factor may ‘bias’ your estimates.</p></li>
+<li><p>Alternatively, you can predict how the inclusion of a regressor will (in expectation) alter the existing parameters in a model.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="example-selective-education-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-selective-education-1">Example: Selective Education</h2>
+<p>If you consider the single control <span class="math inline">\(x_i=SAT_i\)</span></p>
+<p><span class="math display">\[
+  y_i = \alpha^s + \beta^s p_i + v_i
+\]</span></p>
+<p>versus</p>
+<p><span class="math display">\[
+  y_i = \alpha + \beta p_i + \gamma SAT_i + u_i
+\]</span></p>
+<p>How do you expect <span class="math inline">\(\beta\)</span> to change, relative to <span class="math inline">\(\beta^s\)</span>?</p>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><p>We can only “control” for factors which we observe in the data</p>
+<ul class="incremental">
+<li><p>Caveat:</p>
+<ul class="incremental">
+<li><p>researchers like <span class="citation" data-cites="dale2002estimating">Dale and Krueger (<a href="#ref-dale2002estimating" role="doc-biblioref">2002</a>)</span> use clever methods to control for (some) “unobservables”</p></li>
+<li><p>with repeated observations we can control for <em>some</em> time-invariant unobservables (<em>forthcoming</em>).</p></li>
+</ul></li>
+</ul></li>
+<li><p>How do we know that the controls have entered the model in the correct way.</p>
+<ul class="incremental">
+<li>Can test for model specification w.r.t. included regressors</li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section id="functional-form-misspecification" class="level2">
+<h2 class="anchored" data-anchor-id="functional-form-misspecification">Functional Form Misspecification</h2>
+<p>Another way in which the model may be misspecified is that is excludes nonlinear functions of the <strong>included variables</strong>.</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \dots + \beta_kx_{ik} + u_i
+\]</span></p>
+<p>If MLR 4 holds, then if you were to add nonlinear functions the regressors, they should be irrelevant.</p>
+<p><br>
+</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Limitations">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Limitations
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This test cannot be used to test for other kinds of functional form misspecification such as whether the regressors should be included in log form. For this you need to look at nonnested tests <span class="citation" data-cites="wooldridge2025">(<a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025</a>, sec 9.1b)</span>.</p>
+</div>
+</div>
+</section>
+<section id="reset-test" class="level2">
+<h2 class="anchored" data-anchor-id="reset-test">RESET test</h2>
+<p>Ramsey’s (1969) Regression Equation Specification Error Test (RESET) estimates the model,<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \dots + \beta_kx_{ik} + \delta_1 \hat{y}_i^2 +  \delta_2 \hat{y}_i^3 +  \delta_3 \hat{y}_i^4 + u_i
+\]</span></p>
+<p>where,</p>
+<ul>
+<li><p><span class="math inline">\(\hat{y}_i\)</span> is the predicted value from the original equation.</p></li>
+<li><p>This regression has <span class="math inline">\(n-k-1-3 = n-k-4\)</span> degrees of freedom.</p></li>
+</ul>
+</section>
+<section id="null" class="level2">
+<h2 class="anchored" data-anchor-id="null">Null</h2>
+<p>You then test the null hypothesis,</p>
+<p><span class="math display">\[
+  H_0: \delta_1 = \delta_2 = \delta_3 = 0
+\]</span></p>
+<p>Options:</p>
+<ul>
+<li><span class="math inline">\(F\)</span>-stat: <span class="math inline">\(\overset{a}{\sim}F_{3,n-k-4}\)</span> under <span class="math inline">\(H_0\)</span> (and MLR 1-5)</li>
+<li><span class="math inline">\(LM\)</span>-stat: <span class="math inline">\(\overset{a}{\sim}\chi^2_3\)</span> under <span class="math inline">\(H_0\)</span> (and MLR 1-5)</li>
+<li>Heteroskedastic-robust equivalents</li>
+</ul>
+</section>
+<section id="in-statar" class="level2">
+<h2 class="anchored" data-anchor-id="in-statar">In Stata/R</h2>
+<p>For example, we can use the RESET test to test for non-linearities in a simple Mincer equation.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Ramsey RESET (order 4)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lnwage edu <span class="fu">exp</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> <span class="kw">ovtest</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ramsey RESET test for omitted variables
+Omitted: Powers of fitted values of lnwage
+
+H0: Model has no omitted variables
+
+F(3, 4994) =  36.67
+  Prob &gt; F = 0.0000</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Ramsey RESET (order 4)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(lnwage <span class="sc">~</span> edu <span class="sc">+</span> exp, <span class="at">data=</span>wage_data)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">resettest</span>(model, <span class="at">power =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">type =</span> <span class="st">"fitted"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    RESET test
+
+data:  model
+RESET = 36.675, df1 = 3, df2 = 4994, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-selective-education-2" class="level2">
+<h2 class="anchored" data-anchor-id="example-selective-education-2">Example: Selective Education</h2>
+<p>Does this mean that, if you specify</p>
+<p><span class="math display">\[
+  y_i = \alpha + \beta p_i + \mathbf{x}_i\gamma + u_i
+\]</span></p>
+<p>in which,</p>
+<p><span class="math display">\[
+  \beta = E[y_i|p_i=1,\mathbf{x}_{i}] - E[y_i|p_i=0,\mathbf{x}_{i}]
+\]</span></p>
+<p>under MLR 4, then you have identified the <em>causal</em> impact of selective (private) education on earnings?</p>
+<p><br>
+</p>
+<p>Answer: not clear.</p>
+<ul>
+<li><p>If <span class="math inline">\(\beta\)</span> is a causal parameter, then yes.</p></li>
+<li><p>BUT what makes <span class="math inline">\(\beta\)</span> a causal parameter?</p></li>
+</ul>
+</section>
+<section id="another-control" class="level2">
+<h2 class="anchored" data-anchor-id="another-control">Another control</h2>
+<p>Consider: what if I add another control <span class="math inline">\(z_i\)</span>. The model will then give me,</p>
+<p><span class="math display">\[
+  \beta^\ell = E[y_i|p_i=1,\mathbf{x}_{i},z_i] - E[y_i|p_i=0,\mathbf{x}_{i},z_i]
+\]</span></p>
+<p>where using the same OV-formula logic</p>
+<p><span class="math display">\[
+  \beta \neq\beta^\ell
+\]</span></p>
+<p>Is <strong>this</strong> now the ‘true’ model/parameter?</p>
+</section>
+<section id="good-controls" class="level2">
+<h2 class="anchored" data-anchor-id="good-controls">Good controls?</h2>
+<p>And should anything that is correlated with <span class="math inline">\(y_i\)</span> and <span class="math inline">\(p_i\)</span> be included as a control?</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p>The OV formula tells us how the population parameter changes when we add additional regressors.</p>
+<ul class="incremental">
+<li>Correlations seem to be the important factor.</li>
+</ul></li>
+<li><p>So, should we add (in this example)?</p>
+<ul class="incremental">
+<li><p>Occupation of graduate job: should be correlated with <span class="math inline">\(y_i\)</span> and <span class="math inline">\(p_i\)</span>.</p></li>
+<li><p>What about parental income?</p></li>
+<li><p>And marital status?</p></li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment fade-in">
+<p>The OV formula does not really answer these questions.</p>
+</div>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>The OV formula provides a valuable tool for understanding:</p>
+<ul>
+<li><p>relationship between the short and long regression parameters</p>
+<ul>
+<li><p>i.e., impact of adding additional regressors</p></li>
+<li><p>gives us the <em>bias</em> in a model misspecified by omitted variables</p></li>
+</ul></li>
+</ul>
+<div class="fragment fade-in">
+<p>BUT, doesn’t tell us</p>
+<ul>
+<li><p>which covariates to add</p></li>
+<li><p>how they should appear in the model (interactions, non-linear terms, etc.)</p></li>
+<li><p>why the long model is ‘true’</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="modern-conditional-independence" class="level1">
+<h1>Modern: Conditional Independence</h1>
+<section id="pof" class="level2">
+<h2 class="anchored" data-anchor-id="pof">POF</h2>
+<p>Recall, we have a framework within which we have defined a causal effect:</p>
+<p><span class="math display">\[
+  \tau_i = y_i\small{(1)}-y_i\small{(0)}
+\]</span></p>
+<ul>
+<li><p>The problem is the ITE cannot be observed or estimated.</p></li>
+<li><p>We have to compare different groups of people, which introduces selection.</p></li>
+</ul>
+</section>
+<section id="selection" class="level2">
+<h2 class="anchored" data-anchor-id="selection">Selection</h2>
+<p>In <a href="./lecture-6.html">Lecture 6</a> we derived this <strong>important</strong> decomposition:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  &amp; E[y_i|w_i = 1] - E[y_i|w_i = 0]\\
+  =&amp; E[y_i\small{(1)}|w_i = 1] - E[y_i\small{(0)}|w_i = 0] \\
+    =&amp;\underbrace{E[y_i\small{(1)}|w_i = 1] - \textcolor{red}{E[y_i\small{(0)}|w_i = 1]}} + \underbrace{\textcolor{red}{E[y_i\small{(0)}|w_i = 1]}- E[y_i\small{(0)}|w_i = 0]} \\
+    =&amp; \underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 1]}_{\tau_{att}}+ \underbrace{\textcolor{red}{E[y_i\small{(0)}|w_i = 1]}- E[y_i\small{(0)}|w_i = 0]}_\text{selection}
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="unconfoundedness" class="level2">
+<h2 class="anchored" data-anchor-id="unconfoundedness">Unconfoundedness</h2>
+<p>We dealt with selection by exploiting the property of unconfounded assignment.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<blockquote class="blockquote">
+<p><strong>Unconfounded assignment:</strong> assignment into the treatment is unconfounded if</p>
+<p><span class="math display">\[
+  y_i\small{(1)},y_i\small{(0)} \perp w_i | \mathbf{x}_i
+\]</span></p>
+</blockquote>
+<p><br>
+</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Unconfoundedness">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Unconfoundedness
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Most definitions of unconfoundedness include the condition on a finite set of observable covariates. You can think of the unconditional version (from <a href="./lecture-6.html">Lecture 6</a>) as a special case of this: where assignment is unconfounded independent of observables.</p>
+</div>
+</div>
+</section>
+<section id="cia" class="level2">
+<h2 class="anchored" data-anchor-id="cia">CIA</h2>
+<ul>
+<li><p>Unconfoundedness is a property of assignment</p>
+<ul>
+<li><em>conditional</em> unconfoundedness may be the result of random assignment, stratified on <span class="math inline">\(\mathbf{x}\)</span>, in a controlled experiment.</li>
+</ul></li>
+</ul>
+<div class="fragment fade-in">
+<ul>
+<li><p>In the absence of controlled assignment, unconfoundedness becomes an <strong>assumption</strong></p>
+<ul>
+<li><p>often referred to as the <em>Conditional Independence</em> <strong>Assumption</strong> (CIA)</p></li>
+<li><p><em>as if</em> treatment is randomly assigned, <strong>conditional on</strong> <span class="math inline">\(\mathbf{x_i}\)</span>.</p></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="selection-on-observables" class="level2">
+<h2 class="anchored" data-anchor-id="selection-on-observables">Selection on observables</h2>
+<p>CIA tells you,</p>
+<p><span class="math display">\[
+  E[y_i\small{(0)}|w_i = 1,\textcolor{blue}{\mathbf{x}_i}]= E[y_i\small{(0)}|w_i = 0,\textcolor{blue}{\mathbf{x}_i}] = E[y_i\small{(0)}|\textcolor{blue}{\mathbf{x}_i}]
+\]</span></p>
+<p>which means,</p>
+<p><span class="math display">\[
+  \underbrace{\textcolor{red}{E[y_i\small{(0)}|w_i = 1,\textcolor{blue}{\mathbf{x}_i}]}- E[y_i\small{(0)}|w_i = 0,\textcolor{blue}{\mathbf{x}_i}]}_{\text{Selection}(\mathbf{x}_i)} = 0
+\]</span></p>
+<ul>
+<li><p>Conditional <span class="math inline">\(\mathbf{x}_i\)</span>, there is no selection.</p>
+<ul>
+<li>selection on observables: YES</li>
+<li>selection on unobservables: NO</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2"></h2>
+<p>In addition,</p>
+<p><span class="math display">\[
+  E[y_i\small{(1)}|w_i = 1,\textcolor{blue}{\mathbf{x}_i}]= E[y_i\small{(1)}|w_i = 0,\textcolor{blue}{\mathbf{x}_i}] = E[y_i\small{(1)}|\textcolor{blue}{\mathbf{x}_i}]
+\]</span></p>
+<p>Which means,</p>
+<p><span class="math display">\[
+\underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 1,\textcolor{blue}{\mathbf{x}_i}]}_{\text{ATT}(\mathbf{x}_i)}=\underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 0,\textcolor{blue}{\mathbf{x}_i}]}_{\text{ATU}(\mathbf{x}_i)}=\underbrace{E[y_i\small{(1)}-y_i\small{(0)}|\textcolor{blue}{\mathbf{x}_i}]}_{\text{ATE}(\mathbf{x}_i)}
+\]</span></p>
+<p>These are conditional causal estimands:</p>
+<ul>
+<li>ATE for individuals with characteristics <span class="math inline">\(\mathbf{x}_i\)</span></li>
+<li>ATT for individuals with characteristics <span class="math inline">\(\mathbf{x}_i\)</span></li>
+<li>ATU for individuals with characteristics <span class="math inline">\(\mathbf{x}_i\)</span></li>
+</ul>
+</section>
+<section id="conditional-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-comparison">Conditional comparison</h2>
+<p><span class="math display">\[
+\begin{aligned}
+  &amp; E[y_i|w_i = 1,\textcolor{blue}{\mathbf{x}_i}] - E[y_i|w_i = 0,\textcolor{blue}{\mathbf{x}_i}]\\
+  =&amp; \underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 1,\textcolor{blue}{\mathbf{x}_i}]}_{\text{ATT}(\mathbf{x}_i)}+ \underbrace{\textcolor{red}{E[y_i\small{(0)}|w_i = 1,\textcolor{blue}{\mathbf{x}_i}]}- E[y_i\small{(0)}|w_i = 0,\textcolor{blue}{\mathbf{x}_i}]}_{\text{Selection}(\mathbf{x}_i)}
+  \end{aligned}
+\]</span></p>
+<p><br>
+</p>
+<p>Under unconfoundedness (or CIA),</p>
+<p><span class="math display">\[
+  E[y_i|w_i = 1,\textcolor{blue}{\mathbf{x}_i}] - E[y_i|w_i = 0,\textcolor{blue}{\mathbf{x}_i}] =  \underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 1,\textcolor{blue}{\mathbf{x}_i}]}_{\tau_{att}(\mathbf{x}_i)}
+\]</span></p>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3"></h2>
+<p>And,</p>
+<p><span class="math display">\[
+\underbrace{E[y_i\small{(1)}-y_i\small{(0)}|w_i = 1,\textcolor{blue}{\mathbf{x}_i}]}_{\tau_{att}(\mathbf{x}_i)}
+= \underbrace{E[y_i\small{(1)}-y_i\small{(0)}|\textcolor{blue}{\mathbf{x}_i}]}_{\tau_{ate}(\mathbf{x}_i)}
+\]</span></p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p><strong>BUT</strong> <span class="math inline">\(\tau_{ate}(\mathbf{x}_i)\)</span> (conditional) need NOT equal <span class="math inline">\(\tau_{ate}\)</span> (unconditional).</p>
+</div>
+</section>
+<section id="matching" class="level2">
+<h2 class="anchored" data-anchor-id="matching">Matching</h2>
+<p>The CIA suggests that we need to <strong>match</strong> individuals with the same <span class="math inline">\(x\)</span>s.</p>
+<ul>
+<li><p>upon matching, it is <em>as if</em> assignment was randomized</p></li>
+<li><p>the problem is the “dimensionality” of <span class="math inline">\(\mathbf{x}_i\)</span></p>
+<ul>
+<li>same gender, ethnic background, parental income, number of siblings, etc.</li>
+</ul></li>
+</ul>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>Approaches to matching:</p>
+<ul>
+<li><p>covariate matching: make comparisons for every possible combination</p></li>
+<li><p>propensity score matching: match on <span class="math inline">\(\rho(\mathbf{x}_i) = Pr(w_i=1|\mathbf{x}_i)\)</span> (the propensity score)</p></li>
+</ul>
+</div>
+</section>
+<section id="regression-as-matching" class="level2">
+<h2 class="anchored" data-anchor-id="regression-as-matching">Regression as matching</h2>
+<p>When we wrote down the multivariate regression model in <a href="./lecture-1.html">Lecture-1</a>,</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_{i1} + \beta_2x_{i2}+\beta_3 x_{i3} + u_i
+\]</span></p>
+<p>with <span class="math inline">\(x_{1}\in\{0,1\}\)</span>, we said</p>
+<p><span class="math display">\[
+  \beta_1 = E[y_i|\textcolor{red}{x_{i1}=1},x_{i2},x_{i3}]-E[y_i|\textcolor{blue}{x_{i1}=0},x_{i2},x_{i3}]
+\]</span></p>
+<p><strong>under MLR 1-4</strong>.</p>
+</section>
+<section id="linear-model" class="level2">
+<h2 class="anchored" data-anchor-id="linear-model">Linear model</h2>
+<p>Suppose (for now) TEs are <strong>homogeneous</strong> <span class="citation" data-cites="wooldridge2025">(from <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 101</a>)</span>:<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p><span class="math display">\[
+  y_i = y_i(0) + \tau w_i
+\]</span></p>
+<p>Then,</p>
+<p><span class="math display">\[
+  E[y_i|w_i,\mathbf{x}_i] = E[y_i(0)|w_i,\mathbf{x}_i] + \tau w_i  = E[y_i(0)|\mathbf{x}_i] + \tau w_i
+\]</span></p>
+<p>where second “=” follows from CIA.</p>
+</section>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4"></h2>
+<p>Let us assume then,</p>
+<p><span class="math display">\[
+  E[y_i(0)|\mathbf{x}_i] = \alpha + \mathbf{x}_i\gamma
+\]</span></p>
+<p>i.e.&nbsp;linear regression function</p>
+</section>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5"></h2>
+<p>Then,</p>
+<p><span class="math display">\[
+  E[y_i|w_i,\mathbf{x}_i] = \alpha + \tau w_i + \mathbf{x}_i\gamma
+\]</span></p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>Then by the CEF theorem, we can write:</p>
+<p><span class="math display">\[
+  y_i = \alpha + \tau w_i + \mathbf{x}_i\gamma + u_i
+\]</span></p>
+<p>where <span class="math inline">\(E[u_i|w_i,\mathbf{x}_i]=0\)</span> (i.e.&nbsp;MLR 4)</p>
+<ul>
+<li>OLS is unbiased estimator for <span class="math inline">\(\tau\)</span>.</li>
+</ul>
+</div>
+</section>
+<section id="assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions">Assumptions:</h2>
+<p>Let us keep track of the assumptions we have just made:</p>
+<p><strong>A-1</strong>: CIA</p>
+<p><br>
+</p>
+<p><strong>A-2</strong>: Homogenous TEs: <span class="math inline">\(\tau_i = \tau\)</span></p>
+<p><br>
+</p>
+<p><strong>A-3</strong>: CEF of <span class="math inline">\(y(0)\)</span> is linear (in parameters): <span class="math inline">\(E[y_i(0)|\mathbf{x}_i] = \alpha + \mathbf{x}_i\gamma\)</span></p>
+</section>
+<section id="control-variables-1" class="level2">
+<h2 class="anchored" data-anchor-id="control-variables-1">Control variables</h2>
+<p>So, we have a linear regression model,</p>
+<p><span class="math display">\[
+  y_i = \alpha + \tau w_i + \mathbf{x}_i\gamma + u_i
+\]</span></p>
+<ul>
+<li><p>which identifies the causal impact of <span class="math inline">\(w\)</span> on <span class="math inline">\(y\)</span></p></li>
+<li><p>by “controlling” for <span class="math inline">\(\mathbf{x}\)</span></p>
+<ul>
+<li>the regression “matches” on <span class="math inline">\(x\)</span></li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Common Support">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Common Support
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>One of the key requirements of a matching estimator is “common support” (also referred to as overlapping). Formally, this means</p>
+<p><span class="math display">\[
+  0&lt;\rho(\mathbf{x}_i)&lt;1
+\]</span></p>
+<p>That is, the conditional probability of treatment cannot be 0 or 1 (denoted above by the propensity score). From an experimental perspective, this is equivalent to saying at least one individual must be treated (untreated).</p>
+<p>Without this assumption, you cannot match treated individuals with control individuals for every combinations of the <span class="math inline">\(x\)</span>’s. So, it is a crucial ingredient for matching estimators.</p>
+<p>Linear regression models do not impose this requirement. In fact, you could theoretically estimate the theoretical model with a complete absence of common support, leveraging the strength of the CEF (of <span class="math inline">\(y(0)\)</span>) assumption. This assumption allows you to predict out the counterfactual for the treated group, even in the absence of common support.</p>
+<p>This issue is discussed in <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 686, 691–92</a>)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="good-controls-1" class="level2">
+<h2 class="anchored" data-anchor-id="good-controls-1">Good controls</h2>
+<p>So what <span class="math inline">\(x\)</span>s should you control for?</p>
+<ul>
+<li><p>Evidently, we care about <span class="math inline">\(x\)</span>’s that determine selection (into treatment)</p></li>
+<li><p>As with RCTs, the <span class="math inline">\(x\)</span>s <strong>should not be an outcome of the “experiment”</strong> (i.e.&nbsp;treatment)</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>“Bad controls are variables that are themselves outocome variables in the notional experiment at hand. That is, bad controls might just as well be dependent variables too.” <span class="citation" data-cites="angrist2009mostly">(<a href="#ref-angrist2009mostly" role="doc-biblioref">Angrist and Pischke 2009, 64</a>)</span></p>
+</blockquote>
+<p><br>
+</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are unsure whether a variable could be a good control, ask yourself: could this be an outcome of the “treatment” variable (i.e.&nbsp;variable of interest).</p>
+</div>
+</div>
+</section>
+<section id="heterogeneity" class="level2">
+<h2 class="anchored" data-anchor-id="heterogeneity">Heterogeneity</h2>
+<p>We made a strong assumption: <span class="math inline">\(\tau_i = \tau\)</span>.</p>
+<ul>
+<li><p>This seems unrealistic!</p></li>
+<li><p>Solution: Unrestricted Regression Adjustment <span class="citation" data-cites="wooldridge2025">(see <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, sec. 7.6a</a>)</span> <a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p></li>
+</ul>
+<p><span class="math display">\[
+  y_i = \alpha + \tau_{ate}w_i + w_i\cdot (\mathbf{x}_i-\bar{\mathbf{x}}) \delta + \mathbf{x}_i\gamma + v_i
+\]</span></p>
+<p>where,</p>
+<ul>
+<li><p><span class="math inline">\(w_i\cdot (\mathbf{x}_i-\bar{\mathbf{x}})\)</span> is an interaction of <span class="math inline">\(w_i\)</span> with each of the <span class="math inline">\(j\)</span> demeaned controls.</p>
+<p><span class="math display">\[
+  w_i\times (x_{i1}-\bar{x}_1) + w_i\times (x_{i2}-\bar{x}_2) + \dots + w_i\times (x_{ij}-\bar{x}_j)
+\]</span></p></li>
+</ul>
+</section>
+<section id="control" class="level2">
+<h2 class="anchored" data-anchor-id="control">Control</h2>
+<p>Can you “control” your way out of selection (and into causation)?</p>
+<ul>
+<li><p>Theoretically, YES</p></li>
+<li><p>Practically, in <em>observational studies</em>, it is often difficult to convince the reader that you observe <em>all</em> important variables for selection.</p></li>
+<li><p>Some policy settings can be a little “cleaner”</p></li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled" title="Policy example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Policy example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="citation" data-cites="almus2003effects">Almus and Czarnitzki (<a href="#ref-almus2003effects" role="doc-biblioref">2003</a>)</span> paper on <em>The effects of public R&amp;D subsidies on firms’ innovation activities: the case of Eastern Germany</em> exploits the fact that the government awarded grants based on a score that incorporated known criteria: size, past R&amp;D, patents, sector, etc. While they do not know the exact scoring function, they do know the covariates upon which firms should be matched.</p>
+</div>
+</div>
+</section>
+<section id="example-selective-education-3" class="level2">
+<h2 class="anchored" data-anchor-id="example-selective-education-3">Example: Selective Education</h2>
+<p>If you assume <em>A-1,2,3</em>, then the model</p>
+<p><span class="math display">\[
+  y_i = \alpha + \tau_{ate}p_i + \mathbf{x}_i\gamma + u_i
+\]</span></p>
+<p>DOES, indeed, identify the causal impact of selective education.</p>
+</section>
+</section>
+<section id="traditional-modern" class="level1">
+<h1>Traditional 🤝 Modern</h1>
+<p>We can “marry” these two approaches.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For this section, we will do so for using the notation in the running example.</p>
+</div>
+</div>
+<section id="marriage" class="level2">
+<h2 class="anchored" data-anchor-id="marriage">“Marriage”</h2>
+<p>We will show,</p>
+<ol type="1">
+<li><p>For a discrete variable (of interest), the OV formula tells you about selection into “treatment”.</p>
+<p><span class="math display">\[
+  \text{Traditional}\Rightarrow \text{Modern}
+\]</span></p></li>
+</ol>
+<div class="fragment fade-in">
+<ol start="2" type="1">
+<li><p>When comparing two groups, the selection term is given by the OVB term (under <strong>A-1,2,3</strong>)</p>
+<p><span class="math display">\[
+  \text{Modern}\Rightarrow \text{Traditional}
+\]</span></p></li>
+</ol>
+</div>
+<div class="fragment fade-in">
+<p>This “marriage” is not always so straightforward. The discrete nature of the “treatment” (private education) considered here simplifies things.</p>
+<ul>
+<li>As always, heterogeneous TEs complicate things.</li>
+</ul>
+</div>
+</section>
+<section id="from-the-traditional" class="level2">
+<h2 class="anchored" data-anchor-id="from-the-traditional">From the Traditional</h2>
+<p>In the short (simple) model</p>
+<p><span class="math display">\[
+  y_i = \alpha^s + \beta^s p_i + u_i
+\]</span></p>
+<p>we know that,</p>
+<p><span class="math display">\[
+  \beta^s = E[y_i|p_i = 1]-E[y_i|p_i=0]
+\]</span></p>
+</section>
+<section id="section-6" class="level2">
+<h2 class="anchored" data-anchor-id="section-6"></h2>
+<p>Applying POF, this is</p>
+<p><span class="math display">\[
+  \beta^s = \underbrace{E[y_i(1)-y_i(0)|p_i = 1]}_{\tau_{att}}+\underbrace{E[y_i(0)|p_i=1]-E[y_i(0)|p_i=0]}_{Selection}
+\]</span></p>
+</section>
+<section id="section-7" class="level2">
+<h2 class="anchored" data-anchor-id="section-7"></h2>
+<p>Substituting in the longer model (here simplified with a single <span class="math inline">\(x\)</span>),</p>
+<p><span class="math display">\[
+  y_i = \alpha + \beta p_i + \gamma x_i + v_i
+\]</span></p>
+<p>you get,</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  \beta^s =&amp; E[\textcolor{blue}{\alpha + \beta p_i + \gamma x_i + v_i}|p_i = 1]-E[\textcolor{blue}{\alpha + \beta p_i + \gamma x_i + v_i}|p_i=0] \\
+    =&amp; \underbrace{\alpha-\alpha}_{=0} + \beta + \gamma \big[E[x_i|p_i = 1]-E[x_i|p_i=0]\big] + \underbrace{\big[E[v_i|p_i = 1]-E[v_i|p_i=0]\big]}_{=0} \\
+    =&amp; \beta + \gamma \big[E[x_i|p_i = 1]-E[x_i|p_i=0]\big]
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="section-8" class="level2">
+<h2 class="anchored" data-anchor-id="section-8"></h2>
+<p>The term,</p>
+<p><span class="math display">\[
+E[x_i|p_i = 1]-E[x_i|p_i=0] = \frac{Cov(x_i,p_i)}{Var(p_i)}
+\]</span></p>
+<p>is the slope parameter from a regression of <span class="math inline">\(x\)</span> on <span class="math inline">\(P\)</span>.</p>
+<ul>
+<li>This was <span class="math inline">\(\delta_1\)</span> in the OV formula</li>
+</ul>
+</section>
+<section id="section-9" class="level2">
+<h2 class="anchored" data-anchor-id="section-9"></h2>
+<p>This can be rewritten as,</p>
+<p><span class="math display">\[
+  \frac{Cov(x_i,p_i)}{Var(p_i)} = \underbrace{\frac{Cov(x_i,p_i)}{\textcolor{red}{Var(x_i)}}}_{\theta_1}\times \frac{\textcolor{red}{Var(x_i)}}{Var(p_i)}
+\]</span></p>
+<p>where <span class="math inline">\(\theta_1\)</span> is from,</p>
+<p><span class="math display">\[
+  p_i = \theta_0 + \theta_1 x_i + \epsilon_i
+\]</span></p>
+<ul>
+<li><p>A linear probability model of selection.</p></li>
+<li><p>If <span class="math inline">\(\theta_1=0\)</span>: <strong>selection</strong> is unrelated to <span class="math inline">\(x\)</span>.</p></li>
+</ul>
+</section>
+<section id="section-10" class="level2">
+<h2 class="anchored" data-anchor-id="section-10"></h2>
+<p>The OVB formula in this setting is,</p>
+<p><span class="math display">\[
+  OVB = \beta^s-\beta = \gamma \delta_1 = \gamma \theta_1\frac{Var(x_i)}{Var(p_i)}
+\]</span></p>
+<ul>
+<li><p>If selection is unrelated to <span class="math inline">\(x\)</span>, then OVB = 0</p></li>
+<li><p>Fits with the idea of selection on observables, alone.</p></li>
+</ul>
+</section>
+<section id="from-the-modern" class="level2">
+<h2 class="anchored" data-anchor-id="from-the-modern">From the Modern</h2>
+<p>Under <strong>A-1,2,3</strong>, outlined earlier,</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  \beta^s =&amp; E[y_i|p_i=1] + E[y_i|p_i=0] \\
+   =&amp; \underbrace{E[y_i(1)-y_i(0)|p_i=1]}_{ATT} + \underbrace{E[y_i(0)|p_i=1]-E[y_i(0)|p_i=0]}_\text{Selection}
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="section-11" class="level2">
+<h2 class="anchored" data-anchor-id="section-11"></h2>
+<p>Under <em>A-3</em>,</p>
+<p><span class="math display">\[
+y_i(0) = \alpha + \gamma x_i + \varepsilon_i
+\]</span></p>
+<p>Where, given <strong>A-1</strong> and <strong>A-3</strong>:</p>
+<p><span class="math display">\[
+  E[\varepsilon_i|p_i,x_i]=E[\varepsilon_i|x_i]=0
+\]</span></p>
+</section>
+<section id="section-12" class="level2">
+<h2 class="anchored" data-anchor-id="section-12"></h2>
+<p>The selection term is therefore,</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  &amp;E[y_i(0)|p_i=1]-E[y_i(0)|p_i=0] \\
+  =&amp; E[\alpha + \gamma x_i + \varepsilon_i|p_i=1]-E[\alpha + \gamma x_i + \varepsilon_i|p_i=0] \\
+  =&amp; \underbrace{\alpha-\alpha}_{=0} + \gamma \underbrace{\big[E[x_i|p_i=1]-E[x_i|p_i=0]\big]}_{\delta_1} + \underbrace{\big[E[\varepsilon_i|p_i=1]-E[\varepsilon_i|p_i=0]\big]}_{=0\text{ by CIA}} \\
+  =&amp; \gamma \delta_1
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="section-13" class="level2">
+<h2 class="anchored" data-anchor-id="section-13"></h2>
+<p>Since <span class="math inline">\(\beta = \tau_{att} = \tau_{ate}\)</span> (under <strong>A-1</strong> and <strong>A-2</strong>)</p>
+<p><span class="math display">\[
+  \beta^s = \tau_{att} + \text{Selection} = \beta + \gamma \delta_1
+\]</span></p>
+<p>which is the OV formula.</p>
+<ul>
+<li>the multivariate regression model is explicitly modelling (“controlling for”) selection, <em>under these assumptions</em>.</li>
+</ul>
+</section>
+</section>
+<section id="example-selective-education-4" class="level1">
+<h1>Example: Selective Education</h1>
+<section id="basic-model" class="level2">
+<h2 class="anchored" data-anchor-id="basic-model">Basic model</h2>
+</section>
+<section id="identification-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="identification-strategy">Identification strategy</h2>
+<p>Novel identification strategy to control for factors that may normally be unobserved (i.e.&nbsp;omitted).</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p>Selection into selective universities is based on a number of factors; some explicit (school, grades, sporting achievements), some implicit (social class, familial connections).</p></li>
+<li><p>Ultimately, it <em>might be</em> reasonable to assume that if two individuals received offers from the same set of schools, then they had “comparable/similar” profiles.</p>
+<ul class="incremental">
+<li>Of course, you could pick holes in this assumption.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="section-14" class="level2">
+<h2 class="anchored" data-anchor-id="section-14"></h2>
+<p>Consider the following models:</p>
+<ul>
+<li>Unconditional</li>
+</ul>
+<p><span class="math display">\[
+  y_i = \alpha^s + \beta^s p_i + u_i
+\]</span></p>
+<ul>
+<li>Conditional on observables: SAT and individual characteristics/demographics</li>
+</ul>
+<p><span class="math display">\[
+  y_i = \alpha + \beta p_i + \gamma_1 SAT_i + \mathbf{x}_i\gamma_2 + v_i
+\]</span></p>
+<ul>
+<li>Conditional on “unobservables”: PLUS application group dummies (fixed effects)</li>
+</ul>
+<p><span class="math display">\[
+  y_i = \alpha^\ell + \beta^\ell p_i + \gamma_1^\ell SAT_i + \mathbf{x}_i\gamma_2^\ell + grp_i\psi^\ell + \varepsilon_i
+\]</span></p>
+</section>
+<section id="dale-krueger" class="level2">
+<h2 class="anchored" data-anchor-id="dale-krueger">Dale &amp; Krueger</h2>
+<p>The take home message from <span class="citation" data-cites="dale2002estimating">Dale and Krueger (<a href="#ref-dale2002estimating" role="doc-biblioref">2002</a>)</span>:</p>
+<ul>
+<li><p>in observational studies, where you know little about selection, it can be quite unrealistic to “control” for all important confounding factors.</p></li>
+<li><p>this need not hold in policy settings - e.g. <span class="citation" data-cites="almus2003effects">Almus and Czarnitzki (<a href="#ref-almus2003effects" role="doc-biblioref">2003</a>)</span> - where you know the determinants of the “treatment”.</p></li>
+<li><p>we need to consider other procedures to deal with this problem of selection: for example, instrumental variables and repeated observation.</p></li>
+</ul>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<section id="bibliography" class="level2 scrollable">
+
+
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliography</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-almus2003effects" class="csl-entry" role="listitem">
+Almus, Matthias, and Dirk Czarnitzki. 2003. <span>“The Effects of Public r&amp;d Subsidies on Firms’ Innovation Activities: The Case of Eastern Germany.”</span> <em>Journal of Business &amp; Economic Statistics</em> 21 (2): 226–36.
+</div>
+<div id="ref-angrist2009mostly" class="csl-entry" role="listitem">
+Angrist, Joshua D, and Jörn-Steffen Pischke. 2009. <em>Mostly Harmless Econometrics: An Empiricist’s Companion</em>. Princeton university press.
+</div>
+<div id="ref-angrist2014mastering" class="csl-entry" role="listitem">
+———. 2014. <em>Mastering’metrics: The Path from Cause to Effect</em>. Princeton university press.
+</div>
+<div id="ref-dale2002estimating" class="csl-entry" role="listitem">
+Dale, Stacy Berg, and Alan B Krueger. 2002. <span>“Estimating the Payoff to Attending a More Selective College: An Application of Selection on Observables and Unobservables.”</span> <em>The Quarterly Journal of Economics</em> 117 (4): 1491–1527.
+</div>
+<div id="ref-wooldridge2025" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approach.”</span>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>In <span class="citation" data-cites="dale2002estimating">Dale and Krueger (<a href="#ref-dale2002estimating" role="doc-biblioref">2002</a>)</span> compare Ivy League graduates against State university ones<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>I am borrowing the notation from <span class="citation" data-cites="angrist2014mastering">Angrist and Pischke (<a href="#ref-angrist2014mastering" role="doc-biblioref">2014</a>)</span>, who discusses these as the long and short model. So, the superscript <span class="math inline">\(^s\)</span> is for short. Wooldridge does not use this notation, but it is helpful to keep track of the different parameters.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>You can include more than 2 regressors. It just makes the math a little more tedious.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>To define the population parameter in this way, we require MLR 1-4(a).<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This formula can be found on p.&nbsp;87 of <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>. Wooldridge uses <span class="math inline">\(\tilde{\beta}_1\)</span> in place of <span class="math inline">\(\hat{\beta}^s_1\)</span>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>This formula can be found on p.&nbsp;171 of <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 312</a>)</span> includes only the second and third polynomial of <span class="math inline">\(\hat y\)</span>. However, Stata’s default is to include the fourth-order polynomial.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Also referred to as (strong) ignorability <span class="citation" data-cites="wooldridge2025">(see <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, 100</a>)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>What is important here is just that <span class="math inline">\(\tau_{ate}(\mathbf{x}_i)=\tau_{ate}\)</span> (i.e.&nbsp;heterogeneity is independent of <span class="math inline">\(\mathbf{x}_i\)</span>)<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>See proof on p.&nbsp;256 for more detail.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

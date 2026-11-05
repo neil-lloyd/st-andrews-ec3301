@@ -329,10 +329,10 @@ $$
 $$
 
 ::: {.border}
-**FALSE.** There is a mistake in both the numerator and denominator.
+**FALSE.** There are mistakes in both the numerator and denominator.
 
 $$
-  t\text{-stat} = \frac{2\hat{\beta}_1-3\beta_2+5}{\sqrt{4Var(\hat{\beta}_1)+9Var(\hat{\beta}_2)-12Cov(\hat{\beta}_1,\hat{\beta}_2)}}
+  t\text{-stat} = \frac{2\hat{\beta}_1-3\hat{\beta}_2+5}{\sqrt{4Var(\hat{\beta}_1)+9Var(\hat{\beta}_2)-12Cov(\hat{\beta}_1,\hat{\beta}_2)}}
 $$
 
 :::

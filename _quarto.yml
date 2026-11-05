@@ -30,8 +30,8 @@ website:
             text: Lecture 5
           - href: lecture-6-multi.qmd
             text: Lecture 6
-#          - href: lecture-7-multi.qmd
-#            text: Lecture 7.
+          - href: lecture-7-multi.qmd
+            text: Lecture 7.
 #          - href: lecture-8-multi.qmd
 #            text: Lecture 8
 #          - href: lecture-9-multi.qmd
@@ -52,14 +52,10 @@ website:
             text: Lab 3 (Stata)
           - href: lab-3-R.qmd
             text: Lab 3 (R)  
-#          - href: lab-4-Stata.qmd
-#            text: Lab 4 (Stata)
-#          - href: lab-4-R.qmd
-#            text: Lab 4 (R)  
-#          - href: lab-5-Stata.qmd
-#            text: Lab 5 (Stata)
-#          - href: lab-5-R.qmd
-#            text: Lab 5 (R)  
+          - href: lab-4-Stata.qmd
+            text: Lab 4 (Stata)
+          - href: lab-4-R.qmd
+            text: Lab 4 (R)  
       - text: Tutorials
         menu:
           - href: tutorial-1.qmd

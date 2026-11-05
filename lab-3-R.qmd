@@ -157,8 +157,8 @@ Load these **after** `rm(list = ls())`, or the `stars` and `gof` settings will b
 
 As a substitute, you can use the following AI-written functions to create the tables using R's `knitr` and `broom` packages. 
 
-  - `balance_table(data, vars)`: means by treatment group, the difference, and the $p$-value of a $t$-test (replaces `dtable, by(treat, tests)`)
-  - `reg_table(models, types, keep)`: places regression results side-by-side (replaces `etable`)
+  - `balance_table(data, vars)`: means by treatment group, the difference, and the $p$-value of a $t$-test
+  - `reg_table(models, types, keep)`: places regression results side-by-side
 
 ```{r}
 #| code-fold: true

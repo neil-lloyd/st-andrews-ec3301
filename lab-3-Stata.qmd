@@ -41,7 +41,7 @@ On Moodle, under "Week 8", you find the ["Lab 3 Data"](https://moody.st-andrews.
 
 3. Download the "dizonross2019.dta" file and store it in this folder. 
 
-4. Open Stata and create a new .do file. Save it as "Lab 2/lab-2.do"
+4. Open Stata and create a new .do file. Save it as "Lab 3/lab-3.do"
 
 5. Add the following to your .do file; editing the file path to match your folder structure.
 
