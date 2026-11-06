@@ -1257,7 +1257,7 @@
     "href": "lecture-4.html#example-pm2.5-2",
     "title": "Testing Linear Hypotheses",
     "section": "Example: PM2.5",
-    "text": "Example: PM2.5\nIn our example of\n\\[\n  PM2.5_\\ell = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\\]\nThis could be as simple as,\n\\[\n  H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0\n\\]\n\n\n\n\n\n\nCautionMultiple hypothesis testing\n\n\n\nWhy not test \\(H^{(1)}_0: \\beta_1=0\\) and then \\(H^{(2)}_0: \\beta_2 = 0\\) as separate individual hypotheses? The combined size of these tests would not be \\(\\alpha\\). Why? The estimators are are correlated which implies:\n\\[\n  Pr\\big(\\text{Reject}\\;H^{(1)}_0\\;\\text{or}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_1=0\\big) \\neq \\alpha\n\\]\n\n\n\n\n\n\n\n\nTipMultiple hyopthesis testing\n\n\n\n\n\nThere are a number of ways to correctly do multiple hypothesis testing. One is the Bonferroni correction which gets you to reject separate hypotheses sequentially using an algorithim. It does so by ensuring that the family-wise error rate (the probability of rejecting at least one true \\(H_0\\) across a “family” of hypotheses) is \\(\\leq \\alpha\\)."
+    "text": "Example: PM2.5\nIn our example of\n\\[\n  PM2.5_\\ell = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\\]\nThis could be as simple as,\n\\[\n  H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0\n\\]\n\n\n\n\n\n\nCautionMultiple hypothesis testing\n\n\n\nWhy not test \\(H^{(1)}_0: \\beta_1=0\\) and then \\(H^{(2)}_0: \\beta_2 = 0\\) as separate individual hypotheses? The combined size of these tests would not be \\(\\alpha\\).\n\\[\n  Pr\\big(\\text{Reject}\\;H^{(1)}_0\\;\\text{or}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_2=0\\big) \\neq \\alpha\n\\]\nWhy? For two reasons:\n\nSuppose, the tests are independent. Then,\n\\[\n\\begin{aligned}\nPr\\big(\\text{Reject}\\;H^{(1)}_0\\;\\text{or}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_2=0\\big) =& Pr\\big(\\text{Reject}\\;H^{(1)}_0 \\big|\\beta_1=0,\\beta_2=0\\big) \\\\\n&+Pr\\big(\\text{Reject}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_2=0\\big) \\\\\n=& 2\\alpha\n\\end{aligned}\n\\]\nWe could then adjust the size of each individual test to \\(\\alpha/2\\) to ensure that the probability of making at least one type-1 error is \\(\\alpha\\) overall.\nThe bigger (“messier”) problem is that the tests are not independent of one another because the \\(Cov(\\hat\\beta_1,\\hat\\beta_2)\\neq 0\\). This makes it difficult to define this probability.\n\n\n\n\n\n\n\n\n\nTipMultiple hyopthesis testing\n\n\n\n\n\nThere are a number of ways to correctly do multiple hypothesis testing. One is the Bonferroni correction which gets you to reject separate hypotheses sequentially using an algorithim. It does so by ensuring that the family-wise error rate (the probability of rejecting at least one true \\(H_0\\) across a “family” of hypotheses) is \\(\\leq \\alpha\\)."
   },
   {
     "objectID": "lecture-4.html#test",
@@ -1397,14 +1397,14 @@
     "href": "lecture-4.html#section-8",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "StataR\n\n\n\n\nCode\nuse \"$data_dir\\morg24_bothgen.dta\", clear\n\n* Scatter\ntwoway (scatter lnwage exp, mc(blue%50)) (lfit lnwage exp, lwidth(*2)), by(sex,  legend(off) note(\"\") ) xtitle(\"Potential Experience (=Age-(Years of Education +6))\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nwage_data &lt;- read_dta(file.path(data_dir, \"morg24_bothgen.dta\"))\n\nggplot(wage_data, aes(x = exp, y = lnwage)) +\n  geom_point(colour = \"blue\", alpha = 0.5) +\n  geom_smooth(method = \"lm\", se = FALSE, linewidth = 1.5) +\n  facet_wrap(~ as_factor(sex)) +\n  labs(x = \"Potential Experience (=Age-(Years of Education +6))\") +\n  theme_minimal()"
+    "text": "StataR\n\n\n\n\nCode\nuse \"$data_dir\\morg24_bothgen.dta\", clear\n\n* Scatter\ntwoway (scatter lnwage exp, mc(blue%50)) (lfit lnwage exp, lwidth(*2)), by(sex,  legend(off) note(\"\") ) xtitle(\"Potential Experience (=Age-(Years of Education +6))\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nwage_data &lt;- read_dta(file.path(data_dir, \"morg24_bothgen.dta\"))\n\nggplot(wage_data, aes(x = exp, y = lnwage)) +\n  geom_point(colour = \"blue\", alpha = 0.5) +\n  geom_smooth(method = \"lm\", se = FALSE, linewidth = 1.5) +\n  facet_wrap(~ as_factor(sex)) +\n  labs(x = \"Potential Experience (=Age-(Years of Education +6))\") +\n  theme_minimal()\n\n\n`geom_smooth()` using formula = 'y ~ x'"
   },
   {
     "objectID": "lecture-4.html#section-9",
     "href": "lecture-4.html#section-9",
     "title": "Testing Linear Hypotheses",
     "section": "",
-    "text": "If we overlay the fitted lines we get\n\nStataR\n\n\n\n\nCode\n\n* overlay fitted lines\ntwoway (lfit lnwage exp if sex==1, lc(blue)) (lfit lnwage exp if sex==2, lc(red) lwidth(*2)), xtitle(\"Potential Experience (=Age-(Years of Education +6))\") legend(order(1 \"Male\" 2 \"Female\") r(2) ring(0) pos(5)) ylabel(2(1)6)\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nwage_data$group &lt;- factor(wage_data$sex, levels = c(1, 2),\n                          labels = c(\"Male\", \"Female\"))\n\nggplot(wage_data, aes(x = exp, y = lnwage, colour = group)) +\n  geom_smooth(data = subset(wage_data, sex == 1),\n              method = \"lm\", se = FALSE, linewidth = 0.75) +\n  geom_smooth(data = subset(wage_data, sex == 2),\n              method = \"lm\", se = FALSE, linewidth = 1.5) +\n  scale_colour_manual(values = c(Male = \"blue\", Female = \"red\")) +\n  scale_y_continuous(breaks = 2:6) +\n  coord_cartesian(ylim = c(2, 6)) +\n  labs(x = \"Potential Experience (=Age-(Years of Education +6))\",\n       y = \"lnwage\", colour = NULL) +\n  theme_minimal() +\n  theme(legend.position = \"inside\",\n        legend.position.inside = c(0.98, 0.02),\n        legend.justification = c(1, 0))"
+    "text": "If we overlay the fitted lines we get\n\nStataR\n\n\n\n\nCode\n\n* overlay fitted lines\ntwoway (lfit lnwage exp if sex==1, lc(blue)) (lfit lnwage exp if sex==2, lc(red) lwidth(*2)), xtitle(\"Potential Experience (=Age-(Years of Education +6))\") legend(order(1 \"Male\" 2 \"Female\") r(2) ring(0) pos(5)) ylabel(2(1)6)\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nwage_data$group &lt;- factor(wage_data$sex, levels = c(1, 2),\n                          labels = c(\"Male\", \"Female\"))\n\nggplot(wage_data, aes(x = exp, y = lnwage, colour = group)) +\n  geom_smooth(data = subset(wage_data, sex == 1),\n              method = \"lm\", se = FALSE, linewidth = 0.75) +\n  geom_smooth(data = subset(wage_data, sex == 2),\n              method = \"lm\", se = FALSE, linewidth = 1.5) +\n  scale_colour_manual(values = c(Male = \"blue\", Female = \"red\")) +\n  scale_y_continuous(breaks = 2:6) +\n  coord_cartesian(ylim = c(2, 6)) +\n  labs(x = \"Potential Experience (=Age-(Years of Education +6))\",\n       y = \"lnwage\", colour = NULL) +\n  theme_minimal() +\n  theme(legend.position = \"inside\",\n        legend.position.inside = c(0.98, 0.02),\n        legend.justification = c(1, 0))\n\n\n`geom_smooth()` using formula = 'y ~ x'\n`geom_smooth()` using formula = 'y ~ x'"
   },
   {
     "objectID": "lecture-4.html#f-test",
@@ -1495,7 +1495,7 @@
     "href": "lecture-4.html#demonstration",
     "title": "Testing Linear Hypotheses",
     "section": "Demonstration",
-    "text": "Demonstration\nHere are the SSR for each version:\n\nStataR\n\n\n\nModel for group 1 (i.e. “male”)\n\n\nqui reg lnwage edu exp if sex==1\ndis e(rss)\n\n715.90864\n\n\n\nModel for group 2 (i.e. “female”)\n\n\nqui reg lnwage edu exp if sex==2\ndis e(rss)\n\n539.59768\n\n\n\nUnrestricted model (i.e. with interactions)\n\n\nqui reg lnwage i.sex##c.edu i.sex##c.exp\ndis e(rss)\n\n1255.5063\n\n\n\nRestricted model (i.e. without interactions)\n\n\nqui reg lnwage edu exp\ndis e(rss)\n\n1307.1667\n\n\n\n\n\nModel for group 1 (i.e. “male”)\n\n\nmodel_m &lt;- lm(lnwage ~ edu + exp, data = wage_data, subset = sex == 1)\ndeviance(model_m)\n\n[1] 715.9086\n\n\n\nModel for group 2 (i.e. “female”)\n\n\nmodel_f &lt;- lm(lnwage ~ edu + exp, data = wage_data, subset = sex == 2)\ndeviance(model_f)\n\n[1] 539.5977\n\n\n\nUnrestricted model (i.e. with interactions)\n\n\nmodel_ur &lt;- lm(lnwage ~ sex * edu + sex * exp, data = wage_data)\ndeviance(model_ur)\n\n[1] 1255.506\n\n\n\nRestricted model (i.e. without interactions)\n\n\nmodel_r &lt;- lm(lnwage ~ edu + exp, data = wage_data)\ndeviance(model_r)\n\n[1] 1307.167"
+    "text": "Demonstration\nHere are the SSR for each version:\n\nStataR\n\n\n\nModel for group 1 (i.e. “male”)\n\n\nqui reg lnwage edu exp if sex==1\ndis e(rss)\n\n715.90864\n\n\n\nModel for group 2 (i.e. “female”)\n\n\nqui reg lnwage edu exp if sex==2\ndis e(rss)\n\n539.59768\n\n\n\nUnrestricted model (i.e. with interactions)\n\n\nqui reg lnwage i.sex##c.edu i.sex##c.exp\ndis e(rss)\n\n1255.5063\n\n\n\nRestricted model (i.e. without interactions)\n\n\nqui reg lnwage edu exp\ndis e(rss)\n\n1307.1667\n\n\n\n\n\n\nCode\n# make sex a factor variable\nwage_data$sex &lt;- factor(wage_data$sex)\n\n\n\nModel for group 1 (i.e. “male”)\n\n\nmodel_m &lt;- lm(lnwage ~ edu + exp, data = wage_data, subset = sex == 1)\ndeviance(model_m)\n\n[1] 715.9086\n\n\n\nModel for group 2 (i.e. “female”)\n\n\nmodel_f &lt;- lm(lnwage ~ edu + exp, data = wage_data, subset = sex == 2)\ndeviance(model_f)\n\n[1] 539.5977\n\n\n\nUnrestricted model (i.e. with interactions)\n\n\nmodel_ur &lt;- lm(lnwage ~ sex * edu + sex * exp, data = wage_data)\ndeviance(model_ur)\n\n[1] 1255.506\n\n\n\nRestricted model (i.e. without interactions)\n\n\nmodel_r &lt;- lm(lnwage ~ edu + exp, data = wage_data)\ndeviance(model_r)\n\n[1] 1307.167"
   },
   {
     "objectID": "lecture-4.html#section-12",
@@ -1635,7 +1635,7 @@
     "href": "lecture-4-slides.html#example-pm2.5-2",
     "title": "Testing Linear Hypotheses",
     "section": "Example: PM2.5",
-    "text": "Example: PM2.5\nIn our example of\n\n  PM2.5_\\ell = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\nThis could be as simple as,\n\n  H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0\n\n\n\n\n\n\n\n\nMultiple hypothesis testing\n\n\nWhy not test H^{(1)}_0: \\beta_1=0 and then H^{(2)}_0: \\beta_2 = 0 as separate individual hypotheses? The combined size of these tests would not be \\alpha. Why? The estimators are are correlated which implies:\n\n  Pr\\big(\\text{Reject}\\;H^{(1)}_0\\;\\text{or}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_1=0\\big) \\neq \\alpha"
+    "text": "Example: PM2.5\nIn our example of\n\n  PM2.5_\\ell = \\beta_0 + \\beta_1 EV_\\ell + \\beta_2 hybrid_\\ell + \\mathbf{x}_\\ell\\gamma + u_\\ell\n\nThis could be as simple as,\n\n  H_0: \\beta_1 = 0\\;\\text{and}\\; \\beta_2 = 0\n\n\n\n\n\n\n\n\nMultiple hypothesis testing\n\n\nWhy not test H^{(1)}_0: \\beta_1=0 and then H^{(2)}_0: \\beta_2 = 0 as separate individual hypotheses? The combined size of these tests would not be \\alpha.\n\n  Pr\\big(\\text{Reject}\\;H^{(1)}_0\\;\\text{or}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_2=0\\big) \\neq \\alpha\n\nWhy? For two reasons:\n\nSuppose, the tests are independent. Then,\n\n\\begin{aligned}\nPr\\big(\\text{Reject}\\;H^{(1)}_0\\;\\text{or}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_2=0\\big) =& Pr\\big(\\text{Reject}\\;H^{(1)}_0 \\big|\\beta_1=0,\\beta_2=0\\big) \\\\\n&+Pr\\big(\\text{Reject}\\;H^{(2)}_0 \\big|\\beta_1=0,\\beta_2=0\\big) \\\\\n=& 2\\alpha\n\\end{aligned}\n\nWe could then adjust the size of each individual test to \\alpha/2 to ensure that the probability of making at least one type-1 error is \\alpha overall.\nThe bigger (“messier”) problem is that the tests are not independent of one another because the Cov(\\hat\\beta_1,\\hat\\beta_2)\\neq 0. This makes it difficult to define this probability."
   },
   {
     "objectID": "lecture-4-slides.html#test",
@@ -6482,13 +6482,6 @@
     "text": "Since \\beta = \\tau_{att} = \\tau_{ate} (under A-1 and A-2)\n\n  \\beta^s = \\tau_{att} + \\text{Selection} = \\beta + \\gamma \\delta_1\n\nwhich is the OV formula.\n\nthe multivariate regression model is explicitly modelling (“controlling for”) selection, under these assumptions."
   },
   {
-    "objectID": "lecture-7-slides.html#basic-model",
-    "href": "lecture-7-slides.html#basic-model",
-    "title": "Omitted Variables and Conditional Independence",
-    "section": "Basic model",
-    "text": "Basic model"
-  },
-  {
     "objectID": "lecture-7-slides.html#identification-strategy",
     "href": "lecture-7-slides.html#identification-strategy",
     "title": "Omitted Variables and Conditional Independence",
@@ -6914,13 +6907,6 @@
     "title": "Omitted Variables and Conditional Independence",
     "section": "",
     "text": "Since \\(\\beta = \\tau_{att} = \\tau_{ate}\\) (under A-1 and A-2)\n\\[\n  \\beta^s = \\tau_{att} + \\text{Selection} = \\beta + \\gamma \\delta_1\n\\]\nwhich is the OV formula.\n\nthe multivariate regression model is explicitly modelling (“controlling for”) selection, under these assumptions."
-  },
-  {
-    "objectID": "lecture-7.html#basic-model",
-    "href": "lecture-7.html#basic-model",
-    "title": "Omitted Variables and Conditional Independence",
-    "section": "Basic model",
-    "text": "Basic model"
   },
   {
     "objectID": "lecture-7.html#identification-strategy",

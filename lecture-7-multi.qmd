@@ -1086,8 +1086,6 @@ which is the OV formula.
 
 # Example: Selective Education
 
-## Basic model
-
 ## Identification strategy
 
 Novel identification strategy to control for factors that may normally be unobserved (i.e. omitted).

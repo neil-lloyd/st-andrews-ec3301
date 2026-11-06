@@ -405,7 +405,7 @@ Where $R$ is a $q\times k$ matrix of constants and $r$ a $q$-dimensional column 
 :::
 ::::
 
-## Example: PM2.5
+## Example: PM2.5 {.scrollable}
 
 In our example of 
 
@@ -420,12 +420,27 @@ $$
 $$
 
 :::{.callout-caution title="Multiple hypothesis testing"}
-Why not test $H^{(1)}_0: \beta_1=0$ and then $H^{(2)}_0: \beta_2 = 0$ as separate individual hypotheses? The combined size of these tests would not be $\alpha$. Why? The estimators are are correlated which implies:
+Why not test $H^{(1)}_0: \beta_1=0$ and then $H^{(2)}_0: \beta_2 = 0$ as separate individual hypotheses? The combined size of these tests would not be $\alpha$. 
 
 $$
-  Pr\big(\text{Reject}\;H^{(1)}_0\;\text{or}\;H^{(2)}_0 \big|\beta_1=0,\beta_1=0\big) \neq \alpha
+  Pr\big(\text{Reject}\;H^{(1)}_0\;\text{or}\;H^{(2)}_0 \big|\beta_1=0,\beta_2=0\big) \neq \alpha
 $$
 
+Why? For two reasons:
+
+- Suppose, the tests are independent. Then,
+  
+  $$
+  \begin{aligned}
+  Pr\big(\text{Reject}\;H^{(1)}_0\;\text{or}\;H^{(2)}_0 \big|\beta_1=0,\beta_2=0\big) =& Pr\big(\text{Reject}\;H^{(1)}_0 \big|\beta_1=0,\beta_2=0\big) \\
+  &+Pr\big(\text{Reject}\;H^{(2)}_0 \big|\beta_1=0,\beta_2=0\big) \\
+  =& 2\alpha
+  \end{aligned}
+  $$ 
+  
+  We could then adjust the size of each individual test to $\alpha/2$ to ensure that the probability of making *at least one* type-1 error is $\alpha$ overall.
+
+- The bigger ("messier") problem is that the tests are not independent of one another because the $Cov(\hat\beta_1,\hat\beta_2)\neq 0$. This makes it difficult to define this probability. 
 :::
 
 ::::{.content-visible unless-format="revealjs"}

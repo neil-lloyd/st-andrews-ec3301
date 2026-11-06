@@ -2,15 +2,14 @@
 title: Econometrics Lab 3
 subtitle: RCT Replication in R
 format:
-  html: default
-#    other-links:
-#      - text: "Solution .R file (AppsAnywhere)"
-#        href: "material/lab-3/ec3301-lab-3.R"
-#        icon: code-square
-#    other-links:
-#      - text: "Solution .R file"
-#        href: "material/lab-3/ec3301-lab-3-alt.R"
-#        icon: code-square
+  html:
+    other-links:
+      - text: "Solution .R file (AppsAnywhere)"
+        href: "material/lab-3/ec3301-lab-3.R"
+        icon: code-square
+      - text: "Solution .R file"
+        href: "material/lab-3/ec3301-lab-3-alt.R"
+        icon: code-square
 engine: knitr
 ---
 
