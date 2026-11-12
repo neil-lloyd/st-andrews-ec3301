@@ -1,0 +1,2527 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Proxy and Instrumental Variables – EC3301 Econometrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cf201e8c159c64e39451d1a718f2f573.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">EC3301 Econometrics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lectures" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lectures</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lectures">    
+        <li>
+    <a class="dropdown-item" href="./lecture-0.html">
+ <span class="dropdown-text">Pre-sessional Lecture</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-1.html">
+ <span class="dropdown-text">Lecture 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-2.html">
+ <span class="dropdown-text">Lecture 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-3.html">
+ <span class="dropdown-text">Lecture 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-4.html">
+ <span class="dropdown-text">Lecture 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-5.html">
+ <span class="dropdown-text">Lecture 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-6.html">
+ <span class="dropdown-text">Lecture 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-7.html">
+ <span class="dropdown-text">Lecture 7</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-8.html">
+ <span class="dropdown-text">Lecture 8</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="./lab-1-Stata.html">
+ <span class="dropdown-text">Lab 1 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-1-R.html">
+ <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-Stata.html">
+ <span class="dropdown-text">Lab 2 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-R.html">
+ <span class="dropdown-text">Lab 2 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-3-Stata.html">
+ <span class="dropdown-text">Lab 3 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-3-R.html">
+ <span class="dropdown-text">Lab 3 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-4-Stata.html">
+ <span class="dropdown-text">Lab 4 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-4-R.html">
+ <span class="dropdown-text">Lab 4 (R)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./tutorial-1.html">
+ <span class="dropdown-text">Tutorial 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-1-solutions.html">
+ <span class="dropdown-text">Tutorial 1 (Solutions)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2.html">
+ <span class="dropdown-text">Tutorial 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2-solutions.html">
+ <span class="dropdown-text">Tutorial 2 (Solutions)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-3.html">
+ <span class="dropdown-text">Tutorial 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-3-solutions.html">
+ <span class="dropdown-text">Tutorial 3 (Solutions)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-extra-material" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Extra Material</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-extra-material">    
+        <li>
+    <a class="dropdown-item" href="./material-interpretation.html">
+ <span class="dropdown-text">Interpreting Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-cef.html">
+ <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-intercept.html">
+ <span class="dropdown-text">The Intercept</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-R.html">
+ <span class="dropdown-text">Basic Programming in R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-Stata.html">
+ <span class="dropdown-text">Basic Programming in Stata</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="light-content">
+<p><img src="img/01-standard-vertical-black-text.png" class="img-fluid"></p>
+</div>
+<div class="dark-content">
+<p><img src="img/02-standard-vertical-white-text.png" class="img-fluid"></p>
+</div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#proxy-variables" id="toc-proxy-variables" class="nav-link active" data-scroll-target="#proxy-variables">Proxy Variables</a></li>
+  <li><a href="#instrumental-variables" id="toc-instrumental-variables" class="nav-link" data-scroll-target="#instrumental-variables">Instrumental Variables</a></li>
+  <li><a href="#iv-estimator" id="toc-iv-estimator" class="nav-link" data-scroll-target="#iv-estimator">IV Estimator</a></li>
+  <li><a href="#poorweak-instruments" id="toc-poorweak-instruments" class="nav-link" data-scroll-target="#poorweak-instruments">Poor/Weak Instruments</a></li>
+  <li><a href="#multivariate-case" id="toc-multivariate-case" class="nav-link" data-scroll-target="#multivariate-case">Multivariate case</a></li>
+  <li><a href="#sls" id="toc-sls" class="nav-link" data-scroll-target="#sls">2SLS</a></li>
+  <li><a href="#causation" id="toc-causation" class="nav-link" data-scroll-target="#causation">Causation</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-8-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="lecture-8-notes-Stata.pdf"><i class="bi bi-file-pdf"></i>PDF with Stata</a></li><li><a href="lecture-8-notes-R.pdf"><i class="bi bi-file-pdf"></i>PDF with R</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Proxy and Instrumental Variables</h1>
+<p class="subtitle lead">Lecture 8</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="reading" class="level2">
+<h2 class="anchored" data-anchor-id="reading">Reading</h2>
+<p>This lecture covers material from <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>:</p>
+<ul>
+<li>Chapter 9.2 “Using Proxy Variables for Unobserved Explanatory Variables”</li>
+<li>Chapter 15.1 “Motivation: Omitted Vairables in a Simple Regression Model”</li>
+<li>Chapter 15.2 “IV Estimation of the Multiple Regression Model”</li>
+<li>Chapter 15.3 “Two Stage Least Squares”</li>
+<li>Chapter 19.5 “Instrumental Variables and the Local Average Treatment Effect”</li>
+</ul>
+</section>
+<section id="proxy-variables" class="level1">
+<h1>Proxy Variables</h1>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>The following example comes from <span class="citation" data-cites="blackburn1992unobserved">Blackburn and Neumark (<a href="#ref-blackburn1992unobserved" role="doc-biblioref">1992</a>)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It is an argument based on the traditional OV framework</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p>The ‘true’ model explaining the relationship between wages and education (i.e.&nbsp;Mincer equation) is given,</p>
+<p><span class="math display">\[
+  ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 abil_i + \mathbf{x}_i\gamma + u_i
+\]</span></p>
+<p>where <span class="math inline">\(abil_i\)</span> is individual (innate) ability</p></li>
+<li><p>Since <span class="math inline">\(abil_i\)</span> is unobserved, it is omitted from the estimating equation</p>
+<p><span class="math display">\[
+  ln(wage_i) = \beta^s_0 + \beta^s_1 edu_i + \mathbf{x}_i\gamma^s + v_i
+\]</span></p></li>
+</ul>
+</div>
+</section>
+<section id="ov-bias" class="level2">
+<h2 class="anchored" data-anchor-id="ov-bias">OV Bias</h2>
+<p>Using the OV formula from <a href="./lecture-7.html">Lecture 7</a>,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><span class="math display">\[
+  p\lim \hat{\beta}^s_1 = \beta_1 + \underbrace{\beta_2 \frac{Cov(\widetilde{abil}_i,\widetilde{edu}_i)}{Var(\widetilde{edu}_i)}}
+\]</span></p>
+<ul>
+<li><p>We expect this bias to be positive, since our prior is that</p>
+<ul>
+<li><p><span class="math inline">\(\beta_2&gt;0\)</span></p></li>
+<li><p><span class="math inline">\(Cov(\widetilde{abil}_i,\widetilde{edu}_i)&gt;0\)</span></p></li>
+</ul></li>
+</ul>
+</section>
+<section id="proxy" class="level2">
+<h2 class="anchored" data-anchor-id="proxy">Proxy</h2>
+<p>What if we had variable that could “stand in” for unobserved ability?</p>
+<ul>
+<li><p>The argument made by <span class="citation" data-cites="blackburn1992unobserved">Blackburn and Neumark (<a href="#ref-blackburn1992unobserved" role="doc-biblioref">1992</a>)</span> is to estimate the <span class="math inline">\(a\)</span>-lternative model,</p>
+<p><span class="math display">\[
+  ln(wage_i) = \beta^a_0 + \beta^a_1 edu_i + \beta^a_3 IQ_i + \mathbf{x}_i\gamma^a + \varepsilon_i
+\]</span></p></li>
+</ul>
+<p>In which,</p>
+<ul>
+<li><p>An individual’s <span class="math inline">\(IQ\)</span> acts as a <strong>proxy</strong> for unobserved ability.</p></li>
+<li><p>Having controlled for <span class="math inline">\(IQ\)</span>,</p>
+<p><span class="math display">\[
+  p\lim \hat{\beta}^a_1 = \beta_1
+\]</span></p></li>
+</ul>
+</section>
+<section id="theory" class="level2">
+<h2 class="anchored" data-anchor-id="theory">Theory</h2>
+<p>Let us now formalize this framework and think through the assumptions under which it is valid.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>The ‘true’, <em>intended</em> model is,</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \beta_3x^*_{i3} + u_i
+\]</span></p>
+<p>where,</p>
+<ul>
+<li><p><span class="math inline">\(x^*_{i3}\)</span> is unobserved</p></li>
+<li><p>We will assume that MLR 1-4 are satisfied; or at least MLR 1-4a</p></li>
+</ul>
+</div>
+</section>
+<section id="plug-in-solution" class="level2">
+<h2 class="anchored" data-anchor-id="plug-in-solution">Plug-in solution</h2>
+<p>As a proxy for <span class="math inline">\(x^*_{i3}\)</span>, you observe <span class="math inline">\(x_{i3}\)</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><p>The relationship between these two is given by,</p>
+<p><span class="math display">\[
+  x^*_{i3} = \delta_0 + \delta_1 x_{i3} + \nu_{i3}
+\]</span></p>
+<p>or, more importantly <span class="math inline">\(E[x^*_{i3}|x_{i3}]=\delta_0 + \delta_1 x_{i3}\)</span></p></li>
+<li><p>In practice, you regress <span class="math inline">\(y\)</span> on <span class="math inline">\(x_1,x_2,x_3\)</span></p></li>
+</ul>
+</div>
+<div class="fragment fade-in">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 315</a>)</span> refers to this as the “plug-in solution to the omitted variables problem”</p>
+</div>
+</div>
+</div>
+</section>
+<section id="plug-in" class="level2">
+<h2 class="anchored" data-anchor-id="plug-in">Plug in</h2>
+<p>Given we know the ‘true’ model, we can <em>plug in</em> <span class="math inline">\(x^*_{i3} = \delta_0 + \delta_1 x_{i3} + \nu_{i3}\)</span>:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  y_i =&amp; \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \beta_3(\textcolor{red}{\delta_0 + \delta_1 x_{i3} + \nu_{i3}}) + u_i \\
+  =&amp; (\beta_0 + \beta_3\textcolor{red}{\delta_0}) + \beta_1x_{i1} + \beta_2x_{i2} + \beta_3 \textcolor{red}{\delta_1 x_{i3}} +
+  (u_i + \beta_3\textcolor{red}{\nu_{i3}})
+  \end{aligned}
+\]</span></p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>which can be rewritten using <span class="math inline">\(a\)</span>-lternate parameters,</p>
+<p><span class="math display">\[
+  y_i =\beta_0^a +\beta^a_1x_{i1} + \beta^a_2x_{i2} + \beta^a_3x_{i3} + \varepsilon_i
+\]</span></p>
+</div>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
+<p><span class="math display">\[
+  y_i =\underbrace{\beta_0^a}_{\beta_0 + \beta_3\textcolor{red}{\delta_0}} +\beta^a_1x_{i1} + \beta^a_2x_{i2} + \underbrace{\beta^a_3}_{\beta_3 \textcolor{red}{\delta_1}}x_{i3} + \underbrace{\varepsilon_i}_{u_i + \beta_3\textcolor{red}{\nu_{i3}}}
+\]</span></p>
+<p>Evidently,</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p><span class="math inline">\(\beta_0^a\neq \beta_0\)</span> and <span class="math inline">\(\beta_3^a\neq \beta_3\)</span></p>
+<ul class="incremental">
+<li>not a concern, since these aren’t the coefficients of interest</li>
+</ul></li>
+<li><p>however, under what assumptions are,</p>
+<ul class="incremental">
+<li><p><span class="math inline">\(\beta^a_1 = \beta_1\)</span> and <span class="math inline">\(\beta^a_2 = \beta_2\)</span></p></li>
+<li><p>in other words,</p>
+<p><span class="math display">\[
+  p\lim \hat{\beta}^a_j = \beta_j\qquad j=1,2
+\]</span></p></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2"></h2>
+<p>From MLR 4, we need:</p>
+<p><span class="math display">\[
+  E[\varepsilon_i|x_{i1},x_{i2},x_{i3}] = 0
+\]</span></p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>Given that <span class="math inline">\(\varepsilon_i=u_i + \beta_3\textcolor{red}{\nu_{i3}}\)</span></p>
+<p><span class="math display">\[
+  E[\varepsilon_i|x_{i1},x_{i2},x_{i3}] = \underbrace{E[u_i|x_{i1},x_{i2},x_{i3}]}_\text{term (1)} + \underbrace{\beta_3E[\nu_{i3}|x_{i1},x_{i2},x_{i3}]}_\text{term (2)}
+\]</span></p>
+<p>where the first term <span class="math inline">\(=0\)</span>, given the assumptions of the ‘true’ model.</p>
+</div>
+</section>
+<section id="term-1" class="level2">
+<h2 class="anchored" data-anchor-id="term-1">Term (1)</h2>
+<p>What can we say about,</p>
+<p><span class="math display">\[
+  E[u_i|x_{i1},x_{i2},x_{i3}]
+\]</span></p>
+<p>We know from the set-up:</p>
+<ul>
+<li><span class="math inline">\(E[u_i|x_{i1},x_{i2},x^*_{i3}]=0 \quad \Rightarrow \quad E[u_i|x_{i1},x_{i2}]=0\)</span></li>
+</ul>
+<div class="fragment fade-in">
+<ul>
+<li><p>But, <span class="math inline">\(E[u_i|x_{i1},x_{i2},x^*_{i3}]\)</span> is not the same as <span class="math inline">\(E[u_i|x_{i1},x_{i2},x_{i3}]\)</span></p>
+<p><span class="math inline">\(\Rightarrow\)</span> must <strong>assume</strong></p>
+<p><span class="math display">\[
+  E[u_i|x_{i1},x_{i2},x_{i3}] = E[u_i|x_{i1},x_{i2}]=0
+\]</span></p>
+<ul>
+<li>implies that <span class="math inline">\(x_3\)</span> is irrelevant in the main equation (i.e., conditional on <span class="math inline">\(x_1,x_2,x^*_3\)</span>)</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="term-2" class="level2">
+<h2 class="anchored" data-anchor-id="term-2">Term (2)</h2>
+<p>What can we say about,</p>
+<p><span class="math display">\[
+  E[\nu_{i3}|x_{i1},x_{i2},x_{i3}]
+\]</span></p>
+<p>We know from the set-up:</p>
+<ul>
+<li><span class="math inline">\(E[\nu_{i3}|x_{i3}]=0\)</span></li>
+</ul>
+<div class="fragment fade-in">
+<ul>
+<li><p>But, <span class="math inline">\(E[\nu_{i3}|x_{i3}]\)</span> is not same as <span class="math inline">\(E[\nu_{i3}|x_{i1},x_{i2},x_{i3}]\)</span></p>
+<p><span class="math inline">\(\Rightarrow\)</span> must <strong>assume</strong></p>
+<p><span class="math display">\[
+  E[\nu_{i3}|x_{i1},x_{i2},x_{i3}] = E[\nu_{i3}|x_{i3}]=0
+\]</span></p></li>
+</ul>
+</div>
+</section>
+<section id="good-proxy" class="level2">
+<h2 class="anchored" data-anchor-id="good-proxy">“Good” proxy</h2>
+<p>To recap, we need the following (identifying) assumptions:</p>
+<p><strong>A-1</strong> MLR 4 for the ‘true’ model:</p>
+<p><span class="math display">\[
+     E[u_i|x_{i1},x_{i2},x^*_{i3}]=0
+   \]</span></p>
+<p><strong>A-2</strong> Relevance and linearity of the proxy equation: <span class="math inline">\(\delta_1&gt;0\)</span></p>
+<p><span class="math display">\[
+     x^*_{i3} = \delta_0 + \delta_1 x_{i3} + \nu_{i3}
+   \]</span></p>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3"></h2>
+<p><strong>A-3</strong> Mean independence of <span class="math inline">\(u\)</span> w.r.t. <span class="math inline">\(x_3\)</span> (conditional on <span class="math inline">\(x_2,x_3\)</span>)</p>
+<p><span class="math display">\[
+     E[u_{i}|x_{i1},x_{i2},x_{i3}] = E[u_{i}|x_{i1},x_{i2}]=0
+   \]</span></p>
+<p><strong>A-4</strong> Mean independence of <span class="math inline">\(\nu_{3}\)</span> w.r.t. other regressors: <span class="math inline">\(x_1,x_2\)</span></p>
+<p><span class="math display">\[
+     E[\nu_{i3}|x_{i1},x_{i2},x_{i3}] = E[\nu_{i3}|x_{i1}]=0
+   \]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are only concerned with consistency and not finite sample bias, you could replace 1, 3 &amp; 4 with their covariance equivalents.</p>
+</div>
+</div>
+</section>
+<section id="example-blackburn-neumark-1992" class="level2">
+<h2 class="anchored" data-anchor-id="example-blackburn-neumark-1992">Example: Blackburn &amp; Neumark (1992)</h2>
+<p>To justify <span class="citation" data-cites="blackburn1992unobserved">Blackburn and Neumark (<a href="#ref-blackburn1992unobserved" role="doc-biblioref">1992</a>)</span>’s use of IQ as a proxy for unobserved ability,</p>
+<p><strong>A-3</strong> requires,</p>
+<p><span class="math display">\[
+  E[ln(wage_i)|educ_i,abil_i,\mathbf{x}_i,IQ_i] = \beta_0 + \beta_1 edu_i + \beta_2 abil_i + \mathbf{x}_i\gamma
+\]</span></p>
+<ul>
+<li>Wages are unrelated to IQ scores, independently of ability</li>
+</ul>
+<div class="fragment fade-in">
+<p><strong>A-4</strong> requires,</p>
+<p><span class="math display">\[
+  E[abil_i|educ_i,\mathbf{x}_i,IQ_i] = \delta_0 + \delta_1 IQ_i
+\]</span></p>
+<ul>
+<li>Ability is unrelated to education and other controls, conditional on IQ</li>
+</ul>
+<p><strong>Can either of these be tested?</strong></p>
+</div>
+</section>
+<section id="section-4" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="section-4"></h2>
+<p>On p.&nbsp;316, <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span> provides this example of <span class="citation" data-cites="blackburn1992unobserved">Blackburn and Neumark (<a href="#ref-blackburn1992unobserved" role="doc-biblioref">1992</a>)</span> using a sample of data from the US National Longitudinal Survey of Young Men. The data follows a cohort of men born in 1966. IQ data was collected from high school records.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                          model1       model2   
+------------------------------------------------
+educ                     0.0654 ***   0.0544 ***
+                       (0.0063)     (0.0069)    
+exper                    0.0140 ***   0.0141 ***
+                       (0.0032)     (0.0032)    
+tenure                   0.0117 ***   0.0114 ***
+                       (0.0025)     (0.0024)    
+married                  0.1994 ***   0.1998 ***
+                       (0.0391)     (0.0388)    
+south                   -0.0909 ***  -0.0802 ***
+                       (0.0262)     (0.0263)    
+urban                    0.1839 ***   0.1819 ***
+                       (0.0270)     (0.0268)    
+black                   -0.1883 ***  -0.1431 ***
+                       (0.0377)     (0.0395)    
+IQ                                    0.0036 ***
+                                    (0.0010)    
+_cons                    5.3955 ***   5.1764 ***
+                       (0.1132)     (0.1280)    
+Number of observations      935          935    
+R-squared                 0.253        0.263    
+------------------------------------------------
+*** p&lt;.01, ** p&lt;.05, * p&lt;.1</code></pre>
+</div>
+</div>
+</section>
+<section id="example-dale-krueger-2002" class="level2">
+<h2 class="anchored" data-anchor-id="example-dale-krueger-2002">Example: Dale &amp; Krueger (2002)</h2>
+<p>In <a href="./lecture-7.html">Lecture-7</a> we discussed <span class="citation" data-cites="dale2002estimating">Dale and Krueger (<a href="#ref-dale2002estimating" role="doc-biblioref">2002</a>)</span> which uses a novel identification strategy:</p>
+<p><span class="math display">\[
+  y_i = \alpha^\ell + \beta^\ell p_i + \gamma_1^\ell SAT_i + \mathbf{x}_i\gamma_2^\ell + grp_i\psi^\ell + \varepsilon_i
+\]</span></p>
+<p>whereby they include application-group dummies (<span class="math inline">\(grp_i\)</span>) in their model</p>
+<ul>
+<li><p>You can think of these dummy variables as <strong>proxies</strong> for a range of unobservable characteristics that vary <strong>across</strong> application group.</p>
+<ul>
+<li>Does not control for selection <em>within</em> groups; i.e.&nbsp;unobserved factors that determine enrollment conditional on admission.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="instrumental-variables" class="level1">
+<h1>Instrumental Variables</h1>
+<section id="problem" class="level2">
+<h2 class="anchored" data-anchor-id="problem">Problem</h2>
+<p>We can introduce the concept of an instrumental variable using the same problem:</p>
+<ul>
+<li><p>The ‘true’ model explaining the relationship between wages and education (i.e.&nbsp;Mincer equation) is given,</p>
+<p><span class="math display">\[
+  ln(wage_i) = \beta_0 + \beta_1 edu_i + \beta_2 abil_i + \mathbf{x}_i\gamma + u_i
+\]</span></p>
+<p>where <span class="math inline">\(abil_i\)</span> is individual (innate) ability</p></li>
+</ul>
+</section>
+<section id="section-6" class="level2">
+<h2 class="anchored" data-anchor-id="section-6"></h2>
+<p>In the model,</p>
+<p><span class="math display">\[
+  ln(wage_i) = \beta_0 + \beta_1 edu_i + \mathbf{x}_i\gamma + \varepsilon_i
+\]</span></p>
+<p>the error,</p>
+<p><span class="math display">\[
+  \varepsilon_i = \beta_2 abil_i + u_i
+\]</span></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is NOT the same as the simple model:</p>
+<p><span class="math display">\[
+  ln(wage_i) = \beta^s_0 + \beta^s_1 edu_i + \mathbf{x}_i\gamma^s + v_i
+\]</span></p>
+<p>which has different population parameters to the ‘true’ model</p>
+</div>
+</div>
+</section>
+<section id="simplifaction" class="level2">
+<h2 class="anchored" data-anchor-id="simplifaction">Simplifaction</h2>
+<p>Abstracting away from the additional <span class="math inline">\(\mathbf{x}\)</span>-covariates for now,<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> the correlation between <span class="math inline">\(edu\)</span> and the error is given by,</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  Cov(edu_i,\varepsilon_i) =&amp; Cov(edu_i,\textcolor{blue}{\beta_2 abil_i + u_i}) \\
+  =&amp; \textcolor{blue}{\beta_2} Cov(edu_i,\textcolor{blue}{abil_i}) + \underbrace{Cov(edu_i,\textcolor{blue}{u_i})}_{=0} \\
+  =&amp; \textcolor{blue}{\beta_2} Cov(edu_i,\textcolor{blue}{abil_i})
+  \end{aligned}
+\]</span></p>
+<p>Which tells us that MLR-4a (or 4) are violated if,</p>
+<p><span class="math display">\[
+  Cov(edu_i,\textcolor{blue}{abil_i})\neq 0
+\]</span></p>
+<ul>
+<li>This is the OVB problem.</li>
+</ul>
+</section>
+<section id="solution" class="level2">
+<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<p>Find another variable (<span class="math inline">\(z\)</span>) that satisfies:</p>
+<ol type="1">
+<li>Uncorrelated with the error term <span class="math inline">\(\varepsilon_i\)</span> (from the unidentified model)</li>
+</ol>
+<p><span class="math display">\[
+  Cov(\varepsilon_i,z_i)= 0
+\]</span></p>
+<ol start="2" type="1">
+<li>Correlated with the <em>endogenous</em> variable <span class="math inline">\(edu_i\)</span></li>
+</ol>
+<p><span class="math display">\[
+  Cov(edu_i,z_i)\neq 0
+\]</span></p>
+<p>We call <span class="math inline">\(z\)</span> an <strong>instrumental variable</strong>.</p>
+</section>
+<section id="section-7" class="level2">
+<h2 class="anchored" data-anchor-id="section-7"></h2>
+<p>In place of the identifying moment under MLR-4a (see <a href="./lecture-1.html">Lecture 1</a>),</p>
+<p><span class="math display">\[
+  E[\varepsilon_i edu_i] = E[(y_i-\beta_0-\beta_1 edu_i)edu_i] = 0
+\]</span></p>
+<p>You have,</p>
+<p><span class="math display">\[
+  E[\varepsilon_i z_i] = E[(y_i-\beta_0-\beta_1 edu_i)z_i]=0
+\]</span></p>
+</section>
+<section id="theory-1" class="level2">
+<h2 class="anchored" data-anchor-id="theory-1">Theory</h2>
+<p>Consider the model,</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_{i} + \varepsilon_i
+\]</span></p>
+<ul>
+<li>We often call this the <strong>structural equation</strong>, with <span class="math inline">\(\beta_1\)</span> being an structural parameter</li>
+</ul>
+</section>
+<section id="endogeneity" class="level2">
+<h2 class="anchored" data-anchor-id="endogeneity">Endogeneity</h2>
+<p>The problem is that,</p>
+<p><span class="math display">\[
+  Cov(x_{i},\varepsilon_i)\neq 0
+\]</span></p>
+<ul>
+<li><p>as in the case of omitted variables</p></li>
+<li><p>other causes such as measurement error <span class="citation" data-cites="wooldridge2025">(see <a href="#ref-wooldridge2025" role="doc-biblioref">Wooldridge 2025, sec. 15.4</a>)</span></p></li>
+</ul>
+</section>
+<section id="first-stage" class="level2">
+<h2 class="anchored" data-anchor-id="first-stage">First stage</h2>
+<p>There exists an <strong>instrument</strong> <span class="math inline">\(z\)</span>, such that,</p>
+<p><span class="math display">\[
+  x_i = \pi_0 + \pi_1 z_i + \nu_i
+\]</span></p>
+<p>with,</p>
+<p><span class="math display">\[
+  \pi = \frac{Cov(x_i,z_i)}{Var(z_i)} \neq 0
+\]</span></p>
+<p>We call this the <strong>first stage</strong> equation.</p>
+</section>
+<section id="exogeneity" class="level2">
+<h2 class="anchored" data-anchor-id="exogeneity">Exogeneity</h2>
+<p>The instrument is uncorrelated with the error:</p>
+<p><span class="math display">\[
+  Cov(z_i,\varepsilon_i) = 0
+\]</span></p>
+<ul>
+<li><p>the instrument is uncorrelated with unobserved (i.e.&nbsp;not <span class="math inline">\(x\)</span> or any other included regressors) determinants of <span class="math inline">\(y\)</span></p>
+<ol type="1">
+<li><p>This implies that <span class="math inline">\(z\)</span> must be <strong>excluded</strong> from the main equation; else, <span class="math inline">\(\varepsilon_i = \beta_2z_i + \eta_i\)</span></p></li>
+<li><p><span class="math inline">\(z\)</span> must be exogenous w.r.t. all other factors determining <span class="math inline">\(y\)</span> (not explained by the model).</p></li>
+</ol></li>
+</ul>
+<p><strong>The instrument must only explain <span class="math inline">\(y\)</span> through <span class="math inline">\(x\)</span></strong></p>
+</section>
+<section id="dag" class="level2">
+<h2 class="anchored" data-anchor-id="dag">DAG</h2>
+<p>This is often visualized using a DAG (Directed Acyclic Graph) diagram:</p>
+<p><span class="math display">\[
+  \begin{matrix}y &amp; \longleftarrow &amp; x \\
+  &amp; &amp; \uparrow \\
+  &amp; &amp; z
+  \end{matrix}
+\]</span></p>
+</section>
+<section id="identification" class="level2">
+<h2 class="anchored" data-anchor-id="identification">Identification</h2>
+<p>Starting with the identifying moment:</p>
+<p><span class="math display">\[
+  Cov(z_i,\varepsilon_i) = 0
+\]</span></p>
+<p>Substitue in <span class="math inline">\(\varepsilon_i = y_i-\beta_0-\beta_1x_i\)</span></p>
+<p><span class="math display">\[
+  \begin{aligned}
+  0=&amp; Cov(z_i,\textcolor{red}{y_i-\beta_0-\beta_1x_i}) \\
+  =&amp; Cov(z_i,\textcolor{red}{y_i})-\underbrace{Cov(z_i,\textcolor{red}{\beta_0})}_{=0}-\textcolor{red}{\beta_1}Cov(z_i,\textcolor{red}{x_i}) \\
+  \Rightarrow \textcolor{red}{\beta_1} =&amp; \frac{Cov(z_i,\textcolor{red}{y_i})}{Cov(z_i,\textcolor{red}{x_i})}
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="famous-examples" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="famous-examples">Famous examples</h2>
+<ul>
+<li><p>Birth/Death:</p>
+<ul>
+<li><p><span class="citation" data-cites="angrist1991compulsory">Joshua D. Angrist and Krueger (<a href="#ref-angrist1991compulsory" role="doc-biblioref">1991</a>)</span>: quarter of birth as instrument (compulsary school leaving laws) <span class="citation" data-cites="oreopoulos2006estimating">(see also <a href="#ref-oreopoulos2006estimating" role="doc-biblioref">Oreopoulos 2006</a>)</span></p></li>
+<li><p><span class="citation" data-cites="angrist1998children">Joshua D. Angrist and Evans (<a href="#ref-angrist1998children" role="doc-biblioref">1998</a>)</span>: sex-combination of first two children</p></li>
+<li><p><span class="citation" data-cites="acemoglu2001colonial">Acemoglu, Johnson, and Robinson (<a href="#ref-acemoglu2001colonial" role="doc-biblioref">2001</a>)</span>: settler mortality rates</p></li>
+</ul></li>
+<li><p>Lotteries:</p>
+<ul>
+<li><span class="citation" data-cites="angrist1990lifetime">Joshua D. Angrist (<a href="#ref-angrist1990lifetime" role="doc-biblioref">1990</a>)</span>: Vietnam draft</li>
+</ul></li>
+<li><p>Distance/geography/weather:</p>
+<ul>
+<li><p><span class="citation" data-cites="card1995using">Card (<a href="#ref-card1995using" role="doc-biblioref">1995</a>)</span>: distance to college</p></li>
+<li><p><span class="citation" data-cites="mcclellan1994does">McClellan, McNeil, and Newhouse (<a href="#ref-mcclellan1994does" role="doc-biblioref">1994</a>)</span>: distance to a hospital</p></li>
+<li><p><span class="citation" data-cites="frankel1999trade">Frankel and Romer (<a href="#ref-frankel1999trade" role="doc-biblioref">1999</a>)</span>: gravity model for trade openness</p></li>
+<li><p><span class="citation" data-cites="nunn2008long">Nunn (<a href="#ref-nunn2008long" role="doc-biblioref">2008</a>)</span>: distance to slave markets <span class="citation" data-cites="nunn2011slave">(see also <a href="#ref-nunn2011slave" role="doc-biblioref">Nunn and Wantchekon 2011</a>)</span></p></li>
+<li><p><span class="citation" data-cites="miguel2004economic">Miguel, Satyanath, and Sergenti (<a href="#ref-miguel2004economic" role="doc-biblioref">2004</a>)</span>: rainfall for agricultural output</p></li>
+</ul></li>
+<li><p>Shift-share instruments <span class="citation" data-cites="bartik1991who">(“Bartik” style <a href="#ref-bartik1991who" role="doc-biblioref">Bartik 1991</a>)</span>:</p>
+<ul>
+<li><p><span class="citation" data-cites="card2001immigrant">Card (<a href="#ref-card2001immigrant" role="doc-biblioref">2001b</a>)</span>: immigration shift-share</p></li>
+<li><p><span class="citation" data-cites="autor2013china">Autor, Dorn, and Hanson (<a href="#ref-autor2013china" role="doc-biblioref">2013</a>)</span>: “China shock” exposure</p></li>
+</ul></li>
+<li><p>Prices and characteristics of other goods</p>
+<ul>
+<li><p><span class="citation" data-cites="hausman1996valuation">Hausman (<a href="#ref-hausman1996valuation" role="doc-biblioref">1996</a>)</span>: prices in other markets</p></li>
+<li><p><span class="citation" data-cites="berry1995automobile">Berry, Levinsohn, and Pakes (<a href="#ref-berry1995automobile" role="doc-biblioref">1995</a>)</span>: characteristics of rival products</p></li>
+</ul></li>
+<li><p>Simulated (eligibility) instrument</p>
+<ul>
+<li><p><span class="citation" data-cites="currie1996health">Currie and Gruber (<a href="#ref-currie1996health" role="doc-biblioref">1996</a>)</span>: state-level Medicaid rules</p></li>
+<li><p><span class="citation" data-cites="gruber2002elasticity">Gruber and Saez (<a href="#ref-gruber2002elasticity" role="doc-biblioref">2002</a>)</span>: simulated tax instrument <span class="citation" data-cites="auten1999effect">(see also <a href="#ref-auten1999effect" role="doc-biblioref">Auten and Carroll 1999</a>)</span></p></li>
+</ul></li>
+<li><p>Other public policies</p>
+<ul>
+<li><p><span class="citation" data-cites="dahl2012impact">Dahl and Lochner (<a href="#ref-dahl2012impact" role="doc-biblioref">2012</a>)</span>: EITC reforms</p></li>
+<li><p><span class="citation" data-cites="duflo2001schooling">Duflo (<a href="#ref-duflo2001schooling" role="doc-biblioref">2001</a>)</span>: INPRES policy in Indonesia</p></li>
+<li><p><span class="citation" data-cites="evans1999can">Evans and Ringel (<a href="#ref-evans1999can" role="doc-biblioref">1999</a>)</span>: cigarette taxes</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="instrument-vs-proxy" class="level2">
+<h2 class="anchored" data-anchor-id="instrument-vs-proxy">Instrument vs Proxy</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Proxy variables</strong></p>
+<ul>
+<li><p>Must be correlated with unobserved (omitted) variable.</p></li>
+<li><p>e.g.&nbsp;ability must be correlated with IQ</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="fragment fade-in">
+<p><strong>Instrumental variables</strong></p>
+<ul>
+<li><p>Must be uncorrelated with the error term; including, unobserved (omitted) variables.</p></li>
+<li><p>e.g.&nbsp;as an instrument for college attendance, distance to college must be uncorrelated with ability</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="fragment fade-in">
+<p><strong>Good proxies make for bad instruments!</strong></p>
+</div>
+</section>
+</section>
+<section id="iv-estimator" class="level1">
+<h1>IV Estimator</h1>
+<section id="estimator" class="level2">
+<h2 class="anchored" data-anchor-id="estimator">Estimator</h2>
+<p>We can estimate <span class="math inline">\(\beta_1\)</span> using the sample analogue approach:</p>
+<p><span class="math display">\[
+  \hat{\beta}^{iv}_{1} = \frac{\sum_{i=1}^n(z_i-\bar{z})(y_i-\bar{y})}{\sum_{i=1}^n(z_i-\bar{z})(x_i-\bar{x})}
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Method of Moments">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Method of Moments
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is called a Method of Moments (MM) estimator, as it replaces the identifying moments with their sample analogue. MM estimators and the wider class of Generalized Method of Moments (GMM) estimators are typically discussed in graduate Econometrics. These methods are used extensively in Applied Macroeconomics.</p>
+<p>Here we consider an exactly identified setting: there is a single instrument for each endogenous regressor. GMM methods can be applied to over-identified settings.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="reduced-form" class="level2">
+<h2 class="anchored" data-anchor-id="reduced-form">Reduced form</h2>
+<p>We can divide both the numerator and denomator by <span class="math inline">\(SST_z\)</span>:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  \hat{\beta}_{1,iv} =&amp; \frac{\frac{\sum_{i=1}^n(z_i-\bar{z})(y_i-\bar{y})}{\textcolor{red}{\sum_{i=1}^n(z_i-\bar{z})^2}}}{\frac{\sum_{i=1}^n(z_i-\bar{z})(x_i-\bar{x})}{{\textcolor{red}{\sum_{i=1}^n(z_i-\bar{z})^2}}}} \\
+  =&amp; \frac{\hat{\gamma}_{1}}{\hat{\pi}_{1}}
+  \end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\hat{\gamma}_{1},\hat{\pi}_{1}\)</span> are <em>OLS estimators</em> from,</p>
+<ul>
+<li><p>a regression of <span class="math inline">\(y\)</span> on <span class="math inline">\(z\)</span> (<strong>reduced form</strong>)</p></li>
+<li><p>a regression of <span class="math inline">\(x\)</span> on <span class="math inline">\(z\)</span> (<strong>first stage</strong>)</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Reduced form">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reduced form
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Reduced form is another phrase that is used widely in applied economics, often with a variety of meanings. Indeed, it is a phrase that is difficult to “pin down”. In this setting, it has a very specific meaning. It refers to model in which the outcome is regressed on the exogenous regressors and excluded instruments <em>alone</em>. That is, all endogenous regressors are excluded.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="variance" class="level2">
+<h2 class="anchored" data-anchor-id="variance">Variance</h2>
+<p>Assuming <span class="math inline">\(E[\varepsilon^2|z]=\sigma^2_\varepsilon\)</span> (MLR 5 equivalent for IV), the asymptotic variance of this estimator is given by,</p>
+<p><span class="math display">\[
+  \frac{\sigma^2_\varepsilon}{n\sigma^2_x\rho^2_{x,z}}
+\]</span></p>
+<p>where <span class="math inline">\(\rho_{x,z}\)</span> is the population correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span>.</p>
+</section>
+<section id="variance-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="variance-estimator">Variance estimator</h2>
+<p>This variance can be estimated as,</p>
+<p><span class="math display">\[
+  \frac{\hat\sigma^2_\varepsilon}{SST_xR^2_{x,z}}
+\]</span></p>
+<p>where,</p>
+<ul>
+<li><p><span class="math inline">\(\hat\sigma^2_\varepsilon = \frac{1}{n-2}\sum_{i=1}^n \hat{\varepsilon}_i^2\)</span> (i.e.&nbsp;standard residual estimator)</p></li>
+<li><p><span class="math inline">\(R^2_{x,z}\)</span> is the R-squared from a regression of <span class="math inline">\(x\)</span> on <span class="math inline">\(z\)</span> (i.e.&nbsp;the first stage)</p>
+<ul>
+<li>The variance can be very large if <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span> have a weak (first-stage) correlation.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="poorweak-instruments" class="level1">
+<h1>Poor/Weak Instruments</h1>
+<section id="inconsistency-of-ols" class="level2">
+<h2 class="anchored" data-anchor-id="inconsistency-of-ols">Inconsistency of OLS</h2>
+<p>The OLS estimator has the <span class="math inline">\(p\lim\)</span>:</p>
+<p><span class="math display">\[
+  p\lim \hat\beta_{1,ols} = \beta_1 + \frac{Cov(x,\varepsilon)}{Var(x)}= \beta_1 + Corr(x,\varepsilon)\times \frac{\sigma_{\varepsilon}}{\sigma_x}
+\]</span></p>
+<p>It is inconsistent if <span class="math inline">\(Corr(x,\varepsilon)\neq 0\)</span></p>
+<ul>
+<li>And the magnitude and sign of the inconsistency depends on the correlation of <span class="math inline">\(x\)</span> and <span class="math inline">\(\varepsilon\)</span></li>
+</ul>
+</section>
+<section id="poor-instruments" class="level2">
+<h2 class="anchored" data-anchor-id="poor-instruments">Poor instruments</h2>
+<p>For IV, you can derive a similar formula</p>
+<p><span class="math display">\[
+  p\lim \hat\beta_{1,iv} = \beta_1 + \frac{Corr(z,\varepsilon)}{Corr(z,x)}\times \frac{\sigma_{\varepsilon}}{\sigma_x}
+\]</span></p>
+<p>If <span class="math inline">\(Corr(z,\varepsilon)=0\)</span>, then this is <span class="math inline">\(\beta_1\)</span>. However, if not</p>
+<ul>
+<li><p>may have a different sign to that of OLS</p></li>
+<li><p>the asymptotic bias may be larger than that of OLS</p></li>
+</ul>
+</section>
+<section id="weak-instruments" class="level2">
+<h2 class="anchored" data-anchor-id="weak-instruments">Weak instruments</h2>
+<p>The problem is amplified by the case where <span class="math inline">\(Corr(z,\varepsilon)\neq 0\)</span> and the first-stage correlation is <em>very small</em>.</p>
+<p><span class="math display">\[
+  \frac{Corr(z,\varepsilon)}{Corr(z,x)}\times \frac{\sigma_{\varepsilon}}{\sigma_x}
+\]</span></p>
+<p>And if the first-stage relationship is “weak”, the asymptotic bias could be larger than that of OLS.</p>
+<ul>
+<li>This problem was first identified by <span class="citation" data-cites="bound1995problems">Bound, Jaeger, and Baker (<a href="#ref-bound1995problems" role="doc-biblioref">1995</a>)</span> and formalized by <span class="citation" data-cites="staiger1997instrumental">Staiger and Stock (<a href="#ref-staiger1997instrumental" role="doc-biblioref">1997</a>)</span></li>
+</ul>
+</section>
+</section>
+<section id="multivariate-case" class="level1">
+<h1>Multivariate case</h1>
+<section id="section-8" class="level2">
+<h2 class="anchored" data-anchor-id="section-8"></h2>
+<p>The previous example was include a single endogenous regressor.</p>
+<ul>
+<li><p>To extend the model it will help to use a new notation:</p>
+<ol type="1">
+<li><p>Denote all endogenous variables as: <span class="math inline">\(y_{j}\)</span></p></li>
+<li><p>Denote all exogenous variables as: <span class="math inline">\(z_j\)</span></p></li>
+</ol></li>
+</ul>
+</section>
+<section id="structural-equation" class="level2">
+<h2 class="anchored" data-anchor-id="structural-equation">Structural equation</h2>
+<p>The <strong>structural equation</strong> is given by,<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p><span class="math display">\[
+  y_{i1} = \beta_0 + \beta_1 y_{i2} + \beta_2 z_{i1} + \beta_3 z_{i2}+ \dots + \beta_{k-1} z_{i,k-1} + u_i
+\]</span></p>
+<p>You can think of the structural equation as the model of interest.</p>
+</section>
+<section id="section-9" class="level2">
+<h2 class="anchored" data-anchor-id="section-9"></h2>
+<p>Let’s simplify things buy considering 1 endogenous and 2 exogenous regressors:</p>
+<p><span class="math display">\[
+  y_{i1} = \beta_0 + \beta_1 y_{i2} + \beta_2 z_{i1} + \beta_3 z_{i2} + u_i
+\]</span></p>
+</section>
+<section id="instrument" class="level2">
+<h2 class="anchored" data-anchor-id="instrument">Instrument</h2>
+<p><strong>Exogeneity</strong>: We need an instrument for <span class="math inline">\(y_2\)</span>, that satisfies</p>
+<p><span class="math display">\[
+  Cov(z_3,u)=0
+\]</span></p>
+<p>And <span class="math inline">\(z_1,z_2\)</span> are exogenous ,</p>
+<p><span class="math display">\[
+  Cov(z_1,u)=Cov(z_2,u)=0
+\]</span></p>
+<p>by assumption (or construction).</p>
+</section>
+<section id="reduced-from" class="level2">
+<h2 class="anchored" data-anchor-id="reduced-from">Reduced from</h2>
+<p>The reduced form equation is given by,</p>
+<p><span class="math display">\[
+  y_{i1} = \gamma_0 + \gamma_1z_{i1} + \gamma_2 z_{i2}+ \gamma_3 z_{i3} + e_i
+\]</span></p>
+<ul>
+<li>A regression of the outcome against all exogenous variables.</li>
+</ul>
+</section>
+<section id="first-stage-1" class="level2">
+<h2 class="anchored" data-anchor-id="first-stage-1">First-stage</h2>
+<p><strong>Relevance</strong>: The instrument must be correlated with <span class="math inline">\(y_2\)</span> <em>conditional</em> on <span class="math inline">\(z_1,z_2\)</span>:</p>
+<p><span class="math display">\[
+  y_{i2} = \pi_0 + \pi_1 z_{i1} + \pi_{2} z_{i2} + \pi_3 z_{i3} + \nu_i
+\]</span></p>
+<p>i.e.,</p>
+<p><span class="math display">\[
+  \pi_3\neq0
+\]</span></p>
+<ul>
+<li>Can and MUST be tested.</li>
+</ul>
+</section>
+<section id="estimation" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="estimation">Estimation</h2>
+<p>Using the same method of moments approach:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+    0=&amp; \sum_{i=1}^{n}(y_{i1} - \hat{\beta}_{0,iv} - \hat{\beta}_{1,iv}\textcolor{blue}{y_{i2}} - \hat{\beta}_{2,iv}z_{i1}-\hat{\beta}_{3,iv}z_{i,2}) \\
+    0=&amp; \sum_{i=1}^{n}z_{i,1}(y_{i1} - \hat{\beta}_{0,iv} - \hat{\beta}_{1,iv}\textcolor{blue}{y_{i2}} - \hat{\beta}_{2,iv}z_{i1}-\hat{\beta}_{3,iv}z_{i,2}) \\
+    0=&amp; \sum_{i=1}^{n}z_{i,2}(y_{i1} - \hat{\beta}_{0,iv} - \hat{\beta}_{1,iv}\textcolor{blue}{y_{i2}} - \hat{\beta}_{2,iv}z_{i1}-\hat{\beta}_{3,iv}z_{i,2}) \\
+    0=&amp; \sum_{i=1}^{n}\textcolor{red}{z_{i3}}(y_{i1} - \hat{\beta}_{0,iv} - \hat{\beta}_{1,iv}\textcolor{blue}{y_{i2}} - \hat{\beta}_{2,iv}z_{i1}-\hat{\beta}_{3,iv}z_{i,2})
+  \end{aligned}
+\]</span></p>
+<ul>
+<li><p>One endogenous regressor (<span class="math inline">\(\textcolor{blue}{y_{i2}}\)</span>)</p></li>
+<li><p>One excluded instrument (<span class="math inline">\(\textcolor{red}{z_{i,k}}\)</span>) <span class="math inline">\(\Rightarrow\)</span> one additional moment (for identification and estimation).</p></li>
+<li><p>Overall: 4 parameters and 4 equations.</p></li>
+</ul>
+</section>
+<section id="section-10" class="level2">
+<h2 class="anchored" data-anchor-id="section-10"></h2>
+<p>As before, you can show that,</p>
+<p><span class="math display">\[
+  \hat{\beta}_{1,iv} = \frac{\hat\gamma_{3,ols}}{\hat\pi_{3,ols}}
+\]</span></p>
+<ul>
+<li><p>The reduced form coefficient, scaled by the first-stage</p></li>
+<li><p>The only difference with the simple case is that at each step you partial out the impact of <span class="math inline">\(z_1,z_2\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="sls" class="level1">
+<h1>2SLS</h1>
+<section id="motivation-1" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-1">Motivation</h2>
+<p>What do you do when you have multiple excluded instruments; e.g.&nbsp;<span class="math inline">\(\textcolor{red}{z_3,z_4,z_5}\)</span>.</p>
+<ul>
+<li><p>You potentially have 6 equations, to solve for 4 unknowns</p></li>
+<li><p>Over-identified</p></li>
+<li><p>Multiple solutions</p></li>
+<li><p>GMM methods consider the effecient choice of estimators.</p></li>
+</ul>
+</section>
+<section id="simple-solution" class="level2">
+<h2 class="anchored" data-anchor-id="simple-solution">Simple solution</h2>
+<p>Consider the first-stage equation:</p>
+<p><span class="math display">\[
+  y_{i2} = \pi_0 + \pi_1 z_{i1} + \pi_{2} z_{i2} + \pi_3 \textcolor{red}{z_{i3}} + \pi_4 \textcolor{red}{z_{i4}} + \pi_5 \textcolor{red}{z_{i5}} + \nu_i
+\]</span></p>
+<ul>
+<li><p>Test for relevance: <span class="math inline">\(H_0: \pi_3=\pi_4=\pi_5=0\)</span></p></li>
+<li><p>Predicted value - <span class="math inline">\(\hat{y}_{i2}\)</span> - is a linear function/combination of exogenous regressors</p></li>
+</ul>
+</section>
+<section id="instrument-1" class="level2">
+<h2 class="anchored" data-anchor-id="instrument-1">Instrument</h2>
+<p>We can use <span class="math inline">\(\hat{y}_{i2}\)</span> as an instrument:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+    0=&amp; \sum_{i=1}^{n}(y_{i1} - \hat{\beta}_{0,iv} - \hat{\beta}_{1,iv}\textcolor{blue}{y_{i2}} - \hat{\beta}_{2,iv}z_{i1}-\hat{\beta}_{3,iv}z_{i,2}) \\
+    0=&amp; \sum_{i=1}^{n}z_{i,1}(y_{i1} - \hat{\beta}_{0,iv} - \hat{\beta}_{1,iv}\textcolor{blue}{y_{i2}} - \hat{\beta}_{2,iv}z_{i1}-\hat{\beta}_{3,iv}z_{i,2}) \\
+    0=&amp; \sum_{i=1}^{n}z_{i,2}(y_{i1} - \hat{\beta}_{0,iv} - \hat{\beta}_{1,iv}\textcolor{blue}{y_{i2}} - \hat{\beta}_{2,iv}z_{i1}-\hat{\beta}_{3,iv}z_{i,2}) \\
+    0=&amp; \sum_{i=1}^{n}\textcolor{red}{\hat{y}_{i2}}(y_{i1} - \hat{\beta}_{0,iv} - \hat{\beta}_{1,iv}\textcolor{blue}{y_{i2}} - \hat{\beta}_{2,iv}z_{i1}-\hat{\beta}_{3,iv}z_{i,2})
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="section-11" class="level2">
+<h2 class="anchored" data-anchor-id="section-11"></h2>
+<p>Turns out, this <span class="math inline">\(\hat\beta_{1,iv}\)</span>, is equivalent to the OLS estimator of the linear regression model</p>
+<p><span class="math display">\[
+  y_{i1} = \beta_0 + \beta_1 \textcolor{red}{\hat{y}_{i2}} + \beta_2 z_{i1} + \beta_3 z_{i2} + \epsilon_i
+\]</span></p>
+<p>which replace <span class="math inline">\(\textcolor{blue}{y_{i2}}\)</span> with <span class="math inline">\(\textcolor{red}{\hat{y}_{i2}}\)</span></p>
+</section>
+<section id="two-stage-least-squares" class="level2">
+<h2 class="anchored" data-anchor-id="two-stage-least-squares">Two Stage Least Squares</h2>
+<p>So, this estimator can be solved in two stages/steps:</p>
+<p><strong>First stage</strong>: Compute the predicted value from the first-stage regression(s) by OLS</p>
+<p><span class="math display">\[
+  \textcolor{red}{\hat{y}_{i2}} = \hat\pi_0 + \hat\pi_1 z_{i1} + \hat\pi_{2} z_{i2} + \hat\pi_3 z_{i3} + \hat\pi_4 z_{i4} + \hat\pi_5 z_{i5}
+\]</span></p>
+<p><strong>Second stage</strong>: Replace the endogenous variable(s) with their predicted values and estimate by OLS.</p>
+<p><span class="math display">\[
+  y_{i1} = \beta_0 + \beta_1 \textcolor{red}{\hat{y}_{i2}} + \beta_2 z_{i1} + \beta_3 z_{i2} + \epsilon_i
+\]</span></p>
+<p>This works for the exact-identified case too, where there is a single instrument for each endogenous regressor.</p>
+<ul>
+<li>BUT will give you the wrong SEs (generated regressor problem).</li>
+</ul>
+</section>
+<section id="intuition" class="level2">
+<h2 class="anchored" data-anchor-id="intuition">Intuition</h2>
+<p>There is a strong intuition to 2SLS:</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p><span class="math inline">\(\textcolor{red}{\hat{y}_{2}}\)</span> is the part of <span class="math inline">\(y_2\)</span> explained by <span class="math inline">\(z_1,\dots,z_5\)</span>.</p></li>
+<li><p>Since, <span class="math inline">\(z_1,\dots,z_5\)</span> are all exogenous (i.e.&nbsp;<span class="math inline">\(Cov(z_j,u)=0\)</span>), <span class="math inline">\(\textcolor{red}{\hat{y}_{2}}\)</span> is exogenous.</p></li>
+<li><p>2SLS “extracts” the part of <span class="math inline">\(y_2\)</span> (the endogenous) regressor that is exogenous in the first stage.</p></li>
+<li><p>However, <span class="math inline">\(z_1,z_2\)</span> are <strong>included</strong> as standalone regressors in the second stage.</p></li>
+<li><p>Frisch-Waugh Theorem tells us that <span class="math inline">\(\hat\beta_{1,2sls}\)</span> is estimated using the part of <span class="math inline">\(\textcolor{red}{\hat{y}_{2}}\)</span> that is NOT explained by <span class="math inline">\(z_1,z_2\)</span></p></li>
+<li><p>Thus, we estimate <span class="math inline">\(\hat\beta_{1,2sls}\)</span> using variation in <span class="math inline">\(y_2\)</span> explained by the <strong>excluded</strong> regressors <span class="math inline">\(z_3,z_4,z_5\)</span>.</p></li>
+</ul>
+</div>
+</section>
+<section id="example-card-1995" class="level2">
+<h2 class="anchored" data-anchor-id="example-card-1995">Example: Card (1995)</h2>
+<p>The following example comes from <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 528</a>)</span>, which is itself a replication of <span class="citation" data-cites="card1995using card2001estimating">Card (<a href="#ref-card1995using" role="doc-biblioref">1995</a>; see also <a href="#ref-card2001estimating" role="doc-biblioref">Card 2001a</a>)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-8/card-1995.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="check-first-stage" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="check-first-stage">Check first-stage</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="st">"$data_dir\wooldridge_CARD.dta"</span>, <span class="kw">clear</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> educ nearc4 exper expersq <span class="bn">black</span> smsa south smsa66 reg662 reg663 reg664 reg665 reg666 reg667 reg668 reg669</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">test</span> nearc4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Source |       SS           df       MS      Number of obs   =     3,010
+-------------+----------------------------------   F(15, 2994)     =    182.13
+       Model |  10287.6179        15  685.841194   Prob &gt; F        =    0.0000
+    Residual |  11274.4622     2,994  3.76568542   R-squared       =    0.4771
+-------------+----------------------------------   Adj R-squared   =    0.4745
+       Total |  21562.0801     3,009  7.16586243   Root MSE        =    1.9405
+
+------------------------------------------------------------------------------
+        educ | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      nearc4 |   .3198989   .0878638     3.64   0.000     .1476194    .4921785
+       exper |  -.4125334   .0336996   -12.24   0.000    -.4786101   -.3464566
+     expersq |   .0008686   .0016504     0.53   0.599    -.0023674    .0041046
+       black |  -.9355287   .0937348    -9.98   0.000     -1.11932   -.7517377
+        smsa |   .4021825   .1048112     3.84   0.000     .1966732    .6076918
+       south |  -.0516126   .1354284    -0.38   0.703    -.3171548    .2139296
+      smsa66 |   .0254805   .1057692     0.24   0.810    -.1819071    .2328682
+      reg662 |  -.0786363   .1871154    -0.42   0.674    -.4455241    .2882514
+      reg663 |   -.027939   .1833745    -0.15   0.879    -.3874918    .3316139
+      reg664 |    .117182   .2172531     0.54   0.590    -.3087984    .5431624
+      reg665 |  -.2726165   .2184204    -1.25   0.212    -.7008858    .1556528
+      reg666 |  -.3028147   .2370712    -1.28   0.202    -.7676536    .1620242
+      reg667 |  -.2168177   .2343879    -0.93   0.355    -.6763953    .2427598
+      reg668 |   .5238914   .2674749     1.96   0.050    -.0005618    1.048344
+      reg669 |    .210271   .2024568     1.04   0.299    -.1866975    .6072395
+       _cons |   16.63825   .2406297    69.14   0.000     16.16644    17.11007
+------------------------------------------------------------------------------
+
+
+ ( 1)  nearc4 = 0
+
+       F(  1,  2994) =   13.26
+            Prob &gt; F =    0.0003</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>card_dta <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"wooldridge_CARD.dta"</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>modelfs <span class="ot">&lt;-</span> <span class="fu">lm</span>(educ <span class="sc">~</span> nearc4 <span class="sc">+</span> exper <span class="sc">+</span> expersq <span class="sc">+</span> black <span class="sc">+</span> smsa <span class="sc">+</span> south <span class="sc">+</span> smsa66 <span class="sc">+</span> reg662 <span class="sc">+</span> reg663 <span class="sc">+</span> reg664 <span class="sc">+</span> reg665 <span class="sc">+</span> reg666 <span class="sc">+</span> reg667 <span class="sc">+</span> reg668 <span class="sc">+</span> reg669, <span class="at">data =</span> card_dta)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelfs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = educ ~ nearc4 + exper + expersq + black + smsa + 
+    south + smsa66 + reg662 + reg663 + reg664 + reg665 + reg666 + 
+    reg667 + reg668 + reg669, data = card_dta)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-7.545 -1.370 -0.091  1.278  6.239 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 16.6382529  0.2406297  69.145  &lt; 2e-16 ***
+nearc4       0.3198989  0.0878638   3.641 0.000276 ***
+exper       -0.4125334  0.0336996 -12.241  &lt; 2e-16 ***
+expersq      0.0008686  0.0016504   0.526 0.598728    
+black       -0.9355287  0.0937348  -9.981  &lt; 2e-16 ***
+smsa         0.4021825  0.1048112   3.837 0.000127 ***
+south       -0.0516126  0.1354284  -0.381 0.703152    
+smsa66       0.0254805  0.1057692   0.241 0.809644    
+reg662      -0.0786363  0.1871154  -0.420 0.674329    
+reg663      -0.0279390  0.1833745  -0.152 0.878913    
+reg664       0.1171820  0.2172531   0.539 0.589665    
+reg665      -0.2726165  0.2184204  -1.248 0.212082    
+reg666      -0.3028147  0.2370712  -1.277 0.201590    
+reg667      -0.2168177  0.2343879  -0.925 0.355021    
+reg668       0.5238914  0.2674749   1.959 0.050246 .  
+reg669       0.2102710  0.2024568   1.039 0.299076    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.941 on 2994 degrees of freedom
+Multiple R-squared:  0.4771,    Adjusted R-squared:  0.4745 
+F-statistic: 182.1 on 15 and 2994 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(modelfs, <span class="st">"nearc4 = 0"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear hypothesis test:
+nearc4 = 0
+
+Model 1: restricted model
+Model 2: educ ~ nearc4 + exper + expersq + black + smsa + south + smsa66 + 
+    reg662 + reg663 + reg664 + reg665 + reg666 + reg667 + reg668 + 
+    reg669
+
+  Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    
+1   2995 11324                                  
+2   2994 11274  1    49.917 13.256 0.0002763 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="estimate-2sls" class="level2">
+<h2 class="anchored" data-anchor-id="estimate-2sls">Estimate 2SLS</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>In Stata, the main IV command is <code>ivreg2</code> (an update of <code>ivregress</code>)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ivreg2 lwage exper expersq <span class="bn">black</span> smsa south smsa66 reg662 reg663 reg664 reg665 reg666 reg667 reg668 reg669 (educ = nearc4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>IV (2SLS) estimation
+--------------------
+
+Estimates efficient for homoskedasticity only
+Statistics consistent for homoskedasticity only
+
+                                                      Number of obs =     3010
+                                                      F( 15,  2994) =    51.01
+                                                      Prob &gt; F      =   0.0000
+Total (centered) SS     =  592.6416447                Centered R2   =   0.2382
+Total (uncentered) SS   =  118616.3653                Uncentered R2 =   0.9962
+Residual SS             =   451.494832                Root MSE      =    .3873
+
+------------------------------------------------------------------------------
+       lwage | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        educ |   .1315038   .0548174     2.40   0.016     .0240637     .238944
+       exper |   .1082711   .0235956     4.59   0.000     .0620246    .1545176
+     expersq |  -.0023349   .0003326    -7.02   0.000    -.0029868    -.001683
+       black |  -.1467757   .0537564    -2.73   0.006    -.2521364   -.0414151
+        smsa |   .1118083   .0315777     3.54   0.000     .0499171    .1736995
+       south |  -.1446715    .027212    -5.32   0.000    -.1980061   -.0913369
+      smsa66 |   .0185311   .0215511     0.86   0.390    -.0237082    .0607704
+      reg662 |   .1007678   .0375854     2.68   0.007     .0271017    .1744339
+      reg663 |   .1482588   .0367162     4.04   0.000     .0762964    .2202211
+      reg664 |   .0498971   .0436234     1.14   0.253    -.0356032    .1353974
+      reg665 |   .1462719   .0469387     3.12   0.002     .0542738    .2382701
+      reg666 |   .1629029   .0517714     3.15   0.002     .0614328    .2643731
+      reg667 |   .1345722   .0492708     2.73   0.006     .0380032    .2311413
+      reg668 |   -.083077   .0591735    -1.40   0.160    -.1990548    .0329008
+      reg669 |   .1078142   .0417024     2.59   0.010      .026079    .1895494
+       _cons |   3.666151   .9223682     3.97   0.000     1.858342    5.473959
+------------------------------------------------------------------------------
+Underidentification test (Anderson canon. corr. LM statistic):          13.268
+                                                   Chi-sq(1) P-val =    0.0003
+------------------------------------------------------------------------------
+Weak identification test (Cragg-Donald Wald F statistic):               13.256
+Stock-Yogo weak ID test critical values: 10% maximal IV size             16.38
+                                         15% maximal IV size              8.96
+                                         20% maximal IV size              6.66
+                                         25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+------------------------------------------------------------------------------
+Sargan statistic (overidentification test of all instruments):           0.000
+                                                 (equation exactly identified)
+------------------------------------------------------------------------------
+Instrumented:         educ
+Included instruments: exper expersq black smsa south smsa66 reg662 reg663
+                      reg664 reg665 reg666 reg667 reg668 reg669
+Excluded instruments: nearc4
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>In R, you can use the modern regression package <code>fixest</code>, but also legacy options like <code>ivreg</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"fixest"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>modeliv <span class="ot">&lt;-</span> <span class="fu">feols</span>(lwage <span class="sc">~</span> exper <span class="sc">+</span> expersq <span class="sc">+</span> black <span class="sc">+</span> smsa <span class="sc">+</span> south <span class="sc">+</span> smsa66 <span class="sc">+</span> reg662 <span class="sc">+</span> reg663 <span class="sc">+</span> reg664 <span class="sc">+</span> reg665 <span class="sc">+</span> reg666 <span class="sc">+</span> reg667 <span class="sc">+</span> reg668 <span class="sc">+</span> reg669 <span class="sc">|</span> educ <span class="sc">~</span> nearc4, <span class="at">data =</span> card_dta)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modeliv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>TSLS estimation: Second stage
+|- D.V.   : lwage
+|- Endo.  : educ
+|- Instr. : nearc4
+Dep. Var.: lwage
+Observations: 3,010
+Standard-errors: IID 
+             Estimate Std. Error   t value   Pr(&gt;|t|)    
+(Intercept)  3.666151   0.924830  3.964137 7.5384e-05 ***
+fit_educ     0.131504   0.054964  2.392559 1.6793e-02 *  
+exper        0.108271   0.023659  4.576401 4.9229e-06 ***
+expersq     -0.002335   0.000333 -7.001372 3.1161e-12 ***
+black       -0.146776   0.053900 -2.723119 6.5044e-03 ** 
+smsa         0.111808   0.031662  3.531310 4.1975e-04 ***
+south       -0.144672   0.027285 -5.302309 1.2266e-07 ***
+smsa66       0.018531   0.021609  0.857580 3.9119e-01    
+reg662       0.100768   0.037686  2.673898 7.5382e-03 ** 
+reg663       0.148259   0.036814  4.027224 5.7841e-05 ***
+reg664       0.049897   0.043740  1.140770 2.5406e-01    
+reg665       0.146272   0.047064  3.107940 1.9016e-03 ** 
+reg666       0.162903   0.051910  3.138206 1.7164e-03 ** 
+reg667       0.134572   0.049402  2.724007 6.4870e-03 ** 
+reg668      -0.083077   0.059331 -1.400221 1.6155e-01    
+reg669       0.107814   0.041814  2.578444 9.9720e-03 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 0.387296   Adj. R2: 0.190652
+F-test (1st stage), educ: stat = 13.2558, p = 2.763e-4, on 1 and 2,994 DoF.
+              Wu-Hausman: stat =  1.1676, p = 0.279973, on 1 and 2,993 DoF.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="iv-vs-ols" class="level2">
+<h2 class="anchored" data-anchor-id="iv-vs-ols">IV vs OLS</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lwage edu exper expersq <span class="bn">black</span> smsa south smsa66 reg662 reg663 reg664 reg665 reg666 reg667 reg668 reg669 </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">est</span> <span class="kw">store</span> OLS</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> ivreg2 lwage exper expersq <span class="bn">black</span> smsa south smsa66 reg662 reg663 reg664 reg665 reg666 reg667 reg668 reg669 (educ = nearc4)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">est</span> <span class="kw">store</span> IV</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>etable, <span class="kw">est</span>(OLS IV) column(<span class="kw">estimates</span>) <span class="kw">keep</span>(educ) eqrecode(first_stage = <span class="kw">xb</span> reduced_form = <span class="kw">xb</span> IV = <span class="kw">xb</span> ) novarlabel cstat(_r_b, nformat(%5.4f)) cstat(_r_se, nformat(%5.4f))showstars showstarsnote stars(.1 <span class="st">"*"</span> .05 <span class="st">"**"</span> .01 <span class="st">"***"</span>) mstat(<span class="kw">N</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS          IV    
+-----------------------------------------------
+educ                     0.0747 ***   0.1315 **
+                       (0.0035)     (0.0548)   
+Number of observations     3010         3010   
+-----------------------------------------------
+*** p&lt;.01, ** p&lt;.05, * p&lt;.1</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Suggests significant downward bias in IV</p>
+<ul>
+<li><p><span class="citation" data-cites="angrist1991compulsory">Joshua D. Angrist and Krueger (<a href="#ref-angrist1991compulsory" role="doc-biblioref">1991</a>)</span> find OLS and IV are more similar.</p></li>
+<li><p>Likewise, <span class="citation" data-cites="duflo2001schooling">Duflo (<a href="#ref-duflo2001schooling" role="doc-biblioref">2001</a>)</span>.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="automated" class="level2">
+<h2 class="anchored" data-anchor-id="automated">Automated</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>Use option <code>first</code> or <code>sfirst</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ivreg2 lwage exper expersq <span class="bn">black</span> smsa south smsa66 reg662 reg663 reg664 reg665 reg666 reg667 reg668 reg669 (educ = nearc4), first </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// alternative, use sfirst option to show first-stage alongside reduced form</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>First-stage regressions
+-----------------------
+
+
+First-stage regression of educ:
+
+Statistics consistent for homoskedasticity only
+Number of obs =                   3010
+------------------------------------------------------------------------------
+        educ | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      nearc4 |   .3198989   .0878638     3.64   0.000     .1476194    .4921785
+       exper |  -.4125334   .0336996   -12.24   0.000    -.4786101   -.3464566
+     expersq |   .0008686   .0016504     0.53   0.599    -.0023674    .0041046
+       black |  -.9355287   .0937348    -9.98   0.000     -1.11932   -.7517377
+        smsa |   .4021825   .1048112     3.84   0.000     .1966732    .6076918
+       south |  -.0516126   .1354284    -0.38   0.703    -.3171548    .2139296
+      smsa66 |   .0254805   .1057692     0.24   0.810    -.1819071    .2328682
+      reg662 |  -.0786363   .1871154    -0.42   0.674    -.4455241    .2882514
+      reg663 |   -.027939   .1833745    -0.15   0.879    -.3874918    .3316139
+      reg664 |    .117182   .2172531     0.54   0.590    -.3087984    .5431624
+      reg665 |  -.2726165   .2184204    -1.25   0.212    -.7008858    .1556528
+      reg666 |  -.3028147   .2370712    -1.28   0.202    -.7676536    .1620242
+      reg667 |  -.2168177   .2343879    -0.93   0.355    -.6763953    .2427598
+      reg668 |   .5238914   .2674749     1.96   0.050    -.0005618    1.048344
+      reg669 |    .210271   .2024568     1.04   0.299    -.1866975    .6072395
+       _cons |   16.63825   .2406297    69.14   0.000     16.16644    17.11007
+------------------------------------------------------------------------------
+F test of excluded instruments:
+  F(  1,  2994) =    13.26
+  Prob &gt; F      =   0.0003
+Sanderson-Windmeijer multivariate F test of excluded instruments:
+  F(  1,  2994) =    13.26
+  Prob &gt; F      =   0.0003
+
+
+
+Summary results for first-stage regressions
+-------------------------------------------
+
+                                           (Underid)            (Weak id)
+Variable     | F(  1,  2994)  P-val | SW Chi-sq(  1) P-val | SW F(  1,  2994)
+educ         |      13.26    0.0003 |       13.33   0.0003 |       13.26
+
+Stock-Yogo weak ID F test critical values for single endogenous regressor:
+                                   10% maximal IV size             16.38
+                                   15% maximal IV size              8.96
+                                   20% maximal IV size              6.66
+                                   25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Sanderson-Windmeijer F statistic.
+
+Underidentification test
+Ho: matrix of reduced form coefficients has rank=K1-1 (underidentified)
+Ha: matrix has rank=K1 (identified)
+Anderson canon. corr. LM statistic       Chi-sq(1)=13.27    P-val=0.0003
+
+Weak identification test
+Ho: equation is weakly identified
+Cragg-Donald Wald F statistic                                      13.26
+
+Stock-Yogo weak ID test critical values for K1=1 and L1=1:
+                                   10% maximal IV size             16.38
+                                   15% maximal IV size              8.96
+                                   20% maximal IV size              6.66
+                                   25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+
+Weak-instrument-robust inference
+Tests of joint significance of endogenous regressors B1 in main equation
+Ho: B1=0 and orthogonality conditions are valid
+Anderson-Rubin Wald test           F(1,2994)=      5.42     P-val=0.0200
+Anderson-Rubin Wald test           Chi-sq(1)=      5.44     P-val=0.0196
+Stock-Wright LM S statistic        Chi-sq(1)=      5.43     P-val=0.0197
+
+Number of observations               N  =       3010
+Number of regressors                 K  =         16
+Number of endogenous regressors      K1 =          1
+Number of instruments                L  =         16
+Number of excluded instruments       L1 =          1
+
+IV (2SLS) estimation
+--------------------
+
+Estimates efficient for homoskedasticity only
+Statistics consistent for homoskedasticity only
+
+                                                      Number of obs =     3010
+                                                      F( 15,  2994) =    51.01
+                                                      Prob &gt; F      =   0.0000
+Total (centered) SS     =  592.6416447                Centered R2   =   0.2382
+Total (uncentered) SS   =  118616.3653                Uncentered R2 =   0.9962
+Residual SS             =   451.494832                Root MSE      =    .3873
+
+------------------------------------------------------------------------------
+       lwage | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        educ |   .1315038   .0548174     2.40   0.016     .0240637     .238944
+       exper |   .1082711   .0235956     4.59   0.000     .0620246    .1545176
+     expersq |  -.0023349   .0003326    -7.02   0.000    -.0029868    -.001683
+       black |  -.1467757   .0537564    -2.73   0.006    -.2521364   -.0414151
+        smsa |   .1118083   .0315777     3.54   0.000     .0499171    .1736995
+       south |  -.1446715    .027212    -5.32   0.000    -.1980061   -.0913369
+      smsa66 |   .0185311   .0215511     0.86   0.390    -.0237082    .0607704
+      reg662 |   .1007678   .0375854     2.68   0.007     .0271017    .1744339
+      reg663 |   .1482588   .0367162     4.04   0.000     .0762964    .2202211
+      reg664 |   .0498971   .0436234     1.14   0.253    -.0356032    .1353974
+      reg665 |   .1462719   .0469387     3.12   0.002     .0542738    .2382701
+      reg666 |   .1629029   .0517714     3.15   0.002     .0614328    .2643731
+      reg667 |   .1345722   .0492708     2.73   0.006     .0380032    .2311413
+      reg668 |   -.083077   .0591735    -1.40   0.160    -.1990548    .0329008
+      reg669 |   .1078142   .0417024     2.59   0.010      .026079    .1895494
+       _cons |   3.666151   .9223682     3.97   0.000     1.858342    5.473959
+------------------------------------------------------------------------------
+Underidentification test (Anderson canon. corr. LM statistic):          13.268
+                                                   Chi-sq(1) P-val =    0.0003
+------------------------------------------------------------------------------
+Weak identification test (Cragg-Donald Wald F statistic):               13.256
+Stock-Yogo weak ID test critical values: 10% maximal IV size             16.38
+                                         15% maximal IV size              8.96
+                                         20% maximal IV size              6.66
+                                         25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+------------------------------------------------------------------------------
+Sargan statistic (overidentification test of all instruments):           0.000
+                                                 (equation exactly identified)
+------------------------------------------------------------------------------
+Instrumented:         educ
+Included instruments: exper expersq black smsa south smsa66 reg662 reg663
+                      reg664 reg665 reg666 reg667 reg668 reg669
+Excluded instruments: nearc4
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>Use option <code>summary(modeliv, stage = 1:2)</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modeliv, <span class="at">stage =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>IV: First stage: educ
+TSLS estimation: First stage
+|- D.V.   : lwage
+|- Endo.  : educ
+|- Instr. : nearc4
+Dep. Var.: educ
+Observations: 3,010
+Standard-errors: IID 
+             Estimate Std. Error    t value   Pr(&gt;|t|)    
+(Intercept) 16.638253   0.240630  69.144628  &lt; 2.2e-16 ***
+nearc4       0.319899   0.087864   3.640850 0.00027634 ***
+exper       -0.412533   0.033700 -12.241485  &lt; 2.2e-16 ***
+expersq      0.000869   0.001650   0.526287 0.59872767    
+black       -0.935529   0.093735  -9.980596  &lt; 2.2e-16 ***
+smsa         0.402182   0.104811   3.837208 0.00012701 ***
+south       -0.051613   0.135428  -0.381106 0.70315160    
+smsa66       0.025481   0.105769   0.240907 0.80964379    
+reg662      -0.078636   0.187115  -0.420256 0.67432871    
+reg663      -0.027939   0.183375  -0.152360 0.87891321    
+reg664       0.117182   0.217253   0.539380 0.58966478    
+reg665      -0.272616   0.218420  -1.248127 0.21208205    
+reg666      -0.302815   0.237071  -1.277315 0.20158995    
+reg667      -0.216818   0.234388  -0.925038 0.35502056    
+reg668       0.523891   0.267475   1.958656 0.05024574 .  
+reg669       0.210271   0.202457   1.038597 0.29907617    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 1.93537   Adj. R2: 0.474497
+F-test (1st stage): stat = 13.256, p = 2.763e-4, on 1 and 2,994 DoF.
+
+IV: Second stage
+TSLS estimation: Second stage
+|- D.V.   : lwage
+|- Endo.  : educ
+|- Instr. : nearc4
+Dep. Var.: lwage
+Observations: 3,010
+Standard-errors: IID 
+             Estimate Std. Error   t value   Pr(&gt;|t|)    
+(Intercept)  3.666151   0.924830  3.964137 7.5384e-05 ***
+fit_educ     0.131504   0.054964  2.392559 1.6793e-02 *  
+exper        0.108271   0.023659  4.576401 4.9229e-06 ***
+expersq     -0.002335   0.000333 -7.001372 3.1161e-12 ***
+black       -0.146776   0.053900 -2.723119 6.5044e-03 ** 
+smsa         0.111808   0.031662  3.531310 4.1975e-04 ***
+south       -0.144672   0.027285 -5.302309 1.2266e-07 ***
+smsa66       0.018531   0.021609  0.857580 3.9119e-01    
+reg662       0.100768   0.037686  2.673898 7.5382e-03 ** 
+reg663       0.148259   0.036814  4.027224 5.7841e-05 ***
+reg664       0.049897   0.043740  1.140770 2.5406e-01    
+reg665       0.146272   0.047064  3.107940 1.9016e-03 ** 
+reg666       0.162903   0.051910  3.138206 1.7164e-03 ** 
+reg667       0.134572   0.049402  2.724007 6.4870e-03 ** 
+reg668      -0.083077   0.059331 -1.400221 1.6155e-01    
+reg669       0.107814   0.041814  2.578444 9.9720e-03 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 0.387296   Adj. R2: 0.190652
+F-test (1st stage), educ: stat = 13.2558, p = 2.763e-4, on 1 and 2,994 DoF.
+              Wu-Hausman: stat =  1.1676, p = 0.279973, on 1 and 2,993 DoF.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="demonstrating-2sls" class="level2">
+<h2 class="anchored" data-anchor-id="demonstrating-2sls">Demonstrating 2SLS</h2>
+<p><strong>Remember</strong>: this works here because the model is exactly identified.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> educ nearc4 exper expersq <span class="bn">black</span> smsa south smsa66 reg662 reg663 reg664 reg665 reg666 reg667 reg668 reg669 </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">est</span> <span class="kw">store</span> first_stage</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scalar</span> fs = _b[nearc4]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> lwage nearc4 exper expersq <span class="bn">black</span> smsa south smsa66 reg662 reg663 reg664 reg665 reg666 reg667 reg668 reg669 </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">est</span> <span class="kw">store</span> reduced_form</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scalar</span> rd = _b[nearc4]</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>etable, <span class="kw">est</span>(first_stage reduced_form IV) column(<span class="kw">estimates</span>) <span class="kw">keep</span>(nearc4 educ) eqrecode(first_stage = <span class="kw">xb</span> reduced_form = <span class="kw">xb</span> IV = <span class="kw">xb</span> ) novarlabel cstat(_r_b, nformat(%5.4f)) cstat(_r_se, nformat(%5.4f)) </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>dis rd/fs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       first_stage reduced_form    IV   
+--------------------------------------------------------
+nearc4                      0.3199                      
+                          (0.0879)                      
+nearc4                                   0.0421         
+                                       (0.0181)         
+educ                                              0.1315
+                                                (0.0548)
+Number of observations        3010         3010     3010
+--------------------------------------------------------
+
+.13150384</code></pre>
+</div>
+</div>
+</section>
+<section id="practicals" class="level2">
+<h2 class="anchored" data-anchor-id="practicals">Practicals</h2>
+<p>We have just touched the surface on topics related to instrumental variables</p>
+<ul>
+<li><p>As evidence of this, check the <code>help ivreg2</code> file in Stata. It is <strong>dense</strong>.</p></li>
+<li><p>Stata’s command has this many options:</p></li>
+</ul>
+<p><code>ivreg2 depvar [varlist1] (varlist2=varlist_iv) [weight] [if exp] [in range] [, gmm2s bw(#) kernel(string) dkraay(integer) kiefer liml fuller(#) kclass(#) coviv cue b0(matrix) robust cluster(varlist) orthog(varlist_ex) endog(varlist_en) redundant(varlist_ex) partial(varlist) small noconstant center smatrix(matrix) wmatrix(matrix) first ffirst savefirst savefprefix(prefix) sfirst savesfirst savesfprefix(prefix) rf saverf saverfprefix(prefix) nocollin noid level(#) bvclean noheader nofooter eform(string) depname(varname) plus ]</code></p>
+<p>There’s enough material to have an entire module: “EC33IV”.</p>
+</section>
+<section id="tests" class="level2">
+<h2 class="anchored" data-anchor-id="tests">Tests</h2>
+<p>Here are a few practical matters you could should read up on if you intend to use an IV estimator.</p>
+<ul>
+<li><p>SE corrections and their implications for first-stage <span class="math inline">\(F\)</span>-tests</p></li>
+<li><p><strong>Under-identifcation</strong> tests: instruments provide no information about endogenous regressors</p>
+<ul>
+<li>Anderson canonical correlation LM statistic for homoskedastic SEs</li>
+<li>Kleibergen-Paap rank Wald/F test for robust or clustered SEs</li>
+</ul></li>
+<li><p><strong>Weak identification</strong> tests: instruments provide <em>little</em> information about endogenous regressors</p>
+<ul>
+<li>Cragg-Donald Wald/F test for homoskedastic SEs</li>
+<li>Kleibergen-Paap rank Wald/F test for robust or clustered SEs</li>
+<li>Stock-Yogo critical values</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-12" class="level2">
+<h2 class="anchored" data-anchor-id="section-12"></h2>
+<ul>
+<li><p>With multiple instruments (<strong>over identified</strong>), there is a test for the exogeneity of the instruments</p>
+<ul>
+<li>Sargan test for homoskedastic SEs</li>
+<li>Hansen J for robust or clustered SEs</li>
+</ul></li>
+<li><p>The difference between 2SLS and GMM estimation methods</p>
+<ul>
+<li>Efficient GMM</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="causation" class="level1">
+<h1>Causation</h1>
+<section id="iv-and-causation" class="level2">
+<h2 class="anchored" data-anchor-id="iv-and-causation">IV and Causation</h2>
+<p>Instrumental variables have been central to the way Economists think about causal inference <span class="citation" data-cites="angrist2001instrumental">Joshua D. Angrist and Krueger (<a href="#ref-angrist2001instrumental" role="doc-biblioref">2001</a>)</span>.</p>
+<p><strong>WHY?</strong></p>
+<ul>
+<li><p>They solve the problem of endogeneity in observational studies by introducing exogenous variation to the system.</p>
+<ul>
+<li>originally used to solve the problem of simultaneous equations (e.g.&nbsp;demand-supply)</li>
+</ul></li>
+<li><p>However, the expectations have changed dramatically w.r.t. what constitutes a “good/valid” instrument</p></li>
+</ul>
+</section>
+<section id="section-13" class="level2">
+<h2 class="anchored" data-anchor-id="section-13"></h2>
+<blockquote class="blockquote">
+<p>“When using instrumental variables, for example, it’s no longer enough to mechanically invoke a simultaneous equations framework, labeling some variables endogenous and others exogenous, without substantially justifying the exclusion restrictions and as-good-as-randomly-assigned assumptions that make instruments valid. The best of today’s design-based studies make a strong institutional case, backed up with empirical evidence, for the variation thought to generate a useful natural experiment.” <span class="citation" data-cites="angrist2010credibility">(<a href="#ref-angrist2010credibility" role="doc-biblioref">Joshua D. Angrist and Pischke 2010, 12</a>)</span></p>
+</blockquote>
+</section>
+<section id="experiments-as-instruments" class="level2">
+<h2 class="anchored" data-anchor-id="experiments-as-instruments">Experiments as Instruments</h2>
+<p>Applied (micro) economists have looked to natural and real/controlled experiments as such sources of exogenous variation</p>
+<p><span class="math display">\[
+  \text{i.e., Experiment as Instrument}
+\]</span></p>
+</section>
+<section id="section-14" class="level2">
+<h2 class="anchored" data-anchor-id="section-14"></h2>
+<p>If <span class="math inline">\(w\in\{0,1\}\)</span> denotes assignment in an experiment,</p>
+<ul>
+<li><p>You could study the “reduced form” effect of <span class="math inline">\(w\)</span> on <span class="math inline">\(y\)</span></p>
+<p><span class="math display">\[
+  y_i = \alpha + \beta w_i + \mathbf{x}_i\gamma + \varepsilon_i
+\]</span></p></li>
+<li><p>or, <strong>potentially</strong>, use <span class="math inline">\(w\)</span> as an instrument to study the impact of <span class="math inline">\(y_2\)</span> on <span class="math inline">\(y_1\)</span></p>
+<p><span class="math display">\[
+  y_{1i} = \alpha + \beta y_{2i} + \mathbf{x}_i\gamma + \varepsilon_i
+\]</span></p></li>
+</ul>
+<p>Whether this works will depend on whether the experiments fulfills the <strong>exclusion restriction</strong> that it has no direct effect on <span class="math inline">\(y_1\)</span>.</p>
+<ul>
+<li>i.e., only effects <span class="math inline">\(y_1\)</span> through its impact on <span class="math inline">\(y_2\)</span></li>
+</ul>
+</section>
+<section id="examples" class="level2">
+<h2 class="anchored" data-anchor-id="examples">Examples</h2>
+<p>Famous examples of this approach are</p>
+<ul>
+<li><p><span class="citation" data-cites="angrist1991compulsory">Joshua D. Angrist and Krueger (<a href="#ref-angrist1991compulsory" role="doc-biblioref">1991</a>)</span> use of quart of birth as a “natural experiment” by virtue of the school enrollment laws in the US.</p></li>
+<li><p><span class="citation" data-cites="angrist1999using">Joshua D. Angrist and Lavy (<a href="#ref-angrist1999using" role="doc-biblioref">1999</a>)</span> use of bureaucratic rules for class sizes</p></li>
+</ul>
+<p>And many other famous applied microeconomics papers from Labour, Development, Health, Education, Personnel, etc.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Noble">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Noble
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In 2021 David Card, Joshua Angrist, and Guido Imbens were award the Noble Prize for their work on causal inference and empirical methods using real and natural experiments. Many believe that Alan Krueger, who passed away two years earlier, would have been considered to share in the same prize. It is not a coincidence that we site so many of their papers on this topic starting in the early 1990s.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<section id="bibliography" class="level2">
+
+
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliography</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-acemoglu2001colonial" class="csl-entry" role="listitem">
+Acemoglu, Daron, Simon Johnson, and James A. Robinson. 2001. <span>“The Colonial Origins of Comparative Development: An Empirical Investigation.”</span> <em>American Economic Review</em> 91 (5): 1369–1401.
+</div>
+<div id="ref-angrist1990lifetime" class="csl-entry" role="listitem">
+Angrist, Joshua D. 1990. <span>“Lifetime Earnings and the <span>Vietnam</span> Era Draft Lottery: Evidence from Social Security Administrative Records.”</span> <em>American Economic Review</em> 80 (3): 313–36.
+</div>
+<div id="ref-angrist1998children" class="csl-entry" role="listitem">
+Angrist, Joshua D., and William N. Evans. 1998. <span>“Children and Their Parents’ Labor Supply: Evidence from Exogenous Variation in Family Size.”</span> <em>American Economic Review</em> 88 (3): 450–77.
+</div>
+<div id="ref-angrist1991compulsory" class="csl-entry" role="listitem">
+Angrist, Joshua D., and Alan B. Krueger. 1991. <span>“Does Compulsory School Attendance Affect Schooling and Earnings?”</span> <em>Quarterly Journal of Economics</em> 106 (4): 979–1014.
+</div>
+<div id="ref-angrist2001instrumental" class="csl-entry" role="listitem">
+Angrist, Joshua D, and Alan B Krueger. 2001. <span>“Instrumental Variables and the Search for Identification: From Supply and Demand to Natural Experiments.”</span> <em>Journal of Economic Perspectives</em> 15 (4): 69–85.
+</div>
+<div id="ref-angrist1999using" class="csl-entry" role="listitem">
+Angrist, Joshua D., and Victor Lavy. 1999. <span>“Using Maimonides’ Rule to Estimate the Effect of Class Size on Scholastic Achievement.”</span> <em>The Quarterly Journal of Economics</em> 114 (2): 533–75.
+</div>
+<div id="ref-angrist2010credibility" class="csl-entry" role="listitem">
+Angrist, Joshua D, and Jörn-Steffen Pischke. 2010. <span>“The Credibility Revolution in Empirical Economics: How Better Research Design Is Taking the Con Out of Econometrics.”</span> <em>Journal of Economic Perspectives</em> 24 (2): 3–30.
+</div>
+<div id="ref-auten1999effect" class="csl-entry" role="listitem">
+Auten, Gerald, and Robert Carroll. 1999. <span>“The Effect of Income Taxes on Household Income.”</span> <em>Review of Economics and Statistics</em> 81 (4): 681–93.
+</div>
+<div id="ref-autor2013china" class="csl-entry" role="listitem">
+Autor, David H., David Dorn, and Gordon H. Hanson. 2013. <span>“The <span>China</span> Syndrome: Local Labor Market Effects of Import Competition in the <span>United States</span>.”</span> <em>American Economic Review</em> 103 (6): 2121–68.
+</div>
+<div id="ref-bartik1991who" class="csl-entry" role="listitem">
+Bartik, Timothy J. 1991. <em>Who Benefits from State and Local Economic Development Policies?</em> Kalamazoo, MI: W.E. Upjohn Institute for Employment Research.
+</div>
+<div id="ref-berry1995automobile" class="csl-entry" role="listitem">
+Berry, Steven, James Levinsohn, and Ariel Pakes. 1995. <span>“Automobile Prices in Market Equilibrium.”</span> <em>Econometrica</em> 63 (4): 841–90.
+</div>
+<div id="ref-blackburn1992unobserved" class="csl-entry" role="listitem">
+Blackburn, McKinley, and David Neumark. 1992. <span>“Unobserved Ability, Efficiency Wages, and Interindustry Wage Differentials.”</span> <em>The Quarterly Journal of Economics</em> 107 (4): 1421–36.
+</div>
+<div id="ref-bound1995problems" class="csl-entry" role="listitem">
+Bound, John, David A Jaeger, and Regina M Baker. 1995. <span>“Problems with Instrumental Variables Estimation When the Correlation Between the Instruments and the Endogenous Explanatory Variable Is Weak.”</span> <em>Journal of the American Statistical Association</em> 90 (430): 443–50.
+</div>
+<div id="ref-card1995using" class="csl-entry" role="listitem">
+Card, David. 1995. <span>“Using Geographic Variation in College Proximity to Estimate the Return to Schooling.”</span> In <em>Aspects of Labour Market Behaviour: Essays in Honour of John Vanderkamp</em>, edited by Louis N. Christofides, E. Kenneth Grant, and Robert Swidinsky, 201–22. Toronto: University of Toronto Press.
+</div>
+<div id="ref-card2001estimating" class="csl-entry" role="listitem">
+———. 2001a. <span>“Estimating the Return to Schooling: Progress on Some Persistent Econometric Problems.”</span> <em>Econometrica</em> 69 (5): 1127–60.
+</div>
+<div id="ref-card2001immigrant" class="csl-entry" role="listitem">
+———. 2001b. <span>“Immigrant Inflows, Native Outflows, and the Local Labor Market Impacts of Higher Immigration.”</span> <em>Journal of Labor Economics</em> 19 (1): 22–64.
+</div>
+<div id="ref-currie1996health" class="csl-entry" role="listitem">
+Currie, Janet, and Jonathan Gruber. 1996. <span>“Health Insurance Eligibility, Utilization of Medical Care, and Child Health.”</span> <em>Quarterly Journal of Economics</em> 111 (2): 431–66.
+</div>
+<div id="ref-dahl2012impact" class="csl-entry" role="listitem">
+Dahl, Gordon B., and Lance Lochner. 2012. <span>“The Impact of Family Income on Child Achievement: Evidence from the Earned Income Tax Credit.”</span> <em>American Economic Review</em> 102 (5): 1927–56.
+</div>
+<div id="ref-dale2002estimating" class="csl-entry" role="listitem">
+Dale, Stacy Berg, and Alan B Krueger. 2002. <span>“Estimating the Payoff to Attending a More Selective College: An Application of Selection on Observables and Unobservables.”</span> <em>The Quarterly Journal of Economics</em> 117 (4): 1491–1527.
+</div>
+<div id="ref-duflo2001schooling" class="csl-entry" role="listitem">
+Duflo, Esther. 2001. <span>“Schooling and Labor Market Consequences of School Construction in <span>Indonesia</span>: Evidence from an Unusual Policy Experiment.”</span> <em>American Economic Review</em> 91 (4): 795–813.
+</div>
+<div id="ref-evans1999can" class="csl-entry" role="listitem">
+Evans, William N., and Jeanne S. Ringel. 1999. <span>“Can Higher Cigarette Taxes Improve Birth Outcomes?”</span> <em>Journal of Public Economics</em> 72 (1): 135–54.
+</div>
+<div id="ref-frankel1999trade" class="csl-entry" role="listitem">
+Frankel, Jeffrey A., and David Romer. 1999. <span>“Does Trade Cause Growth?”</span> <em>American Economic Review</em> 89 (3): 379–99.
+</div>
+<div id="ref-gruber2002elasticity" class="csl-entry" role="listitem">
+Gruber, Jon, and Emmanuel Saez. 2002. <span>“The Elasticity of Taxable Income: Evidence and Implications.”</span> <em>Journal of Public Economics</em> 84 (1): 1–32.
+</div>
+<div id="ref-hausman1996valuation" class="csl-entry" role="listitem">
+Hausman, Jerry A. 1996. <span>“Valuation of New Goods Under Perfect and Imperfect Competition.”</span> In <em>The Economics of New Goods</em>, edited by Timothy F. Bresnahan and Robert J. Gordon, 207–48. Chicago: University of Chicago Press.
+</div>
+<div id="ref-mcclellan1994does" class="csl-entry" role="listitem">
+McClellan, Mark, Barbara J. McNeil, and Joseph P. Newhouse. 1994. <span>“Does More Intensive Treatment of Acute Myocardial Infarction in the Elderly Reduce Mortality? <span>A</span>nalysis Using Instrumental Variables.”</span> <em>JAMA</em> 272 (11): 859–66.
+</div>
+<div id="ref-miguel2004economic" class="csl-entry" role="listitem">
+Miguel, Edward, Shanker Satyanath, and Ernest Sergenti. 2004. <span>“Economic Shocks and Civil Conflict: An Instrumental Variables Approach.”</span> <em>Journal of Political Economy</em> 112 (4): 725–53.
+</div>
+<div id="ref-nunn2008long" class="csl-entry" role="listitem">
+Nunn, Nathan. 2008. <span>“The Long-Term Effects of <span>Africa</span>’s Slave Trades.”</span> <em>Quarterly Journal of Economics</em> 123 (1): 139–76.
+</div>
+<div id="ref-nunn2011slave" class="csl-entry" role="listitem">
+Nunn, Nathan, and Leonard Wantchekon. 2011. <span>“The Slave Trade and the Origins of Mistrust in <span>Africa</span>.”</span> <em>American Economic Review</em> 101 (7): 3221–52.
+</div>
+<div id="ref-oreopoulos2006estimating" class="csl-entry" role="listitem">
+Oreopoulos, Philip. 2006. <span>“Estimating Average and Local Average Treatment Effects of Education When Compulsory Schooling Laws Really Matter.”</span> <em>American Economic Review</em> 96 (1): 152–75.
+</div>
+<div id="ref-staiger1997instrumental" class="csl-entry" role="listitem">
+Staiger, Douglas, and J Stock. 1997. <span>“Instrumental Variables Regression with Weak Instruments.”</span> <em>Econometrica</em> 65 (3): 557–86.
+</div>
+<div id="ref-wooldridge2025" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approach.”</span>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Cited in <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 316</a>)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><span class="math inline">\(\widetilde{edu}_i\)</span> is the part of <span class="math inline">\(edu_i\)</span> not explained by other regressors (<span class="math inline">\(\mathbf{x}_i\)</span>) in the limit. Likewise, for <span class="math inline">\(\widetilde{abil}_i\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>We will try to stick closely to <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>’s notation.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>It just complicates the Math. We add it in by considering the conditional covariance: <span class="math inline">\(Cov(edu_i,e_i|\mathbf{x}_i)\)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This term comes from the early work on the estimation of simultaneous equations in econometrics. Instrumental variables are needed to solve the problem of simultaneity. For example, consider the case where <span class="math inline">\(y_1,y_2\)</span> are quantity and price of a good.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

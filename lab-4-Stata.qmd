@@ -2,11 +2,11 @@
 title: Econometrics Lab 4
 subtitle: Observational Studies in Stata
 format: 
-  html: default
-#    other-links:
-#      - text: "Solution .do file"
-#        href: "material/lab-4/ec3301-lab-4.do"
-#        icon: code-square
+  html: 
+    other-links:
+      - text: "Solution .do file"
+        href: "material/lab-4/ec3301-lab-4.do"
+        icon: code-square
 jupyter: nbstata
 ---
 
