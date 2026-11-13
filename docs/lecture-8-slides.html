@@ -1306,7 +1306,6 @@ margin-right: 0; }
 <p><span class="math display">
   E[\varepsilon_i|x_{i1},x_{i2},x_{i3}] = \underbrace{E[u_i|x_{i1},x_{i2},x_{i3}]}_\text{term (1)} + \underbrace{\beta_3E[\nu_{i3}|x_{i1},x_{i2},x_{i3}]}_\text{term (2)}
 </span></p>
-<p>where the first term <span class="math inline">=0</span>, given the assumptions of the ‘true’ model.</p>
 </div>
 </section>
 <section id="term-1" class="slide level2">
@@ -1359,7 +1358,7 @@ margin-right: 0; }
 <p><span class="math display">
      E[u_i|x_{i1},x_{i2},x^*_{i3}]=0
    </span></p>
-<p><strong>A-2</strong> Relevance and linearity of the proxy equation: <span class="math inline">\delta_1&gt;0</span></p>
+<p><strong>A-2</strong> Relevance and linearity of the proxy equation: <span class="math inline">\delta_1\neq0</span></p>
 <p><span class="math display">
      x^*_{i3} = \delta_0 + \delta_1 x_{i3} + \nu_{i3}
    </span></p>
@@ -1520,7 +1519,7 @@ R-squared                 0.253        0.263
 <ul>
 <li>This is the OVB problem.</li>
 </ul>
-<aside><ol class="aside-footnotes"><li id="fn4"><p>It just complicates the Math. We add it in by considering the conditional covariance: <span class="math inline">Cov(edu_i,e_i|\mathbf{x}_i)</span>.</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn4"><p>It just complicates the Math. We add it in by considering the conditional covariance: <span class="math inline">Cov(edu_i,\varepsilon_i|\mathbf{x}_i)</span>.</p></li></ol></aside></section>
 <section id="solution" class="slide level2">
 <h2>Solution</h2>
 <p>Find another variable (<span class="math inline">z</span>) that satisfies:</p>
@@ -1578,7 +1577,7 @@ R-squared                 0.253        0.263
 </span></p>
 <p>with,</p>
 <p><span class="math display">
-  \pi = \frac{Cov(x_i,z_i)}{Var(z_i)} \neq 0
+  \pi_1 = \frac{Cov(x_i,z_i)}{Var(z_i)} \neq 0
 </span></p>
 <p>We call this the <strong>first stage</strong> equation.</p>
 </section>
@@ -1706,7 +1705,7 @@ R-squared                 0.253        0.263
 <p><span class="math display">
   \begin{aligned}
   \hat{\beta}_{1,iv} =&amp; \frac{\frac{\sum_{i=1}^n(z_i-\bar{z})(y_i-\bar{y})}{\textcolor{red}{\sum_{i=1}^n(z_i-\bar{z})^2}}}{\frac{\sum_{i=1}^n(z_i-\bar{z})(x_i-\bar{x})}{{\textcolor{red}{\sum_{i=1}^n(z_i-\bar{z})^2}}}} \\
-  =&amp; \frac{\hat{\gamma}_{1}}{\hat{\pi}_{1}}
+  =&amp; \frac{\hat{\gamma}_{1,ols}}{\hat{\pi}_{1,ols}}
   \end{aligned}
 </span></p>
 <p>where <span class="math inline">\hat{\gamma}_{1},\hat{\pi}_{1}</span> are <em>OLS estimators</em> from,</p>

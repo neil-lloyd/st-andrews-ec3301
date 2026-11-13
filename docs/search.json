@@ -7004,7 +7004,7 @@
     "href": "lecture-8-slides.html#section-2",
     "title": "Proxy and Instrumental Variables",
     "section": "",
-    "text": "From MLR 4, we need:\n\n  E[\\varepsilon_i|x_{i1},x_{i2},x_{i3}] = 0\n\n\n\n\nGiven that \\varepsilon_i=u_i + \\beta_3\\textcolor{red}{\\nu_{i3}}\n\n  E[\\varepsilon_i|x_{i1},x_{i2},x_{i3}] = \\underbrace{E[u_i|x_{i1},x_{i2},x_{i3}]}_\\text{term (1)} + \\underbrace{\\beta_3E[\\nu_{i3}|x_{i1},x_{i2},x_{i3}]}_\\text{term (2)}\n\nwhere the first term =0, given the assumptions of the ‘true’ model."
+    "text": "From MLR 4, we need:\n\n  E[\\varepsilon_i|x_{i1},x_{i2},x_{i3}] = 0\n\n\n\n\nGiven that \\varepsilon_i=u_i + \\beta_3\\textcolor{red}{\\nu_{i3}}\n\n  E[\\varepsilon_i|x_{i1},x_{i2},x_{i3}] = \\underbrace{E[u_i|x_{i1},x_{i2},x_{i3}]}_\\text{term (1)} + \\underbrace{\\beta_3E[\\nu_{i3}|x_{i1},x_{i2},x_{i3}]}_\\text{term (2)}"
   },
   {
     "objectID": "lecture-8-slides.html#term-1",
@@ -7025,7 +7025,7 @@
     "href": "lecture-8-slides.html#good-proxy",
     "title": "Proxy and Instrumental Variables",
     "section": "“Good” proxy",
-    "text": "“Good” proxy\nTo recap, we need the following (identifying) assumptions:\nA-1 MLR 4 for the ‘true’ model:\n\n     E[u_i|x_{i1},x_{i2},x^*_{i3}]=0\n   \nA-2 Relevance and linearity of the proxy equation: \\delta_1&gt;0\n\n     x^*_{i3} = \\delta_0 + \\delta_1 x_{i3} + \\nu_{i3}"
+    "text": "“Good” proxy\nTo recap, we need the following (identifying) assumptions:\nA-1 MLR 4 for the ‘true’ model:\n\n     E[u_i|x_{i1},x_{i2},x^*_{i3}]=0\n   \nA-2 Relevance and linearity of the proxy equation: \\delta_1\\neq0\n\n     x^*_{i3} = \\delta_0 + \\delta_1 x_{i3} + \\nu_{i3}"
   },
   {
     "objectID": "lecture-8-slides.html#section-3",
@@ -7074,7 +7074,7 @@
     "href": "lecture-8-slides.html#simplifaction",
     "title": "Proxy and Instrumental Variables",
     "section": "Simplifaction",
-    "text": "Simplifaction\nAbstracting away from the additional \\mathbf{x}-covariates for now,1 the correlation between edu and the error is given by,\n\n  \\begin{aligned}\n  Cov(edu_i,\\varepsilon_i) =& Cov(edu_i,\\textcolor{blue}{\\beta_2 abil_i + u_i}) \\\\\n  =& \\textcolor{blue}{\\beta_2} Cov(edu_i,\\textcolor{blue}{abil_i}) + \\underbrace{Cov(edu_i,\\textcolor{blue}{u_i})}_{=0} \\\\\n  =& \\textcolor{blue}{\\beta_2} Cov(edu_i,\\textcolor{blue}{abil_i})\n  \\end{aligned}\n\nWhich tells us that MLR-4a (or 4) are violated if,\n\n  Cov(edu_i,\\textcolor{blue}{abil_i})\\neq 0\n\n\nThis is the OVB problem.\n\nIt just complicates the Math. We add it in by considering the conditional covariance: Cov(edu_i,e_i|\\mathbf{x}_i)."
+    "text": "Simplifaction\nAbstracting away from the additional \\mathbf{x}-covariates for now,1 the correlation between edu and the error is given by,\n\n  \\begin{aligned}\n  Cov(edu_i,\\varepsilon_i) =& Cov(edu_i,\\textcolor{blue}{\\beta_2 abil_i + u_i}) \\\\\n  =& \\textcolor{blue}{\\beta_2} Cov(edu_i,\\textcolor{blue}{abil_i}) + \\underbrace{Cov(edu_i,\\textcolor{blue}{u_i})}_{=0} \\\\\n  =& \\textcolor{blue}{\\beta_2} Cov(edu_i,\\textcolor{blue}{abil_i})\n  \\end{aligned}\n\nWhich tells us that MLR-4a (or 4) are violated if,\n\n  Cov(edu_i,\\textcolor{blue}{abil_i})\\neq 0\n\n\nThis is the OVB problem.\n\nIt just complicates the Math. We add it in by considering the conditional covariance: Cov(edu_i,\\varepsilon_i|\\mathbf{x}_i)."
   },
   {
     "objectID": "lecture-8-slides.html#solution",
@@ -7109,7 +7109,7 @@
     "href": "lecture-8-slides.html#first-stage",
     "title": "Proxy and Instrumental Variables",
     "section": "First stage",
-    "text": "First stage\nThere exists an instrument z, such that,\n\n  x_i = \\pi_0 + \\pi_1 z_i + \\nu_i\n\nwith,\n\n  \\pi = \\frac{Cov(x_i,z_i)}{Var(z_i)} \\neq 0\n\nWe call this the first stage equation."
+    "text": "First stage\nThere exists an instrument z, such that,\n\n  x_i = \\pi_0 + \\pi_1 z_i + \\nu_i\n\nwith,\n\n  \\pi_1 = \\frac{Cov(x_i,z_i)}{Var(z_i)} \\neq 0\n\nWe call this the first stage equation."
   },
   {
     "objectID": "lecture-8-slides.html#exogeneity",
@@ -7151,7 +7151,7 @@
     "href": "lecture-8-slides.html#reduced-form",
     "title": "Proxy and Instrumental Variables",
     "section": "Reduced form",
-    "text": "Reduced form\nWe can divide both the numerator and denomator by SST_z:\n\n  \\begin{aligned}\n  \\hat{\\beta}_{1,iv} =& \\frac{\\frac{\\sum_{i=1}^n(z_i-\\bar{z})(y_i-\\bar{y})}{\\textcolor{red}{\\sum_{i=1}^n(z_i-\\bar{z})^2}}}{\\frac{\\sum_{i=1}^n(z_i-\\bar{z})(x_i-\\bar{x})}{{\\textcolor{red}{\\sum_{i=1}^n(z_i-\\bar{z})^2}}}} \\\\\n  =& \\frac{\\hat{\\gamma}_{1}}{\\hat{\\pi}_{1}}\n  \\end{aligned}\n\nwhere \\hat{\\gamma}_{1},\\hat{\\pi}_{1} are OLS estimators from,\n\na regression of y on z (reduced form)\na regression of x on z (first stage)"
+    "text": "Reduced form\nWe can divide both the numerator and denomator by SST_z:\n\n  \\begin{aligned}\n  \\hat{\\beta}_{1,iv} =& \\frac{\\frac{\\sum_{i=1}^n(z_i-\\bar{z})(y_i-\\bar{y})}{\\textcolor{red}{\\sum_{i=1}^n(z_i-\\bar{z})^2}}}{\\frac{\\sum_{i=1}^n(z_i-\\bar{z})(x_i-\\bar{x})}{{\\textcolor{red}{\\sum_{i=1}^n(z_i-\\bar{z})^2}}}} \\\\\n  =& \\frac{\\hat{\\gamma}_{1,ols}}{\\hat{\\pi}_{1,ols}}\n  \\end{aligned}\n\nwhere \\hat{\\gamma}_{1},\\hat{\\pi}_{1} are OLS estimators from,\n\na regression of y on z (reduced form)\na regression of x on z (first stage)"
   },
   {
     "objectID": "lecture-8-slides.html#variance",
@@ -7459,7 +7459,7 @@
     "href": "lecture-8.html#section-2",
     "title": "Proxy and Instrumental Variables",
     "section": "",
-    "text": "From MLR 4, we need:\n\\[\n  E[\\varepsilon_i|x_{i1},x_{i2},x_{i3}] = 0\n\\]\n\n\n\nGiven that \\(\\varepsilon_i=u_i + \\beta_3\\textcolor{red}{\\nu_{i3}}\\)\n\\[\n  E[\\varepsilon_i|x_{i1},x_{i2},x_{i3}] = \\underbrace{E[u_i|x_{i1},x_{i2},x_{i3}]}_\\text{term (1)} + \\underbrace{\\beta_3E[\\nu_{i3}|x_{i1},x_{i2},x_{i3}]}_\\text{term (2)}\n\\]\nwhere the first term \\(=0\\), given the assumptions of the ‘true’ model."
+    "text": "From MLR 4, we need:\n\\[\n  E[\\varepsilon_i|x_{i1},x_{i2},x_{i3}] = 0\n\\]\n\n\n\nGiven that \\(\\varepsilon_i=u_i + \\beta_3\\textcolor{red}{\\nu_{i3}}\\)\n\\[\n  E[\\varepsilon_i|x_{i1},x_{i2},x_{i3}] = \\underbrace{E[u_i|x_{i1},x_{i2},x_{i3}]}_\\text{term (1)} + \\underbrace{\\beta_3E[\\nu_{i3}|x_{i1},x_{i2},x_{i3}]}_\\text{term (2)}\n\\]"
   },
   {
     "objectID": "lecture-8.html#term-1",
@@ -7480,7 +7480,7 @@
     "href": "lecture-8.html#good-proxy",
     "title": "Proxy and Instrumental Variables",
     "section": "“Good” proxy",
-    "text": "“Good” proxy\nTo recap, we need the following (identifying) assumptions:\nA-1 MLR 4 for the ‘true’ model:\n\\[\n     E[u_i|x_{i1},x_{i2},x^*_{i3}]=0\n   \\]\nA-2 Relevance and linearity of the proxy equation: \\(\\delta_1&gt;0\\)\n\\[\n     x^*_{i3} = \\delta_0 + \\delta_1 x_{i3} + \\nu_{i3}\n   \\]"
+    "text": "“Good” proxy\nTo recap, we need the following (identifying) assumptions:\nA-1 MLR 4 for the ‘true’ model:\n\\[\n     E[u_i|x_{i1},x_{i2},x^*_{i3}]=0\n   \\]\nA-2 Relevance and linearity of the proxy equation: \\(\\delta_1\\neq0\\)\n\\[\n     x^*_{i3} = \\delta_0 + \\delta_1 x_{i3} + \\nu_{i3}\n   \\]"
   },
   {
     "objectID": "lecture-8.html#section-3",
@@ -7564,7 +7564,7 @@
     "href": "lecture-8.html#first-stage",
     "title": "Proxy and Instrumental Variables",
     "section": "First stage",
-    "text": "First stage\nThere exists an instrument \\(z\\), such that,\n\\[\n  x_i = \\pi_0 + \\pi_1 z_i + \\nu_i\n\\]\nwith,\n\\[\n  \\pi = \\frac{Cov(x_i,z_i)}{Var(z_i)} \\neq 0\n\\]\nWe call this the first stage equation."
+    "text": "First stage\nThere exists an instrument \\(z\\), such that,\n\\[\n  x_i = \\pi_0 + \\pi_1 z_i + \\nu_i\n\\]\nwith,\n\\[\n  \\pi_1 = \\frac{Cov(x_i,z_i)}{Var(z_i)} \\neq 0\n\\]\nWe call this the first stage equation."
   },
   {
     "objectID": "lecture-8.html#exogeneity",
@@ -7606,7 +7606,7 @@
     "href": "lecture-8.html#reduced-form",
     "title": "Proxy and Instrumental Variables",
     "section": "Reduced form",
-    "text": "Reduced form\nWe can divide both the numerator and denomator by \\(SST_z\\):\n\\[\n  \\begin{aligned}\n  \\hat{\\beta}_{1,iv} =& \\frac{\\frac{\\sum_{i=1}^n(z_i-\\bar{z})(y_i-\\bar{y})}{\\textcolor{red}{\\sum_{i=1}^n(z_i-\\bar{z})^2}}}{\\frac{\\sum_{i=1}^n(z_i-\\bar{z})(x_i-\\bar{x})}{{\\textcolor{red}{\\sum_{i=1}^n(z_i-\\bar{z})^2}}}} \\\\\n  =& \\frac{\\hat{\\gamma}_{1}}{\\hat{\\pi}_{1}}\n  \\end{aligned}\n\\]\nwhere \\(\\hat{\\gamma}_{1},\\hat{\\pi}_{1}\\) are OLS estimators from,\n\na regression of \\(y\\) on \\(z\\) (reduced form)\na regression of \\(x\\) on \\(z\\) (first stage)\n\n\n\n\n\n\n\nTipReduced form\n\n\n\n\n\nReduced form is another phrase that is used widely in applied economics, often with a variety of meanings. Indeed, it is a phrase that is difficult to “pin down”. In this setting, it has a very specific meaning. It refers to model in which the outcome is regressed on the exogenous regressors and excluded instruments alone. That is, all endogenous regressors are excluded."
+    "text": "Reduced form\nWe can divide both the numerator and denomator by \\(SST_z\\):\n\\[\n  \\begin{aligned}\n  \\hat{\\beta}_{1,iv} =& \\frac{\\frac{\\sum_{i=1}^n(z_i-\\bar{z})(y_i-\\bar{y})}{\\textcolor{red}{\\sum_{i=1}^n(z_i-\\bar{z})^2}}}{\\frac{\\sum_{i=1}^n(z_i-\\bar{z})(x_i-\\bar{x})}{{\\textcolor{red}{\\sum_{i=1}^n(z_i-\\bar{z})^2}}}} \\\\\n  =& \\frac{\\hat{\\gamma}_{1,ols}}{\\hat{\\pi}_{1,ols}}\n  \\end{aligned}\n\\]\nwhere \\(\\hat{\\gamma}_{1},\\hat{\\pi}_{1}\\) are OLS estimators from,\n\na regression of \\(y\\) on \\(z\\) (reduced form)\na regression of \\(x\\) on \\(z\\) (first stage)\n\n\n\n\n\n\n\nTipReduced form\n\n\n\n\n\nReduced form is another phrase that is used widely in applied economics, often with a variety of meanings. Indeed, it is a phrase that is difficult to “pin down”. In this setting, it has a very specific meaning. It refers to model in which the outcome is regressed on the exogenous regressors and excluded instruments alone. That is, all endogenous regressors are excluded."
   },
   {
     "objectID": "lecture-8.html#variance",
@@ -7844,7 +7844,7 @@
     "href": "lecture-8.html#footnotes",
     "title": "Proxy and Instrumental Variables",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nCited in Wooldridge (2025, 316)↩︎\n\\(\\widetilde{edu}_i\\) is the part of \\(edu_i\\) not explained by other regressors (\\(\\mathbf{x}_i\\)) in the limit. Likewise, for \\(\\widetilde{abil}_i\\).↩︎\nWe will try to stick closely to Wooldridge (2025)’s notation.↩︎\nIt just complicates the Math. We add it in by considering the conditional covariance: \\(Cov(edu_i,e_i|\\mathbf{x}_i)\\).↩︎\nThis term comes from the early work on the estimation of simultaneous equations in econometrics. Instrumental variables are needed to solve the problem of simultaneity. For example, consider the case where \\(y_1,y_2\\) are quantity and price of a good.↩︎"
+    "text": "Footnotes\n\n\nCited in Wooldridge (2025, 316)↩︎\n\\(\\widetilde{edu}_i\\) is the part of \\(edu_i\\) not explained by other regressors (\\(\\mathbf{x}_i\\)) in the limit. Likewise, for \\(\\widetilde{abil}_i\\).↩︎\nWe will try to stick closely to Wooldridge (2025)’s notation.↩︎\nIt just complicates the Math. We add it in by considering the conditional covariance: \\(Cov(edu_i,\\varepsilon_i|\\mathbf{x}_i)\\).↩︎\nThis term comes from the early work on the estimation of simultaneous equations in econometrics. Instrumental variables are needed to solve the problem of simultaneity. For example, consider the case where \\(y_1,y_2\\) are quantity and price of a good.↩︎"
   },
   {
     "objectID": "material-intercept.html",

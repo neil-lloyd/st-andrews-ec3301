@@ -707,7 +707,6 @@ Note
 <p><span class="math display">\[
   E[\varepsilon_i|x_{i1},x_{i2},x_{i3}] = \underbrace{E[u_i|x_{i1},x_{i2},x_{i3}]}_\text{term (1)} + \underbrace{\beta_3E[\nu_{i3}|x_{i1},x_{i2},x_{i3}]}_\text{term (2)}
 \]</span></p>
-<p>where the first term <span class="math inline">\(=0\)</span>, given the assumptions of the ‘true’ model.</p>
 </div>
 </section>
 <section id="term-1" class="level2">
@@ -760,7 +759,7 @@ Note
 <p><span class="math display">\[
      E[u_i|x_{i1},x_{i2},x^*_{i3}]=0
    \]</span></p>
-<p><strong>A-2</strong> Relevance and linearity of the proxy equation: <span class="math inline">\(\delta_1&gt;0\)</span></p>
+<p><strong>A-2</strong> Relevance and linearity of the proxy equation: <span class="math inline">\(\delta_1\neq0\)</span></p>
 <p><span class="math display">\[
      x^*_{i3} = \delta_0 + \delta_1 x_{i3} + \nu_{i3}
    \]</span></p>
@@ -973,7 +972,7 @@ Important
 \]</span></p>
 <p>with,</p>
 <p><span class="math display">\[
-  \pi = \frac{Cov(x_i,z_i)}{Var(z_i)} \neq 0
+  \pi_1 = \frac{Cov(x_i,z_i)}{Var(z_i)} \neq 0
 \]</span></p>
 <p>We call this the <strong>first stage</strong> equation.</p>
 </section>
@@ -1117,7 +1116,7 @@ Important
 <p><span class="math display">\[
   \begin{aligned}
   \hat{\beta}_{1,iv} =&amp; \frac{\frac{\sum_{i=1}^n(z_i-\bar{z})(y_i-\bar{y})}{\textcolor{red}{\sum_{i=1}^n(z_i-\bar{z})^2}}}{\frac{\sum_{i=1}^n(z_i-\bar{z})(x_i-\bar{x})}{{\textcolor{red}{\sum_{i=1}^n(z_i-\bar{z})^2}}}} \\
-  =&amp; \frac{\hat{\gamma}_{1}}{\hat{\pi}_{1}}
+  =&amp; \frac{\hat{\gamma}_{1,ols}}{\hat{\pi}_{1,ols}}
   \end{aligned}
 \]</span></p>
 <p>where <span class="math inline">\(\hat{\gamma}_{1},\hat{\pi}_{1}\)</span> are <em>OLS estimators</em> from,</p>
@@ -2102,7 +2101,7 @@ Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approa
 <li id="fn1"><p>Cited in <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025, 316</a>)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p><span class="math inline">\(\widetilde{edu}_i\)</span> is the part of <span class="math inline">\(edu_i\)</span> not explained by other regressors (<span class="math inline">\(\mathbf{x}_i\)</span>) in the limit. Likewise, for <span class="math inline">\(\widetilde{abil}_i\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>We will try to stick closely to <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>’s notation.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>It just complicates the Math. We add it in by considering the conditional covariance: <span class="math inline">\(Cov(edu_i,e_i|\mathbf{x}_i)\)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>It just complicates the Math. We add it in by considering the conditional covariance: <span class="math inline">\(Cov(edu_i,\varepsilon_i|\mathbf{x}_i)\)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>This term comes from the early work on the estimation of simultaneous equations in econometrics. Instrumental variables are needed to solve the problem of simultaneity. For example, consider the case where <span class="math inline">\(y_1,y_2\)</span> are quantity and price of a good.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->

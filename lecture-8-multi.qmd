@@ -266,7 +266,6 @@ $$
   E[\varepsilon_i|x_{i1},x_{i2},x_{i3}] = \underbrace{E[u_i|x_{i1},x_{i2},x_{i3}]}_\text{term (1)} + \underbrace{\beta_3E[\nu_{i3}|x_{i1},x_{i2},x_{i3}]}_\text{term (2)}
 $$
 
-where the first term $=0$, given the assumptions of the 'true' model. 
 :::
 
 ## Term (1)
@@ -331,7 +330,7 @@ To recap, we need the following (identifying) assumptions:
      E[u_i|x_{i1},x_{i2},x^*_{i3}]=0
    $$
 
-**A-2** Relevance and linearity of the proxy equation: $\delta_1>0$
+**A-2** Relevance and linearity of the proxy equation: $\delta_1\neq0$
 
    $$
      x^*_{i3} = \delta_0 + \delta_1 x_{i3} + \nu_{i3} 
@@ -464,7 +463,7 @@ which has different population parameters to the 'true' model
 
 Abstracting away from the additional $\mathbf{x}$-covariates for now,[^4] the correlation between $edu$ and the error is given by, 
 
-[^4]: It just complicates the Math. We add it in by considering the conditional covariance: $Cov(edu_i,e_i|\mathbf{x}_i)$.
+[^4]: It just complicates the Math. We add it in by considering the conditional covariance: $Cov(edu_i,\varepsilon_i|\mathbf{x}_i)$.
 
 $$
   \begin{aligned}
@@ -547,7 +546,7 @@ $$
 with, 
 
 $$
-  \pi = \frac{Cov(x_i,z_i)}{Var(z_i)} \neq 0
+  \pi_1 = \frac{Cov(x_i,z_i)}{Var(z_i)} \neq 0
 $$
 
 We call this the **first stage** equation. 
@@ -702,7 +701,7 @@ We can divide both the numerator and denomator by $SST_z$:
 $$
   \begin{aligned}
   \hat{\beta}_{1,iv} =& \frac{\frac{\sum_{i=1}^n(z_i-\bar{z})(y_i-\bar{y})}{\textcolor{red}{\sum_{i=1}^n(z_i-\bar{z})^2}}}{\frac{\sum_{i=1}^n(z_i-\bar{z})(x_i-\bar{x})}{{\textcolor{red}{\sum_{i=1}^n(z_i-\bar{z})^2}}}} \\
-  =& \frac{\hat{\gamma}_{1}}{\hat{\pi}_{1}}
+  =& \frac{\hat{\gamma}_{1,ols}}{\hat{\pi}_{1,ols}}
   \end{aligned}
 $$
 
