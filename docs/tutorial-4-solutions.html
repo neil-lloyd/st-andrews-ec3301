@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Tutorial 4 (Solutions) – EC3301 Econometrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cf201e8c159c64e39451d1a718f2f573.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-fc741f0b887a700e42f37d64ebb49055.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">EC3301 Econometrics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lectures" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lectures</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lectures">    
+        <li>
+    <a class="dropdown-item" href="./lecture-0.html">
+ <span class="dropdown-text">Pre-sessional Lecture</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-1.html">
+ <span class="dropdown-text">Lecture 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-2.html">
+ <span class="dropdown-text">Lecture 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-3.html">
+ <span class="dropdown-text">Lecture 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-4.html">
+ <span class="dropdown-text">Lecture 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-5.html">
+ <span class="dropdown-text">Lecture 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-6.html">
+ <span class="dropdown-text">Lecture 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-7.html">
+ <span class="dropdown-text">Lecture 7</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-8.html">
+ <span class="dropdown-text">Lecture 8</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="./lab-1-Stata.html">
+ <span class="dropdown-text">Lab 1 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-1-R.html">
+ <span class="dropdown-text">Lab 1 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-Stata.html">
+ <span class="dropdown-text">Lab 2 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-2-R.html">
+ <span class="dropdown-text">Lab 2 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-3-Stata.html">
+ <span class="dropdown-text">Lab 3 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-3-R.html">
+ <span class="dropdown-text">Lab 3 (R)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-4-Stata.html">
+ <span class="dropdown-text">Lab 4 (Stata)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab-4-R.html">
+ <span class="dropdown-text">Lab 4 (R)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./tutorial-1.html">
+ <span class="dropdown-text">Tutorial 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-1-solutions.html">
+ <span class="dropdown-text">Tutorial 1 (Solutions)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2.html">
+ <span class="dropdown-text">Tutorial 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-2-solutions.html">
+ <span class="dropdown-text">Tutorial 2 (Solutions)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-3.html">
+ <span class="dropdown-text">Tutorial 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-3-solutions.html">
+ <span class="dropdown-text">Tutorial 3 (Solutions)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorial-4.html">
+ <span class="dropdown-text">Tutorial 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-extra-material" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Extra Material</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-extra-material">    
+        <li>
+    <a class="dropdown-item" href="./material-interpretation.html">
+ <span class="dropdown-text">Interpreting Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-cef.html">
+ <span class="dropdown-text">Conditional Expectation Function</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-intercept.html">
+ <span class="dropdown-text">The Intercept</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-R.html">
+ <span class="dropdown-text">Basic Programming in R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./material-programming-Stata.html">
+ <span class="dropdown-text">Basic Programming in Stata</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="light-content">
+<p><img src="img/01-standard-vertical-black-text.png" class="img-fluid"></p>
+</div>
+<div class="dark-content">
+<p><img src="img/02-standard-vertical-white-text.png" class="img-fluid"></p>
+</div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#rct-power-calculation-gennetian-et-al.-2024" id="toc-rct-power-calculation-gennetian-et-al.-2024" class="nav-link active" data-scroll-target="#rct-power-calculation-gennetian-et-al.-2024">RCT Power Calculation: Gennetian <em>et al.</em> (2024)</a></li>
+  <li><a href="#proxy-iv-example-acemoglu-johnson-robinson-2001" id="toc-proxy-iv-example-acemoglu-johnson-robinson-2001" class="nav-link" data-scroll-target="#proxy-iv-example-acemoglu-johnson-robinson-2001">Proxy &amp; IV Example: Acemoglu, Johnson &amp; Robinson (2001)</a></li>
+  <li><a href="#recent-iv-examples" id="toc-recent-iv-examples" class="nav-link" data-scroll-target="#recent-iv-examples">Recent IV Examples</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="tutorial-4-solutions.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tutorial 4 (Solutions)</h1>
+<p class="subtitle lead">EC3301 - Martinmas Semester</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="rct-power-calculation-gennetian-et-al.-2024" class="level1">
+<h1>RCT Power Calculation: Gennetian <em>et al.</em> (2024)</h1>
+<p>This question takes inspiration from <span class="citation" data-cites="gennetian2024effects">Gennetian et al. (<a href="#ref-gennetian2024effects" role="doc-biblioref">2024</a>)</span>. Available online from <a href="https://www.nature.com/articles/s41562-024-01915-7.pdf">www.nature.com</a>. The study evaluates how low income households use unconditional cash transfers to investment in their children’s education. We will use this study to demonstrate the significance of power calculations.</p>
+<p>While discussing their research design, the authors write:</p>
+<blockquote class="blockquote">
+<p>“Striking a balance between statistical power and project costs, 40% of the recruited sample within each site was randomized to receive $333 monthly cash gifts and 60% to receive $20 monthly cash gifts. With an enrolled sample of <span class="math inline">\(n=1,000\)</span> mother–infant dyads, and accounting for a predicted 20% attrition over longer-term follow-ups, the anticipated sample size of 800 dyads during subsequent waves of data collection is estimated to provide 80% power to detect a 0.207 s.d. impact at <span class="math inline">\(P&lt;0.05\)</span> in a two-tailed test on the family investment and related family process outcomes examined here. Data collectors were blinded to assignment of treatment status.” (p.&nbsp;1523)</p>
+</blockquote>
+<p><br>
+</p>
+<ol type="1">
+<li>Write down the formula for the variance of the simple difference between means (SDM) <span class="math inline">\(\hat\tau\)</span> estimator, assuming a homogeneous treatment effect.</li>
+</ol>
+<div class="border">
+<p><span class="math display">\[
+  Var(\hat{\tau}) = \sigma^2 \bigg(\frac{1}{n_0} + \frac{1}{n_1}\bigg)
+\]</span></p>
+</div>
+<p><br>
+</p>
+<ol start="2" type="1">
+<li>Solve for <span class="math inline">\(sd(\hat\tau)\)</span> as a function of <span class="math inline">\(\sigma\)</span>, assuming <span class="math inline">\(n = 800\)</span> and <span class="math inline">\(\bar{w} = 0.4\)</span> (the parameters specified above).</li>
+</ol>
+<div class="border">
+<p><span class="math display">\[
+  Var(\hat{\tau}) = \sigma^2 \bigg(\frac{1}{n_0} + \frac{1}{n_1}\bigg) = \sigma^2 \bigg(\frac{1}{n\bar{w}} + \frac{1}{n(1-\bar{w})}\bigg) = \frac{\sigma^2}{n\bar{w}(1-\bar{w})}
+\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[
+  sd(\hat\tau) = \frac{\sigma}{\sqrt{800\times 0.4\times 0.6}} = \frac{\sigma}{\sqrt{192}}
+\]</span></p>
+<p>where <span class="math inline">\(\sigma\)</span> is the unobserved s.d. of <span class="math inline">\(y\)</span>.</p>
+</div>
+<p><br>
+</p>
+<ol start="3" type="1">
+<li>What is the distribution of the test-statistic <span class="math inline">\(\hat{\tau}/sd(\hat\tau)\)</span> under the hull hypothesis <span class="math inline">\(H_0: \tau=0\)</span>?</li>
+</ol>
+<div class="border">
+<p>We do not know the finite sample of this distribution of this test static. However, we know that by CLT the asymptotic distribution will be normal. For slightly more conservative test, we can use the <span class="math inline">\(t\)</span>-distribution.</p>
+</div>
+<p><br>
+</p>
+<ol start="4" type="1">
+<li><p>Solve for power function the two-sided test: <span class="math inline">\(H_0: \tau=0\)</span> against <span class="math inline">\(H_1: \tau\neq0\)</span> (<span class="math inline">\(\alpha = 0.05\)</span>). That is, expand on,</p>
+<p><span class="math display">\[
+  Pr(\text{Reject}\; H_0| \tau = \kappa)
+\]</span></p>
+<p>Use the critical values from a <span class="math inline">\(N(0,1)\)</span> distribution for the rejection rule. The answer should include the expression <span class="math inline">\(\kappa/\sigma\)</span></p></li>
+</ol>
+<div class="border">
+<p><span class="math display">\[
+\begin{aligned}
+&amp; Pr(\text{Reject}\; H_0| \tau = \kappa) \\
+=&amp; Pr\bigg(\frac{\hat{\tau}}{sd}&lt;\text{z}_{0.025}\bigg|\tau = \kappa\bigg) + Pr\bigg(\frac{\hat{\tau}}{sd}&gt;\text{z}_{0.975}\bigg|\tau = \kappa\bigg) \\
+=&amp; Pr\bigg(\frac{\hat{\tau}-\kappa}{sd}&lt;\text{z}_{0.025}-\frac{\kappa}{sd}\bigg|\tau = \kappa\bigg) + Pr\bigg(\frac{\hat{\tau}-\kappa}{sd}&gt;\text{z}_{0.975}-\frac{\kappa}{sd}\bigg|\tau = \kappa\bigg) \\
+=&amp; Pr\bigg(\frac{\hat{\tau}-\kappa}{sd}&lt;\text{z}_{0.025}-\frac{\kappa}{\sigma}\times \sqrt{192}\bigg|\tau = \kappa\bigg) + Pr\bigg(\frac{\hat{\tau}-\kappa}{sd}&gt;\text{z}_{0.975}-\frac{\kappa}{\sigma}\times \sqrt{192}\bigg|\tau = \kappa\bigg)
+\end{aligned}
+\]</span></p>
+</div>
+<p><br>
+</p>
+<ol start="5" type="1">
+<li><p>The authors compute the power of the test for <span class="math inline">\(\kappa/\sigma = 0.207\)</span>: “to detect a 0.207 s.d. impact”. Using the above expression, compute the power assuming</p>
+<p><span class="math display">\[
+  \frac{\hat{\tau}-\kappa}{sd(\hat{\tau})}\overset{a}{\sim} N(0,1)
+\]</span> Your answer will not be exactly 80%, but should be close.</p></li>
+</ol>
+<div class="border">
+<p><span class="math display">\[
+\begin{aligned}
+&amp; Pr(\text{Reject}\; H_0| \tau = \kappa) \\
+\approx&amp; Pr(z&lt;\text{z}_{0.025}-0.207\times \sqrt{192}|\tau = \kappa) + Pr(z&gt;\text{z}_{0.975}-0.207\times \sqrt{192}|\tau = \kappa) \\
+=&amp; 0.82
+\end{aligned}
+\]</span></p>
+<div id="d425df74" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">normal</span>(<span class="fu">invnormal</span>(0.025)-0.207*<span class="fu">sqrt</span>(192)) + 1-<span class="fu">normal</span>(<span class="fu">invnormal</span>(0.975)-0.207*<span class="fu">sqrt</span>(192))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.81814403</code></pre>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+<ol start="6" type="1">
+<li>On p.&nbsp;1524, the authors write:</li>
+</ol>
+<blockquote class="blockquote">
+<p>“Estimates for each follow-up wave following pre-registration protocols are derived by the following straightforward model: <span class="math display">\[ Y = Z\pi + X\beta + \varepsilon \]</span> where <span class="math inline">\(Y\)</span> is the outcome of interest for mother or the household and <span class="math inline">\(\varepsilon\)</span> is the error term. The model includes the following baseline covariates (<span class="math inline">\(X\)</span>) with the goal of improving precision in the estimate: mother’s characteristics (mother’s age, maximum education level attained, race and ethnicity, marital status, general health, an indicator of maternal depressive symptoms and cigarettes and alcohol consumption during pregnancy), household characteristics (number of children born to mother, number of adults in the household, father living with the mother, household income and household net worth), baby’s birth characteristics (weight at birth and gestational age), a site-based fixed effect and an indicator for the switch from in-person to phone interviews.”</p>
+</blockquote>
+<p>Describe the econometric rationale for adding these baseline covariates in a linear regression model.</p>
+<div class="border">
+<p>This an example of Restricted Regression Adjustment (RRA). The rationale is to lower the variance of the estimator by explaining more of the variance in the outcome. This works well in RCTs because assignment into treatment is typically independent of baseline covariates. The caviate here is stratified experiments.</p>
+</div>
+<p><br>
+</p>
+<ol start="7" type="1">
+<li>The original working paper version of this paper shows the conditional and unconditional estimates in Tables 1-5: <a href="https://www.nber.org/system/files/working_papers/w30379/w30379.pdf">www.nber.org</a>. Why are the estimated SEs of the conditional ATE point estimates (column 4) not all smaller than the unconditional ones (column 3)?</li>
+</ol>
+<div class="border">
+<p>You can show that the asymptotic variance of the RRA estimator is lower than the simple OLS estimator. However, the finite sample variance may not be bigger because of the non-zero correlation between assignment and baseline covariates in the realized data.</p>
+</div>
+</section>
+<section id="proxy-iv-example-acemoglu-johnson-robinson-2001" class="level1">
+<h1>Proxy &amp; IV Example: Acemoglu, Johnson &amp; Robinson (2001)</h1>
+<p>This question concerns <span class="citation" data-cites="acemoglu2001colonial">Acemoglu, Johnson, and Robinson (<a href="#ref-acemoglu2001colonial" role="doc-biblioref">2001</a>)</span> “The Colonial Origins of Comparative Development: An Empirical Investigation”. Available online from <a href="https://www.aeaweb.org/articles?id=10.1257/aer.91.5.1369">www.aeaweb.org</a>. The goal of the paper is to understand the (causal) relationship between development and institutions. The consider a range of institutions, by one key measure is an index of protection against expropriation. The authors estimate the following linear model using OLS (p.&nbsp;1378; see results in Table 2).</p>
+<p><span class="math display">\[
+  \log y_i = \mu + \alpha R_i + \mathbf{X}_i'\gamma + \varepsilon_i
+\]</span></p>
+<p>where</p>
+<ul>
+<li><p><span class="math inline">\(y_i\)</span> is income per capita,</p></li>
+<li><p><span class="math inline">\(R_i\)</span> is measure of protection against expropriation. It is measured on a scale from 0 to 10, with 0 indicating no protection.</p></li>
+<li><p><span class="math inline">\(\mathbf{X}_i\)</span> a vector of control variables.</p></li>
+</ul>
+<p><br>
+</p>
+<ol type="1">
+<li>What are the control variables (covariates) included in this regression.</li>
+</ol>
+<div class="border">
+<p>The covariates include: latitude of the country, regional dummy variable variables (Asia, Africa, and Other).</p>
+</div>
+<p><br>
+</p>
+<ol start="2" type="1">
+<li>If we think of these variables as proxy variables, what would they be proxy for? Think about the unobserved factors which may confound the relationship between development and institutions.</li>
+</ol>
+<div class="border">
+<p>These geographical controls are being used to control for geographical (climate, disease, ruggedness, coastline, etc.) as well as cultural (social) determinants of development that vary across space.</p>
+</div>
+<p><br>
+</p>
+<ol start="3" type="1">
+<li>Interpret coefficient of interest in column (2) of Table 2. The base sample includes “64 countries that were ex-colonies and for which we have settler mortality, protection against expropriation risk, and GDP data” (p.&nbsp;1377).</li>
+</ol>
+<div class="border">
+<p>An increase in the index of 1 unit increases predicted output by 68%, among ex-colonies.</p>
+<div id="0e02780d" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">exp</span>(0.52)-1)*100</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>68.202765</code></pre>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+<ol start="4" type="1">
+<li>Comparing the coefficient estimates of columns (2) and (6), is specification (2) upward or downward biased due to omitted variables? In particular, consider the relationship between climate, which is proxied for by latitude. What do the results <em>suggest</em> is the relationship bewteen climate and institutions?</li>
+</ol>
+<blockquote class="blockquote">
+<p>“Many social scientists, including Montesquieu [1784] (1989), Diamond (1997), and Sachs and coauthors, have argued for a direct effect of climate on performance, and Gallup et al.&nbsp;(1998) and Hall and Jones (1999) document the correlation between distance from the equator and economic performance. To control for this, in columns (3)–(6), we add latitude as a regressor (we follow the literature in using the absolute value measure of latitude, i.e., distance from the equator, scaled between 0 and 1).” (p.&nbsp;1379)</p>
+</blockquote>
+<div class="border">
+<p>After controlling for geographical variables, the estimated cofficient drops to 0.41. This suggests that the simple model is upward biased. The coefficient on latitude is positive, suggesting that the relationshp between instutitions and latitude is positive too. This means that, on average, ex-colonies further from the equator have stronger institutions.</p>
+</div>
+<p><br>
+</p>
+<ol start="5" type="1">
+<li>Explain why the authors believe <span class="math inline">\(R_i\)</span> to be endogenous, even conditional on <span class="math inline">\(\mathbf{X}\)</span>?</li>
+</ol>
+<div class="border">
+<p>These remain relatively “crude” controls. The controls account for geographical confounding factors - like climate and cultural differences that matter for development - but it is too strong to say that conditional on geography it is <em>as if</em> institutions are randomly assigned. In addition, we need to account for the potential reverse causal relationship between development and institutions. This cannot be resolved using controls.</p>
+</div>
+<p><br>
+</p>
+<ol start="6" type="1">
+<li>What do the authors propose as an instrument for <span class="math inline">\(R_i\)</span>? Under what assumptions is this a valid instrument? [Hint: see p.&nbsp;1383]</li>
+</ol>
+<div class="border">
+<p>The proposed, excluded instrument is the log of settler mortality; a historical variable from the colonial period. The conditions needed are:</p>
+<p><span class="math display">\[
+  Cov(\log M_i,\varepsilon_i)=0\qquad \text{and}\qquad Cov(\log M_i, R_i) \neq 0
+\]</span></p>
+</div>
+<p><br>
+</p>
+<ol start="7" type="1">
+<li>Explain why this historical instrument might affect contemporary levels of institutions in an ex-colony. That is, why do we expect there to be a valid first-stage? [Hint: the authors describe a chain of causation on pp.&nbsp;1370, 1383]</li>
+</ol>
+<div class="border">
+<p>The causal relationship runs between the following channels:</p>
+<p><span class="math display">\[
+  \text{settler mortality} \Rightarrow \text{level of colonial settlement} \Rightarrow \text{colonial institutions} \Rightarrow \text{modern institutions}
+\]</span></p>
+</div>
+<p><br>
+</p>
+<ol start="8" type="1">
+<li>Could <span class="math inline">\(\log M_i\)</span> have a direct effect on contemporary development, thereby violating the exclusion restriction? Consider the potential significance of <span class="math inline">\(\mathbf{X}\)</span> here. [Hint: see p.&nbsp;1371]</li>
+</ol>
+<div class="border">
+<p>Historical settler mortality rates may be directly related to disease environments that matter today. First, the authors argue that historically important diseases often affected settlers more than native populations. In addition, to the extent to which modern disease environments relate to geography - for example, Malaria is a tropical disease - these are controlled for through <span class="math inline">\(\mathbf{X}\)</span>.</p>
+</div>
+<p><br>
+</p>
+<ol start="9" type="1">
+<li><p>The first-stage equation is shown below (p.&nbsp;1384). Compute the F-statistic for <span class="math inline">\(H_0: \beta=0\)</span> using column (10) from Table 3.</p>
+<p><span class="math display">\[
+  R_i = \zeta + \beta \log M_i + \mathbf{X}_i'\delta + \upsilon_i
+\]</span></p></li>
+</ol>
+<div class="border">
+<p>The <span class="math inline">\(F\)</span>-stat is the square of the <span class="math inline">\(t\)</span>-stat:</p>
+<p><span class="math display">\[
+  F\text{-stat} = \bigg(\frac{-0.51}{0.14}\bigg)^2
+\]</span></p>
+<div id="a2715b8e" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dis (-0.51/0.14)^2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>13.270408</code></pre>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+<ol start="10" type="1">
+<li>Interpret the 2SLS-IV estimate from column (9), Table 4. Is it statistically significant at a 5% level?</li>
+</ol>
+<div class="border">
+<p>The coefficient is 1.10, suggesting that a 1 unit increase in the index increases predicted GDP per capita by 200%, among ex-colonies.</p>
+<div id="6c3ddb89" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">exp</span>(1.1)-1)*100</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>200.4166</code></pre>
+</div>
+</div>
+<p>The result is statistically significant at a 5% level:</p>
+<div id="7c560792" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dis 1.1/0.46</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dis invt(59,0.975)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2.3913043
+2.0009954</code></pre>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+<ol start="11" type="1">
+<li>Comparing these results to those of Table 2, what do can we conclude with respect to the bias in OLS? How does this compare with your answer to Q4.</li>
+</ol>
+<div class="border">
+<p>The IV estimates are substantially larger than the OLS estimates (across all control-variable specifications). This suggests that OLS is in fact downward biased; the opposite direction to what we concluded in Q4. However, Q4 only concerned the OV bias from the specific controls considered here. The bias from other OVs and reverse causality may point in a different direction.</p>
+</div>
+<p><br>
+</p>
+<ol start="12" type="1">
+<li>Suppose <span class="math inline">\(Cov(\log M_i,\varepsilon_i)\neq 0\)</span>. Explain why the IV estimates may themselves be biased in a different direction to OLS.</li>
+</ol>
+<div class="border">
+<p>From <a href="./lecture-8.html">Lecture 8</a>:</p>
+<p><span class="math display">\[
+  p\lim \hat\alpha_{ols} = \alpha + Corr(R,\varepsilon)\times \frac{\sigma_{\varepsilon}}{\sigma_R}
+\]</span></p>
+<p><span class="math display">\[
+  p\lim \hat\alpha_{iv} = \alpha + \frac{Corr(\log M,\varepsilon)}{Corr(\log M,R)}\times \frac{\sigma_{\varepsilon}}{\sigma_R}
+\]</span></p>
+<p>Since <span class="math inline">\(Corr(\log M,R)&lt;0\)</span> (from first-stage), the (inconsitency) bias of IV may be actually be positive if <span class="math inline">\(Corr(\log M,\varepsilon)&lt;0\)</span>. This would mean that ex-colonies with higher settler mortality are negatively correlated with unobserved factors that positively affect development today. For example, if historical disease environments (like Malaria) still matter today for development.</p>
+</div>
+</section>
+<section id="recent-iv-examples" class="level1">
+<h1>Recent IV Examples</h1>
+<p>Below you will find a list of recent NBER working papers that make use of an instrumental variable identification strategy. For each paper, try to find: (1) the endogenous variable; (2) the excluded instrument(s); (3) the source of exogenous variation.</p>
+<p><br>
+</p>
+<ol type="1">
+<li><span class="citation" data-cites="angrist2025instrumental">Angrist et al. (<a href="#ref-angrist2025instrumental" role="doc-biblioref">2025</a>)</span> available online <a href="https://www.nber.org/system/files/working_papers/w33635/w33635.pdf">www.nber.org</a>.</li>
+</ol>
+<div class="border">
+<ol type="1">
+<li><p>Taking Menopause Hormone Treatment (MHT).</p></li>
+<li><p>Assignment in the Women’s Health Initiative (WHI) clinical trials.</p></li>
+<li><p>Randomization</p></li>
+</ol>
+</div>
+<p><br>
+</p>
+<ol start="2" type="1">
+<li><span class="citation" data-cites="stevenson2023conviction">Stevenson et al. (<a href="#ref-stevenson2023conviction" role="doc-biblioref">2023</a>)</span> available online <a href="https://www.nber.org/system/files/working_papers/w32894/revisions/w32894.rev1.pdf">www.nber.org</a>. [Hint: p.&nbsp;12]</li>
+</ol>
+<div class="border">
+<ol type="1">
+<li><p>Noncarceral conviction of criminals in Virginia</p></li>
+<li><p>The predicted rate of noncarceral convinction for the assigned judge</p></li>
+<li><p>Quazi-random assignment of judges to cases within the judicial system</p></li>
+</ol>
+</div>
+<p><br>
+</p>
+<ol start="3" type="1">
+<li><span class="citation" data-cites="grossman2022health">Grossman, Tello-Trillo, and Willage (<a href="#ref-grossman2022health" role="doc-biblioref">2022</a>)</span> available online <a href="https://www.nber.org/system/files/working_papers/w29661/w29661.pdf">www.nber.org</a>. [Hint: p.&nbsp;15]</li>
+</ol>
+<div class="border">
+<ol type="1">
+<li><p>The public health insurance status of a mother’s <span class="math inline">\(J\)</span> children.</p></li>
+<li><p>Simulated eligibility of the mother’s children based on their age, year, and state at point of observation. This aggregated across children for each mother. There is a second version with aggregates years of eligibility for each mother based on past and present eligibility.</p></li>
+<li><p>The model includes mother FEs, state-times-year(time) FEs, as well as a dummy for each possible YOB of a child. These are all the factors that determine eligibility and closely predict eligibility of a mother’s children. The authors exploit the fact that eliibility rules change over time. Thus, a given mother’s children may gain/lose eligibility over time due to policy variation alone (and not just changes in eligibility criteria like age). This policy variation is the identifying variation of the paper (see Figure 1).</p></li>
+</ol>
+<p>Note, this paper does not actually</p>
+</div>
+<p><br>
+</p>
+<ol start="4" type="1">
+<li><span class="citation" data-cites="dettling2025did">Dettling and Kearney (<a href="#ref-dettling2025did" role="doc-biblioref">2025</a>)</span> available online <a href="https://www.nber.org/system/files/working_papers/w33446/w33446.pdf">www.nber.org</a>. [Hint: p.&nbsp;16-21]</li>
+</ol>
+<div class="border">
+<ol type="1">
+<li><p>The number of either Federal Housing Administration or Veterans Association (or combined) mortgages issued in a state and year.</p></li>
+<li><p>An interaction of the spread in period <span class="math inline">\(t-1\)</span> and the number of lenders in state <span class="math inline">\(s\)</span>. The spread in the difference between interest of FHA bonds and Aaa corporate bonds in that year.</p></li>
+<li><p>“The rigidity of the government-backed mortgage interest rates led to annual supply-side variation in institutions’ willingness to issue these mortgages.” (p.&nbsp;19) This time variation is then translated to the state-year level through an interaction with the number of state-level lenders.<br>
+</p></li>
+</ol>
+</div>
+<p><br>
+</p>
+<ol start="5" type="1">
+<li><span class="citation" data-cites="caiumi2024immigration">Caiumi and Peri (<a href="#ref-caiumi2024immigration" role="doc-biblioref">2024</a>)</span> available online <a href="https://www.nber.org/system/files/working_papers/w32389/w32389.pdf">www.nber.org</a>. [Hint: p.&nbsp;26-28]</li>
+</ol>
+<div class="border">
+<ol type="1">
+<li><p>The log of foreign-born employment in a given education-experience cell</p></li>
+<li><p>The predicted foreign-born population in each education-experience cell based on historic migration flows.</p></li>
+<li><p>Historical persistence of source-country migration flows that are assumed to be unrelated to cell-specific demand factors.</p></li>
+</ol>
+</div>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-acemoglu2001colonial" class="csl-entry" role="listitem">
+Acemoglu, Daron, Simon Johnson, and James A Robinson. 2001. <span>“The Colonial Origins of Comparative Development: An Empirical Investigation.”</span> <em>American Economic Review</em> 91 (5): 1369–1401.
+</div>
+<div id="ref-angrist2025instrumental" class="csl-entry" role="listitem">
+Angrist, Joshua, Amanda E Kowalski, Ljubica Ristovska, and Marcia L Stefanick. 2025. <span>“Instrumental Variables Methods Reveal Larger Effects of Menopausal Hormone Therapy in the Landmark Women’s Health Initiative Clinical Trial.”</span> In <em>AEA Papers and Proceedings</em>, 115:215–20. American Economic Association, 2014 Broadway, Suite 305, Nashville, TN 37203.
+</div>
+<div id="ref-caiumi2024immigration" class="csl-entry" role="listitem">
+Caiumi, Alessandro, and Giovanni Peri. 2024. <span>“Immigration’s Effect on US Wages and Employment Redux.”</span> National bureau of economic research.
+</div>
+<div id="ref-dettling2025did" class="csl-entry" role="listitem">
+Dettling, Lisa J, and Melissa Schettini Kearney. 2025. <span>“Did the Modern Mortgage Set the Stage for the US Baby Boom?”</span> National Bureau of Economic Research.
+</div>
+<div id="ref-gennetian2024effects" class="csl-entry" role="listitem">
+Gennetian, Lisa A, Greg J Duncan, Nathan A Fox, Sarah Halpern-Meekin, Katherine Magnuson, Kimberly G Noble, and Hirokazu Yoshikawa. 2024. <span>“Effects of a Monthly Unconditional Cash Transfer Starting at Birth on Family Investments Among US Families with Low Income.”</span> <em>Nature Human Behaviour</em> 8 (8): 1514–29.
+</div>
+<div id="ref-grossman2022health" class="csl-entry" role="listitem">
+Grossman, Daniel S, Sebastian Tello-Trillo, and Barton Willage. 2022. <span>“Health Insurance for Whom? The ‘Spill-up’effects of Children’s Health Insurance on Mothers.”</span> National Bureau of Economic Research.
+</div>
+<div id="ref-stevenson2023conviction" class="csl-entry" role="listitem">
+Stevenson, Megan T, Aurelie Ouss, Winnie van Dijk, John Eric Humphries, and Kamelia Stavreva. 2023. <span>“Conviction, Incarceration, and Recidivism: Understanding the Revolving Door.”</span> <em>Available at SSRN</em>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
