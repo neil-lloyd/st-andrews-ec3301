@@ -621,12 +621,31 @@ window.Quarto = {
 =&amp; 0.82
 \end{aligned}
 \]</span></p>
-<div id="d425df74" class="cell" data-execution_count="3">
+<div id="a7fe6fa6" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">normal</span>(<span class="fu">invnormal</span>(0.025)-0.207*<span class="fu">sqrt</span>(192)) + 1-<span class="fu">normal</span>(<span class="fu">invnormal</span>(0.975)-0.207*<span class="fu">sqrt</span>(192))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.81814403</code></pre>
 </div>
 </div>
+<p>Suppose the authors had sufficient budget to treat half the sample. Then <span class="math inline">\(n\bar{w}(1-\bar{w})=200\)</span> and the power would increase to:</p>
+<div id="8923755a" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">normal</span>(<span class="fu">invnormal</span>(0.025)-0.207*<span class="fu">sqrt</span>(200)) + 1-<span class="fu">normal</span>(<span class="fu">invnormal</span>(0.975)-0.207*<span class="fu">sqrt</span>(200))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.83334297</code></pre>
+</div>
+</div>
+<p>Just a 1% increase in power.</p>
+<p>If they were to reduce the number of treated individuals from <span class="math inline">\(n_1=320\)</span> (at 40%) to <span class="math inline">\(260\)</span> (60 fewer), they would save about $20,000. This is enough to include an additional 1000 control units (at $20 each). Doing so would increase power by a factor of,</p>
+<p><span class="math display">\[
+n\bar{w}(1-\bar{w}) = \bigg(\frac{1}{n_0} + \frac{1}{n_1}\bigg)^{-1} = \bigg(\frac{1}{1480} + \frac{1}{260}\bigg)^{-1} \approx 221
+\]</span></p>
+<div id="19c7d39b" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">normal</span>(<span class="fu">invnormal</span>(0.025)-0.207*<span class="fu">sqrt</span>(220)) + 1-<span class="fu">normal</span>(<span class="fu">invnormal</span>(0.975)-0.207*<span class="fu">sqrt</span>(220))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.86657445</code></pre>
+</div>
+</div>
+<p>A bigger increase of 5%. Of course, we are ignoring the additional cost of surveying 1000 more individuals, which is significant.</p>
 </div>
 <p><br>
 </p>
@@ -683,13 +702,14 @@ window.Quarto = {
 <li>Interpret coefficient of interest in column (2) of Table 2. The base sample includes “64 countries that were ex-colonies and for which we have settler mortality, protection against expropriation risk, and GDP data” (p.&nbsp;1377).</li>
 </ol>
 <div class="border">
-<p>An increase in the index of 1 unit increases predicted output by 68%, among ex-colonies.</p>
-<div id="0e02780d" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">exp</span>(0.52)-1)*100</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>An increase in the index of 1 unit increases predicted output by 68%, among ex-colonies and holding other factors fixed.</p>
+<div id="e0811007" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">exp</span>(0.52)-1)*100</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>68.202765</code></pre>
 </div>
 </div>
+<p>This is a large point estimate. The mean of <span class="math inline">\(R\)</span> is 6.5 with a standard deviation of 1.5 (Table 1). Thus, a one standard deviation change in expropriation risk is associated with more than 100% increase in GDP per capita. In Table A2, Nigeria has a <span class="math inline">\(R=5.55\)</span> compared with Chile’s 7.82, while their (log) of GDP per capita is 6.81 and 9.35, respectively. This point estimate suggests that the difference in the countries’ <span class="math inline">\(R\)</span> of 2.27 would predict a difference in <em>log</em> GDP per capita of <span class="math inline">\(2.27\times 0.68 = 1.18\)</span>. This is just under half the difference in their log GDP per capita (=2.54).</p>
 </div>
 <p><br>
 </p>
@@ -753,8 +773,8 @@ window.Quarto = {
 <p><span class="math display">\[
   F\text{-stat} = \bigg(\frac{-0.51}{0.14}\bigg)^2
 \]</span></p>
-<div id="a2715b8e" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dis (-0.51/0.14)^2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="4fdb00c8" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dis (-0.51/0.14)^2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>13.270408</code></pre>
 </div>
@@ -763,33 +783,45 @@ window.Quarto = {
 <p><br>
 </p>
 <ol start="10" type="1">
-<li>Interpret the 2SLS-IV estimate from column (9), Table 4. Is it statistically significant at a 5% level?</li>
+<li>Interpret the 2SLS-IV estimate from column (8), Table 4. Is it statistically significant at a 5% level?</li>
 </ol>
 <div class="border">
-<p>The coefficient is 1.10, suggesting that a 1 unit increase in the index increases predicted GDP per capita by 200%, among ex-colonies.</p>
-<div id="6c3ddb89" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">exp</span>(1.1)-1)*100</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The coefficient is 1.10, suggesting that a 1 unit increase in the index increases predicted GDP per capita by 200%, among ex-colonies and holding other factors fixed.</p>
+<div id="da0a9e5d" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dis (<span class="fu">exp</span>(1.1)-1)*100</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>200.4166</code></pre>
 </div>
 </div>
 <p>The result is statistically significant at a 5% level:</p>
-<div id="7c560792" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dis 1.1/0.46</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dis invt(59,0.975)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="d61f8375" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dis 1.1/0.46</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>dis invt(58,0.975)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2.3913043
-2.0009954</code></pre>
+2.0017175</code></pre>
 </div>
 </div>
 </div>
 <p><br>
 </p>
 <ol start="11" type="1">
-<li>Comparing these results to those of Table 2, what do can we conclude with respect to the bias in OLS? How does this compare with your answer to Q4.</li>
+<li>Comparing these results to those of Table 2, what can we conclude with respect to the bias in OLS? How does this compare with your answer to Q4.</li>
 </ol>
 <div class="border">
 <p>The IV estimates are substantially larger than the OLS estimates (across all control-variable specifications). This suggests that OLS is in fact downward biased; the opposite direction to what we concluded in Q4. However, Q4 only concerned the OV bias from the specific controls considered here. The bias from other OVs and reverse causality may point in a different direction.</p>
+<p>Are these realistic? The authors think so:</p>
+<blockquote class="blockquote">
+<p>“Does the 2SLS estimatemake quantitative sense?Doesit implythat institutionaldifferences canexplainasignificant fractionof income differences across countries? Let us once again compare two”typical” countries with high and low expropriation risk, Nigeria and Chile (these countries are typical for the IV regression in the sense that they are practically on the regression line). Our 2SLS estimate, 0.94, implies that the 2.24 differences in expropriation risk between these two countries should translate into 206 log point (approximately 7-fold) difference. In practice, the presence of measurement error complicates this interpretation, because some of the difference be tween Nigeria and Chile’s expropriation index may reflect measurement error. Therefore, the 7-fold difference is an upper bound. In any case, the estimates in Table 4 imply a substantial, but not implausibly large, effect of institutional differences on income per capita.” (pp.&nbsp;1386-1387)</p>
+</blockquote>
+<p>The authors get the 206 log point difference from <span class="math inline">\(0.94\times 2.24=2.1056\)</span> (difference is likely due to rounding in reported estimates). If you then compute,</p>
+<div id="883bee10" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dis <span class="fu">exp</span>(2.06)-1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>6.8459698</code></pre>
+</div>
+</div>
+<p>This tells you that Chile’s GDP per capita is predicted to be <span class="math inline">\(\approx 700\%\)</span> larger than Nigeria’s. The authors suggest this is a 7-fold difference, which is evidently referring to the gap between the two countries and not the ratio of their GDP per capita. These estimates put the ratio of the two GDPs at closer to <span class="math inline">\(\exp(2.06)\approx 8\)</span>.</p>
 </div>
 <p><br>
 </p>
@@ -845,7 +877,7 @@ window.Quarto = {
 <li><p>Simulated eligibility of the mother’s children based on their age, year, and state at point of observation. This aggregated across children for each mother. There is a second version with aggregates years of eligibility for each mother based on past and present eligibility.</p></li>
 <li><p>The model includes mother FEs, state-times-year(time) FEs, as well as a dummy for each possible YOB of a child. These are all the factors that determine eligibility and closely predict eligibility of a mother’s children. The authors exploit the fact that eliibility rules change over time. Thus, a given mother’s children may gain/lose eligibility over time due to policy variation alone (and not just changes in eligibility criteria like age). This policy variation is the identifying variation of the paper (see Figure 1).</p></li>
 </ol>
-<p>Note, this paper does not actually</p>
+<p>Note, this paper does not actually impliement a 2SLS IV estimation. This is because the endogenous variable - the number of insured children in household - is not actually observed in the data.</p>
 </div>
 <p><br>
 </p>

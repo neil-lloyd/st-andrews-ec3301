@@ -1,0 +1,462 @@
+---
+title: Repeated Observations and Difference in Differences
+subtitle: Lecture 9
+format: 
+  html: 
+    output-file: lecture-9.html
+#   other-links:
+#     - text: "PDF with Stata"
+#       href: "lecture-9-notes-Stata.pdf"
+#       icon: file-pdf
+#     - text: "PDF with R"
+#       href: "lecture-9-notes-R.pdf"
+#       icon: file-pdf
+  revealjs: 
+    output-file: lecture-9-slides.html
+#    footer: "[Lecture 9](lecture-9-multi.qmd) - St Andrews Business School - Martinmas 2026/27"
+engine: knitr
+---
+  
+```{r}
+#| include: false
+#| cache: false
+
+library(Statamarkdown)
+knitr::opts_chunk$set(collectcode = TRUE)
+```
+
+
+```{r}
+#| include: false
+
+# Packages
+library(haven)    
+library(ggplot2)
+library(DT)
+
+source(here::here("config.R"))
+```
+
+```{stata}
+*| include: false
+
+do "config.do"
+```
+
+# Data Structure & Notation
+
+## Cross-section
+
+```{r}
+#| echo: false
+
+df <- data.frame(
+  id        = 1:5,
+  time   = c(1, 1, 1, 1, 1),
+  empl_i     = c(1, 0, 1, 0, 0),
+  empl_rate_1 = c(0.4,0.4,0.4,0.4,0.4)
+)
+
+DT::datatable(
+  df,
+  rownames = FALSE,
+  colnames = c("ID", "Time", "Empl-stat (i)", "Empl-rate (t)"),
+  options  = list(pageLength = 10, dom = "t")   # 10 rows, no search/paging clutter
+)
+```
+
+## Pooled cross-sections
+
+:::: columns
+::: {.column width="50%"}
+Stacks one cross-section atop another
+
+- Also referred to as *repeated* cross-sections
+
+- Cannot follow the same individual through time. 
+:::
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+
+df <- data.frame(
+  id        = 1:10,
+  time   = c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2),
+  empl_it     = c(1, 0, 1, 0, 0, 1, 1, 0, 0, 1),
+  empl_rate_t = c(0.4,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.6,0.6)
+)
+
+DT::datatable(
+  df,
+  rownames = FALSE,
+  colnames = c("ID", "Time", "Empl-stat (i)", "Empl-rate (t)"),
+  options  = list(pageLength = 10, dom = "t")   # 10 rows, no search/paging clutter
+)
+```
+
+:::
+::::
+
+  
+## Panels
+
+Follows the same units through time
+
+- Also referred to as *longitudinal* data
+
+- Here the data is shown in **wide** form; which is intuitive
+
+```{r}
+#| echo: false
+
+df <- data.frame(
+  id        = 1:5,
+  empl_i1     = c(1, 0, 1, 0, 0),
+  empl_rate_1 = c(0.4,0.4,0.4,0.4,0.4),
+  empl_i2     = c(1, 1, 0, 0, 1),
+  empl_rate_2 = c(0.6,0.6,0.6,0.6,0.6),
+  empl_rate_i = c(1,0.5,0.5,0,0.5)
+)
+
+DT::datatable(
+  df,
+  rownames = FALSE,
+  colnames = c("ID", "Empl-stat (1)", "Empl-rate (1)", "Empl-stat (2)", "Empl-rate (2)", "Empl-rate (i)"),
+  options  = list(pageLength = 5, dom = "t")   # 10 rows, no search/paging clutter
+)
+```
+  
+## 
+
+:::: columns
+::: {.column width="50%"}
+For estimation, you need the data in **long** form (*akin to repeated cross-sections*)
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+
+df <- data.frame(
+  id        = c(1:5,1:5),
+  time   = c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2),
+  empl_it     = c(1, 0, 1, 0, 0, 1, 1, 0, 0, 1),
+  empl_rate_t = c(0.4,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.6,0.6),
+  empl_rate_i = c(1,0.5,0.5,0,0.5,1,0.5,0.5,0,0.5)
+)
+
+DT::datatable(
+  df,
+  rownames = FALSE,
+  colnames = c("ID", "Time", "Empl-stat (i)", "Empl-rate (t)", "Empl-rate (i)"),
+  options  = list(pageLength = 10, dom = "t")   # 10 rows, no search/paging clutter
+)
+```  
+
+:::
+::::  
+
+## Notation
+
+When we write down a linear regression model for a either a repeated cross-section or panel dataset, we add both $i$ and $t$ to the subscripts:
+
+$$
+  y_{it} = \beta_0 + \beta_1 x_{it1} + \beta_2 x_{it2} + \dots + \beta_k x_{itk} + u_{it}
+$$
+
+::: {.fragment .fade-in}
+However, you may also have some variables that
+
+- do not vary with time: $x_{i}$
+  
+  - e.g. individual ethnicity
+
+- vary only with time: $x_{t}$
+
+  - e.g. adding aggregate unemployment rate to individual level model of wages 
+:::
+
+# Pooled Cross-sections
+
+## Example: Poverty & SCP
+
+Suppose, a researcher wants to evaluate the impact that of the [Home Energy Scotland Grant and Loan](https://www.homeenergyscotland.org/home-energy-scotland-grant-loan) programme on a household's energy expenditure. 
+
+- Grant of up to £7,500 to install clean heating systems and energy efficiency measures.
+
+![](material/lecture-9/home-energy-scotland.png){fig-align="center"}
+
+## Empirical specification
+
+They propose the following linear regression model specification
+
+$$
+  energy_{it} = \delta + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it}
+$$
+
+To be estimated using repeated cross-sections of the Scottish Household Survey.
+
+- $energy_{it}$: amount (£'s) spent on energy
+
+- $grant_{it}$: cumulative amount received from the programme
+
+## Controls
+
+As controls, the author collects information at the household level ($\mathbf{x}_{it}$) on:
+
+1. dwelling type
+
+2. ownership type
+
+3. household size
+
+4. household income
+
+5. number of rooms
+
+6. location
+
+## Time-varying factors
+
+But there are other key macroeconomics variables that explain expenditure on energy over time:
+
+1. Global oil price 
+
+2. Global gas price
+
+2. Domestic energy prices (gas,electricity)
+
+   - Determined by domestic auctions: marginal supplier
+
+This variables vary with time, but NOT across households:
+
+$$
+  \mathbf{z}_t\eta
+$$
+
+## 
+
+So, our model is actually,
+
+$$
+  energy_{it} = \delta + \beta grant_{it} + \mathbf{x}_{it}\gamma + \mathbf{z}_t\eta + \varepsilon_{it}
+$$
+
+where, 
+
+- $\mathbf{x}$ includes household level controls
+
+- $\mathbf{z}$ includes time-varying (macroeconomic/aggregate) controls 
+
+## Identification
+
+Since the data comprises repeated cross-sections of individual, it is reasonable to assume that each observation is a random draw from the underlying population (MLR 2).
+
+\
+
+- As before, we need MLR1-4a for consistency. 
+
+- The question is more whether MLR 1 holds true across time. 
+
+  - Is the model time-invariant?
+
+
+## Time-varying parameters
+
+We could evaluate this question using a Chow test:
+
+- Estimate the model separately for each year:
+
+
+  $$
+  energy_{is} = \delta_s + \beta_s grant_{is} + \mathbf{x}_{is}\gamma_s + \mathbf{z}_s\eta_s + \varepsilon_{is} \quad \text{for}\;s = 1,\dots,T
+  $$
+
+- Test whether the parameters vary using $SSR_s$ from each equation. 
+
+## 
+
+**BUT** there is a problem here for $\mathbf{z}_s\eta_s$ in the model: 
+
+- In any given period, these variables do not vary
+
+- e.g., if oil price is \$100 (per barrol) for period $s=1$ and \$120 (per barrol)  for period $s=2$
+
+- but within a given period $t$, the oil price doesn't vary across households. 
+
+- So, $\mathbf{z}_s\eta_s$ is a constant! And cannot be separately identified from $\delta_s$, the time-varying constant. 
+
+## Time fixed effects
+
+If we take our original model and allow the constant term (only) to vary with time.
+
+$$
+  energy_{it} = \delta_t + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it}
+$$
+
+then we must exclude all variables that also vary *only* with time: $\mathbf{z}_t\eta$
+
+- We call $\delta_t$ **time fixed effects**
+
+- These time FEs "absorb" any other variables that vary only with time. 
+
+- We say, time FEs "control" for any time-varying (e.g., macroeconomic) factors/shocks; **even ones we don't observe** in the data. 
+
+## Time dummies:
+
+When it comes to estimation, time FEs are equvilent to including a set of dummy variables: one for each year. 
+
+$$
+  \begin{aligned}
+  energy_{it} =& \delta_t + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it} \\
+  =& \sum_{s=1}^{T}\delta_s \mathbf{1}\{s=t\} + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it}
+  \end{aligned}
+$$
+
+In place of a constant, we have $T$ dummy variables that identify each period. For any given $t$, only one of these dummies $=1$
+
+:::{.callout-note}
+This notation can be very confusing. Do not concern yourself with the complicated sum, but rather the intuition that when we include an intercept in a linear regression it gives us the slope coefficient on a constant (a regressor that $=1$ for all observations). To implement time FEs, we are essentially adding a separate constant for each period time. And these constants are all just dummy variables: $\mathbf{1}\{s=t\}$. 
+:::
+
+## In Stata/R
+
+# Panel Models
+
+## Preamble
+
+There is a large, complex literature on panel data models:
+
+- Static vs Dynamic models
+
+- Short (small $T$) vs long (large $T$) panels
+
+- Variance (standard error) corrections for autocorrelation
+
+We are going to skip over many of these topics, to talk about the types of panel data models you might see in modern applied (microeconomic) research
+
+- short, static panel data models
+
+## Identification
+
+We are going to discuss an estimation procedure that deals with potential endogeneity of error term related to time-invariant heterogeneity ($\nu_{i}$):
+
+$$
+  \varepsilon_{it} = \nu_{i}+\upsilon_{it}
+$$
+
+for example, $\nu_{i}$ may reflect unobserved preferences within a household w.r.t. heating of the home. 
+
+- Likely that $E[\nu_{i}|grant_{it},\mathbf{x}_{it},\mathbf{x}_{i}]\neq 0$
+
+## Covariance
+
+But there is also a secondary issue regarding correlation of $\varepsilon_{it}$ across observations in panel data. 
+
+- Suppose we remove $\nu_{i}$ from the model
+
+- We must expect that 
+
+  $$
+    Cov(\upsilon_{it},\upsilon_{is}) \neq 0 \quad \text{for}\; t\neq s
+  $$
+  
+  - Issue for estimation of variance. 
+  - We fix this by estimating clustered SEs (at the unit level)
+
+## Example
+
+Consider our model:
+
+$$
+  energy_{it} = \delta_t + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it}
+$$
+
+Some of the household characteristics in $\mathbf{x}_{it}$ may not vary with time:
+
+1. dwelling type (might not)
+
+2. ownership type (might not)
+
+3. household size (might not)
+
+4. household income (probably does)
+
+5. number of rooms (might not)
+
+6. location (might not)
+
+**What really matters is whether they vary in the data.**
+
+## Time-invarianct covariates
+
+Let's split up the household characteristics into
+
+- those that vary with time: $\mathbf{x}_{it}\gamma_1$
+
+- those that are time-invariant: $\mathbf{x}_{i}\gamma_2$
+
+$$
+  energy_{it} = \delta_t + \beta grant_{it} + \mathbf{x}_{it}\gamma_1 + \mathbf{x}_{i}\gamma_2 + \varepsilon_{it}
+$$
+
+## Unit FEs
+
+Because we observe repeated observations of the **same** household, we can include unit FEs
+
+$$
+  energy_{it} = \alpha_i + \delta_t + \beta grant_{it} + \mathbf{x}_{it}\gamma_1 + \varepsilon_{it}
+$$
+
+**BUT** by the same logic as before, 
+
+- unit FEs "absorb" anything that is invariant at the unit level: $\mathbf{x}_{i}\gamma_2$
+
+- we say, unit FEs "control" for any time-invariant (e.g., fixed building characteristics) heterogeneity (i.e. things that vary across $i$); **even ones we don't observe** in the data. 
+
+  - unit FEs potentially control for things we do not observe: e.g. household preferences over how warm to keep their home. 
+  
+## Time-varying treatment
+
+Crucially, this means that the treatment variable $grant_{it}$ must vary at the **unit-level over time**. 
+
+$$
+  energy_{it} = \alpha_i + \delta_t + \beta grant_{it} + \mathbf{x}_{it}\gamma_1 + \varepsilon_{it}
+$$
+
+for example, a households (cumulative) grant is looks like over 4 periods
+
+$$
+  grant_{i} = \{0,0,3000,7500\}
+$$
+
+## Estimation
+
+The OLS estimator for this model is often referred to as the "fixed-effects" (or "within") estimator. The logic is that you estimate a transformed version of the model:
+
+$$
+  \widetilde{energy}_{it} = \delta_t + \beta \widetilde{grant}_{it} + \widetilde{\mathbf{x}}_{it}\gamma_1 + \tilde{\upsilon}_{it}
+$$
+
+where each variable has been demeaned at the **unit-level**
+
+$$
+  \widetilde{energy}_{it} = energy_{it} - \overline{energy}_{i}
+$$
+
+  - Remember: when you include a constant in the model it does the same thing, but using the global mean of the variable. 
+  
+  - Helps with the intuition of why the remaining variables must vary at the unit level over time. 
+  
+  - The error term is $\tilde{\upsilon}_{it}$ because $\varepsilon_{it} = \nu_{i}+\upsilon_{it}$ and $\nu_{i}$ is time-invariant:
+  
+  $$
+    \tilde{\varepsilon}_{it} = \tilde{\upsilon}_{it}
+  $$
+  
+## In Stata/R
+
+
+

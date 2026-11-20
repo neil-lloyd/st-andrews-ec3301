@@ -520,6 +520,8 @@ window.Quarto = {
   <li><a href="#multivariate-case" id="toc-multivariate-case" class="nav-link" data-scroll-target="#multivariate-case">Multivariate case</a></li>
   <li><a href="#sls" id="toc-sls" class="nav-link" data-scroll-target="#sls">2SLS</a></li>
   <li><a href="#causation" id="toc-causation" class="nav-link" data-scroll-target="#causation">Causation</a></li>
+  <li><a href="#late" id="toc-late" class="nav-link" data-scroll-target="#late">LATE</a></li>
+  <li><a href="#examples-oreopoulus-2006" id="toc-examples-oreopoulus-2006" class="nav-link" data-scroll-target="#examples-oreopoulus-2006">Examples: Oreopoulus (2006)</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-8-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="lecture-8-notes-Stata.pdf"><i class="bi bi-file-pdf"></i>PDF with Stata</a></li><li><a href="lecture-8-notes-R.pdf"><i class="bi bi-file-pdf"></i>PDF with R</a></li></ul></div></nav>
@@ -1994,6 +1996,489 @@ Number of observations        3010         3010     3010
 </div>
 </section>
 </section>
+<section id="late" class="level1">
+<h1>LATE</h1>
+<section id="endogenous-treatment" class="level2">
+<h2 class="anchored" data-anchor-id="endogenous-treatment">Endogenous treatment</h2>
+<p>Suppose assignment in an experiment provides an individual with <strong>access</strong> to a treatment only.</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p>An individual’s treatment status (“take up”) may differ from their random assignment.</p></li>
+<li><p>It may depend on factors other than random assignment.</p></li>
+<li><p>Let <span class="math inline">\(w_i\in \{0,1\}\)</span> denote their random assignment. So,</p>
+<p><span class="math display">\[
+  y_i(1),y_i(0)\perp w_i
+\]</span></p></li>
+<li><p>Let <span class="math inline">\(d_i\in \{0,1\}\)</span> denote an individual’s treatment</p>
+<p><span class="math display">\[
+  y_i(1),y_i(0)\not\perp d_i
+\]</span></p></li>
+<li><p>This is often referred to as <strong>non-compliance</strong>.</p></li>
+</ul>
+</div>
+</section>
+<section id="examples-1" class="level2">
+<h2 class="anchored" data-anchor-id="examples-1">Examples</h2>
+<ol type="1">
+<li><p><span class="citation" data-cites="banerjee2015miracle">Banerjee et al. (<a href="#ref-banerjee2015miracle" role="doc-biblioref">2015</a>)</span> <em>The miracle of microfinance? Evidence from a randomized evaluation</em></p>
+<ul>
+<li>Randomized villages that gained <strong>access</strong> to a <em>particular</em> microfinance lender</li>
+<li>Unethical to “force” a loan on a household</li>
+<li>Villages may have had access to formal microloans through other providers</li>
+<li>The people observed in treated villages with microloans will be a self-selected group</li>
+</ul></li>
+</ol>
+<p><br>
+</p>
+<ol start="2" type="1">
+<li><p><span class="citation" data-cites="finkelstein2012oregon">Finkelstein et al. (<a href="#ref-finkelstein2012oregon" role="doc-biblioref">2012</a>)</span> <em>The Oregon health insurance experiment: evidence from the first year</em></p>
+<ul>
+<li>There were limited spaces in this Medicaid programme for low-income adults.</li>
+<li>The government implemented a lottery to decide who could <strong>apply</strong>.</li>
+<li>Many didn’t apply or weren’t eligible, leading to an increase in coverage (among treated) of only 25%.</li>
+</ul></li>
+</ol>
+</section>
+<section id="treatment-as-a-po" class="level2">
+<h2 class="anchored" data-anchor-id="treatment-as-a-po">Treatment as a PO</h2>
+<p>Borrowing from <a href="./lecture-6.html">Lecture 6</a>, we can model receipt of treatment as a potential outcome of assignment and there are 4 potential scenarios:</p>
+<div class="incremental">
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol class="incremental" type="1">
+<li><p><span class="math inline">\(d_i(0)=0\)</span> and <span class="math inline">\(d_i(1) = 0\)</span></p>
+<ul class="incremental">
+<li>We call these <strong>never takers</strong> (<span class="math inline">\(\textcolor{purple}{NT}\)</span>)</li>
+</ul></li>
+<li><p><span class="math inline">\(d_i(0)=1\)</span> and <span class="math inline">\(d_i(1)=1\)</span></p>
+<ul class="incremental">
+<li>We call these <strong>always takers</strong> (<span class="math inline">\(\textcolor{green}{AT}\)</span>)</li>
+</ul></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<ol class="incremental" start="3" type="1">
+<li><p><span class="math inline">\(d_i(0) = 0\)</span> and <span class="math inline">\(d_i(1) = 1\)</span></p>
+<ul class="incremental">
+<li>We call these <strong>compliers</strong> (<span class="math inline">\(\textcolor{blue}{C}\)</span>)</li>
+</ul></li>
+<li><p><span class="math inline">\(d_i(0) = 1\)</span> and <span class="math inline">\(d_i(1) = 0\)</span></p>
+<ul class="incremental">
+<li>We call these <strong>defiers</strong> (<span class="math inline">\(\textcolor{red}{D}\)</span>)</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="fragment fade-in">
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To know whether an individual is a <span class="math inline">\(\textcolor{purple}{NT}\)</span>, <span class="math inline">\(\textcolor{green}{AT}\)</span>, <span class="math inline">\(\textcolor{blue}{C}\)</span>, or <span class="math inline">\(\textcolor{red}{D}\)</span> you need to observe both potential outcomes.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="itt" class="level2">
+<h2 class="anchored" data-anchor-id="itt">ITT</h2>
+<p>What if we compare</p>
+<p><span class="math display">\[
+  E[d_i|w_i=1]-E[d_i|w_i=0]
+\]</span></p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>Under unconfoundedness (w.r.t. <span class="math inline">\(d_i(1),d_i(0)\)</span>):</p>
+<p><span class="math display">\[
+  E[d_i(1)|w_i=1]-E[d_i(0)|w_i=0] = \underbrace{E[d_i(1)-d_i(0)]}_{ITT_d}
+\]</span></p>
+<p>We call this the Intention to Treat (<span class="math inline">\(ITT_d\)</span>) effect on the (endogenous) treatment variable.</p>
+</div>
+</section>
+<section id="decomposition" class="level2">
+<h2 class="anchored" data-anchor-id="decomposition">Decomposition</h2>
+<p>But we know that <span class="math inline">\(d_i(1)-d_i(0)\)</span> can only take on specific values: <span class="math inline">\(\{-1,0,1\}\)</span></p>
+<div class="fragment fade-in">
+<p><span class="math display">\[
+\begin{aligned}
+  &amp;E[d_i(1)-d_i(0)] \\
+  =&amp; 0\times Pr(\textcolor{purple}{NT}) + 0\times Pr(\textcolor{green}{AT}) + 1\times Pr(\textcolor{blue}{C}) - 1\times Pr(D) \\
+  =&amp; Pr(\textcolor{blue}{C}) - Pr(\textcolor{red}{D})
+\end{aligned}
+\]</span></p>
+<p>We will return to this formula shortly.</p>
+</div>
+</section>
+<section id="the-pos-of-the-outcome" class="level2">
+<h2 class="anchored" data-anchor-id="the-pos-of-the-outcome">The POs of the outcome</h2>
+<p>What of the main outcome variable <span class="math inline">\(y\)</span>?</p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>It may depend on both <span class="math inline">\(d\)</span> and <span class="math inline">\(w\)</span>:</p>
+<p><span class="math display">\[
+  y_i(d_i,w_i) = y_i(d_i(w_i),w_i)
+\]</span></p>
+</div>
+</section>
+<section id="exclusion-restriction" class="level2">
+<h2 class="anchored" data-anchor-id="exclusion-restriction">Exclusion restriction</h2>
+<p>To move forward we need an assumption</p>
+<blockquote class="blockquote">
+<p><strong>Exclusion restriction</strong>:</p>
+<p><span class="math display">\[
+  y_i(d_i,1) = y_i(d_i,0),\;\text{for}\;d_i\in\{0,1\}
+\]</span></p>
+</blockquote>
+<p>Which states: conditional on the value of (endogenous) treatment, assignment does NOT matter for the outcome.</p>
+<ul>
+<li>No direct experimental effects</li>
+</ul>
+</section>
+<section id="decomposition-1" class="level2">
+<h2 class="anchored" data-anchor-id="decomposition-1">Decomposition</h2>
+<p>When we compare</p>
+<p><span class="math display">\[
+  E[y_i|w_i=1]-E[y_i|w_i=0]
+\]</span></p>
+<p>We’re actually comparing:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  &amp;E[y_i(d_i(1),1)|w_i=1]-E[y_i(d_i(0),0)|w_i=0] \\
+  =&amp;E[y_i(d_i(1))|w_i=1]-E[y_i(d_i(0))|w_i=0]
+  \end{aligned}
+\]</span></p>
+<p>Where the second line follows from the <strong>exclusion restriction</strong>.</p>
+</section>
+<section id="section-15" class="level2">
+<h2 class="anchored" data-anchor-id="section-15"></h2>
+<p>Under unconfoundedness (w.r.t. <span class="math inline">\(y_i(1),y_i(0)\)</span>):</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  &amp;E[y_i(d_i(1))|w_i=1]-E[y_i(d_i(0))|w_i=0] \\
+  =&amp; \underbrace{E[y_i(d_i(1)) - y_i(d_i(0))]}_{ITT_y}
+  \end{aligned}
+\]</span></p>
+<p>We call this the Intention to Treat (<span class="math inline">\(ITT_y\)</span>) effect on the outcome variable.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A lot of applied microeconomics papers estimate ITT effects. This is often because the (quasi-)experimental variation they use does not fulfill the exclusion restriction. Or because they do not observe the (endogenous) treatment variable, just the assignment. They can still estimate the reduced-form effect of assignment. This reduced form estimate becomes an ITT effect (as opposed to an ATE/ATT) under non-compliance <span class="citation" data-cites="banerjee2015miracle">(see for example, <a href="#ref-banerjee2015miracle" role="doc-biblioref">Banerjee et al. 2015</a>)</span>.</p>
+</div>
+</div>
+</section>
+<section id="section-16" class="level2">
+<h2 class="anchored" data-anchor-id="section-16"></h2>
+<p>We can break this up by group: <span class="math inline">\(\textcolor{purple}{NT}\)</span>, <span class="math inline">\(\textcolor{green}{AT}\)</span>, <span class="math inline">\(\textcolor{blue}{C}\)</span>, and <span class="math inline">\(\textcolor{red}{D}\)</span>:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+    &amp;E[y_i(d_i(1))-y_i(d_i(0))] \\
+    =&amp;E[y_i(0)-y_i(0)|\textcolor{purple}{NT}]\times Pr(\textcolor{purple}{NT}) \\
+    &amp;+E[y_i(1)-y_i(1)|\textcolor{green}{AT}]\times Pr(\textcolor{green}{AT}) \\
+    &amp;+E[y_i(1)-y_i(0)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C}) \\
+    &amp;+E[y_i(0)-y_i(1)|\textcolor{red}{D}]\times Pr(\textcolor{red}{D})
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="section-17" class="level2">
+<h2 class="anchored" data-anchor-id="section-17"></h2>
+<p>Under unconfoundedness (w.r.t <span class="math inline">\(y_i(0),y_i(1)\)</span>)</p>
+<p><span class="math display">\[
+  \begin{aligned}
+    =&amp;\underbrace{E[y_i(0)-y_i(0)|\textcolor{purple}{NT}]}_{=0}\times Pr(\textcolor{purple}{NT}) \\
+    &amp;+\underbrace{E[y_i(1)-y_i(1)|\textcolor{green}{AT}]}_{=0}\times Pr(\textcolor{green}{AT}) \\
+    &amp;+E[y_i(1)-y_i(0)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C}) \\
+    &amp;+E[y_i(0)-y_i(1)|\textcolor{red}{D}]\times Pr(\textcolor{red}{D}) \\
+    =&amp;E[y_i(1)-y_i(0)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C}) \\
+  &amp;-E[y_i(1)-y_i(0)|\textcolor{red}{D}]\times Pr(\textcolor{red}{D})
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="section-18" class="level2">
+<h2 class="anchored" data-anchor-id="section-18"></h2>
+<p>Suppose we assumed that:</p>
+<ol type="1">
+<li><p><span class="math inline">\(Pr(\textcolor{blue}{C})&gt;0 \Rightarrow Pr(d_i(1)&gt;d_i(0))&gt;0\)</span></p></li>
+<li><p><span class="math inline">\(Pr(\textcolor{red}{D}) = 0\Rightarrow Pr(d_i(1)&lt;d_i(0))=0\)</span></p>
+<ul>
+<li>This is referred to as the <strong>monotonicity</strong> assumption: assignment influences treatment in a single direction.</li>
+</ul></li>
+</ol>
+<div class="fragment fade-in">
+<p>Then,</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  ITT_y =&amp; E[y_i|w_i=1]-E[y_i|w_i=0] = E[y_i(1)-y_i(1)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C}) \\
+  &amp;\\
+  ITT_d =&amp; E[d_i|w_i=1]-E[d_i|w_i=0] = Pr(\textcolor{blue}{C}) \\
+  \end{aligned}
+\]</span></p>
+</div>
+</section>
+<section id="late-1" class="level2">
+<h2 class="anchored" data-anchor-id="late-1">LATE</h2>
+<p>If we take the ratio of the two ITT effects:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  \frac{ITT_y}{ITT_d} =&amp; \frac{E[y_i|w_i=1]-E[y_i|w_i=0]}{E[d_i|w_i=1]-E[d_i|w_i=0]} \\
+  =&amp; \frac{E[y_i(0)-y_i(1)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C})}{Pr(\textcolor{blue}{C})} \\
+  = &amp; E[y_i(0)-y_i(1)|\textcolor{blue}{C}]
+  \end{aligned}
+\]</span></p>
+<p>We call this the <strong>Local Average Treatment Effect</strong> (LATE)</p>
+<ul>
+<li>The ATE of the Compliers</li>
+</ul>
+</section>
+<section id="assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
+<p>Let us collect the assumptions we have made:</p>
+<ol type="1">
+<li><p><strong>Exclusion Restriction:</strong> <span class="math inline">\(y_i(d_i,1) = y_i(d_i,0),\;\text{for}\;d_i\in\{0,1\}\)</span></p></li>
+<li><p><strong>Unconfoundedness:</strong> <span class="math inline">\(d_i(1),d_i(0),y_i(1),y_i(0) \perp w_i\)</span></p></li>
+<li><p><strong>Existence of compliers:</strong> <span class="math inline">\(Pr(d_i(1)&gt;d_i(0))&gt;0\)</span></p></li>
+<li><p><strong>Monotonicity (absence of defiers):</strong> <span class="math inline">\(Pr(d_i(1)&lt;d_i(0))=0\)</span></p></li>
+</ol>
+</section>
+<section id="instrumental-variables-1" class="level2">
+<h2 class="anchored" data-anchor-id="instrumental-variables-1">Instrumental variables</h2>
+<p>We described the IV set-up as follows:</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_i + \varepsilon_i
+\]</span></p>
+<p>where,</p>
+<ol type="1">
+<li><p><span class="math inline">\(Cov(x_i,\varepsilon_i) \neq 0\)</span></p></li>
+<li><p><span class="math inline">\(Cov(z_i,\varepsilon_i) = 0\)</span>, which implied two things:</p>
+<p>2.1. <span class="math inline">\(z_i\)</span> must be excluded from the main model (i.e.&nbsp;not in <span class="math inline">\(\varepsilon_i\)</span>)</p>
+<p>2.2. <span class="math inline">\(z_i\)</span> must be exogenous w.r.t. <span class="math inline">\(\varepsilon_i\)</span></p></li>
+<li><p><span class="math inline">\(Cov(z_i,x_i) \neq 0\)</span> (valid first-stage)</p></li>
+</ol>
+</section>
+<section id="experiments-as-ivs" class="level2">
+<h2 class="anchored" data-anchor-id="experiments-as-ivs">Experiments as IVs</h2>
+<p>Now, suppose we have</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 d_i + \varepsilon_i
+\]</span></p>
+<p>where <span class="math inline">\(d_i\)</span> denotes endogenous treatment.</p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>An our instrument is <strong>random</strong> assignment: <span class="math inline">\(w_i\)</span></p>
+<ul>
+<li><p><span class="math inline">\(w_i\)</span> is unconfounded (<span class="math inline">\(\Rightarrow\)</span> exogenous)</p></li>
+<li><p>If we also then assume that <span class="math inline">\(w_i\)</span> is excluded (i.e.&nbsp;no experimental effects)</p>
+<p><span class="math display">\[\Rightarrow Cov(w_i,\varepsilon_i)=0\]</span></p></li>
+</ul>
+</div>
+</section>
+<section id="section-19" class="level2">
+<h2 class="anchored" data-anchor-id="section-19"></h2>
+<p><strong>First-stage</strong>:</p>
+<p><span class="math display">\[
+  d_i = \pi_0 + \pi_1 w_i + \nu_i
+\]</span></p>
+<p>If we have <strong>compliers</strong> and <strong>no defiers</strong> (monotonicity),</p>
+<ul>
+<li><p>then <span class="math inline">\(\pi_1&gt;0\)</span></p>
+<p><span class="math display">\[\Rightarrow Cov(w_i,d_i)\neq0\]</span></p></li>
+</ul>
+<div class="fragment fade-in">
+<ul>
+<li><p>This equation would give us the <span class="math inline">\(ITT_d\)</span></p></li>
+<li><p>and <span class="math inline">\(\hat{\pi}_{1,ols} = \bar{d}_1-\bar{d}_0\)</span></p></li>
+</ul>
+</div>
+</section>
+<section id="section-20" class="level2">
+<h2 class="anchored" data-anchor-id="section-20"></h2>
+<p><strong>Reduced-form</strong>:</p>
+<p><span class="math display">\[
+  y_i = \gamma_0 + \gamma_1 w_i + \upsilon_i
+\]</span></p>
+<ul>
+<li><p>This equation would give us the <span class="math inline">\(ITT_y\)</span></p></li>
+<li><p>and <span class="math inline">\(\hat{\gamma}_{1,ols}=\bar{y}_1-\bar{y}_0\)</span></p></li>
+</ul>
+</section>
+<section id="section-21" class="level2">
+<h2 class="anchored" data-anchor-id="section-21"></h2>
+<p>We know that the IV estimator would be,</p>
+<p><span class="math display">\[
+  \hat{\beta}_{1,iv} = \hat{\beta}_{1,2sls} = \frac{\hat{\gamma}_{1,ols}}{\hat{\pi}_{1,ols}}
+\]</span></p>
+</section>
+<section id="section-22" class="level2">
+<h2 class="anchored" data-anchor-id="section-22"></h2>
+<p>In this simple setting (single, discrete endogenous variable and instrument)</p>
+<p><br>
+</p>
+<p><span class="math display">\[
+\frac{\hat{\gamma}_{1,ols}}{\hat{\pi}_{1,ols}} = \frac{\bar{y}_1-\bar{y}_0}{\bar{d}_1-\bar{d}_0}
+\]</span></p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>Which is the sample analogue of:</p>
+<p><span class="math display">\[
+\frac{E[y_i|w_i=1]-E[y_i|w_i=0]}{E[d_i|w_i=1]-E[d_i|w_i=0]}
+\]</span></p>
+</div>
+</section>
+<section id="late-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="late-estimation">LATE Estimation</h2>
+<p>Assuming heterogeneous TEs and single, discrete instrument</p>
+<ul>
+<li><p>IV (2SLS) estimator estimates a Local Average Treatment Effect</p>
+<ul>
+<li>ATE of compliers</li>
+</ul></li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li><p>under four assumptions:</p>
+<ol type="1">
+<li><p>Exclusion restriction</p></li>
+<li><p>Unconfoundedness</p></li>
+<li><p>Compliers (first-stage)</p></li>
+<li><p>Monotonicity</p></li>
+</ol></li>
+</ul>
+</section>
+<section id="comparison" class="level2">
+<h2 class="anchored" data-anchor-id="comparison">Comparison</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>For standard IV we had:</p>
+<ol type="1">
+<li><p><span class="math inline">\(Cov(\varepsilon_i,z_i)= 0\)</span></p></li>
+<li><p><span class="math inline">\(Cov(x_i,z_i)\neq 0\)</span></p></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p>For LATE (with heterogeneous TEs)</p>
+<ol type="1">
+<li><p>Exclusion restriction</p></li>
+<li><p>Unconfoundedness</p></li>
+<li><p>Compliers</p></li>
+<li><p>Monotonicity (no defiers)</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The standard parametric IV estimator required just two assumptions. Using (quasi-)random assignment within an experiment requires you to add the exclusion restriction as a separate assumption. The unconfoundedness of assignment makes the instrument exogenous, but does not rule out the possibility of direct (experimental) effects. Monotonicity is needed due to the potential heterogeneity of the first-stage relationship.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="examples-oreopoulus-2006" class="level1">
+<h1>Examples: Oreopoulus (2006)</h1>
+<section id="section-23" class="level2">
+<h2 class="anchored" data-anchor-id="section-23"></h2>
+<p><span class="citation" data-cites="oreopoulos2006estimating">Oreopoulos (<a href="#ref-oreopoulos2006estimating" role="doc-biblioref">2006</a>)</span> presents a nice, “clean” example of Local Average Treatment Effect.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-8/oreopoulos-2006.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="first-stage-2" class="level2">
+<h2 class="anchored" data-anchor-id="first-stage-2">First-stage</h2>
+<p>The paper exploits a sharp policy change, resulting in a strong first-stage.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-8/oreopoulos-figure1.png" class="img-fluid figure-img"></p>
+<figcaption>p.&nbsp;154</figcaption>
+</figure>
+</div>
+</section>
+<section id="estimation-1" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-1">Estimation</h2>
+<p>The estimate the first-stage effect, the specify the model:</p>
+<p><span class="math display">\[
+  y_{i} = \pi_0 + \pi_1 d_{i} + \pi_1 yob_{i} + \pi_2 yob^2_{i} + \mathbf{x}_{i}\rho + \varepsilon_i
+\]</span></p>
+<p>where,</p>
+<ul>
+<li><p><span class="math inline">\(yob_i\)</span>: denotes the individual’s year-of-birth (they incldue a polynomial)</p></li>
+<li><p><span class="math inline">\(d_i\)</span>: is a dummy variable denoting that your year-of-birth is later than 1932 (<strong>excluded variable</strong>)</p></li>
+</ul>
+<p><em>Where does variation in <span class="math inline">\(d_i\)</span> come from?</em> Is it exogenous?</p>
+</section>
+<section id="first-stage-3" class="level2">
+<h2 class="anchored" data-anchor-id="first-stage-3">First stage</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-8/oreopoulos-figure4.png" class="img-fluid figure-img"></p>
+<figcaption>p.&nbsp;160</figcaption>
+</figure>
+</div>
+<p>The coefficient on <span class="math inline">\(d_i\)</span> (<span class="math inline">\(\pi_1\)</span>) captures the vertical distance bewteen the two two lines; the “break” in the function.</p>
+</section>
+<section id="reduced-form-1" class="level2">
+<h2 class="anchored" data-anchor-id="reduced-form-1">Reduced form</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-8/oreopoulos-figure6.png" class="img-fluid figure-img"></p>
+<figcaption>p.&nbsp;163</figcaption>
+</figure>
+</div>
+</section>
+<section id="fs-rf" class="level2">
+<h2 class="anchored" data-anchor-id="fs-rf">FS &amp; RF</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-8/oreopoulos-table1.png" class="img-fluid figure-img"></p>
+<figcaption>p.&nbsp;161</figcaption>
+</figure>
+</div>
+<p>So, IV estimate should be <span class="math inline">\(0.065/0.440 = 0.148\)</span> (not accounting for unobserved precision).</p>
+</section>
+<section id="ols-vs-iv" class="level2">
+<h2 class="anchored" data-anchor-id="ols-vs-iv">OLS vs IV</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-8/oreopoulos-table2.png" class="img-fluid figure-img"></p>
+<figcaption>p.&nbsp;164</figcaption>
+</figure>
+</div>
+</section>
+<section id="late-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="late-interpretation">LATE interpretation</h2>
+<p>Point estimate of 15.8%</p>
+<ul>
+<li><p>this the ATE for compliers</p></li>
+<li><p>who are the compliers?</p>
+<ul>
+<li><p>The individuals who who gained additional year<em>s</em> (treatment here is continuous) of education <strong>because</strong> of the law change.</p></li>
+<li><p>Remember, we must assume monotonicity: no one gains <em>less</em> education under the new policy. Which seems reasonable.</p></li>
+</ul></li>
+</ul>
+</section>
+</section>
 <section id="references" class="level1">
 <h1>References</h1>
 <section id="bibliography" class="level2">
@@ -2033,6 +2518,9 @@ Auten, Gerald, and Robert Carroll. 1999. <span>“The Effect of Income Taxes on 
 <div id="ref-autor2013china" class="csl-entry" role="listitem">
 Autor, David H., David Dorn, and Gordon H. Hanson. 2013. <span>“The <span>China</span> Syndrome: Local Labor Market Effects of Import Competition in the <span>United States</span>.”</span> <em>American Economic Review</em> 103 (6): 2121–68.
 </div>
+<div id="ref-banerjee2015miracle" class="csl-entry" role="listitem">
+Banerjee, Abhijit, Esther Duflo, Rachel Glennerster, and Cynthia Kinnan. 2015. <span>“The Miracle of Microfinance? Evidence from a Randomized Evaluation.”</span> <em>American Economic Journal: Applied Economics</em> 7 (1): 22–53.
+</div>
 <div id="ref-bartik1991who" class="csl-entry" role="listitem">
 Bartik, Timothy J. 1991. <em>Who Benefits from State and Local Economic Development Policies?</em> Kalamazoo, MI: W.E. Upjohn Institute for Employment Research.
 </div>
@@ -2068,6 +2556,9 @@ Duflo, Esther. 2001. <span>“Schooling and Labor Market Consequences of School 
 </div>
 <div id="ref-evans1999can" class="csl-entry" role="listitem">
 Evans, William N., and Jeanne S. Ringel. 1999. <span>“Can Higher Cigarette Taxes Improve Birth Outcomes?”</span> <em>Journal of Public Economics</em> 72 (1): 135–54.
+</div>
+<div id="ref-finkelstein2012oregon" class="csl-entry" role="listitem">
+Finkelstein, Amy, Sarah Taubman, Bill Wright, Mira Bernstein, Jonathan Gruber, Joseph P Newhouse, Heidi Allen, Katherine Baicker, and the Oregon Health Study Group. 2012. <span>“The Oregon Health Insurance Experiment: Evidence from the First Year.”</span> <em>The Quarterly Journal of Economics</em> 127 (3): 1057–1106.
 </div>
 <div id="ref-frankel1999trade" class="csl-entry" role="listitem">
 Frankel, Jeffrey A., and David Romer. 1999. <span>“Does Trade Cause Growth?”</span> <em>American Economic Review</em> 89 (3): 379–99.
@@ -2107,84 +2598,9 @@ Wooldridge, Jeffrey M. 2025. <span>“Introductory Econometrics: A Modern Approa
 <li id="fn3"><p>We will try to stick closely to <span class="citation" data-cites="wooldridge2025">Wooldridge (<a href="#ref-wooldridge2025" role="doc-biblioref">2025</a>)</span>’s notation.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>It just complicates the Math. We add it in by considering the conditional covariance: <span class="math inline">\(Cov(edu_i,\varepsilon_i|\mathbf{x}_i)\)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>This term comes from the early work on the estimation of simultaneous equations in econometrics. Instrumental variables are needed to solve the problem of simultaneity. For example, consider the case where <span class="math inline">\(y_1,y_2\)</span> are quantity and price of a good.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><span class="citation" data-cites="angrist1991compulsory">Joshua D. Angrist and Krueger (<a href="#ref-angrist1991compulsory" role="doc-biblioref">1991</a>)</span> was the seminal paper on this topic, providing a LATE interpretation of an IV strategy based on minimum school-leaving age. However, there is much debate as to the validity of the first-stage <span class="citation" data-cites="bound1995problems">Bound, Jaeger, and Baker (<a href="#ref-bound1995problems" role="doc-biblioref">1995</a>)</span>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
-
-
-<script>
-
-  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
-  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
-  // slide changes (different for each slide format).
-
-  (function () {
-
-    // dispatch for htmlwidgets
-
-    function fireSlideEnter() {
-
-      const event = window.document.createEvent("Event");
-
-      event.initEvent("slideenter", true, true);
-
-      window.document.dispatchEvent(event);
-
-    }
-
-
-
-    function fireSlideChanged(previousSlide, currentSlide) {
-
-      fireSlideEnter();
-
-
-
-      // dispatch for shiny
-
-      if (window.jQuery) {
-
-        if (previousSlide) {
-
-          window.jQuery(previousSlide).trigger("hidden");
-
-        }
-
-        if (currentSlide) {
-
-          window.jQuery(currentSlide).trigger("shown");
-
-        }
-
-      }
-
-    }
-
-
-
-    // hookup for slidy
-
-    if (window.w3c_slidy) {
-
-      window.w3c_slidy.add_observer(function (slide_num) {
-
-        // slide_num starts at position 1
-
-        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
-      });
-
-    }
-
-
-
-  })();
-
-</script>
-
-
-
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

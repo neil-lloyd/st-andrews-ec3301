@@ -1110,6 +1110,486 @@ And many other famous applied microeconomics papers from Labour, Development, He
 In 2021 David Card, Joshua Angrist, and Guido Imbens were award the Noble Prize for their work on causal inference and empirical methods using real and natural experiments. Many believe that Alan Krueger, who passed away two years earlier, would have been considered to share in the same prize. It is not a coincidence that we site so many of their papers on this topic starting in the early 1990s. 
 :::
   
+# LATE
+
+## Endogenous treatment
+
+Suppose assignment in an experiment provides an individual with **access** to a treatment only. 
+
+::: incremental
+- An individual's treatment status ("take up") may differ from their random assignment. 
+
+- It may depend on factors other than random assignment.
+
+- Let $w_i\in \{0,1\}$ denote their random assignment. So, 
+
+  $$
+    y_i(1),y_i(0)\perp w_i
+  $$
+
+- Let $d_i\in \{0,1\}$ denote an individual's treatment
+
+  $$
+    y_i(1),y_i(0)\not\perp d_i
+  $$
+
+- This is often referred to as **non-compliance**.
+:::
+
+## Examples
+
+1. @banerjee2015miracle *The miracle of microfinance? Evidence from a randomized evaluation*
+
+   - Randomized villages that gained **access** to a *particular* microfinance lender
+   - Unethical to "force" a loan on a household
+   - Villages may have had access to formal microloans through other providers
+   - The people observed in treated villages with microloans will be a self-selected group
+
+\
+
+2. @finkelstein2012oregon *The Oregon health insurance experiment: evidence from the first year*
+
+   - There were limited spaces in this Medicaid programme for low-income adults. 
+   - The government implemented a lottery to decide who could **apply**. 
+   - Many didn't apply or weren't eligible, leading to an increase in coverage (among treated) of only 25%. 
+
+## Treatment as a PO
+
+Borrowing from [Lecture 6](lecture-6-multi.qmd), we can model receipt of treatment as a potential outcome of assignment and there are 4 potential scenarios:
+
+::::: incremental
+:::: columns
+::: {.column width="50%"}
+
+1. $d_i(0)=0$ and $d_i(1) = 0$
+
+   - We call these **never takers** ($\textcolor{purple}{NT}$)
+   
+2. $d_i(0)=1$ and $d_i(1)=1$
+
+   - We call these **always takers** ($\textcolor{green}{AT}$)
+   
+:::
+::: {.column width="50%"}
+
+3. $d_i(0) = 0$ and $d_i(1) = 1$
+
+   - We call these **compliers** ($\textcolor{blue}{C}$)
+   
+4. $d_i(0) = 1$ and $d_i(1) = 0$
+
+   - We call these **defiers** ($\textcolor{red}{D}$)
+   
+:::
+::::
+:::::
+
+:::: {.fragment .fade-in}
+:::{.callout-important}
+To know whether an individual is a $\textcolor{purple}{NT}$, $\textcolor{green}{AT}$, $\textcolor{blue}{C}$, or $\textcolor{red}{D}$ you need to observe both potential outcomes. 
+:::
+::::
+
+## ITT
+
+What if we compare
+
+$$
+  E[d_i|w_i=1]-E[d_i|w_i=0]
+$$
+
+\
+
+::: {.fragment .fade-in}
+Under unconfoundedness (w.r.t. $d_i(1),d_i(0)$):
+
+$$
+  E[d_i(1)|w_i=1]-E[d_i(0)|w_i=0] = \underbrace{E[d_i(1)-d_i(0)]}_{ITT_d}
+$$
+
+We call this the Intention to Treat ($ITT_d$) effect on the (endogenous) treatment variable. 
+:::
+
+## Decomposition
+
+But we know that $d_i(1)-d_i(0)$ can only take on specific values: $\{-1,0,1\}$
+
+::: {.fragment .fade-in}
+$$
+\begin{aligned}
+  &E[d_i(1)-d_i(0)] \\
+  =& 0\times Pr(\textcolor{purple}{NT}) + 0\times Pr(\textcolor{green}{AT}) + 1\times Pr(\textcolor{blue}{C}) - 1\times Pr(D) \\
+  =& Pr(\textcolor{blue}{C}) - Pr(\textcolor{red}{D})
+\end{aligned}
+$$
+
+We will return to this formula shortly.
+
+:::
+
+## The POs of the outcome
+
+What of the main outcome variable $y$?
+
+\
+
+::: {.fragment .fade-in}
+It may depend on both $d$ and $w$:
+
+$$
+  y_i(d_i,w_i) = y_i(d_i(w_i),w_i)
+$$
+
+:::
+
+## Exclusion restriction
+
+To move forward we need an assumption
+
+> **Exclusion restriction**:
+> 
+> $$
+>   y_i(d_i,1) = y_i(d_i,0),\;\text{for}\;d_i\in\{0,1\}
+> $$
+
+Which states: conditional on the value of (endogenous) treatment, assignment does NOT matter for the outcome. 
+
+- No direct experimental effects
+
+## Decomposition
+
+When we compare 
+
+$$
+  E[y_i|w_i=1]-E[y_i|w_i=0]
+$$
+
+We're actually comparing:
+
+$$
+  \begin{aligned}
+  &E[y_i(d_i(1),1)|w_i=1]-E[y_i(d_i(0),0)|w_i=0] \\
+  =&E[y_i(d_i(1))|w_i=1]-E[y_i(d_i(0))|w_i=0]
+  \end{aligned}
+$$
+
+Where the second line follows from the **exclusion restriction**. 
+
+##
+
+Under unconfoundedness (w.r.t. $y_i(1),y_i(0)$):
+
+$$
+  \begin{aligned}
+  &E[y_i(d_i(1))|w_i=1]-E[y_i(d_i(0))|w_i=0] \\
+  =& \underbrace{E[y_i(d_i(1)) - y_i(d_i(0))]}_{ITT_y}
+  \end{aligned}
+$$
+
+We call this the Intention to Treat ($ITT_y$) effect on the outcome variable. 
+
+:::{.callout-note}
+A lot of applied microeconomics papers estimate ITT effects. This is often because the (quasi-)experimental variation they use does not fulfill the exclusion restriction. Or because they do not observe the (endogenous) treatment variable, just the assignment. They can still estimate the reduced-form effect of assignment. This reduced form estimate becomes an ITT effect (as opposed to an ATE/ATT) under non-compliance [see for example, @banerjee2015miracle].
+:::
+
+## 
+
+We can break this up by group: $\textcolor{purple}{NT}$, $\textcolor{green}{AT}$, $\textcolor{blue}{C}$, and $\textcolor{red}{D}$:
+
+$$
+  \begin{aligned}
+    &E[y_i(d_i(1))-y_i(d_i(0))] \\
+    =&E[y_i(0)-y_i(0)|\textcolor{purple}{NT}]\times Pr(\textcolor{purple}{NT}) \\
+    &+E[y_i(1)-y_i(1)|\textcolor{green}{AT}]\times Pr(\textcolor{green}{AT}) \\
+    &+E[y_i(1)-y_i(0)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C}) \\
+    &+E[y_i(0)-y_i(1)|\textcolor{red}{D}]\times Pr(\textcolor{red}{D}) 
+  \end{aligned}
+$$
+
+## 
+
+Under unconfoundedness (w.r.t $y_i(0),y_i(1)$)
+
+$$
+  \begin{aligned}
+    =&\underbrace{E[y_i(0)-y_i(0)|\textcolor{purple}{NT}]}_{=0}\times Pr(\textcolor{purple}{NT}) \\
+    &+\underbrace{E[y_i(1)-y_i(1)|\textcolor{green}{AT}]}_{=0}\times Pr(\textcolor{green}{AT}) \\
+    &+E[y_i(1)-y_i(0)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C}) \\
+    &+E[y_i(0)-y_i(1)|\textcolor{red}{D}]\times Pr(\textcolor{red}{D}) \\
+    =&E[y_i(1)-y_i(0)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C}) \\
+  &-E[y_i(1)-y_i(0)|\textcolor{red}{D}]\times Pr(\textcolor{red}{D})
+  \end{aligned}
+$$
+
+## 
+
+Suppose we assumed that: 
+
+1. $Pr(\textcolor{blue}{C})>0 \Rightarrow Pr(d_i(1)>d_i(0))>0$
+
+2. $Pr(\textcolor{red}{D}) = 0\Rightarrow Pr(d_i(1)<d_i(0))=0$
+
+   - This is referred to as the **monotonicity** assumption: assignment influences treatment in a single direction.
+
+::: {.fragment .fade-in}
+Then, 
+
+$$
+  \begin{aligned}
+  ITT_y =& E[y_i|w_i=1]-E[y_i|w_i=0] = E[y_i(1)-y_i(1)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C}) \\
+  &\\
+  ITT_d =& E[d_i|w_i=1]-E[d_i|w_i=0] = Pr(\textcolor{blue}{C}) \\
+  \end{aligned}
+$$
+
+:::
+
+## LATE
+
+If we take the ratio of the two ITT effects:
+
+$$
+  \begin{aligned}
+  \frac{ITT_y}{ITT_d} =& \frac{E[y_i|w_i=1]-E[y_i|w_i=0]}{E[d_i|w_i=1]-E[d_i|w_i=0]} \\
+  =& \frac{E[y_i(0)-y_i(1)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C})}{Pr(\textcolor{blue}{C})} \\
+  = & E[y_i(0)-y_i(1)|\textcolor{blue}{C}]
+  \end{aligned}
+$$
+
+We call this the **Local Average Treatment Effect** (LATE)
+
+- The ATE of the Compliers
+
+## Assumptions
+
+Let us collect the assumptions we have made:
+
+1. **Exclusion Restriction:** $y_i(d_i,1) = y_i(d_i,0),\;\text{for}\;d_i\in\{0,1\}$
+
+2. **Unconfoundedness:** $d_i(1),d_i(0),y_i(1),y_i(0) \perp w_i$
+
+3. **Existence of compliers:** $Pr(d_i(1)>d_i(0))>0$
+
+4. **Monotonicity (absence of defiers):** $Pr(d_i(1)<d_i(0))=0$
+
+## Instrumental variables
+
+We described the IV set-up as follows:
+
+$$
+  y_i = \beta_0 + \beta_1 x_i + \varepsilon_i
+$$
+
+where, 
+
+1. $Cov(x_i,\varepsilon_i) \neq 0$
+
+2. $Cov(z_i,\varepsilon_i) = 0$, which implied two things:
+
+   2.1. $z_i$ must be excluded from the main model (i.e. not in $\varepsilon_i$)
+   
+   2.2. $z_i$ must be exogenous w.r.t. $\varepsilon_i$
+   
+3. $Cov(z_i,x_i) \neq 0$ (valid first-stage)
+
+## Experiments as IVs
+
+Now, suppose we have 
+
+$$
+  y_i = \beta_0 + \beta_1 d_i + \varepsilon_i
+$$
+
+where $d_i$ denotes endogenous treatment. 
+
+\
+
+::: {.fragment .fade-in}
+An our instrument is **random** assignment: $w_i$ 
+
+- $w_i$ is unconfounded ($\Rightarrow$ exogenous)
+
+- If we also then assume that $w_i$ is excluded (i.e. no experimental effects)
+
+  $$\Rightarrow Cov(w_i,\varepsilon_i)=0$$ 
+
+:::
+
+##
+
+**First-stage**: 
+
+$$
+  d_i = \pi_0 + \pi_1 w_i + \nu_i
+$$
+
+If we have **compliers** and **no defiers** (monotonicity), 
+
+- then $\pi_1>0$
+
+  $$\Rightarrow Cov(w_i,d_i)\neq0$$ 
+  
+::: {.fragment .fade-in}
+
+- This equation would give us the $ITT_d$  
+    
+- and $\hat{\pi}_{1,ols} = \bar{d}_1-\bar{d}_0$
+
+:::
+
+##
+
+**Reduced-form**:
+
+$$
+  y_i = \gamma_0 + \gamma_1 w_i + \upsilon_i
+$$
+
+- This equation would give us the $ITT_y$  
+
+- and $\hat{\gamma}_{1,ols}=\bar{y}_1-\bar{y}_0$
+
+##
+
+We know that the IV estimator would be, 
+
+$$
+  \hat{\beta}_{1,iv} = \hat{\beta}_{1,2sls} = \frac{\hat{\gamma}_{1,ols}}{\hat{\pi}_{1,ols}}
+$$
+
+## 
+
+In this simple setting (single, discrete endogenous variable and instrument)
+
+\
+
+$$
+\frac{\hat{\gamma}_{1,ols}}{\hat{\pi}_{1,ols}} = \frac{\bar{y}_1-\bar{y}_0}{\bar{d}_1-\bar{d}_0}
+$$
+
+\
+
+::: {.fragment .fade-in}
+Which is the sample analogue of:
+
+$$
+\frac{E[y_i|w_i=1]-E[y_i|w_i=0]}{E[d_i|w_i=1]-E[d_i|w_i=0]}
+$$
+
+:::
+
+## LATE Estimation
+
+Assuming heterogeneous TEs and single, discrete instrument
+
+- IV (2SLS) estimator estimates a Local Average Treatment Effect
+
+  - ATE of compliers
+  
+\
+
+  - under four assumptions:
+
+    1. Exclusion restriction
+    
+    2. Unconfoundedness
+    
+    3. Compliers (first-stage)
+    
+    4. Monotonicity
+  
+## Comparison
+
+:::: columns
+::: {.column width="50%"}
+For standard IV we had:
+
+1. $Cov(\varepsilon_i,z_i)= 0$
+
+2. $Cov(x_i,z_i)\neq 0$
+
+:::
+::: {.column width="50%"}
+For LATE (with heterogeneous TEs)
+
+1. Exclusion restriction
+  
+2. Unconfoundedness
+
+3. Compliers
+
+4. Monotonicity (no defiers)
+
+:::
+::::
+
+:::{.callout-caution}
+The standard parametric IV estimator required just two assumptions. Using (quasi-)random assignment within an experiment requires you to add the exclusion restriction as a separate assumption. The unconfoundedness of assignment makes the instrument exogenous, but does not rule out the possibility of direct (experimental) effects. Monotonicity is needed due to the potential heterogeneity of the first-stage relationship. 
+:::
+  
+# Examples: Oreopoulus (2006)
+
+## 
+@oreopoulos2006estimating presents a nice, "clean" example of Local Average Treatment Effect.[^6]
+
+[^6]: @angrist1991compulsory was the seminal paper on this topic, providing a LATE interpretation of an IV strategy based on minimum school-leaving age. However, there is much debate as to the validity of the first-stage @bound1995problems.
+
+![](material/lecture-8/oreopoulos-2006.png){fig-align="center"}
+
+## First-stage
+
+The paper exploits a sharp policy change, resulting in a strong first-stage. 
+
+![p. 154](material/lecture-8/oreopoulos-figure1.png){fig-align="center"}
+
+## Estimation
+
+The estimate the first-stage effect, the specify the model:
+
+$$
+  y_{i} = \pi_0 + \pi_1 d_{i} + \pi_1 yob_{i} + \pi_2 yob^2_{i} + \mathbf{x}_{i}\rho + \varepsilon_i
+$$
+
+where, 
+
+- $yob_i$: denotes the individual's year-of-birth (they incldue a polynomial)
+
+- $d_i$: is a dummy variable denoting that your year-of-birth is later than 1932 (**excluded variable**)
+
+*Where does variation in $d_i$ come from?* Is it exogenous?
+
+## First stage
+
+![p. 160](material/lecture-8/oreopoulos-figure4.png){fig-align="center"}
+
+The coefficient on $d_i$ ($\pi_1$) captures the vertical distance bewteen the two two lines; the "break" in the function. 
+
+## Reduced form
+
+![p. 163](material/lecture-8/oreopoulos-figure6.png){fig-align="center"}
+
+## FS & RF
+
+![p. 161](material/lecture-8/oreopoulos-table1.png){fig-align="center"}
+
+So, IV estimate should be $0.065/0.440 = 0.148$ (not accounting for unobserved precision).
+
+## OLS vs IV
+
+![p. 164](material/lecture-8/oreopoulos-table2.png){fig-align="center"}
+
+## LATE interpretation
+
+Point estimate of 15.8% 
+
+- this the ATE for compliers
+
+- who are the compliers? 
+
+  - The individuals who who gained additional year*s* (treatment here is continuous) of education **because** of the law change. 
+  
+  - Remember, we must assume monotonicity: no one gains *less* education under the new policy. Which seems reasonable.
+  
 # References
 
 ## Bibliography

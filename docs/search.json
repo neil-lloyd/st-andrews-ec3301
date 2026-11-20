@@ -4,7 +4,7 @@
     "href": "tutorial-4.html",
     "title": "Tutorial 4",
     "section": "",
-    "text": "RCT Power Calculation: Gennetian et al. (2024)\nThis question takes inspiration from Gennetian et al. (2024). Available online from www.nature.com. The study evaluates how low income households use unconditional cash transfers to investment in their children’s education. We will use this study to demonstrate the significance of power calculations.\nWhile discussing their research design, the authors write:\n\n“Striking a balance between statistical power and project costs, 40% of the recruited sample within each site was randomized to receive $333 monthly cash gifts and 60% to receive $20 monthly cash gifts. With an enrolled sample of \\(n=1,000\\) mother–infant dyads, and accounting for a predicted 20% attrition over longer-term follow-ups, the anticipated sample size of 800 dyads during subsequent waves of data collection is estimated to provide 80% power to detect a 0.207 s.d. impact at \\(P&lt;0.05\\) in a two-tailed test on the family investment and related family process outcomes examined here. Data collectors were blinded to assignment of treatment status.” (p. 1523)\n\n\n\n\nWrite down the formula for the variance of the simple difference between means (SDM) \\(\\hat\\tau\\) estimator, assuming a homogeneous treatment effect.\n\n\n\n\nSolve for \\(sd(\\hat\\tau)\\) as a function of \\(\\sigma\\), assuming \\(n = 800\\) and \\(\\bar{w} = 0.4\\) (the parameters specified above).\n\n\n\n\nWhat is the distribution of the test-statistic \\(\\hat{\\tau}/sd(\\hat\\tau)\\) under the hull hypothesis \\(H_0: \\tau=0\\)?\n\n\n\n\nSolve for power function the two-sided test: \\(H_0: \\tau=0\\) against \\(H_1: \\tau\\neq0\\) (\\(\\alpha = 0.05\\)). That is, expand on,\n\\[\n  Pr(\\text{Reject}\\; H_0| \\tau = \\kappa)\n\\]\nUse the critical values from a \\(N(0,1)\\) distribution for the rejection rule. The answer should include the expression \\(\\kappa/\\sigma\\)\n\n\n\n\nThe authors compute the power of the test for \\(\\kappa/\\sigma = 0.207\\): “to detect a 0.207 s.d. impact”. Using the above expression, compute the power assuming\n\\[\n  \\frac{\\hat{\\tau}-\\kappa}{sd(\\hat{\\tau})}\\overset{a}{\\sim} N(0,1)\n\\] Your answer will not be exactly 80%, but should be close.\n\n\n\n\nOn p. 1524, the authors write:\n\n\n“Estimates for each follow-up wave following pre-registration protocols are derived by the following straightforward model: \\[ Y = Z\\pi + X\\beta + \\varepsilon \\] where \\(Y\\) is the outcome of interest for mother or the household and \\(\\varepsilon\\) is the error term. The model includes the following baseline covariates (\\(X\\)) with the goal of improving precision in the estimate: mother’s characteristics (mother’s age, maximum education level attained, race and ethnicity, marital status, general health, an indicator of maternal depressive symptoms and cigarettes and alcohol consumption during pregnancy), household characteristics (number of children born to mother, number of adults in the household, father living with the mother, household income and household net worth), baby’s birth characteristics (weight at birth and gestational age), a site-based fixed effect and an indicator for the switch from in-person to phone interviews.”\n\nDescribe the econometric rationale for adding these baseline covariates in a linear regression model.\n\n\n\nThe original working paper version of this paper shows the conditional and unconditional estimates in Tables 1-5: www.nber.org. Why are the estimated SEs of the conditional ATE point estimates (column 4) not all smaller than the unconditional ones (column 3)?\n\n\n\nProxy & IV Example: Acemoglu, Johnson & Robinson (2001)\nThis question concerns Acemoglu, Johnson, and Robinson (2001) “The Colonial Origins of Comparative Development: An Empirical Investigation”. Available online from www.aeaweb.org. The goal of the paper is to understand the (causal) relationship between development and institutions. The consider a range of institutions, by one key measure is an index of protection against expropriation. The authors estimate the following linear model using OLS (p. 1378; see results in Table 2).\n\\[\n  \\log y_i = \\mu + \\alpha R_i + \\mathbf{X}_i'\\gamma + \\varepsilon_i\n\\]\nwhere\n\n\\(y_i\\) is income per capita,\n\\(R_i\\) is measure of protection against expropriation. It is measured on a scale from 0 to 10, with 0 indicating no protection.\n\\(\\mathbf{X}_i\\) a vector of control variables.\n\n\n\n\nWhat are the control variables (covariates) included in this regression.\n\n\n\n\nIf we think of these variables as proxy variables, what would they be proxy for? Think about the unobserved factors which may confound the relationship between development and institutions.\n\n\n\n\nInterpret coefficient of interest in column (2) of Table 2. The base sample includes “64 countries that were ex-colonies and for which we have settler mortality, protection against expropriation risk, and GDP data” (p. 1377).\n\n\n\n\nComparing the coefficient estimates of columns (2) and (6), is specification (2) upward or downward biased due to omitted variables? In particular, consider the relationship between climate, which is proxied for by latitude. What do the results suggest is the relationship bewteen climate and institutions?\n\n\n“Many social scientists, including Montesquieu [1784] (1989), Diamond (1997), and Sachs and coauthors, have argued for a direct effect of climate on performance, and Gallup et al. (1998) and Hall and Jones (1999) document the correlation between distance from the equator and economic performance. To control for this, in columns (3)–(6), we add latitude as a regressor (we follow the literature in using the absolute value measure of latitude, i.e., distance from the equator, scaled between 0 and 1).” (p. 1379)\n\n\n\n\nExplain why the authors believe \\(R_i\\) to be endogenous, even conditional on \\(\\mathbf{X}\\)?\n\n\n\n\nWhat do the authors propose as an instrument for \\(R_i\\)? Under what assumptions is this a valid instrument? [Hint: see p. 1383]\n\n\n\n\nExplain why this historical instrument might affect contemporary levels of institutions in an ex-colony. That is, why do we expect there to be a valid first-stage? [Hint: the authors describe a chain of causation on pp. 1370, 1383]\n\n\n\n\nCould \\(\\log M_i\\) have a direct effect on contemporary development, thereby violating the exclusion restriction? Consider the potential significance of \\(\\mathbf{X}\\) here. [Hint: see p. 1371]\n\n\n\n\nThe first-stage equation is shown below (p. 1384). Compute the F-statistic for \\(H_0: \\beta=0\\) using column (10) from Table 3.\n\\[\n  R_i = \\zeta + \\beta \\log M_i + \\mathbf{X}_i'\\delta + \\upsilon_i\n\\]\n\n\n\n\nInterpret the 2SLS-IV estimate from column (9), Table 4. Is it statistically significant at a 5% level?\n\n\n\n\nComparing these results to those of Table 2, what do can we conclude with respect to the bias in OLS? How does this compare with your answer to Q4.\n\n\n\n\nSuppose \\(Cov(\\log M_i,\\varepsilon_i)\\neq 0\\). Explain why the IV estimates may themselves be biased in a different direction to OLS.\n\n\n\nRecent IV Examples\nBelow you will find a list of recent NBER working papers that make use of an instrumental variable identification strategy. For each paper, try to find: (1) the endogenous variable; (2) the excluded instrument(s); (3) the source of exogenous variation.\n\n\n\nAngrist et al. (2025) available online www.nber.org.\n\n\n\n\nStevenson et al. (2023) available online www.nber.org. [Hint: p. 12]\n\n\n\n\nGrossman, Tello-Trillo, and Willage (2022) available online www.nber.org. [Hint: p. 15]\n\n\n\n\nDettling and Kearney (2025) available online www.nber.org. [Hint: p. 16-21]\n\n\n\n\nCaiumi and Peri (2024) available online www.nber.org. [Hint: p. 26-28]\n\n\n\n\n\n\nReferences\n\nAcemoglu, Daron, Simon Johnson, and James A Robinson. 2001. “The Colonial Origins of Comparative Development: An Empirical Investigation.” American Economic Review 91 (5): 1369–1401.\n\n\nAngrist, Joshua, Amanda E Kowalski, Ljubica Ristovska, and Marcia L Stefanick. 2025. “Instrumental Variables Methods Reveal Larger Effects of Menopausal Hormone Therapy in the Landmark Women’s Health Initiative Clinical Trial.” In AEA Papers and Proceedings, 115:215–20. American Economic Association, 2014 Broadway, Suite 305, Nashville, TN 37203.\n\n\nCaiumi, Alessandro, and Giovanni Peri. 2024. “Immigration’s Effect on US Wages and Employment Redux.” National bureau of economic research.\n\n\nDettling, Lisa J, and Melissa Schettini Kearney. 2025. “Did the Modern Mortgage Set the Stage for the US Baby Boom?” National Bureau of Economic Research.\n\n\nGennetian, Lisa A, Greg J Duncan, Nathan A Fox, Sarah Halpern-Meekin, Katherine Magnuson, Kimberly G Noble, and Hirokazu Yoshikawa. 2024. “Effects of a Monthly Unconditional Cash Transfer Starting at Birth on Family Investments Among US Families with Low Income.” Nature Human Behaviour 8 (8): 1514–29.\n\n\nGrossman, Daniel S, Sebastian Tello-Trillo, and Barton Willage. 2022. “Health Insurance for Whom? The ‘Spill-up’effects of Children’s Health Insurance on Mothers.” National Bureau of Economic Research.\n\n\nStevenson, Megan T, Aurelie Ouss, Winnie van Dijk, John Eric Humphries, and Kamelia Stavreva. 2023. “Conviction, Incarceration, and Recidivism: Understanding the Revolving Door.” Available at SSRN."
+    "text": "RCT Power Calculation: Gennetian et al. (2024)\nThis question takes inspiration from Gennetian et al. (2024). Available online from www.nature.com. The study evaluates how low income households use unconditional cash transfers to investment in their children’s education. We will use this study to demonstrate the significance of power calculations.\nWhile discussing their research design, the authors write:\n\n“Striking a balance between statistical power and project costs, 40% of the recruited sample within each site was randomized to receive $333 monthly cash gifts and 60% to receive $20 monthly cash gifts. With an enrolled sample of \\(n=1,000\\) mother–infant dyads, and accounting for a predicted 20% attrition over longer-term follow-ups, the anticipated sample size of 800 dyads during subsequent waves of data collection is estimated to provide 80% power to detect a 0.207 s.d. impact at \\(P&lt;0.05\\) in a two-tailed test on the family investment and related family process outcomes examined here. Data collectors were blinded to assignment of treatment status.” (p. 1523)\n\n\n\n\nWrite down the formula for the variance of the simple difference between means (SDM) \\(\\hat\\tau\\) estimator, assuming a homogeneous treatment effect.\n\n\n\n\nSolve for \\(sd(\\hat\\tau)\\) as a function of \\(\\sigma\\), assuming \\(n = 800\\) and \\(\\bar{w} = 0.4\\) (the parameters specified above).\n\n\n\n\nWhat is the distribution of the test-statistic \\(\\hat{\\tau}/sd(\\hat\\tau)\\) under the hull hypothesis \\(H_0: \\tau=0\\)?\n\n\n\n\nSolve for power function the two-sided test: \\(H_0: \\tau=0\\) against \\(H_1: \\tau\\neq0\\) (\\(\\alpha = 0.05\\)). That is, expand on,\n\\[\n  Pr(\\text{Reject}\\; H_0| \\tau = \\kappa)\n\\]\nUse the critical values from a \\(N(0,1)\\) distribution for the rejection rule. The answer should include the expression \\(\\kappa/\\sigma\\)\n\n\n\n\nThe authors compute the power of the test for \\(\\kappa/\\sigma = 0.207\\): “to detect a 0.207 s.d. impact”. Using the above expression, compute the power assuming\n\\[\n  \\frac{\\hat{\\tau}-\\kappa}{sd(\\hat{\\tau})}\\overset{a}{\\sim} N(0,1)\n\\] Your answer will not be exactly 80%, but should be close.\n\n\n\n\nOn p. 1524, the authors write:\n\n\n“Estimates for each follow-up wave following pre-registration protocols are derived by the following straightforward model: \\[ Y = Z\\pi + X\\beta + \\varepsilon \\] where \\(Y\\) is the outcome of interest for mother or the household and \\(\\varepsilon\\) is the error term. The model includes the following baseline covariates (\\(X\\)) with the goal of improving precision in the estimate: mother’s characteristics (mother’s age, maximum education level attained, race and ethnicity, marital status, general health, an indicator of maternal depressive symptoms and cigarettes and alcohol consumption during pregnancy), household characteristics (number of children born to mother, number of adults in the household, father living with the mother, household income and household net worth), baby’s birth characteristics (weight at birth and gestational age), a site-based fixed effect and an indicator for the switch from in-person to phone interviews.”\n\nDescribe the econometric rationale for adding these baseline covariates in a linear regression model.\n\n\n\nThe original working paper version of this paper shows the conditional and unconditional estimates in Tables 1-5: www.nber.org. Why are the estimated SEs of the conditional ATE point estimates (column 4) not all smaller than the unconditional ones (column 3)?\n\n\n\nProxy & IV Example: Acemoglu, Johnson & Robinson (2001)\nThis question concerns Acemoglu, Johnson, and Robinson (2001) “The Colonial Origins of Comparative Development: An Empirical Investigation”. Available online from www.aeaweb.org. The goal of the paper is to understand the (causal) relationship between development and institutions. The consider a range of institutions, by one key measure is an index of protection against expropriation. The authors estimate the following linear model using OLS (p. 1378; see results in Table 2).\n\\[\n  \\log y_i = \\mu + \\alpha R_i + \\mathbf{X}_i'\\gamma + \\varepsilon_i\n\\]\nwhere\n\n\\(y_i\\) is income per capita,\n\\(R_i\\) is measure of protection against expropriation. It is measured on a scale from 0 to 10, with 0 indicating no protection.\n\\(\\mathbf{X}_i\\) a vector of control variables.\n\n\n\n\nWhat are the control variables (covariates) included in this regression.\n\n\n\n\nIf we think of these variables as proxy variables, what would they be proxy for? Think about the unobserved factors which may confound the relationship between development and institutions.\n\n\n\n\nInterpret coefficient of interest in column (2) of Table 2. The base sample includes “64 countries that were ex-colonies and for which we have settler mortality, protection against expropriation risk, and GDP data” (p. 1377).\n\n\n\n\nComparing the coefficient estimates of columns (2) and (6), is specification (2) upward or downward biased due to omitted variables? In particular, consider the relationship between climate, which is proxied for by latitude. What do the results suggest is the relationship bewteen climate and institutions?\n\n\n“Many social scientists, including Montesquieu [1784] (1989), Diamond (1997), and Sachs and coauthors, have argued for a direct effect of climate on performance, and Gallup et al. (1998) and Hall and Jones (1999) document the correlation between distance from the equator and economic performance. To control for this, in columns (3)–(6), we add latitude as a regressor (we follow the literature in using the absolute value measure of latitude, i.e., distance from the equator, scaled between 0 and 1).” (p. 1379)\n\n\n\n\nExplain why the authors believe \\(R_i\\) to be endogenous, even conditional on \\(\\mathbf{X}\\)?\n\n\n\n\nWhat do the authors propose as an instrument for \\(R_i\\)? Under what assumptions is this a valid instrument? [Hint: see p. 1383]\n\n\n\n\nExplain why this historical instrument might affect contemporary levels of institutions in an ex-colony. That is, why do we expect there to be a valid first-stage? [Hint: the authors describe a chain of causation on pp. 1370, 1383]\n\n\n\n\nCould \\(\\log M_i\\) have a direct effect on contemporary development, thereby violating the exclusion restriction? Consider the potential significance of \\(\\mathbf{X}\\) here. [Hint: see p. 1371]\n\n\n\n\nThe first-stage equation is shown below (p. 1384). Compute the F-statistic for \\(H_0: \\beta=0\\) using column (10) from Table 3.\n\\[\n  R_i = \\zeta + \\beta \\log M_i + \\mathbf{X}_i'\\delta + \\upsilon_i\n\\]\n\n\n\n\nInterpret the 2SLS-IV estimate from column (8), Table 4. Is it statistically significant at a 5% level?\n\n\n\n\nComparing these results to those of Table 2, what can we conclude with respect to the bias in OLS? How does this compare with your answer to Q4.\n\n\n\n\nSuppose \\(Cov(\\log M_i,\\varepsilon_i)\\neq 0\\). Explain why the IV estimates may themselves be biased in a different direction to OLS.\n\n\n\nRecent IV Examples\nBelow you will find a list of recent NBER working papers that make use of an instrumental variable identification strategy. For each paper, try to find: (1) the endogenous variable; (2) the excluded instrument(s); (3) the source of exogenous variation.\n\n\n\nAngrist et al. (2025) available online www.nber.org.\n\n\n\n\nStevenson et al. (2023) available online www.nber.org. [Hint: p. 12]\n\n\n\n\nGrossman, Tello-Trillo, and Willage (2022) available online www.nber.org. [Hint: p. 15]\n\n\n\n\nDettling and Kearney (2025) available online www.nber.org. [Hint: p. 16-21]\n\n\n\n\nCaiumi and Peri (2024) available online www.nber.org. [Hint: p. 26-28]\n\n\n\n\n\n\nReferences\n\nAcemoglu, Daron, Simon Johnson, and James A Robinson. 2001. “The Colonial Origins of Comparative Development: An Empirical Investigation.” American Economic Review 91 (5): 1369–1401.\n\n\nAngrist, Joshua, Amanda E Kowalski, Ljubica Ristovska, and Marcia L Stefanick. 2025. “Instrumental Variables Methods Reveal Larger Effects of Menopausal Hormone Therapy in the Landmark Women’s Health Initiative Clinical Trial.” In AEA Papers and Proceedings, 115:215–20. American Economic Association, 2014 Broadway, Suite 305, Nashville, TN 37203.\n\n\nCaiumi, Alessandro, and Giovanni Peri. 2024. “Immigration’s Effect on US Wages and Employment Redux.” National bureau of economic research.\n\n\nDettling, Lisa J, and Melissa Schettini Kearney. 2025. “Did the Modern Mortgage Set the Stage for the US Baby Boom?” National Bureau of Economic Research.\n\n\nGennetian, Lisa A, Greg J Duncan, Nathan A Fox, Sarah Halpern-Meekin, Katherine Magnuson, Kimberly G Noble, and Hirokazu Yoshikawa. 2024. “Effects of a Monthly Unconditional Cash Transfer Starting at Birth on Family Investments Among US Families with Low Income.” Nature Human Behaviour 8 (8): 1514–29.\n\n\nGrossman, Daniel S, Sebastian Tello-Trillo, and Barton Willage. 2022. “Health Insurance for Whom? The ‘Spill-up’effects of Children’s Health Insurance on Mothers.” National Bureau of Economic Research.\n\n\nStevenson, Megan T, Aurelie Ouss, Winnie van Dijk, John Eric Humphries, and Kamelia Stavreva. 2023. “Conviction, Incarceration, and Recidivism: Understanding the Revolving Door.” Available at SSRN."
   },
   {
     "objectID": "tutorial-3.html",
@@ -7403,7 +7403,7 @@
     "href": "lecture-8-slides.html#bibliography",
     "title": "Proxy and Instrumental Variables",
     "section": "Bibliography",
-    "text": "Bibliography\n\n\n\n\nAcemoglu, Daron, Simon Johnson, and James A Robinson. 2001. “The Colonial Origins of Comparative Development: An Empirical Investigation.” American Economic Review 91 (5): 1369–1401.\n\n\nAngrist, Joshua D. 1990. “Lifetime Earnings and the Vietnam Era Draft Lottery: Evidence from Social Security Administrative Records.” American Economic Review 80 (3): 313–36.\n\n\nAngrist, Joshua D., and William N. Evans. 1998. “Children and Their Parents’ Labor Supply: Evidence from Exogenous Variation in Family Size.” American Economic Review 88 (3): 450–77.\n\n\nAngrist, Joshua D., and Alan B. Krueger. 1991. “Does Compulsory School Attendance Affect Schooling and Earnings?” Quarterly Journal of Economics 106 (4): 979–1014.\n\n\nAngrist, Joshua D, and Alan B Krueger. 2001. “Instrumental Variables and the Search for Identification: From Supply and Demand to Natural Experiments.” Journal of Economic Perspectives 15 (4): 69–85.\n\n\nAngrist, Joshua D., and Victor Lavy. 1999. “Using Maimonides’ Rule to Estimate the Effect of Class Size on Scholastic Achievement.” The Quarterly Journal of Economics 114 (2): 533–75.\n\n\nAngrist, Joshua D, and Jörn-Steffen Pischke. 2010. “The Credibility Revolution in Empirical Economics: How Better Research Design Is Taking the Con Out of Econometrics.” Journal of Economic Perspectives 24 (2): 3–30.\n\n\nAuten, Gerald, and Robert Carroll. 1999. “The Effect of Income Taxes on Household Income.” Review of Economics and Statistics 81 (4): 681–93.\n\n\nAutor, David H., David Dorn, and Gordon H. Hanson. 2013. “The China Syndrome: Local Labor Market Effects of Import Competition in the United States.” American Economic Review 103 (6): 2121–68.\n\n\nBartik, Timothy J. 1991. Who Benefits from State and Local Economic Development Policies? Kalamazoo, MI: W.E. Upjohn Institute for Employment Research.\n\n\nBerry, Steven, James Levinsohn, and Ariel Pakes. 1995. “Automobile Prices in Market Equilibrium.” Econometrica 63 (4): 841–90.\n\n\nBlackburn, McKinley, and David Neumark. 1992. “Unobserved Ability, Efficiency Wages, and Interindustry Wage Differentials.” The Quarterly Journal of Economics 107 (4): 1421–36.\n\n\nBound, John, David A Jaeger, and Regina M Baker. 1995. “Problems with Instrumental Variables Estimation When the Correlation Between the Instruments and the Endogenous Explanatory Variable Is Weak.” Journal of the American Statistical Association 90 (430): 443–50.\n\n\nCard, David. 1995. “Using Geographic Variation in College Proximity to Estimate the Return to Schooling.” In Aspects of Labour Market Behaviour: Essays in Honour of John Vanderkamp, edited by Louis N. Christofides, E. Kenneth Grant, and Robert Swidinsky, 201–22. Toronto: University of Toronto Press.\n\n\n———. 2001a. “Estimating the Return to Schooling: Progress on Some Persistent Econometric Problems.” Econometrica 69 (5): 1127–60.\n\n\n———. 2001b. “Immigrant Inflows, Native Outflows, and the Local Labor Market Impacts of Higher Immigration.” Journal of Labor Economics 19 (1): 22–64.\n\n\nCurrie, Janet, and Jonathan Gruber. 1996. “Health Insurance Eligibility, Utilization of Medical Care, and Child Health.” Quarterly Journal of Economics 111 (2): 431–66.\n\n\nDahl, Gordon B., and Lance Lochner. 2012. “The Impact of Family Income on Child Achievement: Evidence from the Earned Income Tax Credit.” American Economic Review 102 (5): 1927–56.\n\n\nDale, Stacy Berg, and Alan B Krueger. 2002. “Estimating the Payoff to Attending a More Selective College: An Application of Selection on Observables and Unobservables.” The Quarterly Journal of Economics 117 (4): 1491–1527.\n\n\nDuflo, Esther. 2001. “Schooling and Labor Market Consequences of School Construction in Indonesia: Evidence from an Unusual Policy Experiment.” American Economic Review 91 (4): 795–813.\n\n\nEvans, William N., and Jeanne S. Ringel. 1999. “Can Higher Cigarette Taxes Improve Birth Outcomes?” Journal of Public Economics 72 (1): 135–54.\n\n\nFrankel, Jeffrey A., and David Romer. 1999. “Does Trade Cause Growth?” American Economic Review 89 (3): 379–99.\n\n\nGruber, Jon, and Emmanuel Saez. 2002. “The Elasticity of Taxable Income: Evidence and Implications.” Journal of Public Economics 84 (1): 1–32.\n\n\nHausman, Jerry A. 1996. “Valuation of New Goods Under Perfect and Imperfect Competition.” In The Economics of New Goods, edited by Timothy F. Bresnahan and Robert J. Gordon, 207–48. Chicago: University of Chicago Press.\n\n\nMcClellan, Mark, Barbara J. McNeil, and Joseph P. Newhouse. 1994. “Does More Intensive Treatment of Acute Myocardial Infarction in the Elderly Reduce Mortality? Analysis Using Instrumental Variables.” JAMA 272 (11): 859–66.\n\n\nMiguel, Edward, Shanker Satyanath, and Ernest Sergenti. 2004. “Economic Shocks and Civil Conflict: An Instrumental Variables Approach.” Journal of Political Economy 112 (4): 725–53.\n\n\nNunn, Nathan. 2008. “The Long-Term Effects of Africa’s Slave Trades.” Quarterly Journal of Economics 123 (1): 139–76.\n\n\nNunn, Nathan, and Leonard Wantchekon. 2011. “The Slave Trade and the Origins of Mistrust in Africa.” American Economic Review 101 (7): 3221–52.\n\n\nOreopoulos, Philip. 2006. “Estimating Average and Local Average Treatment Effects of Education When Compulsory Schooling Laws Really Matter.” American Economic Review 96 (1): 152–75.\n\n\nStaiger, Douglas, and J Stock. 1997. “Instrumental Variables Regression with Weak Instruments.” Econometrica 65 (3): 557–86.\n\n\nWooldridge, Jeffrey M. 2025. “Introductory Econometrics: A Modern Approach.”"
+    "text": "Bibliography\n\n\n\n\nAcemoglu, Daron, Simon Johnson, and James A Robinson. 2001. “The Colonial Origins of Comparative Development: An Empirical Investigation.” American Economic Review 91 (5): 1369–1401.\n\n\nAngrist, Joshua D. 1990. “Lifetime Earnings and the Vietnam Era Draft Lottery: Evidence from Social Security Administrative Records.” American Economic Review 80 (3): 313–36.\n\n\nAngrist, Joshua D., and William N. Evans. 1998. “Children and Their Parents’ Labor Supply: Evidence from Exogenous Variation in Family Size.” American Economic Review 88 (3): 450–77.\n\n\nAngrist, Joshua D., and Alan B. Krueger. 1991. “Does Compulsory School Attendance Affect Schooling and Earnings?” Quarterly Journal of Economics 106 (4): 979–1014.\n\n\nAngrist, Joshua D, and Alan B Krueger. 2001. “Instrumental Variables and the Search for Identification: From Supply and Demand to Natural Experiments.” Journal of Economic Perspectives 15 (4): 69–85.\n\n\nAngrist, Joshua D., and Victor Lavy. 1999. “Using Maimonides’ Rule to Estimate the Effect of Class Size on Scholastic Achievement.” The Quarterly Journal of Economics 114 (2): 533–75.\n\n\nAngrist, Joshua D, and Jörn-Steffen Pischke. 2010. “The Credibility Revolution in Empirical Economics: How Better Research Design Is Taking the Con Out of Econometrics.” Journal of Economic Perspectives 24 (2): 3–30.\n\n\nAuten, Gerald, and Robert Carroll. 1999. “The Effect of Income Taxes on Household Income.” Review of Economics and Statistics 81 (4): 681–93.\n\n\nAutor, David H., David Dorn, and Gordon H. Hanson. 2013. “The China Syndrome: Local Labor Market Effects of Import Competition in the United States.” American Economic Review 103 (6): 2121–68.\n\n\nBanerjee, Abhijit, Esther Duflo, Rachel Glennerster, and Cynthia Kinnan. 2015. “The Miracle of Microfinance? Evidence from a Randomized Evaluation.” American Economic Journal: Applied Economics 7 (1): 22–53.\n\n\nBartik, Timothy J. 1991. Who Benefits from State and Local Economic Development Policies? Kalamazoo, MI: W.E. Upjohn Institute for Employment Research.\n\n\nBerry, Steven, James Levinsohn, and Ariel Pakes. 1995. “Automobile Prices in Market Equilibrium.” Econometrica 63 (4): 841–90.\n\n\nBlackburn, McKinley, and David Neumark. 1992. “Unobserved Ability, Efficiency Wages, and Interindustry Wage Differentials.” The Quarterly Journal of Economics 107 (4): 1421–36.\n\n\nBound, John, David A Jaeger, and Regina M Baker. 1995. “Problems with Instrumental Variables Estimation When the Correlation Between the Instruments and the Endogenous Explanatory Variable Is Weak.” Journal of the American Statistical Association 90 (430): 443–50.\n\n\nCard, David. 1995. “Using Geographic Variation in College Proximity to Estimate the Return to Schooling.” In Aspects of Labour Market Behaviour: Essays in Honour of John Vanderkamp, edited by Louis N. Christofides, E. Kenneth Grant, and Robert Swidinsky, 201–22. Toronto: University of Toronto Press.\n\n\n———. 2001a. “Estimating the Return to Schooling: Progress on Some Persistent Econometric Problems.” Econometrica 69 (5): 1127–60.\n\n\n———. 2001b. “Immigrant Inflows, Native Outflows, and the Local Labor Market Impacts of Higher Immigration.” Journal of Labor Economics 19 (1): 22–64.\n\n\nCurrie, Janet, and Jonathan Gruber. 1996. “Health Insurance Eligibility, Utilization of Medical Care, and Child Health.” Quarterly Journal of Economics 111 (2): 431–66.\n\n\nDahl, Gordon B., and Lance Lochner. 2012. “The Impact of Family Income on Child Achievement: Evidence from the Earned Income Tax Credit.” American Economic Review 102 (5): 1927–56.\n\n\nDale, Stacy Berg, and Alan B Krueger. 2002. “Estimating the Payoff to Attending a More Selective College: An Application of Selection on Observables and Unobservables.” The Quarterly Journal of Economics 117 (4): 1491–1527.\n\n\nDuflo, Esther. 2001. “Schooling and Labor Market Consequences of School Construction in Indonesia: Evidence from an Unusual Policy Experiment.” American Economic Review 91 (4): 795–813.\n\n\nEvans, William N., and Jeanne S. Ringel. 1999. “Can Higher Cigarette Taxes Improve Birth Outcomes?” Journal of Public Economics 72 (1): 135–54.\n\n\nFinkelstein, Amy, Sarah Taubman, Bill Wright, Mira Bernstein, Jonathan Gruber, Joseph P Newhouse, Heidi Allen, Katherine Baicker, and the Oregon Health Study Group. 2012. “The Oregon Health Insurance Experiment: Evidence from the First Year.” The Quarterly Journal of Economics 127 (3): 1057–1106.\n\n\nFrankel, Jeffrey A., and David Romer. 1999. “Does Trade Cause Growth?” American Economic Review 89 (3): 379–99.\n\n\nGruber, Jon, and Emmanuel Saez. 2002. “The Elasticity of Taxable Income: Evidence and Implications.” Journal of Public Economics 84 (1): 1–32.\n\n\nHausman, Jerry A. 1996. “Valuation of New Goods Under Perfect and Imperfect Competition.” In The Economics of New Goods, edited by Timothy F. Bresnahan and Robert J. Gordon, 207–48. Chicago: University of Chicago Press.\n\n\nMcClellan, Mark, Barbara J. McNeil, and Joseph P. Newhouse. 1994. “Does More Intensive Treatment of Acute Myocardial Infarction in the Elderly Reduce Mortality? Analysis Using Instrumental Variables.” JAMA 272 (11): 859–66.\n\n\nMiguel, Edward, Shanker Satyanath, and Ernest Sergenti. 2004. “Economic Shocks and Civil Conflict: An Instrumental Variables Approach.” Journal of Political Economy 112 (4): 725–53.\n\n\nNunn, Nathan. 2008. “The Long-Term Effects of Africa’s Slave Trades.” Quarterly Journal of Economics 123 (1): 139–76.\n\n\nNunn, Nathan, and Leonard Wantchekon. 2011. “The Slave Trade and the Origins of Mistrust in Africa.” American Economic Review 101 (7): 3221–52.\n\n\nOreopoulos, Philip. 2006. “Estimating Average and Local Average Treatment Effects of Education When Compulsory Schooling Laws Really Matter.” American Economic Review 96 (1): 152–75.\n\n\nStaiger, Douglas, and J Stock. 1997. “Instrumental Variables Regression with Weak Instruments.” Econometrica 65 (3): 557–86.\n\n\nWooldridge, Jeffrey M. 2025. “Introductory Econometrics: A Modern Approach.”"
   },
   {
     "objectID": "lecture-8.html",
@@ -7865,7 +7865,7 @@
     "href": "lecture-8.html#footnotes",
     "title": "Proxy and Instrumental Variables",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nCited in Wooldridge (2025, 316)↩︎\n\\(\\widetilde{edu}_i\\) is the part of \\(edu_i\\) not explained by other regressors (\\(\\mathbf{x}_i\\)) in the limit. Likewise, for \\(\\widetilde{abil}_i\\).↩︎\nWe will try to stick closely to Wooldridge (2025)’s notation.↩︎\nIt just complicates the Math. We add it in by considering the conditional covariance: \\(Cov(edu_i,\\varepsilon_i|\\mathbf{x}_i)\\).↩︎\nThis term comes from the early work on the estimation of simultaneous equations in econometrics. Instrumental variables are needed to solve the problem of simultaneity. For example, consider the case where \\(y_1,y_2\\) are quantity and price of a good.↩︎"
+    "text": "Footnotes\n\n\nCited in Wooldridge (2025, 316)↩︎\n\\(\\widetilde{edu}_i\\) is the part of \\(edu_i\\) not explained by other regressors (\\(\\mathbf{x}_i\\)) in the limit. Likewise, for \\(\\widetilde{abil}_i\\).↩︎\nWe will try to stick closely to Wooldridge (2025)’s notation.↩︎\nIt just complicates the Math. We add it in by considering the conditional covariance: \\(Cov(edu_i,\\varepsilon_i|\\mathbf{x}_i)\\).↩︎\nThis term comes from the early work on the estimation of simultaneous equations in econometrics. Instrumental variables are needed to solve the problem of simultaneity. For example, consider the case where \\(y_1,y_2\\) are quantity and price of a good.↩︎\nJoshua D. Angrist and Krueger (1991) was the seminal paper on this topic, providing a LATE interpretation of an IV strategy based on minimum school-leaving age. However, there is much debate as to the validity of the first-stage Bound, Jaeger, and Baker (1995).↩︎"
   },
   {
     "objectID": "material-intercept.html",
@@ -7984,6 +7984,846 @@
     "href": "tutorial-4-solutions.html",
     "title": "Tutorial 4 (Solutions)",
     "section": "",
-    "text": "RCT Power Calculation: Gennetian et al. (2024)\nThis question takes inspiration from Gennetian et al. (2024). Available online from www.nature.com. The study evaluates how low income households use unconditional cash transfers to investment in their children’s education. We will use this study to demonstrate the significance of power calculations.\nWhile discussing their research design, the authors write:\n\n“Striking a balance between statistical power and project costs, 40% of the recruited sample within each site was randomized to receive $333 monthly cash gifts and 60% to receive $20 monthly cash gifts. With an enrolled sample of \\(n=1,000\\) mother–infant dyads, and accounting for a predicted 20% attrition over longer-term follow-ups, the anticipated sample size of 800 dyads during subsequent waves of data collection is estimated to provide 80% power to detect a 0.207 s.d. impact at \\(P&lt;0.05\\) in a two-tailed test on the family investment and related family process outcomes examined here. Data collectors were blinded to assignment of treatment status.” (p. 1523)\n\n\n\n\nWrite down the formula for the variance of the simple difference between means (SDM) \\(\\hat\\tau\\) estimator, assuming a homogeneous treatment effect.\n\n\n\\[\n  Var(\\hat{\\tau}) = \\sigma^2 \\bigg(\\frac{1}{n_0} + \\frac{1}{n_1}\\bigg)\n\\]\n\n\n\n\nSolve for \\(sd(\\hat\\tau)\\) as a function of \\(\\sigma\\), assuming \\(n = 800\\) and \\(\\bar{w} = 0.4\\) (the parameters specified above).\n\n\n\\[\n  Var(\\hat{\\tau}) = \\sigma^2 \\bigg(\\frac{1}{n_0} + \\frac{1}{n_1}\\bigg) = \\sigma^2 \\bigg(\\frac{1}{n\\bar{w}} + \\frac{1}{n(1-\\bar{w})}\\bigg) = \\frac{\\sigma^2}{n\\bar{w}(1-\\bar{w})}\n\\]\nThus,\n\\[\n  sd(\\hat\\tau) = \\frac{\\sigma}{\\sqrt{800\\times 0.4\\times 0.6}} = \\frac{\\sigma}{\\sqrt{192}}\n\\]\nwhere \\(\\sigma\\) is the unobserved s.d. of \\(y\\).\n\n\n\n\nWhat is the distribution of the test-statistic \\(\\hat{\\tau}/sd(\\hat\\tau)\\) under the hull hypothesis \\(H_0: \\tau=0\\)?\n\n\nWe do not know the finite sample of this distribution of this test static. However, we know that by CLT the asymptotic distribution will be normal. For slightly more conservative test, we can use the \\(t\\)-distribution.\n\n\n\n\nSolve for power function the two-sided test: \\(H_0: \\tau=0\\) against \\(H_1: \\tau\\neq0\\) (\\(\\alpha = 0.05\\)). That is, expand on,\n\\[\n  Pr(\\text{Reject}\\; H_0| \\tau = \\kappa)\n\\]\nUse the critical values from a \\(N(0,1)\\) distribution for the rejection rule. The answer should include the expression \\(\\kappa/\\sigma\\)\n\n\n\\[\n\\begin{aligned}\n& Pr(\\text{Reject}\\; H_0| \\tau = \\kappa) \\\\\n=& Pr\\bigg(\\frac{\\hat{\\tau}}{sd}&lt;\\text{z}_{0.025}\\bigg|\\tau = \\kappa\\bigg) + Pr\\bigg(\\frac{\\hat{\\tau}}{sd}&gt;\\text{z}_{0.975}\\bigg|\\tau = \\kappa\\bigg) \\\\\n=& Pr\\bigg(\\frac{\\hat{\\tau}-\\kappa}{sd}&lt;\\text{z}_{0.025}-\\frac{\\kappa}{sd}\\bigg|\\tau = \\kappa\\bigg) + Pr\\bigg(\\frac{\\hat{\\tau}-\\kappa}{sd}&gt;\\text{z}_{0.975}-\\frac{\\kappa}{sd}\\bigg|\\tau = \\kappa\\bigg) \\\\\n=& Pr\\bigg(\\frac{\\hat{\\tau}-\\kappa}{sd}&lt;\\text{z}_{0.025}-\\frac{\\kappa}{\\sigma}\\times \\sqrt{192}\\bigg|\\tau = \\kappa\\bigg) + Pr\\bigg(\\frac{\\hat{\\tau}-\\kappa}{sd}&gt;\\text{z}_{0.975}-\\frac{\\kappa}{\\sigma}\\times \\sqrt{192}\\bigg|\\tau = \\kappa\\bigg)\n\\end{aligned}\n\\]\n\n\n\n\nThe authors compute the power of the test for \\(\\kappa/\\sigma = 0.207\\): “to detect a 0.207 s.d. impact”. Using the above expression, compute the power assuming\n\\[\n  \\frac{\\hat{\\tau}-\\kappa}{sd(\\hat{\\tau})}\\overset{a}{\\sim} N(0,1)\n\\] Your answer will not be exactly 80%, but should be close.\n\n\n\\[\n\\begin{aligned}\n& Pr(\\text{Reject}\\; H_0| \\tau = \\kappa) \\\\\n\\approx& Pr(z&lt;\\text{z}_{0.025}-0.207\\times \\sqrt{192}|\\tau = \\kappa) + Pr(z&gt;\\text{z}_{0.975}-0.207\\times \\sqrt{192}|\\tau = \\kappa) \\\\\n=& 0.82\n\\end{aligned}\n\\]\n\ndis normal(invnormal(0.025)-0.207*sqrt(192)) + 1-normal(invnormal(0.975)-0.207*sqrt(192))\n\n.81814403\n\n\n\n\n\n\nOn p. 1524, the authors write:\n\n\n“Estimates for each follow-up wave following pre-registration protocols are derived by the following straightforward model: \\[ Y = Z\\pi + X\\beta + \\varepsilon \\] where \\(Y\\) is the outcome of interest for mother or the household and \\(\\varepsilon\\) is the error term. The model includes the following baseline covariates (\\(X\\)) with the goal of improving precision in the estimate: mother’s characteristics (mother’s age, maximum education level attained, race and ethnicity, marital status, general health, an indicator of maternal depressive symptoms and cigarettes and alcohol consumption during pregnancy), household characteristics (number of children born to mother, number of adults in the household, father living with the mother, household income and household net worth), baby’s birth characteristics (weight at birth and gestational age), a site-based fixed effect and an indicator for the switch from in-person to phone interviews.”\n\nDescribe the econometric rationale for adding these baseline covariates in a linear regression model.\n\nThis an example of Restricted Regression Adjustment (RRA). The rationale is to lower the variance of the estimator by explaining more of the variance in the outcome. This works well in RCTs because assignment into treatment is typically independent of baseline covariates. The caviate here is stratified experiments.\n\n\n\n\nThe original working paper version of this paper shows the conditional and unconditional estimates in Tables 1-5: www.nber.org. Why are the estimated SEs of the conditional ATE point estimates (column 4) not all smaller than the unconditional ones (column 3)?\n\n\nYou can show that the asymptotic variance of the RRA estimator is lower than the simple OLS estimator. However, the finite sample variance may not be bigger because of the non-zero correlation between assignment and baseline covariates in the realized data.\n\n\n\nProxy & IV Example: Acemoglu, Johnson & Robinson (2001)\nThis question concerns Acemoglu, Johnson, and Robinson (2001) “The Colonial Origins of Comparative Development: An Empirical Investigation”. Available online from www.aeaweb.org. The goal of the paper is to understand the (causal) relationship between development and institutions. The consider a range of institutions, by one key measure is an index of protection against expropriation. The authors estimate the following linear model using OLS (p. 1378; see results in Table 2).\n\\[\n  \\log y_i = \\mu + \\alpha R_i + \\mathbf{X}_i'\\gamma + \\varepsilon_i\n\\]\nwhere\n\n\\(y_i\\) is income per capita,\n\\(R_i\\) is measure of protection against expropriation. It is measured on a scale from 0 to 10, with 0 indicating no protection.\n\\(\\mathbf{X}_i\\) a vector of control variables.\n\n\n\n\nWhat are the control variables (covariates) included in this regression.\n\n\nThe covariates include: latitude of the country, regional dummy variable variables (Asia, Africa, and Other).\n\n\n\n\nIf we think of these variables as proxy variables, what would they be proxy for? Think about the unobserved factors which may confound the relationship between development and institutions.\n\n\nThese geographical controls are being used to control for geographical (climate, disease, ruggedness, coastline, etc.) as well as cultural (social) determinants of development that vary across space.\n\n\n\n\nInterpret coefficient of interest in column (2) of Table 2. The base sample includes “64 countries that were ex-colonies and for which we have settler mortality, protection against expropriation risk, and GDP data” (p. 1377).\n\n\nAn increase in the index of 1 unit increases predicted output by 68%, among ex-colonies.\n\ndis (exp(0.52)-1)*100\n\n68.202765\n\n\n\n\n\n\nComparing the coefficient estimates of columns (2) and (6), is specification (2) upward or downward biased due to omitted variables? In particular, consider the relationship between climate, which is proxied for by latitude. What do the results suggest is the relationship bewteen climate and institutions?\n\n\n“Many social scientists, including Montesquieu [1784] (1989), Diamond (1997), and Sachs and coauthors, have argued for a direct effect of climate on performance, and Gallup et al. (1998) and Hall and Jones (1999) document the correlation between distance from the equator and economic performance. To control for this, in columns (3)–(6), we add latitude as a regressor (we follow the literature in using the absolute value measure of latitude, i.e., distance from the equator, scaled between 0 and 1).” (p. 1379)\n\n\nAfter controlling for geographical variables, the estimated cofficient drops to 0.41. This suggests that the simple model is upward biased. The coefficient on latitude is positive, suggesting that the relationshp between instutitions and latitude is positive too. This means that, on average, ex-colonies further from the equator have stronger institutions.\n\n\n\n\nExplain why the authors believe \\(R_i\\) to be endogenous, even conditional on \\(\\mathbf{X}\\)?\n\n\nThese remain relatively “crude” controls. The controls account for geographical confounding factors - like climate and cultural differences that matter for development - but it is too strong to say that conditional on geography it is as if institutions are randomly assigned. In addition, we need to account for the potential reverse causal relationship between development and institutions. This cannot be resolved using controls.\n\n\n\n\nWhat do the authors propose as an instrument for \\(R_i\\)? Under what assumptions is this a valid instrument? [Hint: see p. 1383]\n\n\nThe proposed, excluded instrument is the log of settler mortality; a historical variable from the colonial period. The conditions needed are:\n\\[\n  Cov(\\log M_i,\\varepsilon_i)=0\\qquad \\text{and}\\qquad Cov(\\log M_i, R_i) \\neq 0\n\\]\n\n\n\n\nExplain why this historical instrument might affect contemporary levels of institutions in an ex-colony. That is, why do we expect there to be a valid first-stage? [Hint: the authors describe a chain of causation on pp. 1370, 1383]\n\n\nThe causal relationship runs between the following channels:\n\\[\n  \\text{settler mortality} \\Rightarrow \\text{level of colonial settlement} \\Rightarrow \\text{colonial institutions} \\Rightarrow \\text{modern institutions}\n\\]\n\n\n\n\nCould \\(\\log M_i\\) have a direct effect on contemporary development, thereby violating the exclusion restriction? Consider the potential significance of \\(\\mathbf{X}\\) here. [Hint: see p. 1371]\n\n\nHistorical settler mortality rates may be directly related to disease environments that matter today. First, the authors argue that historically important diseases often affected settlers more than native populations. In addition, to the extent to which modern disease environments relate to geography - for example, Malaria is a tropical disease - these are controlled for through \\(\\mathbf{X}\\).\n\n\n\n\nThe first-stage equation is shown below (p. 1384). Compute the F-statistic for \\(H_0: \\beta=0\\) using column (10) from Table 3.\n\\[\n  R_i = \\zeta + \\beta \\log M_i + \\mathbf{X}_i'\\delta + \\upsilon_i\n\\]\n\n\nThe \\(F\\)-stat is the square of the \\(t\\)-stat:\n\\[\n  F\\text{-stat} = \\bigg(\\frac{-0.51}{0.14}\\bigg)^2\n\\]\n\ndis (-0.51/0.14)^2\n\n13.270408\n\n\n\n\n\n\nInterpret the 2SLS-IV estimate from column (9), Table 4. Is it statistically significant at a 5% level?\n\n\nThe coefficient is 1.10, suggesting that a 1 unit increase in the index increases predicted GDP per capita by 200%, among ex-colonies.\n\ndis (exp(1.1)-1)*100\n\n200.4166\n\n\nThe result is statistically significant at a 5% level:\n\ndis 1.1/0.46\ndis invt(59,0.975)\n\n2.3913043\n2.0009954\n\n\n\n\n\n\nComparing these results to those of Table 2, what do can we conclude with respect to the bias in OLS? How does this compare with your answer to Q4.\n\n\nThe IV estimates are substantially larger than the OLS estimates (across all control-variable specifications). This suggests that OLS is in fact downward biased; the opposite direction to what we concluded in Q4. However, Q4 only concerned the OV bias from the specific controls considered here. The bias from other OVs and reverse causality may point in a different direction.\n\n\n\n\nSuppose \\(Cov(\\log M_i,\\varepsilon_i)\\neq 0\\). Explain why the IV estimates may themselves be biased in a different direction to OLS.\n\n\nFrom Lecture 8:\n\\[\n  p\\lim \\hat\\alpha_{ols} = \\alpha + Corr(R,\\varepsilon)\\times \\frac{\\sigma_{\\varepsilon}}{\\sigma_R}\n\\]\n\\[\n  p\\lim \\hat\\alpha_{iv} = \\alpha + \\frac{Corr(\\log M,\\varepsilon)}{Corr(\\log M,R)}\\times \\frac{\\sigma_{\\varepsilon}}{\\sigma_R}\n\\]\nSince \\(Corr(\\log M,R)&lt;0\\) (from first-stage), the (inconsitency) bias of IV may be actually be positive if \\(Corr(\\log M,\\varepsilon)&lt;0\\). This would mean that ex-colonies with higher settler mortality are negatively correlated with unobserved factors that positively affect development today. For example, if historical disease environments (like Malaria) still matter today for development.\n\n\n\nRecent IV Examples\nBelow you will find a list of recent NBER working papers that make use of an instrumental variable identification strategy. For each paper, try to find: (1) the endogenous variable; (2) the excluded instrument(s); (3) the source of exogenous variation.\n\n\n\nAngrist et al. (2025) available online www.nber.org.\n\n\n\nTaking Menopause Hormone Treatment (MHT).\nAssignment in the Women’s Health Initiative (WHI) clinical trials.\nRandomization\n\n\n\n\n\nStevenson et al. (2023) available online www.nber.org. [Hint: p. 12]\n\n\n\nNoncarceral conviction of criminals in Virginia\nThe predicted rate of noncarceral convinction for the assigned judge\nQuazi-random assignment of judges to cases within the judicial system\n\n\n\n\n\nGrossman, Tello-Trillo, and Willage (2022) available online www.nber.org. [Hint: p. 15]\n\n\n\nThe public health insurance status of a mother’s \\(J\\) children.\nSimulated eligibility of the mother’s children based on their age, year, and state at point of observation. This aggregated across children for each mother. There is a second version with aggregates years of eligibility for each mother based on past and present eligibility.\nThe model includes mother FEs, state-times-year(time) FEs, as well as a dummy for each possible YOB of a child. These are all the factors that determine eligibility and closely predict eligibility of a mother’s children. The authors exploit the fact that eliibility rules change over time. Thus, a given mother’s children may gain/lose eligibility over time due to policy variation alone (and not just changes in eligibility criteria like age). This policy variation is the identifying variation of the paper (see Figure 1).\n\nNote, this paper does not actually\n\n\n\n\nDettling and Kearney (2025) available online www.nber.org. [Hint: p. 16-21]\n\n\n\nThe number of either Federal Housing Administration or Veterans Association (or combined) mortgages issued in a state and year.\nAn interaction of the spread in period \\(t-1\\) and the number of lenders in state \\(s\\). The spread in the difference between interest of FHA bonds and Aaa corporate bonds in that year.\n“The rigidity of the government-backed mortgage interest rates led to annual supply-side variation in institutions’ willingness to issue these mortgages.” (p. 19) This time variation is then translated to the state-year level through an interaction with the number of state-level lenders.\n\n\n\n\n\n\nCaiumi and Peri (2024) available online www.nber.org. [Hint: p. 26-28]\n\n\n\nThe log of foreign-born employment in a given education-experience cell\nThe predicted foreign-born population in each education-experience cell based on historic migration flows.\nHistorical persistence of source-country migration flows that are assumed to be unrelated to cell-specific demand factors.\n\n\n\n\n\n\n\nReferences\n\nAcemoglu, Daron, Simon Johnson, and James A Robinson. 2001. “The Colonial Origins of Comparative Development: An Empirical Investigation.” American Economic Review 91 (5): 1369–1401.\n\n\nAngrist, Joshua, Amanda E Kowalski, Ljubica Ristovska, and Marcia L Stefanick. 2025. “Instrumental Variables Methods Reveal Larger Effects of Menopausal Hormone Therapy in the Landmark Women’s Health Initiative Clinical Trial.” In AEA Papers and Proceedings, 115:215–20. American Economic Association, 2014 Broadway, Suite 305, Nashville, TN 37203.\n\n\nCaiumi, Alessandro, and Giovanni Peri. 2024. “Immigration’s Effect on US Wages and Employment Redux.” National bureau of economic research.\n\n\nDettling, Lisa J, and Melissa Schettini Kearney. 2025. “Did the Modern Mortgage Set the Stage for the US Baby Boom?” National Bureau of Economic Research.\n\n\nGennetian, Lisa A, Greg J Duncan, Nathan A Fox, Sarah Halpern-Meekin, Katherine Magnuson, Kimberly G Noble, and Hirokazu Yoshikawa. 2024. “Effects of a Monthly Unconditional Cash Transfer Starting at Birth on Family Investments Among US Families with Low Income.” Nature Human Behaviour 8 (8): 1514–29.\n\n\nGrossman, Daniel S, Sebastian Tello-Trillo, and Barton Willage. 2022. “Health Insurance for Whom? The ‘Spill-up’effects of Children’s Health Insurance on Mothers.” National Bureau of Economic Research.\n\n\nStevenson, Megan T, Aurelie Ouss, Winnie van Dijk, John Eric Humphries, and Kamelia Stavreva. 2023. “Conviction, Incarceration, and Recidivism: Understanding the Revolving Door.” Available at SSRN."
+    "text": "RCT Power Calculation: Gennetian et al. (2024)\nThis question takes inspiration from Gennetian et al. (2024). Available online from www.nature.com. The study evaluates how low income households use unconditional cash transfers to investment in their children’s education. We will use this study to demonstrate the significance of power calculations.\nWhile discussing their research design, the authors write:\n\n“Striking a balance between statistical power and project costs, 40% of the recruited sample within each site was randomized to receive $333 monthly cash gifts and 60% to receive $20 monthly cash gifts. With an enrolled sample of \\(n=1,000\\) mother–infant dyads, and accounting for a predicted 20% attrition over longer-term follow-ups, the anticipated sample size of 800 dyads during subsequent waves of data collection is estimated to provide 80% power to detect a 0.207 s.d. impact at \\(P&lt;0.05\\) in a two-tailed test on the family investment and related family process outcomes examined here. Data collectors were blinded to assignment of treatment status.” (p. 1523)\n\n\n\n\nWrite down the formula for the variance of the simple difference between means (SDM) \\(\\hat\\tau\\) estimator, assuming a homogeneous treatment effect.\n\n\n\\[\n  Var(\\hat{\\tau}) = \\sigma^2 \\bigg(\\frac{1}{n_0} + \\frac{1}{n_1}\\bigg)\n\\]\n\n\n\n\nSolve for \\(sd(\\hat\\tau)\\) as a function of \\(\\sigma\\), assuming \\(n = 800\\) and \\(\\bar{w} = 0.4\\) (the parameters specified above).\n\n\n\\[\n  Var(\\hat{\\tau}) = \\sigma^2 \\bigg(\\frac{1}{n_0} + \\frac{1}{n_1}\\bigg) = \\sigma^2 \\bigg(\\frac{1}{n\\bar{w}} + \\frac{1}{n(1-\\bar{w})}\\bigg) = \\frac{\\sigma^2}{n\\bar{w}(1-\\bar{w})}\n\\]\nThus,\n\\[\n  sd(\\hat\\tau) = \\frac{\\sigma}{\\sqrt{800\\times 0.4\\times 0.6}} = \\frac{\\sigma}{\\sqrt{192}}\n\\]\nwhere \\(\\sigma\\) is the unobserved s.d. of \\(y\\).\n\n\n\n\nWhat is the distribution of the test-statistic \\(\\hat{\\tau}/sd(\\hat\\tau)\\) under the hull hypothesis \\(H_0: \\tau=0\\)?\n\n\nWe do not know the finite sample of this distribution of this test static. However, we know that by CLT the asymptotic distribution will be normal. For slightly more conservative test, we can use the \\(t\\)-distribution.\n\n\n\n\nSolve for power function the two-sided test: \\(H_0: \\tau=0\\) against \\(H_1: \\tau\\neq0\\) (\\(\\alpha = 0.05\\)). That is, expand on,\n\\[\n  Pr(\\text{Reject}\\; H_0| \\tau = \\kappa)\n\\]\nUse the critical values from a \\(N(0,1)\\) distribution for the rejection rule. The answer should include the expression \\(\\kappa/\\sigma\\)\n\n\n\\[\n\\begin{aligned}\n& Pr(\\text{Reject}\\; H_0| \\tau = \\kappa) \\\\\n=& Pr\\bigg(\\frac{\\hat{\\tau}}{sd}&lt;\\text{z}_{0.025}\\bigg|\\tau = \\kappa\\bigg) + Pr\\bigg(\\frac{\\hat{\\tau}}{sd}&gt;\\text{z}_{0.975}\\bigg|\\tau = \\kappa\\bigg) \\\\\n=& Pr\\bigg(\\frac{\\hat{\\tau}-\\kappa}{sd}&lt;\\text{z}_{0.025}-\\frac{\\kappa}{sd}\\bigg|\\tau = \\kappa\\bigg) + Pr\\bigg(\\frac{\\hat{\\tau}-\\kappa}{sd}&gt;\\text{z}_{0.975}-\\frac{\\kappa}{sd}\\bigg|\\tau = \\kappa\\bigg) \\\\\n=& Pr\\bigg(\\frac{\\hat{\\tau}-\\kappa}{sd}&lt;\\text{z}_{0.025}-\\frac{\\kappa}{\\sigma}\\times \\sqrt{192}\\bigg|\\tau = \\kappa\\bigg) + Pr\\bigg(\\frac{\\hat{\\tau}-\\kappa}{sd}&gt;\\text{z}_{0.975}-\\frac{\\kappa}{\\sigma}\\times \\sqrt{192}\\bigg|\\tau = \\kappa\\bigg)\n\\end{aligned}\n\\]\n\n\n\n\nThe authors compute the power of the test for \\(\\kappa/\\sigma = 0.207\\): “to detect a 0.207 s.d. impact”. Using the above expression, compute the power assuming\n\\[\n  \\frac{\\hat{\\tau}-\\kappa}{sd(\\hat{\\tau})}\\overset{a}{\\sim} N(0,1)\n\\] Your answer will not be exactly 80%, but should be close.\n\n\n\\[\n\\begin{aligned}\n& Pr(\\text{Reject}\\; H_0| \\tau = \\kappa) \\\\\n\\approx& Pr(z&lt;\\text{z}_{0.025}-0.207\\times \\sqrt{192}|\\tau = \\kappa) + Pr(z&gt;\\text{z}_{0.975}-0.207\\times \\sqrt{192}|\\tau = \\kappa) \\\\\n=& 0.82\n\\end{aligned}\n\\]\n\ndis normal(invnormal(0.025)-0.207*sqrt(192)) + 1-normal(invnormal(0.975)-0.207*sqrt(192))\n\n.81814403\n\n\nSuppose the authors had sufficient budget to treat half the sample. Then \\(n\\bar{w}(1-\\bar{w})=200\\) and the power would increase to:\n\ndis normal(invnormal(0.025)-0.207*sqrt(200)) + 1-normal(invnormal(0.975)-0.207*sqrt(200))\n\n.83334297\n\n\nJust a 1% increase in power.\nIf they were to reduce the number of treated individuals from \\(n_1=320\\) (at 40%) to \\(260\\) (60 fewer), they would save about $20,000. This is enough to include an additional 1000 control units (at $20 each). Doing so would increase power by a factor of,\n\\[\nn\\bar{w}(1-\\bar{w}) = \\bigg(\\frac{1}{n_0} + \\frac{1}{n_1}\\bigg)^{-1} = \\bigg(\\frac{1}{1480} + \\frac{1}{260}\\bigg)^{-1} \\approx 221\n\\]\n\ndis normal(invnormal(0.025)-0.207*sqrt(220)) + 1-normal(invnormal(0.975)-0.207*sqrt(220))\n\n.86657445\n\n\nA bigger increase of 5%. Of course, we are ignoring the additional cost of surveying 1000 more individuals, which is significant.\n\n\n\n\nOn p. 1524, the authors write:\n\n\n“Estimates for each follow-up wave following pre-registration protocols are derived by the following straightforward model: \\[ Y = Z\\pi + X\\beta + \\varepsilon \\] where \\(Y\\) is the outcome of interest for mother or the household and \\(\\varepsilon\\) is the error term. The model includes the following baseline covariates (\\(X\\)) with the goal of improving precision in the estimate: mother’s characteristics (mother’s age, maximum education level attained, race and ethnicity, marital status, general health, an indicator of maternal depressive symptoms and cigarettes and alcohol consumption during pregnancy), household characteristics (number of children born to mother, number of adults in the household, father living with the mother, household income and household net worth), baby’s birth characteristics (weight at birth and gestational age), a site-based fixed effect and an indicator for the switch from in-person to phone interviews.”\n\nDescribe the econometric rationale for adding these baseline covariates in a linear regression model.\n\nThis an example of Restricted Regression Adjustment (RRA). The rationale is to lower the variance of the estimator by explaining more of the variance in the outcome. This works well in RCTs because assignment into treatment is typically independent of baseline covariates. The caviate here is stratified experiments.\n\n\n\n\nThe original working paper version of this paper shows the conditional and unconditional estimates in Tables 1-5: www.nber.org. Why are the estimated SEs of the conditional ATE point estimates (column 4) not all smaller than the unconditional ones (column 3)?\n\n\nYou can show that the asymptotic variance of the RRA estimator is lower than the simple OLS estimator. However, the finite sample variance may not be bigger because of the non-zero correlation between assignment and baseline covariates in the realized data.\n\n\n\nProxy & IV Example: Acemoglu, Johnson & Robinson (2001)\nThis question concerns Acemoglu, Johnson, and Robinson (2001) “The Colonial Origins of Comparative Development: An Empirical Investigation”. Available online from www.aeaweb.org. The goal of the paper is to understand the (causal) relationship between development and institutions. The consider a range of institutions, by one key measure is an index of protection against expropriation. The authors estimate the following linear model using OLS (p. 1378; see results in Table 2).\n\\[\n  \\log y_i = \\mu + \\alpha R_i + \\mathbf{X}_i'\\gamma + \\varepsilon_i\n\\]\nwhere\n\n\\(y_i\\) is income per capita,\n\\(R_i\\) is measure of protection against expropriation. It is measured on a scale from 0 to 10, with 0 indicating no protection.\n\\(\\mathbf{X}_i\\) a vector of control variables.\n\n\n\n\nWhat are the control variables (covariates) included in this regression.\n\n\nThe covariates include: latitude of the country, regional dummy variable variables (Asia, Africa, and Other).\n\n\n\n\nIf we think of these variables as proxy variables, what would they be proxy for? Think about the unobserved factors which may confound the relationship between development and institutions.\n\n\nThese geographical controls are being used to control for geographical (climate, disease, ruggedness, coastline, etc.) as well as cultural (social) determinants of development that vary across space.\n\n\n\n\nInterpret coefficient of interest in column (2) of Table 2. The base sample includes “64 countries that were ex-colonies and for which we have settler mortality, protection against expropriation risk, and GDP data” (p. 1377).\n\n\nAn increase in the index of 1 unit increases predicted output by 68%, among ex-colonies and holding other factors fixed.\n\ndis (exp(0.52)-1)*100\n\n68.202765\n\n\nThis is a large point estimate. The mean of \\(R\\) is 6.5 with a standard deviation of 1.5 (Table 1). Thus, a one standard deviation change in expropriation risk is associated with more than 100% increase in GDP per capita. In Table A2, Nigeria has a \\(R=5.55\\) compared with Chile’s 7.82, while their (log) of GDP per capita is 6.81 and 9.35, respectively. This point estimate suggests that the difference in the countries’ \\(R\\) of 2.27 would predict a difference in log GDP per capita of \\(2.27\\times 0.68 = 1.18\\). This is just under half the difference in their log GDP per capita (=2.54).\n\n\n\n\nComparing the coefficient estimates of columns (2) and (6), is specification (2) upward or downward biased due to omitted variables? In particular, consider the relationship between climate, which is proxied for by latitude. What do the results suggest is the relationship bewteen climate and institutions?\n\n\n“Many social scientists, including Montesquieu [1784] (1989), Diamond (1997), and Sachs and coauthors, have argued for a direct effect of climate on performance, and Gallup et al. (1998) and Hall and Jones (1999) document the correlation between distance from the equator and economic performance. To control for this, in columns (3)–(6), we add latitude as a regressor (we follow the literature in using the absolute value measure of latitude, i.e., distance from the equator, scaled between 0 and 1).” (p. 1379)\n\n\nAfter controlling for geographical variables, the estimated cofficient drops to 0.41. This suggests that the simple model is upward biased. The coefficient on latitude is positive, suggesting that the relationshp between instutitions and latitude is positive too. This means that, on average, ex-colonies further from the equator have stronger institutions.\n\n\n\n\nExplain why the authors believe \\(R_i\\) to be endogenous, even conditional on \\(\\mathbf{X}\\)?\n\n\nThese remain relatively “crude” controls. The controls account for geographical confounding factors - like climate and cultural differences that matter for development - but it is too strong to say that conditional on geography it is as if institutions are randomly assigned. In addition, we need to account for the potential reverse causal relationship between development and institutions. This cannot be resolved using controls.\n\n\n\n\nWhat do the authors propose as an instrument for \\(R_i\\)? Under what assumptions is this a valid instrument? [Hint: see p. 1383]\n\n\nThe proposed, excluded instrument is the log of settler mortality; a historical variable from the colonial period. The conditions needed are:\n\\[\n  Cov(\\log M_i,\\varepsilon_i)=0\\qquad \\text{and}\\qquad Cov(\\log M_i, R_i) \\neq 0\n\\]\n\n\n\n\nExplain why this historical instrument might affect contemporary levels of institutions in an ex-colony. That is, why do we expect there to be a valid first-stage? [Hint: the authors describe a chain of causation on pp. 1370, 1383]\n\n\nThe causal relationship runs between the following channels:\n\\[\n  \\text{settler mortality} \\Rightarrow \\text{level of colonial settlement} \\Rightarrow \\text{colonial institutions} \\Rightarrow \\text{modern institutions}\n\\]\n\n\n\n\nCould \\(\\log M_i\\) have a direct effect on contemporary development, thereby violating the exclusion restriction? Consider the potential significance of \\(\\mathbf{X}\\) here. [Hint: see p. 1371]\n\n\nHistorical settler mortality rates may be directly related to disease environments that matter today. First, the authors argue that historically important diseases often affected settlers more than native populations. In addition, to the extent to which modern disease environments relate to geography - for example, Malaria is a tropical disease - these are controlled for through \\(\\mathbf{X}\\).\n\n\n\n\nThe first-stage equation is shown below (p. 1384). Compute the F-statistic for \\(H_0: \\beta=0\\) using column (10) from Table 3.\n\\[\n  R_i = \\zeta + \\beta \\log M_i + \\mathbf{X}_i'\\delta + \\upsilon_i\n\\]\n\n\nThe \\(F\\)-stat is the square of the \\(t\\)-stat:\n\\[\n  F\\text{-stat} = \\bigg(\\frac{-0.51}{0.14}\\bigg)^2\n\\]\n\ndis (-0.51/0.14)^2\n\n13.270408\n\n\n\n\n\n\nInterpret the 2SLS-IV estimate from column (8), Table 4. Is it statistically significant at a 5% level?\n\n\nThe coefficient is 1.10, suggesting that a 1 unit increase in the index increases predicted GDP per capita by 200%, among ex-colonies and holding other factors fixed.\n\ndis (exp(1.1)-1)*100\n\n200.4166\n\n\nThe result is statistically significant at a 5% level:\n\ndis 1.1/0.46\ndis invt(58,0.975)\n\n2.3913043\n2.0017175\n\n\n\n\n\n\nComparing these results to those of Table 2, what can we conclude with respect to the bias in OLS? How does this compare with your answer to Q4.\n\n\nThe IV estimates are substantially larger than the OLS estimates (across all control-variable specifications). This suggests that OLS is in fact downward biased; the opposite direction to what we concluded in Q4. However, Q4 only concerned the OV bias from the specific controls considered here. The bias from other OVs and reverse causality may point in a different direction.\nAre these realistic? The authors think so:\n\n“Does the 2SLS estimatemake quantitative sense?Doesit implythat institutionaldifferences canexplainasignificant fractionof income differences across countries? Let us once again compare two”typical” countries with high and low expropriation risk, Nigeria and Chile (these countries are typical for the IV regression in the sense that they are practically on the regression line). Our 2SLS estimate, 0.94, implies that the 2.24 differences in expropriation risk between these two countries should translate into 206 log point (approximately 7-fold) difference. In practice, the presence of measurement error complicates this interpretation, because some of the difference be tween Nigeria and Chile’s expropriation index may reflect measurement error. Therefore, the 7-fold difference is an upper bound. In any case, the estimates in Table 4 imply a substantial, but not implausibly large, effect of institutional differences on income per capita.” (pp. 1386-1387)\n\nThe authors get the 206 log point difference from \\(0.94\\times 2.24=2.1056\\) (difference is likely due to rounding in reported estimates). If you then compute,\n\ndis exp(2.06)-1\n\n6.8459698\n\n\nThis tells you that Chile’s GDP per capita is predicted to be \\(\\approx 700\\%\\) larger than Nigeria’s. The authors suggest this is a 7-fold difference, which is evidently referring to the gap between the two countries and not the ratio of their GDP per capita. These estimates put the ratio of the two GDPs at closer to \\(\\exp(2.06)\\approx 8\\).\n\n\n\n\nSuppose \\(Cov(\\log M_i,\\varepsilon_i)\\neq 0\\). Explain why the IV estimates may themselves be biased in a different direction to OLS.\n\n\nFrom Lecture 8:\n\\[\n  p\\lim \\hat\\alpha_{ols} = \\alpha + Corr(R,\\varepsilon)\\times \\frac{\\sigma_{\\varepsilon}}{\\sigma_R}\n\\]\n\\[\n  p\\lim \\hat\\alpha_{iv} = \\alpha + \\frac{Corr(\\log M,\\varepsilon)}{Corr(\\log M,R)}\\times \\frac{\\sigma_{\\varepsilon}}{\\sigma_R}\n\\]\nSince \\(Corr(\\log M,R)&lt;0\\) (from first-stage), the (inconsitency) bias of IV may be actually be positive if \\(Corr(\\log M,\\varepsilon)&lt;0\\). This would mean that ex-colonies with higher settler mortality are negatively correlated with unobserved factors that positively affect development today. For example, if historical disease environments (like Malaria) still matter today for development.\n\n\n\nRecent IV Examples\nBelow you will find a list of recent NBER working papers that make use of an instrumental variable identification strategy. For each paper, try to find: (1) the endogenous variable; (2) the excluded instrument(s); (3) the source of exogenous variation.\n\n\n\nAngrist et al. (2025) available online www.nber.org.\n\n\n\nTaking Menopause Hormone Treatment (MHT).\nAssignment in the Women’s Health Initiative (WHI) clinical trials.\nRandomization\n\n\n\n\n\nStevenson et al. (2023) available online www.nber.org. [Hint: p. 12]\n\n\n\nNoncarceral conviction of criminals in Virginia\nThe predicted rate of noncarceral convinction for the assigned judge\nQuazi-random assignment of judges to cases within the judicial system\n\n\n\n\n\nGrossman, Tello-Trillo, and Willage (2022) available online www.nber.org. [Hint: p. 15]\n\n\n\nThe public health insurance status of a mother’s \\(J\\) children.\nSimulated eligibility of the mother’s children based on their age, year, and state at point of observation. This aggregated across children for each mother. There is a second version with aggregates years of eligibility for each mother based on past and present eligibility.\nThe model includes mother FEs, state-times-year(time) FEs, as well as a dummy for each possible YOB of a child. These are all the factors that determine eligibility and closely predict eligibility of a mother’s children. The authors exploit the fact that eliibility rules change over time. Thus, a given mother’s children may gain/lose eligibility over time due to policy variation alone (and not just changes in eligibility criteria like age). This policy variation is the identifying variation of the paper (see Figure 1).\n\nNote, this paper does not actually impliement a 2SLS IV estimation. This is because the endogenous variable - the number of insured children in household - is not actually observed in the data.\n\n\n\n\nDettling and Kearney (2025) available online www.nber.org. [Hint: p. 16-21]\n\n\n\nThe number of either Federal Housing Administration or Veterans Association (or combined) mortgages issued in a state and year.\nAn interaction of the spread in period \\(t-1\\) and the number of lenders in state \\(s\\). The spread in the difference between interest of FHA bonds and Aaa corporate bonds in that year.\n“The rigidity of the government-backed mortgage interest rates led to annual supply-side variation in institutions’ willingness to issue these mortgages.” (p. 19) This time variation is then translated to the state-year level through an interaction with the number of state-level lenders.\n\n\n\n\n\n\nCaiumi and Peri (2024) available online www.nber.org. [Hint: p. 26-28]\n\n\n\nThe log of foreign-born employment in a given education-experience cell\nThe predicted foreign-born population in each education-experience cell based on historic migration flows.\nHistorical persistence of source-country migration flows that are assumed to be unrelated to cell-specific demand factors.\n\n\n\n\n\n\n\nReferences\n\nAcemoglu, Daron, Simon Johnson, and James A Robinson. 2001. “The Colonial Origins of Comparative Development: An Empirical Investigation.” American Economic Review 91 (5): 1369–1401.\n\n\nAngrist, Joshua, Amanda E Kowalski, Ljubica Ristovska, and Marcia L Stefanick. 2025. “Instrumental Variables Methods Reveal Larger Effects of Menopausal Hormone Therapy in the Landmark Women’s Health Initiative Clinical Trial.” In AEA Papers and Proceedings, 115:215–20. American Economic Association, 2014 Broadway, Suite 305, Nashville, TN 37203.\n\n\nCaiumi, Alessandro, and Giovanni Peri. 2024. “Immigration’s Effect on US Wages and Employment Redux.” National bureau of economic research.\n\n\nDettling, Lisa J, and Melissa Schettini Kearney. 2025. “Did the Modern Mortgage Set the Stage for the US Baby Boom?” National Bureau of Economic Research.\n\n\nGennetian, Lisa A, Greg J Duncan, Nathan A Fox, Sarah Halpern-Meekin, Katherine Magnuson, Kimberly G Noble, and Hirokazu Yoshikawa. 2024. “Effects of a Monthly Unconditional Cash Transfer Starting at Birth on Family Investments Among US Families with Low Income.” Nature Human Behaviour 8 (8): 1514–29.\n\n\nGrossman, Daniel S, Sebastian Tello-Trillo, and Barton Willage. 2022. “Health Insurance for Whom? The ‘Spill-up’effects of Children’s Health Insurance on Mothers.” National Bureau of Economic Research.\n\n\nStevenson, Megan T, Aurelie Ouss, Winnie van Dijk, John Eric Humphries, and Kamelia Stavreva. 2023. “Conviction, Incarceration, and Recidivism: Understanding the Revolving Door.” Available at SSRN."
+  },
+  {
+    "objectID": "lecture-9.html",
+    "href": "lecture-9.html",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "Stacks one cross-section atop another\n\nAlso referred to as repeated cross-sections\nCannot follow the same individual through time.\n\n\n\n\n\n\n\n\n\n\n\n\n\nFollows the same units through time\n\nAlso referred to as longitudinal data\nHere the data is shown in wide form; which is intuitive\n\n\n\n\n\n\n\n\n\n\n\n\nFor estimation, you need the data in long form (akin to repeated cross-sections)\n\n\n\n\n\n\n\n\n\n\n\n\nWhen we write down a linear regression model for a either a repeated cross-section or panel dataset, we add both \\(i\\) and \\(t\\) to the subscripts:\n\\[\n  y_{it} = \\beta_0 + \\beta_1 x_{it1} + \\beta_2 x_{it2} + \\dots + \\beta_k x_{itk} + u_{it}\n\\]\n\nHowever, you may also have some variables that\n\ndo not vary with time: \\(x_{i}\\)\n\ne.g. individual ethnicity\n\nvary only with time: \\(x_{t}\\)\n\ne.g. adding aggregate unemployment rate to individual level model of wages"
+  },
+  {
+    "objectID": "lecture-9.html#repeated-cross-sections",
+    "href": "lecture-9.html#repeated-cross-sections",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "Stacks one cross-section atop another\n\nAlso referred to as pooled cross-sections\nCannot follow the same individual through time."
+  },
+  {
+    "objectID": "lecture-9.html#panel",
+    "href": "lecture-9.html#panel",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "Also referred to as pooled cross-sections - Stack one cross-section atop another - Cannot follow the same individual through time."
+  },
+  {
+    "objectID": "lecture-9-slides.html#cross-section",
+    "href": "lecture-9-slides.html#cross-section",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Cross-section",
+    "text": "Cross-section"
+  },
+  {
+    "objectID": "lecture-9-slides.html#repeated-cross-sections",
+    "href": "lecture-9-slides.html#repeated-cross-sections",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Repeated cross-sections",
+    "text": "Repeated cross-sections\n\n\nStacks one cross-section atop another\n\nAlso referred to as pooled cross-sections\nCannot follow the same individual through time."
+  },
+  {
+    "objectID": "lecture-9-slides.html#panel",
+    "href": "lecture-9-slides.html#panel",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Panel",
+    "text": "Panel\n\n\nAlso referred to as pooled cross-sections - Stack one cross-section atop another - Cannot follow the same individual through time."
+  },
+  {
+    "objectID": "lecture-9.html#panels",
+    "href": "lecture-9.html#panels",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "Follows the same units through time\n\nAlso referred to as longitudinal data\nHere the data is shown in wide form; which is intuitive"
+  },
+  {
+    "objectID": "lecture-9.html#section",
+    "href": "lecture-9.html#section",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "For estimation, you need the data in long form (akin to repeated cross-sections)"
+  },
+  {
+    "objectID": "lecture-9-slides.html#panels",
+    "href": "lecture-9-slides.html#panels",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Panels",
+    "text": "Panels\nFollows the same units through time\n\nAlso referred to as longitudinal data\nHere the data is shown in wide form; which is intuitive"
+  },
+  {
+    "objectID": "lecture-9-slides.html#section",
+    "href": "lecture-9-slides.html#section",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "For estimation, you need the data in long form (akin to repeated cross-sections)"
+  },
+  {
+    "objectID": "lecture-9.html#pooled-cross-sections",
+    "href": "lecture-9.html#pooled-cross-sections",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "Stacks one cross-section atop another\n\nAlso referred to as repeated cross-sections\nCannot follow the same individual through time."
+  },
+  {
+    "objectID": "lecture-9.html#notation",
+    "href": "lecture-9.html#notation",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "When we write down a linear regression model for a either a repeated cross-section or panel dataset, we add both \\(i\\) and \\(t\\) to the subscripts:\n\\[\n  y_{it} = \\beta_0 + \\beta_1 x_{it1} + \\beta_2 x_{it2} + \\dots + \\beta_k x_{itk} + u_{it}\n\\]\n\nHowever, you may also have some variables that\n\ndo not vary with time: \\(x_{i}\\)\n\ne.g. individual ethnicity\n\nvary only with time: \\(x_{t}\\)\n\ne.g. adding aggregate unemployment rate to individual level model of wages"
+  },
+  {
+    "objectID": "lecture-9.html#example-poverty-scp",
+    "href": "lecture-9.html#example-poverty-scp",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Example: Poverty & SCP",
+    "text": "Example: Poverty & SCP\nSuppose, a researcher wants to evaluate the impact that of the Home Energy Scotland Grant and Loan programme on a household’s energy expenditure.\n\nGrant of up to £7,500 to install clean heating systems and energy efficiency measures."
+  },
+  {
+    "objectID": "lecture-9.html#empirical-specification",
+    "href": "lecture-9.html#empirical-specification",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Empirical specification",
+    "text": "Empirical specification\nThey propose the following linear regression model specification\n\\[\n  energy_{it} = \\delta + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\varepsilon_{it}\n\\]\nTo be estimated using repeated cross-sections of the Scottish Household Survey.\n\n\\(energy_{it}\\): amount (£’s) spent on energy\n\\(grant_{it}\\): cumulative amount received from the programme"
+  },
+  {
+    "objectID": "lecture-9.html#controls",
+    "href": "lecture-9.html#controls",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Controls",
+    "text": "Controls\nAs controls, the author collects information at the household level (\\(\\mathbf{x}_{it}\\)) on:\n\ndwelling type\nownership type\nhousehold size\nhousehold income\nnumber of rooms\nlocation"
+  },
+  {
+    "objectID": "lecture-9.html#time-varying-factors",
+    "href": "lecture-9.html#time-varying-factors",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time-varying factors",
+    "text": "Time-varying factors\nBut there are other key macroeconomics variables that explain expenditure on energy over time:\n\nGlobal oil price\nExchange rate (GBP-USD)\nDomestic energy prices (determined by domestic markets)\n\nThis variables vary with time, but NOT across households:\n\\[\n  \\mathbf{z}_t\\eta\n\\]"
+  },
+  {
+    "objectID": "lecture-9.html#section-1",
+    "href": "lecture-9.html#section-1",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "So, our model is actually,\n\\[\n  energy_{it} = \\delta + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\mathbf{z}_t\\eta + \\varepsilon_{it}\n\\]\nwhere,\n\n\\(\\mathbf{x}\\) includes household level controls\n\\(\\mathbf{z}\\) includes time-varying (macroeconomic/aggregate) controls"
+  },
+  {
+    "objectID": "lecture-9.html#identification",
+    "href": "lecture-9.html#identification",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Identification",
+    "text": "Identification\nSince the data comprises repeated cross-sections of individual, it is reasonable to assume that each observation is a random draw from the underlying population (MLR 2).\n\n\n\nAs before, we need MLR1-4a for consistency.\nThe question is more whether MLR 1 holds true across time.\n\nIs the model time-invariant?"
+  },
+  {
+    "objectID": "lecture-9.html#time-varying-parameters",
+    "href": "lecture-9.html#time-varying-parameters",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time-varying parameters",
+    "text": "Time-varying parameters\nWe could evaluate this question using a Chow test:\n\nEstimate the model separately for each year:\n\\[\nenergy_{is} = \\delta_s + \\beta_s grant_{is} + \\mathbf{x}_{is}\\gamma_s + \\mathbf{z}_s\\eta_s + \\varepsilon_{is} \\quad \\text{for}\\;s = 1,\\dots,T\n\\]\nTest whether the parameters vary using \\(SSR_s\\) from each equation."
+  },
+  {
+    "objectID": "lecture-9.html#section-2",
+    "href": "lecture-9.html#section-2",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "BUT there is a problem here for \\(\\mathbf{z}_s\\eta_s\\) in the model:\n\nIn any given period, these variables do not vary\ne.g., if oil price is $100 (per barrol) for period \\(s=1\\) and $120 (per barrol) for period \\(s=2\\)\nbut within a given period \\(t\\), the oil price doesn’t vary across households.\nSo, \\(\\mathbf{z}_s\\eta_s\\) is a constant! And cannot be separately identified from \\(\\delta_s\\), the time-varying constant."
+  },
+  {
+    "objectID": "lecture-9.html#time-fixed-effects",
+    "href": "lecture-9.html#time-fixed-effects",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time fixed effects",
+    "text": "Time fixed effects\nIf we take our original model and allow the constant term (only) to vary with time.\n\\[\n  energy_{it} = \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\varepsilon_{it}\n\\]\nthen we must exclude all variables that also vary only with time: \\(\\mathbf{z}_t\\eta\\)\n\nWe call \\(\\delta_t\\) time fixed effects\nThese time FEs “absorb” any other variables that vary only with time.\nWe say, time FEs “control” for any time-varying (e.g., macroeconomic) factors/shocks; even ones we don’t observe in the data."
+  },
+  {
+    "objectID": "lecture-9.html#time-dummies",
+    "href": "lecture-9.html#time-dummies",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time dummies:",
+    "text": "Time dummies:\nWhen it comes to estimation, time FEs are equvilent to including a set of dummy variables: one for each year.\n\\[\n  \\begin{aligned}\n  energy_{it} =& \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\varepsilon_{it} \\\\\n  =& \\sum_{s=1}^{T}\\delta_s \\mathbf{1}\\{s=t\\} + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\varepsilon_{it}\n  \\end{aligned}\n\\]\nIn place of a constant, we have \\(T\\) dummy variables that identify each period. For any given \\(t\\), only one of these dummies \\(=1\\)\n\n\n\n\n\n\nNote\n\n\n\nThis notation can be very confusing. Do not concern yourself with the complicated sum, but rather the intuition that when we include an intercept in a linear regression it gives us the slope coefficient on a constant (a regressor that \\(=1\\) for all observations). To implement time FEs, we are essentially adding a separate constant for each period. And these constants are all just dummy variables: \\(\\mathbf{1}\\{s=t\\}\\)."
+  },
+  {
+    "objectID": "lecture-9.html#in-statar",
+    "href": "lecture-9.html#in-statar",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "In Stata/R",
+    "text": "In Stata/R"
+  },
+  {
+    "objectID": "lecture-9.html#preamble",
+    "href": "lecture-9.html#preamble",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Preamble",
+    "text": "Preamble\nThere is a large, complex literature on panel data models:\n\nStatic vs Dynamic models\nShort (small \\(T\\)) vs long (large \\(T\\)) panels\nVariance (standard error) corrections for autocorrelation\n\nWe are going to skip over many of these topics, to talk about the types of panel data models you might see in modern applied (microeconomic) research\n\nshort, static panel data models"
+  },
+  {
+    "objectID": "lecture-9.html#identification-1",
+    "href": "lecture-9.html#identification-1",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Identification",
+    "text": "Identification\nWe are going to discuss an estimation procedure that deals with potential endogeneity of error term related to time-invariant heterogeneity (\\(\\nu_{i}\\)):\n\\[\n  \\varepsilon_{it} = \\nu_{i}+\\upsilon_{it}\n\\]\nfor example, \\(\\nu_{i}\\) may reflect unobserved preferences within a household w.r.t. heating fo the home.\n\nLikely that \\(E[\\nu_{i}|grant_{it},\\mathbf{x}_{it},\\mathbf{x}_{i}]\\neq 0\\)"
+  },
+  {
+    "objectID": "lecture-9.html#covariance",
+    "href": "lecture-9.html#covariance",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Covariance",
+    "text": "Covariance\nBut there is also an issue regarding correlation of \\(\\varepsilon_{it}\\) across observations.\n\nSuppose we deal with \\(\\nu_{i}\\)\nWe must expect that\n\\[\n  Cov(\\upsilon_{it},\\upsilon_{is}) \\neq 0 \\quad \\text{for}\\; t\\neq s\n\\]\n\nIssue for estimation of variance.\nWe fix this by estimating clustered SEs (at the unit level)"
+  },
+  {
+    "objectID": "lecture-9.html#example",
+    "href": "lecture-9.html#example",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Example",
+    "text": "Example\nConsider our model:\n\\[\n  energy_{it} = \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\varepsilon_{it}\n\\]\nSome of the household characteristics in \\(\\mathbf{x}_{it}\\) may not vary with time:\n\ndwelling type (might not)\nownership type (might not)\nhousehold size (might not)\nhousehold income (probably does)\nnumber of rooms (might not)\nlocation (might not)\n\nWhat really matters is whether they vary in the data."
+  },
+  {
+    "objectID": "lecture-9.html#time-invarianct-covariates",
+    "href": "lecture-9.html#time-invarianct-covariates",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time-invarianct covariates",
+    "text": "Time-invarianct covariates\nLet’s split up the household characteristics into\n\nthose that vary with time: \\(\\mathbf{x}_{it}\\gamma_1\\)\nthose that are time-invariant: \\(\\mathbf{x}_{i}\\gamma_2\\)\n\n\\[\n  energy_{it} = \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma_1 + \\mathbf{x}_{i}\\gamma_2 + \\varepsilon_{it}\n\\]"
+  },
+  {
+    "objectID": "lecture-9.html#unit-fes",
+    "href": "lecture-9.html#unit-fes",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Unit FEs",
+    "text": "Unit FEs\nBecause we observe repeated observations of the same household, we can include unit FEs\n\\[\n  energy_{it} = \\alpha_i + \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma_1 + \\varepsilon_{it}\n\\]\nBUT by the same logic as before,\n\nunit FEs “absorb” anything that is invariant at the unit level: \\(\\mathbf{x}_{i}\\gamma_2\\)\nwe say, unit FEs “control” for any time-invariant (e.g., fixed building characteristics) heterogeneity (i.e. things that vary across \\(i\\)); even ones we don’t observe in the data.\n\nunit FEs potentially control for things we do not observe: e.g. household preferences over how warm to keep their home."
+  },
+  {
+    "objectID": "lecture-9.html#time-varying-treatment",
+    "href": "lecture-9.html#time-varying-treatment",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time-varying treatment",
+    "text": "Time-varying treatment\nCrucially, this means that the treatment variable \\(grant_{it}\\) must vary at the unit-level over time.\n\\[\n  energy_{it} = \\alpha_i + \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma_1 + \\varepsilon_{it}\n\\]\nfor example, a households (cumulative) grant is looks like over 4 periods\n\\[\n  grant_{i} = \\{0,0,3000,7500\\}\n\\]"
+  },
+  {
+    "objectID": "lecture-9.html#estimation",
+    "href": "lecture-9.html#estimation",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Estimation",
+    "text": "Estimation\nThe OLS estimator for this model is often referred to as the “fixed-effects” (or “within”) estimator. The logic is that you estimate a transformed version of the model:\n\\[\n  \\widetilde{energy}_{it} = \\delta_t + \\beta \\widetilde{grant}_{it} + \\widetilde{\\mathbf{x}}_{it}\\gamma_1 + \\tilde{\\varepsilon}_{it}\n\\]\nwhere each variable has been demeaned at the unit-level\n\\[\n  \\widetilde{energy}_{it} = energy_{it} - \\overline{energy}_{i}\n\\]\n\nRemember: when you include a constant in the model it does the same thing, but using the global mean of the variable.\nHelps with the intuition of why the remaining variables must vary at the unit level over time."
+  },
+  {
+    "objectID": "lecture-9.html#in-statar-1",
+    "href": "lecture-9.html#in-statar-1",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "In Stata/R",
+    "text": "In Stata/R"
+  },
+  {
+    "objectID": "lecture-9-slides.html#pooled-cross-sections",
+    "href": "lecture-9-slides.html#pooled-cross-sections",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Pooled cross-sections",
+    "text": "Pooled cross-sections\n\n\nStacks one cross-section atop another\n\nAlso referred to as repeated cross-sections\nCannot follow the same individual through time."
+  },
+  {
+    "objectID": "lecture-9-slides.html#notation",
+    "href": "lecture-9-slides.html#notation",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Notation",
+    "text": "Notation\nWhen we write down a linear regression model for a either a repeated cross-section or panel dataset, we add both i and t to the subscripts:\n\n  y_{it} = \\beta_0 + \\beta_1 x_{it1} + \\beta_2 x_{it2} + \\dots + \\beta_k x_{itk} + u_{it}\n\n\nHowever, you may also have some variables that\n\ndo not vary with time: x_{i}\n\ne.g. individual ethnicity\n\nvary only with time: x_{t}\n\ne.g. adding aggregate unemployment rate to individual level model of wages"
+  },
+  {
+    "objectID": "lecture-9-slides.html#example-poverty-scp",
+    "href": "lecture-9-slides.html#example-poverty-scp",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Example: Poverty & SCP",
+    "text": "Example: Poverty & SCP\nSuppose, a researcher wants to evaluate the impact that of the Home Energy Scotland Grant and Loan programme on a household’s energy expenditure.\n\nGrant of up to £7,500 to install clean heating systems and energy efficiency measures."
+  },
+  {
+    "objectID": "lecture-9-slides.html#empirical-specification",
+    "href": "lecture-9-slides.html#empirical-specification",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Empirical specification",
+    "text": "Empirical specification\nThey propose the following linear regression model specification\n\n  energy_{it} = \\delta + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\varepsilon_{it}\n\nTo be estimated using repeated cross-sections of the Scottish Household Survey.\n\nenergy_{it}: amount (£’s) spent on energy\ngrant_{it}: cumulative amount received from the programme"
+  },
+  {
+    "objectID": "lecture-9-slides.html#controls",
+    "href": "lecture-9-slides.html#controls",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Controls",
+    "text": "Controls\nAs controls, the author collects information at the household level (\\mathbf{x}_{it}) on:\n\ndwelling type\nownership type\nhousehold size\nhousehold income\nnumber of rooms\nlocation"
+  },
+  {
+    "objectID": "lecture-9-slides.html#time-varying-factors",
+    "href": "lecture-9-slides.html#time-varying-factors",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time-varying factors",
+    "text": "Time-varying factors\nBut there are other key macroeconomics variables that explain expenditure on energy over time:\n\nGlobal oil price\nExchange rate (GBP-USD)\nDomestic energy prices (determined by domestic markets)\n\nThis variables vary with time, but NOT across households:\n\n  \\mathbf{z}_t\\eta"
+  },
+  {
+    "objectID": "lecture-9-slides.html#section-1",
+    "href": "lecture-9-slides.html#section-1",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "So, our model is actually,\n\n  energy_{it} = \\delta + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\mathbf{z}_t\\eta + \\varepsilon_{it}\n\nwhere,\n\n\\mathbf{x} includes household level controls\n\\mathbf{z} includes time-varying (macroeconomic/aggregate) controls"
+  },
+  {
+    "objectID": "lecture-9-slides.html#identification",
+    "href": "lecture-9-slides.html#identification",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Identification",
+    "text": "Identification\nSince the data comprises repeated cross-sections of individual, it is reasonable to assume that each observation is a random draw from the underlying population (MLR 2).\n\n\n\nAs before, we need MLR1-4a for consistency.\nThe question is more whether MLR 1 holds true across time.\n\nIs the model time-invariant?"
+  },
+  {
+    "objectID": "lecture-9-slides.html#time-varying-parameters",
+    "href": "lecture-9-slides.html#time-varying-parameters",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time-varying parameters",
+    "text": "Time-varying parameters\nWe could evaluate this question using a Chow test:\n\nEstimate the model separately for each year:\n\nenergy_{is} = \\delta_s + \\beta_s grant_{is} + \\mathbf{x}_{is}\\gamma_s + \\mathbf{z}_s\\eta_s + \\varepsilon_{is} \\quad \\text{for}\\;s = 1,\\dots,T\n\nTest whether the parameters vary using SSR_s from each equation."
+  },
+  {
+    "objectID": "lecture-9-slides.html#section-2",
+    "href": "lecture-9-slides.html#section-2",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "",
+    "text": "BUT there is a problem here for \\mathbf{z}_s\\eta_s in the model:\n\nIn any given period, these variables do not vary\ne.g., if oil price is $100 (per barrol) for period s=1 and $120 (per barrol) for period s=2\nbut within a given period t, the oil price doesn’t vary across households.\nSo, \\mathbf{z}_s\\eta_s is a constant! And cannot be separately identified from \\delta_s, the time-varying constant."
+  },
+  {
+    "objectID": "lecture-9-slides.html#time-fixed-effects",
+    "href": "lecture-9-slides.html#time-fixed-effects",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time fixed effects",
+    "text": "Time fixed effects\nIf we take our original model and allow the constant term (only) to vary with time.\n\n  energy_{it} = \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\varepsilon_{it}\n\nthen we must exclude all variables that also vary only with time: \\mathbf{z}_t\\eta\n\nWe call \\delta_t time fixed effects\nThese time FEs “absorb” any other variables that vary only with time.\nWe say, time FEs “control” for any time-varying (e.g., macroeconomic) factors/shocks; even ones we don’t observe in the data."
+  },
+  {
+    "objectID": "lecture-9-slides.html#time-dummies",
+    "href": "lecture-9-slides.html#time-dummies",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time dummies:",
+    "text": "Time dummies:\nWhen it comes to estimation, time FEs are equvilent to including a set of dummy variables: one for each year.\n\n  \\begin{aligned}\n  energy_{it} =& \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\varepsilon_{it} \\\\\n  =& \\sum_{s=1}^{T}\\delta_s \\mathbf{1}\\{s=t\\} + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\varepsilon_{it}\n  \\end{aligned}\n\nIn place of a constant, we have T dummy variables that identify each period. For any given t, only one of these dummies =1\n\n\n\n\n\n\nNote\n\n\nThis notation can be very confusing. Do not concern yourself with the complicated sum, but rather the intuition that when we include an intercept in a linear regression it gives us the slope coefficient on a constant (a regressor that =1 for all observations). To implement time FEs, we are essentially adding a separate constant for each period. And these constants are all just dummy variables: \\mathbf{1}\\{s=t\\}."
+  },
+  {
+    "objectID": "lecture-9-slides.html#in-statar",
+    "href": "lecture-9-slides.html#in-statar",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "In Stata/R",
+    "text": "In Stata/R"
+  },
+  {
+    "objectID": "lecture-9-slides.html#preamble",
+    "href": "lecture-9-slides.html#preamble",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Preamble",
+    "text": "Preamble\nThere is a large, complex literature on panel data models:\n\nStatic vs Dynamic models\nShort (small T) vs long (large T) panels\nVariance (standard error) corrections for autocorrelation\n\nWe are going to skip over many of these topics, to talk about the types of panel data models you might see in modern applied (microeconomic) research\n\nshort, static panel data models"
+  },
+  {
+    "objectID": "lecture-9-slides.html#identification-1",
+    "href": "lecture-9-slides.html#identification-1",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Identification",
+    "text": "Identification\nWe are going to discuss an estimation procedure that deals with potential endogeneity of error term related to time-invariant heterogeneity (\\nu_{i}):\n\n  \\varepsilon_{it} = \\nu_{i}+\\upsilon_{it}\n\nfor example, \\nu_{i} may reflect unobserved preferences within a household w.r.t. heating fo the home.\n\nLikely that E[\\nu_{i}|grant_{it},\\mathbf{x}_{it},\\mathbf{x}_{i}]\\neq 0"
+  },
+  {
+    "objectID": "lecture-9-slides.html#covariance",
+    "href": "lecture-9-slides.html#covariance",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Covariance",
+    "text": "Covariance\nBut there is also an issue regarding correlation of \\varepsilon_{it} across observations.\n\nSuppose we deal with \\nu_{i}\nWe must expect that\n\n  Cov(\\upsilon_{it},\\upsilon_{is}) \\neq 0 \\quad \\text{for}\\; t\\neq s\n\n\nIssue for estimation of variance.\nWe fix this by estimating clustered SEs (at the unit level)"
+  },
+  {
+    "objectID": "lecture-9-slides.html#example",
+    "href": "lecture-9-slides.html#example",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Example",
+    "text": "Example\nConsider our model:\n\n  energy_{it} = \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma + \\varepsilon_{it}\n\nSome of the household characteristics in \\mathbf{x}_{it} may not vary with time:\n\ndwelling type (might not)\nownership type (might not)\nhousehold size (might not)\nhousehold income (probably does)\nnumber of rooms (might not)\nlocation (might not)\n\nWhat really matters is whether they vary in the data."
+  },
+  {
+    "objectID": "lecture-9-slides.html#time-invarianct-covariates",
+    "href": "lecture-9-slides.html#time-invarianct-covariates",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time-invarianct covariates",
+    "text": "Time-invarianct covariates\nLet’s split up the household characteristics into\n\nthose that vary with time: \\mathbf{x}_{it}\\gamma_1\nthose that are time-invariant: \\mathbf{x}_{i}\\gamma_2\n\n\n  energy_{it} = \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma_1 + \\mathbf{x}_{i}\\gamma_2 + \\varepsilon_{it}"
+  },
+  {
+    "objectID": "lecture-9-slides.html#unit-fes",
+    "href": "lecture-9-slides.html#unit-fes",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Unit FEs",
+    "text": "Unit FEs\nBecause we observe repeated observations of the same household, we can include unit FEs\n\n  energy_{it} = \\alpha_i + \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma_1 + \\varepsilon_{it}\n\nBUT by the same logic as before,\n\nunit FEs “absorb” anything that is invariant at the unit level: \\mathbf{x}_{i}\\gamma_2\nwe say, unit FEs “control” for any time-invariant (e.g., fixed building characteristics) heterogeneity (i.e. things that vary across i); even ones we don’t observe in the data.\n\nunit FEs potentially control for things we do not observe: e.g. household preferences over how warm to keep their home."
+  },
+  {
+    "objectID": "lecture-9-slides.html#time-varying-treatment",
+    "href": "lecture-9-slides.html#time-varying-treatment",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Time-varying treatment",
+    "text": "Time-varying treatment\nCrucially, this means that the treatment variable grant_{it} must vary at the unit-level over time.\n\n  energy_{it} = \\alpha_i + \\delta_t + \\beta grant_{it} + \\mathbf{x}_{it}\\gamma_1 + \\varepsilon_{it}\n\nfor example, a households (cumulative) grant is looks like over 4 periods\n\n  grant_{i} = \\{0,0,3000,7500\\}"
+  },
+  {
+    "objectID": "lecture-9-slides.html#estimation",
+    "href": "lecture-9-slides.html#estimation",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "Estimation",
+    "text": "Estimation\nThe OLS estimator for this model is often referred to as the “fixed-effects” (or “within”) estimator. The logic is that you estimate a transformed version of the model:\n\n  \\widetilde{energy}_{it} = \\delta_t + \\beta \\widetilde{grant}_{it} + \\widetilde{\\mathbf{x}}_{it}\\gamma_1 + \\tilde{\\varepsilon}_{it}\n\nwhere each variable has been demeaned at the unit-level\n\n  \\widetilde{energy}_{it} = energy_{it} - \\overline{energy}_{i}\n\n\nRemember: when you include a constant in the model it does the same thing, but using the global mean of the variable.\nHelps with the intuition of why the remaining variables must vary at the unit level over time."
+  },
+  {
+    "objectID": "lecture-9-slides.html#in-statar-1",
+    "href": "lecture-9-slides.html#in-statar-1",
+    "title": "Repeated Observations and Difference in Differences",
+    "section": "In Stata/R",
+    "text": "In Stata/R"
+  },
+  {
+    "objectID": "lecture-8.html#endogenous-treatment",
+    "href": "lecture-8.html#endogenous-treatment",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Endogenous treatment",
+    "text": "Endogenous treatment\nSuppose assignment in an experiment provides an individual with access to a treatment only.\n\n\nAn individual’s treatment status (“take up”) may differ from their random assignment.\nIt may depend on factors other than random assignment.\nLet \\(w_i\\in \\{0,1\\}\\) denote their random assignment. So,\n\\[\n  y_i(1),y_i(0)\\perp w_i\n\\]\nLet \\(d_i\\in \\{0,1\\}\\) denote an individual’s treatment\n\\[\n  y_i(1),y_i(0)\\not\\perp d_i\n\\]\nThis is often referred to as non-compliance."
+  },
+  {
+    "objectID": "lecture-8.html#examples-1",
+    "href": "lecture-8.html#examples-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Examples",
+    "text": "Examples\n\nBanerjee et al. (2015) The miracle of microfinance? Evidence from a randomized evaluation\n\nRandomized villages that gained access to a particular microfinance lender\nUnethical to “force” a loan on a household\nVillages may have had access to formal microloans through other providers\nThe people observed in treated villages with microloans will be a self-selected group\n\n\n\n\n\nFinkelstein et al. (2012) The Oregon health insurance experiment: evidence from the first year\n\nThere were limited spaces in this Medicaid programme for low-income adults.\nThe government implemented a lottery to decide who could apply.\nMany didn’t apply or weren’t eligible, leading to an increase in coverage (among treated) of only 25%."
+  },
+  {
+    "objectID": "lecture-8.html#pos-of-treatment",
+    "href": "lecture-8.html#pos-of-treatment",
+    "title": "Proxy and Instrumental Variables",
+    "section": "POs of treatment",
+    "text": "POs of treatment\nAs we showed in Lecture 6, we can model treatment as a potential outcome and there are 4 potential scenarios:\n\n\n\\(d_i(0)=0\\) and \\(d_i(1) = 0\\)\n\nWe call these never takers (NT)\n\n\\(d_i(0)=1\\) and \\(d_i(1)=1\\)\n\nWe call these always takers (AT)\n\n\\(d_i(0) = 0\\) and \\(d_i(1) = 1\\)\n\nWe call these compliers (C)\n\n\\(d_i(0) = 1\\) and \\(d_i(1) = 0\\)\n\nWe call these defiers\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nTo know whether an individual is a NT, AT, C, or D you need to observe both potential outcomes."
+  },
+  {
+    "objectID": "lecture-8.html#itt",
+    "href": "lecture-8.html#itt",
+    "title": "Proxy and Instrumental Variables",
+    "section": "ITT",
+    "text": "ITT\nWhat if we compare\n\\[\n  E[d_i|w_i=1]-E[d_i|w_i=0]\n\\]\n\n\n\nUnder unconfoundedness (w.r.t. \\(d_i(1),d_i(0)\\)):\n\\[\n  E[d_i(1)|w_i=1]-E[d_i(0)|w_i=0] = \\underbrace{E[d_i(1)-d_i(0)]}_{ITT_d}\n\\]\nWe call this the Intention to Treat (\\(ITT_d\\)) effect on the (endogenous) treatment variable."
+  },
+  {
+    "objectID": "lecture-8.html#decomposition",
+    "href": "lecture-8.html#decomposition",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Decomposition",
+    "text": "Decomposition\nBut we know that \\(d_i(1)-d_i(0)\\) can only take on specific values: \\(\\{-1,0,1\\}\\)\n\n\\[\n\\begin{aligned}\n  &E[d_i(1)-d_i(0)] \\\\\n  =& 0\\times Pr(\\textcolor{purple}{NT}) + 0\\times Pr(\\textcolor{green}{AT}) + 1\\times Pr(\\textcolor{blue}{C}) - 1\\times Pr(D) \\\\\n  =& Pr(\\textcolor{blue}{C}) - Pr(\\textcolor{red}{D})\n\\end{aligned}\n\\]\nWe will return to this formula shortly."
+  },
+  {
+    "objectID": "lecture-8.html#the-outcome",
+    "href": "lecture-8.html#the-outcome",
+    "title": "Proxy and Instrumental Variables",
+    "section": "The outcome",
+    "text": "The outcome\nWhat of the main outcome variable \\(y\\)?\n\n\nIt may depend on both \\(d\\) and \\(w\\):\n\\[\n  y_i(d_i,w_i) = y_i(d_i(w_i),w_i)\n\\]"
+  },
+  {
+    "objectID": "lecture-8.html#exclusion-restriction",
+    "href": "lecture-8.html#exclusion-restriction",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Exclusion restriction",
+    "text": "Exclusion restriction\nTo move forward we need an assumption\n\nExclusion restriction:\n\\[\n  y_i(d_i,1) = y_i(d_i,0),\\;\\text{for}\\;d_i\\in\\{0,1\\}\n\\]\n\nWhich states: conditional on the value of (endogenous) treatment, assignment does NOT matter for the outcome.\n\nNo direct experimental effects"
+  },
+  {
+    "objectID": "lecture-8.html#decomposition-1",
+    "href": "lecture-8.html#decomposition-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Decomposition",
+    "text": "Decomposition\nWhen we compare\n\\[\n  E[y_i|w_i=1]-E[y_i|w_i=0]\n\\]\nWe’re actually comparing:\n\\[\n  \\begin{aligned}\n  &E[y_i(d_i(1),1)|w_i=1]-E[y_i(d_i(0),0)|w_i=0] \\\\\n  =&E[y_i(d_i(1))|w_i=1]-E[y_i(d_i(0))|w_i=0]\n  \\end{aligned}\n\\]\nWhere the second line follows from the exclusion restriction."
+  },
+  {
+    "objectID": "lecture-8.html#section-15",
+    "href": "lecture-8.html#section-15",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "Under unconfoundedness (w.r.t. \\(y_i(1),y_i(0)\\)):\n\\[\n  \\begin{aligned}\n  &E[y_i(d_i(1))|w_i=1]-E[y_i(d_i(0))|w_i=0] \\\\\n  =& \\underbrace{E[y_i(d_i(1)) - y_i(d_i(0))]}_{ITT_y}\n  \\end{aligned}\n\\]\nWe call this the Intention to Treat (\\(ITT_y\\)) effect on the outcome variable.\n\n\n\n\n\n\nNote\n\n\n\nA lot of applied microeconomics papers estimate ITT effects. This is often because the (quasi-)experimental variation they use does not fulfill the exclusion restriction. Or because they do not observe the (endogenous) treatment variable, just the assignment. They can still estimate the reduced-form effect of assignment. This reduced form estimate becomes an ITT effect (as opposed to an ATE/ATT) under non-compliance (see for example, Banerjee et al. 2015)."
+  },
+  {
+    "objectID": "lecture-8.html#section-16",
+    "href": "lecture-8.html#section-16",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "We can break this up by group: \\(\\textcolor{purple}{NT}\\), \\(\\textcolor{green}{AT}\\), \\(\\textcolor{blue}{C}\\), and \\(\\textcolor{red}{D}\\):\n\\[\n  \\begin{aligned}\n    &E[y_i(d_i(1))-y_i(d_i(0))] \\\\\n    =&E[y_i(0)-y_i(0)|\\textcolor{purple}{NT}]\\times Pr(\\textcolor{purple}{NT}) \\\\\n    &+E[y_i(1)-y_i(1)|\\textcolor{green}{AT}]\\times Pr(\\textcolor{green}{AT}) \\\\\n    &+E[y_i(1)-y_i(0)|\\textcolor{blue}{C}]\\times Pr(\\textcolor{blue}{C}) \\\\\n    &+E[y_i(0)-y_i(1)|\\textcolor{red}{D}]\\times Pr(\\textcolor{red}{D})\n  \\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "lecture-8.html#section-17",
+    "href": "lecture-8.html#section-17",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "Under unconfoundedness (w.r.t \\(y_i(0),y_i(1)\\))\n\\[\n  \\begin{aligned}\n    =&\\underbrace{E[y_i(0)-y_i(0)|\\textcolor{purple}{NT}]}_{=0}\\times Pr(\\textcolor{purple}{NT}) \\\\\n    &+\\underbrace{E[y_i(1)-y_i(1)|\\textcolor{green}{AT}]}_{=0}\\times Pr(\\textcolor{green}{AT}) \\\\\n    &+E[y_i(1)-y_i(0)|\\textcolor{blue}{C}]\\times Pr(\\textcolor{blue}{C}) \\\\\n    &+E[y_i(0)-y_i(1)|\\textcolor{red}{D}]\\times Pr(\\textcolor{red}{D}) \\\\\n    =&E[y_i(1)-y_i(0)|\\textcolor{blue}{C}]\\times Pr(\\textcolor{blue}{C}) \\\\\n  &-E[y_i(1)-y_i(0)|\\textcolor{red}{D}]\\times Pr(\\textcolor{red}{D})\n  \\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "lecture-8.html#late-1",
+    "href": "lecture-8.html#late-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "LATE",
+    "text": "LATE\nIf we take the ratio of the two ITT effects:\n\\[\n  \\begin{aligned}\n  \\frac{ITT_y}{ITT_d} =& \\frac{E[y_i|w_i=1]-E[y_i|w_i=0]}{E[d_i|w_i=1]-E[d_i|w_i=0]} \\\\\n  =& \\frac{E[y_i(0)-y_i(1)|\\textcolor{blue}{C}]\\times Pr(\\textcolor{blue}{C})}{Pr(\\textcolor{blue}{C})} \\\\\n  = & E[y_i(0)-y_i(1)|\\textcolor{blue}{C}]\n  \\end{aligned}\n\\]\nWe call this the Local Average Treatment Effect (LATE)\n\nThe ATE of the Compliers"
+  },
+  {
+    "objectID": "lecture-8.html#assumptions",
+    "href": "lecture-8.html#assumptions",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Assumptions",
+    "text": "Assumptions\nLet us collect the assumptions we have made:\n\nExclusion Restriction: \\(y_i(d_i,1) = y_i(d_i,0),\\;\\text{for}\\;d_i\\in\\{0,1\\}\\)\nUnconfoundedness: \\(d_i(1),d_i(0),y_i(1),y_i(0) \\perp w_i\\)\nExistence of compliers: \\(Pr(d_i(1)&gt;d_i(0))&gt;0\\)\nMonotonicity (absence of defiers): \\(Pr(d_i(1)&lt;d_i(0))=0\\)"
+  },
+  {
+    "objectID": "lecture-8.html#instrumental-variables-1",
+    "href": "lecture-8.html#instrumental-variables-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Instrumental variables",
+    "text": "Instrumental variables\nWe described the IV set-up as follows:\n\\[\n  y_i = \\beta_0 + \\beta_1 x_i + \\varepsilon_i\n\\]\nwhere,\n\n\\(Cov(x_i,\\varepsilon_i) \\neq 0\\)\n\\(Cov(z_i,\\varepsilon_i) = 0\\), which implied two things:\n2.1. \\(z_i\\) must be excluded from the main model (i.e. not in \\(\\varepsilon_i\\))\n2.2. \\(z_i\\) must be exogenous w.r.t. \\(\\varepsilon_i\\)\n\\(Cov(z_i,x_i) \\neq 0\\) (valid first-stage)"
+  },
+  {
+    "objectID": "lecture-8.html#experiments-as-ivs",
+    "href": "lecture-8.html#experiments-as-ivs",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Experiments as IVs",
+    "text": "Experiments as IVs\nNow, suppose we have\n\\[\n  y_i = \\beta_0 + \\beta_1 d_i + \\varepsilon_i\n\\]\nwhere \\(d_i\\) denotes endogenous treatment.\n\n\n\nAn our instrument is random assignment: \\(w_i\\)\n\n\\(w_i\\) is unconfounded (\\(\\Rightarrow\\) exogenous)\nIf we also then assume that \\(w_i\\) is excluded (i.e. no experimental effects)\n\\[\\Rightarrow Cov(w_i,\\varepsilon_i)=0\\]"
+  },
+  {
+    "objectID": "lecture-8.html#section-18",
+    "href": "lecture-8.html#section-18",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "Suppose we assumed that:\n\n\\(Pr(\\textcolor{blue}{C})&gt;0 \\Rightarrow Pr(d_i(1)&gt;d_i(0))&gt;0\\)\n\\(Pr(\\textcolor{red}{D}) = 0\\Rightarrow Pr(d_i(1)&lt;d_i(0))=0\\)\n\nThis is referred to as the monotonicity assumption: assignment influences treatment in a single direction.\n\n\n\nThen,\n\\[\n  \\begin{aligned}\n  ITT_y =& E[y_i|w_i=1]-E[y_i|w_i=0] = E[y_i(1)-y_i(1)|\\textcolor{blue}{C}]\\times Pr(\\textcolor{blue}{C}) \\\\\n  &\\\\\n  ITT_d =& E[d_i|w_i=1]-E[d_i|w_i=0] = Pr(\\textcolor{blue}{C}) \\\\\n  \\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "lecture-8.html#section-19",
+    "href": "lecture-8.html#section-19",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "First-stage:\n\\[\n  d_i = \\pi_0 + \\pi_1 w_i + \\nu_i\n\\]\nIf we have compliers and no defiers (monotonicity),\n\nthen \\(\\pi_1&gt;0\\)\n\\[\\Rightarrow Cov(w_i,d_i)\\neq0\\]\n\n\n\nThis equation would give us the \\(ITT_d\\)\nand \\(\\hat{\\pi}_{1,ols} = \\bar{d}_1-\\bar{d}_0\\)"
+  },
+  {
+    "objectID": "lecture-8.html#section-20",
+    "href": "lecture-8.html#section-20",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "Reduced-form:\n\\[\n  y_i = \\gamma_0 + \\gamma_1 w_i + \\upsilon_i\n\\]\n\nThis equation would give us the \\(ITT_y\\)\nand \\(\\hat{\\gamma}_{1,ols}=\\bar{y}_1-\\bar{y}_0\\)"
+  },
+  {
+    "objectID": "lecture-8.html#late-estimation",
+    "href": "lecture-8.html#late-estimation",
+    "title": "Proxy and Instrumental Variables",
+    "section": "LATE Estimation",
+    "text": "LATE Estimation\nAssuming heterogeneous TEs and single, discrete instrument\n\nIV (2SLS) estimator estimates a Local Average Treatment Effect\n\nATE of compliers\n\n\n\n\n\nunder four assumptions:\n\nExclusion restriction\nUnconfoundedness\nCompliers (first-stage)\nMonotonicity"
+  },
+  {
+    "objectID": "lecture-8.html#pitfalls",
+    "href": "lecture-8.html#pitfalls",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Pitfalls",
+    "text": "Pitfalls\n\nCan test for first-stage: evidence of compliers assuming away defiers\nExclusion restriction: many experiments do not meat this requirement\n\nIf issue is non-compliance in RCT, usually works\nMany RCTs provide access to treatment only\n\nOften ethical concerns\nOften limited to \\(ITT_y\\)\n\nNatural experiment settings, a case must be made for exclusion\n\nMany policies fail, as have direct effects too."
+  },
+  {
+    "objectID": "lecture-8.html#section-21",
+    "href": "lecture-8.html#section-21",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "We know that the IV estimator would be,\n\\[\n  \\hat{\\beta}_{1,iv} = \\hat{\\beta}_{1,2sls} = \\frac{\\hat{\\gamma}_{1,ols}}{\\hat{\\pi}_{1,ols}}\n\\]"
+  },
+  {
+    "objectID": "lecture-8.html#first-stage-2",
+    "href": "lecture-8.html#first-stage-2",
+    "title": "Proxy and Instrumental Variables",
+    "section": "First-stage",
+    "text": "First-stage\nThe paper exploits a sharp policy change, resulting in a strong first-stage.\n\n\n\np. 154"
+  },
+  {
+    "objectID": "lecture-8.html#estimation-1",
+    "href": "lecture-8.html#estimation-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Estimation",
+    "text": "Estimation\nThe estimate the first-stage effect, the specify the model:\n\\[\n  y_{i} = \\pi_0 + \\pi_1 d_{i} + \\pi_1 yob_{i} + \\pi_2 yob^2_{i} + \\mathbf{x}_{i}\\rho + \\varepsilon_i\n\\]\nwhere,\n\n\\(yob_i\\): denotes the individual’s year-of-birth (they incldue a polynomial)\n\\(d_i\\): is a dummy variable denoting that your year-of-birth is later than 1932 (excluded variable)\n\nWhere does variation in \\(d_i\\) come from? Is it exogenous?"
+  },
+  {
+    "objectID": "lecture-8.html#first-stage-3",
+    "href": "lecture-8.html#first-stage-3",
+    "title": "Proxy and Instrumental Variables",
+    "section": "First stage",
+    "text": "First stage\n\n\n\np. 160\n\n\nThe coefficient on \\(d_i\\) (\\(\\pi_1\\)) captures the vertical distance bewteen the two two lines; the “break” in the function."
+  },
+  {
+    "objectID": "lecture-8.html#reduced-form-1",
+    "href": "lecture-8.html#reduced-form-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Reduced form",
+    "text": "Reduced form\n\n\n\np. 163"
+  },
+  {
+    "objectID": "lecture-8.html#fs-rf",
+    "href": "lecture-8.html#fs-rf",
+    "title": "Proxy and Instrumental Variables",
+    "section": "FS & RF",
+    "text": "FS & RF\n\n\n\np. 161\n\n\nSo, IV estimate should be \\(0.065/0.440 = 0.148\\) (not accounting for unobserved precision)."
+  },
+  {
+    "objectID": "lecture-8.html#ols-vs-iv",
+    "href": "lecture-8.html#ols-vs-iv",
+    "title": "Proxy and Instrumental Variables",
+    "section": "OLS vs IV",
+    "text": "OLS vs IV\n\n\n\np. 164"
+  },
+  {
+    "objectID": "lecture-8.html#late-interpretation",
+    "href": "lecture-8.html#late-interpretation",
+    "title": "Proxy and Instrumental Variables",
+    "section": "LATE interpretation",
+    "text": "LATE interpretation\nPoint estimate of 15.8%\n\nthis the ATE for compliers\nwho are the compliers?\n\nThe individuals who who gained additional years (treatment here is continuous) of education because of the law change.\nRemember, we must assume monotonicity: no one gains less education under the new policy. Which seems reasonable."
+  },
+  {
+    "objectID": "lecture-8-slides.html#endogenous-treatment",
+    "href": "lecture-8-slides.html#endogenous-treatment",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Endogenous treatment",
+    "text": "Endogenous treatment\nSuppose assignment in an experiment provides an individual with access to a treatment only.\n\nAn individual’s treatment status (“take up”) may differ from their random assignment.\nIt may depend on factors other than random assignment.\nLet w_i\\in \\{0,1\\} denote their random assignment. So,\n\n  y_i(1),y_i(0)\\perp w_i\n\nLet d_i\\in \\{0,1\\} denote an individual’s treatment\n\n  y_i(1),y_i(0)\\not\\perp d_i\n\nThis is often referred to as non-compliance."
+  },
+  {
+    "objectID": "lecture-8-slides.html#examples-1",
+    "href": "lecture-8-slides.html#examples-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Examples",
+    "text": "Examples\n\nBanerjee et al. (2015) The miracle of microfinance? Evidence from a randomized evaluation\n\nRandomized villages that gained access to a particular microfinance lender\nUnethical to “force” a loan on a household\nVillages may have had access to formal microloans through other providers\nThe people observed in treated villages with microloans will be a self-selected group\n\n\n\n\n\nFinkelstein et al. (2012) The Oregon health insurance experiment: evidence from the first year\n\nThere were limited spaces in this Medicaid programme for low-income adults.\nThe government implemented a lottery to decide who could apply.\nMany didn’t apply or weren’t eligible, leading to an increase in coverage (among treated) of only 25%."
+  },
+  {
+    "objectID": "lecture-8-slides.html#pos-of-treatment",
+    "href": "lecture-8-slides.html#pos-of-treatment",
+    "title": "Proxy and Instrumental Variables",
+    "section": "POs of treatment",
+    "text": "POs of treatment\nAs we showed in Lecture 6, we can model treatment as a potential outcome and there are 4 potential scenarios:\n\nd_i(0)=0 and d_i(1) = 0\n\nWe call these never takers (NT)\n\nd_i(0)=1 and d_i(1)=1\n\nWe call these always takers (AT)\n\nd_i(0) = 0 and d_i(1) = 1\n\nWe call these compliers (C)\n\nd_i(0) = 1 and d_i(1) = 0\n\nWe call these defiers\n\n\n\n\n\n\n\n\nImportant\n\n\nTo know whether an individual is a NT, AT, C, or D you need to observe both potential outcomes."
+  },
+  {
+    "objectID": "lecture-8-slides.html#itt",
+    "href": "lecture-8-slides.html#itt",
+    "title": "Proxy and Instrumental Variables",
+    "section": "ITT",
+    "text": "ITT\nWhat if we compare\n\n  E[d_i|w_i=1]-E[d_i|w_i=0]\n\n\n\n\nUnder unconfoundedness (w.r.t. d_i(1),d_i(0)):\n\n  E[d_i(1)|w_i=1]-E[d_i(0)|w_i=0] = \\underbrace{E[d_i(1)-d_i(0)]}_{ITT_d}\n\nWe call this the Intention to Treat (ITT_d) effect on the (endogenous) treatment variable."
+  },
+  {
+    "objectID": "lecture-8-slides.html#decomposition",
+    "href": "lecture-8-slides.html#decomposition",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Decomposition",
+    "text": "Decomposition\nBut we know that d_i(1)-d_i(0) can only take on specific values: \\{-1,0,1\\}\n\n\n\\begin{aligned}\n  &E[d_i(1)-d_i(0)] \\\\\n  =& 0\\times Pr(\\textcolor{purple}{NT}) + 0\\times Pr(\\textcolor{green}{AT}) + 1\\times Pr(\\textcolor{blue}{C}) - 1\\times Pr(D) \\\\\n  =& Pr(\\textcolor{blue}{C}) - Pr(\\textcolor{red}{D})\n\\end{aligned}\n\nWe will return to this formula shortly."
+  },
+  {
+    "objectID": "lecture-8-slides.html#the-outcome",
+    "href": "lecture-8-slides.html#the-outcome",
+    "title": "Proxy and Instrumental Variables",
+    "section": "The outcome",
+    "text": "The outcome\nWhat of the main outcome variable y?\n\n\nIt may depend on both d and w:\n\n  y_i(d_i,w_i) = y_i(d_i(w_i),w_i)"
+  },
+  {
+    "objectID": "lecture-8-slides.html#exclusion-restriction",
+    "href": "lecture-8-slides.html#exclusion-restriction",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Exclusion restriction",
+    "text": "Exclusion restriction\nTo move forward we need an assumption\n\nExclusion restriction:\n\n  y_i(d_i,1) = y_i(d_i,0),\\;\\text{for}\\;d_i\\in\\{0,1\\}\n\n\nWhich states: conditional on the value of (endogenous) treatment, assignment does NOT matter for the outcome.\n\nNo direct experimental effects"
+  },
+  {
+    "objectID": "lecture-8-slides.html#decomposition-1",
+    "href": "lecture-8-slides.html#decomposition-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Decomposition",
+    "text": "Decomposition\nWhen we compare\n\n  E[y_i|w_i=1]-E[y_i|w_i=0]\n\nWe’re actually comparing:\n\n  \\begin{aligned}\n  &E[y_i(d_i(1),1)|w_i=1]-E[y_i(d_i(0),0)|w_i=0] \\\\\n  =&E[y_i(d_i(1))|w_i=1]-E[y_i(d_i(0))|w_i=0]\n  \\end{aligned}\n\nWhere the second line follows from the exclusion restriction."
+  },
+  {
+    "objectID": "lecture-8-slides.html#section-15",
+    "href": "lecture-8-slides.html#section-15",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "Under unconfoundedness (w.r.t. y_i(1),y_i(0)):\n\n  \\begin{aligned}\n  &E[y_i(d_i(1))|w_i=1]-E[y_i(d_i(0))|w_i=0] \\\\\n  =& \\underbrace{E[y_i(d_i(1)) - y_i(d_i(0))]}_{ITT_y}\n  \\end{aligned}\n\nWe call this the Intention to Treat (ITT_y) effect on the outcome variable.\n\n\n\n\n\n\nNote\n\n\nA lot of applied microeconomics papers estimate ITT effects. This is often because the (quasi-)experimental variation they use does not fulfill the exclusion restriction. Or because they do not observe the (endogenous) treatment variable, just the assignment. They can still estimate the reduced-form effect of assignment. This reduced form estimate becomes an ITT effect (as opposed to an ATE/ATT) under non-compliance (see for example, Banerjee et al. 2015)."
+  },
+  {
+    "objectID": "lecture-8-slides.html#section-16",
+    "href": "lecture-8-slides.html#section-16",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "We can break this up by group: \\textcolor{purple}{NT}, \\textcolor{green}{AT}, \\textcolor{blue}{C}, and \\textcolor{red}{D}:\n\n  \\begin{aligned}\n    &E[y_i(d_i(1))-y_i(d_i(0))] \\\\\n    =&E[y_i(0)-y_i(0)|\\textcolor{purple}{NT}]\\times Pr(\\textcolor{purple}{NT}) \\\\\n    &+E[y_i(1)-y_i(1)|\\textcolor{green}{AT}]\\times Pr(\\textcolor{green}{AT}) \\\\\n    &+E[y_i(1)-y_i(0)|\\textcolor{blue}{C}]\\times Pr(\\textcolor{blue}{C}) \\\\\n    &+E[y_i(0)-y_i(1)|\\textcolor{red}{D}]\\times Pr(\\textcolor{red}{D})\n  \\end{aligned}"
+  },
+  {
+    "objectID": "lecture-8-slides.html#section-17",
+    "href": "lecture-8-slides.html#section-17",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "Under unconfoundedness (w.r.t y_i(0),y_i(1))\n\n  \\begin{aligned}\n    =&\\underbrace{E[y_i(0)-y_i(0)|\\textcolor{purple}{NT}]}_{=0}\\times Pr(\\textcolor{purple}{NT}) \\\\\n    &+\\underbrace{E[y_i(1)-y_i(1)|\\textcolor{green}{AT}]}_{=0}\\times Pr(\\textcolor{green}{AT}) \\\\\n    &+E[y_i(1)-y_i(0)|\\textcolor{blue}{C}]\\times Pr(\\textcolor{blue}{C}) \\\\\n    &+E[y_i(0)-y_i(1)|\\textcolor{red}{D}]\\times Pr(\\textcolor{red}{D}) \\\\\n    =&E[y_i(1)-y_i(0)|\\textcolor{blue}{C}]\\times Pr(\\textcolor{blue}{C}) \\\\\n  &-E[y_i(1)-y_i(0)|\\textcolor{red}{D}]\\times Pr(\\textcolor{red}{D})\n  \\end{aligned}"
+  },
+  {
+    "objectID": "lecture-8-slides.html#late-1",
+    "href": "lecture-8-slides.html#late-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "LATE",
+    "text": "LATE\nIf we take the ratio of the two ITT effects:\n\n  \\begin{aligned}\n  \\frac{ITT_y}{ITT_d} =& \\frac{E[y_i|w_i=1]-E[y_i|w_i=0]}{E[d_i|w_i=1]-E[d_i|w_i=0]} \\\\\n  =& \\frac{E[y_i(0)-y_i(1)|\\textcolor{blue}{C}]\\times Pr(\\textcolor{blue}{C})}{Pr(\\textcolor{blue}{C})} \\\\\n  = & E[y_i(0)-y_i(1)|\\textcolor{blue}{C}]\n  \\end{aligned}\n\nWe call this the Local Average Treatment Effect (LATE)\n\nThe ATE of the Compliers"
+  },
+  {
+    "objectID": "lecture-8-slides.html#assumptions",
+    "href": "lecture-8-slides.html#assumptions",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Assumptions",
+    "text": "Assumptions\nLet us collect the assumptions we have made:\n\nExclusion Restriction: y_i(d_i,1) = y_i(d_i,0),\\;\\text{for}\\;d_i\\in\\{0,1\\}\nUnconfoundedness: d_i(1),d_i(0),y_i(1),y_i(0) \\perp w_i\nExistence of compliers: Pr(d_i(1)&gt;d_i(0))&gt;0\nMonotonicity (absence of defiers): Pr(d_i(1)&lt;d_i(0))=0"
+  },
+  {
+    "objectID": "lecture-8-slides.html#instrumental-variables-1",
+    "href": "lecture-8-slides.html#instrumental-variables-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Instrumental variables",
+    "text": "Instrumental variables\nWe described the IV set-up as follows:\n\n  y_i = \\beta_0 + \\beta_1 x_i + \\varepsilon_i\n\nwhere,\n\nCov(x_i,\\varepsilon_i) \\neq 0\nCov(z_i,\\varepsilon_i) = 0, which implied two things:\n2.1. z_i must be excluded from the main model (i.e. not in \\varepsilon_i)\n2.2. z_i must be exogenous w.r.t. \\varepsilon_i\nCov(z_i,x_i) \\neq 0 (valid first-stage)"
+  },
+  {
+    "objectID": "lecture-8-slides.html#experiments-as-ivs",
+    "href": "lecture-8-slides.html#experiments-as-ivs",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Experiments as IVs",
+    "text": "Experiments as IVs\nNow, suppose we have\n\n  y_i = \\beta_0 + \\beta_1 d_i + \\varepsilon_i\n\nwhere d_i denotes endogenous treatment.\n\n\n\nAn our instrument is random assignment: w_i\n\nw_i is unconfounded (\\Rightarrow exogenous)\nIf we also then assume that w_i is excluded (i.e. no experimental effects)\n\\Rightarrow Cov(w_i,\\varepsilon_i)=0"
+  },
+  {
+    "objectID": "lecture-8-slides.html#section-18",
+    "href": "lecture-8-slides.html#section-18",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "Suppose we assumed that:\n\nPr(\\textcolor{blue}{C})&gt;0 \\Rightarrow Pr(d_i(1)&gt;d_i(0))&gt;0\nPr(\\textcolor{red}{D}) = 0\\Rightarrow Pr(d_i(1)&lt;d_i(0))=0\n\nThis is referred to as the monotonicity assumption: assignment influences treatment in a single direction.\n\n\n\nThen,\n\n  \\begin{aligned}\n  ITT_y =& E[y_i|w_i=1]-E[y_i|w_i=0] = E[y_i(1)-y_i(1)|\\textcolor{blue}{C}]\\times Pr(\\textcolor{blue}{C}) \\\\\n  &\\\\\n  ITT_d =& E[d_i|w_i=1]-E[d_i|w_i=0] = Pr(\\textcolor{blue}{C}) \\\\\n  \\end{aligned}"
+  },
+  {
+    "objectID": "lecture-8-slides.html#section-19",
+    "href": "lecture-8-slides.html#section-19",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "First-stage:\n\n  d_i = \\pi_0 + \\pi_1 w_i + \\nu_i\n\nIf we have compliers and no defiers (monotonicity),\n\nthen \\pi_1&gt;0\n\\Rightarrow Cov(w_i,d_i)\\neq0\n\n\n\nThis equation would give us the ITT_d\nand \\hat{\\pi}_{1,ols} = \\bar{d}_1-\\bar{d}_0"
+  },
+  {
+    "objectID": "lecture-8-slides.html#section-20",
+    "href": "lecture-8-slides.html#section-20",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "Reduced-form:\n\n  y_i = \\gamma_0 + \\gamma_1 w_i + \\upsilon_i\n\n\nThis equation would give us the ITT_y\nand \\hat{\\gamma}_{1,ols}=\\bar{y}_1-\\bar{y}_0"
+  },
+  {
+    "objectID": "lecture-8-slides.html#late-estimation",
+    "href": "lecture-8-slides.html#late-estimation",
+    "title": "Proxy and Instrumental Variables",
+    "section": "LATE Estimation",
+    "text": "LATE Estimation\nAssuming heterogeneous TEs and single, discrete instrument\n\nIV (2SLS) estimator estimates a Local Average Treatment Effect\n\nATE of compliers\n\n\n\n\n\nunder four assumptions:\n\nExclusion restriction\nUnconfoundedness\nCompliers (first-stage)\nMonotonicity"
+  },
+  {
+    "objectID": "lecture-8-slides.html#pitfalls",
+    "href": "lecture-8-slides.html#pitfalls",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Pitfalls",
+    "text": "Pitfalls\n\nCan test for first-stage: evidence of compliers assuming away defiers\nExclusion restriction: many experiments do not meat this requirement\n\nIf issue is non-compliance in RCT, usually works\nMany RCTs provide access to treatment only\n\nOften ethical concerns\nOften limited to ITT_y\n\nNatural experiment settings, a case must be made for exclusion\n\nMany policies fail, as have direct effects too."
+  },
+  {
+    "objectID": "lecture-8-slides.html#section-21",
+    "href": "lecture-8-slides.html#section-21",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "We know that the IV estimator would be,\n\n  \\hat{\\beta}_{1,iv} = \\hat{\\beta}_{1,2sls} = \\frac{\\hat{\\gamma}_{1,ols}}{\\hat{\\pi}_{1,ols}}"
+  },
+  {
+    "objectID": "lecture-8-slides.html#first-stage-2",
+    "href": "lecture-8-slides.html#first-stage-2",
+    "title": "Proxy and Instrumental Variables",
+    "section": "First-stage",
+    "text": "First-stage\nThe paper exploits a sharp policy change, resulting in a strong first-stage.\n\np. 154"
+  },
+  {
+    "objectID": "lecture-8-slides.html#estimation-1",
+    "href": "lecture-8-slides.html#estimation-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Estimation",
+    "text": "Estimation\nThe estimate the first-stage effect, the specify the model:\n\n  y_{i} = \\pi_0 + \\pi_1 d_{i} + \\pi_1 yob_{i} + \\pi_2 yob^2_{i} + \\mathbf{x}_{i}\\rho + \\varepsilon_i\n\nwhere,\n\nyob_i: denotes the individual’s year-of-birth (they incldue a polynomial)\nd_i: is a dummy variable denoting that your year-of-birth is later than 1932 (excluded variable)\n\nWhere does variation in d_i come from? Is it exogenous?"
+  },
+  {
+    "objectID": "lecture-8-slides.html#first-stage-3",
+    "href": "lecture-8-slides.html#first-stage-3",
+    "title": "Proxy and Instrumental Variables",
+    "section": "First stage",
+    "text": "First stage\n\np. 160The coefficient on d_i (\\pi_1) captures the vertical distance bewteen the two two lines; the “break” in the function."
+  },
+  {
+    "objectID": "lecture-8-slides.html#reduced-form-1",
+    "href": "lecture-8-slides.html#reduced-form-1",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Reduced form",
+    "text": "Reduced form\n\np. 163"
+  },
+  {
+    "objectID": "lecture-8-slides.html#fs-rf",
+    "href": "lecture-8-slides.html#fs-rf",
+    "title": "Proxy and Instrumental Variables",
+    "section": "FS & RF",
+    "text": "FS & RF\n\np. 161So, IV estimate should be 0.065/0.440 = 0.148 (not accounting for unobserved precision)."
+  },
+  {
+    "objectID": "lecture-8-slides.html#ols-vs-iv",
+    "href": "lecture-8-slides.html#ols-vs-iv",
+    "title": "Proxy and Instrumental Variables",
+    "section": "OLS vs IV",
+    "text": "OLS vs IV\n\np. 164"
+  },
+  {
+    "objectID": "lecture-8-slides.html#late-interpretation",
+    "href": "lecture-8-slides.html#late-interpretation",
+    "title": "Proxy and Instrumental Variables",
+    "section": "LATE interpretation",
+    "text": "LATE interpretation\nPoint estimate of 15.8%\n\nthis the ATE for compliers\nwho are the compliers?\n\nThe individuals who who gained additional years (treatment here is continuous) of education because of the law change.\nRemember, we must assume monotonicity: no one gains less education under the new policy. Which seems reasonable."
+  },
+  {
+    "objectID": "lecture-8.html#treatment-as-a-po",
+    "href": "lecture-8.html#treatment-as-a-po",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Treatment as a PO",
+    "text": "Treatment as a PO\nBorrowing from Lecture 6, we can model receipt of treatment as a potential outcome of assignment and there are 4 potential scenarios:\n\n\n\n\n\\(d_i(0)=0\\) and \\(d_i(1) = 0\\)\n\nWe call these never takers (\\(\\textcolor{purple}{NT}\\))\n\n\\(d_i(0)=1\\) and \\(d_i(1)=1\\)\n\nWe call these always takers (\\(\\textcolor{green}{AT}\\))\n\n\n\n\n\\(d_i(0) = 0\\) and \\(d_i(1) = 1\\)\n\nWe call these compliers (\\(\\textcolor{blue}{C}\\))\n\n\\(d_i(0) = 1\\) and \\(d_i(1) = 0\\)\n\nWe call these defiers (\\(\\textcolor{red}{D}\\))\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nTo know whether an individual is a \\(\\textcolor{purple}{NT}\\), \\(\\textcolor{green}{AT}\\), \\(\\textcolor{blue}{C}\\), or \\(\\textcolor{red}{D}\\) you need to observe both potential outcomes."
+  },
+  {
+    "objectID": "lecture-8-slides.html#treatment-as-a-po",
+    "href": "lecture-8-slides.html#treatment-as-a-po",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Treatment as a PO",
+    "text": "Treatment as a PO\nBorrowing from Lecture 6, we can model receipt of treatment as a potential outcome of assignment and there are 4 potential scenarios:\n\n\n\nd_i(0)=0 and d_i(1) = 0\n\nWe call these never takers (\\textcolor{purple}{NT})\n\nd_i(0)=1 and d_i(1)=1\n\nWe call these always takers (\\textcolor{green}{AT})\n\n\n\n\nd_i(0) = 0 and d_i(1) = 1\n\nWe call these compliers (\\textcolor{blue}{C})\n\nd_i(0) = 1 and d_i(1) = 0\n\nWe call these defiers (\\textcolor{red}{D})\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nTo know whether an individual is a \\textcolor{purple}{NT}, \\textcolor{green}{AT}, \\textcolor{blue}{C}, or \\textcolor{red}{D} you need to observe both potential outcomes."
+  },
+  {
+    "objectID": "lecture-8.html#the-pos-of-the-outcome",
+    "href": "lecture-8.html#the-pos-of-the-outcome",
+    "title": "Proxy and Instrumental Variables",
+    "section": "The POs of the outcome",
+    "text": "The POs of the outcome\nWhat of the main outcome variable \\(y\\)?\n\n\n\nIt may depend on both \\(d\\) and \\(w\\):\n\\[\n  y_i(d_i,w_i) = y_i(d_i(w_i),w_i)\n\\]"
+  },
+  {
+    "objectID": "lecture-8-slides.html#the-pos-of-the-outcome",
+    "href": "lecture-8-slides.html#the-pos-of-the-outcome",
+    "title": "Proxy and Instrumental Variables",
+    "section": "The POs of the outcome",
+    "text": "The POs of the outcome\nWhat of the main outcome variable y?\n\n\n\nIt may depend on both d and w:\n\n  y_i(d_i,w_i) = y_i(d_i(w_i),w_i)"
+  },
+  {
+    "objectID": "lecture-8.html#section-22",
+    "href": "lecture-8.html#section-22",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "In this simple setting (single, discrete endogenous variable and instrument)\n\n\n\\[\n\\frac{\\hat{\\gamma}_{1,ols}}{\\hat{\\pi}_{1,ols}} = \\frac{\\bar{y}_1-\\bar{y}_0}{\\bar{d}_1-\\bar{d}_0}\n\\]\n\n\n\nWhich is the sample analogue of:\n\\[\n\\frac{E[y_i|w_i=1]-E[y_i|w_i=0]}{E[d_i|w_i=1]-E[d_i|w_i=0]}\n\\]"
+  },
+  {
+    "objectID": "lecture-8.html#section-23",
+    "href": "lecture-8.html#section-23",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "Oreopoulos (2006) presents a nice, “clean” example of Local Average Treatment Effect.6"
+  },
+  {
+    "objectID": "lecture-8-slides.html#section-22",
+    "href": "lecture-8-slides.html#section-22",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "In this simple setting (single, discrete endogenous variable and instrument)\n\n\n\n\\frac{\\hat{\\gamma}_{1,ols}}{\\hat{\\pi}_{1,ols}} = \\frac{\\bar{y}_1-\\bar{y}_0}{\\bar{d}_1-\\bar{d}_0}\n\n\n\n\nWhich is the sample analogue of:\n\n\\frac{E[y_i|w_i=1]-E[y_i|w_i=0]}{E[d_i|w_i=1]-E[d_i|w_i=0]}"
+  },
+  {
+    "objectID": "lecture-8-slides.html#section-23",
+    "href": "lecture-8-slides.html#section-23",
+    "title": "Proxy and Instrumental Variables",
+    "section": "",
+    "text": "Oreopoulos (2006) presents a nice, “clean” example of Local Average Treatment Effect.1\n\n\n\n\n\nJoshua D. Angrist and Krueger (1991) was the seminal paper on this topic, providing a LATE interpretation of an IV strategy based on minimum school-leaving age. However, there is much debate as to the validity of the first-stage Bound, Jaeger, and Baker (1995)."
+  },
+  {
+    "objectID": "lecture-8.html#comparison",
+    "href": "lecture-8.html#comparison",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Comparison",
+    "text": "Comparison\n\n\nFor standard IV we had:\n\n\\(Cov(\\varepsilon_i,z_i)= 0\\)\n\\(Cov(x_i,z_i)\\neq 0\\)\n\n\nFor LATE (with heterogeneous TEs)\n\nExclusion restriction\nUnconfoundedness\nCompliers\nMonotonicity (no defiers)\n\n\n\n\n\n\n\n\n\nCaution\n\n\n\nThe standard parametric IV estimator required just two assumptions. Using (quasi-)random assignment within an experiment requires you to add the exclusion restriction as a separate assumption. The unconfoundedness of assignment makes the instrument exogenous, but does not rule out the possibility of direct (experimental) effects. Monotonicity is needed due to the potential heterogeneity of the first-stage relationship."
+  },
+  {
+    "objectID": "lecture-8-slides.html#comparison",
+    "href": "lecture-8-slides.html#comparison",
+    "title": "Proxy and Instrumental Variables",
+    "section": "Comparison",
+    "text": "Comparison\n\n\nFor standard IV we had:\n\nCov(\\varepsilon_i,z_i)= 0\nCov(x_i,z_i)\\neq 0\n\n\nFor LATE (with heterogeneous TEs)\n\nExclusion restriction\nUnconfoundedness\nCompliers\nMonotonicity (no defiers)\n\n\n\n\n\n\n\n\nCaution\n\n\nThe standard parametric IV estimator required just two assumptions. Using (quasi-)random assignment within an experiment requires you to add the exclusion restriction as a separate assumption. The unconfoundedness of assignment makes the instrument exogenous, but does not rule out the possibility of direct (experimental) effects. Monotonicity is needed due to the potential heterogeneity of the first-stage relationship."
   }
 ]

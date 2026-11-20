@@ -96,6 +96,26 @@ $$
 ```{stata}
 dis normal(invnormal(0.025)-0.207*sqrt(192)) + 1-normal(invnormal(0.975)-0.207*sqrt(192))
 ```
+
+Suppose the authors had sufficient budget to treat half the sample. Then $n\bar{w}(1-\bar{w})=200$ and the power would increase to:
+
+```{stata}
+dis normal(invnormal(0.025)-0.207*sqrt(200)) + 1-normal(invnormal(0.975)-0.207*sqrt(200))
+```
+
+Just a 1% increase in power. 
+
+If they were to reduce the number of treated individuals from $n_1=320$ (at 40%) to $260$ (60 fewer), they would save about \$20,000. This is enough to include an additional 1000 control units (at \$20 each). Doing so would increase power by a factor of,
+
+$$
+n\bar{w}(1-\bar{w}) = \bigg(\frac{1}{n_0} + \frac{1}{n_1}\bigg)^{-1} = \bigg(\frac{1}{1480} + \frac{1}{260}\bigg)^{-1} \approx 221
+$$
+
+```{stata}
+dis normal(invnormal(0.025)-0.207*sqrt(220)) + 1-normal(invnormal(0.975)-0.207*sqrt(220))
+```
+
+A bigger increase of 5%. Of course, we are ignoring the additional cost of surveying 1000 more individuals, which is significant. 
 :::
 \
 
@@ -153,11 +173,13 @@ These geographical controls are being used to control for geographical (climate,
 3. Interpret coefficient of interest in column (2) of Table 2. The base sample includes "64 countries that were ex-colonies and for which we have settler mortality, protection against expropriation risk, and GDP data" (p. 1377).
 
 :::{.border}
-An increase in the index of 1 unit increases predicted output by 68%, among ex-colonies. 
+An increase in the index of 1 unit increases predicted output by 68%, among ex-colonies and holding other factors fixed. 
 
 ```{stata}
 dis (exp(0.52)-1)*100
 ```
+
+This is a large point estimate. The mean of $R$ is 6.5 with a standard deviation of 1.5 (Table 1). Thus, a one standard deviation change in expropriation risk is associated with more than 100% increase in GDP per capita. In Table A2, Nigeria has a $R=5.55$ compared with Chile's 7.82, while their (log) of GDP per capita is 6.81 and 9.35, respectively. This point estimate suggests that the difference in the countries' $R$ of 2.27 would predict a difference in *log* GDP per capita of $2.27\times 0.68 = 1.18$. This is just under half the difference in their log GDP per capita (=2.54). 
 :::
 \
 
@@ -226,10 +248,10 @@ dis (-0.51/0.14)^2
 :::
 \
 
-10. Interpret the 2SLS-IV estimate from column (9), Table 4. Is it statistically significant at a 5% level? 
+10. Interpret the 2SLS-IV estimate from column (8), Table 4. Is it statistically significant at a 5% level? 
 
 :::{.border}
-The coefficient is 1.10, suggesting that a 1 unit increase in the index increases predicted GDP per capita by 200%, among ex-colonies. 
+The coefficient is 1.10, suggesting that a 1 unit increase in the index increases predicted GDP per capita by 200%, among ex-colonies and holding other factors fixed. 
 
 ```{stata}
 dis (exp(1.1)-1)*100
@@ -239,15 +261,27 @@ The result is statistically significant at a 5% level:
 
 ```{stata}
 dis 1.1/0.46
-dis invt(59,0.975)
+dis invt(58,0.975)
 ```
 :::
 \
 
-11. Comparing these results to those of Table 2, what do can we conclude with respect to the bias in OLS? How does this compare with your answer to Q4. 
+11. Comparing these results to those of Table 2, what can we conclude with respect to the bias in OLS? How does this compare with your answer to Q4. 
 
 :::{.border}
 The IV estimates are substantially larger than the OLS estimates (across all control-variable specifications). This suggests that OLS is in fact downward biased; the opposite direction to what we concluded in Q4. However, Q4 only concerned the OV bias from the specific controls considered here. The bias from other OVs and reverse causality may point in a different direction. 
+
+Are these realistic? The authors think so:
+
+> "Does the 2SLS estimatemake quantitative sense?Doesit implythat institutionaldifferences canexplainasignificant fractionof income differences across countries? Let us once again compare two "typical" countries with high and low expropriation risk, Nigeria and Chile (these countries are typical for the IV regression in the sense that they are practically on the regression line). Our 2SLS estimate, 0.94, implies that the 2.24 differences in expropriation risk between these two countries should translate into 206 log point (approximately 7-fold) difference. In practice, the presence of measurement error complicates this interpretation, because some of the difference be tween Nigeria and Chile’s expropriation index may reflect measurement error. Therefore, the 7-fold difference is an upper bound. In any case, the estimates in Table 4 imply a substantial, but not implausibly large, effect of institutional differences on income per capita." (pp. 1386-1387)
+
+The authors get the 206 log point difference from $0.94\times 2.24=2.1056$ (difference is likely due to rounding in reported estimates). If you then compute, 
+
+```{stata}
+dis exp(2.06)-1
+```
+
+This tells you that Chile's GDP per capita is predicted to be $\approx 700\%$ larger than Nigeria's. The authors suggest this is a 7-fold difference, which is evidently referring to the gap between the two countries and not the ratio of their GDP per capita. These estimates put the ratio of the two GDPs at closer to $\exp(2.06)\approx 8$. 
 :::
 \
 
@@ -304,7 +338,7 @@ Below you will find a list of recent NBER working papers that make use of an ins
 
 3. The model includes mother FEs, state-times-year(time) FEs, as well as a dummy for each possible YOB of a child. These are all the factors that determine eligibility and closely predict eligibility of a mother's children. The authors exploit the fact that eliibility rules change over time. Thus, a given mother's children may gain/lose eligibility over time due to policy variation alone (and not just changes in eligibility criteria like age). This policy variation is the identifying variation of the paper (see Figure 1).
 
-Note, this paper does not actually 
+Note, this paper does not actually impliement a 2SLS IV estimation. This is because the endogenous variable - the number of insured children in household - is not actually observed in the data. 
 :::
 \
 
