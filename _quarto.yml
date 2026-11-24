@@ -34,10 +34,10 @@ website:
             text: Lecture 7
           - href: lecture-8-multi.qmd
             text: Lecture 8
-#          - href: lecture-9-multi.qmd
-#            text: Lecture 9
-#          - href: lecture-10-multi.qmd
-#            text: Lecture 10
+          - href: lecture-9-multi.qmd
+            text: Lecture 9
+          - href: lecture-project.qmd
+            text: Project Lecture
       - text: Labs
         menu:
           - href: lab-1-Stata.qmd

@@ -1,19 +1,19 @@
 ---
-title: Repeated Observations and Difference in Differences
+title: Multi-Period Models and Difference in Differences
 subtitle: Lecture 9
 format: 
   html: 
     output-file: lecture-9.html
-#   other-links:
-#     - text: "PDF with Stata"
-#       href: "lecture-9-notes-Stata.pdf"
-#       icon: file-pdf
-#     - text: "PDF with R"
-#       href: "lecture-9-notes-R.pdf"
-#       icon: file-pdf
+    other-links:
+      - text: "PDF with Stata"
+        href: "lecture-9-notes-Stata.pdf"
+        icon: file-pdf
+      - text: "PDF with R"
+        href: "lecture-9-notes-R.pdf"
+        icon: file-pdf
   revealjs: 
     output-file: lecture-9-slides.html
-#    footer: "[Lecture 9](lecture-9-multi.qmd) - St Andrews Business School - Martinmas 2026/27"
+    footer: "[Lecture 9](lecture-9-multi.qmd) - St Andrews Business School - Martinmas 2026/27"
 engine: knitr
 ---
   
@@ -33,6 +33,7 @@ knitr::opts_chunk$set(collectcode = TRUE)
 library(haven)    
 library(ggplot2)
 library(DT)
+library(modelsummary)
 
 source(here::here("config.R"))
 ```
@@ -45,7 +46,9 @@ do "config.do"
 
 # Data Structure & Notation
 
-## Cross-section
+:::::{.content-visible unless-format="pdf"}
+
+## Single cross section
 
 ```{r}
 #| echo: false
@@ -65,13 +68,13 @@ DT::datatable(
 )
 ```
 
-## Pooled cross-sections
+## Pooled cross sections
 
 :::: columns
 ::: {.column width="50%"}
-Stacks one cross-section atop another
+Stacks one cross section atop another
 
-- Also referred to as *repeated* cross-sections
+- Also referred to as *repeated* cross sections
 
 - Cannot follow the same individual through time. 
 :::
@@ -131,7 +134,7 @@ DT::datatable(
 
 :::: columns
 ::: {.column width="50%"}
-For estimation, you need the data in **long** form (*akin to repeated cross-sections*)
+For estimation, you need the data in **long** form (*akin to repeated cross sections*)
 
 :::
 ::: {.column width="50%"}
@@ -158,9 +161,11 @@ DT::datatable(
 :::
 ::::  
 
+:::::
+
 ## Notation
 
-When we write down a linear regression model for a either a repeated cross-section or panel dataset, we add both $i$ and $t$ to the subscripts:
+When we write down a linear regression model for a either a repeated cross section or panel dataset, we add both $i$ and $t$ to the subscripts:
 
 $$
   y_{it} = \beta_0 + \beta_1 x_{it1} + \beta_2 x_{it2} + \dots + \beta_k x_{itk} + u_{it}
@@ -178,9 +183,9 @@ However, you may also have some variables that
   - e.g. adding aggregate unemployment rate to individual level model of wages 
 :::
 
-# Pooled Cross-sections
+# Pooled Cross Sections
 
-## Example: Poverty & SCP
+## Hypothetical example: Poverty & SCP
 
 Suppose, a researcher wants to evaluate the impact that of the [Home Energy Scotland Grant and Loan](https://www.homeenergyscotland.org/home-energy-scotland-grant-loan) programme on a household's energy expenditure. 
 
@@ -196,7 +201,7 @@ $$
   energy_{it} = \delta + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it}
 $$
 
-To be estimated using repeated cross-sections of the Scottish Household Survey.
+To be estimated using repeated cross sections of the Scottish Household Survey.
 
 - $energy_{it}$: amount (£'s) spent on energy
 
@@ -252,7 +257,7 @@ where,
 
 ## Identification
 
-Since the data comprises repeated cross-sections of individual, it is reasonable to assume that each observation is a random draw from the underlying population (MLR 2).
+Since the data comprises repeated cross sections of individual, it is reasonable to assume that each observation is a random draw from the underlying population (MLR 2).
 
 \
 
@@ -270,23 +275,29 @@ We could evaluate this question using a Chow test:
 - Estimate the model separately for each year:
 
 
-  $$
-  energy_{is} = \delta_s + \beta_s grant_{is} + \mathbf{x}_{is}\gamma_s + \mathbf{z}_s\eta_s + \varepsilon_{is} \quad \text{for}\;s = 1,\dots,T
-  $$
+$$
+  energy_{it} = \delta_t + \beta_t grant_{it} + \mathbf{x}_{it}\gamma_t + \mathbf{z}_t\eta_t + \varepsilon_{it} \quad \text{for}\;t = 1,\dots,T
+$$
 
-- Test whether the parameters vary using $SSR_s$ from each equation. 
+- Test whether the parameters vary using $SSR_t$ from each equation. 
 
 ## 
 
-**BUT** there is a problem here for $\mathbf{z}_s\eta_s$ in the model: 
+**BUT** there is a problem with $\mathbf{z}_t\eta_t$ in this model: 
+
+::: incremental
 
 - In any given period, these variables do not vary
 
-- e.g., if oil price is \$100 (per barrol) for period $s=1$ and \$120 (per barrol)  for period $s=2$
+  - e.g., oil price is \$100 in period $t=1$ and \$120 for period $t=2$
 
-- but within a given period $t$, the oil price doesn't vary across households. 
+  - but within a given period $t$, the oil price doesn't vary across households
 
-- So, $\mathbf{z}_s\eta_s$ is a constant! And cannot be separately identified from $\delta_s$, the time-varying constant. 
+- So, $\mathbf{z}_t\eta_t$ is a constant in each individual cross section
+
+  - cannot be separately identified from $\delta_t$, the time-varying constant
+
+:::
 
 ## Time fixed effects
 
@@ -298,36 +309,39 @@ $$
 
 then we must exclude all variables that also vary *only* with time: $\mathbf{z}_t\eta$
 
+::: incremental
+
 - We call $\delta_t$ **time fixed effects**
 
 - These time FEs "absorb" any other variables that vary only with time. 
 
 - We say, time FEs "control" for any time-varying (e.g., macroeconomic) factors/shocks; **even ones we don't observe** in the data. 
 
+:::
+
 ## Time dummies:
 
 When it comes to estimation, time FEs are equvilent to including a set of dummy variables: one for each year. 
 
 $$
-  \begin{aligned}
-  energy_{it} =& \delta_t + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it} \\
-  =& \sum_{s=1}^{T}\delta_s \mathbf{1}\{s=t\} + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it}
-  \end{aligned}
+  \delta_t = \sum_{j=1}^{T}\delta_j \mathbf{1}\{j=t\} 
 $$
 
-In place of a constant, we have $T$ dummy variables that identify each period. For any given $t$, only one of these dummies $=1$
+In place of a constant, we have $T$ dummy variables that identify each period. 
+
+- For any given $t$, only one of these dummies $=1$
 
 :::{.callout-note}
-This notation can be very confusing. Do not concern yourself with the complicated sum, but rather the intuition that when we include an intercept in a linear regression it gives us the slope coefficient on a constant (a regressor that $=1$ for all observations). To implement time FEs, we are essentially adding a separate constant for each period time. And these constants are all just dummy variables: $\mathbf{1}\{s=t\}$. 
+This notation can be very confusing. Do not concern yourself with the complicated sum, but rather the intuition that when we include an intercept in a linear regression it gives us the slope coefficient on a constant (a regressor that $=1$ for all observations). To implement time FEs, we are essentially adding a separate constant for each period time. And these constants are all just dummy variables: $\mathbf{1}\{j=t\}$. 
 :::
 
-## In Stata/R
+
 
 # Panel Models
 
 ## Preamble
 
-There is a large, complex literature on panel data models:
+There is a large, fairly complex literature on panel data models:
 
 - Static vs Dynamic models
 
@@ -341,19 +355,59 @@ We are going to skip over many of these topics, to talk about the types of panel
 
 ## Identification
 
-We are going to discuss an estimation procedure that deals with potential endogeneity of error term related to time-invariant heterogeneity ($\nu_{i}$):
+As with cross sectional models, the primary concern is the potential endogeneity of the regressors:
 
 $$
-  \varepsilon_{it} = \nu_{i}+\upsilon_{it}
+  Cov(\varepsilon_{it},x_{itj}) \quad j=1,\dots,k 
 $$
 
-for example, $\nu_{i}$ may reflect unobserved preferences within a household w.r.t. heating of the home. 
 
-- Likely that $E[\nu_{i}|grant_{it},\mathbf{x}_{it},\mathbf{x}_{i}]\neq 0$
+## Composite error
 
-## Covariance
+What's different in panel data is the opportunity to consider a composite error:
 
-But there is also a secondary issue regarding correlation of $\varepsilon_{it}$ across observations in panel data. 
+$$
+  \varepsilon_{it}= \nu_{i}+\upsilon_{it}
+$$
+
+where,
+
+- $\nu_{i}$: time-invariant heterogeneity
+
+  - e.g., unobserved household preferences for heating of the home.
+
+- $\upsilon_{it}$: time-varying unobserved heterogeneity ("shocks")
+
+  - e.g., a household is away and turns off their heating for a month
+
+##
+
+It is likely that time-invariant heterogeneity ($\nu_{i}$) is related to many observed regressors. For example, 
+
+$$
+  Cov(\nu_{i}, grant_{it}) \neq 0
+$$
+
+- households with a strong environmental preferences are more likely to apply for a grant to investment in solar panels. 
+
+  - This would be a problem of "selection on unobservables"
+  
+::: {.fragment .fade-in}
+
+**Fortunatley**, we are going to investigate an estimation procedure that eliminates $\nu_i$ from the equation. So, we only need to concern ourselves with MLR 4a w.r.t. $\upsilon_{it}$.
+
+$$
+  Cov(\upsilon_{it}, x_{itj}) = 0 \quad j=1,\dots,k
+$$
+
+:::
+
+
+## Autocorrelation
+
+A secondary concern relates to the correlation of $\varepsilon_{it}$ across observations in panel data. 
+
+::: incremental
 
 - Suppose we remove $\nu_{i}$ from the model
 
@@ -365,6 +419,8 @@ But there is also a secondary issue regarding correlation of $\varepsilon_{it}$ 
   
   - Issue for estimation of variance. 
   - We fix this by estimating clustered SEs (at the unit level)
+
+:::
 
 ## Example
 
@@ -410,6 +466,8 @@ $$
   energy_{it} = \alpha_i + \delta_t + \beta grant_{it} + \mathbf{x}_{it}\gamma_1 + \varepsilon_{it}
 $$
 
+::: {.fragment .fade-in}
+
 **BUT** by the same logic as before, 
 
 - unit FEs "absorb" anything that is invariant at the unit level: $\mathbf{x}_{i}\gamma_2$
@@ -418,6 +476,8 @@ $$
 
   - unit FEs potentially control for things we do not observe: e.g. household preferences over how warm to keep their home. 
   
+:::
+
 ## Time-varying treatment
 
 Crucially, this means that the treatment variable $grant_{it}$ must vary at the **unit-level over time**. 
@@ -455,8 +515,147 @@ $$
   $$
     \tilde{\varepsilon}_{it} = \tilde{\upsilon}_{it}
   $$
+
+# Data Example: EVs & PM2.5
+
+## Data
+
+Unfortunately, we do not have data on these hypothetical grants. 
+
+- Data on EV vehicle registration and neighbourhood PM2.5 from [Lecture 4](lecture-4-multi.qmd)
+
+$$
+  \ln(PM2.5_{\ell,t}) = \delta_t + \beta EVshare_{\ell,t} + \gamma \ln(pop_{\ell,t}) + u_{\ell,t}
+$$
+
+```{stata}
+*| echo: false
+*| code-fold: false
+*| output: true
+
+* Open data
+use "$data_dir\pm25_panel.dta", clear
+tab year
+```
+
+
+## Pooled cross section {.scrollable}
+
+::: {.panel-tabset}
+
+### Stata 
+
+```{stata}
+*| echo: true
+*| code-fold: true
+*| output: true
+
+est clear
+qui reg ln_pm25 ev_share 
+	est store model1
+qui reg ln_pm25 ev_share ln_pop
+	est store model2
+qui reg ln_pm25 ev_share ln_pop i.year
+	est store model3
+
+etable, est(model1 model2 model3)
+
+```
+
+### R
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+    
+
+# Load the Stata file
+pm25_panel <- read.csv(file.path(data_dir, "pm25_panel.csv"))
+
+# Estimate univariate linear regression
+model1 <- lm(ln_pm25 ~ ev_share, data = pm25_panel)
+model2 <- lm(ln_pm25 ~ ev_share + ln_pop, data = pm25_panel)
+model3 <- lm(ln_pm25 ~ ev_share + ln_pop + factor(year), data = pm25_panel)
+
+# View results
+modelsummary(list("(1)" = model1, "(2)" = model2, "(3)" = model3))
+```
+:::
   
-## In Stata/R
+  
+## Panel {.scrollable}
 
+```{stata}
+*| echo: true
+*| code-fold: true
+*| output: true
 
+est clear
+qui reg ln_pm25 ev_share 
+	est store model1
+qui reg ln_pm25 ev_share ln_pop
+	est store model2
+qui reg ln_pm25 ev_share ln_pop i.year
+	est store model3
+qui areg ln_pm25 ev_share ln_pop i.year, absorb(la_id)
+	est store model4
+etable, est(model1 model2 model3 model4)
 
+```
+
+## Unit FEs {.scrollable}
+
+::: {.panel-tabset}
+
+### Stata 
+
+Legacy panel data approach: `xtreg`
+
+```{stata}
+*| echo: true
+*| code-fold: true
+*| output: true
+
+* First tell Stata the unit and time identifiers
+xtset la_id year
+
+* Estimate fixed effects estimator with xtreg
+xtreg ln_pm25 ev_share ln_pop i.year, fe
+
+```
+
+Modern two-way FEs function `reghdfe`
+
+```{stata}
+*| echo: true
+*| code-fold: true
+*| output: true
+
+reghdfe ln_pm25 ev_share ln_pop, absorb(la_id year)
+
+```
+
+### R
+
+Modern FEs function `reghdfe`
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+    
+
+# Load the fixest package
+library("fixest")
+
+# Estimate model with two-way FEs
+model4 <- feols(ln_pm25 ~ ev_share + ln_pop | la_id + year, data = pm25_panel)
+
+# View results
+summary(model4)
+```
+:::
+
+# References
+
+## Bibliography

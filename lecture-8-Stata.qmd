@@ -1349,8 +1349,8 @@ If we take the ratio of the two ITT effects:
 $$
   \begin{aligned}
   \frac{ITT_y}{ITT_d} =& \frac{E[y_i|w_i=1]-E[y_i|w_i=0]}{E[d_i|w_i=1]-E[d_i|w_i=0]} \\
-  =& \frac{E[y_i(0)-y_i(1)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C})}{Pr(\textcolor{blue}{C})} \\
-  = & E[y_i(0)-y_i(1)|\textcolor{blue}{C}]
+  =& \frac{E[y_i(1)-y_i(0)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C})}{Pr(\textcolor{blue}{C})} \\
+  = & E[y_i(1)-y_i(0)|\textcolor{blue}{C}]
   \end{aligned}
 $$
 
@@ -1545,16 +1545,20 @@ The paper exploits a sharp policy change, resulting in a strong first-stage.
 The estimate the first-stage effect, the specify the model:
 
 $$
-  y_{i} = \pi_0 + \pi_1 d_{i} + \pi_1 yob_{i} + \pi_2 yob^2_{i} + \mathbf{x}_{i}\rho + \varepsilon_i
+  s_{i} = \pi_0 + \pi_1 w_{i} + \pi_1 yob_{i} + \pi_2 yob^2_{i} + \mathbf{x}_{i}\rho + \varepsilon_i
 $$
 
 where, 
 
-- $yob_i$: denotes the individual's year-of-birth (they incldue a polynomial)
+- $s$ is years of schooling (endogenous)
 
-- $d_i$: is a dummy variable denoting that your year-of-birth is later than 1932 (**excluded variable**)
+- $yob$: denotes the individual's year-of-birth (they incldue a polynomial)
 
-*Where does variation in $d_i$ come from?* Is it exogenous?
+- $w$: is a dummy variable denoting that your year-of-birth is later than 1932 (**excluded variable**)
+
+  - exogenous assignment variable
+
+*Where does variation in $W_i$ come from?* 
 
 ## First stage
 

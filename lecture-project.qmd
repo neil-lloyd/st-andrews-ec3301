@@ -1,0 +1,591 @@
+---
+title: Understanding a Simulated Tax Rate
+subtitle: Project Lecture
+format: 
+  html: 
+    output-file: lecture-project.html
+#  pdf: 
+#    output-file: lecture-project-notes.pdf
+  revealjs: 
+    output-file: lecture-project-slides.html
+    footer: "[Project Lecture](lecture-project.qmd) - St Andrews Business School - Martinmas 2026/27"
+engine: knitr
+---
+  
+```{r}
+#| include: false
+#| cache: false
+
+library(Statamarkdown)
+knitr::opts_chunk$set(collectcode = TRUE)
+```
+
+
+```{r}
+#| include: false
+
+# Packages
+library(usincometaxes)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+source(here::here("config.R"))
+```
+
+```{stata}
+*| include: false
+
+do "config.do"
+```
+
+## Overview
+
+- Research question: what is the causal affect of an increase in taxes on:
+  
+  - charitable giving
+  - labour supply
+  - wealth
+  
+- Using data from the Consumer Expenditure survey (for US)
+
+  - years: 2016-2019 $\Rightarrow$ **pooled cross section**. 
+  
+  - avoided 2020 due to Covid
+
+  
+## Specification
+
+Linear regression model
+
+$$
+  y_{it} = \alpha + \beta tax_{it} + \mathbf{x}_{it}\gamma + u_{it}
+$$
+  
+where, 
+
+$$
+  tax_{it} = T(\mathbf{x}_{it},s,t)
+$$
+  
+**Problem:**
+
+- $tax_{it}$ is endogeneous
+
+  - determined by factors that are "self-selected": $\mathbf{x}_{it}$, potentially $s$
+  
+- BUT $tax_{it}$ is also determined by exogenous tax policy: $T(\cdot,s,t)$
+
+
+## Simulated instrument
+
+The literature on elasticity of taxable income [@gruber2002elasticity] asks a similar question:[^1]
+
+[^1]: The paper is available online: [www.sciencedirect.com](https://www.sciencedirect.com/science/article/pii/S0047272701000858)
+
+$$
+  y_{it} = \alpha + \tau tax_{it} + \mathbf{x}_{it}\eta + u_{it}
+$$
+
+Where $y_{it}$ is reported taxable income and $tax_{it}$ is the net-of-tax rate (i.e. 1 minus tax rate)
+
+- Important policy parameter for understanding how tax changes translate into changes in taxable income (i.e. Laffer curve)
+
+## Identification
+
+Since $tax_{it}$ is endogenous 
+
+- Instrument: 
+
+$$
+  sim_{it} = TAXSIM(\mathbf{x}_{it},s,t)
+$$
+  
+  - Predicted $tax_{it}$ based on observable income *in the previous period*
+  
+  - Paper use panel data from administrative tax records
+  
+:::{.callout-warning}
+This project takes inspiration from @gruber2002elasticity, but  we do not have the same data structure. The authors use panel data to look at changes in taxes at the individual/household level. There are other useful examples of approaches to simulated instruments, like @grossman2022health from [Tutorial 4](tutorial-4.qmd).
+:::
+  
+## Reduced form
+
+For this exercise, you will not observe $tax$. 
+
+- Can't conduct IV estimation
+
+- But, you can estimate the reduced form relationship
+
+$$
+  y_{it} = \delta + \beta sim_{it} + x_{it}\gamma + v_{it}
+$$
+ 
+## Identifying variation
+
+Suppose you regress $y$ on $sim$ alone
+
+$$
+  \beta^s = \frac{Cov(y_{it},sim_{it})}{Var(sim_{it})}
+$$
+
+What is the source of variation in $sim_{it}$?
+
+1. Endogenous factors
+
+2. Exogenous factors
+
+## 
+
+If instead, you regress $y$ on $sim$ and a set of controls $\mathbf{x}$
+
+$$
+  y_{it} = \delta + \beta sim_{it} + \mathbf{x}_{it}\gamma + v_{it}
+$$
+   
+Then, 
+
+$$
+    \beta = \frac{Cov(\tilde y_{it},\widetilde{sim}_{it})}{Var(\widetilde{sim}_{it})}
+$$
+
+where $\widetilde{sim}_{it}$ is residual from regressing $sim$ on $\mathbf{x}$
+
+## Controls
+
+So, the controls you choose are important!
+
+- To "isolate" the exogenous variation in $sim$ you need to control for the right factors. 
+
+
+:::{.callout-caution title="Income"}
+The primary determinant of taxes is income. In @gruber2002elasticity the authors use panel data to control for income in the previous period. Meaning income cannot be an outcome of the contemporaneous tax change. 
+
+In the paper, the simulated taxes for the current period are based on current tax policy, but previous period's income. 
+:::
+
+## Matching
+
+If you think about it from a matching perspective, the instrument plugs a set of characteristics into a TAXSIM function[^2]
+
+[^2]: This is the name of the tax simulated used to construct the variable in the CEX.
+
+$$
+  sim_{it} = TAXSIM(\mathbf{x}_{it},s,t)
+$$
+
+That takes as inputs:
+
+- The household's characteristics
+
+- Their state 
+
+- The year
+
+##
+
+If two households ($i,i'$) have the same $\mathbf{x}$, live in the same $s$ state, in the same period $t$,
+
+$$
+  TAXSIM(\mathbf{x}_{it},s,t) = TAXSIM(\mathbf{x}_{i't},s,t) 
+$$
+
+**Perfect match!**
+
+::: {.fragment .fade-in}
+
+If you hold $\mathbf{x}$ fixed (e.g. control for $\mathbf{x}$), 
+
+- with a single state and time period, 
+
+- there is no (identifying) variation in $sim$.
+
+:::
+
+## Different jurisdictions
+
+But you could find two households ($i,i'$) with the same $\mathbf{x}$ in the same period $t$ who live in different states ($s,s'$):
+
+$$
+  TAXSIM(\mathbf{x}_{it},s,t) \neq TAXSIM(\mathbf{x}_{i't},s',t)
+$$
+
+**IF** the states have different tax policies.  
+
+:::: {.fragment .fade-in}
+::: incremental
+
+- You now have variation in $sim$ based on the state people live in. 
+
+- With a single cross-section of data this would be the best you can do. 
+
+- A concern might be that *people choose where to live*. 
+
+  - unobserved preferences that determine the outcome (giving, labour, wealth) may also determine decisions on where to live. 
+
+  - e.g., people know that Florida has low taxes and is a nice place to retire
+
+:::  
+::::
+  
+## Repeated observations
+
+With repeated observations, you can do a bit better. 
+
+- You could find two households ($i,i'$) with the same $\mathbf{x}$, **in the same state** $s$, but different periods ($t,t'$)
+
+$$
+  TAXSIM(\mathbf{x}_{it},s,t) \neq TAXSIM(\mathbf{x}_{i't'},s,t')
+$$
+**IF** there is a *policy change*. 
+
+- Ideally, you would like different states to enact different policy changes
+
+- At a minimum, you want the policy change to affect different groups of people differently. 
+
+## Policy change
+
+The reason you were provided with a pooled cross-section of data from 2016-2019 is the Tax Cuts and Jobs Act (effective 1 January 2018)
+
+![](material/lecture-project/tax-cuts-jobs-act.jpg)
+
+
+## Simulation (1) {.scrollable}
+
+Simulation for single, 40-year-old, with USD 60,000 income
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+
+
+income <- 60000
+states <- c(state.abb, "DC")   # 50 states + DC
+years  <- 2016:2019
+
+# ---- 1. Build the TAXSIM input: one row per state-year ----------------------
+households <- expand_grid(year = years, state = states) %>%
+  mutate(taxsimid = row_number(),
+         mstat    = "single",
+         page     = 40,       # primary taxpayer's age
+         depx     = 0,        # number of dependents
+         pwages   = income)
+
+# ---- 2. Calculate taxes ------------------------------------------------------
+taxes <- taxsim_calculate_taxes(households,
+                                marginal_tax_rates = "Wages")
+
+# ---- 3. Average tax rates (% of gross income) --------------------------------
+rates <- households %>%
+  left_join(taxes, by = "taxsimid") %>%
+  mutate(federal_atr = 100 * fiitax / pwages,
+         state_atr   = 100 * siitax / pwages,
+         income_atr  = federal_atr + state_atr,
+         fica_atr    = 100 * tfica / pwages,   # employee share of payroll tax
+         total_atr   = income_atr + fica_atr)
+
+#write.csv(rates, "avg_tax_rate_60k_by_state.csv", row.names = FALSE)
+
+# ---- 4. Plot: one row per state, a dot per year -----------------------------
+# Sort states by their 2019 rate
+state_order <- rates %>%
+  filter(year == 2019) %>%
+  arrange(income_atr) %>%
+  pull(state)
+
+plot_data <- rates %>%
+  mutate(state = factor(state, levels = state_order),
+         year  = factor(year))
+
+ggplot(plot_data, aes(x = total_atr, y = state)) +
+  geom_line(aes(group = state), colour = "grey85", linewidth = 0.8) +
+  geom_point(aes(colour = year), size = 2.2) +
+  scale_colour_manual(values = c("2016" = "#86b6ef", "2017" = "#3987e5",
+                                 "2018" = "#1c5cab", "2019" = "#0d366b")) +
+  labs(title    = "Average income tax rate at $60,000 by state, 2016-2019",
+       x        = "Total income tax, % of gross wages",
+       y        = NULL,
+       colour   = NULL,
+       caption  = paste("Single filer, age 40, no dependents, $60,000 wages.",
+                        "Includes local taxes and payroll tax.",
+                        "Source: NBER TAXSIM 35 via usincometaxes.",
+                        sep = "\n")) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position     = "top",
+        panel.grid.major.y  = element_blank(),
+        panel.grid.minor    = element_blank(),
+        plot.caption        = element_text(hjust = 0, colour = "grey40")) +
+  scale_x_continuous(limits = c(0, 50),
+                     breaks = seq(0, 50, by = 10),
+                     labels = function(x) paste0(x, "%")) +
+  scale_y_discrete(guide = guide_axis(n.dodge = 2))
+
+```
+
+## Simulation (1) {.scrollable}
+
+Simulation for single, 40-year-old, with USD 120,000 income
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+
+
+# ---- 1. Build the TAXSIM input: one row per state-year ----------------------
+households <- expand_grid(year = years, state = states) %>%
+  mutate(taxsimid = row_number(),
+         mstat    = "single",
+         page     = 40,       # primary taxpayer's age
+         depx     = 0,        # number of dependents
+         pwages   = income*2)
+
+# ---- 2. Calculate taxes ------------------------------------------------------
+taxes <- taxsim_calculate_taxes(households,
+                                marginal_tax_rates = "Wages")
+
+# ---- 3. Average tax rates (% of gross income) --------------------------------
+rates <- households %>%
+  left_join(taxes, by = "taxsimid") %>%
+  mutate(federal_atr = 100 * fiitax / pwages,
+         state_atr   = 100 * siitax / pwages,
+         income_atr  = federal_atr + state_atr,
+         fica_atr    = 100 * tfica / pwages,   # employee share of payroll tax
+         total_atr   = income_atr + fica_atr)
+
+#write.csv(rates, "avg_tax_rate_60k_by_state.csv", row.names = FALSE)
+
+# ---- 4. Plot: one row per state, a dot per year -----------------------------
+# Sort states by their 2019 rate
+state_order <- rates %>%
+  filter(year == 2019) %>%
+  arrange(income_atr) %>%
+  pull(state)
+
+plot_data <- rates %>%
+  mutate(state = factor(state, levels = state_order),
+         year  = factor(year))
+
+ggplot(plot_data, aes(x = total_atr, y = state)) +
+  geom_line(aes(group = state), colour = "grey85", linewidth = 0.8) +
+  geom_point(aes(colour = year), size = 2.2) +
+  scale_colour_manual(values = c("2016" = "#86b6ef", "2017" = "#3987e5",
+                                 "2018" = "#1c5cab", "2019" = "#0d366b")) +
+  labs(title    = "Average income tax rate at $120,000 by state, 2016-2019",
+       x        = "Total income tax, % of gross wages",
+       y        = NULL,
+       colour   = NULL,
+       caption  = paste("Single filer, age 40, no dependents, $120,000 wages.",
+                        "Includes local taxes and payroll tax.",
+                        "Source: NBER TAXSIM 35 via usincometaxes.",
+                        sep = "\n")) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position     = "top",
+        panel.grid.major.y  = element_blank(),
+        panel.grid.minor    = element_blank(),
+        plot.caption        = element_text(hjust = 0, colour = "grey40")) +
+  scale_x_continuous(limits = c(0, 50),
+                     breaks = seq(0, 50, by = 10),
+                     labels = function(x) paste0(x, "%")) +
+  scale_y_discrete(guide = guide_axis(n.dodge = 2))
+
+```
+
+## Simulation (3) {.scrollable}
+
+Simulation for married, 40-year-old couple, single-earner, 2 children (ages 6 and 8), with USD 60,000 income
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+
+# ---- 1. Build the TAXSIM input: one row per state-year ----------------------
+households <- expand_grid(year = years, state = states) %>%
+  mutate(taxsimid = row_number(),
+         mstat    = "married, jointly",
+         page     = 40,       # primary taxpayer's age
+         sage     = 40,       # spouse's age
+         depx     = 2,        # number of dependents
+         age1     = 6,       # ages of the dependents
+         age2     = 8,
+         pwages   = income,   # all wages earned by one spouse
+         swages   = 0)
+
+# ---- 2. Calculate taxes ------------------------------------------------------
+taxes <- taxsim_calculate_taxes(households,
+                                marginal_tax_rates = "Wages")
+
+# ---- 3. Average tax rates (% of gross income) --------------------------------
+rates <- households %>%
+  left_join(taxes, by = "taxsimid") %>%
+  mutate(federal_atr = 100 * fiitax / pwages,
+         state_atr   = 100 * siitax / pwages,
+         income_atr  = federal_atr + state_atr,
+         fica_atr    = 100 * tfica / pwages,   # employee share of payroll tax
+         total_atr   = income_atr + fica_atr)
+
+#write.csv(rates, "avg_tax_rate_60k_by_state.csv", row.names = FALSE)
+
+# ---- 4. Plot: one row per state, a dot per year -----------------------------
+# Sort states by their 2019 rate
+state_order <- rates %>%
+  filter(year == 2019) %>%
+  arrange(income_atr) %>%
+  pull(state)
+
+plot_data <- rates %>%
+  mutate(state = factor(state, levels = state_order),
+         year  = factor(year))
+
+ggplot(plot_data, aes(x = total_atr, y = state)) +
+  geom_line(aes(group = state), colour = "grey85", linewidth = 0.8) +
+  geom_point(aes(colour = year), size = 2.2) +
+  scale_colour_manual(values = c("2016" = "#86b6ef", "2017" = "#3987e5",
+                                 "2018" = "#1c5cab", "2019" = "#0d366b")) +
+  labs(title    = "Average income tax rate at $60,000 by state, 2016-2019",
+       x        = "Total income tax, % of gross wages",
+       y        = NULL,
+       colour   = NULL,
+       caption  = paste("Married filer, age 40, 2 dependents, $60,000 wages single earner.",
+                        "Includes local taxes and payroll tax.",
+                        "Source: NBER TAXSIM 35 via usincometaxes.",
+                        sep = "\n")) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position     = "top",
+        panel.grid.major.y  = element_blank(),
+        panel.grid.minor    = element_blank(),
+        plot.caption        = element_text(hjust = 0, colour = "grey40")) +
+  scale_x_continuous(limits = c(0, 50),
+                     breaks = seq(0, 50, by = 10),
+                     labels = function(x) paste0(x, "%")) +
+  scale_y_discrete(guide = guide_axis(n.dodge = 2))
+
+```
+
+## Simulation (4) {.scrollable}
+
+Simulation for married, 40-year-old couple, double-earner, 2 children (ages 6 and 8), with USD 60,000 income **each**
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| warning: false
+
+
+# ---- 1. Build the TAXSIM input: one row per state-year ----------------------
+households <- expand_grid(year = years, state = states) %>%
+  mutate(taxsimid = row_number(),
+         mstat    = "married, jointly",
+         page     = 40,       # primary taxpayer's age
+         sage     = 40,       # spouse's age
+         depx     = 2,        # number of dependents
+         age1     = 6,       # ages of the dependents
+         age2     = 8,
+         pwages   = income,   # all wages earned by one spouse
+         swages   = income)
+
+# ---- 2. Calculate taxes ------------------------------------------------------
+taxes <- taxsim_calculate_taxes(households,
+                                marginal_tax_rates = "Wages")
+
+# ---- 3. Average tax rates (% of gross income) --------------------------------
+rates <- households %>%
+  left_join(taxes, by = "taxsimid") %>%
+  mutate(federal_atr = 100 * fiitax / pwages,
+         state_atr   = 100 * siitax / pwages,
+         income_atr  = federal_atr + state_atr,
+         fica_atr    = 100 * tfica / pwages,   # employee share of payroll tax
+         total_atr   = income_atr + fica_atr)
+
+#write.csv(rates, "avg_tax_rate_60k_by_state.csv", row.names = FALSE)
+
+# ---- 4. Plot: one row per state, a dot per year -----------------------------
+# Sort states by their 2019 rate
+state_order <- rates %>%
+  filter(year == 2019) %>%
+  arrange(income_atr) %>%
+  pull(state)
+
+plot_data <- rates %>%
+  mutate(state = factor(state, levels = state_order),
+         year  = factor(year))
+
+ggplot(plot_data, aes(x = total_atr, y = state)) +
+  geom_line(aes(group = state), colour = "grey85", linewidth = 0.8) +
+  geom_point(aes(colour = year), size = 2.2) +
+  scale_colour_manual(values = c("2016" = "#86b6ef", "2017" = "#3987e5",
+                                 "2018" = "#1c5cab", "2019" = "#0d366b")) +
+  labs(title    = "Average income tax rate at $120,000 by state, 2016-2019",
+       x        = "Total tax, % of gross wages",
+       y        = NULL,
+       colour   = NULL,
+       caption  = paste("Married filer, age 40, 2 dependents, $60,000 wages both earners.",
+                        "Includes local taxes and payroll tax.",
+                        "Source: NBER TAXSIM 35 via usincometaxes.",
+                        sep = "\n")) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position     = "top",
+        panel.grid.major.y  = element_blank(),
+        panel.grid.minor    = element_blank(),
+        plot.caption        = element_text(hjust = 0, colour = "grey40")) +
+  scale_x_continuous(limits = c(0, 50),
+                     breaks = seq(0, 50, by = 10),
+                     labels = function(x) paste0(x, "%")) +
+  scale_y_discrete(guide = guide_axis(n.dodge = 2))
+
+```
+
+## CEX (2016-2019)
+
+The data at your disposal is a repeated cross section of **households**. 
+
+::: incremental
+
+- In the CEX, households are surveyed four times (i.e. a panel), but only the final interview asks about wealth. This is the one you observe. 
+
+- Income is also recorded in the final interview.
+
+  - it represents the previous 12 months' income (i.e. partly lagged, by up to 12 months)
+
+  - may not span an exact calendar/tax year. 
+  
+- The tax variables are a weighted average of taxes for overlapping tax years, 
+
+  - based on the months reported in each tax year 
+
+  - **not ideal**, but does include some exogenous variation resulting from policy reforms
+
+  - you really see tax change taking effect in 2019 data, as 2018 income records partly reflect 2017 income. 
+  
+:::
+
+## CEX Plots
+
+```{stata}
+*| echo: true
+*| code-fold: true
+*| output: false
+
+use "$data_dir\cex2016_2019.dta", clear
+
+drop if state_fips==.
+drop if inlist(state_fips,54,33,18,19,10,11)
+drop if atr_total<0 | atr_total>1
+
+collapse (mean) atr_total, by(region release_year)
+
+xtset region release_year
+```
+
+```{stata}
+*| echo: true
+*| code-fold: true
+*| stata.fig: true
+
+xtline atr_total, overlay xtitle(Survey Year) ytitle(Average of atr_total) ylabel(0.05(0.05)0.15) legend(pos(2) ring(0)) title("Selecting on households within incomes $30,000 to $120,000")
+```
+
+## Bibliography
+

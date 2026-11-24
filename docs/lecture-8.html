@@ -386,6 +386,14 @@ window.Quarto = {
     <a class="dropdown-item" href="./lecture-8.html">
  <span class="dropdown-text">Lecture 8</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-9.html">
+ <span class="dropdown-text">Lecture 9</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-project.html">
+ <span class="dropdown-text">Project Lecture</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -2234,8 +2242,8 @@ Note
 <p><span class="math display">\[
   \begin{aligned}
   \frac{ITT_y}{ITT_d} =&amp; \frac{E[y_i|w_i=1]-E[y_i|w_i=0]}{E[d_i|w_i=1]-E[d_i|w_i=0]} \\
-  =&amp; \frac{E[y_i(0)-y_i(1)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C})}{Pr(\textcolor{blue}{C})} \\
-  = &amp; E[y_i(0)-y_i(1)|\textcolor{blue}{C}]
+  =&amp; \frac{E[y_i(1)-y_i(0)|\textcolor{blue}{C}]\times Pr(\textcolor{blue}{C})}{Pr(\textcolor{blue}{C})} \\
+  = &amp; E[y_i(1)-y_i(0)|\textcolor{blue}{C}]
   \end{aligned}
 \]</span></p>
 <p>We call this the <strong>Local Average Treatment Effect</strong> (LATE)</p>
@@ -2419,14 +2427,18 @@ Caution
 <h2 class="anchored" data-anchor-id="estimation-1">Estimation</h2>
 <p>The estimate the first-stage effect, the specify the model:</p>
 <p><span class="math display">\[
-  y_{i} = \pi_0 + \pi_1 d_{i} + \pi_1 yob_{i} + \pi_2 yob^2_{i} + \mathbf{x}_{i}\rho + \varepsilon_i
+  s_{i} = \pi_0 + \pi_1 w_{i} + \pi_1 yob_{i} + \pi_2 yob^2_{i} + \mathbf{x}_{i}\rho + \varepsilon_i
 \]</span></p>
 <p>where,</p>
 <ul>
-<li><p><span class="math inline">\(yob_i\)</span>: denotes the individual’s year-of-birth (they incldue a polynomial)</p></li>
-<li><p><span class="math inline">\(d_i\)</span>: is a dummy variable denoting that your year-of-birth is later than 1932 (<strong>excluded variable</strong>)</p></li>
+<li><p><span class="math inline">\(s\)</span> is years of schooling (endogenous)</p></li>
+<li><p><span class="math inline">\(yob\)</span>: denotes the individual’s year-of-birth (they incldue a polynomial)</p></li>
+<li><p><span class="math inline">\(w\)</span>: is a dummy variable denoting that your year-of-birth is later than 1932 (<strong>excluded variable</strong>)</p>
+<ul>
+<li>exogenous assignment variable</li>
+</ul></li>
 </ul>
-<p><em>Where does variation in <span class="math inline">\(d_i\)</span> come from?</em> Is it exogenous?</p>
+<p><em>Where does variation in <span class="math inline">\(W_i\)</span> come from?</em></p>
 </section>
 <section id="first-stage-3" class="level2">
 <h2 class="anchored" data-anchor-id="first-stage-3">First stage</h2>

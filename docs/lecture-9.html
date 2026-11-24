@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Repeated Observations and Difference in Differences – EC3301 Econometrics</title>
+<title>Multi-Period Models and Difference in Differences – EC3301 Econometrics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -351,6 +386,14 @@ window.Quarto = {
     <a class="dropdown-item" href="./lecture-8.html">
  <span class="dropdown-text">Lecture 8</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-9.html">
+ <span class="dropdown-text">Lecture 9</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lecture-project.html">
+ <span class="dropdown-text">Project Lecture</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -479,10 +522,12 @@ window.Quarto = {
    
   <ul>
   <li><a href="#data-structure-notation" id="toc-data-structure-notation" class="nav-link active" data-scroll-target="#data-structure-notation">Data Structure &amp; Notation</a></li>
-  <li><a href="#pooled-cross-sections-1" id="toc-pooled-cross-sections-1" class="nav-link" data-scroll-target="#pooled-cross-sections-1">Pooled Cross-sections</a></li>
+  <li><a href="#pooled-cross-sections-1" id="toc-pooled-cross-sections-1" class="nav-link" data-scroll-target="#pooled-cross-sections-1">Pooled Cross Sections</a></li>
   <li><a href="#panel-models" id="toc-panel-models" class="nav-link" data-scroll-target="#panel-models">Panel Models</a></li>
+  <li><a href="#data-example-evs-pm2.5" id="toc-data-example-evs-pm2.5" class="nav-link" data-scroll-target="#data-example-evs-pm2.5">Data Example: EVs &amp; PM2.5</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-9-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-9-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="lecture-9-notes-Stata.pdf"><i class="bi bi-file-pdf"></i>PDF with Stata</a></li><li><a href="lecture-9-notes-R.pdf"><i class="bi bi-file-pdf"></i>PDF with R</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -490,7 +535,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Repeated Observations and Difference in Differences</h1>
+<h1 class="title">Multi-Period Models and Difference in Differences</h1>
 <p class="subtitle lead">Lecture 9</p>
 </div>
 
@@ -510,29 +555,29 @@ window.Quarto = {
 
 <section id="data-structure-notation" class="level1">
 <h1>Data Structure &amp; Notation</h1>
-<section id="cross-section" class="level2">
-<h2 class="anchored" data-anchor-id="cross-section">Cross-section</h2>
+<section id="single-cross-section" class="level2">
+<h2 class="anchored" data-anchor-id="single-cross-section">Single cross section</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-778ea28ebc4be7bc55c5" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-778ea28ebc4be7bc55c5">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[1,1,1,1,1],[1,0,1,0,0],[0.4,0.4,0.4,0.4,0.4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_i","targets":2},{"name":"empl_rate_1","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ff01788c4a3235c8fd0b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ff01788c4a3235c8fd0b">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[1,1,1,1,1],[1,0,1,0,0],[0.4,0.4,0.4,0.4,0.4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_i","targets":2},{"name":"empl_rate_1","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="pooled-cross-sections" class="level2">
-<h2 class="anchored" data-anchor-id="pooled-cross-sections">Pooled cross-sections</h2>
+<h2 class="anchored" data-anchor-id="pooled-cross-sections">Pooled cross sections</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Stacks one cross-section atop another</p>
+<p>Stacks one cross section atop another</p>
 <ul>
-<li><p>Also referred to as <em>repeated</em> cross-sections</p></li>
+<li><p>Also referred to as <em>repeated</em> cross sections</p></li>
 <li><p>Cannot follow the same individual through time.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-9dfa71563e49e6b5356b" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9dfa71563e49e6b5356b">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10],[1,1,1,1,1,2,2,2,2,2],[1,0,1,0,0,1,1,0,0,1],[0.4,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.6,0.6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_it","targets":2},{"name":"empl_rate_t","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-8afca7897d2143bb95dc" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8afca7897d2143bb95dc">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10],[1,1,1,1,1,2,2,2,2,2],[1,0,1,0,0,1,1,0,0,1],[0.4,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.6,0.6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_it","targets":2},{"name":"empl_rate_t","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -547,8 +592,8 @@ window.Quarto = {
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-c1ef983e4a995dec84ac" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c1ef983e4a995dec84ac">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[1,0,1,0,0],[0.4,0.4,0.4,0.4,0.4],[1,1,0,0,1],[0.6,0.6,0.6,0.6,0.6],[1,0.5,0.5,0,0.5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Empl-stat (1)<\/th>\n      <th>Empl-rate (1)<\/th>\n      <th>Empl-stat (2)<\/th>\n      <th>Empl-rate (2)<\/th>\n      <th>Empl-rate (i)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]},{"name":"id","targets":0},{"name":"empl_i1","targets":1},{"name":"empl_rate_1","targets":2},{"name":"empl_i2","targets":3},{"name":"empl_rate_2","targets":4},{"name":"empl_rate_i","targets":5}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-bf3767f7fa045ef3552d" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-bf3767f7fa045ef3552d">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[1,0,1,0,0],[0.4,0.4,0.4,0.4,0.4],[1,1,0,0,1],[0.6,0.6,0.6,0.6,0.6],[1,0.5,0.5,0,0.5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Empl-stat (1)<\/th>\n      <th>Empl-rate (1)<\/th>\n      <th>Empl-stat (2)<\/th>\n      <th>Empl-rate (2)<\/th>\n      <th>Empl-rate (i)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]},{"name":"id","targets":0},{"name":"empl_i1","targets":1},{"name":"empl_rate_1","targets":2},{"name":"empl_i2","targets":3},{"name":"empl_rate_2","targets":4},{"name":"empl_rate_i","targets":5}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -556,12 +601,12 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="section"></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>For estimation, you need the data in <strong>long</strong> form (<em>akin to repeated cross-sections</em>)</p>
+<p>For estimation, you need the data in <strong>long</strong> form (<em>akin to repeated cross sections</em>)</p>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-dd7607c45f92dbc0a033" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-dd7607c45f92dbc0a033">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,1,2,3,4,5],[1,1,1,1,1,2,2,2,2,2],[1,0,1,0,0,1,1,0,0,1],[0.4,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.6,0.6],[1,0.5,0.5,0,0.5,1,0.5,0.5,0,0.5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n      <th>Empl-rate (i)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_it","targets":2},{"name":"empl_rate_t","targets":3},{"name":"empl_rate_i","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-48fd6d7724447bffa783" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-48fd6d7724447bffa783">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,1,2,3,4,5],[1,1,1,1,1,2,2,2,2,2],[1,0,1,0,0,1,1,0,0,1],[0.4,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.6,0.6],[1,0.5,0.5,0,0.5,1,0.5,0.5,0,0.5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n      <th>Empl-rate (i)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_it","targets":2},{"name":"empl_rate_t","targets":3},{"name":"empl_rate_i","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -569,7 +614,7 @@ window.Quarto = {
 </section>
 <section id="notation" class="level2">
 <h2 class="anchored" data-anchor-id="notation">Notation</h2>
-<p>When we write down a linear regression model for a either a repeated cross-section or panel dataset, we add both <span class="math inline">\(i\)</span> and <span class="math inline">\(t\)</span> to the subscripts:</p>
+<p>When we write down a linear regression model for a either a repeated cross section or panel dataset, we add both <span class="math inline">\(i\)</span> and <span class="math inline">\(t\)</span> to the subscripts:</p>
 <p><span class="math display">\[
   y_{it} = \beta_0 + \beta_1 x_{it1} + \beta_2 x_{it2} + \dots + \beta_k x_{itk} + u_{it}
 \]</span></p>
@@ -589,9 +634,9 @@ window.Quarto = {
 </section>
 </section>
 <section id="pooled-cross-sections-1" class="level1">
-<h1>Pooled Cross-sections</h1>
-<section id="example-poverty-scp" class="level2">
-<h2 class="anchored" data-anchor-id="example-poverty-scp">Example: Poverty &amp; SCP</h2>
+<h1>Pooled Cross Sections</h1>
+<section id="hypothetical-example-poverty-scp" class="level2">
+<h2 class="anchored" data-anchor-id="hypothetical-example-poverty-scp">Hypothetical example: Poverty &amp; SCP</h2>
 <p>Suppose, a researcher wants to evaluate the impact that of the <a href="https://www.homeenergyscotland.org/home-energy-scotland-grant-loan">Home Energy Scotland Grant and Loan</a> programme on a household’s energy expenditure.</p>
 <ul>
 <li>Grant of up to £7,500 to install clean heating systems and energy efficiency measures.</li>
@@ -608,7 +653,7 @@ window.Quarto = {
 <p><span class="math display">\[
   energy_{it} = \delta + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it}
 \]</span></p>
-<p>To be estimated using repeated cross-sections of the Scottish Household Survey.</p>
+<p>To be estimated using repeated cross sections of the Scottish Household Survey.</p>
 <ul>
 <li><p><span class="math inline">\(energy_{it}\)</span>: amount (£’s) spent on energy</p></li>
 <li><p><span class="math inline">\(grant_{it}\)</span>: cumulative amount received from the programme</p></li>
@@ -631,8 +676,11 @@ window.Quarto = {
 <p>But there are other key macroeconomics variables that explain expenditure on energy over time:</p>
 <ol type="1">
 <li><p>Global oil price</p></li>
-<li><p>Exchange rate (GBP-USD)</p></li>
-<li><p>Domestic energy prices (determined by domestic markets)</p></li>
+<li><p>Global gas price</p></li>
+<li><p>Domestic energy prices (gas,electricity)</p>
+<ul>
+<li>Determined by domestic auctions: marginal supplier</li>
+</ul></li>
 </ol>
 <p>This variables vary with time, but NOT across households:</p>
 <p><span class="math display">\[
@@ -653,7 +701,7 @@ window.Quarto = {
 </section>
 <section id="identification" class="level2">
 <h2 class="anchored" data-anchor-id="identification">Identification</h2>
-<p>Since the data comprises repeated cross-sections of individual, it is reasonable to assume that each observation is a random draw from the underlying population (MLR 2).</p>
+<p>Since the data comprises repeated cross sections of individual, it is reasonable to assume that each observation is a random draw from the underlying population (MLR 2).</p>
 <p><br>
 </p>
 <ul>
@@ -668,22 +716,31 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="time-varying-parameters">Time-varying parameters</h2>
 <p>We could evaluate this question using a Chow test:</p>
 <ul>
-<li><p>Estimate the model separately for each year:</p>
+<li>Estimate the model separately for each year:</li>
+</ul>
 <p><span class="math display">\[
-energy_{is} = \delta_s + \beta_s grant_{is} + \mathbf{x}_{is}\gamma_s + \mathbf{z}_s\eta_s + \varepsilon_{is} \quad \text{for}\;s = 1,\dots,T
-\]</span></p></li>
-<li><p>Test whether the parameters vary using <span class="math inline">\(SSR_s\)</span> from each equation.</p></li>
+  energy_{it} = \delta_t + \beta_t grant_{it} + \mathbf{x}_{it}\gamma_t + \mathbf{z}_t\eta_t + \varepsilon_{it} \quad \text{for}\;t = 1,\dots,T
+\]</span></p>
+<ul>
+<li>Test whether the parameters vary using <span class="math inline">\(SSR_t\)</span> from each equation.</li>
 </ul>
 </section>
 <section id="section-2" class="level2">
 <h2 class="anchored" data-anchor-id="section-2"></h2>
-<p><strong>BUT</strong> there is a problem here for <span class="math inline">\(\mathbf{z}_s\eta_s\)</span> in the model:</p>
-<ul>
-<li><p>In any given period, these variables do not vary</p></li>
-<li><p>e.g., if oil price is $100 (per barrol) for period <span class="math inline">\(s=1\)</span> and $120 (per barrol) for period <span class="math inline">\(s=2\)</span></p></li>
-<li><p>but within a given period <span class="math inline">\(t\)</span>, the oil price doesn’t vary across households.</p></li>
-<li><p>So, <span class="math inline">\(\mathbf{z}_s\eta_s\)</span> is a constant! And cannot be separately identified from <span class="math inline">\(\delta_s\)</span>, the time-varying constant.</p></li>
+<p><strong>BUT</strong> there is a problem with <span class="math inline">\(\mathbf{z}_t\eta_t\)</span> in this model:</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p>In any given period, these variables do not vary</p>
+<ul class="incremental">
+<li><p>e.g., oil price is $100 in period <span class="math inline">\(t=1\)</span> and $120 for period <span class="math inline">\(t=2\)</span></p></li>
+<li><p>but within a given period <span class="math inline">\(t\)</span>, the oil price doesn’t vary across households</p></li>
+</ul></li>
+<li><p>So, <span class="math inline">\(\mathbf{z}_t\eta_t\)</span> is a constant in each individual cross section</p>
+<ul class="incremental">
+<li>cannot be separately identified from <span class="math inline">\(\delta_t\)</span>, the time-varying constant</li>
+</ul></li>
 </ul>
+</div>
 </section>
 <section id="time-fixed-effects" class="level2">
 <h2 class="anchored" data-anchor-id="time-fixed-effects">Time fixed effects</h2>
@@ -692,22 +749,24 @@ energy_{is} = \delta_s + \beta_s grant_{is} + \mathbf{x}_{is}\gamma_s + \mathbf{
   energy_{it} = \delta_t + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it}
 \]</span></p>
 <p>then we must exclude all variables that also vary <em>only</em> with time: <span class="math inline">\(\mathbf{z}_t\eta\)</span></p>
-<ul>
+<div class="incremental">
+<ul class="incremental">
 <li><p>We call <span class="math inline">\(\delta_t\)</span> <strong>time fixed effects</strong></p></li>
 <li><p>These time FEs “absorb” any other variables that vary only with time.</p></li>
 <li><p>We say, time FEs “control” for any time-varying (e.g., macroeconomic) factors/shocks; <strong>even ones we don’t observe</strong> in the data.</p></li>
 </ul>
+</div>
 </section>
 <section id="time-dummies" class="level2">
 <h2 class="anchored" data-anchor-id="time-dummies">Time dummies:</h2>
 <p>When it comes to estimation, time FEs are equvilent to including a set of dummy variables: one for each year.</p>
 <p><span class="math display">\[
-  \begin{aligned}
-  energy_{it} =&amp; \delta_t + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it} \\
-  =&amp; \sum_{s=1}^{T}\delta_s \mathbf{1}\{s=t\} + \beta grant_{it} + \mathbf{x}_{it}\gamma + \varepsilon_{it}
-  \end{aligned}
+  \delta_t = \sum_{j=1}^{T}\delta_j \mathbf{1}\{j=t\}
 \]</span></p>
-<p>In place of a constant, we have <span class="math inline">\(T\)</span> dummy variables that identify each period. For any given <span class="math inline">\(t\)</span>, only one of these dummies <span class="math inline">\(=1\)</span></p>
+<p>In place of a constant, we have <span class="math inline">\(T\)</span> dummy variables that identify each period.</p>
+<ul>
+<li>For any given <span class="math inline">\(t\)</span>, only one of these dummies <span class="math inline">\(=1\)</span></li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -718,19 +777,16 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This notation can be very confusing. Do not concern yourself with the complicated sum, but rather the intuition that when we include an intercept in a linear regression it gives us the slope coefficient on a constant (a regressor that <span class="math inline">\(=1\)</span> for all observations). To implement time FEs, we are essentially adding a separate constant for each period. And these constants are all just dummy variables: <span class="math inline">\(\mathbf{1}\{s=t\}\)</span>.</p>
+<p>This notation can be very confusing. Do not concern yourself with the complicated sum, but rather the intuition that when we include an intercept in a linear regression it gives us the slope coefficient on a constant (a regressor that <span class="math inline">\(=1\)</span> for all observations). To implement time FEs, we are essentially adding a separate constant for each period time. And these constants are all just dummy variables: <span class="math inline">\(\mathbf{1}\{j=t\}\)</span>.</p>
 </div>
 </div>
-</section>
-<section id="in-statar" class="level2">
-<h2 class="anchored" data-anchor-id="in-statar">In Stata/R</h2>
 </section>
 </section>
 <section id="panel-models" class="level1">
 <h1>Panel Models</h1>
 <section id="preamble" class="level2">
 <h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
-<p>There is a large, complex literature on panel data models:</p>
+<p>There is a large, fairly complex literature on panel data models:</p>
 <ul>
 <li><p>Static vs Dynamic models</p></li>
 <li><p>Short (small <span class="math inline">\(T\)</span>) vs long (large <span class="math inline">\(T\)</span>) panels</p></li>
@@ -743,29 +799,64 @@ Note
 </section>
 <section id="identification-1" class="level2">
 <h2 class="anchored" data-anchor-id="identification-1">Identification</h2>
-<p>We are going to discuss an estimation procedure that deals with potential endogeneity of error term related to time-invariant heterogeneity (<span class="math inline">\(\nu_{i}\)</span>):</p>
+<p>As with cross sectional models, the primary concern is the potential endogeneity of the regressors:</p>
 <p><span class="math display">\[
-  \varepsilon_{it} = \nu_{i}+\upsilon_{it}
+  Cov(\varepsilon_{it},x_{itj}) \quad j=1,\dots,k
 \]</span></p>
-<p>for example, <span class="math inline">\(\nu_{i}\)</span> may reflect unobserved preferences within a household w.r.t. heating fo the home.</p>
+</section>
+<section id="composite-error" class="level2">
+<h2 class="anchored" data-anchor-id="composite-error">Composite error</h2>
+<p>What’s different in panel data is the opportunity to consider a composite error:</p>
+<p><span class="math display">\[
+  \varepsilon_{it}= \nu_{i}+\upsilon_{it}
+\]</span></p>
+<p>where,</p>
 <ul>
-<li>Likely that <span class="math inline">\(E[\nu_{i}|grant_{it},\mathbf{x}_{it},\mathbf{x}_{i}]\neq 0\)</span></li>
+<li><p><span class="math inline">\(\nu_{i}\)</span>: time-invariant heterogeneity</p>
+<ul>
+<li>e.g., unobserved household preferences for heating of the home.</li>
+</ul></li>
+<li><p><span class="math inline">\(\upsilon_{it}\)</span>: time-varying unobserved heterogeneity (“shocks”)</p>
+<ul>
+<li>e.g., a household is away and turns off their heating for a month</li>
+</ul></li>
 </ul>
 </section>
-<section id="covariance" class="level2">
-<h2 class="anchored" data-anchor-id="covariance">Covariance</h2>
-<p>But there is also an issue regarding correlation of <span class="math inline">\(\varepsilon_{it}\)</span> across observations.</p>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3"></h2>
+<p>It is likely that time-invariant heterogeneity (<span class="math inline">\(\nu_{i}\)</span>) is related to many observed regressors. For example,</p>
+<p><span class="math display">\[
+  Cov(\nu_{i}, grant_{it}) \neq 0
+\]</span></p>
 <ul>
-<li><p>Suppose we deal with <span class="math inline">\(\nu_{i}\)</span></p></li>
+<li><p>households with a strong environmental preferences are more likely to apply for a grant to investment in solar panels.</p>
+<ul>
+<li>This would be a problem of “selection on unobservables”</li>
+</ul></li>
+</ul>
+<div class="fragment fade-in">
+<p><strong>Fortunatley</strong>, we are going to investigate an estimation procedure that eliminates <span class="math inline">\(\nu_i\)</span> from the equation. So, we only need to concern ourselves with MLR 4a w.r.t. <span class="math inline">\(\upsilon_{it}\)</span>.</p>
+<p><span class="math display">\[
+  Cov(\upsilon_{it}, x_{itj}) = 0 \quad j=1,\dots,k
+\]</span></p>
+</div>
+</section>
+<section id="autocorrelation" class="level2">
+<h2 class="anchored" data-anchor-id="autocorrelation">Autocorrelation</h2>
+<p>A secondary concern relates to the correlation of <span class="math inline">\(\varepsilon_{it}\)</span> across observations in panel data.</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p>Suppose we remove <span class="math inline">\(\nu_{i}\)</span> from the model</p></li>
 <li><p>We must expect that</p>
 <p><span class="math display">\[
   Cov(\upsilon_{it},\upsilon_{is}) \neq 0 \quad \text{for}\; t\neq s
 \]</span></p>
-<ul>
+<ul class="incremental">
 <li>Issue for estimation of variance.</li>
 <li>We fix this by estimating clustered SEs (at the unit level)</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="example" class="level2">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
@@ -801,6 +892,7 @@ Note
 <p><span class="math display">\[
   energy_{it} = \alpha_i + \delta_t + \beta grant_{it} + \mathbf{x}_{it}\gamma_1 + \varepsilon_{it}
 \]</span></p>
+<div class="fragment fade-in">
 <p><strong>BUT</strong> by the same logic as before,</p>
 <ul>
 <li><p>unit FEs “absorb” anything that is invariant at the unit level: <span class="math inline">\(\mathbf{x}_{i}\gamma_2\)</span></p></li>
@@ -809,6 +901,7 @@ Note
 <li>unit FEs potentially control for things we do not observe: e.g.&nbsp;household preferences over how warm to keep their home.</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="time-varying-treatment" class="level2">
 <h2 class="anchored" data-anchor-id="time-varying-treatment">Time-varying treatment</h2>
@@ -825,7 +918,7 @@ Note
 <h2 class="anchored" data-anchor-id="estimation">Estimation</h2>
 <p>The OLS estimator for this model is often referred to as the “fixed-effects” (or “within”) estimator. The logic is that you estimate a transformed version of the model:</p>
 <p><span class="math display">\[
-  \widetilde{energy}_{it} = \delta_t + \beta \widetilde{grant}_{it} + \widetilde{\mathbf{x}}_{it}\gamma_1 + \tilde{\varepsilon}_{it}
+  \widetilde{energy}_{it} = \delta_t + \beta \widetilde{grant}_{it} + \widetilde{\mathbf{x}}_{it}\gamma_1 + \tilde{\upsilon}_{it}
 \]</span></p>
 <p>where each variable has been demeaned at the <strong>unit-level</strong></p>
 <p><span class="math display">\[
@@ -834,16 +927,574 @@ Note
 <ul>
 <li><p>Remember: when you include a constant in the model it does the same thing, but using the global mean of the variable.</p></li>
 <li><p>Helps with the intuition of why the remaining variables must vary at the unit level over time.</p></li>
+<li><p>The error term is <span class="math inline">\(\tilde{\upsilon}_{it}\)</span> because <span class="math inline">\(\varepsilon_{it} = \nu_{i}+\upsilon_{it}\)</span> and <span class="math inline">\(\nu_{i}\)</span> is time-invariant:</p></li>
 </ul>
+<p><span class="math display">\[
+    \tilde{\varepsilon}_{it} = \tilde{\upsilon}_{it}
+  \]</span></p>
 </section>
-<section id="in-statar-1" class="level2">
-<h2 class="anchored" data-anchor-id="in-statar-1">In Stata/R</h2>
+</section>
+<section id="data-example-evs-pm2.5" class="level1">
+<h1>Data Example: EVs &amp; PM2.5</h1>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>Unfortunately, we do not have data on these hypothetical grants.</p>
+<ul>
+<li>Data on EV vehicle registration and neighbourhood PM2.5 from <a href="./lecture-4.html">Lecture 4</a></li>
+</ul>
+<p><span class="math display">\[
+  \ln(PM2.5_{\ell,t}) = \delta_t + \beta EVshare_{\ell,t} + \gamma \ln(pop_{\ell,t}) + u_{\ell,t}
+\]</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>       year |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       2018 |        285       14.29       14.29
+       2019 |        285       14.29       28.57
+       2020 |        285       14.29       42.86
+       2021 |        285       14.29       57.14
+       2022 |        285       14.29       71.43
+       2023 |        285       14.29       85.71
+       2024 |        285       14.29      100.00
+------------+-----------------------------------
+      Total |      1,995      100.00</code></pre>
+</div>
+</div>
+</section>
+<section id="pooled-cross-section" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="pooled-cross-section">Pooled cross section</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> ln_pm25 ev_share </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">est</span> <span class="kw">store</span> model1</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> ln_pm25 ev_share ln_pop</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">est</span> <span class="kw">store</span> model2</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> ln_pm25 ev_share ln_pop i.<span class="fu">year</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">est</span> <span class="kw">store</span> model3</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>etable, <span class="kw">est</span>(model1 model2 model3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       ln_pm25 ln_pm25 ln_pm25
+----------------------------------------------
+ev_share                -0.441  -0.494   1.736
+                       (0.200) (0.197) (0.166)
+ln_pop                           0.061   0.063
+                               (0.007) (0.006)
+year                                          
+  2019                                   0.006
+                                       (0.013)
+  2020                                  -0.244
+                                       (0.013)
+  2021                                  -0.274
+                                       (0.013)
+  2022                                  -0.241
+                                       (0.013)
+  2023                                  -0.347
+                                       (0.013)
+  2024                                  -0.353
+                                       (0.013)
+Intercept                2.053   1.330   1.477
+                       (0.005) (0.088) (0.067)
+Number of observations    1995    1995    1995
+----------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the Stata file</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pm25_panel <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"pm25_panel.csv"</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate univariate linear regression</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ln_pm25 <span class="sc">~</span> ev_share, <span class="at">data =</span> pm25_panel)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ln_pm25 <span class="sc">~</span> ev_share <span class="sc">+</span> ln_pop, <span class="at">data =</span> pm25_panel)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ln_pm25 <span class="sc">~</span> ev_share <span class="sc">+</span> ln_pop <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> pm25_panel)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(<span class="st">"(1)"</span> <span class="ot">=</span> model1, <span class="st">"(2)"</span> <span class="ot">=</span> model2, <span class="st">"(3)"</span> <span class="ot">=</span> model3))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_rf5xr7lqstt3p88ef44b = TinyTable.createTableFunctions("tinytable_rf5xr7lqstt3p88ef44b");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '26', j: 2 }, { i: '26', j: 3 }, { i: '26', j: 4 } ], css_id: 'tinytable_css_wlvv7nxpsykfrep6elv6',}, 
+          { positions: [ { i: '18', j: 2 }, { i: '18', j: 3 }, { i: '18', j: 4 } ], css_id: 'tinytable_css_9twneuerbcnuk53od4il',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '12', j: 2 }, { i: '13', j: 2 }, { i: '14', j: 2 }, { i: '15', j: 2 }, { i: '16', j: 2 }, { i: '17', j: 2 }, { i: '19', j: 2 }, { i: '20', j: 2 }, { i: '21', j: 2 }, { i: '22', j: 2 }, { i: '23', j: 2 }, { i: '24', j: 2 }, { i: '25', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '12', j: 3 }, { i: '13', j: 3 }, { i: '14', j: 3 }, { i: '15', j: 3 }, { i: '16', j: 3 }, { i: '17', j: 3 }, { i: '19', j: 3 }, { i: '20', j: 3 }, { i: '21', j: 3 }, { i: '22', j: 3 }, { i: '23', j: 3 }, { i: '24', j: 3 }, { i: '25', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '8', j: 4 }, { i: '9', j: 4 }, { i: '10', j: 4 }, { i: '11', j: 4 }, { i: '12', j: 4 }, { i: '13', j: 4 }, { i: '14', j: 4 }, { i: '15', j: 4 }, { i: '16', j: 4 }, { i: '17', j: 4 }, { i: '19', j: 4 }, { i: '20', j: 4 }, { i: '21', j: 4 }, { i: '22', j: 4 }, { i: '23', j: 4 }, { i: '24', j: 4 }, { i: '25', j: 4 } ], css_id: 'tinytable_css_u9eb6nlkwni6qgjsa9ou',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_gtf1te56mx54s2phqxja',}, 
+          { positions: [ { i: '26', j: 1 } ], css_id: 'tinytable_css_wxs5s9509ep9wcuc0kyt',}, 
+          { positions: [ { i: '18', j: 1 } ], css_id: 'tinytable_css_lfxmlbylh5u2rtxtbzcm',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '12', j: 1 }, { i: '13', j: 1 }, { i: '14', j: 1 }, { i: '15', j: 1 }, { i: '16', j: 1 }, { i: '17', j: 1 }, { i: '19', j: 1 }, { i: '20', j: 1 }, { i: '21', j: 1 }, { i: '22', j: 1 }, { i: '23', j: 1 }, { i: '24', j: 1 }, { i: '25', j: 1 } ], css_id: 'tinytable_css_upyroskyldtvd73g4pox',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_kl0fohbuxrt1577gh2ns',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_rf5xr7lqstt3p88ef44b.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_wlvv7nxpsykfrep6elv6, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_wlvv7nxpsykfrep6elv6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_9twneuerbcnuk53od4il, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_9twneuerbcnuk53od4il {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_u9eb6nlkwni6qgjsa9ou, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_u9eb6nlkwni6qgjsa9ou { text-align: center }
+    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_gtf1te56mx54s2phqxja, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_gtf1te56mx54s2phqxja {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_wxs5s9509ep9wcuc0kyt, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_wxs5s9509ep9wcuc0kyt {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_lfxmlbylh5u2rtxtbzcm, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_lfxmlbylh5u2rtxtbzcm {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_upyroskyldtvd73g4pox, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_upyroskyldtvd73g4pox { text-align: left }
+    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_kl0fohbuxrt1577gh2ns, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_kl0fohbuxrt1577gh2ns {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_rf5xr7lqstt3p88ef44b" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">(1)</th>
+                <th scope="col" data-row="0" data-col="3">(2)</th>
+                <th scope="col" data-row="0" data-col="4">(3)</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">(Intercept)</td>
+                  <td data-row="1" data-col="2">2.053</td>
+                  <td data-row="1" data-col="3">1.330</td>
+                  <td data-row="1" data-col="4">1.477</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(0.005)</td>
+                  <td data-row="2" data-col="3">(0.088)</td>
+                  <td data-row="2" data-col="4">(0.067)</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">ev_share</td>
+                  <td data-row="3" data-col="2">-0.441</td>
+                  <td data-row="3" data-col="3">-0.494</td>
+                  <td data-row="3" data-col="4">1.736</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2">(0.200)</td>
+                  <td data-row="4" data-col="3">(0.197)</td>
+                  <td data-row="4" data-col="4">(0.166)</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">ln_pop</td>
+                  <td data-row="5" data-col="2"></td>
+                  <td data-row="5" data-col="3">0.061</td>
+                  <td data-row="5" data-col="4">0.063</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2"></td>
+                  <td data-row="6" data-col="3">(0.007)</td>
+                  <td data-row="6" data-col="4">(0.006)</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="1">factor(year)2019</td>
+                  <td data-row="7" data-col="2"></td>
+                  <td data-row="7" data-col="3"></td>
+                  <td data-row="7" data-col="4">0.006</td>
+                </tr>
+                <tr>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2"></td>
+                  <td data-row="8" data-col="3"></td>
+                  <td data-row="8" data-col="4">(0.013)</td>
+                </tr>
+                <tr>
+                  <td data-row="9" data-col="1">factor(year)2020</td>
+                  <td data-row="9" data-col="2"></td>
+                  <td data-row="9" data-col="3"></td>
+                  <td data-row="9" data-col="4">-0.244</td>
+                </tr>
+                <tr>
+                  <td data-row="10" data-col="1"></td>
+                  <td data-row="10" data-col="2"></td>
+                  <td data-row="10" data-col="3"></td>
+                  <td data-row="10" data-col="4">(0.013)</td>
+                </tr>
+                <tr>
+                  <td data-row="11" data-col="1">factor(year)2021</td>
+                  <td data-row="11" data-col="2"></td>
+                  <td data-row="11" data-col="3"></td>
+                  <td data-row="11" data-col="4">-0.274</td>
+                </tr>
+                <tr>
+                  <td data-row="12" data-col="1"></td>
+                  <td data-row="12" data-col="2"></td>
+                  <td data-row="12" data-col="3"></td>
+                  <td data-row="12" data-col="4">(0.013)</td>
+                </tr>
+                <tr>
+                  <td data-row="13" data-col="1">factor(year)2022</td>
+                  <td data-row="13" data-col="2"></td>
+                  <td data-row="13" data-col="3"></td>
+                  <td data-row="13" data-col="4">-0.241</td>
+                </tr>
+                <tr>
+                  <td data-row="14" data-col="1"></td>
+                  <td data-row="14" data-col="2"></td>
+                  <td data-row="14" data-col="3"></td>
+                  <td data-row="14" data-col="4">(0.013)</td>
+                </tr>
+                <tr>
+                  <td data-row="15" data-col="1">factor(year)2023</td>
+                  <td data-row="15" data-col="2"></td>
+                  <td data-row="15" data-col="3"></td>
+                  <td data-row="15" data-col="4">-0.347</td>
+                </tr>
+                <tr>
+                  <td data-row="16" data-col="1"></td>
+                  <td data-row="16" data-col="2"></td>
+                  <td data-row="16" data-col="3"></td>
+                  <td data-row="16" data-col="4">(0.013)</td>
+                </tr>
+                <tr>
+                  <td data-row="17" data-col="1">factor(year)2024</td>
+                  <td data-row="17" data-col="2"></td>
+                  <td data-row="17" data-col="3"></td>
+                  <td data-row="17" data-col="4">-0.353</td>
+                </tr>
+                <tr>
+                  <td data-row="18" data-col="1"></td>
+                  <td data-row="18" data-col="2"></td>
+                  <td data-row="18" data-col="3"></td>
+                  <td data-row="18" data-col="4">(0.013)</td>
+                </tr>
+                <tr>
+                  <td data-row="19" data-col="1">Num.Obs.</td>
+                  <td data-row="19" data-col="2">1995</td>
+                  <td data-row="19" data-col="3">1995</td>
+                  <td data-row="19" data-col="4">1995</td>
+                </tr>
+                <tr>
+                  <td data-row="20" data-col="1">R2</td>
+                  <td data-row="20" data-col="2">0.002</td>
+                  <td data-row="20" data-col="3">0.035</td>
+                  <td data-row="20" data-col="4">0.448</td>
+                </tr>
+                <tr>
+                  <td data-row="21" data-col="1">R2 Adj.</td>
+                  <td data-row="21" data-col="2">0.002</td>
+                  <td data-row="21" data-col="3">0.034</td>
+                  <td data-row="21" data-col="4">0.446</td>
+                </tr>
+                <tr>
+                  <td data-row="22" data-col="1">AIC</td>
+                  <td data-row="22" data-col="2">-711.6</td>
+                  <td data-row="22" data-col="3">-776.3</td>
+                  <td data-row="22" data-col="4">-1878.7</td>
+                </tr>
+                <tr>
+                  <td data-row="23" data-col="1">BIC</td>
+                  <td data-row="23" data-col="2">-694.8</td>
+                  <td data-row="23" data-col="3">-753.9</td>
+                  <td data-row="23" data-col="4">-1822.7</td>
+                </tr>
+                <tr>
+                  <td data-row="24" data-col="1">Log.Lik.</td>
+                  <td data-row="24" data-col="2">358.792</td>
+                  <td data-row="24" data-col="3">392.138</td>
+                  <td data-row="24" data-col="4">949.335</td>
+                </tr>
+                <tr>
+                  <td data-row="25" data-col="1">F</td>
+                  <td data-row="25" data-col="2">4.859</td>
+                  <td data-row="25" data-col="3">36.369</td>
+                  <td data-row="25" data-col="4">201.591</td>
+                </tr>
+                <tr>
+                  <td data-row="26" data-col="1">RMSE</td>
+                  <td data-row="26" data-col="2">0.20</td>
+                  <td data-row="26" data-col="3">0.20</td>
+                  <td data-row="26" data-col="4">0.15</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="panel" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="panel">Panel</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> ln_pm25 ev_share </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">est</span> <span class="kw">store</span> model1</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> ln_pm25 ev_share ln_pop</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">est</span> <span class="kw">store</span> model2</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">reg</span> ln_pm25 ev_share ln_pop i.<span class="fu">year</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">est</span> <span class="kw">store</span> model3</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">areg</span> ln_pm25 ev_share ln_pop i.<span class="fu">year</span>, absorb(la_id)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">est</span> <span class="kw">store</span> model4</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>etable, <span class="kw">est</span>(model1 model2 model3 model4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       ln_pm25 ln_pm25 ln_pm25 ln_pm25
+------------------------------------------------------
+ev_share                -0.441  -0.494   1.736  -0.160
+                       (0.200) (0.197) (0.166) (0.130)
+ln_pop                           0.061   0.063   0.141
+                               (0.007) (0.006) (0.094)
+year                                                  
+  2019                                   0.006   0.008
+                                       (0.013) (0.006)
+  2020                                  -0.244  -0.237
+                                       (0.013) (0.006)
+  2021                                  -0.274  -0.259
+                                       (0.013) (0.007)
+  2022                                  -0.241  -0.216
+                                       (0.013) (0.007)
+  2023                                  -0.347  -0.311
+                                       (0.013) (0.008)
+  2024                                  -0.353  -0.303
+                                       (0.013) (0.008)
+Intercept                2.053   1.330   1.477   0.554
+                       (0.005) (0.088) (0.067) (1.122)
+Number of observations    1995    1995    1995    1995
+------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="unit-fes-1" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="unit-fes-1">Unit FEs</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Legacy panel data approach: <code>xtreg</code></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>* First tell Stata the unit and time identifiers</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>xtset la_id <span class="fu">year</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>* Estimate fixed <span class="kw">effects</span> estimator with <span class="kw">xtreg</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">xtreg</span> ln_pm25 ev_share ln_pop i.<span class="fu">year</span>, <span class="kw">fe</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Panel variable: la_id (strongly balanced)
+ Time variable: year, 2018 to 2024
+         Delta: 1 unit
+
+
+Fixed-effects (within) regression               Number of obs     =      1,995
+Group variable: la_id                           Number of groups  =        285
+
+R-squared:                                      Obs per group:
+     Within  = 0.7599                                         min =          7
+     Between = 0.0690                                         avg =        7.0
+     Overall = 0.3775                                         max =          7
+
+                                                F(8, 1702)        =     673.31
+corr(u_i, Xb) = -0.1841                         Prob &gt; F          =     0.0000
+
+------------------------------------------------------------------------------
+     ln_pm25 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    ev_share |  -.1603648   .1299376    -1.23   0.217    -.4152191    .0944895
+      ln_pop |   .1407886   .0939793     1.50   0.134    -.0435386    .3251157
+             |
+        year |
+       2019  |    .007792   .0063883     1.22   0.223    -.0047378    .0203218
+       2020  |  -.2374957   .0064163   -37.01   0.000    -.2500803   -.2249111
+       2021  |  -.2590259   .0065454   -39.57   0.000    -.2718638    -.246188
+       2022  |  -.2157743   .0069402   -31.09   0.000    -.2293866   -.2021621
+       2023  |  -.3109033   .0076368   -40.71   0.000    -.3258819   -.2959247
+       2024  |  -.3027325   .0084101   -36.00   0.000    -.3192278   -.2862372
+             |
+       _cons |   .5541659   1.121735     0.49   0.621    -1.645959    2.754291
+-------------+----------------------------------------------------------------
+     sigma_u |   .1461683
+     sigma_e |  .07601883
+         rho |  .78710375   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+F test that all u_i=0: F(284, 1702) = 21.48                  Prob &gt; F = 0.0000</code></pre>
+</div>
+</div>
+<p>Modern two-way FEs function <code>reghdfe</code></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>reghdfe ln_pm25 ev_share ln_pop, absorb(la_id <span class="fu">year</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(MWFE estimator converged in 2 iterations)
+
+HDFE Linear regression                            Number of obs   =      1,995
+Absorbing 2 HDFE groups                           F(   2,   1702) =       1.63
+                                                  Prob &gt; F        =     0.1968
+                                                  R-squared       =     0.8796
+                                                  Adj R-squared   =     0.8590
+                                                  Within R-sq.    =     0.0019
+                                                  Root MSE        =     0.0760
+
+------------------------------------------------------------------------------
+     ln_pm25 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    ev_share |  -.1603648   .1299376    -1.23   0.217    -.4152191    .0944895
+      ln_pop |   .1407886   .0939793     1.50   0.134    -.0435386    .3251157
+       _cons |   .3658602    1.12339     0.33   0.745     -1.83751     2.56923
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       la_id |       285           0         285     |
+        year |         7           1           6     |
+-----------------------------------------------------+</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Modern FEs function <code>reghdfe</code></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the fixest package</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"fixest"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate model with two-way FEs</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">feols</span>(ln_pm25 <span class="sc">~</span> ev_share <span class="sc">+</span> ln_pop <span class="sc">|</span> la_id <span class="sc">+</span> year, <span class="at">data =</span> pm25_panel)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>OLS estimation, Dep. Var.: ln_pm25
+Observations: 1,995
+Fixed-effects: la_id: 285,  year: 7
+Standard-errors: IID 
+          Estimate Std. Error  t value Pr(&gt;|t|) 
+ev_share -0.160365   0.129938 -1.23417  0.21731 
+ln_pop    0.140789   0.093979  1.49809  0.13430 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 0.070215     Adj. R2: 0.858989
+                 Within R2: 0.001908</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<section id="bibliography" class="level2">
+<h2 class="anchored" data-anchor-id="bibliography">Bibliography</h2>
 
 
 </section>
 </section>
 
 </main> <!-- /main -->
+
+
+<script>
+
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+  // slide changes (different for each slide format).
+
+  (function () {
+
+    // dispatch for htmlwidgets
+
+    function fireSlideEnter() {
+
+      const event = window.document.createEvent("Event");
+
+      event.initEvent("slideenter", true, true);
+
+      window.document.dispatchEvent(event);
+
+    }
+
+
+
+    function fireSlideChanged(previousSlide, currentSlide) {
+
+      fireSlideEnter();
+
+
+
+      // dispatch for shiny
+
+      if (window.jQuery) {
+
+        if (previousSlide) {
+
+          window.jQuery(previousSlide).trigger("hidden");
+
+        }
+
+        if (currentSlide) {
+
+          window.jQuery(currentSlide).trigger("shown");
+
+        }
+
+      }
+
+    }
+
+
+
+    // hookup for slidy
+
+    if (window.w3c_slidy) {
+
+      window.w3c_slidy.add_observer(function (slide_num) {
+
+        // slide_num starts at position 1
+
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+      });
+
+    }
+
+
+
+  })();
+
+</script>
+
+
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
