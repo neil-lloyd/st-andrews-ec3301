@@ -4,8 +4,8 @@ subtitle: Project Lecture
 format: 
   html: 
     output-file: lecture-project.html
-#  pdf: 
-#    output-file: lecture-project-notes.pdf
+  pdf: 
+    output-file: lecture-project-notes.pdf
   revealjs: 
     output-file: lecture-project-slides.html
     footer: "[Project Lecture](lecture-project.qmd) - St Andrews Business School - Martinmas 2026/27"
@@ -255,8 +255,7 @@ The reason you were provided with a pooled cross-section of data from 2016-2019 
 Simulation for single, 40-year-old, with USD 60,000 income
 
 ```{r}
-#| echo: true
-#| code-fold: true
+#| echo: false
 #| warning: false
 
 
@@ -328,8 +327,7 @@ ggplot(plot_data, aes(x = total_atr, y = state)) +
 Simulation for single, 40-year-old, with USD 120,000 income
 
 ```{r}
-#| echo: true
-#| code-fold: true
+#| echo: false
 #| warning: false
 
 
@@ -397,8 +395,7 @@ ggplot(plot_data, aes(x = total_atr, y = state)) +
 Simulation for married, 40-year-old couple, single-earner, 2 children (ages 6 and 8), with USD 60,000 income
 
 ```{r}
-#| echo: true
-#| code-fold: true
+#| echo: false
 #| warning: false
 
 # ---- 1. Build the TAXSIM input: one row per state-year ----------------------
@@ -469,8 +466,7 @@ ggplot(plot_data, aes(x = total_atr, y = state)) +
 Simulation for married, 40-year-old couple, double-earner, 2 children (ages 6 and 8), with USD 60,000 income **each**
 
 ```{r}
-#| echo: true
-#| code-fold: true
+#| echo: false
 #| warning: false
 
 
@@ -583,8 +579,9 @@ xtset region release_year
 *| echo: true
 *| code-fold: true
 *| stata.fig: true
-
-xtline atr_total, overlay xtitle(Survey Year) ytitle(Average of atr_total) ylabel(0.05(0.05)0.15) legend(pos(2) ring(0)) title("Selecting on households within incomes $30,000 to $120,000")
+*| fig.align: "center"
+*| stata.fig.format: !expr if (knitr::is_latex_output()) "pdf" else "svg"
+xtline atr_total, overlay xtitle(Survey Year) ytitle(Average of atr_total) ylabel(0.05(0.05)0.15) legend(pos(2) ring(0)) title("Selecting on households within incomes 30,000-120,000 USD")
 ```
 
 ## Bibliography

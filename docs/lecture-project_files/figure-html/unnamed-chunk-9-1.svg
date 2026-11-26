@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- This is a Stata 19.0 generated SVG file (http://www.stata.com) -->
+
+<svg version="1.1" width="6.000in" height="4.000in" viewBox="0 0 4320 2880" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>Stata Graph - Graph</desc>
+	<rect x="0" y="0" width="4320" height="2880" style="fill:#FFFFFF;stroke:none"/>
+	<rect x="0.00" y="0.00" width="4320.00" height="2880.00" style="fill:#FFFFFF"/>
+	<rect x="2.88" y="2.88" width="4314.24" height="2874.24" style="fill:none;stroke:#FFFFFF;stroke-width:5.76"/>
+	<rect x="410.67" y="235.31" width="3808.48" height="2293.96" style="fill:#E0E0E0"/>
+	<rect x="413.55" y="238.19" width="3802.73" height="2288.20" style="fill:none;stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="410.67" y1="2465.95" x2="4219.16" y2="2465.95" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="410.67" y1="1382.29" x2="4219.16" y2="1382.29" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="474.12" y1="2529.26" x2="474.12" y2="235.31" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="1701.27" y1="2529.26" x2="1701.27" y2="235.31" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="2928.56" y1="2529.26" x2="2928.56" y2="235.31" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="4155.84" y1="2529.26" x2="4155.84" y2="235.31" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<path d=" M473.99 1275.36 L1701.27 1296.02 L2928.42 1306.15 L4155.71 1429.00" stroke-linejoin="round" style="fill:none;stroke:#000000;stroke-width:7.20"/>
+	<path d=" M473.99 1293.46 L1701.27 1336.12 L2928.42 1144.95 L4155.71 1452.22" stroke-linejoin="round" style="fill:none;stroke:#619CFF;stroke-width:7.20"/>
+	<path d=" M473.99 1807.41 L1701.27 1755.57 L2928.42 1600.18 L4155.71 1938.77" stroke-linejoin="round" style="fill:none;stroke:#00C0AF;stroke-width:7.20"/>
+	<path d=" M473.99 1298.05 L1701.27 1397.95 L2928.42 1361.23 L4155.71 1529.57" stroke-linejoin="round" style="fill:none;stroke:#C99800;stroke-width:7.20"/>
+	<line x1="410.67" y1="2465.95" x2="370.71" y2="2465.95" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="350.73" y="2493.95" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="end">.05</text>
+	<line x1="410.67" y1="1382.29" x2="370.71" y2="1382.29" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="350.73" y="1410.29" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="end">.1</text>
+	<line x1="410.67" y1="298.76" x2="370.71" y2="298.76" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="350.73" y="326.77" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="end">.15</text>
+	<text x="176.70" y="1382.29" style="font-family:'Helvetica';font-size:79.92px;fill:#000000" transform="rotate(-90 176.70,1382.29)" text-anchor="middle">Average of atr_total</text>
+	<line x1="474.12" y1="2529.26" x2="474.12" y2="2569.23" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="474.12" y="2645.08" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="middle">2016</text>
+	<line x1="1701.27" y1="2529.26" x2="1701.27" y2="2569.23" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="1701.27" y="2645.08" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="middle">2017</text>
+	<line x1="2928.56" y1="2529.26" x2="2928.56" y2="2569.23" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="2928.56" y="2645.08" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="middle">2018</text>
+	<line x1="4155.84" y1="2529.26" x2="4155.84" y2="2569.23" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="4155.84" y="2645.08" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="middle">2019</text>
+	<text x="2314.98" y="2735.13" style="font-family:'Helvetica';font-size:79.92px;fill:#000000" text-anchor="middle">Survey Year</text>
+	<rect x="3532.68" y="269.87" width="651.92" height="526.37" style="fill:#FFFFFF"/>
+	<rect x="3535.56" y="272.75" width="646.16" height="520.61" style="fill:none;stroke:#FFFFFF;stroke-opacity:0.00;stroke-width:5.76"/>
+	<line x1="3575.88" y1="353.17" x2="3719.79" y2="353.17" style="stroke:#000000;stroke-width:7.20"/>
+	<line x1="3575.88" y1="473.05" x2="3719.79" y2="473.05" style="stroke:#619CFF;stroke-width:7.20"/>
+	<line x1="3575.88" y1="593.06" x2="3719.79" y2="593.06" style="stroke:#00C0AF;stroke-width:7.20"/>
+	<line x1="3575.88" y1="713.08" x2="3719.79" y2="713.08" style="stroke:#C99800;stroke-width:7.20"/>
+	<text x="3779.87" y="381.17" style="font-family:'Helvetica';font-size:79.92px;fill:#000000">Northeast</text>
+	<text x="3779.87" y="501.05" style="font-family:'Helvetica';font-size:79.92px;fill:#000000">Midwest</text>
+	<text x="3779.87" y="621.07" style="font-family:'Helvetica';font-size:79.92px;fill:#000000">South</text>
+	<text x="3779.87" y="741.09" style="font-family:'Helvetica';font-size:79.92px;fill:#000000">West</text>
+	<text x="2314.98" y="187.95" style="font-family:'Helvetica';font-size:100.04px;fill:#000000" text-anchor="middle">Selecting on households within incomes 30,000-120,000 USD</text>
+</svg>

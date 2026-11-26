@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -525,6 +545,12 @@ window.Quarto = {
   <li><a href="#pooled-cross-sections-1" id="toc-pooled-cross-sections-1" class="nav-link" data-scroll-target="#pooled-cross-sections-1">Pooled Cross Sections</a></li>
   <li><a href="#panel-models" id="toc-panel-models" class="nav-link" data-scroll-target="#panel-models">Panel Models</a></li>
   <li><a href="#data-example-evs-pm2.5" id="toc-data-example-evs-pm2.5" class="nav-link" data-scroll-target="#data-example-evs-pm2.5">Data Example: EVs &amp; PM2.5</a></li>
+  <li><a href="#difference-in-differences" id="toc-difference-in-differences" class="nav-link" data-scroll-target="#difference-in-differences">Difference in Differences</a></li>
+  <li><a href="#graphical-demonstration" id="toc-graphical-demonstration" class="nav-link" data-scroll-target="#graphical-demonstration">Graphical demonstration</a></li>
+  <li><a href="#linear-model" id="toc-linear-model" class="nav-link" data-scroll-target="#linear-model">Linear Model</a></li>
+  <li><a href="#example-mw" id="toc-example-mw" class="nav-link" data-scroll-target="#example-mw">Example: MW</a></li>
+  <li><a href="#modern-application" id="toc-modern-application" class="nav-link" data-scroll-target="#modern-application">Modern Application</a></li>
+  <li><a href="#multi-period-did" id="toc-multi-period-did" class="nav-link" data-scroll-target="#multi-period-did">Multi-period DID</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture-9-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="lecture-9-notes-Stata.pdf"><i class="bi bi-file-pdf"></i>PDF with Stata</a></li><li><a href="lecture-9-notes-R.pdf"><i class="bi bi-file-pdf"></i>PDF with R</a></li></ul></div></nav>
@@ -559,8 +585,8 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="single-cross-section">Single cross section</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-ff01788c4a3235c8fd0b" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ff01788c4a3235c8fd0b">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[1,1,1,1,1],[1,0,1,0,0],[0.4,0.4,0.4,0.4,0.4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_i","targets":2},{"name":"empl_rate_1","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-141b99da6bf9c4477b0e" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-141b99da6bf9c4477b0e">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[1,1,1,1,1],[1,0,1,0,0],[0.4,0.4,0.4,0.4,0.4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_i","targets":2},{"name":"empl_rate_1","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -576,8 +602,8 @@ window.Quarto = {
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-8afca7897d2143bb95dc" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8afca7897d2143bb95dc">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10],[1,1,1,1,1,2,2,2,2,2],[1,0,1,0,0,1,1,0,0,1],[0.4,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.6,0.6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_it","targets":2},{"name":"empl_rate_t","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-59e29e26c3432740bead" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-59e29e26c3432740bead">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10],[1,1,1,1,1,2,2,2,2,2],[1,0,1,0,0,1,1,0,0,1],[0.4,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.6,0.6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_it","targets":2},{"name":"empl_rate_t","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -592,8 +618,8 @@ window.Quarto = {
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-bf3767f7fa045ef3552d" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-bf3767f7fa045ef3552d">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[1,0,1,0,0],[0.4,0.4,0.4,0.4,0.4],[1,1,0,0,1],[0.6,0.6,0.6,0.6,0.6],[1,0.5,0.5,0,0.5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Empl-stat (1)<\/th>\n      <th>Empl-rate (1)<\/th>\n      <th>Empl-stat (2)<\/th>\n      <th>Empl-rate (2)<\/th>\n      <th>Empl-rate (i)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]},{"name":"id","targets":0},{"name":"empl_i1","targets":1},{"name":"empl_rate_1","targets":2},{"name":"empl_i2","targets":3},{"name":"empl_rate_2","targets":4},{"name":"empl_rate_i","targets":5}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-125309fbabf4958e7a03" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-125309fbabf4958e7a03">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[1,0,1,0,0],[0.4,0.4,0.4,0.4,0.4],[1,1,0,0,1],[0.6,0.6,0.6,0.6,0.6],[1,0.5,0.5,0,0.5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Empl-stat (1)<\/th>\n      <th>Empl-rate (1)<\/th>\n      <th>Empl-stat (2)<\/th>\n      <th>Empl-rate (2)<\/th>\n      <th>Empl-rate (i)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]},{"name":"id","targets":0},{"name":"empl_i1","targets":1},{"name":"empl_rate_1","targets":2},{"name":"empl_i2","targets":3},{"name":"empl_rate_2","targets":4},{"name":"empl_rate_i","targets":5}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -605,8 +631,8 @@ window.Quarto = {
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-48fd6d7724447bffa783" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-48fd6d7724447bffa783">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,1,2,3,4,5],[1,1,1,1,1,2,2,2,2,2],[1,0,1,0,0,1,1,0,0,1],[0.4,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.6,0.6],[1,0.5,0.5,0,0.5,1,0.5,0.5,0,0.5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n      <th>Empl-rate (i)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_it","targets":2},{"name":"empl_rate_t","targets":3},{"name":"empl_rate_i","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-eae81e282cadc10b98ff" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-eae81e282cadc10b98ff">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,1,2,3,4,5],[1,1,1,1,1,2,2,2,2,2],[1,0,1,0,0,1,1,0,0,1],[0.4,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.6,0.6],[1,0.5,0.5,0,0.5,1,0.5,0.5,0,0.5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>Time<\/th>\n      <th>Empl-stat (i)<\/th>\n      <th>Empl-rate (t)<\/th>\n      <th>Empl-rate (i)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4]},{"name":"id","targets":0},{"name":"time","targets":1},{"name":"empl_it","targets":2},{"name":"empl_rate_t","targets":3},{"name":"empl_rate_i","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -1027,25 +1053,25 @@ Number of observations    1995    1995    1995
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_rf5xr7lqstt3p88ef44b = TinyTable.createTableFunctions("tinytable_rf5xr7lqstt3p88ef44b");
+      const tableFns_fjdz2zeq64ydy7sm502c = TinyTable.createTableFunctions("tinytable_fjdz2zeq64ydy7sm502c");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '26', j: 2 }, { i: '26', j: 3 }, { i: '26', j: 4 } ], css_id: 'tinytable_css_wlvv7nxpsykfrep6elv6',}, 
-          { positions: [ { i: '18', j: 2 }, { i: '18', j: 3 }, { i: '18', j: 4 } ], css_id: 'tinytable_css_9twneuerbcnuk53od4il',}, 
-          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '12', j: 2 }, { i: '13', j: 2 }, { i: '14', j: 2 }, { i: '15', j: 2 }, { i: '16', j: 2 }, { i: '17', j: 2 }, { i: '19', j: 2 }, { i: '20', j: 2 }, { i: '21', j: 2 }, { i: '22', j: 2 }, { i: '23', j: 2 }, { i: '24', j: 2 }, { i: '25', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '12', j: 3 }, { i: '13', j: 3 }, { i: '14', j: 3 }, { i: '15', j: 3 }, { i: '16', j: 3 }, { i: '17', j: 3 }, { i: '19', j: 3 }, { i: '20', j: 3 }, { i: '21', j: 3 }, { i: '22', j: 3 }, { i: '23', j: 3 }, { i: '24', j: 3 }, { i: '25', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '8', j: 4 }, { i: '9', j: 4 }, { i: '10', j: 4 }, { i: '11', j: 4 }, { i: '12', j: 4 }, { i: '13', j: 4 }, { i: '14', j: 4 }, { i: '15', j: 4 }, { i: '16', j: 4 }, { i: '17', j: 4 }, { i: '19', j: 4 }, { i: '20', j: 4 }, { i: '21', j: 4 }, { i: '22', j: 4 }, { i: '23', j: 4 }, { i: '24', j: 4 }, { i: '25', j: 4 } ], css_id: 'tinytable_css_u9eb6nlkwni6qgjsa9ou',}, 
-          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_gtf1te56mx54s2phqxja',}, 
-          { positions: [ { i: '26', j: 1 } ], css_id: 'tinytable_css_wxs5s9509ep9wcuc0kyt',}, 
-          { positions: [ { i: '18', j: 1 } ], css_id: 'tinytable_css_lfxmlbylh5u2rtxtbzcm',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '12', j: 1 }, { i: '13', j: 1 }, { i: '14', j: 1 }, { i: '15', j: 1 }, { i: '16', j: 1 }, { i: '17', j: 1 }, { i: '19', j: 1 }, { i: '20', j: 1 }, { i: '21', j: 1 }, { i: '22', j: 1 }, { i: '23', j: 1 }, { i: '24', j: 1 }, { i: '25', j: 1 } ], css_id: 'tinytable_css_upyroskyldtvd73g4pox',}, 
-          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_kl0fohbuxrt1577gh2ns',}, 
+          { positions: [ { i: '26', j: 2 }, { i: '26', j: 3 }, { i: '26', j: 4 } ], css_id: 'tinytable_css_ph36d8xgidfjdxd4mdj5',}, 
+          { positions: [ { i: '18', j: 2 }, { i: '18', j: 3 }, { i: '18', j: 4 } ], css_id: 'tinytable_css_baaft5l2v5exd8sj19qp',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '12', j: 2 }, { i: '13', j: 2 }, { i: '14', j: 2 }, { i: '15', j: 2 }, { i: '16', j: 2 }, { i: '17', j: 2 }, { i: '19', j: 2 }, { i: '20', j: 2 }, { i: '21', j: 2 }, { i: '22', j: 2 }, { i: '23', j: 2 }, { i: '24', j: 2 }, { i: '25', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '12', j: 3 }, { i: '13', j: 3 }, { i: '14', j: 3 }, { i: '15', j: 3 }, { i: '16', j: 3 }, { i: '17', j: 3 }, { i: '19', j: 3 }, { i: '20', j: 3 }, { i: '21', j: 3 }, { i: '22', j: 3 }, { i: '23', j: 3 }, { i: '24', j: 3 }, { i: '25', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '8', j: 4 }, { i: '9', j: 4 }, { i: '10', j: 4 }, { i: '11', j: 4 }, { i: '12', j: 4 }, { i: '13', j: 4 }, { i: '14', j: 4 }, { i: '15', j: 4 }, { i: '16', j: 4 }, { i: '17', j: 4 }, { i: '19', j: 4 }, { i: '20', j: 4 }, { i: '21', j: 4 }, { i: '22', j: 4 }, { i: '23', j: 4 }, { i: '24', j: 4 }, { i: '25', j: 4 } ], css_id: 'tinytable_css_7zn3yp2oyuqzi2isf2hs',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_dlw19hag45b5ymuwxqm9',}, 
+          { positions: [ { i: '26', j: 1 } ], css_id: 'tinytable_css_g58sy2kk12osmzfauinp',}, 
+          { positions: [ { i: '18', j: 1 } ], css_id: 'tinytable_css_1ntgvt32luw3yld9yeqx',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '12', j: 1 }, { i: '13', j: 1 }, { i: '14', j: 1 }, { i: '15', j: 1 }, { i: '16', j: 1 }, { i: '17', j: 1 }, { i: '19', j: 1 }, { i: '20', j: 1 }, { i: '21', j: 1 }, { i: '22', j: 1 }, { i: '23', j: 1 }, { i: '24', j: 1 }, { i: '25', j: 1 } ], css_id: 'tinytable_css_sg0t2n2t4zo2t7vbpyku',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_k5ji2wifbb563ppb55bg',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_rf5xr7lqstt3p88ef44b.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_fjdz2zeq64ydy7sm502c.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -1054,17 +1080,17 @@ Number of observations    1995    1995    1995
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_wlvv7nxpsykfrep6elv6, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_wlvv7nxpsykfrep6elv6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_9twneuerbcnuk53od4il, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_9twneuerbcnuk53od4il {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_u9eb6nlkwni6qgjsa9ou, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_u9eb6nlkwni6qgjsa9ou { text-align: center }
-    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_gtf1te56mx54s2phqxja, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_gtf1te56mx54s2phqxja {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_wxs5s9509ep9wcuc0kyt, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_wxs5s9509ep9wcuc0kyt {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_lfxmlbylh5u2rtxtbzcm, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_lfxmlbylh5u2rtxtbzcm {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_upyroskyldtvd73g4pox, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_upyroskyldtvd73g4pox { text-align: left }
-    #tinytable_rf5xr7lqstt3p88ef44b td.tinytable_css_kl0fohbuxrt1577gh2ns, #tinytable_rf5xr7lqstt3p88ef44b th.tinytable_css_kl0fohbuxrt1577gh2ns {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_fjdz2zeq64ydy7sm502c td.tinytable_css_ph36d8xgidfjdxd4mdj5, #tinytable_fjdz2zeq64ydy7sm502c th.tinytable_css_ph36d8xgidfjdxd4mdj5 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_fjdz2zeq64ydy7sm502c td.tinytable_css_baaft5l2v5exd8sj19qp, #tinytable_fjdz2zeq64ydy7sm502c th.tinytable_css_baaft5l2v5exd8sj19qp {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_fjdz2zeq64ydy7sm502c td.tinytable_css_7zn3yp2oyuqzi2isf2hs, #tinytable_fjdz2zeq64ydy7sm502c th.tinytable_css_7zn3yp2oyuqzi2isf2hs { text-align: center }
+    #tinytable_fjdz2zeq64ydy7sm502c td.tinytable_css_dlw19hag45b5ymuwxqm9, #tinytable_fjdz2zeq64ydy7sm502c th.tinytable_css_dlw19hag45b5ymuwxqm9 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_fjdz2zeq64ydy7sm502c td.tinytable_css_g58sy2kk12osmzfauinp, #tinytable_fjdz2zeq64ydy7sm502c th.tinytable_css_g58sy2kk12osmzfauinp {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_fjdz2zeq64ydy7sm502c td.tinytable_css_1ntgvt32luw3yld9yeqx, #tinytable_fjdz2zeq64ydy7sm502c th.tinytable_css_1ntgvt32luw3yld9yeqx {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_fjdz2zeq64ydy7sm502c td.tinytable_css_sg0t2n2t4zo2t7vbpyku, #tinytable_fjdz2zeq64ydy7sm502c th.tinytable_css_sg0t2n2t4zo2t7vbpyku { text-align: left }
+    #tinytable_fjdz2zeq64ydy7sm502c td.tinytable_css_k5ji2wifbb563ppb55bg, #tinytable_fjdz2zeq64ydy7sm502c th.tinytable_css_k5ji2wifbb563ppb55bg {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_rf5xr7lqstt3p88ef44b" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_fjdz2zeq64ydy7sm502c" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -1409,92 +1435,1135 @@ RMSE: 0.070215     Adj. R2: 0.858989
 </div>
 </section>
 </section>
+<section id="difference-in-differences" class="level1">
+<h1>Difference in Differences</h1>
+<section id="groups" class="level2">
+<h2 class="anchored" data-anchor-id="groups">2 groups</h2>
+<p>In experiments (<a href="./lecture-6.html">lecture 6</a>), we compare two groups</p>
+<p><span class="math display">\[
+  E[y_i | w_i =1]-E[y_i|w_i=0]
+\]</span></p>
+<p>And <em>under unconfoundedness</em> (whether by randomization or assumption),</p>
+<p><span class="math display">\[
+  =E[y_i(1)-y_i(0)] = \tau_{ate}
+\]</span></p>
+</section>
+<section id="groups-2-periods" class="level2">
+<h2 class="anchored" data-anchor-id="groups-2-periods">2 groups, 2 periods</h2>
+<p>Suppose we observe 2 groups, across 2 periods of time:</p>
+<p><span class="math display">\[
+  y_{it}
+\]</span></p>
+<ul>
+<li><p>we must have either a repeated cross section or a panel</p></li>
+<li><p>be able to follow the same group in each period</p></li>
+</ul>
+</section>
+<section id="treatment" class="level2">
+<h2 class="anchored" data-anchor-id="treatment">Treatment</h2>
+<p>Let us consider a discrete treatment, denoted:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p><span class="math display">\[
+  d_i = \mathbf{1}\{\text{treated}\}
+\]</span></p>
+<p><br>
+</p>
+<p><em>Crucially</em>, we observe the treated (<span class="math inline">\(d_i=1\)</span>) and control (<span class="math inline">\(d_i=0\)</span>) groups <strong>before and after</strong> the treatment.</p>
+<p>Let,</p>
+<p><span class="math display">\[
+  q_t = \mathbf{1}\{t&gt;t_0\}
+\]</span></p>
+<p>where <span class="math inline">\(t_0\)</span> is the period of treatment.</p>
+</section>
+<section id="post-period" class="level2">
+<h2 class="anchored" data-anchor-id="post-period">Post period</h2>
+<p>In the period immediately after the treatment, you can identify</p>
+<p><span class="math display">\[
+  E[y_{it} | d_i =1, q_t = 1]-E[y_{it} | d_i =0, q_t = 1]
+\]</span></p>
+<div class="fragment fade-in">
+<p>Written in terms of POs, this gives you</p>
+<p><span class="math display">\[
+  E[y_{it}(1) | d_i =1, q_t = 1]-E[y_{it}(0) | d_i =0, q_t = 1]
+\]</span></p>
+</div>
+</section>
+<section id="decomposition" class="level2">
+<h2 class="anchored" data-anchor-id="decomposition">Decomposition</h2>
+<p>We know from <a href="./lecture-6.html">Lecture 6</a>, that this difference can be decomposed:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  &amp;E[y_{it}(1) | d_i =1, q_t = 1]-E[y_{it}(0) | d_i =0, q_t = 1] \\
+  =&amp; E[y_{it}(1) | d_i =1, q_t = 1]-\textcolor{red}{E[y_{it}(0) | d_i =1, q_t = 1]} \\
+  &amp;+\textcolor{red}{E[y_{it}(0) | d_i =1, q_t = 1]} -E[y_{it}(0) | d_i =0, q_t = 1] \\
+  =&amp; \underbrace{E[y_{it}(1)-y_{it}(0) | d_i =1, q_t = 1]}_{\tau_{att}} \\
+  &amp;+\underbrace{\textcolor{red}{E[y_{it}(0) | d_i =1, q_t = 1]} -E[y_{it}(0) | d_i =0, q_t = 1]}_\text{Selection}
+  \end{aligned}
+\]</span></p>
+</section>
+<section id="pre-period" class="level2">
+<h2 class="anchored" data-anchor-id="pre-period">Pre period</h2>
+<p>In the period immediately before the treatment, you can identify</p>
+<p><span class="math display">\[
+  \textcolor{blue}{E[y_{it} | d_i =1, q_t = 0]-E[y_{it} | d_i =0, q_t = 0]}
+\]</span></p>
+<div class="fragment fade-in">
+<p>Since neither group is yet treated, this gives you</p>
+<p><span class="math display">\[
+  \textcolor{blue}{E[y_{it}(0) | d_i =1, q_t = 0]-E[y_{it}(0) | d_i =0, q_t = 0]}
+\]</span></p>
+<ul>
+<li><p><strong>Assumes:</strong> treated group do not anticipate the treatment</p></li>
+<li><p>We call this <strong>no anticipation</strong> (or no pre-emptive behaviour) assumption</p></li>
+</ul>
+</div>
+</section>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4"></h2>
+<p>Compare this term from the pre-period:</p>
+<p><span class="math display">\[
+  \textcolor{blue}{E[y_{it}(0) | d_i =1, q_t = 0]-E[y_{it}(0) | d_i =0, q_t = 0]}
+\]</span></p>
+<p><br>
+</p>
+<p>With the selection term from the post period:</p>
+<p><span class="math display">\[
+  \textcolor{red}{E[y_{it}(0) | d_i =1, q_t = 1]} -E[y_{it}(0) | d_i =0, q_t = 1]
+\]</span></p>
+</section>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5"></h2>
+<p>What if we deduct one difference from the other:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  &amp;\big[E[y_{it} | d_i =1, q_t = 1]-E[y_{it} | d_i =0, q_t = 1]\big] \\
+  &amp;-\big[\textcolor{blue}{E[y_{it} | d_i =1, q_t = 0]-E[y_{it} | d_i =0, q_t = 0]}\big]
+  \end{aligned}
+\]</span></p>
+<p>a <strong>difference in differences</strong></p>
+</section>
+<section id="decomposition-1" class="level2">
+<h2 class="anchored" data-anchor-id="decomposition-1">Decomposition</h2>
+<p>Following the same decomposition, you end up with:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+   &amp; \underbrace{E[y_{it}(1)-y_{it}(0) | d_i =1, q_t = 1]}_{\tau_{att}} \\
+  &amp;+\big[\textcolor{red}{E[y_{it}(0) | d_i =1, q_t = 1]} -E[y_{it}(0) | d_i =0, q_t = 1]\big] \\
+  &amp;-\big[\textcolor{blue}{E[y_{it}(0) | d_i =1, q_t = 0]-E[y_{it}(0) | d_i =0, q_t = 0]}\big] \\
+  =&amp; \tau_{att}
+  \end{aligned}
+\]</span></p>
+<p><strong>if we assume</strong> the two terms middle differences (w.r.t. <span class="math inline">\(y(0)\)</span>) are the same.</p>
+</section>
+<section id="assumption" class="level2">
+<h2 class="anchored" data-anchor-id="assumption">Assumption</h2>
+<p>What is this assumption:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+   &amp;\textcolor{red}{E[y_{it}(0) | d_i =1, q_t = 1]} -E[y_{it}(0) | d_i =0, q_t = 1] \\
+  =&amp;\textcolor{blue}{E[y_{it}(0) | d_i =1, q_t = 0]-E[y_{it}(0) | d_i =0, q_t = 0]}
+  \end{aligned}
+\]</span></p>
+<ul>
+<li>Selection term in pre-period is same as that in post-period.</li>
+</ul>
+</section>
+<section id="parallel-trends" class="level2">
+<h2 class="anchored" data-anchor-id="parallel-trends">Parallel trends</h2>
+<p>This can be re-arranged:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+   &amp;\textcolor{red}{E[y_{it}(0) | d_i =1, q_t = 1]} - \textcolor{blue}{E[y_{it}(0) | d_i =1, q_t = 0]}  \\
+  =&amp;E[y_{it}(0) | d_i =0, q_t = 1]-\textcolor{blue}{E[y_{it}(0) | d_i =0, q_t = 0]}
+  \end{aligned}
+\]</span></p>
+<div class="fragment fade-in">
+<p><strong>parallel trends assumption</strong></p>
+<ul>
+<li><p>in the absence of treatment, the mean of the 2 groups would change by the same amount.</p></li>
+<li><p>this is very different to the assumption of unconfoundedness, which says: <span class="math inline">\(\textcolor{red}{E[y_{it}(0) | d_i =1, q_t = 1]} = \textcolor{blue}{E[y_{it}(0) | d_i =1, q_t = 0]}\)</span></p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="graphical-demonstration" class="level1">
+<h1>Graphical demonstration</h1>
+<section id="control-group" class="level2">
+<h2 class="anchored" data-anchor-id="control-group">Control group</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/did1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="treatment-vs-control" class="level2">
+<h2 class="anchored" data-anchor-id="treatment-vs-control">Treatment vs control</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/did2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="parallel-trends-1" class="level2">
+<h2 class="anchored" data-anchor-id="parallel-trends-1">Parallel trends</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/did3.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="att" class="level2">
+<h2 class="anchored" data-anchor-id="att">ATT</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/did4.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="linear-model" class="level1">
+<h1>Linear Model</h1>
+<section id="dummy-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="dummy-interaction">Dummy interaction</h2>
+<p>We will skip the lengthy approach of <a href="./lecture-6.html">Lecture 6</a> and consider the model:</p>
+<p><span class="math display">\[
+  y_{it} = \alpha + \psi d_i + \delta q_t + \beta d_i\times q_t + \varepsilon_{it}
+\]</span></p>
+<p>where, <span class="math inline">\(d_i\times q_t\)</span> is an interaction of the two dummy variables.</p>
+</section>
+<section id="cefs" class="level2">
+<h2 class="anchored" data-anchor-id="cefs">CEFs</h2>
+<p>Let’s consider the CE of <span class="math inline">\(y_{it}\)</span> for combination of <span class="math inline">\(d_i,q_t\)</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><p><span class="math inline">\(E[y_{it}|d_i=0,q_t=0] = \alpha\)</span></p></li>
+<li><p><span class="math inline">\(E[y_{it}|d_i=0,q_t=1] = \alpha+\delta\)</span></p>
+<ul class="incremental">
+<li><p><span class="math inline">\(\Rightarrow \delta = E[y_{it}|d_i=0,q_t=1]-E[y_{it}|d_i=0,q_t=0]\)</span></p></li>
+<li><p><span class="math inline">\(\delta\)</span> captures the mean difference in <span class="math inline">\(y\)</span> in the control group over time.</p></li>
+</ul></li>
+<li><p><span class="math inline">\(E[y_{it}|d_i=1,q_t=0] = \alpha+\psi\)</span></p>
+<ul class="incremental">
+<li><p><span class="math inline">\(\Rightarrow \psi = E[y_{it}|d_i=1,q_t=0]-E[y_{it}|d_i=0,q_t=0]\)</span></p></li>
+<li><p><span class="math inline">\(\psi\)</span> captures the mean difference between treated and control, in the pre-period.</p></li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section id="section-6" class="level2">
+<h2 class="anchored" data-anchor-id="section-6"></h2>
+<ol start="4" type="1">
+<li><p><span class="math inline">\(E[y_{it}|d_i=1,q_t=1] = \alpha + \psi + \delta + \beta\)</span></p>
+<p><span class="math display">\[
+  \begin{aligned}
+  \Rightarrow \beta =&amp; \big[\underbrace{E[y_{it}|d_i=1,q_t=1]-E[y_{it}|d_i=0,q_t=1]}_{(\alpha + \psi + \delta + \beta)-(\alpha+\delta)=\beta + \psi}\big] \\
+  &amp;-\big[\underbrace{E[y_{it}|d_i=1,q_t=0]-E[y_{it}|d_i=0,q_t=0]}_{(\alpha+\psi)-(\alpha)=\psi}\big]
+  \end{aligned}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\beta\)</span> is the DID estimand.</p></li>
+<li><p><span class="math inline">\(\beta\)</span> is the ATT under assumptions: (1) parallel trends, (2) no anticipation</p></li>
+</ul></li>
+</ol>
+</section>
+<section id="control-group-1" class="level2">
+<h2 class="anchored" data-anchor-id="control-group-1">Control group</h2>
+<p><span class="math display">\[
+  y_{it} = \alpha + \psi d_i + \delta q_t + \beta d_i\times q_t + \varepsilon_{it}
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/did5.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="treatment-vs-control-1" class="level2">
+<h2 class="anchored" data-anchor-id="treatment-vs-control-1">Treatment vs control</h2>
+<p><span class="math display">\[
+  y_{it} = \alpha + \psi d_i + \delta q_t + \beta d_i\times q_t + \varepsilon_{it}
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/did6.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="parallel-trends-2" class="level2">
+<h2 class="anchored" data-anchor-id="parallel-trends-2">Parallel trends</h2>
+<p><span class="math display">\[
+  y_{it} = \alpha + \psi d_i + \delta q_t + \beta d_i\times q_t + \varepsilon_{it}
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/did7.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="att-1" class="level2">
+<h2 class="anchored" data-anchor-id="att-1">ATT</h2>
+<p><span class="math display">\[
+  y_{it} = \alpha + \psi d_i + \delta q_t + \beta d_i\times q_t + \varepsilon_{it}
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/did8.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="att-vs-ate" class="level2">
+<h2 class="anchored" data-anchor-id="att-vs-ate">ATT vs ATE</h2>
+<p>So, under parallel trends and no anticipation:</p>
+<p><span class="math display">\[
+  y_{it} = \alpha + \psi d_i + \delta q_t + \tau_{att} d_i\times q_t + \varepsilon_{it}
+\]</span></p>
+<p><strong>Why ATT and not ATE?</strong></p>
+<ul>
+<li><p>You need unconfoundedness to learn about the ATE.</p></li>
+<li><p>Here we are relying on parallel trends as our identifying assumption.</p>
+<ul>
+<li><p>Doesn’t rule out selection into treatment</p></li>
+<li><p>But rather assumes selection is time-invariant</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="covariates" class="level2">
+<h2 class="anchored" data-anchor-id="covariates">Covariates</h2>
+<p>What if you add covariates?</p>
+<p><span class="math display">\[
+  y_{it} = \alpha + \psi d_i + \delta q_t + \tau_{att} d_i\times q_t + \mathbf{x}_{it}\gamma + \upsilon_{it}
+\]</span></p>
+<ul>
+<li><p>They must be “good” controls</p></li>
+<li><p>Should improve power (as with RCT)</p></li>
+<li><p>Likely correlated with <span class="math inline">\(d_i\)</span>, potentially <span class="math inline">\(q_t\)</span></p></li>
+<li><p>Unlikely to be correlated with <span class="math inline">\(d_i\times q_t\)</span></p>
+<ul>
+<li><p>unless: outcomes of experiment</p></li>
+<li><p>if correlated (i.e.&nbsp;estimates change a lot after adding controls), you should ask why?</p></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="example-mw" class="level1">
+<h1>Example: MW</h1>
+<section id="mw-debate" class="level2">
+<h2 class="anchored" data-anchor-id="mw-debate">MW debate</h2>
+<p>There has been a extended debate in the labour economic literature on the impact of Minimum Wages:</p>
+<ul>
+<li><p>Pre-1990’s literature:</p>
+<ul>
+<li><p>Mostly supported the idea that an higher minimum wages reduce employment.</p></li>
+<li><p>Wellington (1991) &amp; Brown et al.&nbsp;(1983): 10% increase in minimum wage reduce teen employment by 1%.</p></li>
+<li><p>Largely based on time-series evidence (Brown et al., 1982) or cross-country studies.</p></li>
+</ul></li>
+</ul>
+<blockquote class="blockquote">
+<p>“Isolating the impacts of labor market institutions is inherently difficult… Identification issues essentially result from the endogeneity of labor market institutions and the interactions between them… makes it difficult to attribute variations in outcomes to the institutions themselves, rather than other features of the societies in which they exist.” Baetcherman (2012)</p>
+</blockquote>
+</section>
+<section id="card-1994" class="level2">
+<h2 class="anchored" data-anchor-id="card-1994">Card (1994)</h2>
+<p><span class="citation" data-cites="card1994minimum">Card and Krueger (<a href="#ref-card1994minimum" role="doc-biblioref">1994</a>)</span> is a seminal paper in both the MW and “natural experiments” literatures (<a href="https://davidcard.berkeley.edu/papers/njmin-aer.pdf">available online</a>)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/ck1994.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="section-7" class="level2">
+<h2 class="anchored" data-anchor-id="section-7"></h2>
+<p>Exploit a natural experiment:</p>
+<ul>
+<li><p>Increase in New Jersey minimum wage from $4.25 to $5.05 (19%), April 1992</p></li>
+<li><p>Examine the impact on employment at fast food outlets (low wage jobs)</p></li>
+<li><p>Use Pennsylvania as a control group in a DiD research design</p></li>
+<li><p><strong>Results</strong>: Find no evidence of a negative employment effect</p></li>
+<li><p>This paper highlights the fact that you can make strong conclusions from what is effectively a very simple research design.</p></li>
+</ul>
+</section>
+<section id="institution-change" class="level2">
+<h2 class="anchored" data-anchor-id="institution-change">Institution change</h2>
+<p>This minimum wage change was not unexpected:</p>
+<ul>
+<li>Federal minimum wage is the floor to all state level minimum wages</li>
+<li>Federal increase from $3.35 <span class="math inline">\(\rightarrow\)</span> $3.80 in April 1990</li>
+<li>Federal increase from $3.80 <span class="math inline">\(\rightarrow\)</span> $4.25 in April 1991</li>
+<li>New Jersey choose to increase its own minimum wage to $5.05 effect April 1992, giving it the highest minimum wage in the country.</li>
+<li>Opposed by business leaders, but the opposition lost an appeal (March, 1992) by a close margin.</li>
+</ul>
+<p>This last minute appeal and close election do create some uncertainty.</p>
+</section>
+<section id="cards-setup" class="level2">
+<h2 class="anchored" data-anchor-id="cards-setup">Card’s setup</h2>
+<p><span class="math display">\[
+  d_i = \begin{cases}
+  1\quad \text{if "New Jersey"} \\
+  0\quad \text{if "Pennsylvania"}
+  \end{cases}
+\]</span></p>
+<p><span class="math display">\[
+  q_t = \begin{cases}
+  1 \quad \text{if}\;t&gt;\text{April 1992} \\
+  0 \quad \text{otherwise}
+  \end{cases}
+\]</span></p>
+</section>
+<section id="data-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-1">Data</h2>
+<p>The authors collect their own data using a phone survey of employers:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/ck1994_table_sample.png" class="img-fluid figure-img"></p>
+<figcaption>p.&nbsp;774</figcaption>
+</figure>
+</div>
+</section>
+<section id="pre-vs-post" class="level2">
+<h2 class="anchored" data-anchor-id="pre-vs-post">Pre vs post</h2>
+<p>In the pre-period the states had similar wage distributions</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/ck1994_wages1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/ck1994_wages2.png" class="img-fluid figure-img"></p>
+<figcaption>p.&nbsp;777</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="did" class="level2">
+<h2 class="anchored" data-anchor-id="did">DID</h2>
+<p>No evidence of a negative effect, as competitive models would predict.</p>
+<p><img src="material/lecture-9/ck1994_table_did.png" class="img-fluid quarto-figure quarto-figure-center" alt="p.780"> - If anything, some evidence of small positive effect, as suggested by monopsonistic models.</p>
+</section>
+<section id="mw-debate-1" class="level2">
+<h2 class="anchored" data-anchor-id="mw-debate-1">MW debate</h2>
+<ul>
+<li><p>Card &amp; Krueger (1994) don’t show pre-trends to help persuade you that the parallel trends assumption is likely to hold.</p></li>
+<li><p>After this paper comes the rebuttal by Neumark &amp; Wascher (2000, AER), followed immediately by a response from Card &amp; Krueger (2000, AER).</p></li>
+<li><p>This is just round 1 of what is a multi-round debate. The discussion has now shifted away from state-level minimum wages to the study of city-specific policies.</p></li>
+</ul>
+</section>
+</section>
+<section id="modern-application" class="level1">
+<h1>Modern Application</h1>
+<section id="section-9" class="level2">
+<h2 class="anchored" data-anchor-id="section-9"></h2>
+<p>It was 1 January 2018 and Kathleen Wynne was keen to salvage her reelection bid for the premiership of Ontario, Canada.</p>
+<p><img src="material/lecture-9/ontario.jpeg" class="img-fluid"></p>
+</section>
+<section id="section-10" class="level2">
+<h2 class="anchored" data-anchor-id="section-10"></h2>
+<p>The governing liberal party announced an unexpected (non-standard) minimum wage increase of $2.40 (from $11.60 to $14, or 21%). With a $2.25 increase for those under 18 and $2.10 for liquor servers.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/min_wage.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="set-up" class="level2">
+<h2 class="anchored" data-anchor-id="set-up">Set-up</h2>
+<p><span class="math display">\[
+  d_i = \begin{cases}
+  1 \;\text{if "Ontario"}\\
+  0 \; \text{if "Quebec" or "Manitoba"}
+  \end{cases}
+\]</span></p>
+<p><br>
+</p>
+<p><span class="math display">\[
+  q_t = \begin{cases}
+  1\;\text{if}\;t=2018 \\
+  0\;\text{if}\;t=2017
+  \end{cases}
+\]</span></p>
+</section>
+<section id="graphical-results" class="level2">
+<h2 class="anchored" data-anchor-id="graphical-results">Graphical results</h2>
+<p>Here I am plotting the employment rate (employment-population ratio) of young individuals aged 15-29</p>
+<div class="cell" data-layout-align="center" data-stata.fig="true" data-stata.fig.format="svg">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">preserve</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> <span class="kw">keep</span> <span class="kw">if</span> <span class="fu">inlist</span>(agegrp,1,3)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">collapse</span> (<span class="kw">mean</span>) employ, <span class="kw">by</span>(province <span class="fu">year</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span>  (connected employ <span class="fu">year</span> <span class="kw">if</span> province==6) (connected employ <span class="fu">year</span> <span class="kw">if</span> province==5, ms(S))  (connected employ <span class="fu">year</span> <span class="kw">if</span> province==7, ms(D)) <span class="kw">if</span> <span class="fu">inlist</span>(<span class="fu">year</span>,2017,2018), <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Ontario"</span> 2 <span class="st">"Quebec"</span> 3 <span class="st">"Manitoba"</span>) <span class="fu">r</span>(1) pos(6)) <span class="bn">ytitle</span>(Employment rate)  <span class="kw">ylabel</span>(0.2(.1).8, <span class="kw">format</span>(%2.1f)) <span class="kw">xlabel</span>(2017 2018) xmtick(2016.5(.5)2018.5)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">restore</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecture-9-multi_files/figure-html/unnamed-chunk-16-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="regression" class="level2">
+<h2 class="anchored" data-anchor-id="regression">Regression</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> treat = province==6</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> <span class="kw">post</span> = <span class="fu">year</span>&gt;=2018</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> trtpost = treat*<span class="kw">post</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> city = <span class="fu">inlist</span>(cma,2,4,9)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> <span class="fu">year</span> city</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> female = sex==2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Quebec as control group</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>eststo: <span class="kw">qui</span> <span class="kw">reg</span> employ treat <span class="kw">post</span> trtpost <span class="kw">if</span> <span class="fu">inlist</span>(province,5,6) &amp; <span class="fu">inlist</span>(<span class="fu">year</span>,2017,2018) &amp; <span class="fu">inlist</span>(agegrp,1,3), <span class="fu">r</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>eststo: <span class="kw">qui</span> <span class="kw">reg</span> employ treat <span class="kw">post</span> trtpost i.<span class="fu">month</span> <span class="kw">if</span> <span class="fu">inlist</span>(province,5,6) &amp; <span class="fu">inlist</span>(<span class="fu">year</span>,2017,2018) &amp; <span class="fu">inlist</span>(agegrp,1,3), <span class="fu">r</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>eststo: <span class="kw">qui</span> <span class="kw">reg</span> employ treat <span class="kw">post</span> trtpost i.<span class="fu">month</span> female city i.efamtype i.edugrp <span class="kw">if</span> <span class="fu">inlist</span>(province,5,6) &amp; <span class="fu">inlist</span>(<span class="fu">year</span>,2017,2018) &amp; <span class="fu">inlist</span>(agegrp,1,3), <span class="fu">r</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>esttab, <span class="kw">replace</span> se <span class="kw">star</span>(* 0.1 ** 0.05 *** 0.01) <span class="kw">keep</span>(<span class="dt">_cons</span> treat <span class="kw">post</span> trtpost) <span class="kw">order</span>(<span class="dt">_cons</span> treat <span class="kw">post</span> trtpost) indicate(<span class="st">"Month FE = 2.month"</span> <span class="st">"Covariates = 2.efamtype"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(est1 stored)
+
+(est2 stored)
+
+(est3 stored)
+
+
+------------------------------------------------------------
+                      (1)             (2)             (3)   
+                   employ          employ          employ   
+------------------------------------------------------------
+_cons               0.656***        0.621***        0.620***
+                (0.00286)       (0.00509)       (0.00587)   
+
+treat             -0.0503***      -0.0501***      -0.0130***
+                (0.00364)       (0.00364)       (0.00329)   
+
+post               0.0354***       0.0354***       0.0255***
+                (0.00401)       (0.00401)       (0.00359)   
+
+trtpost           -0.0253***      -0.0251***      -0.0245***
+                (0.00513)       (0.00512)       (0.00459)   
+
+Month FE               No             Yes             Yes   
+
+Covariates             No              No             Yes   
+------------------------------------------------------------
+N                  147798          147798          147798   
+------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01</code></pre>
+</div>
+</div>
+</section>
+<section id="section-11" class="level2">
+<h2 class="anchored" data-anchor-id="section-11"></h2>
+<p>Manitoba as control group</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>eststo: <span class="kw">qui</span> <span class="kw">reg</span> employ treat <span class="kw">post</span> trtpost <span class="kw">if</span> <span class="fu">inlist</span>(province,7,6) &amp; <span class="fu">inlist</span>(<span class="fu">year</span>,2017,2018) &amp; <span class="fu">inlist</span>(agegrp,1,3), <span class="fu">r</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>eststo: <span class="kw">qui</span> <span class="kw">reg</span> employ treat <span class="kw">post</span> trtpost i.<span class="fu">month</span> <span class="kw">if</span> <span class="fu">inlist</span>(province,7,6) &amp; <span class="fu">inlist</span>(<span class="fu">year</span>,2017,2018) &amp; <span class="fu">inlist</span>(agegrp,1,3), <span class="fu">r</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>eststo: <span class="kw">qui</span> <span class="kw">reg</span> employ treat <span class="kw">post</span> trtpost i.<span class="fu">month</span> female city i.efamtype i.edugrp <span class="kw">if</span> <span class="fu">inlist</span>(province,7,6) &amp; <span class="fu">inlist</span>(<span class="fu">year</span>,2017,2018) &amp; <span class="fu">inlist</span>(agegrp,1,3), <span class="fu">r</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>esttab, <span class="kw">replace</span> se <span class="kw">star</span>(* 0.1 ** 0.05 *** 0.01) <span class="kw">keep</span>(<span class="dt">_cons</span> treat <span class="kw">post</span> trtpost) <span class="kw">order</span>(<span class="dt">_cons</span> treat <span class="kw">post</span> trtpost) indicate(<span class="st">"Month FE = 2.month"</span> <span class="st">"Covariates = 2.efamtype"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(est1 stored)
+
+(est2 stored)
+
+(est3 stored)
+
+
+------------------------------------------------------------
+                      (1)             (2)             (3)   
+                   employ          employ          employ   
+------------------------------------------------------------
+_cons               0.603***        0.568***        0.591***
+                (0.00358)       (0.00577)       (0.00637)   
+
+treat             0.00262         0.00369          0.0264***
+                (0.00423)       (0.00423)       (0.00381)   
+
+post             -0.00220       -0.000755          0.0133***
+                (0.00517)       (0.00516)       (0.00458)   
+
+trtpost            0.0123**        0.0111*        -0.0125** 
+                (0.00608)       (0.00607)       (0.00540)   
+
+Month FE               No             Yes             Yes   
+
+Covariates             No              No             Yes   
+------------------------------------------------------------
+N                  129206          129206          129206   
+------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01</code></pre>
+</div>
+</div>
+</section>
+<section id="section-12" class="level2">
+<h2 class="anchored" data-anchor-id="section-12"></h2>
+<p>Manitoba &amp; Quebec as pooled control group</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">clear</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>eststo: <span class="kw">reg</span> employ treat <span class="kw">post</span> trtpost <span class="kw">if</span> <span class="fu">inlist</span>(province,7,6,5) &amp; <span class="fu">inlist</span>(<span class="fu">year</span>,2017,2018) &amp; <span class="fu">inlist</span>(agegrp,1,3), <span class="fu">r</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>eststo: <span class="kw">reg</span> employ treat <span class="kw">post</span> trtpost i.<span class="fu">month</span> <span class="kw">if</span> <span class="fu">inlist</span>(province,7,6,5) &amp; <span class="fu">inlist</span>(<span class="fu">year</span>,2017,2018) &amp; <span class="fu">inlist</span>(agegrp,1,3), <span class="fu">r</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>eststo: <span class="kw">reg</span> employ treat <span class="kw">post</span> trtpost i.<span class="fu">month</span> female city i.efamtype i.edugrp <span class="kw">if</span> <span class="fu">inlist</span>(province,7,6,5) &amp; <span class="fu">inlist</span>(<span class="fu">year</span>,2017,2018) &amp; <span class="fu">inlist</span>(agegrp,1,3), <span class="fu">r</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>esttab, <span class="kw">replace</span> se <span class="kw">star</span>(* 0.1 ** 0.05 *** 0.01) <span class="kw">keep</span>(<span class="dt">_cons</span> treat <span class="kw">post</span> trtpost) <span class="kw">order</span>(<span class="dt">_cons</span> treat <span class="kw">post</span> trtpost) indicate(<span class="st">"Month FE = 2.month"</span> <span class="st">"Covariates = 2.efamtype"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear regression                               Number of obs     =    183,723
+                                                F(3, 183719)      =      96.69
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.0016
+                                                Root MSE          =     .48308
+
+------------------------------------------------------------------------------
+             |               Robust
+      employ | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       treat |  -.0289138   .0031789    -9.10   0.000    -.0351444   -.0226832
+        post |   .0214282   .0031812     6.74   0.000     .0151931    .0276634
+     trtpost |   -.011338   .0045072    -2.52   0.012     -.020172    -.002504
+       _cons |   .6345375   .0022417   283.06   0.000     .6301437    .6389312
+------------------------------------------------------------------------------
+(est1 stored)
+
+
+Linear regression                               Number of obs     =    183,723
+                                                F(14, 183708)     =      73.85
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.0055
+                                                Root MSE          =     .48215
+
+------------------------------------------------------------------------------
+             |               Robust
+      employ | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       treat |  -.0283528   .0031728    -8.94   0.000    -.0345713   -.0221343
+        post |    .022031    .003176     6.94   0.000     .0158061    .0282559
+     trtpost |   -.011701   .0044989    -2.60   0.009    -.0205188   -.0028833
+             |
+       month |
+          2  |  -.0039448   .0055821    -0.71   0.480    -.0148857    .0069961
+          3  |   .0041902    .005569     0.75   0.452    -.0067249    .0151053
+          4  |   .0135607   .0055468     2.44   0.014     .0026892    .0244322
+          5  |   .0417467   .0055054     7.58   0.000     .0309562    .0525371
+          6  |   .0624812    .005489    11.38   0.000     .0517229    .0732395
+          7  |   .0960176   .0054465    17.63   0.000     .0853425    .1066927
+          8  |   .0819951   .0054726    14.98   0.000     .0712689    .0927213
+          9  |   .0313737   .0055689     5.63   0.000     .0204587    .0422887
+         10  |   .0312333   .0055821     5.60   0.000     .0202926    .0421741
+         11  |   .0331757   .0055816     5.94   0.000     .0222359    .0441155
+         12  |   .0332626   .0055751     5.97   0.000     .0223356    .0441896
+             |
+       _cons |   .5988005   .0043998   136.10   0.000      .590177    .6074239
+------------------------------------------------------------------------------
+(est2 stored)
+
+
+Linear regression                               Number of obs     =    183,723
+                                                F(35, 183687)     =    2168.43
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.2041
+                                                Root MSE          =     .43135
+
+------------------------------------------------------------------------------
+             |               Robust
+      employ | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       treat |   .0027813   .0028482     0.98   0.329    -.0028011    .0083638
+        post |   .0209641   .0028296     7.41   0.000     .0154182      .02651
+     trtpost |  -.0201467   .0040256    -5.00   0.000    -.0280368   -.0122567
+             |
+       month |
+          2  |  -.0030424   .0049738    -0.61   0.541    -.0127909    .0067062
+          3  |    .002576   .0049716     0.52   0.604    -.0071682    .0123202
+          4  |   .0099528   .0049456     2.01   0.044     .0002596     .019646
+          5  |   .0363644   .0049193     7.39   0.000     .0267227     .046006
+          6  |   .0564715   .0048925    11.54   0.000     .0468824    .0660607
+          7  |   .0955921   .0049127    19.46   0.000     .0859633    .1052209
+          8  |   .0803885   .0049315    16.30   0.000     .0707228    .0900541
+          9  |   .0242947   .0049648     4.89   0.000     .0145637    .0340257
+         10  |   .0240242   .0049863     4.82   0.000     .0142511    .0337974
+         11  |   .0247597   .0049812     4.97   0.000     .0149966    .0345227
+         12  |   .0249825   .0049898     5.01   0.000     .0152026    .0347624
+             |
+      female |   .0011349   .0020581     0.55   0.581    -.0028989    .0051688
+        city |  -.0915812   .0026874   -34.08   0.000    -.0968484    -.086314
+             |
+    efamtype |
+2. Husban..  |   .1234256   .0030051    41.07   0.000     .1175356    .1293156
+3. Husban..  |  -.1059147   .0035046   -30.22   0.000    -.1127837   -.0990456
+4. Husban..  |  -.0697179   .0052919   -13.17   0.000    -.0800899   -.0593459
+5. Husban..  |  -.1973463    .007925   -24.90   0.000    -.2128791   -.1818135
+6. Husban..  |  -.3402987   .0052245   -65.14   0.000    -.3505385   -.3300588
+7. Husban..  |  -.0989178   .0108843    -9.09   0.000    -.1202509   -.0775848
+8. Husban..  |  -.1388252   .0086216   -16.10   0.000    -.1557234    -.121927
+9. Husban..  |   -.253424   .0082304   -30.79   0.000    -.2695554   -.2372925
+10. Husba..  |  -.1383649   .0137732   -10.05   0.000    -.1653601   -.1113697
+11. Husba..  |   -.298213   .0098215   -30.36   0.000    -.3174628   -.2789632
+12. Husba..  |  -.5369095   .0070836   -75.80   0.000    -.5507931   -.5230259
+13. Husba..  |  -.2299046   .0188145   -12.22   0.000    -.2667805   -.1930287
+14. Singl..  |  -.1895023    .005002   -37.89   0.000    -.1993061   -.1796986
+15. Husba..  |  -.1081707   .0078053   -13.86   0.000     -.123469   -.0928724
+16. Singl..  |    -.48931   .0062603   -78.16   0.000    -.5015801   -.4770399
+17. Singl..  |  -.2105714   .0150241   -14.02   0.000    -.2400183   -.1811245
+18. Other..  |  -.0703932   .0044592   -15.79   0.000    -.0791332   -.0616533
+             |
+      edugrp |
+2. Some s..  |   .2051594   .0024487    83.78   0.000     .2003601    .2099588
+3. Univer..  |   .2658294   .0029201    91.04   0.000     .2601061    .2715526
+             |
+       _cons |   .6028886   .0050573   119.21   0.000     .5929764    .6128008
+------------------------------------------------------------------------------
+(est3 stored)
+
+
+------------------------------------------------------------
+                      (1)             (2)             (3)   
+                   employ          employ          employ   
+------------------------------------------------------------
+_cons               0.635***        0.599***        0.603***
+                (0.00224)       (0.00440)       (0.00506)   
+
+treat             -0.0289***      -0.0284***      0.00278   
+                (0.00318)       (0.00317)       (0.00285)   
+
+post               0.0214***       0.0220***       0.0210***
+                (0.00318)       (0.00318)       (0.00283)   
+
+trtpost           -0.0113**       -0.0117***      -0.0201***
+                (0.00451)       (0.00450)       (0.00403)   
+
+Month FE               No             Yes             Yes   
+
+Covariates             No              No             Yes   
+------------------------------------------------------------
+N                  183723          183723          183723   
+------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="multi-period-did" class="level1">
+<h1>Multi-period DID</h1>
+<section id="periods" class="level2">
+<h2 class="anchored" data-anchor-id="periods">2 periods</h2>
+<p>With only 2 periods of data (pre- and post-treatment)</p>
+<ul>
+<li><p>can’t provide evidence that parallel trends holds <strong>in pre-period</strong></p></li>
+<li><p>can’t provide evidence that there was no pre-emptive response to the policy/treatment</p></li>
+<li><p>can only show the immediate impact on the outcome</p>
+<ul>
+<li>may under- or over-estimate medium-term impact</li>
+</ul></li>
+</ul>
+</section>
+<section id="multiple-pre-periods" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-pre-periods">Multiple pre-periods</h2>
+<p>With more pre-treatment data, you can “eye-ball” the treatment and control for evidence of parallel trends and anticipatory responses.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/ontario2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Reviewing the pre-preiod it looks like something may have happened in Manitoba.</p>
+</section>
+<section id="multiple-post-periods" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-post-periods">Multiple post-periods</h2>
+<p>With more post-treatment data, we can “eye-ball” whether the divergence was a once-off phenomenon.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/ontario3.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="period-model" class="level2">
+<h2 class="anchored" data-anchor-id="period-model">2-period model</h2>
+<p>You can estimate the same 2-period model with multiple periods of data:</p>
+<p><span class="math display">\[
+  y_{it} = \alpha + \psi d_i + \delta q_t + \beta d_i\times q_t + \varepsilon_{it}
+\]</span></p>
+<p><strong>However,</strong></p>
+<ul>
+<li><p>the model ignores potential heterogeneity</p></li>
+<li><p>what if the ATT is different in each post-treatment period?</p></li>
+<li><p>is <span class="math inline">\(\beta\)</span> then an average of these post-treatment ATTs?</p></li>
+</ul>
+<p><strong>This is now a large literature on the complexities of DID models!</strong> Which we won’t get into.</p>
+</section>
+<section id="section-13" class="level2">
+<h2 class="anchored" data-anchor-id="section-13"></h2>
+<p>In order to write down a more flexible model, we need a richer notation.</p>
+<ul>
+<li><p>Recall:</p>
+<p><span class="math display">\[
+  d_i = \mathbf{1}\{\text{treated}\}\qquad \text{and}\qquad q_t = \mathbf{1}\{t&gt;t_0\}
+\]</span></p></li>
+<li><p>In place of <span class="math inline">\(q_t\)</span> - which identifies the <em>whole</em> post-period - we want a variable captures each period relative to the post period.</p>
+<ul>
+<li>e.g.&nbsp;if treatment is start of 2018 then 2018 is the first year of treatment, 2019 is the second</li>
+</ul></li>
+</ul>
+</section>
+<section id="option-1-event-time" class="level2">
+<h2 class="anchored" data-anchor-id="option-1-event-time">Option 1: Event-time</h2>
+<p>Define a measure of time, which captures time since the event:</p>
+<p><span class="math display">\[
+  s = t-t_0
+\]</span></p>
+<p>For example, <span class="math inline">\(t_0 = 2018\)</span></p>
+<ul>
+<li><p><span class="math inline">\(t=2018\Rightarrow s = 0\)</span>; i.e.&nbsp;first year of treatment</p></li>
+<li><p><span class="math inline">\(t=2017\Rightarrow s = -1\)</span>; i.e.&nbsp;year preceeding treatment</p></li>
+<li><p><span class="math inline">\(t=2019\Rightarrow s = +1\)</span>; i.e.&nbsp;second year since treatment</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is a very flexible notation that is used in event-study research designs. Also, referred to as staggered DID, these methods are used in settings where different groups are treated in different periods. In these settings, it is standard to define a treatment period for each treatment group: <span class="math inline">\(t_{j0}\)</span>. For the never-treated treated control group, this becomes <span class="math inline">\(t_{j0}=\infty\)</span>. This trick sets <span class="math inline">\(s = \infty\)</span> for all periods in the never treated control group.</p>
+</div>
+</div>
+</section>
+<section id="section-14" class="level2">
+<h2 class="anchored" data-anchor-id="section-14"></h2>
+<p>Event-time dummies:</p>
+<p><span class="math display">\[
+  \mathbf{1}\{s = 0\}
+\]</span></p>
+<p>This dummy variable is =1 in the period of the treatment, but 0 otherwise.</p>
+<p><span class="math display">\[
+  \mathbf{1}\{s = 1\}
+\]</span></p>
+<p>This dummy variable is =1 in the second period since treatment, but 0 otherwise.</p>
+</section>
+<section id="option-2-differences" class="level2">
+<h2 class="anchored" data-anchor-id="option-2-differences">Option 2: Differences</h2>
+<p>The same result can be achieved using first-difference notations as well as lags. Consider</p>
+<p><span class="math display">\[
+  \Delta q_t = q_t - q_t-1
+\]</span></p>
+<p>If</p>
+<p><span class="math display">\[
+  q_t = \begin{cases}
+  1\;\text{if}\;t\geq 2018 \\
+  0\;\text{if}\;t&lt;2018
+  \end{cases}
+\]</span></p>
+<p>Then,</p>
+<p><span class="math display">\[
+  \Delta q_t = \begin{cases}
+  1\;\text{if}\;t= 2018 \\
+  0\;\text{otherwise}
+  \end{cases}
+\]</span></p>
+</section>
+<section id="section-15" class="level2">
+<h2 class="anchored" data-anchor-id="section-15"></h2>
+<p>You can define the lag and leads of this variable</p>
+<ul>
+<li><p>For example, lag 1:</p>
+<p><span class="math display">\[
+\Delta q_{t-1} = q_{t-1} - q_{t-2} = \begin{cases}
+  1\;\text{if}\;t= 2019 \\
+  0\;\text{otherwise}
+  \end{cases}
+\]</span></p></li>
+<li><p>For example, lead 1:</p>
+<p><span class="math display">\[
+\Delta q_{t+1} = q_{t+1} - q_{t} = \begin{cases}
+  1\;\text{if}\;t= 2017 \\
+  0\;\text{otherwise}
+  \end{cases}
+\]</span></p></li>
+</ul>
+<p><strong>Both notations are used in the literature.</strong></p>
+</section>
+<section id="multi-period-models" class="level2">
+<h2 class="anchored" data-anchor-id="multi-period-models">Multi-period models</h2>
+<p>Suppose <span class="math inline">\(t = 1,\dots,T\)</span>, and treatment is in period <span class="math inline">\(t_0\)</span>.</p>
+<ul>
+<li><p>Event-time ranges from <span class="math inline">\(s = 1-t_0,\dots,-1,0,\dots,T-t_0\)</span></p></li>
+<li><p>e.g.&nbsp;in the Canadian data: <span class="math inline">\(t = 2010,\dots,2019;\;s = -8,\dots,1\)</span></p></li>
+</ul>
+</section>
+<section id="section-16" class="level2">
+<h2 class="anchored" data-anchor-id="section-16"></h2>
+<p>The model:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  y_{it} =&amp; \alpha + \psi D_i + \delta q_t +\beta_0 d_i\times\mathbf{1}\{s=0\} \\
+  &amp;+ \beta_1d_i\times\mathbf{1}\{s=1\} + \dots + \beta_1d_i\times\mathbf{1}\{s=T-t_0\} + \varepsilon_{it}
+  \end{aligned}
+\]</span></p>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>We call this a <em>semi-dynamic</em> model and can be written as follows:</p>
+<p><span class="math display">\[
+  y_{it} = \alpha + \psi D_i + \delta q_t + \sum_{j=0}^{T-t_0}\beta_jd_i\times\mathbf{1}\{s=j\} + \varepsilon_{it}
+\]</span></p>
+</div>
+</section>
+<section id="time-fes" class="level2">
+<h2 class="anchored" data-anchor-id="time-fes">Time FEs</h2>
+<p>If we are going to allow the ATT to vary with each period (post-treatment), we should also allow the control group’s time-trend to vary too.</p>
+<ul>
+<li>This is pinned down by <span class="math inline">\(\delta q_t\)</span> in the model.</li>
+</ul>
+<p><br>
+</p>
+<div class="fragment fade-in">
+<p>Including time FEs:</p>
+<p><span class="math display">\[
+  y_{it} = \delta_t + \psi d_i + \sum_{j=0}^{T-t_0}\beta_jd_i\times\mathbf{1}\{s=j\} + \varepsilon_{it}
+\]</span></p>
+</div>
+</section>
+<section id="two-way-fes" class="level2">
+<h2 class="anchored" data-anchor-id="two-way-fes">Two-way FEs</h2>
+<p><strong>Under parallel trends and no anticipation</strong>, the model implies a <strong>two-way FEs</strong> structure for the CEF of <span class="math inline">\(y(0)\)</span>.</p>
+<p><span class="math display">\[
+  E[y_{it}(0)|t,d_i] =  \delta_t + \psi d_i
+\]</span></p>
+<ul>
+<li>consistent with parallel trends (i.e.&nbsp;<span class="math inline">\(\delta_t\)</span> is common).</li>
+</ul>
+<div class="fragment fade-in">
+<p>And,</p>
+<p><span class="math display">\[
+  \beta_s = \tau_{att}(s) \qquad s = 0,\dots,T-t_0
+\]</span></p>
+</div>
+</section>
+<section id="dynamic-specification" class="level2">
+<h2 class="anchored" data-anchor-id="dynamic-specification">Dynamic specification</h2>
+<p>However, we can make the model even more flexible:</p>
+<p><span class="math display">\[
+  y_{it} = \delta_t + \psi d_i + \sum_{j=1-t_0}^{-2}\beta_jd_i\times\mathbf{1}\{s=j\}+\sum_{j=0}^{T-t_0}\beta_jd_i\times\mathbf{1}\{s=j\} + \varepsilon_{it}
+\]</span></p>
+<div class="fragment fade-in">
+<p>OR, combining these:</p>
+<p><span class="math display">\[
+  y_{it} = \delta_t + \psi d_i + \sum_{j\neq-1}\beta_jd_i\times\mathbf{1}\{s=j\} + \varepsilon_{it}
+\]</span></p>
+<ul>
+<li><p>you MUST exclude at least one interaction (otherwise perfectly collinear with <span class="math inline">\(d_i\)</span>)</p></li>
+<li><p>typical to exclude -1, as period of normalization</p></li>
+</ul>
+</div>
+</section>
+<section id="leads" class="level2">
+<h2 class="anchored" data-anchor-id="leads">Leads</h2>
+<p>What should we make of,</p>
+<p><span class="math display">\[
+  \beta_s \qquad\text{for}\; s=1-t_0,\dots,-2
+\]</span></p>
+<p><br>
+</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p>These are DID estimads for the <strong>pre-period</strong></p></li>
+<li><p><strong>Under parallel trends, they should be =0</strong></p></li>
+<li><p>Test for parallel trends:</p>
+<p><span class="math display">\[
+  H_0: \beta_{1-t_0}=\dots=\beta_{-2}=0
+\]</span></p></li>
+</ul>
+</div>
+</section>
+<section id="panel-vs-pooled" class="level2">
+<h2 class="anchored" data-anchor-id="panel-vs-pooled">Panel vs Pooled</h2>
+<p>With panel data, you can include unit FEs:</p>
+<p><span class="math display">\[
+  y_{it} = \alpha_i + \delta_t + \sum_{j=0}^{T-t_0}\beta_jd_i\times\mathbf{1}\{s=j\} + \varepsilon_{it}
+\]</span></p>
+<ul>
+<li><p>But this is not needed for identification!</p></li>
+<li><p>The unit FEs absorb <span class="math inline">\(\psi d_i\)</span>, as it is time-invariant.</p></li>
+<li><p>Unit/individual FEs <strong>tend to</strong> explain a large share of the variation in <span class="math inline">\(y\)</span>, leading to more precise estimates.</p></li>
+</ul>
+</section>
+<section id="group-assignment" class="level2">
+<h2 class="anchored" data-anchor-id="group-assignment">Group assignment</h2>
+<p>What is quite common is for the treatment to be assigned at the “group” level,</p>
+<ul>
+<li><p>for example, provincial policies in the Canada</p>
+<p><span class="math display">\[
+  d_i = d_g
+\]</span></p></li>
+</ul>
+<div class="fragment fade-in">
+<p>You can then include group FEs in the estimation, which absorb <span class="math inline">\(\psi d_p\)</span></p>
+<p><span class="math display">\[
+  y_{it} = \delta_t + \psi_g + \sum_{j\neq-1}\beta_jd_g\times\mathbf{1}\{s=j\} + \varepsilon_{it}
+\]</span></p>
+<ul>
+<li><p>when treatment is assigned at a group level, it is standard to cluster SEs at the group level</p></li>
+<li><p>although, cluster corrections require a <em>sufficiently large</em> number of clusters</p></li>
+</ul>
+</div>
+</section>
+<section id="example-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-1">Example</h2>
+<p>In this setting there is a one-to-one mapping between event-time and time. So, we can estimate:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> employ i.treat##ib2017.<span class="fu">year</span> <span class="kw">if</span> <span class="fu">inlist</span>(province,5,6) &amp; <span class="fu">inlist</span>(agegrp,1,3), <span class="kw">robust</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear regression                               Number of obs     =    801,947
+                                                F(19, 801927)     =     230.11
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.0052
+                                                Root MSE          =     .48806
+
+------------------------------------------------------------------------------
+             |               Robust
+      employ | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     1.treat |   -.050272   .0036447   -13.79   0.000    -.0574155   -.0431285
+             |
+        year |
+       2010  |  -.0376238   .0039265    -9.58   0.000    -.0453196   -.0299279
+       2011  |  -.0350096   .0039664    -8.83   0.000    -.0427837   -.0272355
+       2012  |  -.0328138   .0040027    -8.20   0.000     -.040659   -.0249687
+       2013  |  -.0408441   .0040189   -10.16   0.000     -.048721   -.0329672
+       2014  |  -.0470177   .0040566   -11.59   0.000    -.0549685   -.0390668
+       2015  |  -.0304617   .0041054    -7.42   0.000    -.0385082   -.0224153
+       2016  |  -.0232776   .0040867    -5.70   0.000    -.0312873   -.0152679
+       2018  |   .0353838   .0040133     8.82   0.000     .0275178    .0432497
+       2019  |   .0379695   .0039752     9.55   0.000     .0301782    .0457609
+             |
+  treat#year |
+     1 2010  |  -.0087479   .0049892    -1.75   0.080    -.0185267    .0010308
+     1 2011  |  -.0013982   .0050229    -0.28   0.781    -.0112429    .0084465
+     1 2012  |   -.004643   .0050497    -0.92   0.358    -.0145402    .0052541
+     1 2013  |  -.0003102   .0050798    -0.06   0.951    -.0102665    .0096461
+     1 2014  |    .017387   .0051065     3.40   0.001     .0073785    .0273956
+     1 2015  |   .0022434   .0051905     0.43   0.666    -.0079298    .0124166
+     1 2016  |   .0134855    .005174     2.61   0.009     .0033446    .0236264
+     1 2018  |  -.0252936   .0051285    -4.93   0.000    -.0353452   -.0152419
+     1 2019  |   -.029923   .0050907    -5.88   0.000    -.0399006   -.0199454
+             |
+       _cons |   .6558956   .0028642   229.00   0.000     .6502818    .6615094
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="plotting-coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-coefficients">Plotting coefficients</h2>
+<div class="cell" data-layout-align="center" data-stata.fig="true" data-stata.fig.format="svg">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cap prog <span class="kw">drop</span> graphprep</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">program</span> def graphprep</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">args</span> <span class="fu">mod</span> <span class="bn">start</span> <span class="kw">end</span> base treat <span class="kw">prefix</span> suffix</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">quietly</span>{</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        cap <span class="kw">drop</span> <span class="ot">`mod'</span>*</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">gen</span> <span class="ot">`mod'</span> = .</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">gen</span> <span class="ot">`mod'</span>_up = .</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">gen</span> <span class="ot">`mod'</span>_lo = .</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">gen</span> <span class="ot">`mod'</span>_t = .</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">local</span> n = 1</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">forvalues</span> i = <span class="ot">`start'</span>/<span class="ot">`end'</span> {</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>            <span class="kw">if</span> <span class="ot">`i'</span>!=<span class="ot">`base'</span> {</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>            <span class="kw">local</span> <span class="kw">var</span> <span class="ot">`prefix'`i'`suffix'</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>            <span class="kw">replace</span> <span class="ot">`mod'</span> = _b[<span class="ot">`var'</span>] <span class="kw">in</span> <span class="ot">`n'</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>            <span class="kw">replace</span> <span class="ot">`mod'</span>_up = _b[<span class="ot">`var'</span>]+<span class="fu">invttail</span>(<span class="fu">e</span>(df_r),0.5*(1-c(<span class="dv">level</span>)/100))*_se[<span class="ot">`var'</span>] <span class="kw">in</span> <span class="ot">`n'</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>            <span class="kw">replace</span> <span class="ot">`mod'</span>_lo = _b[<span class="ot">`var'</span>]-<span class="fu">invttail</span>(<span class="fu">e</span>(df_r),0.5*(1-c(<span class="dv">level</span>)/100))*_se[<span class="ot">`var'</span>] <span class="kw">in</span> <span class="ot">`n'</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>            <span class="kw">else</span> <span class="kw">replace</span> <span class="ot">`mod'</span> = 0 <span class="kw">in</span> <span class="ot">`n'</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>            <span class="kw">replace</span> <span class="ot">`mod'</span>_t = <span class="ot">`i'</span>-<span class="ot">`treat'</span> <span class="kw">in</span> <span class="ot">`n'</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>            <span class="kw">local</span> n = <span class="ot">`n'</span>+1</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>graphprep mod1 2010 2019 2017 2018 1.treat# .<span class="fu">year</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">twoway</span> (rcap mod1_up mod1_lo mod1_t,  lc(<span class="bn">black</span>)) (connected mod1 mod1_t, lc(plb1) mc(<span class="bn">black</span>) ms(o)), <span class="bn">ytitle</span>(<span class="st">"Change in outcome"</span>) <span class="kw">ylabel</span>(-0.04(0.02)0.04, <span class="kw">format</span>(%3.2f))  <span class="kw">yline</span>(0, lc(plr1) lp(solid)) <span class="bn">xtitle</span>(<span class="st">"Event-time"</span>) <span class="kw">xlabel</span>(-8(1)1) <span class="bn">xline</span>(-0.5, lc(<span class="bn">black</span>*.80%50) lp(<span class="kw">dash</span>)) <span class="bn">title</span>(<span class="st">"Dynamic specification"</span>) <span class="bn">subtitle</span>(<span class="st">"Using Quebec as control, without covariates"</span>) <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">text</span>(.03 -.5 <span class="st">"&gt;POST"</span>, place(E) <span class="kw">color</span>(plr1) <span class="kw">size</span>(small))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecture-9-multi_files/figure-html/unnamed-chunk-22-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-covariates" class="level2">
+<h2 class="anchored" data-anchor-id="adding-covariates">Adding covariates</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/ontario5.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="alternate-control-group" class="level2">
+<h2 class="anchored" data-anchor-id="alternate-control-group">Alternate control group</h2>
+<p>Using Manitoba as a control, we see strong evidence of a violation of parallel trends.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/ontario6.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="placebo" class="level2">
+<h2 class="anchored" data-anchor-id="placebo">Placebo</h2>
+<p>We could examine whether there is an effect for older workers.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="material/lecture-9/ontario7.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
 <section id="references" class="level1">
 <h1>References</h1>
 <section id="bibliography" class="level2">
-<h2 class="anchored" data-anchor-id="bibliography">Bibliography</h2>
+
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
 
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliography</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-card1994minimum" class="csl-entry" role="listitem">
+Card, David, and Alan Krueger. 1994. <span>“Minimum Wages and Employment: A Case Study of the New Jersey and Pennsylvania Fast Food Industries.”</span> <em>American Economic Review</em> 84 (4): 772–93.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
-<script>
-
-  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
-  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
-  // slide changes (different for each slide format).
-
-  (function () {
-
-    // dispatch for htmlwidgets
-
-    function fireSlideEnter() {
-
-      const event = window.document.createEvent("Event");
-
-      event.initEvent("slideenter", true, true);
-
-      window.document.dispatchEvent(event);
-
-    }
-
-
-
-    function fireSlideChanged(previousSlide, currentSlide) {
-
-      fireSlideEnter();
-
-
-
-      // dispatch for shiny
-
-      if (window.jQuery) {
-
-        if (previousSlide) {
-
-          window.jQuery(previousSlide).trigger("hidden");
-
-        }
-
-        if (currentSlide) {
-
-          window.jQuery(currentSlide).trigger("shown");
-
-        }
-
-      }
-
-    }
-
-
-
-    // hookup for slidy
-
-    if (window.w3c_slidy) {
-
-      window.w3c_slidy.add_observer(function (slide_num) {
-
-        // slide_num starts at position 1
-
-        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
-      });
-
-    }
-
-
-
-  })();
-
-</script>
-
-
-
+<ol>
+<li id="fn1"><p>Distinguishing from <span class="math inline">\(w_i\)</span>, which is associated with an (conditionally) unconfounded assignment. Here <span class="math inline">\(d_i\)</span> need not be unconfounded.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- This is a Stata 19.0 generated SVG file (http://www.stata.com) -->
+
+<svg version="1.1" width="6.000in" height="4.000in" viewBox="0 0 4320 2880" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>Stata Graph - Graph</desc>
+	<rect x="0" y="0" width="4320" height="2880" style="fill:#FFFFFF;stroke:none"/>
+	<rect x="0.00" y="0.00" width="4320.00" height="2880.00" style="fill:#FFFFFF"/>
+	<rect x="2.88" y="2.88" width="4314.24" height="2874.24" style="fill:none;stroke:#FFFFFF;stroke-width:5.76"/>
+	<rect x="410.67" y="100.85" width="3808.48" height="2192.84" style="fill:#E0E0E0"/>
+	<rect x="413.55" y="103.73" width="3802.73" height="2187.08" style="fill:none;stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="410.67" y1="1885.98" x2="4219.16" y2="1885.98" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="410.67" y1="1541.59" x2="4219.16" y2="1541.59" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="410.67" y1="1197.33" x2="4219.16" y2="1197.33" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="410.67" y1="852.94" x2="4219.16" y2="852.94" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="410.67" y1="508.55" x2="4219.16" y2="508.55" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="1394.55" y1="2293.69" x2="1394.55" y2="100.85" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="3235.41" y1="2293.69" x2="3235.41" y2="100.85" style="stroke:#FFFFFF;stroke-width:5.76"/>
+	<path d=" M1394.42 833.64 L3235.28 798.81" stroke-linejoin="round" style="fill:none;stroke:#000000;stroke-width:5.76"/>
+	<circle cx="1394.42" cy="833.64" r="17.86" style="fill:#000000"/>
+	<circle cx="1394.42" cy="833.64" r="14.98" style="fill:none;stroke:#000000;stroke-width:5.76"/>
+	<circle cx="3235.28" cy="798.81" r="17.86" style="fill:#000000"/>
+	<circle cx="3235.28" cy="798.81" r="14.98" style="fill:none;stroke:#000000;stroke-width:5.76"/>
+	<path d=" M1394.42 660.43 L3235.28 538.66" stroke-linejoin="round" style="fill:none;stroke:#619CFF;stroke-width:5.76"/>
+	<rect x="1376.55" y="642.57" width="35.73" height="35.73" style="fill:#619CFF"/>
+	<rect x="1379.43" y="645.45" width="29.97" height="29.97" style="fill:none;stroke:#619CFF;stroke-width:5.76"/>
+	<rect x="3217.41" y="520.79" width="35.73" height="35.73" style="fill:#619CFF"/>
+	<rect x="3220.29" y="523.67" width="29.97" height="29.97" style="fill:none;stroke:#619CFF;stroke-width:5.76"/>
+	<path d=" M1394.42 842.68 L3235.28 850.24" stroke-linejoin="round" style="fill:none;stroke:#00C0AF;stroke-width:5.76"/>
+	<polygon points="1369.15,842.68 1394.42,817.42 1419.68,842.68 1394.42,867.95" style="fill:#00C0AF"/>
+	<polygon points="1373.22,842.68 1394.42,821.49 1415.61,842.68 1394.42,863.88" style="fill:none;stroke:#00C0AF;stroke-width:5.76"/>
+	<polygon points="3210.01,850.24 3235.28,824.98 3260.54,850.24 3235.28,875.51" style="fill:#00C0AF"/>
+	<polygon points="3214.08,850.24 3235.28,829.05 3256.47,850.24 3235.28,871.44" style="fill:none;stroke:#00C0AF;stroke-width:5.76"/>
+	<line x1="410.67" y1="2230.37" x2="370.71" y2="2230.37" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="350.73" y="2258.38" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="end">0.2</text>
+	<line x1="410.67" y1="1885.98" x2="370.71" y2="1885.98" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="350.73" y="1913.99" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="end">0.3</text>
+	<line x1="410.67" y1="1541.59" x2="370.71" y2="1541.59" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="350.73" y="1569.60" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="end">0.4</text>
+	<line x1="410.67" y1="1197.33" x2="370.71" y2="1197.33" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="350.73" y="1225.34" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="end">0.5</text>
+	<line x1="410.67" y1="852.94" x2="370.71" y2="852.94" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="350.73" y="880.95" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="end">0.6</text>
+	<line x1="410.67" y1="508.55" x2="370.71" y2="508.55" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="350.73" y="536.56" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="end">0.7</text>
+	<line x1="410.67" y1="164.16" x2="370.71" y2="164.16" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="350.73" y="192.17" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="end">0.8</text>
+	<text x="176.70" y="1197.33" style="font-family:'Helvetica';font-size:79.92px;fill:#000000" transform="rotate(-90 176.70,1197.33)" text-anchor="middle">Employment rate</text>
+	<line x1="474.12" y1="2293.69" x2="474.12" y2="2313.80" style="stroke:#606060;stroke-width:5.76"/>
+	<line x1="1394.55" y1="2293.69" x2="1394.55" y2="2313.80" style="stroke:#606060;stroke-width:5.76"/>
+	<line x1="2314.98" y1="2293.69" x2="2314.98" y2="2313.80" style="stroke:#606060;stroke-width:5.76"/>
+	<line x1="3235.41" y1="2293.69" x2="3235.41" y2="2313.80" style="stroke:#606060;stroke-width:5.76"/>
+	<line x1="4155.84" y1="2293.69" x2="4155.84" y2="2313.80" style="stroke:#606060;stroke-width:5.76"/>
+	<line x1="1394.55" y1="2293.69" x2="1394.55" y2="2333.78" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="1394.55" y="2409.64" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="middle">2017</text>
+	<line x1="3235.41" y1="2293.69" x2="3235.41" y2="2333.78" style="stroke:#606060;stroke-width:5.76"/>
+	<text x="3235.41" y="2409.64" style="font-family:'Helvetica';font-size:79.92px;fill:#606060" text-anchor="middle">2018</text>
+	<text x="2314.98" y="2499.69" style="font-family:'Helvetica';font-size:79.92px;fill:#000000" text-anchor="middle">Survey year</text>
+	<rect x="1435.59" y="2578.27" width="1758.65" height="166.32" style="fill:#FFFFFF"/>
+	<rect x="1438.47" y="2581.15" width="1752.89" height="160.56" style="fill:none;stroke:#FFFFFF;stroke-opacity:0.00;stroke-width:5.76"/>
+	<line x1="1478.79" y1="2661.43" x2="1622.70" y2="2661.43" style="stroke:#000000;stroke-width:5.76"/>
+	<circle cx="1550.75" cy="2661.43" r="17.86" style="fill:#000000"/>
+	<circle cx="1550.75" cy="2661.43" r="14.98" style="fill:none;stroke:#000000;stroke-width:5.76"/>
+	<line x1="2033.37" y1="2661.43" x2="2177.28" y2="2661.43" style="stroke:#619CFF;stroke-width:5.76"/>
+	<rect x="2087.46" y="2643.57" width="35.73" height="35.73" style="fill:#619CFF"/>
+	<rect x="2090.34" y="2646.45" width="29.97" height="29.97" style="fill:none;stroke:#619CFF;stroke-width:5.76"/>
+	<line x1="2608.88" y1="2661.43" x2="2752.92" y2="2661.43" style="stroke:#00C0AF;stroke-width:5.76"/>
+	<polygon points="2655.56,2661.43 2680.83,2636.16 2706.10,2661.43 2680.83,2686.70" style="fill:#00C0AF"/>
+	<polygon points="2659.64,2661.43 2680.83,2640.24 2702.03,2661.43 2680.83,2682.63" style="fill:none;stroke:#00C0AF;stroke-width:5.76"/>
+	<text x="1682.78" y="2689.44" style="font-family:'Helvetica';font-size:79.92px;fill:#000000">Ontario</text>
+	<text x="2237.36" y="2689.44" style="font-family:'Helvetica';font-size:79.92px;fill:#000000">Quebec</text>
+	<text x="2812.86" y="2689.44" style="font-family:'Helvetica';font-size:79.92px;fill:#000000">Manitoba</text>
+</svg>

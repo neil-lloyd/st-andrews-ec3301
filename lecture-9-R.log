@@ -1,7 +1,7 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2026.2.17)  24 NOV 2026 15:56
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2026.2.17)  26 NOV 2026 21:36
  restricted system commands enabled.
-**lecture-project.tex
-(./lecture-project.tex
+**lecture-9-R.tex
+(./lecture-9-R.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
@@ -1181,9 +1181,9 @@ File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO
 Package: xurl 2022/01/09 v 0.10 modify URL breaks
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 250.
-No file lecture-project.aux.
+No file lecture-9-R.aux.
 
-\openout1 = lecture-project.aux
+\openout1 = lecture-9-R.aux
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 263.
 LaTeX Font Info:    ... okay on input line 263.
 LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 263.
@@ -1533,121 +1533,52 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 ) (c:/texlive/2025/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 362.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 362.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 362.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 362.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 362.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 362.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 362.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 362.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 362.
+Package tocbasic Info: character protrusion at toc deactivated on input line 30
+3.
+No file lecture-9-R.toc.
+\tf@toc=\write5
+
+\openout5 = lecture-9-R.toc
 [1
 
 
-{c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (c:/texlive/202
-5/texmf-dist/tex/latex/microtype/mt-TU-empty.cfg
+{c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<material/lecture-9/home-energy-scotland.png, id=20, 286.57062pt x 114.92938pt>
+
+File: material/lecture-9/home-energy-scotland.png Graphic file (type png)
+<use material/lecture-9/home-energy-scotland.png>
+Package luatex.def Info: material/lecture-9/home-energy-scotland.png  used on i
+nput line 358.
+(luatex.def)             Requested size: 286.56992pt x 114.9291pt.
+[2<./material/lecture-9/home-energy-scotland.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 451--452
+
+ []
+
+[3] [4] (c:/texlive/2025/texmf-dist/tex/latex/microtype/mt-TU-empty.cfg
 File: mt-TU-empty.cfg 2021/06/22 v1.1 microtype config. file: fonts with nonsta
 ndard glyph set (RS)
-) [2] [3] [4]
-<material/lecture-project/tax-cuts-jobs-act.jpg, id=56, 488.0634pt x 228.1323pt
->
-File: material/lecture-project/tax-cuts-jobs-act.jpg Graphic file (type jpg)
-<use material/lecture-project/tax-cuts-jobs-act.jpg>
-Package luatex.def Info: material/lecture-project/tax-cuts-jobs-act.jpg  used o
-n input line 583.
-(luatex.def)             Requested size: 488.06221pt x 228.13173pt.
+) [5] [6] [7] [8] [9]
 
-Overfull \hbox (10.97212pt too wide) in paragraph at lines 583--584
-[][] 
- []
+! LaTeX Error: Environment tblr undefined.
 
-[5<./material/lecture-project/tax-cuts-jobs-act.jpg>]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 649.
-
-Overfull \vbox (0.9976pt too high) detected at line 652
- []
-
-[6]
-<lecture-project_files/figure-pdf/unnamed-chunk-4-1.pdf, id=69, 380.42125pt x 2
-41.90375pt>
-File: lecture-project_files/figure-pdf/unnamed-chunk-4-1.pdf Graphic file (type
- pdf)
-<use lecture-project_files/figure-pdf/unnamed-chunk-4-1.pdf>
-Package luatex.def Info: lecture-project_files/figure-pdf/unnamed-chunk-4-1.pdf
-  used on input line 654.
-(luatex.def)             Requested size: 380.4203pt x 241.90315pt.
-[7<./lecture-project_files/figure-pdf/unnamed-chunk-4-1.pdf>] [8]
-<lecture-project_files/figure-pdf/unnamed-chunk-5-1.pdf, id=86, 380.42125pt x 2
-41.90375pt>
-File: lecture-project_files/figure-pdf/unnamed-chunk-5-1.pdf Graphic file (type
- pdf)
-<use lecture-project_files/figure-pdf/unnamed-chunk-5-1.pdf>
-Package luatex.def Info: lecture-project_files/figure-pdf/unnamed-chunk-5-1.pdf
-  used on input line 721.
-(luatex.def)             Requested size: 380.4203pt x 241.90315pt.
-[9<./lecture-project_files/figure-pdf/unnamed-chunk-5-1.pdf>]
-Underfull \vbox (badness 10000) detected at line 791
- []
-
-
-Underfull \vbox (badness 10000) detected at line 791
- []
-
-[10]
-<lecture-project_files/figure-pdf/unnamed-chunk-6-1.pdf, id=102, 380.42125pt x 
-241.90375pt>
-File: lecture-project_files/figure-pdf/unnamed-chunk-6-1.pdf Graphic file (type
- pdf)
-<use lecture-project_files/figure-pdf/unnamed-chunk-6-1.pdf>
-Package luatex.def Info: lecture-project_files/figure-pdf/unnamed-chunk-6-1.pdf
-  used on input line 793.
-(luatex.def)             Requested size: 380.4203pt x 241.90315pt.
-[11<./lecture-project_files/figure-pdf/unnamed-chunk-6-1.pdf>] [12]
-<lecture-project_files/figure-pdf/unnamed-chunk-7-1.pdf, id=119, 380.42125pt x 
-241.90375pt>
-File: lecture-project_files/figure-pdf/unnamed-chunk-7-1.pdf Graphic file (type
- pdf)
-<use lecture-project_files/figure-pdf/unnamed-chunk-7-1.pdf>
-Package luatex.def Info: lecture-project_files/figure-pdf/unnamed-chunk-7-1.pdf
-  used on input line 865.
-(luatex.def)             Requested size: 380.4203pt x 241.90315pt.
-[13<./lecture-project_files/figure-pdf/unnamed-chunk-7-1.pdf>]
-
-LaTeX Warning: File `lecture-project_files/mediabag/lecture-project_files/figur
-e-pdf/unnamed-chunk-9-1.pdf' not found on input line 925.
-
-
-! Package luatex.def Error: File `lecture-project_files/mediabag/lecture-projec
-t_files/figure-pdf/unnamed-chunk-9-1.pdf' not found: using draft setting.
-
-See the luatex.def package documentation for explanation.
+See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.925 ...ct_files/figure-pdf/unnamed-chunk-9-1.pdf}}
-                                                  
+l.858 \begin{tblr}
+                [         %% tabularray outer open
 
 Here is how much of LuaTeX's memory you used:
- 42225 strings out of 476076
+ 42148 strings out of 476076
  100000,1648299 words of node,token memory allocated
- 14124 words of node memory still in use:
-   90 hlist, 5 vlist, 8 rule, 44 disc, 12 local_par, 2 dir, 358 glue, 86 kern, 7
-3 penalty, 12 margin_kern, 1037 glyph, 313 attribute, 69 glue_spec, 313 attribut
-e_list, 1 temp, 7 if_stack, 4 write, 2 pdf_dest, 115 pdf_colorstack nodes
-   avail lists: 1:2,2:1315,3:374,4:775,5:467,6:56,7:3435,8:31,9:215,10:5,11:156,
-12:1
- 63818 multiletter control sequences out of 65536+600000
- 91 fonts using 27956607 bytes
- 108i,8n,114p,11236b,1126s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 2109 words of node memory still in use:
+   17 hlist, 3 vlist, 7 rule, 1 local_par, 3 dir, 38 glue, 12 kern, 11 penalty, 
+73 glyph, 85 attribute, 82 glue_spec, 85 attribute_list, 2 temp, 1 pdf_dest, 1 p
+df_action, 35 pdf_colorstack nodes
+   avail lists: 1:3,2:583,3:683,4:226,5:324,6:49,7:3041,8:45,9:246,10:7,11:192,1
+2:1
+ 63737 multiletter control sequences out of 65536+600000
+ 69 fonts using 19956655 bytes
+ 108i,8n,114p,11232b,1126s stack positions out of 10000i,1000n,20000p,200000b,200000s
 !  ==> Fatal error occurred, no output PDF file produced!
